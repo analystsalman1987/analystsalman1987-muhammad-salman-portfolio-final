@@ -1,7 +1,7 @@
 import { AppData } from '../types';
 
 export const DEFAULT_APP_DATA: AppData = {
-  version: 7,
+  version: 8,
   lastUpdated: new Date().toISOString(),
   profile: {
     fullName: 'Muhammad Salman',
@@ -101,23 +101,23 @@ export const DEFAULT_APP_DATA: AppData = {
         'Journal entries',
         'Account analysis',
         'Month-end closing',
-        'Maintaining accurate financial records',
+        'Accurate financial records',
       ],
     },
     {
       id: 'exp-2',
       title: 'Accounts Payable & Receivable',
-      subtitle: 'AP and AR transactions, customer & supplier balances, invoice processing & aging management',
+      subtitle: 'AP/AR transactions, customer & supplier balances, invoice processing & aging',
       category: 'finance',
       iconName: 'ArrowLeftRight',
       description: 'End-to-end management of AP and AR transactions, customer and supplier balances, invoice processing, payment follow-up, and aging control.',
       details: [
-        'AP and AR transactions',
+        'AP/AR transactions',
         'Customer and supplier balances',
         'Invoice processing',
         'Payment follow-up',
         'Collections',
-        'Aging management',
+        'Aging',
       ],
     },
     {
@@ -129,8 +129,7 @@ export const DEFAULT_APP_DATA: AppData = {
       description: 'Periodic preparation and reconciliation of Statement of Accounts (SOA), balance verification, and adjustments with vendors and clients.',
       details: [
         'SOA preparation and reconciliation',
-        'Customer account reconciliation',
-        'Supplier account reconciliation',
+        'Customer and supplier account reconciliation',
         'Balance verification',
         'Payment and invoice adjustments',
       ],
@@ -138,12 +137,12 @@ export const DEFAULT_APP_DATA: AppData = {
     {
       id: 'exp-4',
       title: 'Credit Control & Collections',
-      subtitle: 'Customer aging review, outstanding balance follow-up & credit monitoring',
+      subtitle: 'Aging review, outstanding balance follow-up & credit monitoring',
       category: 'finance',
       iconName: 'CreditCard',
       description: 'Enforcing credit policies, reviewing receivables aging schedules, coordinating collection activities, and client account follow-up.',
       details: [
-        'Customer aging review',
+        'Aging review',
         'Outstanding balance follow-up',
         'Collection coordination',
         'Credit/payment monitoring',
@@ -162,7 +161,7 @@ export const DEFAULT_APP_DATA: AppData = {
         'Monthly and quarterly VAT work',
         'Tax invoices',
         'Financial documentation',
-        'ZATCA-related accounting and compliance',
+        'ZATCA-related accounting/compliance',
       ],
     },
     {
@@ -176,7 +175,7 @@ export const DEFAULT_APP_DATA: AppData = {
         'Inventory costing',
         'Cost analysis',
         'Purchase and sales transaction review',
-        'Coordination of accounting and inventory records',
+        'Accounting and inventory coordination',
       ],
     },
     {
@@ -278,10 +277,10 @@ export const DEFAULT_APP_DATA: AppData = {
       iconName: 'Building2',
       description: 'Coordination between accounting, sales and warehouse processes, verification of accounting documents, client and supplier account coordination, and supporting accurate and timely financial operations.',
       details: [
-        'Coordination between accounting, sales and warehouse processes',
-        'Verification of accounting documents',
-        'Client and supplier account coordination',
-        'Supporting accurate and timely financial operations',
+        'Coordination between accounting, sales and warehouse',
+        'Accounting document verification',
+        'Client and supplier coordination',
+        'Timely financial operations',
       ],
     },
   ],
@@ -373,49 +372,26 @@ export const DEFAULT_APP_DATA: AppData = {
   skills: [
     {
       id: 'sk-cat-1',
-      categoryName: 'Accounting',
+      categoryName: 'Core Accounting Competencies',
       skills: [
         'Financial Reporting',
-        'General Ledger & Bookkeeping',
-        'Accounts Payable (AP)',
-        'Accounts Receivable (AR)',
-        'Month-End Closing',
-        'Purchase & Sales Accounting',
-        'ERP-Based Accounting Operations',
+        'VAT / ZATCA',
+        'AP & AR',
+        'Reconciliation',
+        'Inventory Costing',
+        'Accounting Operations',
       ],
     },
     {
       id: 'sk-cat-2',
-      categoryName: 'Finance',
+      categoryName: 'ERP & Financial Tools',
       skills: [
-        'Bank & Account Reconciliation',
-        'Customer & Supplier Reconciliation',
-        'Inventory Costing',
-        'Credit Control & Receivables Management',
-        'Cash & Payment Management',
-        'Financial Analysis',
-      ],
-    },
-    {
-      id: 'sk-cat-3',
-      categoryName: 'Tax & Compliance',
-      skills: [
-        'VAT & ZATCA Compliance',
-        'Tax Invoicing & Documentation',
-        'Monthly & Quarterly VAT Filing',
-        'Audit Support & Documentation',
-      ],
-    },
-    {
-      id: 'sk-cat-4',
-      categoryName: 'Software',
-      skills: [
+        'Advanced Microsoft Excel',
         'Oracle ERP',
         'QuickBooks',
         'SMACC',
         'Delta Financial',
-        'Advanced Microsoft Excel',
-        'Microsoft Office',
+        'Peachtree / Sage',
       ],
     },
   ],

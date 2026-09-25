@@ -1,137 +1,95 @@
 import { 
-  Calculator, 
-  Coins, 
+  FileSpreadsheet, 
+  Database, 
+  Receipt, 
+  Server, 
+  Landmark, 
+  Layers, 
+  BarChart3, 
   ShieldCheck, 
-  Cpu, 
-  Check, 
-  LucideIcon,
-  BookOpen,
-  BarChart3,
-  ArrowLeftRight,
-  Landmark,
-  Database,
-  Table,
-  ClipboardCheck
+  ArrowLeftRight, 
+  FileCheck, 
+  Package, 
+  Calculator,
+  LucideIcon
 } from 'lucide-react';
 import { SkillCategory } from '../types';
 
 interface SkillsProps {
-  skills: SkillCategory[];
+  skills?: SkillCategory[];
 }
 
-const categoryIcons: Record<string, LucideIcon> = {
-  Accounting: Calculator,
-  Finance: Coins,
-  'Tax & Compliance': ShieldCheck,
-  Software: Cpu,
-};
+interface PracticalSkillItem {
+  name: string;
+  category: string;
+  icon: LucideIcon;
+  badge: string;
+}
 
-const coreVisualSkills = [
-  { label: 'Accounting & Bookkeeping', icon: BookOpen, desc: 'GL & Ledger Accuracy' },
-  { label: 'Financial Reporting', icon: BarChart3, desc: 'Balance Sheets & P&L' },
-  { label: 'Accounts Payable & Receivable', icon: ArrowLeftRight, desc: 'AP / AR Aging & Control' },
-  { label: 'Bank & Account Reconciliation', icon: Landmark, desc: 'Cash & Vendor Scrutiny' },
-  { label: 'VAT / ZATCA', icon: ShieldCheck, desc: 'Saudi E-Invoicing & Filing' },
-  { label: 'ERP Systems', icon: Database, desc: 'Oracle, QuickBooks & SMACC' },
-  { label: 'Advanced Excel', icon: Table, desc: 'VLOOKUP, Pivot & Modeling' },
-  { label: 'Audit Support', icon: ClipboardCheck, desc: 'Internal & External Readiness' },
+const PRACTICAL_SKILLS: PracticalSkillItem[] = [
+  { name: 'Advanced Microsoft Excel', category: 'Financial Modeling & Analysis', icon: FileSpreadsheet, badge: 'Tool' },
+  { name: 'Oracle ERP', category: 'Enterprise ERP System', icon: Database, badge: 'ERP' },
+  { name: 'QuickBooks', category: 'Accounting & Invoicing', icon: Receipt, badge: 'Software' },
+  { name: 'SMACC', category: 'Cloud Accounting & ERP', icon: Server, badge: 'ERP' },
+  { name: 'Delta Financial', category: 'Financial Management Software', icon: Landmark, badge: 'System' },
+  { name: 'Peachtree / Sage', category: 'Accounting Software', icon: Layers, badge: 'Software' },
+  { name: 'Financial Reporting', category: 'Statements & Management Reports', icon: BarChart3, badge: 'Financial' },
+  { name: 'VAT / ZATCA', category: 'Saudi Tax & E-Invoicing', icon: ShieldCheck, badge: 'Compliance' },
+  { name: 'AP & AR', category: 'Accounts Payable & Receivable', icon: ArrowLeftRight, badge: 'Operations' },
+  { name: 'Reconciliation', category: 'Bank, Customer & Supplier SOA', icon: FileCheck, badge: 'Audit' },
+  { name: 'Inventory Costing', category: 'Cost Allocation & Valuation', icon: Package, badge: 'Costing' },
+  { name: 'Accounting Operations', category: 'GL, Journal Entries & Closing', icon: Calculator, badge: 'Core' },
 ];
 
 export function Skills({ skills }: SkillsProps) {
-  if (!skills || skills.length === 0) {
-    return (
-      <section id="skills" className="py-20 bg-slate-50 dark:bg-slate-950/60 border-b border-slate-200 dark:border-slate-800">
-        <div className="max-w-7xl mx-auto px-4 text-center text-slate-500">
-          Information will be added soon.
-        </div>
-      </section>
-    );
-  }
-
+  // If skills prop is provided with data, we display the practical skills
   return (
-    <section id="skills" className="py-20 bg-[#F4F6F8] dark:bg-slate-950/60 border-b border-slate-200 dark:border-slate-800 transition-colors">
+    <section 
+      id="skills" 
+      className="py-16 bg-[#F4F6F8] dark:bg-slate-950/60 border-b border-slate-200 dark:border-slate-800 transition-colors"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Header */}
-        <div className="max-w-3xl mb-10">
+        {/* Section Header */}
+        <div className="max-w-3xl mb-8">
           <span className="text-xs font-bold tracking-widest text-[#0F766E] dark:text-teal-400 uppercase">
-            Domain Competence
+            Practical Competencies
           </span>
-          <h2 className="mt-1 text-3xl font-extrabold text-[#0F2747] dark:text-white sm:text-4xl tracking-tight">
+          <h2 className="mt-1 text-2xl font-bold text-[#0F2747] dark:text-white sm:text-3xl tracking-tight">
             Professional Skills
           </h2>
-          <p className="mt-2 text-sm text-[#64748B] dark:text-slate-400">
-            Categorized core proficiencies across statutory compliance, financial governance, operational accounting, and reporting tools.
+          <p className="mt-2 text-xs sm:text-sm text-[#64748B] dark:text-slate-400">
+            A concise directory of practical accounting software, ERP platforms, and operational tools used in daily practice.
           </p>
         </div>
 
-        {/* Minimal Core Competency Visual Pills / Grid */}
-        <div className="mb-10 grid grid-cols-2 sm:grid-cols-4 gap-3">
-          {coreVisualSkills.map((item, idx) => {
+        {/* Compact, Scan-Friendly Grid of 12 Skills */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
+          {PRACTICAL_SKILLS.map((item) => {
             const Icon = item.icon;
-            return (
-              <div
-                key={idx}
-                className="p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-2xs hover:border-[#0F766E]/50 hover:shadow-xs transition-all flex items-start gap-3"
-              >
-                <div className="w-8 h-8 rounded-lg bg-[#E6F4F1] dark:bg-teal-950/80 text-[#0F766E] dark:text-teal-300 flex items-center justify-center shrink-0 mt-0.5">
-                  <Icon className="w-4 h-4" />
-                </div>
-                <div className="min-w-0">
-                  <h4 className="text-xs font-bold text-[#0F2747] dark:text-white truncate">
-                    {item.label}
-                  </h4>
-                  <p className="text-[11px] text-[#64748B] dark:text-slate-400 truncate">
-                    {item.desc}
-                  </p>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Categories Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {skills.map((cat) => {
-            const Icon = categoryIcons[cat.categoryName] || Calculator;
 
             return (
               <div
-                key={cat.id}
-                className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs hover:border-[#0F766E]/40 dark:hover:border-teal-500/40 transition-all flex flex-col justify-between"
+                key={item.name}
+                className="p-3.5 sm:p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-2xs hover:border-[#0F766E]/50 hover:shadow-xs transition-all flex items-center justify-between gap-3 group"
               >
-                <div>
-                  <div className="flex items-center gap-3 mb-5">
-                    <div className="w-10 h-10 rounded-lg bg-[#E6F4F1] dark:bg-teal-950/70 text-[#0F766E] dark:text-teal-300 flex items-center justify-center">
-                      <Icon className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <h3 className="text-base font-bold text-[#0F2747] dark:text-white">
-                        {cat.categoryName}
-                      </h3>
-                      <span className="text-xs text-[#64748B] dark:text-slate-400">
-                        {cat.skills.length} core competencies
-                      </span>
-                    </div>
+                <div className="flex items-center gap-3 min-w-0">
+                  <div className="w-9 h-9 rounded-lg bg-[#E6F4F1] dark:bg-teal-950/70 text-[#0F766E] dark:text-teal-400 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                    <Icon className="w-4.5 h-4.5" />
                   </div>
-
-                  <div className="flex flex-wrap gap-2">
-                    {cat.skills.map((skill, sIdx) => (
-                      <span
-                        key={sIdx}
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-[#F4F6F8] dark:bg-slate-800/80 text-[#1F2937] dark:text-slate-200 border border-slate-200 dark:border-slate-700/80 hover:border-[#0F766E] hover:bg-[#E6F4F1]/60 transition-colors"
-                      >
-                        <Check className="w-3 h-3 text-[#0F766E] dark:text-teal-400" />
-                        <span>{skill}</span>
-                      </span>
-                    ))}
+                  <div className="min-w-0">
+                    <h3 className="text-xs sm:text-sm font-bold text-[#0F2747] dark:text-white truncate group-hover:text-[#0F766E] dark:group-hover:text-teal-400 transition-colors">
+                      {item.name}
+                    </h3>
+                    <p className="text-[11px] text-[#64748B] dark:text-slate-400 truncate mt-0.5">
+                      {item.category}
+                    </p>
                   </div>
                 </div>
 
-                <div className="pt-4 mt-6 border-t border-slate-100 dark:border-slate-800/70 flex items-center justify-between text-[11px] text-[#64748B] dark:text-slate-400">
-                  <span>Professional Standard</span>
-                  <span className="font-semibold text-[#0F766E] dark:text-teal-400">Verified Practice</span>
-                </div>
+                <span className="hidden sm:inline-block text-[10px] font-bold px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-[#475569] dark:text-slate-300 border border-slate-200/80 dark:border-slate-700 shrink-0">
+                  {item.badge}
+                </span>
               </div>
             );
           })}
