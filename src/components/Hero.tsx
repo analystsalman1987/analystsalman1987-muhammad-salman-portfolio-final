@@ -94,14 +94,14 @@ export function Hero({ profile, onOpenCV, onSelectExperience }: HeroProps) {
         <img 
           src="/images/hero_accounting_bg.jpg" 
           alt="" 
-          className="w-full h-full object-cover object-center opacity-[0.18] dark:opacity-[0.13] filter contrast-105 select-none transition-transform duration-1000 ease-out"
+          className="w-full h-full object-cover object-center opacity-[0.36] dark:opacity-[0.26] filter contrast-105 select-none transition-transform duration-1000 ease-out"
           style={{
             transform: isHomeActive ? 'scale(1.008)' : 'scale(1.0)',
           }}
           loading="eager"
         />
         {/* Soft gradient overlay to preserve optimal contrast and text readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-white/85 via-white/50 to-white dark:from-slate-900/90 dark:via-slate-900/65 dark:to-slate-900" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-white/30 to-white/80 dark:from-slate-900/75 dark:via-slate-900/40 dark:to-slate-900/80" />
       </div>
 
       {/* Subtle corporate ambient background grid */}

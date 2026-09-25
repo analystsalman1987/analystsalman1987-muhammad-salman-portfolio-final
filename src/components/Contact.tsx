@@ -71,10 +71,10 @@ export function Contact({ profile, onSendMessage }: ContactProps) {
         <img 
           src="/images/tax_compliance_workplace.jpg" 
           alt="" 
-          className="w-full h-full object-cover object-center opacity-[0.14] dark:opacity-[0.10] filter contrast-105 select-none"
+          className="w-full h-full object-cover object-center opacity-[0.28] dark:opacity-[0.20] filter contrast-105 select-none"
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-white/50 to-white/90 dark:from-slate-900/90 dark:via-slate-900/60 dark:to-slate-900/90" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-white/30 to-white/80 dark:from-slate-900/75 dark:via-slate-900/40 dark:to-slate-900/80" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

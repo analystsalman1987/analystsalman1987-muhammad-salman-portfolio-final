@@ -33,7 +33,21 @@ export function EducationLanguages({ education, languages }: EducationLanguagesP
   };
 
   return (
-    <section id="education" className="relative py-20 bg-[#F4F6F8] dark:bg-slate-950/60 border-b border-slate-200 dark:border-slate-800 transition-colors">
+    <section id="education" className="relative py-20 bg-[#F4F6F8] dark:bg-slate-950/60 border-b border-slate-200 dark:border-slate-800 transition-colors overflow-hidden">
+      {/* Subtle Professional Accounting & Academic Workplace Background Image */}
+      <div 
+        className="absolute inset-0 pointer-events-none z-0"
+        aria-hidden="true"
+      >
+        <img 
+          src="/images/accounting_workplace.jpg" 
+          alt="" 
+          className="w-full h-full object-cover object-center opacity-[0.25] dark:opacity-[0.18] filter contrast-105 select-none"
+          loading="lazy"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#F4F6F8]/75 via-[#F4F6F8]/40 to-[#F4F6F8]/80 dark:from-slate-950/80 dark:via-slate-950/45 dark:to-slate-950/80" />
+      </div>
+
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">

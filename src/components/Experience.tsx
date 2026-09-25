@@ -65,10 +65,10 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
         <img 
           src="/images/experience_background.jpg" 
           alt="" 
-          className="w-full h-full object-cover object-center opacity-[0.16] dark:opacity-[0.12] filter contrast-105 select-none"
+          className="w-full h-full object-cover object-center opacity-[0.32] dark:opacity-[0.24] filter contrast-105 select-none"
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-white/45 to-white/90 dark:from-slate-900/90 dark:via-slate-900/55 dark:to-slate-900/90" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-white/30 to-white/80 dark:from-slate-900/75 dark:via-slate-900/40 dark:to-slate-900/80" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

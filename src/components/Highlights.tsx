@@ -57,10 +57,10 @@ export function Highlights({ highlights }: HighlightsProps) {
         <img 
           src="/images/accounting_workplace.jpg" 
           alt="" 
-          className="w-full h-full object-cover object-center opacity-[0.12] dark:opacity-[0.08] filter contrast-105 select-none"
+          className="w-full h-full object-cover object-center opacity-[0.25] dark:opacity-[0.18] filter contrast-105 select-none"
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#F4F6F8]/95 via-[#F4F6F8]/65 to-[#F4F6F8]/95 dark:from-slate-900/95 dark:via-slate-900/70 dark:to-slate-900/95" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#F4F6F8]/75 via-[#F4F6F8]/40 to-[#F4F6F8]/80 dark:from-slate-900/80 dark:via-slate-900/45 dark:to-slate-900/80" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
