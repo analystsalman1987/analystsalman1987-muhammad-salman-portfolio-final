@@ -83,31 +83,29 @@ export function Hero({ profile, onOpenCV, onSelectExperience }: HeroProps) {
   };
 
   return (
-    <section id="home" className="relative pt-12 pb-20 md:pt-20 md:pb-28 overflow-hidden">
+    <section id="home" className="relative pt-12 pb-20 md:pt-20 md:pb-28 overflow-hidden bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 transition-colors">
       {/* Subtle Corporate Accounting & Finance Background Image */}
       <div 
-        className={`absolute inset-0 pointer-events-none -z-10 transition-opacity duration-700 ease-in-out ${
-          isHomeActive ? 'opacity-100' : 'opacity-85'
-        }`}
+        className="absolute inset-0 pointer-events-none z-0 transition-opacity duration-700 ease-in-out"
         aria-hidden="true"
       >
         <img 
           src="/images/hero_accounting_bg.jpg" 
           alt="" 
-          className="w-full h-full object-cover object-center opacity-[0.36] dark:opacity-[0.26] filter contrast-105 select-none transition-transform duration-1000 ease-out"
+          className="w-full h-full object-cover object-center opacity-[0.35] dark:opacity-[0.25] filter contrast-105 select-none transition-transform duration-1000 ease-out"
           style={{
             transform: isHomeActive ? 'scale(1.008)' : 'scale(1.0)',
           }}
           loading="eager"
         />
         {/* Soft gradient overlay to preserve optimal contrast and text readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-white/30 to-white/80 dark:from-slate-900/75 dark:via-slate-900/40 dark:to-slate-900/80" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-white/35 to-white/80 dark:from-slate-900/75 dark:via-slate-900/40 dark:to-slate-900/80" />
       </div>
 
       {/* Subtle corporate ambient background grid */}
-      <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,#e2e8f015_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f015_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#1e293b15_1px,transparent_1px),linear-gradient(to_bottom,#1e293b15_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
+      <div className="absolute inset-0 z-0 pointer-events-none bg-[linear-gradient(to_right,#e2e8f015_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f015_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#1e293b15_1px,transparent_1px),linear-gradient(to_bottom,#1e293b15_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           
           {/* Main Hero Copy (Left / Top) */}
