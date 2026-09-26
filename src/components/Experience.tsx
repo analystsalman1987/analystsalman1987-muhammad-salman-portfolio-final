@@ -192,7 +192,7 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
                         </div>
                       </div>
 
-                      {/* CENTER / VIEW DETAILS: Horizontally centered in full card, vertically aligned with Location line */}
+                      {/* CENTER / RESPONSIBILITIES: Horizontally centered in full card, vertically aligned with Location line */}
                       <div className="flex justify-center my-1 sm:my-0 sm:absolute sm:left-1/2 sm:-translate-x-1/2 sm:bottom-0.5 z-10 pointer-events-none">
                         <div 
                           className={`inline-flex items-center gap-1 px-1.5 py-[2px] rounded text-[9.5px] font-medium leading-none tracking-tight transition-all pointer-events-auto ${
@@ -201,7 +201,7 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
                               : 'bg-teal-500/[0.04] hover:bg-teal-500/[0.09] text-[#0F766E] dark:text-teal-300 dark:bg-teal-400/[0.04] dark:hover:bg-teal-400/[0.09] border border-teal-500/20 dark:border-teal-400/20 shadow-2xs backdrop-blur-2xs'
                           }`}
                         >
-                          <span>{isExpanded ? 'Hide Details' : 'View Details'}</span>
+                          <span>{isExpanded ? 'Hide Responsibilities' : 'Responsibilities'}</span>
                           <ChevronDown 
                             className={`w-2 h-2 sm:w-2.5 sm:h-2.5 transition-transform duration-300 ease-out ${
                               isExpanded ? 'rotate-180 text-[#0F766E] dark:text-teal-300' : 'text-[#0F766E] dark:text-teal-400'
@@ -212,20 +212,20 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
 
                       {/* RIGHT SIDE: Logo at top-right, Date directly below */}
                       <div className="flex flex-row sm:flex-col items-center sm:items-end justify-between sm:justify-end gap-1.5 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-100 dark:border-slate-800/60 sm:max-w-[42%]">
-                        {/* Company Logo Badge */}
+                        {/* Company Logo (100% Transparent Background) */}
                         {isAlyami && (
-                          <span className="inline-flex items-center justify-center px-2.5 py-0.5 rounded-md bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-2xs h-7 sm:h-7.5">
+                          <span className="inline-flex items-center justify-center bg-transparent h-8 sm:h-8.5 min-w-[52px] sm:min-w-[60px]">
                             <img
                               src={alyamiLogo}
-                              alt="Ahmed Yahya Alyami"
+                              alt="Ahmed Alyami Group"
                               referrerPolicy="no-referrer"
-                              className="h-5.5 sm:h-6 w-auto object-contain"
+                              className="h-7 sm:h-7.5 w-auto object-contain max-w-[120px]"
                             />
                           </span>
                         )}
 
                         {isPalestine && (
-                          <span className="inline-flex items-center justify-center px-2 py-0.5 rounded-md bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-2xs h-8 sm:h-8.5 min-w-[52px] sm:min-w-[60px]">
+                          <span className="inline-flex items-center justify-center bg-transparent h-8 sm:h-8.5 min-w-[52px] sm:min-w-[60px]">
                             <img
                               src="/images/palestine-hotel-logo.png"
                               alt="Palestine Hotel Makkah"
@@ -236,7 +236,7 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
                         )}
 
                         {isAlRaya && (
-                          <span className="inline-flex items-center justify-center px-2 py-0.5 rounded-md bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-2xs h-8 sm:h-8.5 min-w-[52px] sm:min-w-[60px]">
+                          <span className="inline-flex items-center justify-center bg-transparent h-8 sm:h-8.5 min-w-[52px] sm:min-w-[60px]">
                             <img
                               src="/images/alraya-logo.svg"
                               alt="Al Raya Specialties"
@@ -247,7 +247,7 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
                         )}
 
                         {isHonda && (
-                          <span className="inline-flex items-center justify-center px-2 py-0.5 rounded-md bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-2xs h-8 sm:h-8.5 min-w-[52px] sm:min-w-[60px]">
+                          <span className="inline-flex items-center justify-center bg-transparent h-8 sm:h-8.5 min-w-[52px] sm:min-w-[60px]">
                             <img
                               src="/images/honda-logo.svg"
                               alt="Honda Canal Bank"
@@ -306,16 +306,74 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
                           </h4>
                         </div>
 
+                        {/* Professional Accounting Workflow Visual — Ahmed Alyami Group */}
+                        {job.id === 'job-1' && (
+                          <div className="mb-4 rounded-xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-[#F8FAFC] dark:bg-slate-800/40 p-3 sm:p-3.5 flex flex-col sm:flex-row items-center gap-3.5 shadow-2xs">
+                            <img
+                              src="/images/work_finance_analysis.jpg"
+                              alt="Corporate Financial Analysis & Operations"
+                              referrerPolicy="no-referrer"
+                              className="w-full sm:w-44 h-28 sm:h-24 object-cover rounded-lg shrink-0 shadow-2xs"
+                              loading="lazy"
+                            />
+                            <div className="space-y-1 text-center sm:text-left">
+                              <span className="text-xs sm:text-sm font-bold text-[#0F2747] dark:text-white block">
+                                Corporate Accounting Operations & Financial Analysis
+                              </span>
+                              <p className="text-[11px] sm:text-xs text-[#64748B] dark:text-slate-400 leading-relaxed">
+                                End-to-end ERP operations covering quotation and sales order processing, accounts receivable & payable cycle, vendor reconciliations, cost accounting, and ZATCA VAT compliance.
+                              </p>
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Professional Accounting Workflow Visual — Iqtat Trading Co. */}
+                        {job.id === 'job-2' && (
+                          <div className="mb-4 rounded-xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-[#F8FAFC] dark:bg-slate-800/40 p-3 sm:p-3.5 flex flex-col sm:flex-row items-center gap-3.5 shadow-2xs">
+                            <img
+                              src="/images/work_audit_reports.jpg"
+                              alt="Ledger Auditing & Statement Reconciliations"
+                              referrerPolicy="no-referrer"
+                              className="w-full sm:w-44 h-28 sm:h-24 object-cover rounded-lg shrink-0 shadow-2xs"
+                              loading="lazy"
+                            />
+                            <div className="space-y-1 text-center sm:text-left">
+                              <span className="text-xs sm:text-sm font-bold text-[#0F2747] dark:text-white block">
+                                Ledger Reconciliations & Statements of Account
+                              </span>
+                              <p className="text-[11px] sm:text-xs text-[#64748B] dark:text-slate-400 leading-relaxed">
+                                Multi-branch general ledger maintenance, supplier & customer SOA audits, inventory costing, bank transaction verification, and month-end financial reporting.
+                              </p>
+                            </div>
+                          </div>
+                        )}
+
                         <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                          {job.responsibilities.map((resp, idx) => (
-                            <li 
-                              key={idx} 
-                              className="flex items-start gap-2.5 text-xs sm:text-sm text-[#1F2937] dark:text-slate-300 bg-[#F4F6F8]/90 dark:bg-slate-800/40 p-2.5 rounded-xl border border-slate-200/60 dark:border-slate-800/60 backdrop-blur-xs"
-                            >
-                              <CheckCircle2 className="w-4 h-4 text-[#0F766E] dark:text-teal-400 shrink-0 mt-0.5" />
-                              <span className="leading-relaxed">{resp}</span>
-                            </li>
-                          ))}
+                          {job.responsibilities.map((resp, idx) => {
+                            const colonIndex = resp.indexOf(':');
+                            const hasHeading = colonIndex > 0 && colonIndex < 45;
+                            const heading = hasHeading ? resp.slice(0, colonIndex) : '';
+                            const detail = hasHeading ? resp.slice(colonIndex + 1).trim() : resp;
+
+                            return (
+                              <li 
+                                key={idx} 
+                                className="flex items-start gap-2.5 text-xs sm:text-sm text-[#1F2937] dark:text-slate-300 bg-[#F4F6F8]/90 dark:bg-slate-800/40 p-2.5 rounded-xl border border-slate-200/60 dark:border-slate-800/60 backdrop-blur-xs"
+                              >
+                                <CheckCircle2 className="w-4 h-4 text-[#0F766E] dark:text-teal-400 shrink-0 mt-0.5" />
+                                <span className="leading-relaxed">
+                                  {hasHeading ? (
+                                    <>
+                                      <strong className="font-bold text-[#0F2747] dark:text-white">{heading}:</strong>{' '}
+                                      {detail}
+                                    </>
+                                  ) : (
+                                    resp
+                                  )}
+                                </span>
+                              </li>
+                            );
+                          })}
                         </ul>
                       </div>
                     </div>

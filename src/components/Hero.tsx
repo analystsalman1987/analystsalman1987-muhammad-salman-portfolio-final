@@ -90,16 +90,17 @@ export function Hero({ profile, onOpenCV, onSelectExperience }: HeroProps) {
         aria-hidden="true"
       >
         <img 
-          src="/images/hero_accounting_bg.jpg" 
+          src="/images/home_finance_desk.jpg" 
           alt="" 
-          className="w-full h-full object-cover object-center opacity-[0.35] dark:opacity-[0.25] filter contrast-105 select-none transition-transform duration-1000 ease-out"
+          referrerPolicy="no-referrer"
+          className="w-full h-full object-cover object-center opacity-[0.25] dark:opacity-[0.18] filter contrast-105 select-none transition-transform duration-1000 ease-out"
           style={{
             transform: isHomeActive ? 'scale(1.008)' : 'scale(1.0)',
           }}
           loading="eager"
         />
         {/* Soft gradient overlay to preserve optimal contrast and text readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-white/35 to-white/80 dark:from-slate-900/75 dark:via-slate-900/40 dark:to-slate-900/80" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-white/45 to-white/90 dark:from-slate-900/85 dark:via-slate-900/50 dark:to-slate-900/90" />
       </div>
 
       {/* Subtle corporate ambient background grid */}
@@ -199,25 +200,22 @@ export function Hero({ profile, onOpenCV, onSelectExperience }: HeroProps) {
               {/* Main executive card container */}
               <div className="relative rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 shadow-xl space-y-5">
                 
-                {/* Avatar Display */}
+                {/* Professional Finance Workspace Display */}
                 <div className="flex justify-center">
-                  {profile.avatarUrl ? (
+                  <div className="relative w-full rounded-xl overflow-hidden border-2 border-[#0F766E]/40 shadow-md bg-slate-100 dark:bg-slate-800">
                     <img
-                      src={profile.avatarUrl}
-                      alt={profile.fullName || 'Muhammad Salman'}
-                      className="w-44 h-44 rounded-xl object-cover border-2 border-[#0F766E]/40 shadow-md"
+                      src="/images/home_finance_desk.jpg"
+                      alt="Corporate Accounting & Finance Workspace"
+                      referrerPolicy="no-referrer"
+                      className="w-full h-44 object-cover"
                     />
-                  ) : (
-                    <div className="w-44 h-44 rounded-xl bg-gradient-to-br from-[#0F2747] via-slate-900 to-[#0F766E]/40 border-2 border-[#0F766E]/30 flex flex-col items-center justify-center text-center p-4 shadow-md">
-                      <span className="text-4xl font-extrabold tracking-widest text-teal-300">
-                        MS
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0F2747]/85 via-transparent to-transparent flex items-end p-2.5">
+                      <span className="text-[11px] font-semibold text-white tracking-wide flex items-center gap-1.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-teal-400" />
+                        Finance & Accounting Operations
                       </span>
-                      <span className="text-[11px] font-semibold text-slate-300 uppercase tracking-widest mt-2">
-                        Professional Profile
-                      </span>
-                      <div className="w-8 h-0.5 bg-[#0F766E] rounded-full mt-2" />
                     </div>
-                  )}
+                  </div>
                 </div>
 
                 {/* Quick Info Block */}

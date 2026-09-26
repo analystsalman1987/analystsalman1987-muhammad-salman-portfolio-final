@@ -101,6 +101,14 @@ export function Software({ software }: SoftwareProps) {
         containerClassName: 'h-11 px-2.5 min-w-11',
       };
     }
+    if (lower.includes('delta')) {
+      return {
+        src: '/images/software/delta-logo.svg',
+        alt: 'Delta Financial Software',
+        className: 'h-7 sm:h-8 w-auto object-contain',
+        containerClassName: 'h-11 px-2.5 min-w-11',
+      };
+    }
     return null;
   };
 

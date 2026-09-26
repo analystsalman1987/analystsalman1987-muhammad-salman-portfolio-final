@@ -91,11 +91,23 @@ export const PrintableCV: React.FC<PrintableCVProps> = ({ data }) => {
                 </span>
               </div>
               <ul className="mt-1.5 list-disc list-inside space-y-1 text-[#1F2937]">
-                {(job.responsibilities || []).map((resp, i) => (
-                  <li key={i} className="leading-normal">
-                    {resp}
-                  </li>
-                ))}
+                {(job.responsibilities || []).map((resp, i) => {
+                  const colonIndex = resp.indexOf(':');
+                  const hasHeading = colonIndex > 0 && colonIndex < 45;
+                  const heading = hasHeading ? resp.slice(0, colonIndex) : '';
+                  const detail = hasHeading ? resp.slice(colonIndex + 1).trim() : resp;
+                  return (
+                    <li key={i} className="leading-normal">
+                      {hasHeading ? (
+                        <>
+                          <strong>{heading}:</strong> {detail}
+                        </>
+                      ) : (
+                        resp
+                      )}
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           ))}
