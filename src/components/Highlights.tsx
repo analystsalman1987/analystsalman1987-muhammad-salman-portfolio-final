@@ -13,6 +13,8 @@ import {
   LucideIcon
 } from 'lucide-react';
 import { HighlightItem } from '../types';
+import { useLanguage } from '../context/LanguageContext';
+import { ARABIC_TRANSLATIONS } from '../data/arabicData';
 
 interface HighlightsProps {
   highlights: HighlightItem[];
@@ -32,12 +34,14 @@ const iconMap: Record<string, LucideIcon> = {
 
 export function Highlights({ highlights }: HighlightsProps) {
   const [expandedId, setExpandedId] = useState<string | null>(null);
+  const { isRTL } = useLanguage();
+  const t = ARABIC_TRANSLATIONS.highlights;
 
   if (!highlights || highlights.length === 0) {
     return (
       <section className="py-12 bg-white dark:bg-slate-900 border-y border-slate-200 dark:border-slate-800">
         <div className="max-w-7xl mx-auto px-4 text-center text-slate-500 text-sm">
-          Information will be added soon.
+          {isRTL ? 'سيتم إضافة المعلومات قريباً.' : 'Information will be added soon.'}
         </div>
       </section>
     );
@@ -67,13 +71,13 @@ export function Highlights({ highlights }: HighlightsProps) {
         
         <div className="text-center max-w-2xl mx-auto mb-10">
           <span className="text-xs font-bold tracking-widest text-[#0F766E] dark:text-teal-400 uppercase">
-            Executive Competencies
+            {isRTL ? t.tag : 'Executive Competencies'}
           </span>
           <h2 className="mt-1 text-2xl font-bold text-[#0F2747] dark:text-white sm:text-3xl tracking-tight">
-            Professional Highlights
+            {isRTL ? t.title : 'Professional Highlights'}
           </h2>
           <p className="mt-2 text-xs sm:text-sm text-[#64748B] dark:text-slate-400">
-            Click any competency card to expand core accounting responsibilities and experience details.
+            {isRTL ? t.subtitle : 'Click any competency card to expand core accounting responsibilities and experience details.'}
           </p>
         </div>
 
@@ -81,7 +85,11 @@ export function Highlights({ highlights }: HighlightsProps) {
           {highlights.map((item, idx) => {
             const Icon = iconMap[item.iconName] || Calculator;
             const isExpanded = expandedId === item.id;
-            const hasDetails = Boolean(item.details && item.details.length > 0);
+            const arItem = t.items.find((x) => x.id === item.id) || t.items[idx];
+            const title = isRTL && arItem ? arItem.title : item.title;
+            const subtitle = isRTL && arItem ? arItem.subtitle : item.subtitle;
+            const details = isRTL && arItem ? arItem.details : item.details;
+            const hasDetails = Boolean(details && details.length > 0);
 
             return (
               <div
@@ -117,7 +125,7 @@ export function Highlights({ highlights }: HighlightsProps) {
                           : 'bg-teal-500/[0.06] text-[#0F766E] dark:text-teal-300 border border-teal-500/20 group-hover:bg-teal-500/[0.12]'
                       }`}
                     >
-                      <span>{isExpanded ? 'Collapse' : 'Details'}</span>
+                      <span>{isExpanded ? (isRTL ? t.collapse : 'Collapse') : (isRTL ? t.details : 'Details')}</span>
                       <ChevronDown 
                         className={`w-3 h-3 transition-transform duration-300 ease-out ${
                           isExpanded ? 'rotate-180 text-white' : 'text-[#0F766E] dark:text-teal-400'
@@ -128,10 +136,10 @@ export function Highlights({ highlights }: HighlightsProps) {
 
                   <div className="mt-3.5">
                     <h3 className="text-sm font-bold text-[#0F2747] dark:text-slate-100 group-hover:text-[#0F766E] dark:group-hover:text-teal-400 transition-colors leading-snug">
-                      {item.title}
+                      {title}
                     </h3>
                     <p className="text-xs text-[#64748B] dark:text-slate-400 mt-1.5 leading-relaxed">
-                      {item.subtitle}
+                      {subtitle}
                     </p>
                   </div>
                 </div>
@@ -148,10 +156,10 @@ export function Highlights({ highlights }: HighlightsProps) {
                     <div className="overflow-hidden">
                       <div className="p-4 sm:p-5 pt-3.5 space-y-2.5">
                         <span className="text-[11px] font-bold text-[#0F766E] dark:text-teal-400 tracking-wider uppercase block">
-                          Key Responsibilities & Scope:
+                          {isRTL ? t.scope : 'Key Responsibilities & Scope:'}
                         </span>
                         <ul className="space-y-2">
-                          {item.details?.map((detail, dIdx) => (
+                          {details?.map((detail, dIdx) => (
                             <li key={dIdx} className="flex items-start gap-2 text-xs text-[#1F2937] dark:text-slate-300 leading-relaxed">
                               <CheckCircle2 className="w-3.5 h-3.5 text-[#0F766E] dark:text-teal-400 shrink-0 mt-0.5" />
                               <span>{detail}</span>

@@ -1,5 +1,7 @@
 import { ArrowUp, Mail, Phone, MapPin } from 'lucide-react';
 import { ProfileInfo } from '../types';
+import { useLanguage } from '../context/LanguageContext';
+import { ARABIC_TRANSLATIONS } from '../data/arabicData';
 
 interface FooterProps {
   profile: ProfileInfo;
@@ -9,6 +11,8 @@ interface FooterProps {
 
 export function Footer({ profile, onOpenAdmin, onOpenCV }: FooterProps) {
   const currentYear = new Date().getFullYear();
+  const { isRTL } = useLanguage();
+  const t = ARABIC_TRANSLATIONS.footer;
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -28,26 +32,26 @@ export function Footer({ profile, onOpenAdmin, onOpenCV }: FooterProps) {
               </div>
               <div>
                 <span className="text-base font-bold text-white block">
-                  {profile.fullName || 'Muhammad Salman'}
+                  Muhammad Salman
                 </span>
                 <span className="text-xs text-teal-400 font-medium block">
-                  {profile.professionalTitle || 'Accountant | MBA Accounting & Finance'}
+                  {isRTL ? t.role : (profile.professionalTitle || 'Accountant | MBA Accounting & Finance')}
                 </span>
               </div>
             </div>
             <p className="text-xs text-slate-300/80 max-w-md leading-relaxed">
-              Accounting professional with 14+ years across Saudi Arabia and Pakistan specializing in financial reporting, bookkeeping, reconciliations, month-end closing, ERP systems, and ZATCA VAT compliance.
+              {isRTL ? t.desc : 'Accounting professional with 14+ years across Saudi Arabia and Pakistan specializing in financial reporting, bookkeeping, reconciliations, month-end closing, ERP systems, and ZATCA VAT compliance.'}
             </p>
             <div className="flex items-center gap-2 text-xs text-slate-300/80 pt-1">
               <MapPin className="w-3.5 h-3.5 text-teal-400" />
-              <span>{profile.location || 'Dammam, Saudi Arabia'}</span>
+              <span>{isRTL ? t.location : (profile.location || 'Dammam, Saudi Arabia')}</span>
             </div>
           </div>
 
           {/* Contact Details */}
           <div className="md:col-span-3 space-y-2 text-xs">
             <h4 className="font-bold text-white uppercase tracking-wider text-[11px] mb-3">
-              Direct Contact
+              {isRTL ? t.contactTitle : 'Direct Contact'}
             </h4>
             <div className="flex items-center gap-2 text-slate-300">
               <Mail className="w-3.5 h-3.5 text-teal-400 shrink-0" />
@@ -57,38 +61,38 @@ export function Footer({ profile, onOpenAdmin, onOpenCV }: FooterProps) {
             </div>
             <div className="flex items-center gap-2 text-slate-300">
               <Phone className="w-3.5 h-3.5 text-teal-400 shrink-0" />
-              <a href={`tel:${profile.primaryPhone.replace(/\s+/g, '')}`} className="hover:text-white transition-colors">
+              <a href={`tel:${profile.primaryPhone.replace(/\s+/g, '')}`} className="hover:text-white transition-colors" dir="ltr">
                 {profile.primaryPhone}
               </a>
             </div>
             <div className="flex items-center gap-2 text-slate-400">
               <Phone className="w-3.5 h-3.5 text-slate-500 shrink-0" />
-              <span>Alt: {profile.altPhone}</span>
+              <span dir="ltr">{isRTL ? `${t.altLabel} ${profile.altPhone}` : `Alt: ${profile.altPhone}`}</span>
             </div>
           </div>
 
           {/* Quick Actions */}
           <div className="md:col-span-3 space-y-2 text-xs">
             <h4 className="font-bold text-white uppercase tracking-wider text-[11px] mb-3">
-              Quick Links
+              {isRTL ? t.linksTitle : 'Quick Links'}
             </h4>
             <ul className="space-y-2">
               <li>
                 <button
                   onClick={onOpenCV}
-                  className="hover:text-teal-300 transition-colors text-left cursor-pointer"
+                  className="hover:text-teal-300 transition-colors text-start cursor-pointer"
                 >
-                  View & Print CV / Resume
+                  {isRTL ? t.cvLink : 'View & Print CV / Resume'}
                 </button>
               </li>
               <li>
                 <a href="#experience" className="hover:text-teal-300 transition-colors">
-                  Career History
+                  {isRTL ? t.experienceLink : 'Career History'}
                 </a>
               </li>
               <li>
                 <a href="#software" className="hover:text-teal-300 transition-colors">
-                  ERP & Accounting Software
+                  {isRTL ? t.softwareLink : 'ERP & Accounting Software'}
                 </a>
               </li>
               <li>
@@ -98,9 +102,9 @@ export function Footer({ profile, onOpenAdmin, onOpenCV }: FooterProps) {
                     e.preventDefault();
                     onOpenAdmin();
                   }}
-                  className="text-slate-400 hover:text-teal-300 transition-colors text-left flex items-center gap-1 cursor-pointer"
+                  className="text-slate-400 hover:text-teal-300 transition-colors text-start flex items-center gap-1 cursor-pointer"
                 >
-                  <span>Admin Panel</span>
+                  <span>{isRTL ? t.adminLink : 'Admin Panel'}</span>
                 </a>
               </li>
             </ul>
@@ -111,14 +115,14 @@ export function Footer({ profile, onOpenAdmin, onOpenCV }: FooterProps) {
         {/* Bottom bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
           <div>
-            © {currentYear} {profile.fullName || 'Muhammad Salman'}. All rights reserved.
+            © {currentYear} Muhammad Salman. {isRTL ? t.copyright : 'All rights reserved.'}
           </div>
           
           <button
             onClick={scrollToTop}
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800/80 hover:bg-[#0F766E] text-slate-300 hover:text-white text-xs transition-colors cursor-pointer"
           >
-            <span>Back to top</span>
+            <span>{isRTL ? t.backToTop : 'Back to top'}</span>
             <ArrowUp className="w-3.5 h-3.5" />
           </button>
         </div>

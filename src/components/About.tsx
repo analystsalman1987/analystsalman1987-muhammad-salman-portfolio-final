@@ -3,12 +3,14 @@ import {
   Calculator, 
   ShieldCheck, 
   Layers, 
-  ArrowLeftRight,
-  Receipt,
-  CheckCircle2,
-  ChevronDown
+  ArrowLeftRight, 
+  Receipt, 
+  CheckCircle2, 
+  ChevronDown 
 } from 'lucide-react';
 import { ProfileInfo } from '../types';
+import { useLanguage } from '../context/LanguageContext';
+import { ARABIC_TRANSLATIONS } from '../data/arabicData';
 
 interface AboutProps {
   profile: ProfileInfo;
@@ -87,14 +89,17 @@ const PROFESSIONAL_AREAS: ProfessionalArea[] = [
 
 export function About({ profile }: AboutProps) {
   const [expandedAreaId, setExpandedAreaId] = useState<string | null>(null);
+  const { isRTL } = useLanguage();
+  const t = ARABIC_TRANSLATIONS.about;
 
   const toggleArea = (id: string) => {
     setExpandedAreaId((prev) => (prev === id ? null : id));
   };
 
-  const introText =
-    profile.summary ||
-    'Accounting professional with 14+ years of experience across Saudi Arabia and Pakistan, specializing in financial accounting, reporting, AP & AR, reconciliations, month-end closing, inventory costing, VAT/ZATCA compliance, and ERP-based accounting operations.';
+  const introText = isRTL
+    ? t.summary
+    : profile.summary ||
+      'Accounting professional with 14+ years of experience across Saudi Arabia and Pakistan, specializing in financial accounting, reporting, AP & AR, reconciliations, month-end closing, inventory costing, VAT/ZATCA compliance, and ERP-based accounting operations.';
 
   return (
     <section 
@@ -120,10 +125,10 @@ export function About({ profile }: AboutProps) {
         {/* Header */}
         <div className="max-w-3xl">
           <span className="text-xs font-bold tracking-widest text-[#0F766E] dark:text-teal-400 uppercase">
-            Profile Overview
+            {isRTL ? t.tag : 'Profile Overview'}
           </span>
           <h2 className="mt-1 text-3xl font-extrabold text-[#0F2747] dark:text-white sm:text-4xl tracking-tight">
-            About Muhammad Salman
+            {isRTL ? t.title : 'About Muhammad Salman'}
           </h2>
         </div>
 
@@ -136,10 +141,10 @@ export function About({ profile }: AboutProps) {
           <div className="pt-4 mt-4 border-t border-slate-200/80 dark:border-slate-700/60 flex flex-wrap items-center justify-between gap-3 text-xs font-semibold text-[#64748B] dark:text-slate-400">
             <div className="flex items-center gap-2">
               <span className="inline-block w-2 h-2 rounded-full bg-[#0F766E] shrink-0" />
-              <span>Operating with full compliance in Dammam, Kingdom of Saudi Arabia</span>
+              <span>{isRTL ? t.complianceNote : 'Operating with full compliance in Dammam, Kingdom of Saudi Arabia'}</span>
             </div>
             <span className="px-2.5 py-1 rounded-md bg-[#E6F4F1] dark:bg-teal-950/70 text-[#0F766E] dark:text-teal-300 font-bold border border-[#0F766E]/20">
-              Valid Saudi Driving License
+              {isRTL ? t.drivingLicense : 'Valid Saudi Driving License'}
             </span>
           </div>
         </div>
@@ -151,13 +156,16 @@ export function About({ profile }: AboutProps) {
           <div className="lg:col-span-7 space-y-3">
             <div className="mb-1">
               <h3 className="text-xs font-bold tracking-wider text-[#64748B] dark:text-slate-400 uppercase">
-                Core Competency Breakdown (Click to Expand)
+                {isRTL ? t.breakdownTitle : 'Core Competency Breakdown (Click to Expand)'}
               </h3>
             </div>
 
             {PROFESSIONAL_AREAS.map((area) => {
               const Icon = area.icon;
               const isExpanded = expandedAreaId === area.id;
+              const arArea = t.areas.find((a) => a.id === area.id);
+              const title = isRTL && arArea ? arArea.title : area.title;
+              const details = isRTL && arArea ? arArea.details : area.details;
 
               return (
                 <div
@@ -187,7 +195,7 @@ export function About({ profile }: AboutProps) {
                         <Icon className="w-4.5 h-4.5" />
                       </div>
                       <h4 className="text-sm font-bold text-[#0F2747] dark:text-slate-100 group-hover:text-[#0F766E] dark:group-hover:text-teal-400 transition-colors">
-                        {area.title}
+                        {title}
                       </h4>
                     </div>
 
@@ -198,7 +206,7 @@ export function About({ profile }: AboutProps) {
                           : 'bg-teal-500/[0.06] text-[#0F766E] dark:text-teal-300 border border-teal-500/20 group-hover:bg-teal-500/[0.12]'
                       }`}
                     >
-                      <span>{isExpanded ? 'Hide' : 'View'}</span>
+                      <span>{isExpanded ? (isRTL ? t.hide : 'Hide') : (isRTL ? t.view : 'View')}</span>
                       <ChevronDown 
                         className={`w-3 h-3 transition-transform duration-300 ease-out ${
                           isExpanded ? 'rotate-180 text-white' : 'text-[#0F766E] dark:text-teal-400'
@@ -218,7 +226,7 @@ export function About({ profile }: AboutProps) {
                     <div className="overflow-hidden">
                       <div className="p-4 sm:p-5 pt-3">
                         <ul className="space-y-2">
-                          {area.details.map((detail, dIdx) => (
+                          {details.map((detail, dIdx) => (
                             <li key={dIdx} className="flex items-start gap-2.5 text-xs text-[#1F2937] dark:text-slate-300">
                               <CheckCircle2 className="w-3.5 h-3.5 text-[#0F766E] dark:text-teal-400 shrink-0 mt-0.5" />
                               <span>{detail}</span>
@@ -238,15 +246,15 @@ export function About({ profile }: AboutProps) {
             <div className="grid grid-cols-3 gap-3">
               <div className="p-3.5 rounded-xl bg-white dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800 shadow-2xs text-center">
                 <span className="block text-2xl font-extrabold text-[#0F766E] dark:text-teal-400">14+</span>
-                <span className="text-[11px] font-semibold text-slate-600 dark:text-slate-300">Years Exp</span>
+                <span className="text-[11px] font-semibold text-slate-600 dark:text-slate-300">{isRTL ? t.yearsExpLabel : 'Years Exp'}</span>
               </div>
               <div className="p-3.5 rounded-xl bg-white dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800 shadow-2xs text-center">
                 <span className="block text-2xl font-extrabold text-[#0F2747] dark:text-slate-100">MBA</span>
-                <span className="text-[11px] font-semibold text-slate-600 dark:text-slate-300">Finance</span>
+                <span className="text-[11px] font-semibold text-slate-600 dark:text-slate-300">{isRTL ? t.mbaFinanceLabel : 'Finance'}</span>
               </div>
               <div className="p-3.5 rounded-xl bg-white dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800 shadow-2xs text-center">
                 <span className="block text-2xl font-extrabold text-[#0F766E] dark:text-teal-400">ZATCA</span>
-                <span className="text-[11px] font-semibold text-slate-600 dark:text-slate-300">VAT & Tax</span>
+                <span className="text-[11px] font-semibold text-slate-600 dark:text-slate-300">{isRTL ? t.zatcaVatLabel : 'VAT & Tax'}</span>
               </div>
             </div>
 
@@ -261,10 +269,10 @@ export function About({ profile }: AboutProps) {
               <div className="absolute inset-0 bg-gradient-to-t from-[#0F2747]/95 via-[#0F2747]/40 to-transparent flex items-end p-4 sm:p-5">
                 <div className="text-white">
                   <span className="text-[10px] uppercase font-bold tracking-wider text-teal-300 bg-[#0F2747]/80 px-2.5 py-0.5 rounded backdrop-blur-xs border border-teal-500/30">
-                    Executive Governance
+                    {isRTL ? t.governanceBadge : 'Executive Governance'}
                   </span>
                   <p className="text-xs font-semibold text-slate-100 mt-1.5">
-                    Financial Reporting, Reconciliation & ZATCA Statutory Compliance
+                    {isRTL ? t.governanceDesc : 'Financial Reporting, Reconciliation & ZATCA Statutory Compliance'}
                   </p>
                 </div>
               </div>

@@ -8,6 +8,8 @@ import {
   Briefcase 
 } from 'lucide-react';
 import { WorkExperienceItem } from '../types';
+import { useLanguage } from '../context/LanguageContext';
+import { ARABIC_TRANSLATIONS } from '../data/arabicData';
 import alyamiLogo from '../assets/alyami-logo.png';
 
 interface ExperienceProps {
@@ -19,12 +21,14 @@ interface ExperienceProps {
 export function Experience({ experience, isSelected = false, onToggleSelect }: ExperienceProps) {
   // All cards collapsed by default
   const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set());
+  const { isRTL } = useLanguage();
+  const t = ARABIC_TRANSLATIONS.experience;
 
   if (!experience || experience.length === 0) {
     return (
       <section id="experience" className="py-20 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
         <div className="max-w-7xl mx-auto px-4 text-center text-slate-500">
-          Information will be added soon.
+          {isRTL ? 'سيتم إضافة المعلومات قريباً.' : 'Information will be added soon.'}
         </div>
       </section>
     );
@@ -77,13 +81,13 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
           <div className="max-w-3xl">
             <span className="text-xs font-bold tracking-widest text-[#0F766E] dark:text-teal-400 uppercase">
-              Career Timeline
+              {isRTL ? t.tag : 'Career Timeline'}
             </span>
             <h2 className="mt-1 text-3xl font-extrabold text-[#0F2747] dark:text-white sm:text-4xl tracking-tight">
-              Work Experience
+              {isRTL ? t.title : 'Work Experience'}
             </h2>
             <p className="mt-2 text-sm text-[#64748B] dark:text-slate-400">
-              A sustained record of financial management, regulatory adherence, and accounting across manufacturing, trade, hospitality, and corporate sectors in Saudi Arabia and Pakistan.
+              {isRTL ? t.subtitle : 'A sustained record of financial management, regulatory adherence, and accounting across manufacturing, trade, hospitality, and corporate sectors in Saudi Arabia and Pakistan.'}
             </p>
           </div>
 
@@ -98,10 +102,10 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
                     ? 'bg-[#E6F4F1] text-[#0F766E] border-[#0F766E]/40 dark:bg-teal-950/70 dark:text-teal-300 dark:border-teal-700/60 shadow-2xs'
                     : 'bg-[#F4F6F8] text-slate-600 border-slate-200 dark:bg-slate-800 dark:text-slate-400 dark:border-slate-700 hover:text-slate-900 dark:hover:text-white'
                 }`}
-                title="Toggle subtle background image effect (Test)"
+                title={isRTL ? t.bgTitle : 'Toggle subtle background image effect (Test)'}
               >
                 <span className={`w-1.5 h-1.5 rounded-full transition-colors ${isSelected ? 'bg-[#0F766E] dark:bg-teal-400 animate-pulse' : 'bg-slate-400'}`} />
-                <span>{isSelected ? 'Background: Active' : 'Background: Inactive'}</span>
+                <span>{isSelected ? (isRTL ? t.bgActive : 'Background: Active') : (isRTL ? t.bgInactive : 'Background: Inactive')}</span>
               </button>
             )}
 
@@ -111,16 +115,21 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
               className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-semibold text-[#1F2937] dark:text-slate-300 bg-[#F4F6F8] hover:bg-[#E6F4F1] dark:bg-slate-800 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 transition-colors cursor-pointer"
             >
               <Briefcase className="w-3.5 h-3.5 text-[#0F766E] dark:text-teal-400" />
-              <span>{allExpanded ? 'Collapse All' : 'Expand All'}</span>
+              <span>{allExpanded ? (isRTL ? t.collapseAll : 'Collapse All') : (isRTL ? t.expandAll : 'Expand All')}</span>
             </button>
           </div>
         </div>
 
         {/* Timeline Container */}
-        <div className="relative border-l-2 border-slate-200 dark:border-slate-800 ml-3 sm:ml-4 pl-6 sm:pl-8 space-y-8 sm:space-y-10">
-          {experience.map((job) => {
+        <div className={`relative ${isRTL ? 'border-r-2 mr-3 sm:mr-4 pr-6 sm:pr-8' : 'border-l-2 ml-3 sm:ml-4 pl-6 sm:pl-8'} border-slate-200 dark:border-slate-800 space-y-8 sm:space-y-10`}>
+          {experience.map((job, jobIdx) => {
             const isExpanded = expandedIds.has(job.id);
-            const respCount = job.responsibilities?.length || 0;
+            const arJob = t.jobs.find((j) => j.id === job.id) || t.jobs[jobIdx];
+            const role = isRTL && arJob ? arJob.role : job.role;
+            const location = isRTL && arJob ? arJob.location : job.location;
+            const period = isRTL && arJob ? arJob.period : job.period;
+            const responsibilities = isRTL && arJob ? arJob.responsibilities : job.responsibilities;
+            const respCount = responsibilities?.length || 0;
             const isAlyami = job.id === 'job-1' || job.company.toLowerCase().includes('alyami');
             const isHonda = job.company.toLowerCase().includes('honda');
             const isAlRaya = job.id === 'job-4' || job.company.toLowerCase().includes('raya');
@@ -131,7 +140,7 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
                 
                 {/* Timeline marker node */}
                 <div 
-                  className={`absolute -left-[31px] sm:-left-[39px] top-6 w-4 h-4 rounded-full border-2 transition-all ${
+                  className={`absolute ${isRTL ? '-right-[31px] sm:-right-[39px]' : '-left-[31px] sm:-left-[39px]'} top-6 w-4 h-4 rounded-full border-2 transition-all ${
                     job.isCurrent
                       ? 'bg-[#0F766E] border-[#E6F4F1] dark:border-teal-950 ring-4 ring-[#0F766E]/20'
                       : isExpanded
@@ -169,12 +178,12 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
                         {/* 1. Job designation at the top */}
                         <div className="flex items-center gap-2 flex-wrap">
                           <h3 className="text-lg sm:text-xl font-bold text-[#0F2747] dark:text-white group-hover:text-[#0F766E] dark:group-hover:text-teal-400 transition-colors leading-snug">
-                            {job.role}
+                            {role}
                           </h3>
                           {job.isCurrent && (
                             <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-[#E6F4F1] text-[#0F766E] dark:bg-teal-950/80 dark:text-teal-300 border border-[#0F766E]/30 dark:border-teal-800">
                               <span className="w-1.5 h-1.5 rounded-full bg-[#0F766E] animate-pulse" />
-                              Present Role
+                              {isRTL ? t.presentRole : 'Present Role'}
                             </span>
                           )}
                         </div>
@@ -188,7 +197,7 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
                         {/* 3. Location directly underneath company */}
                         <div className="text-xs sm:text-sm text-[#64748B] dark:text-slate-400 flex items-center gap-1.5">
                           <MapPin className="w-3.5 h-3.5 shrink-0" />
-                          <span>{job.location}</span>
+                          <span>{location}</span>
                         </div>
                       </div>
 
@@ -201,7 +210,7 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
                               : 'bg-teal-500/[0.04] hover:bg-teal-500/[0.09] text-[#0F766E] dark:text-teal-300 dark:bg-teal-400/[0.04] dark:hover:bg-teal-400/[0.09] border border-teal-500/20 dark:border-teal-400/20 shadow-2xs backdrop-blur-2xs'
                           }`}
                         >
-                          <span>{isExpanded ? 'Hide Responsibilities' : 'Responsibilities'}</span>
+                          <span>{isExpanded ? (isRTL ? t.hideResponsibilities : 'Hide Responsibilities') : (isRTL ? t.responsibilities : 'Responsibilities')}</span>
                           <ChevronDown 
                             className={`w-2 h-2 sm:w-2.5 sm:h-2.5 transition-transform duration-300 ease-out ${
                               isExpanded ? 'rotate-180 text-[#0F766E] dark:text-teal-300' : 'text-[#0F766E] dark:text-teal-400'
@@ -260,7 +269,7 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
                         {/* Employment date directly below logo (small & compact) */}
                         <div className="inline-flex items-center gap-1 text-[11px] font-medium text-[#1F2937] dark:text-slate-300 bg-white dark:bg-slate-900 px-2 py-0.5 rounded-md border border-slate-200 dark:border-slate-800">
                           <Calendar className="w-3 h-3 text-[#0F766E] dark:text-teal-400 shrink-0" />
-                          <span>{job.period}</span>
+                          <span>{period}</span>
                         </div>
                       </div>
                     </div>
@@ -279,7 +288,7 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
                       {/* Official Ahmed Yahya Alyami Watermark (Large subtle watermark on right side with exact 18% opacity) */}
                       {isAlyami && (
                         <div 
-                          className={`absolute right-2 sm:right-6 md:right-8 bottom-3 sm:bottom-6 pointer-events-none select-none z-0 transition-all duration-500 ease-out flex items-end justify-end ${
+                          className={`absolute ${isRTL ? 'left-2 sm:left-6 md:left-8 justify-start' : 'right-2 sm:right-6 md:right-8 justify-end'} bottom-3 sm:bottom-6 pointer-events-none select-none z-0 transition-all duration-500 ease-out flex items-end ${
                             isExpanded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
                           }`}
                           aria-hidden="true"
@@ -299,9 +308,9 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
                       <div className="relative z-10 p-5 sm:p-6 pt-5">
                         <div className="flex items-center justify-between mb-3.5">
                           <h4 className="text-xs font-bold uppercase tracking-wider text-[#64748B] dark:text-slate-400 flex items-center gap-2">
-                            <span>Key Responsibilities & Deliverables</span>
+                            <span>{isRTL ? t.deliverablesHeader : 'Key Responsibilities & Deliverables'}</span>
                             <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-[#F4F6F8] dark:bg-slate-800 text-[#64748B] dark:text-slate-400">
-                              {respCount} {respCount === 1 ? 'duty' : 'duties'}
+                              {respCount} {respCount === 1 ? (isRTL ? t.duty : 'duty') : (isRTL ? t.duties : 'duties')}
                             </span>
                           </h4>
                         </div>
@@ -318,10 +327,10 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
                             />
                             <div className="space-y-1 text-center sm:text-left">
                               <span className="text-xs sm:text-sm font-bold text-[#0F2747] dark:text-white block">
-                                Corporate Accounting Operations & Financial Analysis
+                                {isRTL && arJob?.workflowTitle ? arJob.workflowTitle : 'Corporate Accounting Operations & Financial Analysis'}
                               </span>
                               <p className="text-[11px] sm:text-xs text-[#64748B] dark:text-slate-400 leading-relaxed">
-                                End-to-end ERP operations covering quotation and sales order processing, accounts receivable & payable cycle, vendor reconciliations, cost accounting, and ZATCA VAT compliance.
+                                {isRTL && arJob?.workflowDesc ? arJob.workflowDesc : 'End-to-end ERP operations covering quotation and sales order processing, accounts receivable & payable cycle, vendor reconciliations, cost accounting, and ZATCA VAT compliance.'}
                               </p>
                             </div>
                           </div>
@@ -339,17 +348,17 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
                             />
                             <div className="space-y-1 text-center sm:text-left">
                               <span className="text-xs sm:text-sm font-bold text-[#0F2747] dark:text-white block">
-                                Ledger Reconciliations & Statements of Account
+                                {isRTL && arJob?.workflowTitle ? arJob.workflowTitle : 'Ledger Reconciliations & Statements of Account'}
                               </span>
                               <p className="text-[11px] sm:text-xs text-[#64748B] dark:text-slate-400 leading-relaxed">
-                                Multi-branch general ledger maintenance, supplier & customer SOA audits, inventory costing, bank transaction verification, and month-end financial reporting.
+                                {isRTL && arJob?.workflowDesc ? arJob.workflowDesc : 'Multi-branch general ledger maintenance, supplier & customer SOA audits, inventory costing, bank transaction verification, and month-end financial reporting.'}
                               </p>
                             </div>
                           </div>
                         )}
 
                         <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                          {job.responsibilities.map((resp, idx) => {
+                          {responsibilities.map((resp, idx) => {
                             const colonIndex = resp.indexOf(':');
                             const hasHeading = colonIndex > 0 && colonIndex < 45;
                             const heading = hasHeading ? resp.slice(0, colonIndex) : '';

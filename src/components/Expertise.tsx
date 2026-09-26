@@ -17,6 +17,8 @@ import {
   LucideIcon
 } from 'lucide-react';
 import { ExpertiseItem } from '../types';
+import { useLanguage } from '../context/LanguageContext';
+import { ARABIC_TRANSLATIONS } from '../data/arabicData';
 
 interface ExpertiseProps {
   expertise: ExpertiseItem[];
@@ -150,6 +152,8 @@ const defaultDetailsMap: Record<string, string[]> = {
 export function Expertise({ expertise }: ExpertiseProps) {
   // All collapsed by default
   const [expandedId, setExpandedId] = useState<string | null>(null);
+  const { isRTL } = useLanguage();
+  const t = ARABIC_TRANSLATIONS.expertise;
 
   if (!expertise || expertise.length === 0) {
     return null;
@@ -166,11 +170,15 @@ export function Expertise({ expertise }: ExpertiseProps) {
   const renderCard = (item: ExpertiseItem, idx: number) => {
     const isExpanded = expandedId === item.id;
     const Icon = (item.iconName && iconMap[item.iconName]) || defaultIconMap[item.id] || Calculator;
-    const details = item.details && item.details.length > 0 
+    const arItem = t.items.find((x) => x.id === item.id) || t.items[idx];
+    const title = isRTL && arItem ? arItem.title : item.title;
+    const rawSubtitle = item.subtitle || item.description;
+    const subtitle = isRTL && arItem ? arItem.subtitle : rawSubtitle;
+    const rawDetails = item.details && item.details.length > 0 
       ? item.details 
       : defaultDetailsMap[item.id] || [];
+    const details = isRTL && arItem ? arItem.details : rawDetails;
     const hasDetails = details.length > 0;
-    const subtitle = item.subtitle || item.description;
 
     return (
       <div
@@ -206,7 +214,7 @@ export function Expertise({ expertise }: ExpertiseProps) {
                   : 'bg-teal-500/[0.06] text-[#0F766E] dark:text-teal-300 border border-teal-500/20 group-hover:bg-teal-500/[0.12]'
               }`}
             >
-              <span>{isExpanded ? 'Collapse' : 'Details'}</span>
+              <span>{isExpanded ? (isRTL ? t.collapse : 'Collapse') : (isRTL ? t.details : 'Details')}</span>
               <ChevronDown 
                 className={`w-3 h-3 transition-transform duration-300 ease-out ${
                   isExpanded ? 'rotate-180 text-white' : 'text-[#0F766E] dark:text-teal-400'
@@ -217,7 +225,7 @@ export function Expertise({ expertise }: ExpertiseProps) {
 
           <div className="mt-3.5">
             <h3 className="text-sm sm:text-base font-bold text-[#0F2747] dark:text-slate-100 group-hover:text-[#0F766E] dark:group-hover:text-teal-400 transition-colors leading-snug">
-              {item.title}
+              {title}
             </h3>
             {subtitle && (
               <p className="text-xs text-[#64748B] dark:text-slate-400 mt-1.5 leading-relaxed">
@@ -239,7 +247,7 @@ export function Expertise({ expertise }: ExpertiseProps) {
             <div className="overflow-hidden">
               <div className="p-4 sm:p-5 pt-3.5 space-y-2.5">
                 <span className="text-[11px] font-bold text-[#0F766E] dark:text-teal-400 tracking-wider uppercase block">
-                  Core Responsibilities & Scope:
+                  {isRTL ? t.scope : 'Core Responsibilities & Scope:'}
                 </span>
                 <ul className="space-y-2">
                   {details.map((detail, dIdx) => (
@@ -281,13 +289,13 @@ export function Expertise({ expertise }: ExpertiseProps) {
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-10">
           <span className="text-xs font-bold tracking-widest text-[#0F766E] dark:text-teal-400 uppercase">
-            Core Competencies
+            {isRTL ? t.tag : 'Core Competencies'}
           </span>
           <h2 className="mt-1 text-2xl font-bold text-[#0F2747] dark:text-white sm:text-3xl tracking-tight">
-            Core Professional Expertise
+            {isRTL ? t.title : 'Core Professional Expertise'}
           </h2>
           <p className="mt-2 text-xs sm:text-sm text-[#64748B] dark:text-slate-400">
-            Click any expertise card to expand core accounting responsibilities, processes, and operational details.
+            {isRTL ? t.subtitle : 'Click any expertise card to expand core accounting responsibilities, processes, and operational details.'}
           </p>
         </div>
 

@@ -5,12 +5,17 @@ import {
   MapPin, 
 } from 'lucide-react';
 import { AppData, ProfileInfo } from '../types';
+import { useLanguage } from '../context/LanguageContext';
+import { ARABIC_TRANSLATIONS } from '../data/arabicData';
 
 interface PrintableCVProps {
   data: AppData;
 }
 
 export const PrintableCV: React.FC<PrintableCVProps> = ({ data }) => {
+  const { isRTL } = useLanguage();
+  const t = ARABIC_TRANSLATIONS.cvModal;
+
   const profile: Partial<ProfileInfo> = data?.profile || {
     fullName: 'Muhammad Salman',
     professionalTitle: 'Accountant | MBA Accounting & Finance',
@@ -28,36 +33,36 @@ export const PrintableCV: React.FC<PrintableCVProps> = ({ data }) => {
   const languages = data?.languages || [];
 
   return (
-    <div className="bg-white text-slate-900 p-8 sm:p-12 max-w-4xl mx-auto shadow-lg print:shadow-none print:p-0 print:max-w-none text-left font-sans">
+    <div className={`bg-white text-slate-900 p-8 sm:p-12 max-w-4xl mx-auto shadow-lg print:shadow-none print:p-0 print:max-w-none font-sans ${isRTL ? 'text-right' : 'text-left'}`}>
       
       {/* CV Header */}
       <div className="border-b-2 border-[#0F2747] pb-6 mb-6">
         <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
           <div>
             <h1 className="text-3xl font-extrabold tracking-tight text-[#0F2747]">
-              {profile.fullName}
+              Muhammad Salman
             </h1>
             <p className="text-base font-semibold text-[#0F766E] mt-1">
-              {profile.professionalTitle}
+              {isRTL ? ARABIC_TRANSLATIONS.footer.role : profile.professionalTitle}
             </p>
           </div>
           
-          <div className="text-xs text-slate-600 space-y-1 sm:text-right">
-            <div className="flex items-center sm:justify-end gap-1.5">
+          <div className={`text-xs text-slate-600 space-y-1 ${isRTL ? 'sm:text-left' : 'sm:text-right'}`}>
+            <div className={`flex items-center gap-1.5 ${isRTL ? 'sm:justify-start' : 'sm:justify-end'}`}>
               <MapPin className="w-3.5 h-3.5 text-slate-700" />
-              <span>{profile.location}</span>
+              <span>{isRTL ? ARABIC_TRANSLATIONS.footer.location : profile.location}</span>
             </div>
-            <div className="flex items-center sm:justify-end gap-1.5">
+            <div className={`flex items-center gap-1.5 ${isRTL ? 'sm:justify-start' : 'sm:justify-end'}`}>
               <Mail className="w-3.5 h-3.5 text-slate-700" />
               <span>{profile.email}</span>
             </div>
-            <div className="flex items-center sm:justify-end gap-1.5">
+            <div className={`flex items-center gap-1.5 ${isRTL ? 'sm:justify-start' : 'sm:justify-end'}`}>
               <Phone className="w-3.5 h-3.5 text-slate-700" />
-              <span>{profile.primaryPhone} | {profile.altPhone}</span>
+              <span dir="ltr">{profile.primaryPhone} | {profile.altPhone}</span>
             </div>
-            {profile.drivingLicense && (
-              <div className="text-[11px] text-[#0F766E] font-medium sm:text-right pt-0.5">
-                <span>{profile.drivingLicense}</span>
+            {(profile.drivingLicense || isRTL) && (
+              <div className={`text-[11px] text-[#0F766E] font-medium pt-0.5 ${isRTL ? 'sm:text-left' : 'sm:text-right'}`}>
+                <span>{isRTL ? 'إقامة قابلة للتحويل | رخصة قيادة سعودية سارية' : profile.drivingLicense}</span>
               </div>
             )}
           </div>
@@ -67,26 +72,26 @@ export const PrintableCV: React.FC<PrintableCVProps> = ({ data }) => {
       {/* Professional Summary */}
       <div className="mb-6">
         <h2 className="text-xs font-bold uppercase tracking-wider text-[#0F2747] border-b border-slate-300 pb-1 mb-2">
-          Professional Summary
+          {isRTL ? t.summaryTitle : 'Professional Summary'}
         </h2>
         <p className="text-xs text-[#1F2937] leading-relaxed">
-          {profile.summary}
+          {isRTL ? ARABIC_TRANSLATIONS.about.summary : profile.summary}
         </p>
       </div>
 
       {/* Work Experience */}
       <div className="mb-6">
         <h2 className="text-xs font-bold uppercase tracking-wider text-[#0F2747] border-b border-slate-300 pb-1 mb-3">
-          Work Experience
+          {isRTL ? t.experienceTitle : 'Work Experience'}
         </h2>
         <div className="space-y-4">
-          {experience.map((job) => (
+          {(isRTL ? ARABIC_TRANSLATIONS.experience.jobs : experience).map((job) => (
             <div key={job.id} className="text-xs">
-              <div className="flex items-start justify-between font-bold text-[#0F2747]">
+              <div className="flex items-start justify-between font-bold text-[#0F2747] flex-wrap gap-1">
                 <span>
                   {job.role} — <span className="font-semibold text-slate-700">{job.company}</span>
                 </span>
-                <span className="text-slate-600 font-medium whitespace-nowrap ml-2">
+                <span className="text-slate-600 font-medium whitespace-nowrap">
                   {job.period} | {job.location}
                 </span>
               </div>
@@ -117,26 +122,35 @@ export const PrintableCV: React.FC<PrintableCVProps> = ({ data }) => {
       {/* Skills Matrix */}
       <div className="mb-6 page-break-inside-avoid">
         <h2 className="text-xs font-bold uppercase tracking-wider text-[#0F2747] border-b border-slate-300 pb-1 mb-2">
-          Core Skills & Competencies
+          {isRTL ? t.skillsTitle : 'Core Skills & Competencies'}
         </h2>
         <div className="grid grid-cols-2 gap-3 text-xs">
-          {skills.map((cat) => (
-            <div key={cat.id}>
-              <span className="font-bold text-[#0F2747]">{cat.categoryName}: </span>
-              <span className="text-[#1F2937]">{(cat.skills || []).join(', ')}</span>
-            </div>
-          ))}
+          {isRTL ? (
+            ARABIC_TRANSLATIONS.skills.items.map((s, idx) => (
+              <div key={idx}>
+                <span className="font-bold text-[#0F2747]">{s.name}: </span>
+                <span className="text-[#1F2937]">{s.category}</span>
+              </div>
+            ))
+          ) : (
+            skills.map((cat) => (
+              <div key={cat.id}>
+                <span className="font-bold text-[#0F2747]">{cat.categoryName}: </span>
+                <span className="text-[#1F2937]">{(cat.skills || []).join(', ')}</span>
+              </div>
+            ))
+          )}
         </div>
       </div>
 
       {/* ERP & Software */}
       <div className="mb-6 page-break-inside-avoid">
         <h2 className="text-xs font-bold uppercase tracking-wider text-[#0F2747] border-b border-slate-300 pb-1 mb-2">
-          ERP & Systems Expertise
+          {isRTL ? t.softwareTitle : 'ERP & Systems Expertise'}
         </h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs">
-          {software.map((sw) => (
-            <div key={sw.id} className="bg-[#F4F6F8] border border-slate-200 p-2 rounded">
+          {(isRTL ? ARABIC_TRANSLATIONS.software.items : software).map((sw) => (
+            <div key={sw.id || sw.name} className="bg-[#F4F6F8] border border-slate-200 p-2 rounded">
               <div className="font-bold text-[#0F2747]">{sw.name}</div>
               <div className="text-[11px] text-[#0F766E] font-medium">{sw.category}</div>
             </div>
@@ -148,10 +162,10 @@ export const PrintableCV: React.FC<PrintableCVProps> = ({ data }) => {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 page-break-inside-avoid">
         <div>
           <h2 className="text-xs font-bold uppercase tracking-wider text-[#0F2747] border-b border-slate-300 pb-1 mb-2">
-            Education
+            {isRTL ? t.educationTitle : 'Education'}
           </h2>
           <div className="space-y-2 text-xs">
-            {education.map((edu) => (
+            {(isRTL ? ARABIC_TRANSLATIONS.education.items : education).map((edu) => (
               <div key={edu.id}>
                 <div className="font-bold text-[#0F2747]">
                   {edu.degree} — {edu.specialization}
@@ -166,10 +180,10 @@ export const PrintableCV: React.FC<PrintableCVProps> = ({ data }) => {
 
         <div>
           <h2 className="text-xs font-bold uppercase tracking-wider text-[#0F2747] border-b border-slate-300 pb-1 mb-2">
-            Languages
+            {isRTL ? t.languagesTitle : 'Languages'}
           </h2>
           <div className="space-y-1 text-xs text-[#1F2937]">
-            {languages.map((l) => (
+            {(isRTL ? ARABIC_TRANSLATIONS.education.langItems : languages).map((l) => (
               <div key={l.id}>
                 <span className="font-bold text-[#0F2747]">{l.name}</span>
                 {l.notes && <span className="text-slate-600"> ({l.notes})</span>}
@@ -181,7 +195,9 @@ export const PrintableCV: React.FC<PrintableCVProps> = ({ data }) => {
 
       {/* Verification footer */}
       <div className="mt-8 pt-4 border-t border-slate-200 text-center text-[10px] text-slate-500">
-        Professional CV of Muhammad Salman • Accountant | MBA Accounting & Finance • Dammam, Saudi Arabia
+        {isRTL
+          ? 'السيرة الذاتية المهنية — محمد سلمان • محاسب عام | ماجستير إدارة الأعمال (تمويل ومصرفية) • الدمام، المملكة العربية السعودية'
+          : 'Professional CV of Muhammad Salman • Accountant | MBA Accounting & Finance • Dammam, Saudi Arabia'}
       </div>
 
     </div>

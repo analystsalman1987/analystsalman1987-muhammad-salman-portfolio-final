@@ -7,6 +7,8 @@ import {
   GraduationCap
 } from 'lucide-react';
 import { ProfileInfo } from '../types';
+import { useLanguage } from '../context/LanguageContext';
+import { ARABIC_TRANSLATIONS } from '../data/arabicData';
 
 interface HeroProps {
   profile: ProfileInfo;
@@ -16,6 +18,7 @@ interface HeroProps {
 
 export function Hero({ profile, onOpenCV }: HeroProps) {
   const [isHomeActive, setIsHomeActive] = useState(true);
+  const { isRTL } = useLanguage();
 
   useEffect(() => {
     // Detect if Home is selected via hash or scroll
@@ -100,7 +103,7 @@ export function Hero({ profile, onOpenCV }: HeroProps) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           
           {/* Main Hero Copy (Left / Top) */}
-          <div className="lg:col-span-8 space-y-6 text-center lg:text-left">
+          <div className={`lg:col-span-8 space-y-6 text-center ${isRTL ? 'lg:text-right' : 'lg:text-left'}`}>
             
             {/* Status & Location Pill */}
             <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-[#E6F4F1] text-[#0F766E] dark:bg-teal-950/60 dark:text-teal-300 border border-[#0F766E]/30 dark:border-teal-800/80 shadow-xs">
@@ -108,21 +111,24 @@ export function Hero({ profile, onOpenCV }: HeroProps) {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#0F766E] opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-[#0F766E]"></span>
               </span>
-              <span>14+ Years Corporate Experience</span>
+              <span>{isRTL ? ARABIC_TRANSLATIONS.hero.experienceBadge : '14+ Years Experience in Accounting & Finance'}</span>
               <span className="text-[#0F766E]/50 dark:text-teal-700">•</span>
               <span className="flex items-center gap-1">
                 <MapPin className="w-3 h-3 text-[#0F766E] dark:text-teal-400" />
-                <span>Dammam, Saudi Arabia</span>
+                <span>{isRTL ? ARABIC_TRANSLATIONS.hero.location : 'Dammam, Saudi Arabia'}</span>
               </span>
             </div>
 
             {/* Name, Current Role & Current Company */}
             <div className="space-y-2">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#0F2747] dark:text-white tracking-tight leading-tight">
-                Muhammad Salman
+                {isRTL ? 'محمد سلمان' : 'Muhammad Salman'}
               </h1>
+              <p className="text-base sm:text-lg font-semibold text-[#0F766E] dark:text-teal-400">
+                {isRTL ? ARABIC_TRANSLATIONS.hero.degrees : 'MBA (Accounting & Finance) | BBA (Accounting & Finance)'}
+              </p>
               <p className="text-xl sm:text-2xl font-bold text-[#0F766E] dark:text-teal-400 tracking-tight">
-                Accountant
+                {isRTL ? ARABIC_TRANSLATIONS.hero.role : 'Accountant'}
               </p>
               <p className="text-base sm:text-lg font-semibold text-[#0F2747] dark:text-slate-200">
                 Ahmed Alyami Group
@@ -131,33 +137,33 @@ export function Hero({ profile, onOpenCV }: HeroProps) {
 
             {/* Concise Supporting Line */}
             <p className="text-sm sm:text-base text-[#1F2937] dark:text-slate-300 max-w-xl leading-relaxed mx-auto lg:mx-0">
-              Specialized in corporate accounting, financial reporting, reconciliations, and ERP operations across Saudi Arabia and Pakistan.
+              {isRTL ? ARABIC_TRANSLATIONS.hero.tagline : 'Specialized in corporate accounting, financial reporting, reconciliations, and ERP operations across Saudi Arabia and Pakistan.'}
             </p>
 
             {/* Key Value Badges */}
-            <div className="pt-2 flex flex-wrap gap-2.5 justify-center lg:justify-start">
+            <div className={`pt-2 flex flex-wrap gap-2.5 justify-center ${isRTL ? 'lg:justify-start' : 'lg:justify-start'}`}>
               <div className="flex items-center gap-2 px-3 py-1.5 rounded-md bg-white dark:bg-slate-800/80 text-[#1F2937] dark:text-slate-300 text-xs font-medium border border-slate-200 dark:border-slate-700 shadow-2xs">
                 <ShieldCheck className="w-3.5 h-3.5 text-[#0F766E] dark:text-teal-400" />
-                <span>ZATCA VAT Compliance</span>
+                <span>{isRTL ? ARABIC_TRANSLATIONS.hero.badgeZatca : 'ZATCA VAT Compliance'}</span>
               </div>
               <div className="flex items-center gap-2 px-3 py-1.5 rounded-md bg-white dark:bg-slate-800/80 text-[#1F2937] dark:text-slate-300 text-xs font-medium border border-slate-200 dark:border-slate-700 shadow-2xs">
                 <Briefcase className="w-3.5 h-3.5 text-[#0F2747] dark:text-slate-300" />
-                <span>Full AP / AR & Reconciliation</span>
+                <span>{isRTL ? ARABIC_TRANSLATIONS.hero.badgeApar : 'Full AP / AR & Reconciliation'}</span>
               </div>
               <div className="flex items-center gap-2 px-3 py-1.5 rounded-md bg-white dark:bg-slate-800/80 text-[#1F2937] dark:text-slate-300 text-xs font-medium border border-slate-200 dark:border-slate-700 shadow-2xs">
                 <GraduationCap className="w-3.5 h-3.5 text-[#0F766E] dark:text-teal-400" />
-                <span>MBA Banking & Finance</span>
+                <span>{isRTL ? ARABIC_TRANSLATIONS.hero.badgeDegree : 'MBA Banking & Finance'}</span>
               </div>
             </div>
 
             {/* Call to action buttons */}
-            <div className="pt-4 flex flex-wrap gap-3.5 justify-center lg:justify-start">
+            <div className={`pt-4 flex flex-wrap gap-3.5 justify-center ${isRTL ? 'lg:justify-start' : 'lg:justify-start'}`}>
               <button
                 onClick={onOpenCV}
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg bg-[#0F2747] hover:bg-[#16365f] text-white font-semibold text-sm transition-all shadow-sm hover:shadow"
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg bg-[#0F2747] hover:bg-[#16365f] text-white font-semibold text-sm transition-all shadow-sm hover:shadow cursor-pointer"
               >
                 <FileDown className="w-4 h-4" />
-                <span>Download CV</span>
+                <span>{isRTL ? ARABIC_TRANSLATIONS.hero.downloadCv : 'Download CV'}</span>
               </button>
             </div>
 
@@ -187,7 +193,7 @@ export function Hero({ profile, onOpenCV }: HeroProps) {
                         MS
                       </span>
                       <span className="text-[11px] font-semibold text-slate-300 uppercase tracking-widest mt-2">
-                        Professional Profile
+                        {isRTL ? ARABIC_TRANSLATIONS.hero.profileCardTag : 'Professional Profile'}
                       </span>
                       <div className="w-8 h-0.5 bg-[#0F766E] rounded-full mt-2" />
                     </div>
@@ -197,17 +203,17 @@ export function Hero({ profile, onOpenCV }: HeroProps) {
                 {/* Current Profile Information */}
                 <div className="text-center pt-2 border-t border-slate-100 dark:border-slate-800/80 space-y-1">
                   <h3 className="text-lg font-bold text-[#0F2747] dark:text-white">
-                    Muhammad Salman
+                    {isRTL ? 'محمد سلمان' : 'Muhammad Salman'}
                   </h3>
                   <p className="text-sm font-semibold text-[#0F766E] dark:text-teal-400">
-                    Accountant
+                    {isRTL ? ARABIC_TRANSLATIONS.hero.role : 'Accountant'}
                   </p>
                   <p className="text-xs font-semibold text-[#1F2937] dark:text-slate-200">
                     Ahmed Alyami Group
                   </p>
                   <p className="text-xs font-medium text-[#64748B] dark:text-slate-400 flex items-center justify-center gap-1 pt-0.5">
                     <MapPin className="w-3.5 h-3.5 text-[#0F766E] dark:text-teal-400 shrink-0" />
-                    <span>Dammam, Saudi Arabia</span>
+                    <span>{isRTL ? ARABIC_TRANSLATIONS.hero.location : 'Dammam, Saudi Arabia'}</span>
                   </p>
                 </div>
 
@@ -215,11 +221,11 @@ export function Hero({ profile, onOpenCV }: HeroProps) {
                 <div className="grid grid-cols-2 gap-2 pt-2 border-t border-slate-100 dark:border-slate-800/80 text-center">
                   <div className="p-2.5 rounded-lg bg-[#F4F6F8] dark:bg-slate-800/50">
                     <div className="text-base font-extrabold text-[#0F2747] dark:text-white">14+</div>
-                    <div className="text-[10px] font-medium text-[#64748B] dark:text-slate-400 uppercase tracking-wider">Years Exp.</div>
+                    <div className="text-[10px] font-medium text-[#64748B] dark:text-slate-400 uppercase tracking-wider">{isRTL ? ARABIC_TRANSLATIONS.hero.yearsExpLabel : 'Years Exp.'}</div>
                   </div>
                   <div className="p-2.5 rounded-lg bg-[#F4F6F8] dark:bg-slate-800/50">
                     <div className="text-base font-extrabold text-[#0F766E] dark:text-teal-400">ZATCA</div>
-                    <div className="text-[10px] font-medium text-[#64748B] dark:text-slate-400 uppercase tracking-wider">VAT Filing</div>
+                    <div className="text-[10px] font-medium text-[#64748B] dark:text-slate-400 uppercase tracking-wider">{isRTL ? ARABIC_TRANSLATIONS.hero.zatcaLabel : 'VAT Filing'}</div>
                   </div>
                 </div>
 

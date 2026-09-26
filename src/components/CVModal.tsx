@@ -9,6 +9,8 @@ import {
 } from 'lucide-react';
 import { AppData, ProfileInfo } from '../types';
 import { PrintableCV } from './PrintableCV';
+import { useLanguage } from '../context/LanguageContext';
+import { ARABIC_TRANSLATIONS } from '../data/arabicData';
 
 interface CVModalProps {
   isOpen: boolean;
@@ -18,6 +20,8 @@ interface CVModalProps {
 
 export function CVModal({ isOpen, onClose, data }: CVModalProps) {
   const [copied, setCopied] = useState(false);
+  const { isRTL } = useLanguage();
+  const t = ARABIC_TRANSLATIONS.cvModal;
 
   if (!isOpen) return null;
 
@@ -26,6 +30,50 @@ export function CVModal({ isOpen, onClose, data }: CVModalProps) {
   };
 
   const handleCopyText = () => {
+    if (isRTL) {
+      let text = `محمد سلمان\n`;
+      text += `محاسب عام | ماجستير إدارة الأعمال (تمويل ومصرفية)\n`;
+      text += `المدينة: الدمام، المملكة العربية السعودية\n`;
+      text += `البريد الإلكتروني: analystsalman1987@gmail.com\n`;
+      text += `الهاتف: +966 55 348 3495 | +966 55 343 9539\n`;
+      text += `رخصة القيادة: إقامة قابلة للتحويل | رخصة قيادة سعودية سارية\n\n`;
+
+      text += `--- ${t.summaryTitle} ---\n${ARABIC_TRANSLATIONS.hero.tagline}\n\n`;
+
+      text += `--- ${t.experienceTitle} ---\n`;
+      ARABIC_TRANSLATIONS.experience.jobs.forEach((job) => {
+        text += `\n${job.role} - ${job.company} (${job.period}) - ${job.location}\n`;
+        (job.responsibilities || []).forEach((r) => {
+          text += `• ${r}\n`;
+        });
+      });
+
+      text += `\n--- ${t.skillsTitle} ---\n`;
+      ARABIC_TRANSLATIONS.skills.items.forEach((s) => {
+        text += `• ${s.name} (${s.category})\n`;
+      });
+
+      text += `\n--- ${t.softwareTitle} ---\n`;
+      ARABIC_TRANSLATIONS.software.items.forEach((s) => {
+        text += `• ${s.name} (${s.category}): ${s.description}\n`;
+      });
+
+      text += `\n--- ${t.educationTitle} ---\n`;
+      ARABIC_TRANSLATIONS.education.items.forEach((e) => {
+        text += `• ${e.degree} - ${e.specialization} (${e.period}) - ${e.institution}\n`;
+      });
+
+      text += `\n--- ${t.languagesTitle} ---\n`;
+      ARABIC_TRANSLATIONS.education.langItems.forEach((l) => {
+        text += `• ${l.name} (${l.notes})\n`;
+      });
+
+      navigator.clipboard.writeText(text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2500);
+      return;
+    }
+
     const profile: Partial<ProfileInfo> = data?.profile || {
       fullName: 'Muhammad Salman',
       professionalTitle: 'Accountant | MBA Accounting & Finance',
@@ -99,16 +147,16 @@ export function CVModal({ isOpen, onClose, data }: CVModalProps) {
             <button
               onClick={onClose}
               className="p-1.5 text-slate-500 hover:text-slate-900 dark:hover:text-white rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-              title="Close"
+              title={isRTL ? 'إغلاق' : 'Close'}
             >
-              <ArrowLeft className="w-5 h-5" />
+              <ArrowLeft className={`w-5 h-5 ${isRTL ? 'rotate-180' : ''}`} />
             </button>
             <div>
               <h3 className="text-sm font-bold text-[#0F2747] dark:text-white">
-                Muhammad Salman — Professional CV
+                {isRTL ? t.title : 'Muhammad Salman — Professional CV'}
               </h3>
               <p className="text-[11px] text-[#64748B] dark:text-slate-400">
-                Ready to Print, Save as PDF, or Copy
+                {isRTL ? t.subtitle : 'Ready to Print, Save as PDF, or Copy'}
               </p>
             </div>
           </div>
@@ -120,7 +168,7 @@ export function CVModal({ isOpen, onClose, data }: CVModalProps) {
               className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg bg-[#F4F6F8] dark:bg-slate-800 hover:bg-[#E6F4F1] dark:hover:bg-slate-700 text-[#1F2937] dark:text-slate-300 transition-colors cursor-pointer"
             >
               {copied ? <Check className="w-3.5 h-3.5 text-[#0F766E]" /> : <Copy className="w-3.5 h-3.5" />}
-              <span>{copied ? 'Copied!' : 'Copy Text'}</span>
+              <span>{copied ? (isRTL ? t.copied : 'Copied!') : (isRTL ? t.copyText : 'Copy Text')}</span>
             </button>
 
             {/* Print / Save to PDF button */}
@@ -129,7 +177,7 @@ export function CVModal({ isOpen, onClose, data }: CVModalProps) {
               className="inline-flex items-center gap-1.5 px-4 py-1.5 text-xs font-bold rounded-lg bg-[#0F766E] hover:bg-[#0c625c] text-white shadow-xs transition-colors cursor-pointer"
             >
               <Printer className="w-3.5 h-3.5" />
-              <span>Print / Save as PDF</span>
+              <span>{isRTL ? t.printPdf : 'Print / Save as PDF'}</span>
             </button>
 
             {/* Close button */}

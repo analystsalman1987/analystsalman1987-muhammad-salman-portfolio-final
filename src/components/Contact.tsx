@@ -7,10 +7,11 @@ import {
   CheckCircle, 
   ExternalLink, 
   Info,
-  Clock,
   ShieldCheck
 } from 'lucide-react';
 import { ProfileInfo } from '../types';
+import { useLanguage } from '../context/LanguageContext';
+import { ARABIC_TRANSLATIONS } from '../data/arabicData';
 
 interface ContactProps {
   profile: ProfileInfo;
@@ -18,6 +19,9 @@ interface ContactProps {
 }
 
 export function Contact({ profile, onSendMessage }: ContactProps) {
+  const { isRTL } = useLanguage();
+  const t = ARABIC_TRANSLATIONS.contact;
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -30,7 +34,7 @@ export function Contact({ profile, onSendMessage }: ContactProps) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
-      setError('Please fill in your name, email, and message.');
+      setError(isRTL ? t.fillRequiredError : 'Please fill in your name, email, and message.');
       return;
     }
 
@@ -38,18 +42,19 @@ export function Contact({ profile, onSendMessage }: ContactProps) {
       onSendMessage({
         name: formData.name.trim(),
         email: formData.email.trim(),
-        subject: formData.subject.trim() || 'Inquiry from Profile Website',
+        subject: formData.subject.trim() || (isRTL ? 'استفسار من موقع السيرة الذاتية' : 'Inquiry from Profile Website'),
         message: formData.message.trim(),
       });
       setSubmitted(true);
       setError(null);
     } catch {
-      setError('Unable to save message locally.');
+      setError(isRTL ? 'تعذر حفظ الرسالة محلياً.' : 'Unable to save message locally.');
     }
   };
 
   const handleOpenEmailClient = () => {
-    const subject = encodeURIComponent(formData.subject || 'Professional Inquiry - Muhammad Salman');
+    const defaultSubject = isRTL ? 'استفسار مهني - محمد سلمان' : 'Professional Inquiry - Muhammad Salman';
+    const subject = encodeURIComponent(formData.subject || defaultSubject);
     const body = encodeURIComponent(
       `Hello Muhammad,\n\nName: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
     );
@@ -82,13 +87,13 @@ export function Contact({ profile, onSendMessage }: ContactProps) {
         {/* Header */}
         <div className="max-w-3xl mb-12">
           <span className="text-xs font-bold tracking-widest text-[#0F766E] dark:text-teal-400 uppercase">
-            Get In Touch
+            {isRTL ? t.tag : 'Get In Touch'}
           </span>
           <h2 className="mt-1 text-3xl font-extrabold text-[#0F2747] dark:text-white sm:text-4xl tracking-tight">
-            Contact Information
+            {isRTL ? t.title : 'Contact Information'}
           </h2>
           <p className="mt-2 text-sm text-[#64748B] dark:text-slate-400">
-            Available for professional accounting, finance management, and corporate opportunities across Saudi Arabia.
+            {isRTL ? t.subtitle : 'Available for professional accounting, finance management, and corporate opportunities across Saudi Arabia.'}
           </p>
         </div>
 
@@ -107,13 +112,13 @@ export function Contact({ profile, onSendMessage }: ContactProps) {
               </div>
               <div className="min-w-0 flex-1">
                 <span className="text-[11px] font-bold text-[#64748B] dark:text-slate-500 uppercase tracking-wider block">
-                  Email Address
+                  {isRTL ? t.emailLabel : 'Email Address'}
                 </span>
                 <span className="text-sm font-semibold text-[#0F2747] dark:text-white group-hover:text-[#0F766E] dark:group-hover:text-teal-400 transition-colors break-all">
                   {profile.email}
                 </span>
                 <span className="text-xs text-[#64748B] dark:text-slate-400 block mt-0.5">
-                  Direct primary correspondence
+                  {isRTL ? t.emailSub : 'Direct primary correspondence'}
                 </span>
               </div>
             </a>
@@ -128,13 +133,13 @@ export function Contact({ profile, onSendMessage }: ContactProps) {
               </div>
               <div>
                 <span className="text-[11px] font-bold text-[#64748B] dark:text-slate-500 uppercase tracking-wider block">
-                  Primary Mobile / WhatsApp
+                  {isRTL ? t.phoneLabel : 'Primary Mobile / WhatsApp'}
                 </span>
-                <span className="text-sm font-semibold text-[#0F2747] dark:text-white group-hover:text-[#0F766E] dark:group-hover:text-teal-400 transition-colors">
+                <span className="text-sm font-semibold text-[#0F2747] dark:text-white group-hover:text-[#0F766E] dark:group-hover:text-teal-400 transition-colors" dir="ltr">
                   {profile.primaryPhone}
                 </span>
                 <span className="text-xs text-[#64748B] dark:text-slate-400 block mt-0.5">
-                  Direct phone & messaging
+                  {isRTL ? t.phoneSub : 'Direct phone & messaging'}
                 </span>
               </div>
             </a>
@@ -149,13 +154,13 @@ export function Contact({ profile, onSendMessage }: ContactProps) {
               </div>
               <div>
                 <span className="text-[11px] font-bold text-[#64748B] dark:text-slate-500 uppercase tracking-wider block">
-                  Alternative Phone
+                  {isRTL ? t.altPhoneLabel : 'Alternative Phone'}
                 </span>
-                <span className="text-sm font-semibold text-[#0F2747] dark:text-white group-hover:text-[#0F766E] dark:group-hover:text-teal-400 transition-colors">
+                <span className="text-sm font-semibold text-[#0F2747] dark:text-white group-hover:text-[#0F766E] dark:group-hover:text-teal-400 transition-colors" dir="ltr">
                   {profile.altPhone}
                 </span>
                 <span className="text-xs text-[#64748B] dark:text-slate-400 block mt-0.5">
-                  Secondary contact line
+                  {isRTL ? t.altPhoneSub : 'Secondary contact line'}
                 </span>
               </div>
             </a>
@@ -167,13 +172,13 @@ export function Contact({ profile, onSendMessage }: ContactProps) {
               </div>
               <div>
                 <span className="text-[11px] font-bold text-[#64748B] dark:text-slate-500 uppercase tracking-wider block">
-                  Location
+                  {isRTL ? t.locationLabel : 'Location'}
                 </span>
                 <span className="text-sm font-semibold text-[#0F2747] dark:text-white">
-                  {profile.location}
+                  {isRTL ? 'الدمام، المملكة العربية السعودية' : profile.location}
                 </span>
                 <span className="text-xs text-[#64748B] dark:text-slate-400 block mt-0.5">
-                  Eastern Province, Kingdom of Saudi Arabia
+                  {isRTL ? t.locationSub : 'Eastern Province, Kingdom of Saudi Arabia'}
                 </span>
               </div>
             </div>
@@ -186,13 +191,13 @@ export function Contact({ profile, onSendMessage }: ContactProps) {
                 </div>
                 <div>
                   <span className="text-[11px] font-bold text-[#64748B] dark:text-slate-500 uppercase tracking-wider block">
-                    Driving License
+                    {isRTL ? t.licenseLabel : 'Driving License'}
                   </span>
                   <span className="text-sm font-semibold text-[#0F2747] dark:text-white">
-                    {profile.drivingLicense}
+                    {isRTL ? 'إقامة قابلة للتحويل | رخصة قيادة سعودية سارية' : profile.drivingLicense}
                   </span>
                   <span className="text-xs text-[#64748B] dark:text-slate-400 block mt-0.5">
-                    Authorized in Kingdom of Saudi Arabia
+                    {isRTL ? t.licenseSub : 'Authorized in Kingdom of Saudi Arabia'}
                   </span>
                 </div>
               </div>
@@ -207,10 +212,10 @@ export function Contact({ profile, onSendMessage }: ContactProps) {
               <div className="flex items-center justify-between mb-5">
                 <div>
                   <h3 className="text-lg font-bold text-[#0F2747] dark:text-white">
-                    Send a Message
+                    {isRTL ? t.formTitle : 'Send a Message'}
                   </h3>
                   <p className="text-xs text-[#64748B] dark:text-slate-400 mt-0.5">
-                    Messages are stored locally and can also be opened directly in your email client.
+                    {isRTL ? t.formSub : 'Messages are stored locally and can also be opened directly in your email client.'}
                   </p>
                 </div>
               </div>
@@ -219,7 +224,7 @@ export function Contact({ profile, onSendMessage }: ContactProps) {
               <div className="mb-5 p-3 rounded-xl bg-[#E6F4F1] dark:bg-teal-950/40 border border-[#0F766E]/20 dark:border-teal-900/60 text-xs text-[#0F766E] dark:text-teal-300 flex items-start gap-2.5">
                 <Info className="w-4 h-4 shrink-0 mt-0.5 text-[#0F766E] dark:text-teal-400" />
                 <span>
-                  Notice: This frontend application stores inquiry messages locally in your browser storage (viewable in the Admin Panel inbox). You can also click below to open your native email software.
+                  {isRTL ? t.notice : 'Notice: This frontend application stores inquiry messages locally in your browser storage (viewable in the Admin Panel inbox). You can also click below to open your native email software.'}
                 </span>
               </div>
 
@@ -230,10 +235,10 @@ export function Contact({ profile, onSendMessage }: ContactProps) {
                   </div>
                   <div>
                     <h4 className="text-base font-bold text-[#0F2747] dark:text-teal-200">
-                      Message Saved Successfully!
+                      {isRTL ? t.successTitle : 'Message Saved Successfully!'}
                     </h4>
                     <p className="text-xs text-[#0F766E] dark:text-teal-300 mt-1 max-w-md mx-auto">
-                      Your inquiry has been stored locally in the admin inbox. Would you also like to transmit this directly to Muhammad Salman's email inbox?
+                      {isRTL ? t.successSub : "Your inquiry has been stored locally in the admin inbox. Would you also like to transmit this directly to Muhammad Salman's email inbox?"}
                     </p>
                   </div>
 
@@ -243,13 +248,13 @@ export function Contact({ profile, onSendMessage }: ContactProps) {
                       className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#0F766E] hover:bg-[#0c625c] text-white text-xs font-semibold shadow-xs transition-colors cursor-pointer"
                     >
                       <ExternalLink className="w-4 h-4" />
-                      <span>Send Via Email App</span>
+                      <span>{isRTL ? t.sendEmailAppBtn : 'Send Via Email App'}</span>
                     </button>
                     <button
                       onClick={resetForm}
                       className="px-4 py-2.5 rounded-lg bg-white dark:bg-slate-800 text-[#1F2937] dark:text-slate-300 text-xs font-semibold border border-slate-200 dark:border-slate-700 hover:bg-[#F4F6F8] transition-colors cursor-pointer"
                     >
-                      Write Another Message
+                      {isRTL ? t.writeAnotherBtn : 'Write Another Message'}
                     </button>
                   </div>
                 </div>
@@ -264,28 +269,28 @@ export function Contact({ profile, onSendMessage }: ContactProps) {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-xs font-bold text-[#1F2937] dark:text-slate-300 mb-1.5">
-                        Your Name *
+                        {isRTL ? t.nameLabel : 'Your Name *'}
                       </label>
                       <input
                         type="text"
                         required
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        placeholder="e.g. Abdullah Al-Harbi"
+                        placeholder={isRTL ? t.namePlaceholder : 'e.g. Abdullah Al-Harbi'}
                         className="w-full px-3.5 py-2.5 text-xs rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-[#1F2937] dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0F766E]"
                       />
                     </div>
 
                     <div>
                       <label className="block text-xs font-bold text-[#1F2937] dark:text-slate-300 mb-1.5">
-                        Your Email *
+                        {isRTL ? t.emailInputLabel : 'Your Email *'}
                       </label>
                       <input
                         type="email"
                         required
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        placeholder="e.g. name@company.com"
+                        placeholder={isRTL ? t.emailPlaceholder : 'name@company.com'}
                         className="w-full px-3.5 py-2.5 text-xs rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-[#1F2937] dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0F766E]"
                       />
                     </div>
@@ -293,27 +298,27 @@ export function Contact({ profile, onSendMessage }: ContactProps) {
 
                   <div>
                     <label className="block text-xs font-bold text-[#1F2937] dark:text-slate-300 mb-1.5">
-                      Subject
+                      {isRTL ? t.subjectLabel : 'Subject'}
                     </label>
                     <input
                       type="text"
                       value={formData.subject}
                       onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                      placeholder="e.g. Professional Accounting Opportunity"
+                      placeholder={isRTL ? t.subjectPlaceholder : 'e.g. Professional Accounting Opportunity'}
                       className="w-full px-3.5 py-2.5 text-xs rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-[#1F2937] dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0F766E]"
                     />
                   </div>
 
                   <div>
                     <label className="block text-xs font-bold text-[#1F2937] dark:text-slate-300 mb-1.5">
-                      Message *
+                      {isRTL ? t.messageLabel : 'Message *'}
                     </label>
                     <textarea
                       required
                       rows={4}
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      placeholder="Write your inquiry or proposal here..."
+                      placeholder={isRTL ? t.messagePlaceholder : 'Write your inquiry or proposal here...'}
                       className="w-full px-3.5 py-2.5 text-xs rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-[#1F2937] dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0F766E] resize-none"
                     />
                   </div>
@@ -323,8 +328,8 @@ export function Contact({ profile, onSendMessage }: ContactProps) {
                       type="submit"
                       className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-[#0F766E] hover:bg-[#0c625c] text-white font-semibold text-xs transition-all shadow-xs cursor-pointer"
                     >
-                      <Send className="w-3.5 h-3.5" />
-                      <span>Send Message (Save Locally)</span>
+                      <Send className={`w-3.5 h-3.5 ${isRTL ? 'rotate-180' : ''}`} />
+                      <span>{isRTL ? t.submitBtn : 'Send Message (Save Locally)'}</span>
                     </button>
 
                     <button
@@ -333,7 +338,7 @@ export function Contact({ profile, onSendMessage }: ContactProps) {
                       className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-4 py-3 rounded-lg text-[#0F766E] dark:text-teal-300 hover:bg-[#E6F4F1]/60 dark:hover:bg-slate-800 text-xs font-semibold transition-colors cursor-pointer"
                     >
                       <ExternalLink className="w-3.5 h-3.5" />
-                      <span>Direct Email Client</span>
+                      <span>{isRTL ? t.directEmailBtn : 'Direct Email Client'}</span>
                     </button>
                   </div>
                 </form>

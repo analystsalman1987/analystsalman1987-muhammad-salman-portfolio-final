@@ -9,6 +9,8 @@ import {
   ChevronDown
 } from 'lucide-react';
 import { SoftwareItem } from '../types';
+import { useLanguage } from '../context/LanguageContext';
+import { ARABIC_TRANSLATIONS } from '../data/arabicData';
 
 interface SoftwareProps {
   software: SoftwareItem[];
@@ -17,12 +19,14 @@ interface SoftwareProps {
 export function Software({ software }: SoftwareProps) {
   // Collapsed by default
   const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set());
+  const { isRTL } = useLanguage();
+  const t = ARABIC_TRANSLATIONS.software;
 
   if (!software || software.length === 0) {
     return (
       <section id="software" className="py-20 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
         <div className="max-w-7xl mx-auto px-4 text-center text-slate-500">
-          Information will be added soon.
+          {isRTL ? 'سيتم إضافة المعلومات قريباً.' : 'Information will be added soon.'}
         </div>
       </section>
     );
@@ -77,7 +81,7 @@ export function Software({ software }: SoftwareProps) {
         containerClassName: 'h-11 px-3 min-w-11',
       };
     }
-    if (lower.includes('excel')) {
+    if (lower.includes('excel') || lower.includes('إكسل')) {
       return {
         src: '/images/software/excel-logo.svg',
         alt: 'Microsoft Excel',
@@ -85,7 +89,7 @@ export function Software({ software }: SoftwareProps) {
         containerClassName: 'h-11 w-11 px-2',
       };
     }
-    if (lower.includes('office')) {
+    if (lower.includes('office') || lower.includes('أوفيس')) {
       return {
         src: '/images/software/office-logo.svg',
         alt: 'Microsoft Office',
@@ -120,13 +124,13 @@ export function Software({ software }: SoftwareProps) {
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
           <div className="max-w-3xl">
             <span className="text-xs font-bold tracking-widest text-[#0F766E] dark:text-teal-400 uppercase">
-              Systems & Infrastructure
+              {isRTL ? t.tag : 'Systems & Infrastructure'}
             </span>
             <h2 className="mt-1 text-3xl font-extrabold text-[#0F2747] dark:text-white sm:text-4xl tracking-tight">
-              ERP & Software Experience
+              {isRTL ? t.title : 'ERP & Software Experience'}
             </h2>
             <p className="mt-2 text-sm text-[#64748B] dark:text-slate-400">
-              Operational expertise navigating enterprise ERP platforms, accounting systems, and financial spreadsheet modeling.
+              {isRTL ? t.subtitle : 'Operational expertise navigating enterprise ERP platforms, accounting systems, and financial spreadsheet modeling.'}
             </p>
           </div>
 
@@ -137,16 +141,21 @@ export function Software({ software }: SoftwareProps) {
             className="self-start sm:self-auto inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold text-[#1F2937] dark:text-slate-300 bg-[#F4F6F8] hover:bg-[#E6F4F1] dark:bg-slate-800 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 transition-colors cursor-pointer select-none"
           >
             <Layers className="w-3.5 h-3.5 text-[#0F766E] dark:text-teal-400" />
-            <span>{allExpanded ? 'Collapse All' : 'Expand All'}</span>
+            <span>{allExpanded ? (isRTL ? t.collapseAll : 'Collapse All') : (isRTL ? t.expandAll : 'Expand All')}</span>
           </button>
         </div>
 
         {/* Software Grid (Expandable Cards) */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {software.map((item) => {
+          {software.map((item, idx) => {
             const isExpanded = expandedIds.has(item.id);
             const Icon = getSoftwareIcon(item.name);
             const logoInfo = getSoftwareLogo(item.name);
+            const arItem = t.items.find((x) => x.id === item.id) || t.items[idx];
+            const name = isRTL && arItem ? arItem.name : item.name;
+            const category = isRTL && arItem ? arItem.category : item.category;
+            const badge = isRTL && arItem ? arItem.badge : item.badge;
+            const description = isRTL && arItem ? arItem.description : item.description;
 
             return (
               <div
@@ -189,9 +198,9 @@ export function Software({ software }: SoftwareProps) {
                         <Icon className="w-6 h-6" />
                       )}
                     </div>
-                    {item.badge && (
+                    {badge && (
                       <span className="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-[#E6F4F1] text-[#0F766E] dark:bg-teal-950/70 dark:text-teal-300 border border-[#0F766E]/30 dark:border-teal-800">
-                        {item.badge}
+                        {badge}
                       </span>
                     )}
                   </div>
@@ -199,10 +208,10 @@ export function Software({ software }: SoftwareProps) {
                   <div className="flex items-start justify-between gap-2">
                     <div>
                       <h3 className="text-base font-bold text-[#0F2747] dark:text-white group-hover:text-[#0F766E] dark:group-hover:text-teal-400 transition-colors">
-                        {item.name}
+                        {name}
                       </h3>
                       <p className="text-xs font-semibold text-[#0F766E] dark:text-teal-400 mt-0.5">
-                        {item.category}
+                        {category}
                       </p>
                     </div>
 
@@ -213,7 +222,7 @@ export function Software({ software }: SoftwareProps) {
                           : 'bg-[#E6F4F1] text-[#0F766E] hover:bg-[#d5eee8] dark:bg-teal-950/60 dark:text-teal-300 border border-[#0F766E]/30 dark:border-teal-800'
                       }`}
                     >
-                      <span>{isExpanded ? 'Hide' : 'Details'}</span>
+                      <span>{isExpanded ? (isRTL ? t.hide : 'Hide') : (isRTL ? t.details : 'Details')}</span>
                       <ChevronDown
                         className={`w-3.5 h-3.5 transition-transform duration-300 ${
                           isExpanded ? 'rotate-180' : ''
@@ -234,12 +243,12 @@ export function Software({ software }: SoftwareProps) {
                   <div className="overflow-hidden">
                     <div className="p-6 pt-4 space-y-3">
                       <p className="text-xs text-[#1F2937] dark:text-slate-300 leading-relaxed font-normal">
-                        {item.description}
+                        {description}
                       </p>
 
                       <div className="pt-3 border-t border-slate-200/60 dark:border-slate-800/80 flex items-center gap-1.5 text-xs text-[#64748B] dark:text-slate-300 font-medium">
                         <CheckCircle className="w-3.5 h-3.5 text-[#0F766E] dark:text-teal-400" />
-                        <span>Production Environment Experience</span>
+                        <span>{isRTL ? t.verified : 'Production Environment Experience'}</span>
                       </div>
                     </div>
                   </div>

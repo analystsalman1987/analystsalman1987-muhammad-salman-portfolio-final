@@ -10,10 +10,12 @@ import {
   ArrowLeftRight, 
   FileCheck, 
   Package, 
-  Calculator,
-  LucideIcon
+  Calculator, 
+  LucideIcon 
 } from 'lucide-react';
 import { SkillCategory } from '../types';
+import { useLanguage } from '../context/LanguageContext';
+import { ARABIC_TRANSLATIONS } from '../data/arabicData';
 
 interface SkillsProps {
   skills?: SkillCategory[];
@@ -42,7 +44,9 @@ const PRACTICAL_SKILLS: PracticalSkillItem[] = [
 ];
 
 export function Skills({ skills }: SkillsProps) {
-  // If skills prop is provided with data, we display the practical skills
+  const { isRTL } = useLanguage();
+  const t = ARABIC_TRANSLATIONS.skills;
+
   return (
     <section 
       id="skills" 
@@ -53,20 +57,24 @@ export function Skills({ skills }: SkillsProps) {
         {/* Section Header */}
         <div className="max-w-3xl mb-8">
           <span className="text-xs font-bold tracking-widest text-[#0F766E] dark:text-teal-400 uppercase">
-            Practical Competencies
+            {isRTL ? t.tag : 'Practical Competencies'}
           </span>
           <h2 className="mt-1 text-2xl font-bold text-[#0F2747] dark:text-white sm:text-3xl tracking-tight">
-            Professional Skills
+            {isRTL ? t.title : 'Professional Skills'}
           </h2>
           <p className="mt-2 text-xs sm:text-sm text-[#64748B] dark:text-slate-400">
-            A concise directory of practical accounting software, ERP platforms, and operational tools used in daily practice.
+            {isRTL ? t.subtitle : 'A concise directory of practical accounting software, ERP platforms, and operational tools used in daily practice.'}
           </p>
         </div>
 
         {/* Compact, Scan-Friendly Grid of 12 Skills */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
-          {PRACTICAL_SKILLS.map((item) => {
+          {PRACTICAL_SKILLS.map((item, idx) => {
             const Icon = item.icon;
+            const arItem = t.items[idx];
+            const name = isRTL && arItem ? arItem.name : item.name;
+            const category = isRTL && arItem ? arItem.category : item.category;
+            const badge = isRTL && arItem ? arItem.badge : item.badge;
 
             return (
               <div
@@ -79,16 +87,16 @@ export function Skills({ skills }: SkillsProps) {
                   </div>
                   <div className="min-w-0">
                     <h3 className="text-xs sm:text-sm font-bold text-[#0F2747] dark:text-white truncate group-hover:text-[#0F766E] dark:group-hover:text-teal-400 transition-colors">
-                      {item.name}
+                      {name}
                     </h3>
                     <p className="text-[11px] text-[#64748B] dark:text-slate-400 truncate mt-0.5">
-                      {item.category}
+                      {category}
                     </p>
                   </div>
                 </div>
 
                 <span className="hidden sm:inline-block text-[10px] font-bold px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-[#475569] dark:text-slate-300 border border-slate-200/80 dark:border-slate-700 shrink-0">
-                  {item.badge}
+                  {badge}
                 </span>
               </div>
             );
