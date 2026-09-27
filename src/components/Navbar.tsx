@@ -7,7 +7,6 @@ import {
   Moon, 
   Monitor, 
   Lock, 
-  Briefcase,
   ChevronRight
 } from 'lucide-react';
 import { ThemeMode } from '../types';

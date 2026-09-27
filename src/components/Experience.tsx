@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { 
-  Building2, 
   Calendar, 
   MapPin, 
   CheckCircle2, 

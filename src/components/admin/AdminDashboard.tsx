@@ -22,7 +22,7 @@ import {
   LogOut,
   ArrowLeft
 } from 'lucide-react';
-import { AppData, ContactMessage, WorkExperienceItem, ExpertiseItem, EducationItem, LanguageItem, SoftwareItem } from '../../types';
+import { AppData, ContactMessage, WorkExperienceItem, ExpertiseItem } from '../../types';
 import { storageService } from '../../services/storageService';
 
 interface AdminDashboardProps {

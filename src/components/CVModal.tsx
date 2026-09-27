@@ -4,7 +4,6 @@ import {
   Printer, 
   Copy, 
   Check, 
-  FileDown, 
   ArrowLeft 
 } from 'lucide-react';
 import { AppData, ProfileInfo } from '../types';
