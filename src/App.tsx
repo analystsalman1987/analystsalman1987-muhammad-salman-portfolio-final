@@ -16,6 +16,7 @@ import { Footer } from './components/Footer';
 import { CVModal } from './components/CVModal';
 import { AdminLogin } from './components/admin/AdminLogin';
 import { AdminDashboard } from './components/admin/AdminDashboard';
+import { DEFAULT_APP_DATA } from './data/defaultData';
 
 export default function App() {
   const { 
@@ -167,7 +168,13 @@ export default function App() {
 
   // Otherwise render public profile website
   const { settings, profile, highlights, expertise, experience, skills, software, education, languages } = data;
-  const visibility = settings.sectionVisibility || {
+  const rawVisibility = settings?.sectionVisibility;
+  const isExpertiseVisible = rawVisibility ? rawVisibility.expertise !== false : true;
+  const isHighlightsVisible = rawVisibility ? rawVisibility.highlights !== false : true;
+  const effectiveExpertise = (expertise && expertise.length > 0) ? expertise : DEFAULT_APP_DATA.expertise;
+  const effectiveHighlights = (highlights && highlights.length > 0) ? highlights : DEFAULT_APP_DATA.highlights;
+
+  const visibility = {
     hero: true,
     about: true,
     highlights: true,
@@ -179,6 +186,7 @@ export default function App() {
     languages: true,
     cv: true,
     contact: true,
+    ...(rawVisibility || {}),
   };
 
   return (
@@ -212,13 +220,13 @@ export default function App() {
         )}
 
         {/* Professional Highlights Section */}
-        {visibility.highlights && (
-          <Highlights highlights={highlights} />
+        {isHighlightsVisible && (
+          <Highlights highlights={effectiveHighlights} />
         )}
 
         {/* Core Professional Expertise Section */}
-        {visibility.expertise && (
-          <Expertise expertise={expertise} />
+        {isExpertiseVisible && (
+          <Expertise expertise={effectiveExpertise} />
         )}
 
         {/* Work Experience Timeline */}

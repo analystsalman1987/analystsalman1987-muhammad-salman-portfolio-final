@@ -78,12 +78,16 @@ export const storageService = {
       return {
         ...DEFAULT_APP_DATA,
         ...parsed,
+        expertise: (parsed.expertise && parsed.expertise.length > 0) ? parsed.expertise : DEFAULT_APP_DATA.expertise,
+        highlights: (parsed.highlights && parsed.highlights.length > 0) ? parsed.highlights : DEFAULT_APP_DATA.highlights,
         profile: { ...DEFAULT_APP_DATA.profile, ...(parsed.profile || {}) },
         settings: {
           ...DEFAULT_APP_DATA.settings,
           ...(parsed.settings || {}),
           sectionVisibility: {
             ...DEFAULT_APP_DATA.settings.sectionVisibility,
+            expertise: true,
+            highlights: true,
             ...(parsed.settings?.sectionVisibility || {}),
           },
         },

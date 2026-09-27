@@ -1,7 +1,7 @@
 import { AppData } from '../types';
 
 export const DEFAULT_APP_DATA: AppData = {
-  version: 10,
+  version: 11,
   lastUpdated: new Date().toISOString(),
   profile: {
     fullName: 'Muhammad Salman',

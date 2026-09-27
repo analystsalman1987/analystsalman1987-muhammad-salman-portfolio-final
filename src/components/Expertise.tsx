@@ -20,9 +20,10 @@ import {
 import { ExpertiseItem } from '../types';
 import { useLanguage } from '../context/LanguageContext';
 import { ARABIC_TRANSLATIONS } from '../data/arabicData';
+import { DEFAULT_APP_DATA } from '../data/defaultData';
 
 interface ExpertiseProps {
-  expertise: ExpertiseItem[];
+  expertise?: ExpertiseItem[];
 }
 
 const iconMap: Record<string, LucideIcon> = {
@@ -61,9 +62,7 @@ export function Expertise({ expertise }: ExpertiseProps) {
   const { isRTL } = useLanguage();
   const t = ARABIC_TRANSLATIONS.expertise;
 
-  if (!expertise || expertise.length === 0) {
-    return null;
-  }
+  const items = (expertise && expertise.length > 0) ? expertise : DEFAULT_APP_DATA.expertise;
 
   const toggleExpand = (id: string) => {
     setExpandedIds((prev) => {
@@ -77,13 +76,13 @@ export function Expertise({ expertise }: ExpertiseProps) {
     });
   };
 
-  const allExpanded = expertise.length > 0 && expandedIds.size === expertise.length;
+  const allExpanded = items.length > 0 && expandedIds.size === items.length;
 
   const toggleAll = () => {
     if (allExpanded) {
       setExpandedIds(new Set());
     } else {
-      setExpandedIds(new Set(expertise.map((item) => item.id)));
+      setExpandedIds(new Set(items.map((item) => item.id)));
     }
   };
 
@@ -135,7 +134,7 @@ export function Expertise({ expertise }: ExpertiseProps) {
 
         {/* 12 Expandable Categories in 2-Column Responsive Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5 items-start">
-          {expertise.map((item, idx) => {
+          {items.map((item, idx) => {
             const isExpanded = expandedIds.has(item.id);
             const Icon = (item.iconName && iconMap[item.iconName]) || defaultIconById[item.id] || Calculator;
             const arItem = t.items.find((x) => x.id === item.id) || t.items[idx];

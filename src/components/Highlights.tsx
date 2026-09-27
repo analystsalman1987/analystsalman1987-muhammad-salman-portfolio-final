@@ -14,9 +14,10 @@ import {
 import { HighlightItem } from '../types';
 import { useLanguage } from '../context/LanguageContext';
 import { ARABIC_TRANSLATIONS } from '../data/arabicData';
+import { DEFAULT_APP_DATA } from '../data/defaultData';
 
 interface HighlightsProps {
-  highlights: HighlightItem[];
+  highlights?: HighlightItem[];
 }
 
 const iconMap: Record<string, LucideIcon> = {
@@ -36,15 +37,7 @@ export function Highlights({ highlights }: HighlightsProps) {
   const { isRTL } = useLanguage();
   const t = ARABIC_TRANSLATIONS.highlights;
 
-  if (!highlights || highlights.length === 0) {
-    return (
-      <section className="py-12 bg-white dark:bg-slate-900 border-y border-slate-200 dark:border-slate-800">
-        <div className="max-w-7xl mx-auto px-4 text-center text-slate-500 text-sm">
-          {isRTL ? 'سيتم إضافة المعلومات قريباً.' : 'Information will be added soon.'}
-        </div>
-      </section>
-    );
-  }
+  const items = (highlights && highlights.length > 0) ? highlights : DEFAULT_APP_DATA.highlights;
 
   return (
     <section className="relative py-16 bg-[#F4F6F8] dark:bg-slate-900/40 border-y border-slate-200 dark:border-slate-800/80 transition-colors overflow-hidden">
@@ -79,7 +72,7 @@ export function Highlights({ highlights }: HighlightsProps) {
 
         {/* 8 Concise Highlight Cards Grid (Easy for recruiters to scan) */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
-          {highlights.map((item, idx) => {
+          {items.map((item, idx) => {
             const Icon = (item.iconName && iconMap[item.iconName]) || Award;
             const arItem = t.items.find((x) => x.id === item.id) || t.items[idx];
             const title = isRTL && arItem ? arItem.title : item.title;
