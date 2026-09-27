@@ -69,10 +69,10 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
         <img 
           src="/images/experience_background.jpg" 
           alt="" 
-          className="w-full h-full object-cover object-center opacity-[0.32] dark:opacity-[0.24] filter contrast-105 select-none"
+          className="w-full h-full object-cover object-center opacity-[0.16] dark:opacity-[0.12] filter contrast-105 select-none"
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-white/30 to-white/80 dark:from-slate-900/75 dark:via-slate-900/40 dark:to-slate-900/80" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-white/75 to-white/92 dark:from-slate-900/90 dark:via-slate-900/75 dark:to-slate-900/92" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -83,7 +83,7 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
             <span className="text-xs font-bold tracking-widest text-[#0F766E] dark:text-teal-400 uppercase">
               {isRTL ? t.tag : 'Career Timeline'}
             </span>
-            <h2 className="mt-1 text-3xl font-extrabold text-[#0F2747] dark:text-white sm:text-4xl tracking-tight">
+            <h2 className="company-3d-text mt-1 text-3xl font-extrabold text-[#0F2747] dark:text-white sm:text-4xl tracking-tight">
               {isRTL ? t.title : 'Work Experience'}
             </h2>
             <p className="mt-2 text-sm text-[#64748B] dark:text-slate-400">
@@ -126,6 +126,7 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
             const isExpanded = expandedIds.has(job.id);
             const arJob = t.jobs.find((j) => j.id === job.id) || t.jobs[jobIdx];
             const role = isRTL && arJob ? arJob.role : job.role;
+            const companyName = isRTL && arJob?.companyArabic ? arJob.companyArabic : job.company;
             const location = isRTL && arJob ? arJob.location : job.location;
             const period = isRTL && arJob ? arJob.period : job.period;
             const responsibilities = isRTL && arJob ? arJob.responsibilities : job.responsibilities;
@@ -172,14 +173,19 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
                     aria-expanded={isExpanded}
                     className="relative p-5 sm:p-6 cursor-pointer select-none focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#0F766E]"
                   >
-                    <div className="relative flex flex-col sm:flex-row sm:items-end justify-between gap-3 sm:gap-4">
-                      {/* LEFT SIDE: Designation, Company, Location */}
-                      <div className="space-y-0.5 sm:space-y-1 min-w-0 sm:max-w-[42%]">
-                        {/* 1. Job designation at the top */}
+                    <div className="relative flex flex-col sm:flex-row sm:items-start justify-between gap-3 sm:gap-4">
+                      {/* LEFT SIDE: 1. Company Name, 2. Designation / Job Title, 3. Location */}
+                      <div className="space-y-1 sm:space-y-1.5 min-w-0 sm:max-w-[44%]">
+                        {/* 1. Company Name at the top with subtle professional 3D effect */}
+                        <h3 className="company-3d-text text-lg sm:text-xl font-extrabold text-[#0F2747] dark:text-white group-hover:text-[#0F766E] dark:group-hover:text-teal-400 transition-colors leading-snug">
+                          {companyName}
+                        </h3>
+
+                        {/* 2. Designation / Job Title directly below Company Name */}
                         <div className="flex items-center gap-2 flex-wrap">
-                          <h3 className="text-lg sm:text-xl font-bold text-[#0F2747] dark:text-white group-hover:text-[#0F766E] dark:group-hover:text-teal-400 transition-colors leading-snug">
+                          <span className="text-sm sm:text-base font-bold text-[#0F766E] dark:text-teal-400">
                             {role}
-                          </h3>
+                          </span>
                           {job.isCurrent && (
                             <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-[#E6F4F1] text-[#0F766E] dark:bg-teal-950/80 dark:text-teal-300 border border-[#0F766E]/30 dark:border-teal-800">
                               <span className="w-1.5 h-1.5 rounded-full bg-[#0F766E] animate-pulse" />
@@ -188,85 +194,79 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
                           )}
                         </div>
 
-                        {/* 2. Company directly underneath */}
-                        <div className="text-xs sm:text-sm font-semibold text-[#0F766E] dark:text-teal-400 flex items-center gap-1.5">
-                          <Building2 className="w-3.5 h-3.5 shrink-0" />
-                          <span>{job.company}</span>
-                        </div>
-
-                        {/* 3. Location directly underneath company */}
+                        {/* 3. Location directly below Designation */}
                         <div className="text-xs sm:text-sm text-[#64748B] dark:text-slate-400 flex items-center gap-1.5">
-                          <MapPin className="w-3.5 h-3.5 shrink-0" />
+                          <MapPin className="w-3.5 h-3.5 shrink-0 text-[#0F766E] dark:text-teal-400" />
                           <span>{location}</span>
                         </div>
                       </div>
 
-                      {/* CENTER / RESPONSIBILITIES: Horizontally centered in full card, vertically aligned with Location line */}
-                      <div className="flex justify-center my-1 sm:my-0 sm:absolute sm:left-1/2 sm:-translate-x-1/2 sm:bottom-0.5 z-10 pointer-events-none">
+                      {/* CENTER / RESPONSIBILITIES BUTTON: Clean, slightly smaller, light/transparent appearance, consistent across all 6 cards */}
+                      <div className="flex justify-center sm:absolute sm:left-1/2 sm:-translate-x-1/2 sm:bottom-2 z-10 pointer-events-none">
                         <div 
-                          className={`inline-flex items-center gap-1 px-1.5 py-[2px] rounded text-[9.5px] font-medium leading-none tracking-tight transition-all pointer-events-auto ${
+                          className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[10px] sm:text-[11px] font-medium leading-none tracking-tight transition-all pointer-events-auto cursor-pointer ${
                             isExpanded
-                              ? 'bg-teal-500/[0.10] hover:bg-teal-500/[0.16] text-[#0F766E] dark:text-teal-200 dark:bg-teal-400/[0.10] dark:hover:bg-teal-400/[0.16] border border-teal-500/30 dark:border-teal-400/30 shadow-2xs'
-                              : 'bg-teal-500/[0.04] hover:bg-teal-500/[0.09] text-[#0F766E] dark:text-teal-300 dark:bg-teal-400/[0.04] dark:hover:bg-teal-400/[0.09] border border-teal-500/20 dark:border-teal-400/20 shadow-2xs backdrop-blur-2xs'
+                              ? 'bg-teal-600/[0.08] hover:bg-teal-600/[0.14] text-[#0F766E] dark:text-teal-200 dark:bg-teal-400/[0.10] border border-teal-500/30 shadow-2xs'
+                              : 'bg-teal-600/[0.04] hover:bg-teal-600/[0.09] text-[#0F766E] dark:text-teal-300 dark:bg-teal-400/[0.04] border border-teal-500/20 shadow-2xs backdrop-blur-2xs'
                           }`}
                         >
-                          <span>{isExpanded ? (isRTL ? t.hideResponsibilities : 'Hide Responsibilities') : (isRTL ? t.responsibilities : 'Responsibilities')}</span>
+                          <span>{isRTL ? 'المسؤوليات' : 'Responsibilities'}</span>
                           <ChevronDown 
-                            className={`w-2 h-2 sm:w-2.5 sm:h-2.5 transition-transform duration-300 ease-out ${
+                            className={`w-2.5 h-2.5 sm:w-3 sm:h-3 transition-transform duration-300 ease-out ${
                               isExpanded ? 'rotate-180 text-[#0F766E] dark:text-teal-300' : 'text-[#0F766E] dark:text-teal-400'
                             }`} 
                           />
                         </div>
                       </div>
 
-                      {/* RIGHT SIDE: Logo at top-right, Date directly below */}
-                      <div className="flex flex-row sm:flex-col items-center sm:items-end justify-between sm:justify-end gap-1.5 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-100 dark:border-slate-800/60 sm:max-w-[42%]">
-                        {/* Company Logo (100% Transparent Background) */}
+                      {/* RIGHT SIDE: Company logo on right, Employment date positioned neatly below the logo */}
+                      <div className="flex flex-row sm:flex-col items-center sm:items-end justify-between sm:justify-start gap-1.5 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-100 dark:border-slate-800/60 sm:max-w-[42%]">
+                        {/* Company Logo (100% Transparent Background, balanced height) */}
                         {isAlyami && (
-                          <span className="inline-flex items-center justify-center bg-transparent h-8 sm:h-8.5 min-w-[52px] sm:min-w-[60px]">
+                          <span className="inline-flex items-center justify-center sm:justify-end bg-transparent h-7 sm:h-8 min-w-[52px] sm:min-w-[60px]">
                             <img
                               src={alyamiLogo}
-                              alt="Ahmed Alyami Group"
+                              alt="Ahmed Yahya Alyami Contracting Co."
                               referrerPolicy="no-referrer"
-                              className="h-7 sm:h-7.5 w-auto object-contain max-w-[120px]"
+                              className="h-6 sm:h-7.5 w-auto object-contain max-w-[120px]"
                             />
                           </span>
                         )}
 
                         {isPalestine && (
-                          <span className="inline-flex items-center justify-center bg-transparent h-8 sm:h-8.5 min-w-[52px] sm:min-w-[60px]">
+                          <span className="inline-flex items-center justify-center sm:justify-end bg-transparent h-7 sm:h-8 min-w-[52px] sm:min-w-[60px]">
                             <img
                               src="/images/palestine-hotel-logo.png"
                               alt="Palestine Hotel Makkah"
                               referrerPolicy="no-referrer"
-                              className="h-7 sm:h-7.5 w-auto object-contain max-w-[95px]"
+                              className="h-6 sm:h-7.5 w-auto object-contain max-w-[95px]"
                             />
                           </span>
                         )}
 
                         {isAlRaya && (
-                          <span className="inline-flex items-center justify-center bg-transparent h-8 sm:h-8.5 min-w-[52px] sm:min-w-[60px]">
+                          <span className="inline-flex items-center justify-center sm:justify-end bg-transparent h-7 sm:h-8 min-w-[52px] sm:min-w-[60px]">
                             <img
                               src="/images/alraya-logo.svg"
                               alt="Al Raya Specialties"
                               referrerPolicy="no-referrer"
-                              className="h-7 sm:h-7.5 w-auto object-contain max-w-[95px]"
+                              className="h-6 sm:h-7.5 w-auto object-contain max-w-[95px]"
                             />
                           </span>
                         )}
 
                         {isHonda && (
-                          <span className="inline-flex items-center justify-center bg-transparent h-8 sm:h-8.5 min-w-[52px] sm:min-w-[60px]">
+                          <span className="inline-flex items-center justify-center sm:justify-end bg-transparent h-7 sm:h-8 min-w-[52px] sm:min-w-[60px]">
                             <img
                               src="/images/honda-logo.svg"
                               alt="Honda Canal Bank"
                               referrerPolicy="no-referrer"
-                              className="h-7 sm:h-7.5 w-auto object-contain max-w-[95px] text-slate-800 dark:text-slate-200"
+                              className="h-6 sm:h-7.5 w-auto object-contain max-w-[95px] text-slate-800 dark:text-slate-200"
                             />
                           </span>
                         )}
 
-                        {/* Employment date directly below logo (small & compact) */}
+                        {/* 4. Employment Period / Date directly below logo */}
                         <div className="inline-flex items-center gap-1 text-[11px] font-medium text-[#1F2937] dark:text-slate-300 bg-white dark:bg-slate-900 px-2 py-0.5 rounded-md border border-slate-200 dark:border-slate-800">
                           <Calendar className="w-3 h-3 text-[#0F766E] dark:text-teal-400 shrink-0" />
                           <span>{period}</span>

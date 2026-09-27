@@ -1,13 +1,3 @@
-import { useState } from 'react';
-import { 
-  Calculator, 
-  ShieldCheck, 
-  Layers, 
-  ArrowLeftRight, 
-  Receipt, 
-  CheckCircle2, 
-  ChevronDown 
-} from 'lucide-react';
 import { ProfileInfo } from '../types';
 import { useLanguage } from '../context/LanguageContext';
 import { ARABIC_TRANSLATIONS } from '../data/arabicData';
@@ -16,85 +6,9 @@ interface AboutProps {
   profile: ProfileInfo;
 }
 
-interface ProfessionalArea {
-  id: string;
-  title: string;
-  icon: typeof Calculator;
-  details: string[];
-}
-
-const PROFESSIONAL_AREAS: ProfessionalArea[] = [
-  {
-    id: 'area-1',
-    title: 'Financial Accounting & Reporting',
-    icon: Calculator,
-    details: [
-      'Financial reporting',
-      'Bookkeeping',
-      'Account analysis',
-      'Journal entries',
-      'Month-end closing',
-    ],
-  },
-  {
-    id: 'area-2',
-    title: 'AP, AR & Reconciliations',
-    icon: ArrowLeftRight,
-    details: [
-      'Accounts payable and receivable',
-      'Customer and supplier balances',
-      'SOA and aging',
-      'Collections and payment follow-up',
-      'Account adjustments',
-    ],
-  },
-  {
-    id: 'area-3',
-    title: 'VAT & ZATCA Compliance',
-    icon: ShieldCheck,
-    details: [
-      'VAT reporting',
-      'Tax invoices',
-      'Financial documentation',
-      'ZATCA-related accounting and compliance',
-    ],
-  },
-  {
-    id: 'area-4',
-    title: 'ERP & Accounting Systems',
-    icon: Layers,
-    details: [
-      'Oracle ERP',
-      'QuickBooks',
-      'SMACC',
-      'Delta Financial',
-      'Peachtree/Sage',
-      'Advanced Microsoft Excel',
-    ],
-  },
-  {
-    id: 'area-5',
-    title: 'Inventory & Financial Operations',
-    icon: Receipt,
-    details: [
-      'Inventory costing',
-      'Purchase-to-payment process',
-      'Sales documentation',
-      'Petty cash',
-      'Supplier and client payment management',
-      'Financial document control',
-    ],
-  },
-];
-
 export function About({ profile }: AboutProps) {
-  const [expandedAreaId, setExpandedAreaId] = useState<string | null>(null);
   const { isRTL } = useLanguage();
   const t = ARABIC_TRANSLATIONS.about;
-
-  const toggleArea = (id: string) => {
-    setExpandedAreaId((prev) => (prev === id ? null : id));
-  };
 
   const introText = isRTL
     ? t.summary
@@ -127,7 +41,7 @@ export function About({ profile }: AboutProps) {
           <span className="text-xs font-bold tracking-widest text-[#0F766E] dark:text-teal-400 uppercase">
             {isRTL ? t.tag : 'Profile Overview'}
           </span>
-          <h2 className="mt-1 text-3xl font-extrabold text-[#0F2747] dark:text-white sm:text-4xl tracking-tight">
+          <h2 className="company-3d-text mt-1 text-3xl font-extrabold text-[#0F2747] dark:text-white sm:text-4xl tracking-tight">
             {isRTL ? t.title : 'About Muhammad Salman'}
           </h2>
         </div>
@@ -149,115 +63,37 @@ export function About({ profile }: AboutProps) {
           </div>
         </div>
 
-        {/* Below this introduction: Keep the existing expandable About points/details as previously configured */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          
-          {/* 5 Expandable Professional Areas */}
-          <div className="lg:col-span-7 space-y-3">
-            <div className="mb-1">
-              <h3 className="text-xs font-bold tracking-wider text-[#64748B] dark:text-slate-400 uppercase">
-                {isRTL ? t.breakdownTitle : 'Core Competency Breakdown (Click to Expand)'}
-              </h3>
-            </div>
-
-            {PROFESSIONAL_AREAS.map((area) => {
-              const Icon = area.icon;
-              const isExpanded = expandedAreaId === area.id;
-              const arArea = t.areas.find((a) => a.id === area.id);
-              const title = isRTL && arArea ? arArea.title : area.title;
-              const details = isRTL && arArea ? arArea.details : area.details;
-
-              return (
-                <div
-                  key={area.id}
-                  className={`rounded-xl border transition-all duration-200 overflow-hidden bg-white dark:bg-slate-850 ${
-                    isExpanded
-                      ? 'border-[#0F766E]/60 dark:border-teal-500/60 shadow-md ring-1 ring-[#0F766E]/20'
-                      : 'border-slate-200/90 dark:border-slate-800 shadow-xs hover:border-[#0F766E]/40 dark:hover:border-teal-500/40'
-                  }`}
-                >
-                  {/* Clickable Header */}
-                  <div
-                    role="button"
-                    tabIndex={0}
-                    aria-expanded={isExpanded}
-                    onClick={() => toggleArea(area.id)}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        toggleArea(area.id);
-                      }
-                    }}
-                    className="p-4 sm:p-4.5 flex items-center justify-between gap-3 cursor-pointer select-none group"
-                  >
-                    <div className="flex items-center gap-3.5 min-w-0">
-                      <div className="w-9 h-9 rounded-lg bg-[#E6F4F1] dark:bg-teal-950/70 text-[#0F766E] dark:text-teal-300 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
-                        <Icon className="w-4.5 h-4.5" />
-                      </div>
-                      <h4 className="text-sm font-bold text-[#0F2747] dark:text-slate-100 group-hover:text-[#0F766E] dark:group-hover:text-teal-400 transition-colors">
-                        {title}
-                      </h4>
-                    </div>
-
-                    <div 
-                      className={`inline-flex items-center gap-1 px-2.5 py-1 rounded text-[10px] font-medium shrink-0 transition-all ${
-                        isExpanded
-                          ? 'bg-[#0F766E] text-white shadow-2xs'
-                          : 'bg-teal-500/[0.06] text-[#0F766E] dark:text-teal-300 border border-teal-500/20 group-hover:bg-teal-500/[0.12]'
-                      }`}
-                    >
-                      <span>{isExpanded ? (isRTL ? t.hide : 'Hide') : (isRTL ? t.view : 'View')}</span>
-                      <ChevronDown 
-                        className={`w-3 h-3 transition-transform duration-300 ease-out ${
-                          isExpanded ? 'rotate-180 text-white' : 'text-[#0F766E] dark:text-teal-400'
-                        }`} 
-                      />
-                    </div>
-                  </div>
-
-                  {/* Expandable Details */}
-                  <div
-                    className={`grid transition-all duration-300 ease-in-out ${
-                      isExpanded
-                        ? 'grid-rows-[1fr] opacity-100 border-t border-slate-100 dark:border-slate-800 bg-[#F9FBFA] dark:bg-slate-900/50'
-                        : 'grid-rows-[0fr] opacity-0'
-                    }`}
-                  >
-                    <div className="overflow-hidden">
-                      <div className="p-4 sm:p-5 pt-3">
-                        <ul className="space-y-2">
-                          {details.map((detail, dIdx) => (
-                            <li key={dIdx} className="flex items-start gap-2.5 text-xs text-[#1F2937] dark:text-slate-300">
-                              <CheckCircle2 className="w-3.5 h-3.5 text-[#0F766E] dark:text-teal-400 shrink-0 mt-0.5" />
-                              <span>{detail}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Key Stats & Workplace Image (Right Column) */}
-          <div className="lg:col-span-5 space-y-4">
+        {/* Executive Highlights & Workplace Visual */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+          {/* Key Metrics & Professional Governance (Left) */}
+          <div className="lg:col-span-6 space-y-4">
             <div className="grid grid-cols-3 gap-3">
-              <div className="p-3.5 rounded-xl bg-white dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800 shadow-2xs text-center">
-                <span className="block text-2xl font-extrabold text-[#0F766E] dark:text-teal-400">14+</span>
+              <div className="p-4 rounded-xl bg-[#F4F6F8] dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800 shadow-2xs text-center">
+                <span className="block text-2xl sm:text-3xl font-extrabold text-[#0F766E] dark:text-teal-400">14+</span>
                 <span className="text-[11px] font-semibold text-slate-600 dark:text-slate-300">{isRTL ? t.yearsExpLabel : 'Years Exp'}</span>
               </div>
-              <div className="p-3.5 rounded-xl bg-white dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800 shadow-2xs text-center">
-                <span className="block text-2xl font-extrabold text-[#0F2747] dark:text-slate-100">MBA</span>
+              <div className="p-4 rounded-xl bg-[#F4F6F8] dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800 shadow-2xs text-center">
+                <span className="block text-2xl sm:text-3xl font-extrabold text-[#0F2747] dark:text-slate-100">MBA</span>
                 <span className="text-[11px] font-semibold text-slate-600 dark:text-slate-300">{isRTL ? t.mbaFinanceLabel : 'Finance'}</span>
               </div>
-              <div className="p-3.5 rounded-xl bg-white dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800 shadow-2xs text-center">
-                <span className="block text-2xl font-extrabold text-[#0F766E] dark:text-teal-400">ZATCA</span>
+              <div className="p-4 rounded-xl bg-[#F4F6F8] dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800 shadow-2xs text-center">
+                <span className="block text-2xl sm:text-3xl font-extrabold text-[#0F766E] dark:text-teal-400">ZATCA</span>
                 <span className="text-[11px] font-semibold text-slate-600 dark:text-slate-300">{isRTL ? t.zatcaVatLabel : 'VAT & Tax'}</span>
               </div>
             </div>
 
+            <div className="p-5 rounded-xl bg-[#F4F6F8] dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 shadow-2xs space-y-2">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#0F766E] dark:text-teal-400 block">
+                {isRTL ? t.governanceBadge : 'Corporate Financial Governance'}
+              </span>
+              <p className="text-xs sm:text-sm text-[#1F2937] dark:text-slate-300 leading-relaxed font-medium">
+                {isRTL ? t.governanceDesc : 'Dedicated to accurate ledger maintenance, audit-ready financial schedules, balance confirmations, and ZATCA statutory tax compliance across enterprise operations.'}
+              </p>
+            </div>
+          </div>
+
+          {/* Workplace Image (Right) */}
+          <div className="lg:col-span-6">
             <div className="relative rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-md group">
               <img
                 src="/images/accounting_workplace.jpg"
@@ -278,7 +114,6 @@ export function About({ profile }: AboutProps) {
               </div>
             </div>
           </div>
-
         </div>
 
       </div>

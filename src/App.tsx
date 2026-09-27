@@ -9,7 +9,6 @@ import { Highlights } from './components/Highlights';
 import { About } from './components/About';
 import { Expertise } from './components/Expertise';
 import { Experience } from './components/Experience';
-import { Skills } from './components/Skills';
 import { Software } from './components/Software';
 import { EducationLanguages } from './components/Education';
 import { Contact } from './components/Contact';
@@ -229,11 +228,6 @@ export default function App() {
             isSelected={isExperienceSelected}
             onToggleSelect={() => setIsExperienceSelected(!isExperienceSelected)}
           />
-        )}
-
-        {/* Categorized Skills */}
-        {visibility.skills && (
-          <Skills skills={skills} />
         )}
 
         {/* ERP & Software Section */}

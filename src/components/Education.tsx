@@ -62,7 +62,7 @@ export function EducationLanguages({ education, languages }: EducationLanguagesP
               <span className="text-xs font-bold tracking-widest text-[#0F766E] dark:text-teal-400 uppercase">
                 {isRTL ? t.tag : 'Academic Background'}
               </span>
-              <h2 className="mt-1 text-3xl font-extrabold text-[#0F2747] dark:text-white tracking-tight">
+              <h2 className="company-3d-text mt-1 text-3xl font-extrabold text-[#0F2747] dark:text-white tracking-tight">
                 {isRTL ? t.title : 'Education'}
               </h2>
               <p className="mt-2 text-sm text-[#64748B] dark:text-slate-400">

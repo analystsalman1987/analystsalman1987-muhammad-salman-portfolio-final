@@ -1,10 +1,7 @@
 import { useState, useEffect } from 'react';
 import { 
   MapPin, 
-  Briefcase, 
-  FileDown, 
-  ShieldCheck, 
-  GraduationCap
+  FileDown 
 } from 'lucide-react';
 import { ProfileInfo } from '../types';
 import { useLanguage } from '../context/LanguageContext';
@@ -119,45 +116,37 @@ export function Hero({ profile, onOpenCV }: HeroProps) {
               </span>
             </div>
 
-            {/* Name, Current Role & Current Company */}
-            <div className="space-y-2">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#0F2747] dark:text-white tracking-tight leading-tight">
-                {isRTL ? 'محمد سلمان' : 'Muhammad Salman'}
+            {/* Name, Designation & Education */}
+            <div className="space-y-1.5 sm:space-y-2">
+              <h1 className="company-3d-text text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#0F2747] dark:text-white tracking-tight leading-tight">
+                {isRTL ? 'محمد سلمان' : 'MUHAMMAD SALMAN'}
               </h1>
-              <p className="text-base sm:text-lg font-semibold text-[#0F766E] dark:text-teal-400">
-                {isRTL ? ARABIC_TRANSLATIONS.hero.degrees : 'MBA (Accounting & Finance) | BBA (Accounting & Finance)'}
-              </p>
               <p className="text-xl sm:text-2xl font-bold text-[#0F766E] dark:text-teal-400 tracking-tight">
                 {isRTL ? ARABIC_TRANSLATIONS.hero.role : 'Accountant'}
               </p>
-              <p className="text-base sm:text-lg font-semibold text-[#0F2747] dark:text-slate-200">
-                Ahmed Alyami Group
+              <p className="text-base sm:text-lg font-semibold text-[#0F2747] dark:text-slate-200 whitespace-normal sm:whitespace-nowrap">
+                {isRTL ? (ARABIC_TRANSLATIONS.hero.degreeCombined || 'ماجستير وبكالوريوس (المحاسبة والمالية)') : 'MBA & BBA (Accounting & Finance)'}
               </p>
             </div>
 
-            {/* Concise Supporting Line */}
-            <p className="text-sm sm:text-base text-[#1F2937] dark:text-slate-300 max-w-xl leading-relaxed mx-auto lg:mx-0">
-              {isRTL ? ARABIC_TRANSLATIONS.hero.tagline : 'Specialized in corporate accounting, financial reporting, reconciliations, and ERP operations across Saudi Arabia and Pakistan.'}
-            </p>
-
-            {/* Key Value Badges */}
-            <div className={`pt-2 flex flex-wrap gap-2.5 justify-center ${isRTL ? 'lg:justify-start' : 'lg:justify-start'}`}>
-              <div className="flex items-center gap-2 px-3 py-1.5 rounded-md bg-white dark:bg-slate-800/80 text-[#1F2937] dark:text-slate-300 text-xs font-medium border border-slate-200 dark:border-slate-700 shadow-2xs">
-                <ShieldCheck className="w-3.5 h-3.5 text-[#0F766E] dark:text-teal-400" />
-                <span>{isRTL ? ARABIC_TRANSLATIONS.hero.badgeZatca : 'ZATCA VAT Compliance'}</span>
-              </div>
-              <div className="flex items-center gap-2 px-3 py-1.5 rounded-md bg-white dark:bg-slate-800/80 text-[#1F2937] dark:text-slate-300 text-xs font-medium border border-slate-200 dark:border-slate-700 shadow-2xs">
-                <Briefcase className="w-3.5 h-3.5 text-[#0F2747] dark:text-slate-300" />
-                <span>{isRTL ? ARABIC_TRANSLATIONS.hero.badgeApar : 'Full AP / AR & Reconciliation'}</span>
-              </div>
-              <div className="flex items-center gap-2 px-3 py-1.5 rounded-md bg-white dark:bg-slate-800/80 text-[#1F2937] dark:text-slate-300 text-xs font-medium border border-slate-200 dark:border-slate-700 shadow-2xs">
-                <GraduationCap className="w-3.5 h-3.5 text-[#0F766E] dark:text-teal-400" />
-                <span>{isRTL ? ARABIC_TRANSLATIONS.hero.badgeDegree : 'MBA Banking & Finance'}</span>
-              </div>
+            {/* Approved Professional Text */}
+            <div className="text-sm sm:text-base text-[#1F2937] dark:text-slate-300 max-w-2xl leading-relaxed mx-auto lg:mx-0 space-y-2.5">
+              <p>
+                {isRTL 
+                  ? ARABIC_TRANSLATIONS.hero.summaryP1
+                  : 'Accounting & Finance professional with 14+ years of experience in financial reporting, bookkeeping, AP/AR management, reconciliations, and day-to-day accounting operations.'
+                }
+              </p>
+              <p>
+                {isRTL
+                  ? ARABIC_TRANSLATIONS.hero.summaryP2
+                  : 'Experienced in ZATCA VAT compliance, inventory costing, cash management, ERP systems, and advanced MS Excel, with a focus on accurate reporting and efficient financial processes.'
+                }
+              </p>
             </div>
 
             {/* Call to action buttons */}
-            <div className={`pt-4 flex flex-wrap gap-3.5 justify-center ${isRTL ? 'lg:justify-start' : 'lg:justify-start'}`}>
+            <div className={`pt-2 flex flex-wrap gap-3.5 justify-center ${isRTL ? 'lg:justify-start' : 'lg:justify-start'}`}>
               <button
                 onClick={onOpenCV}
                 className="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg bg-[#0F2747] hover:bg-[#16365f] text-white font-semibold text-sm transition-all shadow-sm hover:shadow cursor-pointer"
