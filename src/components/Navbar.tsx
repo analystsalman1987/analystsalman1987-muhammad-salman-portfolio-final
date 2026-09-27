@@ -45,8 +45,8 @@ export function Navbar({
   const navLinks = [
     { name: isRTL ? ARABIC_TRANSLATIONS.nav.home : 'Home', href: '#home' },
     { name: isRTL ? ARABIC_TRANSLATIONS.nav.about : 'About', href: '#about' },
+    { name: isRTL ? ARABIC_TRANSLATIONS.nav.expertise : 'Expertise', href: '#expertise' },
     { name: isRTL ? ARABIC_TRANSLATIONS.nav.experience : 'Experience', href: '#experience' },
-    { name: isRTL ? ARABIC_TRANSLATIONS.nav.skills : 'Skills', href: '#skills' },
     { name: isRTL ? ARABIC_TRANSLATIONS.nav.software : 'ERP & Software', href: '#software' },
     { name: isRTL ? ARABIC_TRANSLATIONS.nav.education : 'Education', href: '#education' },
     { name: isRTL ? ARABIC_TRANSLATIONS.nav.contact : 'Contact', href: '#contact' },

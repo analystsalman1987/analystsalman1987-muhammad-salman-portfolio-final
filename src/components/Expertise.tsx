@@ -90,11 +90,8 @@ export function Expertise({ expertise }: ExpertiseProps) {
   return (
     <section 
       id="expertise" 
-      className="relative py-20 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 transition-colors overflow-hidden"
+      className="relative py-20 scroll-mt-20 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 transition-colors overflow-hidden"
     >
-      {/* Anchor for any remaining legacy #skills navigation */}
-      <span id="skills" className="absolute -top-24 pointer-events-none" aria-hidden="true" />
-
       {/* Subtle Professional Accounting & Operations Background Image */}
       <div 
         className="absolute inset-0 pointer-events-none z-0"

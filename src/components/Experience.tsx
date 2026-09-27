@@ -59,7 +59,7 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
   return (
     <section 
       id="experience" 
-      className="relative py-20 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 transition-colors overflow-hidden"
+      className="relative py-20 scroll-mt-20 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 transition-colors overflow-hidden"
     >
       {/* Subtle Professional Background Image for Experience */}
       <div 

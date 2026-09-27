@@ -206,17 +206,17 @@ export default function App() {
           />
         )}
 
-        {/* Highlights Section */}
-        {visibility.highlights && (
-          <Highlights highlights={highlights} />
-        )}
-
         {/* About Section */}
         {visibility.about && (
           <About profile={profile} />
         )}
 
-        {/* Core Professional Expertise */}
+        {/* Professional Highlights Section */}
+        {visibility.highlights && (
+          <Highlights highlights={highlights} />
+        )}
+
+        {/* Core Professional Expertise Section */}
         {visibility.expertise && (
           <Expertise expertise={expertise} />
         )}
