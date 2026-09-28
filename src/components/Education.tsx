@@ -57,7 +57,7 @@ export function EducationLanguages({ education, languages }: EducationLanguagesP
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
           
           {/* Education Section (Col-Span-7) - Clean Expandable Degree Cards */}
-          <div className="lg:col-span-7 flex flex-col justify-between space-y-6">
+          <div className="lg:col-span-7 flex flex-col justify-between gap-6 h-full">
             <div className="lg:min-h-[104px] flex flex-col justify-start">
               <span className="text-xs font-bold tracking-widest text-[#0F766E] dark:text-teal-400 uppercase">
                 {isRTL ? t.tag : 'Academic Background'}
@@ -205,7 +205,7 @@ export function EducationLanguages({ education, languages }: EducationLanguagesP
           </div>
 
           {/* Languages Section (Col-Span-5) */}
-          <div className="lg:col-span-5 flex flex-col h-full space-y-6">
+          <div className="lg:col-span-5 flex flex-col justify-between gap-6 h-full">
             <div className="lg:min-h-[104px] flex flex-col justify-start">
               <span className="text-xs font-bold tracking-widest text-[#0F766E] dark:text-teal-400 uppercase">
                 {isRTL ? t.languagesTag : 'Communication'}
