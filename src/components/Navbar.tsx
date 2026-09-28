@@ -71,11 +71,11 @@ export function Navbar({
               MS
             </div>
             <div>
-              <span className="block text-base font-bold text-[#0F2747] dark:text-slate-100 tracking-tight leading-none group-hover:text-[#0F766E] dark:group-hover:text-teal-400 transition-colors">
+              <span className="block text-base font-bold text-[#0F2747] dark:text-slate-100 tracking-tight leading-none group-hover:text-[#0F766E] dark:group-hover:text-teal-400 transition-colors whitespace-nowrap">
                 {isRTL ? 'محمد سلمان' : 'Muhammad Salman'}
               </span>
               <span className="block text-xs font-medium text-[#64748B] dark:text-slate-400 mt-1">
-                {isRTL ? 'محاسب | ماجستير مالية' : 'Accountant | MBA Finance'}
+                {isRTL ? 'محاسب' : 'Accountant'}
               </span>
             </div>
           </a>

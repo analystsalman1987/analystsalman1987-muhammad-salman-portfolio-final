@@ -80,9 +80,13 @@ export function About({ profile: _profile }: AboutProps) {
                 <span className="block text-2xl sm:text-3xl font-extrabold text-[#0F766E] dark:text-teal-400">14+</span>
                 <span className="text-[11px] font-semibold text-slate-600 dark:text-slate-300">{isRTL ? t.yearsExpLabel : 'Years Exp'}</span>
               </div>
-              <div className="p-4 rounded-xl bg-[#F4F6F8] dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800 shadow-2xs text-center">
-                <span className="block text-2xl sm:text-3xl font-extrabold text-[#0F2747] dark:text-slate-100">MBA</span>
-                <span className="text-[11px] font-semibold text-slate-600 dark:text-slate-300">{isRTL ? t.mbaFinanceLabel : 'Finance'}</span>
+              <div className="p-3 sm:p-4 rounded-xl bg-[#F4F6F8] dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800 shadow-2xs text-center flex flex-col justify-center items-center">
+                <span className="block text-lg sm:text-2xl font-extrabold text-[#0F2747] dark:text-slate-100 whitespace-nowrap leading-tight">
+                  {isRTL ? t.mbaFinance : 'MBA / BBA'}
+                </span>
+                <span className="text-[10px] sm:text-[11px] font-semibold text-slate-600 dark:text-slate-300 leading-tight mt-1 whitespace-nowrap">
+                  {isRTL ? t.mbaFinanceLabel : 'Accounting & Finance'}
+                </span>
               </div>
               <div className="p-4 rounded-xl bg-[#F4F6F8] dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800 shadow-2xs text-center">
                 <span className="block text-2xl sm:text-3xl font-extrabold text-[#0F766E] dark:text-teal-400">ZATCA</span>
