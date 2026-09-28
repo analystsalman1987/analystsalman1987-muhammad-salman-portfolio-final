@@ -7,8 +7,8 @@ export function useTheme() {
   const [theme, setThemeState] = useState<ThemeMode>(() => {
     try {
       if (typeof window !== 'undefined' && window.localStorage) {
-        const saved = window.localStorage.getItem(THEME_STORAGE_KEY) as ThemeMode | null;
-        if (saved === 'light' || saved === 'dark' || saved === 'system') return saved;
+        const saved = window.localStorage.getItem(THEME_STORAGE_KEY);
+        if (saved === 'dark' || saved === 'light') return saved as ThemeMode;
       }
     } catch {}
     return 'light';
@@ -18,20 +18,14 @@ export function useTheme() {
     try {
       if (typeof document === 'undefined') return;
       const root = document.documentElement;
-      let isDark = false;
-
-      if (mode === 'dark') {
-        isDark = true;
-      } else if (mode === 'light') {
-        isDark = false;
-      } else if (typeof window !== 'undefined' && window.matchMedia) {
-        isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      }
+      const isDark = mode === 'dark';
 
       if (isDark) {
         root.classList.add('dark');
+        root.setAttribute('data-theme', 'dark');
       } else {
         root.classList.remove('dark');
+        root.setAttribute('data-theme', 'light');
       }
     } catch (e) {
       console.warn('Theme apply error:', e);
@@ -40,40 +34,20 @@ export function useTheme() {
 
   const setTheme = useCallback(
     (newTheme: ThemeMode) => {
-      setThemeState(newTheme);
+      const mode: ThemeMode = newTheme === 'dark' ? 'dark' : 'light';
+      setThemeState(mode);
       try {
         if (typeof window !== 'undefined' && window.localStorage) {
-          window.localStorage.setItem(THEME_STORAGE_KEY, newTheme);
+          window.localStorage.setItem(THEME_STORAGE_KEY, mode);
         }
       } catch {}
-      applyTheme(newTheme);
+      applyTheme(mode);
     },
     [applyTheme]
   );
 
   useEffect(() => {
     applyTheme(theme);
-
-    if (typeof window === 'undefined' || !window.matchMedia) return;
-
-    try {
-      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-      const handleChange = () => {
-        if (theme === 'system') {
-          applyTheme('system');
-        }
-      };
-
-      if (mediaQuery.addEventListener) {
-        mediaQuery.addEventListener('change', handleChange);
-        return () => mediaQuery.removeEventListener('change', handleChange);
-      } else if ((mediaQuery as any).addListener) {
-        (mediaQuery as any).addListener(handleChange);
-        return () => (mediaQuery as any).removeListener(handleChange);
-      }
-    } catch (e) {
-      console.warn('MediaQuery listener error:', e);
-    }
   }, [theme, applyTheme]);
 
   return { theme, setTheme };

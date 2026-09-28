@@ -5,7 +5,6 @@ import {
   X, 
   Sun, 
   Moon, 
-  Monitor, 
   Lock, 
   ChevronRight
 } from 'lucide-react';
@@ -35,10 +34,8 @@ export function Navbar({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { language, setLanguage, isRTL } = useLanguage();
 
-  const cycleTheme = () => {
-    if (currentTheme === 'light') onThemeChange('dark');
-    else if (currentTheme === 'dark') onThemeChange('system');
-    else onThemeChange('light');
+  const toggleTheme = () => {
+    onThemeChange(currentTheme === 'dark' ? 'light' : 'dark');
   };
 
   const navLinks = [
@@ -141,14 +138,35 @@ export function Navbar({
 
             {/* Theme switcher */}
             <button
-              onClick={cycleTheme}
-              className="p-2 text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-transparent hover:border-slate-200 dark:hover:border-slate-700"
-              title={`Theme: ${currentTheme} (click to cycle)`}
-              aria-label={isRTL ? 'تبديل المظهر' : 'Toggle theme mode'}
+              type="button"
+              onClick={toggleTheme}
+              className="inline-flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-semibold text-slate-700 dark:text-slate-200 bg-slate-100 hover:bg-slate-200/80 dark:bg-slate-800 dark:hover:bg-slate-700 rounded-lg transition-all border border-slate-200 dark:border-slate-700 cursor-pointer shadow-2xs"
+              title={
+                isRTL
+                  ? (currentTheme === 'dark' ? 'الوضع الليلي نشط (انقر للوضع النهاري)' : 'الوضع النهاري نشط (انقر للوضع الليلي)')
+                  : (currentTheme === 'dark' ? 'Dark Mode active (click for Light Mode)' : 'Light Mode active (click for Dark Mode)')
+              }
+              aria-label={
+                isRTL
+                  ? (currentTheme === 'dark' ? 'تبديل إلى الوضع النهاري' : 'تبديل إلى الوضع الليلي')
+                  : (currentTheme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode')
+              }
             >
-              {currentTheme === 'light' && <Sun className="w-4 h-4 text-amber-500" />}
-              {currentTheme === 'dark' && <Moon className="w-4 h-4 text-blue-400" />}
-              {currentTheme === 'system' && <Monitor className="w-4 h-4 text-[#0F766E]" />}
+              {currentTheme === 'dark' ? (
+                <>
+                  <Moon className="w-4 h-4 text-teal-400 shrink-0" />
+                  <span className="text-[11px] font-bold text-slate-200">
+                    {isRTL ? 'داكن' : 'Dark'}
+                  </span>
+                </>
+              ) : (
+                <>
+                  <Sun className="w-4 h-4 text-amber-500 shrink-0" />
+                  <span className="text-[11px] font-bold text-slate-700">
+                    {isRTL ? 'نهاري' : 'Light'}
+                  </span>
+                </>
+              )}
             </button>
 
             {/* View CV button */}
@@ -214,13 +232,25 @@ export function Navbar({
             </div>
 
             <button
-              onClick={cycleTheme}
-              className="p-1.5 sm:p-2 text-slate-600 dark:text-slate-300 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800"
-              aria-label={isRTL ? 'تبديل المظهر' : 'Toggle theme'}
+              type="button"
+              onClick={toggleTheme}
+              className="p-1.5 sm:p-2 text-slate-600 dark:text-slate-300 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-slate-200/60 dark:border-slate-700/60 cursor-pointer"
+              title={
+                isRTL
+                  ? (currentTheme === 'dark' ? 'الوضع الليلي نشط' : 'الوضع النهاري نشط')
+                  : (currentTheme === 'dark' ? 'Dark Mode active' : 'Light Mode active')
+              }
+              aria-label={
+                isRTL
+                  ? (currentTheme === 'dark' ? 'تبديل إلى الوضع النهاري' : 'تبديل إلى الوضع الليلي')
+                  : (currentTheme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode')
+              }
             >
-              {currentTheme === 'light' && <Sun className="w-4 h-4 text-amber-500" />}
-              {currentTheme === 'dark' && <Moon className="w-4 h-4 text-blue-400" />}
-              {currentTheme === 'system' && <Monitor className="w-4 h-4 text-[#0F766E]" />}
+              {currentTheme === 'dark' ? (
+                <Moon className="w-4 h-4 text-teal-400" />
+              ) : (
+                <Sun className="w-4 h-4 text-amber-500" />
+              )}
             </button>
 
             <button
@@ -291,6 +321,43 @@ export function Navbar({
                 }`}
               >
                 العربية
+              </button>
+            </div>
+          </div>
+
+          {/* Mobile Menu Theme Selector */}
+          <div className="flex items-center justify-between px-3 py-2 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-200/80 dark:border-slate-800">
+            <span className="text-xs font-semibold text-[#1F2937] dark:text-slate-300">
+              {isRTL ? 'المظهر' : 'Appearance'}
+            </span>
+            <div 
+              className="inline-flex items-center p-0.5 rounded-lg bg-slate-200/80 dark:bg-slate-700/80 text-xs"
+              role="group"
+              aria-label="Theme selection"
+            >
+              <button
+                type="button"
+                onClick={() => onThemeChange('light')}
+                className={`flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-semibold transition-all cursor-pointer ${
+                  currentTheme === 'light'
+                    ? 'bg-white dark:bg-slate-900 text-[#0F766E] dark:text-teal-300 shadow-2xs'
+                    : 'text-[#64748B] dark:text-slate-300'
+                }`}
+              >
+                <Sun className="w-3.5 h-3.5 text-amber-500" />
+                <span>{isRTL ? 'نهاري' : 'Light'}</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => onThemeChange('dark')}
+                className={`flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-semibold transition-all cursor-pointer ${
+                  currentTheme === 'dark'
+                    ? 'bg-white dark:bg-slate-900 text-[#0F766E] dark:text-teal-300 shadow-2xs'
+                    : 'text-[#64748B] dark:text-slate-300'
+                }`}
+              >
+                <Moon className="w-3.5 h-3.5 text-teal-400" />
+                <span>{isRTL ? 'داكن' : 'Dark'}</span>
               </button>
             </div>
           </div>

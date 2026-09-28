@@ -97,10 +97,10 @@ export function Contact({ profile, onSendMessage }: ContactProps) {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
           
           {/* Contact Direct Cards (Left) */}
-          <div className="lg:col-span-5 space-y-4">
+          <div className="lg:col-span-5 h-full flex flex-col justify-between gap-3.5 sm:gap-4">
             
             {/* Email Card */}
             <a
@@ -206,8 +206,8 @@ export function Contact({ profile, onSendMessage }: ContactProps) {
           </div>
 
           {/* Contact Form (Right) */}
-          <div className="lg:col-span-7">
-            <div className="p-7 rounded-2xl bg-[#F4F6F8] dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800">
+          <div className="lg:col-span-7 h-full flex flex-col">
+            <div className="p-6 sm:p-7 rounded-2xl bg-[#F4F6F8] dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 flex-1 flex flex-col justify-between">
               
               <div className="flex items-center justify-between mb-5">
                 <div>

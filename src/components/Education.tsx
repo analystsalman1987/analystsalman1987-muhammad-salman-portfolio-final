@@ -54,11 +54,11 @@ export function EducationLanguages({ education, languages }: EducationLanguagesP
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
           
           {/* Education Section (Col-Span-7) - Clean Expandable Degree Cards */}
-          <div className="lg:col-span-7 space-y-6">
-            <div>
+          <div className="lg:col-span-7 flex flex-col justify-between space-y-6">
+            <div className="lg:min-h-[104px] flex flex-col justify-start">
               <span className="text-xs font-bold tracking-widest text-[#0F766E] dark:text-teal-400 uppercase">
                 {isRTL ? t.tag : 'Academic Background'}
               </span>
@@ -205,12 +205,12 @@ export function EducationLanguages({ education, languages }: EducationLanguagesP
           </div>
 
           {/* Languages Section (Col-Span-5) */}
-          <div className="lg:col-span-5 space-y-6">
-            <div>
+          <div className="lg:col-span-5 flex flex-col h-full space-y-6">
+            <div className="lg:min-h-[104px] flex flex-col justify-start">
               <span className="text-xs font-bold tracking-widest text-[#0F766E] dark:text-teal-400 uppercase">
                 {isRTL ? t.languagesTag : 'Communication'}
               </span>
-              <h2 className="mt-1 text-3xl font-extrabold text-[#0F2747] dark:text-white tracking-tight">
+              <h2 className="company-3d-text mt-1 text-3xl font-extrabold text-[#0F2747] dark:text-white tracking-tight">
                 {isRTL ? t.languagesTitle : 'Languages'}
               </h2>
               <p className="mt-2 text-sm text-[#64748B] dark:text-slate-400">
@@ -223,41 +223,43 @@ export function EducationLanguages({ education, languages }: EducationLanguagesP
                 {isRTL ? 'سيتم إضافة المعلومات قريباً.' : 'Information will be added soon.'}
               </div>
             ) : (
-              <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs space-y-4">
-                {languages.map((lang, idx) => {
-                  const arLang = t.langItems.find((x) => x.id === lang.id) || t.langItems[idx];
-                  const name = isRTL && arLang ? arLang.name : lang.name;
-                  const notes = isRTL && arLang ? arLang.notes : lang.notes;
+              <div className="p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs flex-1 flex flex-col justify-between space-y-4">
+                <div className="space-y-3.5 sm:space-y-4">
+                  {languages.map((lang, idx) => {
+                    const arLang = t.langItems.find((x) => x.id === lang.id) || t.langItems[idx];
+                    const name = isRTL && arLang ? arLang.name : lang.name;
+                    const notes = isRTL && arLang ? arLang.notes : lang.notes;
 
-                  return (
-                    <div
-                      key={lang.id}
-                      className="p-4 rounded-xl bg-[#F4F6F8] dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/80 flex items-center justify-between"
-                    >
-                      <div className="flex items-center gap-3">
-                        <div className="w-9 h-9 rounded-lg bg-[#E6F4F1] dark:bg-teal-950/60 text-[#0F766E] dark:text-teal-300 flex items-center justify-center font-bold text-sm">
-                          <Globe className="w-4 h-4" />
+                    return (
+                      <div
+                        key={lang.id}
+                        className="p-4 rounded-xl bg-[#F4F6F8] dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/80 flex items-center justify-between"
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className="w-9 h-9 rounded-lg bg-[#E6F4F1] dark:bg-teal-950/60 text-[#0F766E] dark:text-teal-300 flex items-center justify-center font-bold text-sm">
+                            <Globe className="w-4 h-4" />
+                          </div>
+                          <div>
+                            <h4 className="text-sm font-bold text-[#0F2747] dark:text-white">
+                              {name}
+                            </h4>
+                            {notes && (
+                              <span className="text-xs text-[#64748B] dark:text-slate-400">
+                                {notes}
+                              </span>
+                            )}
+                          </div>
                         </div>
-                        <div>
-                          <h4 className="text-sm font-bold text-[#0F2747] dark:text-white">
-                            {name}
-                          </h4>
-                          {notes && (
-                            <span className="text-xs text-[#64748B] dark:text-slate-400">
-                              {notes}
-                            </span>
-                          )}
-                        </div>
+
+                        <span className="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-[#E6F4F1] dark:bg-teal-950/60 text-[#0F766E] dark:text-teal-300 border border-[#0F766E]/20">
+                          {isRTL ? t.fluentBadge : 'Fluent / Working'}
+                        </span>
                       </div>
+                    );
+                  })}
+                </div>
 
-                      <span className="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-[#E6F4F1] dark:bg-teal-950/60 text-[#0F766E] dark:text-teal-300 border border-[#0F766E]/20">
-                        {isRTL ? t.fluentBadge : 'Fluent / Working'}
-                      </span>
-                    </div>
-                  );
-                })}
-
-                <div className="pt-3 border-t border-slate-100 dark:border-slate-800/80 text-[11px] text-[#64748B] dark:text-slate-400 leading-relaxed">
+                <div className="mt-auto pt-4 border-t border-slate-100 dark:border-slate-800/80 text-[11px] text-[#64748B] dark:text-slate-400 leading-relaxed">
                   {isRTL ? t.languagesNote : 'Daily professional communication with Saudi governmental portals (ZATCA), corporate bank officers, suppliers, and internal stakeholders.'}
                 </div>
               </div>
