@@ -122,14 +122,16 @@ export function Software({ software }: SoftwareProps) {
         
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
-          <div className="max-w-3xl">
-            <span className="text-xs font-bold tracking-widest text-[#0F766E] dark:text-teal-400 uppercase">
+          <div className="flex flex-col items-start gap-1.5 max-w-3xl">
+            <span className="block text-xs font-bold tracking-widest text-[#0F766E] dark:text-teal-400 uppercase">
               {isRTL ? t.tag : 'Systems & Infrastructure'}
             </span>
-            <h2 className="company-3d-text mt-1 text-3xl font-extrabold text-[#0F2747] dark:text-white sm:text-4xl tracking-tight">
-              {isRTL ? t.title : 'ERP & Software Experience'}
-            </h2>
-            <p className="mt-2 text-sm text-[#64748B] dark:text-slate-400">
+            <div>
+              <h2 className="main-heading-3d text-3xl font-extrabold sm:text-4xl tracking-tight">
+                {isRTL ? t.title : 'ERP & Software Experience'}
+              </h2>
+            </div>
+            <p className="mt-1 text-sm text-[#64748B] dark:text-slate-400">
               {isRTL ? t.subtitle : 'Operational expertise navigating enterprise ERP platforms, accounting systems, and financial spreadsheet modeling.'}
             </p>
           </div>

@@ -118,7 +118,7 @@ export function Hero({ profile, onOpenCV }: HeroProps) {
 
             {/* Name, Designation & Education */}
             <div className="space-y-1.5 sm:space-y-2">
-              <h1 className="company-3d-text text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#0F2747] dark:text-white tracking-tight leading-tight">
+              <h1 className="main-heading-3d text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
                 {isRTL ? 'محمد سلمان' : 'MUHAMMAD SALMAN'}
               </h1>
               <p className="text-xl sm:text-2xl font-bold text-[#0F766E] dark:text-teal-400 tracking-tight">
@@ -129,18 +129,12 @@ export function Hero({ profile, onOpenCV }: HeroProps) {
               </p>
             </div>
 
-            {/* Approved Professional Text */}
-            <div className="text-sm sm:text-base text-[#1F2937] dark:text-slate-300 max-w-2xl leading-relaxed mx-auto lg:mx-0 space-y-2.5">
+            {/* Approved Short Professional Introduction */}
+            <div className="text-sm sm:text-base text-[#1F2937] dark:text-slate-300 max-w-2xl leading-relaxed mx-auto lg:mx-0">
               <p>
                 {isRTL 
-                  ? ARABIC_TRANSLATIONS.hero.summaryP1
-                  : 'Accounting & Finance professional with 14+ years of experience in financial reporting, bookkeeping, AP/AR management, reconciliations, and day-to-day accounting operations.'
-                }
-              </p>
-              <p>
-                {isRTL
-                  ? ARABIC_TRANSLATIONS.hero.summaryP2
-                  : 'Experienced in ZATCA VAT compliance, inventory costing, cash management, ERP systems, and advanced MS Excel, with a focus on accurate reporting and efficient financial processes.'
+                  ? ARABIC_TRANSLATIONS.hero.summary
+                  : 'Accounting & Finance professional with 14+ years of experience across Saudi Arabia and Pakistan, specializing in financial operations, reporting, reconciliations, and ERP-based accounting.'
                 }
               </p>
             </div>

@@ -15,12 +15,12 @@
   --color-dark-text: #1F2937;
   --color-muted-text: #64748B;
 
-  /* Refined, softer executive dark theme palette (softer charcoal/slate-navy) */
-  --color-slate-950: #0f172a;
-  --color-slate-900: #182234;
-  --color-slate-850: #1d2b40;
-  --color-slate-800: #22324b;
-  --color-slate-700: #334664;
+  /* Soft dim / slightly darker version of Light Mode (soft light grey/slate tint) */
+  --color-slate-950: #E8EDF3; /* Main page background */
+  --color-slate-900: #DEE5EC; /* Alternate section background */
+  --color-slate-850: #E7ECF1; /* Secondary cards / panels */
+  --color-slate-800: #F1F4F7; /* Main cards */
+  --color-slate-700: #CBD5E1; /* Borders & dividers */
 }
 
 @layer base {
@@ -33,13 +33,65 @@
 
   html.dark,
   [data-theme="dark"] {
-    color: #f1f5f9;
-    background-color: #0f172a;
+    /* Soft dim tint: bright and spacious light slate-grey */
+    --color-slate-950: #E8EDF3;
+    --color-slate-900: #DEE5EC;
+    --color-slate-850: #E7ECF1;
+    --color-slate-800: #F1F4F7;
+    --color-slate-700: #CBD5E1;
+    --color-slate-600: #94A3B8;
+    --color-slate-500: #64748B;
+    --color-slate-400: #475569;
+    --color-slate-300: #334155;
+    --color-slate-200: #1E293B;
+    --color-slate-100: #0F2747;
+
+    --color-teal-950: #D6EAE5;
+    --color-teal-900: #C2DFD9;
+    --color-teal-800: #99D5C8;
+
+    color: #1E293B;
+    background-color: #E8EDF3;
   }
 
   html[dir="rtl"] {
     font-family: 'Cairo', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
+}
+
+/* Ensure typography in soft dim mode maintains clear dark slate/navy contrast on light backgrounds */
+html.dark .dark\:text-white,
+[data-theme="dark"] .dark\:text-white {
+  color: #0F2747;
+}
+
+html.dark .dark\:text-slate-100,
+[data-theme="dark"] .dark\:text-slate-100 {
+  color: #0F2747;
+}
+
+html.dark .dark\:text-slate-200,
+[data-theme="dark"] .dark\:text-slate-200 {
+  color: #1E293B;
+}
+
+html.dark .dark\:text-slate-300,
+[data-theme="dark"] .dark\:text-slate-300 {
+  color: #334155;
+}
+
+html.dark .dark\:text-slate-400,
+[data-theme="dark"] .dark\:text-slate-400 {
+  color: #475569;
+}
+
+html.dark .dark\:text-teal-200,
+[data-theme="dark"] .dark\:text-teal-200,
+html.dark .dark\:text-teal-300,
+[data-theme="dark"] .dark\:text-teal-300,
+html.dark .dark\:text-teal-400,
+[data-theme="dark"] .dark\:text-teal-400 {
+  color: #0F766E;
 }
 
 /* Subtle professional 3D raised / embossed effect for Work Experience Company Name */
@@ -55,9 +107,73 @@
 [data-theme="dark"] .company-3d-text,
 html.dark .company-3d-text {
   text-shadow: 
-    0 1px 1px rgba(0, 0, 0, 0.85),
-    0 2px 3px rgba(0, 0, 0, 0.65),
-    0 3.5px 6px rgba(15, 118, 110, 0.25);
+    0 1px 0 rgba(255, 255, 255, 0.95),
+    0 1.5px 2px rgba(15, 39, 71, 0.18),
+    0 3px 6px rgba(15, 39, 71, 0.08);
+}
+
+/* ==========================================================================
+   Main Headings 3D Embossed Effect (Hero Name & All Section Titles)
+   ========================================================================== */
+.main-heading-3d,
+.hero-name-3d {
+  display: inline-block;
+  color: #0F2747;
+  text-shadow: 
+    0 1px 0 rgba(255, 255, 255, 0.95),
+    0 2px 0 rgba(203, 213, 225, 0.85),
+    0 3px 2px rgba(15, 39, 71, 0.22),
+    0 5px 6px rgba(15, 39, 71, 0.14),
+    0 8px 14px rgba(15, 39, 71, 0.08);
+  letter-spacing: -0.015em;
+  transition: color 0.25s ease, text-shadow 0.25s ease;
+  cursor: pointer;
+  user-select: none;
+}
+
+@media (hover: hover) {
+  .main-heading-3d:hover,
+  .hero-name-3d:hover {
+    color: #0F766E !important;
+    text-shadow: 
+      0 1px 0 rgba(255, 255, 255, 0.95),
+      0 2px 0 rgba(153, 246, 228, 0.85),
+      0 3px 3px rgba(15, 118, 110, 0.32),
+      0 6px 10px rgba(15, 118, 110, 0.20),
+      0 10px 18px rgba(15, 39, 71, 0.12);
+  }
+}
+
+.dark .main-heading-3d,
+[data-theme="dark"] .main-heading-3d,
+html.dark .main-heading-3d,
+.dark .hero-name-3d,
+[data-theme="dark"] .hero-name-3d,
+html.dark .hero-name-3d {
+  color: #0F2747 !important;
+  text-shadow: 
+    0 1px 0 rgba(255, 255, 255, 0.95),
+    0 2px 0 rgba(203, 213, 225, 0.85),
+    0 3px 2px rgba(15, 39, 71, 0.20),
+    0 5px 6px rgba(15, 39, 71, 0.12),
+    0 8px 14px rgba(15, 39, 71, 0.08);
+}
+
+@media (hover: hover) {
+  .dark .main-heading-3d:hover,
+  [data-theme="dark"] .main-heading-3d:hover,
+  html.dark .main-heading-3d:hover,
+  .dark .hero-name-3d:hover,
+  [data-theme="dark"] .hero-name-3d:hover,
+  html.dark .hero-name-3d:hover {
+    color: #0F766E !important;
+    text-shadow: 
+      0 1px 0 rgba(255, 255, 255, 0.95),
+      0 2px 0 rgba(153, 246, 228, 0.85),
+      0 3px 3px rgba(15, 118, 110, 0.32),
+      0 6px 10px rgba(15, 118, 110, 0.20),
+      0 10px 18px rgba(15, 39, 71, 0.12);
+  }
 }
 
 @media print {

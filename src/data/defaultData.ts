@@ -1,7 +1,7 @@
 import { AppData } from '../types';
 
 export const DEFAULT_APP_DATA: AppData = {
-  version: 11,
+  version: 12,
   lastUpdated: new Date().toISOString(),
   profile: {
     fullName: 'Muhammad Salman',
@@ -14,7 +14,7 @@ export const DEFAULT_APP_DATA: AppData = {
     avatarUrl: '', // blank by default, will render "MS" initials badge or uploaded image
     heroIntro: 'Accountant | MBA Accounting & Finance | BBA',
     summary:
-      'Accounting professional with 14+ years of experience across Saudi Arabia and Pakistan, specializing in financial accounting, reporting, AP & AR, reconciliations, month-end closing, inventory costing, VAT/ZATCA compliance, and ERP-based accounting operations.',
+      'With more than 14 years of accounting and finance experience, I have worked across diverse business environments in Saudi Arabia and Pakistan, supporting day-to-day accounting operations, financial reporting, reconciliations, accounts payable and receivable, and month-end activities.\n\nMy professional experience includes ZATCA VAT compliance, inventory and costing, cash and petty cash management, customer and supplier account reconciliation, collections, and ERP-based accounting processes. I focus on maintaining accurate financial records, effective internal controls, and timely financial information to support business operations.',
   },
   highlights: [
     {

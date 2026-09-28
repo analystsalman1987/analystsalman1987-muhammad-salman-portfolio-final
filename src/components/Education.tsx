@@ -58,14 +58,16 @@ export function EducationLanguages({ education, languages }: EducationLanguagesP
           
           {/* Education Section (Col-Span-7) - Clean Expandable Degree Cards */}
           <div className="lg:col-span-7 flex flex-col justify-between gap-6 h-full">
-            <div className="lg:min-h-[104px] flex flex-col justify-start">
-              <span className="text-xs font-bold tracking-widest text-[#0F766E] dark:text-teal-400 uppercase">
+            <div className="lg:min-h-[104px] flex flex-col items-start justify-start gap-1.5">
+              <span className="block text-xs font-bold tracking-widest text-[#0F766E] dark:text-teal-400 uppercase">
                 {isRTL ? t.tag : 'Academic Background'}
               </span>
-              <h2 className="company-3d-text mt-1 text-3xl font-extrabold text-[#0F2747] dark:text-white tracking-tight">
-                {isRTL ? t.title : 'Education'}
-              </h2>
-              <p className="mt-2 text-sm text-[#64748B] dark:text-slate-400">
+              <div>
+                <h2 className="main-heading-3d text-3xl font-extrabold tracking-tight">
+                  {isRTL ? t.title : 'Education'}
+                </h2>
+              </div>
+              <p className="mt-1 text-sm text-[#64748B] dark:text-slate-400">
                 {isRTL ? t.subtitle : 'Formal business administration and banking & finance higher education foundation.'}
               </p>
             </div>
@@ -206,14 +208,16 @@ export function EducationLanguages({ education, languages }: EducationLanguagesP
 
           {/* Languages Section (Col-Span-5) */}
           <div className="lg:col-span-5 flex flex-col justify-between gap-6 h-full">
-            <div className="lg:min-h-[104px] flex flex-col justify-start">
-              <span className="text-xs font-bold tracking-widest text-[#0F766E] dark:text-teal-400 uppercase">
+            <div className="lg:min-h-[104px] flex flex-col items-start justify-start gap-1.5">
+              <span className="block text-xs font-bold tracking-widest text-[#0F766E] dark:text-teal-400 uppercase">
                 {isRTL ? t.languagesTag : 'Communication'}
               </span>
-              <h2 className="company-3d-text mt-1 text-3xl font-extrabold text-[#0F2747] dark:text-white tracking-tight">
-                {isRTL ? t.languagesTitle : 'Languages'}
-              </h2>
-              <p className="mt-2 text-sm text-[#64748B] dark:text-slate-400">
+              <div>
+                <h2 className="main-heading-3d text-3xl font-extrabold tracking-tight">
+                  {isRTL ? t.languagesTitle : 'Languages'}
+                </h2>
+              </div>
+              <p className="mt-1 text-sm text-[#64748B] dark:text-slate-400">
                 {isRTL ? t.languagesSubtitle : 'Linguistic versatility supporting multinational teams, Saudi vendor dealings, and corporate correspondence.'}
               </p>
             </div>

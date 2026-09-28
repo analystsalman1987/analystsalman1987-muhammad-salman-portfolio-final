@@ -57,15 +57,17 @@ export function Highlights({ highlights }: HighlightsProps) {
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-10">
-          <span className="text-xs font-bold tracking-widest text-[#0F766E] dark:text-teal-400 uppercase">
+        {/* Section Header: Vertical Stack (Label above Heading) */}
+        <div className="flex flex-col items-center text-center max-w-2xl mx-auto mb-10 gap-1.5">
+          <span className="block text-xs font-bold tracking-widest text-[#0F766E] dark:text-teal-400 uppercase">
             {isRTL ? t.tag : 'Executive Overview'}
           </span>
-          <h2 className="company-3d-text mt-1 text-2xl font-bold text-[#0F2747] dark:text-white sm:text-3xl tracking-tight">
-            {isRTL ? t.title : 'Professional Highlights'}
-          </h2>
-          <p className="mt-2 text-xs sm:text-sm text-[#64748B] dark:text-slate-400">
+          <div>
+            <h2 className="main-heading-3d text-2xl font-bold sm:text-3xl tracking-tight">
+              {isRTL ? t.title : 'Professional Highlights'}
+            </h2>
+          </div>
+          <p className="mt-1 text-xs sm:text-sm text-[#64748B] dark:text-slate-400">
             {isRTL ? t.subtitle : 'A quick, high-level overview of core accounting qualifications, regional experience, and operational strengths.'}
           </p>
         </div>

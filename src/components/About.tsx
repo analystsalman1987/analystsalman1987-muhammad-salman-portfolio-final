@@ -6,14 +6,9 @@ interface AboutProps {
   profile: ProfileInfo;
 }
 
-export function About({ profile }: AboutProps) {
+export function About({ profile: _profile }: AboutProps) {
   const { isRTL } = useLanguage();
   const t = ARABIC_TRANSLATIONS.about;
-
-  const introText = isRTL
-    ? t.summary
-    : profile.summary ||
-      'Accounting professional with 14+ years of experience across Saudi Arabia and Pakistan, specializing in financial accounting, reporting, AP & AR, reconciliations, month-end closing, inventory costing, VAT/ZATCA compliance, and ERP-based accounting operations.';
 
   return (
     <section 
@@ -36,21 +31,34 @@ export function About({ profile }: AboutProps) {
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         
-        {/* Header */}
-        <div className="max-w-3xl">
-          <span className="text-xs font-bold tracking-widest text-[#0F766E] dark:text-teal-400 uppercase">
+        {/* Header: Vertical Stack (Label above Heading) */}
+        <div className="flex flex-col items-start gap-1.5 max-w-3xl">
+          <span className="block text-xs font-bold tracking-widest text-[#0F766E] dark:text-teal-400 uppercase">
             {isRTL ? t.tag : 'Profile Overview'}
           </span>
-          <h2 className="company-3d-text mt-1 text-3xl font-extrabold text-[#0F2747] dark:text-white sm:text-4xl tracking-tight">
-            {isRTL ? t.title : 'About Muhammad Salman'}
-          </h2>
+          <div>
+            <h2 className="main-heading-3d text-3xl font-extrabold sm:text-4xl tracking-tight">
+              {isRTL ? t.title : 'About Muhammad Salman'}
+            </h2>
+          </div>
         </div>
 
         {/* Detailed Professional Introduction Card */}
         <div className="p-6 sm:p-7 rounded-2xl bg-[#F4F6F8] dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 shadow-xs">
-          <p className="text-base sm:text-lg text-[#1F2937] dark:text-slate-200 leading-relaxed font-medium">
-            {introText}
-          </p>
+          <div className="space-y-4 text-base sm:text-lg text-[#1F2937] dark:text-slate-200 leading-relaxed font-normal">
+            <p>
+              {isRTL
+                ? (t.summaryP1 || 'مع أكثر من 14 عاماً من الخبرة في المحاسبة والمالية، عملت عبر بيئات أعمال متنوعة في المملكة العربية السعودية وباكستان، دعماً للعمليات المحاسبية اليومية، والتقارير المالية، والتسويات، وحسابات الذمم الدائنة والمدينة، وأنشطة الإقفال الشهري.')
+                : 'With more than 14 years of accounting and finance experience, I have worked across diverse business environments in Saudi Arabia and Pakistan, supporting day-to-day accounting operations, financial reporting, reconciliations, accounts payable and receivable, and month-end activities.'
+              }
+            </p>
+            <p>
+              {isRTL
+                ? (t.summaryP2 || 'تشمل خبرتي المهنية الامتثال لضريبة القيمة المضافة لهيئة الزكاة والضريبة والجمارك (ZATCA)، وتكاليف المخزون، وإدارة النقدية والعهدة النثرية، وتسويات حسابات العملاء والموردين، والتحصيلات، والعمليات المحاسبية القائمة على أنظمة تخطيط موارد المؤسسات (ERP). أركز على الحفاظ على سجلات مالية دقيقة، وضوابط داخلية فعالة، وتوفير معلومات مالية دقيقة وفي الوقت المناسب لدعم العمليات التشغيلية للأعمال.')
+                : 'My professional experience includes ZATCA VAT compliance, inventory and costing, cash and petty cash management, customer and supplier account reconciliation, collections, and ERP-based accounting processes. I focus on maintaining accurate financial records, effective internal controls, and timely financial information to support business operations.'
+              }
+            </p>
+          </div>
           
           <div className="pt-4 mt-4 border-t border-slate-200/80 dark:border-slate-700/60 flex flex-wrap items-center justify-between gap-3 text-xs font-semibold text-[#64748B] dark:text-slate-400">
             <div className="flex items-center gap-2">
