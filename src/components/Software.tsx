@@ -88,7 +88,7 @@ const categoryStyles: Record<Category, string> = {
     'bg-amber-100 text-amber-700 border-amber-200 dark:bg-amber-950/60 dark:text-amber-300 dark:border-amber-800',
 };
 
-export default function Software() {
+export function Software() {
   return (
     <section
       id="software"
