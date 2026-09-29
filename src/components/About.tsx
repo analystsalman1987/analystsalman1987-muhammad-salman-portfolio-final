@@ -13,47 +13,47 @@ export function About({ profile: _profile }: AboutProps) {
   return (
     <section
       id="about"
-      className="relative py-20 bg-[#F4FAF8] dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 transition-colors overflow-hidden"
+      className="relative overflow-hidden border-b border-slate-200 py-20 transition-colors dark:border-slate-700 dark:bg-slate-900"
     >
-      {/* Light Professional Accounting & Finance Background */}
+      {/* FINAL ABOUT BACKGROUND */}
       <div
-        className="absolute inset-0 pointer-events-none z-0"
+        className="absolute inset-0 z-0 pointer-events-none"
         aria-hidden="true"
       >
         <img
           src="/images/about_accounting_background.jpg"
           alt=""
           referrerPolicy="no-referrer"
-          className="w-full h-full object-cover object-center opacity-[0.30] dark:opacity-[0.13] filter contrast-105 saturate-[0.85] select-none"
+          className="h-full w-full object-cover object-center opacity-[0.48] dark:opacity-[0.20]"
           loading="lazy"
         />
 
-        {/* Soft overlay keeps the background visible without reducing readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#F4FAF8]/75 via-[#F4FAF8]/62 to-[#F4FAF8]/78 dark:from-slate-900/88 dark:via-slate-900/76 dark:to-slate-900/90" />
-
-        {/* Very soft teal atmosphere */}
-        <div className="absolute inset-0 bg-gradient-to-r from-teal-50/20 via-transparent to-emerald-50/15 dark:from-teal-950/10 dark:to-transparent" />
+        {/* Light green/teal professional overlay.
+            Background remains clearly visible. */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#F1FAF7]/78 via-[#F4FAF8]/70 to-[#EDF8F6]/68 dark:from-slate-900/88 dark:via-slate-900/82 dark:to-slate-900/86" />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
-        {/* Header */}
-        <div className="flex flex-col items-start gap-1.5 max-w-3xl">
-          <span className="block text-xs font-bold tracking-widest text-[#0F766E] dark:text-teal-400 uppercase">
+        {/* SECTION HEADER */}
+        <div className="mb-9 flex max-w-3xl flex-col items-start gap-1.5">
+          <span className="block text-xs font-bold uppercase tracking-widest text-[#0F766E] dark:text-teal-400">
             {isRTL ? t.tag : 'Profile Overview'}
           </span>
 
-          <h2 className="main-heading-3d text-3xl font-extrabold sm:text-4xl tracking-tight">
+          <h2 className="main-heading-3d text-3xl font-extrabold tracking-tight sm:text-4xl">
             {isRTL ? t.title : 'About Muhammad Salman'}
           </h2>
         </div>
 
-        {/* Main About Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
+        {/* MAIN ABOUT CONTENT */}
+        <div className="grid grid-cols-1 items-stretch gap-8 lg:grid-cols-12 lg:gap-12">
 
-          {/* LEFT: About Text Directly on Background */}
-          <div className="lg:col-span-6 flex flex-col justify-between py-1">
-            <div className="space-y-5 text-base sm:text-lg text-slate-800 dark:text-slate-100 leading-relaxed font-normal">
+          {/* LEFT SIDE */}
+          <div className="flex flex-col justify-between lg:col-span-6">
+
+            {/* EXACT APPROVED ABOUT TEXT — NO CARD */}
+            <div className="space-y-5 text-base font-medium leading-relaxed text-slate-800 sm:text-lg dark:text-slate-100">
               <p>
                 {isRTL
                   ? (
@@ -73,10 +73,12 @@ export function About({ profile: _profile }: AboutProps) {
               </p>
             </div>
 
-            {/* Compliance / Driving License */}
-            <div className="pt-4 mt-6 border-t border-slate-300/70 dark:border-slate-700 flex flex-wrap items-center justify-between gap-3 text-xs font-semibold text-slate-700 dark:text-slate-300">
+            {/* COMPLIANCE INFORMATION */}
+            <div className="mt-7 flex flex-wrap items-center justify-between gap-3 border-t border-slate-400/40 pt-4 text-xs font-semibold text-slate-700 dark:border-slate-600 dark:text-slate-300">
+
               <div className="flex items-center gap-2">
-                <span className="inline-block w-2 h-2 rounded-full bg-[#0F766E] shrink-0" />
+                <span className="h-2 w-2 shrink-0 rounded-full bg-[#0F766E]" />
+
                 <span>
                   {isRTL
                     ? t.complianceNote
@@ -84,7 +86,7 @@ export function About({ profile: _profile }: AboutProps) {
                 </span>
               </div>
 
-              <span className="px-2.5 py-1 rounded-md bg-[#E6F4F1]/90 dark:bg-teal-950/70 text-[#0F766E] dark:text-teal-300 font-bold border border-[#0F766E]/20">
+              <span className="rounded-md border border-[#0F766E]/25 bg-[#E6F4F1]/90 px-2.5 py-1 font-bold text-[#0F766E] dark:bg-teal-950/70 dark:text-teal-300">
                 {isRTL
                   ? t.drivingLicense
                   : 'Valid Saudi Driving License'}
@@ -92,110 +94,105 @@ export function About({ profile: _profile }: AboutProps) {
             </div>
           </div>
 
-          {/* RIGHT: Existing Original Finance Workplace Image */}
+          {/* RIGHT SIDE — KEEP EXISTING ORIGINAL IMAGE */}
           <div className="lg:col-span-6">
-            <div className="relative h-full min-h-[330px] sm:min-h-[390px] overflow-hidden rounded-[1.35rem] group">
+            <div className="group relative min-h-[350px] h-full overflow-hidden rounded-[24px] sm:min-h-[410px]">
 
-              {/* Existing image asset retained */}
               <img
                 src="/images/accounting_workplace.jpg"
                 alt="Accounting and Financial Operations Workplace"
                 referrerPolicy="no-referrer"
-                className="absolute inset-0 w-full h-full object-cover object-center opacity-[0.94] dark:opacity-[0.88] group-hover:scale-[1.015] transition-transform duration-700"
+                className="absolute inset-0 h-full w-full object-cover object-center opacity-[0.93] transition-transform duration-700 group-hover:scale-[1.015] dark:opacity-[0.88]"
                 loading="lazy"
               />
 
-              {/* Soft edge blending into About background */}
-              <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-[#F4FAF8]/35 via-transparent to-[#F4FAF8]/18 dark:from-slate-900/25 dark:via-transparent dark:to-slate-900/15" />
+              {/* EDGE BLENDING — image visually merges with About background */}
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#F1FAF7]/32 via-transparent to-[#EDF8F6]/16 dark:from-slate-900/22 dark:via-transparent dark:to-slate-900/12" />
 
-              <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-[#F4FAF8]/18 via-transparent to-transparent dark:from-slate-900/18" />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#F1FAF7]/20 via-transparent to-transparent dark:from-slate-900/15" />
 
-              {/* Bottom gradient for text */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0F2747]/82 via-[#0F2747]/18 to-transparent" />
+              {/* SOFT BOTTOM GRADIENT */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0B2941]/82 via-[#0B2941]/18 to-transparent" />
 
-              {/* Financial Operations & Controls content merged inside image */}
+              {/* FINAL CONTENT INSIDE IMAGE */}
               <div className="absolute inset-x-0 bottom-0 p-5 sm:p-7">
-                <div className="max-w-xl">
-                  <span className="inline-block text-[10px] sm:text-xs uppercase font-extrabold tracking-[0.12em] text-teal-200 mb-2">
-                    {isRTL
-                      ? t.governanceBadge
-                      : 'FINANCIAL OPERATIONS & CONTROLS'}
-                  </span>
 
-                  <p className="text-xs sm:text-sm text-white/95 leading-relaxed font-medium">
-                    {isRTL
-                      ? t.governanceDesc
-                      : 'Dedicated to accurate ledger maintenance, audit-ready financial schedules, balance confirmations, and ZATCA statutory tax compliance across enterprise operations.'}
-                  </p>
-                </div>
+                <h3 className="mb-2 text-xs font-extrabold uppercase tracking-[0.13em] text-teal-200 sm:text-sm">
+                  {isRTL
+                    ? t.governanceBadge
+                    : 'FINANCIAL OPERATIONS & CONTROLS'}
+                </h3>
+
+                <p className="max-w-xl text-xs font-medium leading-relaxed text-white sm:text-sm">
+                  {isRTL
+                    ? t.governanceDesc
+                    : 'Dedicated to accurate ledger maintenance, audit-ready financial schedules, balance confirmations, and ZATCA statutory tax compliance across enterprise operations.'}
+                </p>
               </div>
 
-              {/* Soft border without separate card appearance */}
-              <div className="absolute inset-0 rounded-[1.35rem] ring-1 ring-inset ring-white/25 dark:ring-white/10 pointer-events-none" />
+              <div className="pointer-events-none absolute inset-0 rounded-[24px] ring-1 ring-inset ring-white/25 dark:ring-white/10" />
             </div>
           </div>
         </div>
 
-        {/* Three Professional Metric Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        {/* FINAL THREE CARDS ONLY */}
+        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
 
-          {/* Experience */}
-          <div className="p-4 sm:p-5 rounded-xl bg-white/82 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/70 shadow-sm text-center flex flex-col justify-center items-center min-h-[105px]">
+          {/* 14+ */}
+          <div className="flex min-h-[112px] flex-col items-center justify-center rounded-xl border border-slate-200/80 bg-white/90 p-5 text-center shadow-sm dark:border-slate-700 dark:bg-slate-800/75">
+
             <span
-              className="block text-2xl sm:text-3xl font-extrabold text-[#0F766E] dark:text-teal-400"
+              className="block text-3xl font-extrabold text-[#0F766E] dark:text-teal-400"
               style={{
                 textShadow:
-                  '0 1px 0 rgba(255,255,255,0.65), 0 2px 3px rgba(15,118,110,0.16)'
+                  '0 1px 0 rgba(255,255,255,.8), 0 2px 3px rgba(15,118,110,.20)'
               }}
             >
               14+
             </span>
 
-            <span className="text-[11px] sm:text-xs font-semibold text-slate-600 dark:text-slate-300 mt-1">
-              {isRTL
-                ? t.yearsExpLabel
-                : 'Years Experience'}
+            <span className="mt-1 text-xs font-semibold text-slate-600 dark:text-slate-300">
+              {isRTL ? t.yearsExpLabel : 'Years Experience'}
             </span>
           </div>
 
-          {/* Education */}
-          <div className="p-4 sm:p-5 rounded-xl bg-white/82 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/70 shadow-sm text-center flex flex-col justify-center items-center min-h-[105px]">
+          {/* MBA / BBA */}
+          <div className="flex min-h-[112px] flex-col items-center justify-center rounded-xl border border-slate-200/80 bg-white/90 p-5 text-center shadow-sm dark:border-slate-700 dark:bg-slate-800/75">
+
             <span
-              className="block text-xl sm:text-2xl font-extrabold text-[#0F766E] dark:text-teal-400 whitespace-nowrap leading-tight"
+              className="block whitespace-nowrap text-2xl font-extrabold text-[#0F766E] dark:text-teal-400"
               style={{
                 textShadow:
-                  '0 1px 0 rgba(255,255,255,0.65), 0 2px 3px rgba(15,118,110,0.16)'
+                  '0 1px 0 rgba(255,255,255,.8), 0 2px 3px rgba(15,118,110,.20)'
               }}
             >
               {isRTL ? t.mbaFinance : 'MBA / BBA'}
             </span>
 
-            <span className="text-[11px] sm:text-xs font-semibold text-slate-600 dark:text-slate-300 mt-1">
-              {isRTL
-                ? t.mbaFinanceLabel
-                : 'Accounting & Finance'}
+            <span className="mt-1 text-xs font-semibold text-slate-600 dark:text-slate-300">
+              {isRTL ? t.mbaFinanceLabel : 'Accounting & Finance'}
             </span>
           </div>
 
           {/* ZATCA */}
-          <div className="p-4 sm:p-5 rounded-xl bg-white/82 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/70 shadow-sm text-center flex flex-col justify-center items-center min-h-[105px]">
+          <div className="flex min-h-[112px] flex-col items-center justify-center rounded-xl border border-slate-200/80 bg-white/90 p-5 text-center shadow-sm dark:border-slate-700 dark:bg-slate-800/75">
+
             <span
-              className="block text-2xl sm:text-3xl font-extrabold text-[#0F766E] dark:text-teal-400"
+              className="block text-3xl font-extrabold text-[#0F766E] dark:text-teal-400"
               style={{
                 textShadow:
-                  '0 1px 0 rgba(255,255,255,0.65), 0 2px 3px rgba(15,118,110,0.16)'
+                  '0 1px 0 rgba(255,255,255,.8), 0 2px 3px rgba(15,118,110,.20)'
               }}
             >
               ZATCA
             </span>
 
-            <span className="text-[11px] sm:text-xs font-semibold text-slate-600 dark:text-slate-300 mt-1">
+            <span className="mt-1 text-xs font-semibold text-slate-600 dark:text-slate-300">
               {isRTL
                 ? t.zatcaVatLabel
                 : 'VAT Reporting & Submission'}
             </span>
           </div>
-
         </div>
       </div>
     </section>
