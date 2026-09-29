@@ -13,9 +13,9 @@ export function About({ profile: _profile }: AboutProps) {
   return (
     <section
       id="about"
-      className="relative overflow-hidden border-b border-slate-200 py-20 transition-colors dark:border-slate-700 dark:bg-slate-900"
+      className="relative overflow-hidden border-b border-slate-200 py-20 transition-colors dark:border-slate-800 dark:bg-slate-900"
     >
-      {/* FINAL ABOUT BACKGROUND */}
+      {/* FULL ABOUT BACKGROUND */}
       <div
         className="absolute inset-0 z-0 pointer-events-none"
         aria-hidden="true"
@@ -24,18 +24,16 @@ export function About({ profile: _profile }: AboutProps) {
           src="/images/about_accounting_background.jpg"
           alt=""
           referrerPolicy="no-referrer"
-          className="h-full w-full object-cover object-center opacity-[0.48] dark:opacity-[0.20]"
+          className="h-full w-full object-cover object-center opacity-[0.38] dark:opacity-[0.16]"
           loading="lazy"
         />
 
-        {/* Light green/teal professional overlay.
-            Background remains clearly visible. */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#F1FAF7]/78 via-[#F4FAF8]/70 to-[#EDF8F6]/68 dark:from-slate-900/88 dark:via-slate-900/82 dark:to-slate-900/86" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#F2FAF7]/72 via-[#F3FAF8]/66 to-[#EEF8F5]/68 dark:from-slate-900/88 dark:via-slate-900/82 dark:to-slate-900/86" />
       </div>
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
-        {/* SECTION HEADER */}
+        {/* HEADER */}
         <div className="mb-9 flex max-w-3xl flex-col items-start gap-1.5">
           <span className="block text-xs font-bold uppercase tracking-widest text-[#0F766E] dark:text-teal-400">
             {isRTL ? t.tag : 'Profile Overview'}
@@ -46,14 +44,16 @@ export function About({ profile: _profile }: AboutProps) {
           </h2>
         </div>
 
-        {/* MAIN ABOUT CONTENT */}
-        <div className="grid grid-cols-1 items-stretch gap-8 lg:grid-cols-12 lg:gap-12">
+        {/* FINAL DESKTOP STRUCTURE:
+            LEFT = summary + compliance + 3 cards
+            RIGHT = original image + integrated bottom content */}
+        <div className="grid grid-cols-1 items-stretch gap-8 lg:grid-cols-12 lg:gap-10">
 
           {/* LEFT SIDE */}
-          <div className="flex flex-col justify-between lg:col-span-6">
+          <div className="flex flex-col lg:col-span-6">
 
-            {/* EXACT APPROVED ABOUT TEXT — NO CARD */}
-            <div className="space-y-5 text-base font-medium leading-relaxed text-slate-800 sm:text-lg dark:text-slate-100">
+            {/* APPROVED SUMMARY - TRANSPARENT, NO CARD */}
+            <div className="space-y-5 text-base font-medium leading-relaxed text-[#1E293B] sm:text-lg dark:text-slate-100">
               <p>
                 {isRTL
                   ? (
@@ -73,12 +73,10 @@ export function About({ profile: _profile }: AboutProps) {
               </p>
             </div>
 
-            {/* COMPLIANCE INFORMATION */}
-            <div className="mt-7 flex flex-wrap items-center justify-between gap-3 border-t border-slate-400/40 pt-4 text-xs font-semibold text-slate-700 dark:border-slate-600 dark:text-slate-300">
-
+            {/* COMPLIANCE + LICENSE */}
+            <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-slate-400/40 pt-4 text-xs font-semibold text-slate-700 dark:border-slate-600 dark:text-slate-300">
               <div className="flex items-center gap-2">
                 <span className="h-2 w-2 shrink-0 rounded-full bg-[#0F766E]" />
-
                 <span>
                   {isRTL
                     ? t.complianceNote
@@ -92,31 +90,89 @@ export function About({ profile: _profile }: AboutProps) {
                   : 'Valid Saudi Driving License'}
               </span>
             </div>
+
+            {/* THREE FINAL CARDS - LEFT SIDE ONLY */}
+            <div className="mt-7 grid grid-cols-1 gap-3 sm:grid-cols-3">
+
+              {/* 14+ */}
+              <div className="flex min-h-[108px] flex-col items-center justify-center rounded-xl border border-slate-200/90 bg-white/90 p-4 text-center shadow-sm dark:border-slate-700 dark:bg-slate-800/75">
+                <span
+                  className="text-2xl font-extrabold text-[#0F766E] sm:text-3xl dark:text-teal-400"
+                  style={{
+                    textShadow:
+                      '0 1px 0 rgba(255,255,255,.8), 0 2px 3px rgba(15,118,110,.18)'
+                  }}
+                >
+                  14+
+                </span>
+
+                <span className="mt-1 text-[11px] font-semibold text-slate-600 dark:text-slate-300">
+                  {isRTL ? t.yearsExpLabel : 'Years Experience'}
+                </span>
+              </div>
+
+              {/* MBA / BBA */}
+              <div className="flex min-h-[108px] flex-col items-center justify-center rounded-xl border border-slate-200/90 bg-white/90 p-4 text-center shadow-sm dark:border-slate-700 dark:bg-slate-800/75">
+                <span
+                  className="whitespace-nowrap text-lg font-extrabold text-[#0F766E] sm:text-xl dark:text-teal-400"
+                  style={{
+                    textShadow:
+                      '0 1px 0 rgba(255,255,255,.8), 0 2px 3px rgba(15,118,110,.18)'
+                  }}
+                >
+                  {isRTL ? t.mbaFinance : 'MBA / BBA'}
+                </span>
+
+                <span className="mt-1 text-[10px] font-semibold leading-tight text-slate-600 sm:text-[11px] dark:text-slate-300">
+                  {isRTL
+                    ? t.mbaFinanceLabel
+                    : 'Accounting & Finance'}
+                </span>
+              </div>
+
+              {/* ZATCA */}
+              <div className="flex min-h-[108px] flex-col items-center justify-center rounded-xl border border-slate-200/90 bg-white/90 p-4 text-center shadow-sm dark:border-slate-700 dark:bg-slate-800/75">
+                <span
+                  className="text-2xl font-extrabold text-[#0F766E] sm:text-3xl dark:text-teal-400"
+                  style={{
+                    textShadow:
+                      '0 1px 0 rgba(255,255,255,.8), 0 2px 3px rgba(15,118,110,.18)'
+                  }}
+                >
+                  ZATCA
+                </span>
+
+                <span className="mt-1 text-[10px] font-semibold leading-tight text-slate-600 sm:text-[11px] dark:text-slate-300">
+                  {isRTL
+                    ? t.zatcaVatLabel
+                    : 'VAT Reporting & Submission'}
+                </span>
+              </div>
+            </div>
           </div>
 
-          {/* RIGHT SIDE — KEEP EXISTING ORIGINAL IMAGE */}
+          {/* RIGHT SIDE - EXISTING ORIGINAL IMAGE ONLY */}
           <div className="lg:col-span-6">
-            <div className="group relative min-h-[350px] h-full overflow-hidden rounded-[24px] sm:min-h-[410px]">
+            <div className="group relative h-full min-h-[390px] overflow-hidden rounded-[24px] sm:min-h-[460px] lg:min-h-full">
 
               <img
                 src="/images/accounting_workplace.jpg"
                 alt="Accounting and Financial Operations Workplace"
                 referrerPolicy="no-referrer"
-                className="absolute inset-0 h-full w-full object-cover object-center opacity-[0.93] transition-transform duration-700 group-hover:scale-[1.015] dark:opacity-[0.88]"
+                className="absolute inset-0 h-full w-full object-cover object-center opacity-[0.91] transition-transform duration-700 group-hover:scale-[1.01] dark:opacity-[0.86]"
                 loading="lazy"
               />
 
-              {/* EDGE BLENDING — image visually merges with About background */}
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#F1FAF7]/32 via-transparent to-[#EDF8F6]/16 dark:from-slate-900/22 dark:via-transparent dark:to-slate-900/12" />
+              {/* SOFT OUTER EDGE MERGE */}
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#F2FAF7]/24 via-transparent to-[#EEF8F5]/18 dark:from-slate-900/18 dark:via-transparent dark:to-slate-900/14" />
 
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#F1FAF7]/20 via-transparent to-transparent dark:from-slate-900/15" />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#F2FAF7]/22 via-transparent to-transparent dark:from-slate-900/16" />
 
-              {/* SOFT BOTTOM GRADIENT */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0B2941]/82 via-[#0B2941]/18 to-transparent" />
+              {/* SOFTER BOTTOM GRADIENT */}
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0F3148]/78 via-[#0F3148]/16 to-transparent" />
 
-              {/* FINAL CONTENT INSIDE IMAGE */}
+              {/* CONTENT INSIDE IMAGE */}
               <div className="absolute inset-x-0 bottom-0 p-5 sm:p-7">
-
                 <h3 className="mb-2 text-xs font-extrabold uppercase tracking-[0.13em] text-teal-200 sm:text-sm">
                   {isRTL
                     ? t.governanceBadge
@@ -130,68 +186,9 @@ export function About({ profile: _profile }: AboutProps) {
                 </p>
               </div>
 
-              <div className="pointer-events-none absolute inset-0 rounded-[24px] ring-1 ring-inset ring-white/25 dark:ring-white/10" />
+              {/* VERY SUBTLE EDGE DEFINITION */}
+              <div className="pointer-events-none absolute inset-0 rounded-[24px] ring-1 ring-inset ring-white/20 dark:ring-white/10" />
             </div>
-          </div>
-        </div>
-
-        {/* FINAL THREE CARDS ONLY */}
-        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
-
-          {/* 14+ */}
-          <div className="flex min-h-[112px] flex-col items-center justify-center rounded-xl border border-slate-200/80 bg-white/90 p-5 text-center shadow-sm dark:border-slate-700 dark:bg-slate-800/75">
-
-            <span
-              className="block text-3xl font-extrabold text-[#0F766E] dark:text-teal-400"
-              style={{
-                textShadow:
-                  '0 1px 0 rgba(255,255,255,.8), 0 2px 3px rgba(15,118,110,.20)'
-              }}
-            >
-              14+
-            </span>
-
-            <span className="mt-1 text-xs font-semibold text-slate-600 dark:text-slate-300">
-              {isRTL ? t.yearsExpLabel : 'Years Experience'}
-            </span>
-          </div>
-
-          {/* MBA / BBA */}
-          <div className="flex min-h-[112px] flex-col items-center justify-center rounded-xl border border-slate-200/80 bg-white/90 p-5 text-center shadow-sm dark:border-slate-700 dark:bg-slate-800/75">
-
-            <span
-              className="block whitespace-nowrap text-2xl font-extrabold text-[#0F766E] dark:text-teal-400"
-              style={{
-                textShadow:
-                  '0 1px 0 rgba(255,255,255,.8), 0 2px 3px rgba(15,118,110,.20)'
-              }}
-            >
-              {isRTL ? t.mbaFinance : 'MBA / BBA'}
-            </span>
-
-            <span className="mt-1 text-xs font-semibold text-slate-600 dark:text-slate-300">
-              {isRTL ? t.mbaFinanceLabel : 'Accounting & Finance'}
-            </span>
-          </div>
-
-          {/* ZATCA */}
-          <div className="flex min-h-[112px] flex-col items-center justify-center rounded-xl border border-slate-200/80 bg-white/90 p-5 text-center shadow-sm dark:border-slate-700 dark:bg-slate-800/75">
-
-            <span
-              className="block text-3xl font-extrabold text-[#0F766E] dark:text-teal-400"
-              style={{
-                textShadow:
-                  '0 1px 0 rgba(255,255,255,.8), 0 2px 3px rgba(15,118,110,.20)'
-              }}
-            >
-              ZATCA
-            </span>
-
-            <span className="mt-1 text-xs font-semibold text-slate-600 dark:text-slate-300">
-              {isRTL
-                ? t.zatcaVatLabel
-                : 'VAT Reporting & Submission'}
-            </span>
           </div>
         </div>
       </div>
