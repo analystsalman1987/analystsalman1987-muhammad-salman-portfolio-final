@@ -10,7 +10,31 @@ const __dirname = path.dirname(__filename);
 export default defineConfig(() => {
   return {
     base: '/',
-    plugins: [react(), tailwindcss()],
+    plugins: [
+      react(),
+      tailwindcss(),
+      {
+        name: 'admin-auth-dev-api',
+        configureServer(server) {
+          server.middlewares.use(async (req, res, next) => {
+            const url = req.url ? req.url.split('?')[0] : '';
+            if (url === '/api/admin/login') {
+              const handler = (await import('./api/admin/login.ts')).default;
+              return handler(req, res);
+            }
+            if (url === '/api/admin/check') {
+              const handler = (await import('./api/admin/check.ts')).default;
+              return handler(req, res);
+            }
+            if (url === '/api/admin/logout') {
+              const handler = (await import('./api/admin/logout.ts')).default;
+              return handler(req, res);
+            }
+            next();
+          });
+        },
+      },
+    ],
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),

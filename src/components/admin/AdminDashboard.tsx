@@ -183,7 +183,7 @@ export function AdminDashboard({
                   Local Mode
                 </span>
               </div>
-              <p className="text-xs text-[#64748B] dark:text-slate-400">
+              <p className="text-xs text-slate-700 dark:text-slate-300 font-medium">
                 All changes immediately update the public website and persist in LocalStorage.
               </p>
             </div>
@@ -191,7 +191,7 @@ export function AdminDashboard({
 
           <div className="flex items-center gap-2">
             {saveStatus && (
-              <span className="text-xs font-semibold text-[#0F766E] dark:text-teal-400 bg-[#E6F4F1] dark:bg-teal-950/60 px-2.5 py-1 rounded-md animate-fade-in flex items-center gap-1">
+              <span className="text-xs font-semibold text-[#0F766E] dark:text-teal-400 bg-[#E6F4F1] dark:bg-teal-950/60 px-2.5 py-1 rounded-md animate-fade-in flex items-center gap-1 font-bold">
                 <Check className="w-3.5 h-3.5" />
                 <span>{saveStatus}</span>
               </span>
@@ -207,7 +207,7 @@ export function AdminDashboard({
 
             <button
               onClick={onLogout}
-              className="inline-flex items-center gap-1 px-3 py-2 text-xs font-medium rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1 px-3 py-2 text-xs font-semibold rounded-lg text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
               title="Logout from Admin"
             >
               <LogOut className="w-3.5 h-3.5" />
@@ -216,7 +216,7 @@ export function AdminDashboard({
 
             <button
               onClick={onClose}
-              className="p-2 text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 cursor-pointer"
+              className="p-2 text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>
@@ -246,8 +246,8 @@ export function AdminDashboard({
                 onClick={() => setActiveTab(tab.id as TabType)}
                 className={`flex items-center gap-2 px-4 py-3 text-xs font-semibold whitespace-nowrap border-b-2 transition-all cursor-pointer ${
                   isActive
-                    ? 'border-[#0F766E] text-[#0F766E] dark:text-teal-400 bg-[#E6F4F1]/60 dark:bg-teal-950/20'
-                    : 'border-transparent text-[#64748B] dark:text-slate-400 hover:text-[#0F2747] dark:hover:text-slate-200'
+                    ? 'border-[#0F766E] text-[#0F766E] dark:text-teal-400 bg-[#E6F4F1]/60 dark:bg-teal-950/20 font-bold'
+                    : 'border-transparent text-slate-700 dark:text-slate-300 hover:text-[#0F766E] dark:hover:text-teal-300'
                 }`}
               >
                 <Icon className="w-3.5 h-3.5" />
@@ -265,7 +265,7 @@ export function AdminDashboard({
             <div className="space-y-5 max-w-4xl">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
+                  <label className="block text-xs font-bold text-slate-800 dark:text-slate-200 mb-1">
                     Full Name
                   </label>
                   <input
@@ -277,12 +277,12 @@ export function AdminDashboard({
                         profile: { ...localData.profile, fullName: e.target.value },
                       })
                     }
-                    className="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
+                    className="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-500 dark:placeholder:text-slate-400 font-medium focus:outline-none focus:ring-1 focus:ring-[#0F766E]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
+                  <label className="block text-xs font-bold text-slate-800 dark:text-slate-200 mb-1">
                     Professional Title
                   </label>
                   <input
@@ -294,12 +294,12 @@ export function AdminDashboard({
                         profile: { ...localData.profile, professionalTitle: e.target.value },
                       })
                     }
-                    className="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
+                    className="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-500 dark:placeholder:text-slate-400 font-medium focus:outline-none focus:ring-1 focus:ring-[#0F766E]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
+                  <label className="block text-xs font-bold text-slate-800 dark:text-slate-200 mb-1">
                     Location
                   </label>
                   <input
@@ -311,12 +311,12 @@ export function AdminDashboard({
                         profile: { ...localData.profile, location: e.target.value },
                       })
                     }
-                    className="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
+                    className="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-500 dark:placeholder:text-slate-400 font-medium focus:outline-none focus:ring-1 focus:ring-[#0F766E]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
+                  <label className="block text-xs font-bold text-slate-800 dark:text-slate-200 mb-1">
                     Email Address
                   </label>
                   <input
@@ -328,12 +328,12 @@ export function AdminDashboard({
                         profile: { ...localData.profile, email: e.target.value },
                       })
                     }
-                    className="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
+                    className="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-500 dark:placeholder:text-slate-400 font-medium focus:outline-none focus:ring-1 focus:ring-[#0F766E]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
+                  <label className="block text-xs font-bold text-slate-800 dark:text-slate-200 mb-1">
                     Primary Phone (WhatsApp)
                   </label>
                   <input
@@ -345,12 +345,12 @@ export function AdminDashboard({
                         profile: { ...localData.profile, primaryPhone: e.target.value },
                       })
                     }
-                    className="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
+                    className="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-500 dark:placeholder:text-slate-400 font-medium focus:outline-none focus:ring-1 focus:ring-[#0F766E]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
+                  <label className="block text-xs font-bold text-slate-800 dark:text-slate-200 mb-1">
                     Alternative Phone
                   </label>
                   <input
@@ -362,12 +362,12 @@ export function AdminDashboard({
                         profile: { ...localData.profile, altPhone: e.target.value },
                       })
                     }
-                    className="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
+                    className="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-500 dark:placeholder:text-slate-400 font-medium focus:outline-none focus:ring-1 focus:ring-[#0F766E]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
+                  <label className="block text-xs font-bold text-slate-800 dark:text-slate-200 mb-1">
                     Driving License
                   </label>
                   <input
@@ -380,13 +380,13 @@ export function AdminDashboard({
                         profile: { ...localData.profile, drivingLicense: e.target.value },
                       })
                     }
-                    className="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
+                    className="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-500 dark:placeholder:text-slate-400 font-medium focus:outline-none focus:ring-1 focus:ring-[#0F766E]"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
+                <label className="block text-xs font-bold text-slate-800 dark:text-slate-200 mb-1">
                   Hero Section Introduction
                 </label>
                 <textarea
@@ -398,12 +398,12 @@ export function AdminDashboard({
                       profile: { ...localData.profile, heroIntro: e.target.value },
                     })
                   }
-                  className="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white resize-none"
+                  className="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-500 dark:placeholder:text-slate-400 font-medium focus:outline-none focus:ring-1 focus:ring-[#0F766E] resize-none"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
+                <label className="block text-xs font-bold text-slate-800 dark:text-slate-200 mb-1">
                   About Section Summary
                 </label>
                 <textarea
@@ -415,7 +415,7 @@ export function AdminDashboard({
                       profile: { ...localData.profile, summary: e.target.value },
                     })
                   }
-                  className="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white resize-none"
+                  className="w-full px-3 py-2 text-xs rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-500 dark:placeholder:text-slate-400 font-medium focus:outline-none focus:ring-1 focus:ring-[#0F766E] resize-none"
                 />
               </div>
 
@@ -437,12 +437,12 @@ export function AdminDashboard({
                 <h3 className="text-sm font-bold text-slate-900 dark:text-white">
                   Profile Photo Management
                 </h3>
-                <p className="text-xs text-slate-500 mt-1">
+                <p className="text-xs text-slate-700 dark:text-slate-300 font-medium mt-1">
                   Upload your professional headshot. Images are automatically compressed via client-side Canvas to fit comfortably within LocalStorage (~100KB limit).
                 </p>
               </div>
 
-              <div className="flex flex-col sm:flex-row items-center gap-6 p-6 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800">
+              <div className="flex flex-col sm:flex-row items-center gap-6 p-6 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 shadow-2xs">
                 {localData.profile.avatarUrl ? (
                   <img
                     src={localData.profile.avatarUrl}
@@ -452,7 +452,7 @@ export function AdminDashboard({
                 ) : (
                   <div className="w-36 h-36 rounded-xl bg-slate-900 text-emerald-400 border-2 border-dashed border-emerald-500/40 flex flex-col items-center justify-center text-center p-3">
                     <span className="text-3xl font-extrabold">MS</span>
-                    <span className="text-[10px] text-slate-400 mt-1">Default Initials Avatar</span>
+                    <span className="text-[10px] text-slate-300 mt-1 font-medium">Default Initials Avatar</span>
                   </div>
                 )}
 
@@ -467,20 +467,20 @@ export function AdminDashboard({
                   <div className="flex flex-wrap gap-2">
                     <button
                       onClick={() => fileInputRef.current?.click()}
-                      className="px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-xs"
+                      className="px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-xs cursor-pointer"
                     >
                       Upload New Photo
                     </button>
                     {localData.profile.avatarUrl && (
                       <button
                         onClick={handleRemovePhoto}
-                        className="px-4 py-2 rounded-lg bg-rose-50 dark:bg-rose-950 text-rose-600 dark:text-rose-300 border border-rose-200 dark:border-rose-900 text-xs font-bold hover:bg-rose-100"
+                        className="px-4 py-2 rounded-lg bg-rose-50 dark:bg-rose-950 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-900 text-xs font-bold hover:bg-rose-100 cursor-pointer"
                       >
                         Remove Photo
                       </button>
                     )}
                   </div>
-                  <p className="text-[11px] text-slate-500">
+                  <p className="text-xs text-slate-700 dark:text-slate-300 font-medium">
                     Supports JPG, PNG, WebP. If no photo is uploaded, the website cleanly renders the corporate "MS" initials badge.
                   </p>
                 </div>
@@ -496,7 +496,7 @@ export function AdminDashboard({
                   <h3 className="text-sm font-bold text-slate-900 dark:text-white">
                     Work Experience History ({localData.experience.length} records)
                   </h3>
-                  <p className="text-xs text-slate-500">
+                  <p className="text-xs text-slate-700 dark:text-slate-300 font-medium">
                     Edit roles, periods, companies, or add/remove responsibilities.
                   </p>
                 </div>
@@ -530,10 +530,10 @@ export function AdminDashboard({
                 {localData.experience.map((job, jIdx) => (
                   <div
                     key={job.id}
-                    className="p-5 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 space-y-4"
+                    className="p-5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-4 shadow-2xs"
                   >
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-extrabold text-emerald-700 dark:text-emerald-400">
+                      <span className="text-xs font-extrabold text-[#0F766E] dark:text-teal-400">
                         Position #{jIdx + 1}
                       </span>
                       <button
@@ -547,7 +547,7 @@ export function AdminDashboard({
                             onUpdateData(() => updated);
                           }
                         }}
-                        className="text-xs text-rose-600 hover:text-rose-700 flex items-center gap-1"
+                        className="text-xs text-rose-600 hover:text-rose-700 font-semibold flex items-center gap-1 cursor-pointer"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
                         <span>Delete</span>
@@ -556,7 +556,7 @@ export function AdminDashboard({
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
                       <div>
-                        <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-400 mb-1">
+                        <label className="block text-[11px] font-bold text-slate-800 dark:text-slate-200 mb-1">
                           Role Title
                         </label>
                         <input
@@ -567,12 +567,12 @@ export function AdminDashboard({
                             next[jIdx].role = e.target.value;
                             setLocalData({ ...localData, experience: next });
                           }}
-                          className="w-full px-2.5 py-1.5 text-xs rounded border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800"
+                          className="w-full px-2.5 py-1.5 text-xs rounded border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-500 dark:placeholder:text-slate-400 font-medium focus:outline-none focus:ring-1 focus:ring-[#0F766E]"
                         />
                       </div>
 
                       <div>
-                        <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-400 mb-1">
+                        <label className="block text-[11px] font-bold text-slate-800 dark:text-slate-200 mb-1">
                           Company
                         </label>
                         <input
@@ -583,12 +583,12 @@ export function AdminDashboard({
                             next[jIdx].company = e.target.value;
                             setLocalData({ ...localData, experience: next });
                           }}
-                          className="w-full px-2.5 py-1.5 text-xs rounded border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800"
+                          className="w-full px-2.5 py-1.5 text-xs rounded border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-500 dark:placeholder:text-slate-400 font-medium focus:outline-none focus:ring-1 focus:ring-[#0F766E]"
                         />
                       </div>
 
                       <div>
-                        <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-400 mb-1">
+                        <label className="block text-[11px] font-bold text-slate-800 dark:text-slate-200 mb-1">
                           Location
                         </label>
                         <input
@@ -599,12 +599,12 @@ export function AdminDashboard({
                             next[jIdx].location = e.target.value;
                             setLocalData({ ...localData, experience: next });
                           }}
-                          className="w-full px-2.5 py-1.5 text-xs rounded border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800"
+                          className="w-full px-2.5 py-1.5 text-xs rounded border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-500 dark:placeholder:text-slate-400 font-medium focus:outline-none focus:ring-1 focus:ring-[#0F766E]"
                         />
                       </div>
 
                       <div>
-                        <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-400 mb-1">
+                        <label className="block text-[11px] font-bold text-slate-800 dark:text-slate-200 mb-1">
                           Period
                         </label>
                         <input
@@ -615,14 +615,14 @@ export function AdminDashboard({
                             next[jIdx].period = e.target.value;
                             setLocalData({ ...localData, experience: next });
                           }}
-                          className="w-full px-2.5 py-1.5 text-xs rounded border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800"
+                          className="w-full px-2.5 py-1.5 text-xs rounded border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-500 dark:placeholder:text-slate-400 font-medium focus:outline-none focus:ring-1 focus:ring-[#0F766E]"
                         />
                       </div>
                     </div>
 
                     <div>
                       <div className="flex items-center justify-between mb-2">
-                        <label className="text-[11px] font-bold text-slate-600 dark:text-slate-400">
+                        <label className="text-[11px] font-bold text-slate-800 dark:text-slate-200">
                           Responsibilities ({job.responsibilities.length})
                         </label>
                         <button
@@ -631,7 +631,7 @@ export function AdminDashboard({
                             next[jIdx].responsibilities.push('New responsibility item');
                             setLocalData({ ...localData, experience: next });
                           }}
-                          className="text-[11px] text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-1"
+                          className="text-[11px] text-emerald-600 dark:text-emerald-400 font-bold flex items-center gap-1 cursor-pointer"
                         >
                           <Plus className="w-3 h-3" />
                           <span>Add Bullet</span>
@@ -649,7 +649,7 @@ export function AdminDashboard({
                                 next[jIdx].responsibilities[rIdx] = e.target.value;
                                 setLocalData({ ...localData, experience: next });
                               }}
-                              className="flex-1 px-2.5 py-1 text-xs rounded border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800"
+                              className="flex-1 px-2.5 py-1.5 text-xs rounded border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 font-medium focus:outline-none focus:ring-1 focus:ring-[#0F766E]"
                             />
                             <button
                               onClick={() => {
@@ -657,7 +657,7 @@ export function AdminDashboard({
                                 next[jIdx].responsibilities.splice(rIdx, 1);
                                 setLocalData({ ...localData, experience: next });
                               }}
-                              className="text-slate-400 hover:text-rose-600 p-1"
+                              className="text-slate-500 hover:text-rose-600 p-1 cursor-pointer"
                             >
                               <X className="w-3.5 h-3.5" />
                             </button>
@@ -679,7 +679,7 @@ export function AdminDashboard({
                   <h3 className="text-sm font-bold text-slate-900 dark:text-white">
                     Core Professional Expertise Cards ({localData.expertise.length})
                   </h3>
-                  <p className="text-xs text-slate-500">
+                  <p className="text-xs text-slate-700 dark:text-slate-300 font-medium">
                     Add, edit, or categorize your accounting competencies.
                   </p>
                 </div>
@@ -699,7 +699,7 @@ export function AdminDashboard({
                     setLocalData(updated);
                     onUpdateData(() => updated);
                   }}
-                  className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-emerald-600 text-white text-xs font-bold"
+                  className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-emerald-600 text-white text-xs font-bold hover:bg-emerald-700"
                 >
                   <Plus className="w-3.5 h-3.5" />
                   <span>Add Competency</span>
@@ -710,7 +710,7 @@ export function AdminDashboard({
                 {localData.expertise.map((item, idx) => (
                   <div
                     key={item.id}
-                    className="p-3.5 rounded-lg bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 space-y-2"
+                    className="p-3.5 rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-2 shadow-2xs"
                   >
                     <div className="flex items-center justify-between gap-2">
                       <input
@@ -721,7 +721,7 @@ export function AdminDashboard({
                           next[idx].title = e.target.value;
                           setLocalData({ ...localData, expertise: next });
                         }}
-                        className="font-bold text-xs px-2 py-1 rounded border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 flex-1"
+                        className="font-bold text-xs px-2.5 py-1.5 rounded border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-500 dark:placeholder:text-slate-400 focus:outline-none focus:ring-1 focus:ring-[#0F766E] flex-1"
                       />
                       <select
                         value={item.category}
@@ -730,7 +730,7 @@ export function AdminDashboard({
                           next[idx].category = e.target.value as any;
                           setLocalData({ ...localData, expertise: next });
                         }}
-                        className="text-[11px] px-2 py-1 rounded border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800"
+                        className="text-xs font-semibold px-2 py-1.5 rounded border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-1 focus:ring-[#0F766E]"
                       >
                         <option value="accounting">Accounting</option>
                         <option value="finance">Finance</option>
@@ -746,7 +746,7 @@ export function AdminDashboard({
                           setLocalData(updated);
                           onUpdateData(() => updated);
                         }}
-                        className="text-slate-400 hover:text-rose-600 p-1"
+                        className="text-slate-500 hover:text-rose-600 p-1 cursor-pointer"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
                       </button>
@@ -761,7 +761,7 @@ export function AdminDashboard({
                         setLocalData({ ...localData, expertise: next });
                       }}
                       placeholder="Brief description..."
-                      className="w-full text-[11px] px-2 py-1 rounded border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300"
+                      className="w-full text-xs px-2.5 py-1.5 rounded border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-500 dark:placeholder:text-slate-400 font-medium focus:outline-none focus:ring-1 focus:ring-[#0F766E]"
                     />
                   </div>
                 ))}
@@ -779,7 +779,7 @@ export function AdminDashboard({
                 {localData.skills.map((cat, cIdx) => (
                   <div
                     key={cat.id}
-                    className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 space-y-3"
+                    className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-3 shadow-2xs"
                   >
                     <div className="flex items-center justify-between">
                       <span className="text-xs font-bold text-slate-900 dark:text-white">
@@ -791,7 +791,7 @@ export function AdminDashboard({
                       {cat.skills.map((s, sIdx) => (
                         <span
                           key={sIdx}
-                          className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-[11px] bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700"
+                          className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-semibold bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 border border-slate-300 dark:border-slate-600 shadow-2xs"
                         >
                           <span>{s}</span>
                           <button
@@ -800,7 +800,7 @@ export function AdminDashboard({
                               next[cIdx].skills.splice(sIdx, 1);
                               setLocalData({ ...localData, skills: next });
                             }}
-                            className="text-slate-400 hover:text-rose-600"
+                            className="text-slate-400 hover:text-rose-600 cursor-pointer"
                           >
                             <X className="w-3 h-3" />
                           </button>
@@ -813,7 +813,7 @@ export function AdminDashboard({
                         type="text"
                         placeholder="Add skill..."
                         id={`add-skill-${cIdx}`}
-                        className="flex-1 px-2.5 py-1 text-xs rounded border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800"
+                        className="flex-1 px-2.5 py-1.5 text-xs rounded border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-500 dark:placeholder:text-slate-400 font-medium focus:outline-none focus:ring-1 focus:ring-[#0F766E]"
                         onKeyDown={(e) => {
                           if (e.key === 'Enter') {
                             const val = (e.target as HTMLInputElement).value.trim();
@@ -841,7 +841,7 @@ export function AdminDashboard({
                   <h3 className="text-sm font-bold text-slate-900 dark:text-white">
                     ERP & Software Systems
                   </h3>
-                  <p className="text-xs text-slate-500">
+                  <p className="text-xs text-slate-700 dark:text-slate-300 font-medium">
                     Manage software tool cards (Oracle, QuickBooks, SMACC, Delta Financial, Excel, Office).
                   </p>
                 </div>
@@ -851,11 +851,11 @@ export function AdminDashboard({
                 {localData.software.map((sw, idx) => (
                   <div
                     key={sw.id}
-                    className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 space-y-2.5"
+                    className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-2.5 shadow-2xs"
                   >
                     <div className="grid grid-cols-2 gap-2">
                       <div>
-                        <label className="text-[10px] font-bold text-slate-500 uppercase">Software Name</label>
+                        <label className="text-[11px] font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider block mb-1">Software Name</label>
                         <input
                           type="text"
                           value={sw.name}
@@ -864,11 +864,11 @@ export function AdminDashboard({
                             next[idx].name = e.target.value;
                             setLocalData({ ...localData, software: next });
                           }}
-                          className="w-full text-xs font-bold px-2 py-1 rounded border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800"
+                          className="w-full text-xs font-bold px-2.5 py-1.5 rounded border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-500 dark:placeholder:text-slate-400 focus:outline-none focus:ring-1 focus:ring-[#0F766E]"
                         />
                       </div>
                       <div>
-                        <label className="text-[10px] font-bold text-slate-500 uppercase">Category</label>
+                        <label className="text-[11px] font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider block mb-1">Category</label>
                         <input
                           type="text"
                           value={sw.category}
@@ -877,13 +877,13 @@ export function AdminDashboard({
                             next[idx].category = e.target.value;
                             setLocalData({ ...localData, software: next });
                           }}
-                          className="w-full text-xs px-2 py-1 rounded border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800"
+                          className="w-full text-xs px-2.5 py-1.5 rounded border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-500 dark:placeholder:text-slate-400 font-medium focus:outline-none focus:ring-1 focus:ring-[#0F766E]"
                         />
                       </div>
                     </div>
 
                     <div>
-                      <label className="text-[10px] font-bold text-slate-500 uppercase">Description</label>
+                      <label className="text-[11px] font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider block mb-1">Description</label>
                       <textarea
                         rows={2}
                         value={sw.description}
@@ -892,7 +892,7 @@ export function AdminDashboard({
                           next[idx].description = e.target.value;
                           setLocalData({ ...localData, software: next });
                         }}
-                        className="w-full text-xs px-2 py-1 rounded border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 resize-none"
+                        className="w-full text-xs px-2.5 py-1.5 rounded border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-500 dark:placeholder:text-slate-400 font-medium focus:outline-none focus:ring-1 focus:ring-[#0F766E] resize-none"
                       />
                     </div>
                   </div>
@@ -908,7 +908,7 @@ export function AdminDashboard({
                 <h3 className="text-sm font-bold text-slate-900 dark:text-white">
                   Education Background
                 </h3>
-                <p className="text-xs text-slate-500">
+                <p className="text-xs text-slate-700 dark:text-slate-300 font-medium">
                   MBA & BBA degrees. (Institutions remain blank unless you choose to specify them).
                 </p>
               </div>
@@ -917,11 +917,11 @@ export function AdminDashboard({
                 {localData.education.map((edu, idx) => (
                   <div
                     key={edu.id}
-                    className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 space-y-3"
+                    className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-3 shadow-2xs"
                   >
                     <div className="grid grid-cols-2 gap-3">
                       <div>
-                        <label className="text-[10px] font-bold text-slate-500 uppercase">Degree</label>
+                        <label className="text-[11px] font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider block mb-1">Degree</label>
                         <input
                           type="text"
                           value={edu.degree}
@@ -930,11 +930,11 @@ export function AdminDashboard({
                             next[idx].degree = e.target.value;
                             setLocalData({ ...localData, education: next });
                           }}
-                          className="w-full text-xs font-bold px-2 py-1.5 rounded border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800"
+                          className="w-full text-xs font-bold px-2.5 py-1.5 rounded border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-500 dark:placeholder:text-slate-400 focus:outline-none focus:ring-1 focus:ring-[#0F766E]"
                         />
                       </div>
                       <div>
-                        <label className="text-[10px] font-bold text-slate-500 uppercase">Specialization</label>
+                        <label className="text-[11px] font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider block mb-1">Specialization</label>
                         <input
                           type="text"
                           value={edu.specialization}
@@ -943,14 +943,14 @@ export function AdminDashboard({
                             next[idx].specialization = e.target.value;
                             setLocalData({ ...localData, education: next });
                           }}
-                          className="w-full text-xs px-2 py-1.5 rounded border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800"
+                          className="w-full text-xs px-2.5 py-1.5 rounded border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-500 dark:placeholder:text-slate-400 font-medium focus:outline-none focus:ring-1 focus:ring-[#0F766E]"
                         />
                       </div>
                     </div>
 
                     <div className="grid grid-cols-2 gap-3">
                       <div>
-                        <label className="text-[10px] font-bold text-slate-500 uppercase">Period</label>
+                        <label className="text-[11px] font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider block mb-1">Period</label>
                         <input
                           type="text"
                           value={edu.period}
@@ -959,11 +959,11 @@ export function AdminDashboard({
                             next[idx].period = e.target.value;
                             setLocalData({ ...localData, education: next });
                           }}
-                          className="w-full text-xs px-2 py-1.5 rounded border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800"
+                          className="w-full text-xs px-2.5 py-1.5 rounded border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-500 dark:placeholder:text-slate-400 font-medium focus:outline-none focus:ring-1 focus:ring-[#0F766E]"
                         />
                       </div>
                       <div>
-                        <label className="text-[10px] font-bold text-slate-500 uppercase">Institution (Optional)</label>
+                        <label className="text-[11px] font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider block mb-1">Institution (Optional)</label>
                         <input
                           type="text"
                           placeholder="Leave blank or specify..."
@@ -973,7 +973,7 @@ export function AdminDashboard({
                             next[idx].institution = e.target.value;
                             setLocalData({ ...localData, education: next });
                           }}
-                          className="w-full text-xs px-2 py-1.5 rounded border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800"
+                          className="w-full text-xs px-2.5 py-1.5 rounded border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-500 dark:placeholder:text-slate-400 font-medium focus:outline-none focus:ring-1 focus:ring-[#0F766E]"
                         />
                       </div>
                     </div>
@@ -993,7 +993,7 @@ export function AdminDashboard({
                 {localData.languages.map((lang, idx) => (
                   <div
                     key={lang.id}
-                    className="p-3.5 rounded-lg bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 flex items-center gap-3"
+                    className="p-3.5 rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 flex items-center gap-3 shadow-2xs"
                   >
                     <input
                       type="text"
@@ -1003,7 +1003,7 @@ export function AdminDashboard({
                         next[idx].name = e.target.value;
                         setLocalData({ ...localData, languages: next });
                       }}
-                      className="font-bold text-xs px-2 py-1 rounded border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 w-32"
+                      className="font-bold text-xs px-2.5 py-1.5 rounded border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-1 focus:ring-[#0F766E] w-32"
                     />
                     <input
                       type="text"
@@ -1014,7 +1014,7 @@ export function AdminDashboard({
                         setLocalData({ ...localData, languages: next });
                       }}
                       placeholder="Notes / Proficiency..."
-                      className="text-xs px-2 py-1 rounded border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 flex-1"
+                      className="text-xs px-2.5 py-1.5 rounded border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 placeholder:text-slate-500 dark:placeholder:text-slate-400 font-medium focus:outline-none focus:ring-1 focus:ring-[#0F766E] flex-1"
                     />
                   </div>
                 ))}
@@ -1029,15 +1029,15 @@ export function AdminDashboard({
                 <h3 className="text-sm font-bold text-slate-900 dark:text-white">
                   Section Visibility Controls
                 </h3>
-                <p className="text-xs text-slate-500">
+                <p className="text-xs text-slate-700 dark:text-slate-300 font-medium">
                   Toggle any section on or off on the public website.
                 </p>
               </div>
 
-              <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 divide-y divide-slate-200 dark:divide-slate-800">
+              <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 divide-y divide-slate-200 dark:divide-slate-700 shadow-2xs">
                 {Object.entries(localData.settings.sectionVisibility).map(([key, isVisible]) => (
                   <div key={key} className="py-2.5 flex items-center justify-between">
-                    <span className="text-xs font-bold text-slate-700 dark:text-slate-300 capitalize">
+                    <span className="text-xs font-bold text-slate-900 dark:text-slate-100 capitalize">
                       {key} Section
                     </span>
                     <label className="relative inline-flex items-center cursor-pointer">
@@ -1076,7 +1076,7 @@ export function AdminDashboard({
                   <h3 className="text-sm font-bold text-slate-900 dark:text-white">
                     Contact Inquiries Inbox ({messages.length})
                   </h3>
-                  <p className="text-xs text-slate-500">
+                  <p className="text-xs text-slate-700 dark:text-slate-300 font-medium">
                     Messages submitted through the public contact form stored in your browser storage.
                   </p>
                 </div>
@@ -1088,7 +1088,7 @@ export function AdminDashboard({
                         onClearMessages();
                       }
                     }}
-                    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-semibold text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/60 border border-rose-200 dark:border-rose-900 hover:bg-rose-100"
+                    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-semibold text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/60 border border-rose-200 dark:border-rose-900 hover:bg-rose-100 cursor-pointer"
                   >
                     <Trash2 className="w-3.5 h-3.5" />
                     <span>Clear Inbox</span>
@@ -1097,7 +1097,7 @@ export function AdminDashboard({
               </div>
 
               {messages.length === 0 ? (
-                <div className="p-12 text-center rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 text-slate-500 text-xs">
+                <div className="p-12 text-center rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs font-medium">
                   No inquiries received yet. When visitors fill in the contact form, messages appear here.
                 </div>
               ) : (
@@ -1105,28 +1105,28 @@ export function AdminDashboard({
                   {messages.map((msg) => (
                     <div
                       key={msg.id}
-                      className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 space-y-2"
+                      className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-2 shadow-2xs"
                     >
                       <div className="flex items-center justify-between text-xs">
                         <div className="flex items-center gap-2">
                           <span className="font-bold text-slate-900 dark:text-white">
                             {msg.name}
                           </span>
-                          <span className="text-slate-400">•</span>
+                          <span className="text-slate-500">•</span>
                           <a
                             href={`mailto:${msg.email}`}
-                            className="text-emerald-600 dark:text-emerald-400 hover:underline"
+                            className="text-emerald-700 dark:text-emerald-400 font-semibold hover:underline"
                           >
                             {msg.email}
                           </a>
                         </div>
                         <div className="flex items-center gap-3">
-                          <span className="text-[11px] text-slate-400">
+                          <span className="text-[11px] font-medium text-slate-600 dark:text-slate-400">
                             {new Date(msg.createdAt).toLocaleString()}
                           </span>
                           <button
                             onClick={() => onDeleteMessage(msg.id)}
-                            className="text-slate-400 hover:text-rose-600"
+                            className="text-slate-500 hover:text-rose-600 cursor-pointer"
                             title="Delete Message"
                           >
                             <Trash2 className="w-3.5 h-3.5" />
@@ -1135,12 +1135,12 @@ export function AdminDashboard({
                       </div>
 
                       {msg.subject && (
-                        <div className="text-xs font-semibold text-slate-700 dark:text-slate-300">
+                        <div className="text-xs font-bold text-slate-800 dark:text-slate-200">
                           Subject: {msg.subject}
                         </div>
                       )}
 
-                      <p className="text-xs text-slate-600 dark:text-slate-300 whitespace-pre-wrap bg-white dark:bg-slate-900 p-3 rounded-lg border border-slate-200 dark:border-slate-800">
+                      <p className="text-xs text-slate-800 dark:text-slate-200 whitespace-pre-wrap bg-white dark:bg-slate-900 p-3 rounded-lg border border-slate-200 dark:border-slate-800 font-medium">
                         {msg.message}
                       </p>
                     </div>
@@ -1157,24 +1157,24 @@ export function AdminDashboard({
                 <h3 className="text-sm font-bold text-slate-900 dark:text-white">
                   Backup, Restore & Reset
                 </h3>
-                <p className="text-xs text-slate-500">
+                <p className="text-xs text-slate-700 dark:text-slate-300 font-medium">
                   Export your website configuration as JSON, import previous backups, or restore original CV information.
                 </p>
               </div>
 
               {/* Export Block */}
-              <div className="p-5 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 flex items-center justify-between gap-4">
+              <div className="p-5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 flex items-center justify-between gap-4 shadow-2xs">
                 <div>
                   <h4 className="text-xs font-bold text-slate-900 dark:text-white">
                     Export Website Data (JSON)
                   </h4>
-                  <p className="text-[11px] text-slate-500 mt-0.5">
+                  <p className="text-xs text-slate-700 dark:text-slate-300 mt-1 font-medium">
                     Download a complete JSON snapshot of all profile content, jobs, skills, and settings.
                   </p>
                 </div>
                 <button
                   onClick={handleExport}
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-xs whitespace-nowrap"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-xs whitespace-nowrap cursor-pointer"
                 >
                   <Download className="w-3.5 h-3.5" />
                   <span>Download Backup</span>
@@ -1182,13 +1182,13 @@ export function AdminDashboard({
               </div>
 
               {/* Import Block */}
-              <div className="p-5 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 space-y-3">
+              <div className="p-5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 space-y-3 shadow-2xs">
                 <div className="flex items-center justify-between gap-4">
                   <div>
                     <h4 className="text-xs font-bold text-slate-900 dark:text-white">
                       Import Backup Data (JSON)
                     </h4>
-                    <p className="text-[11px] text-slate-500 mt-0.5">
+                    <p className="text-xs text-slate-700 dark:text-slate-300 mt-1 font-medium">
                       Upload a previously exported JSON file to restore all website content.
                     </p>
                   </div>
@@ -1201,7 +1201,7 @@ export function AdminDashboard({
                   />
                   <button
                     onClick={() => importFileRef.current?.click()}
-                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold shadow-xs whitespace-nowrap"
+                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 dark:bg-slate-700 dark:hover:bg-slate-600 text-white text-xs font-bold shadow-xs whitespace-nowrap cursor-pointer"
                   >
                     <Upload className="w-3.5 h-3.5" />
                     <span>Select JSON File</span>
@@ -1209,14 +1209,14 @@ export function AdminDashboard({
                 </div>
 
                 {importSuccess && (
-                  <div className="p-2.5 rounded bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 text-xs font-semibold flex items-center gap-2">
+                  <div className="p-2.5 rounded bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-200 text-xs font-bold flex items-center gap-2 border border-emerald-200 dark:border-emerald-800">
                     <Check className="w-4 h-4" />
                     <span>Backup restored successfully!</span>
                   </div>
                 )}
 
                 {importError && (
-                  <div className="p-2.5 rounded bg-rose-50 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 text-xs font-semibold flex items-center gap-2">
+                  <div className="p-2.5 rounded bg-rose-50 dark:bg-rose-950/60 text-rose-800 dark:text-rose-200 text-xs font-bold flex items-center gap-2 border border-rose-200 dark:border-rose-800">
                     <AlertTriangle className="w-4 h-4" />
                     <span>{importError}</span>
                   </div>
@@ -1224,18 +1224,18 @@ export function AdminDashboard({
               </div>
 
               {/* Reset to Default Block */}
-              <div className="p-5 rounded-xl bg-rose-50/50 dark:bg-rose-950/20 border border-rose-200 dark:border-rose-900/50 flex items-center justify-between gap-4">
+              <div className="p-5 rounded-xl bg-rose-50/70 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-900/60 flex items-center justify-between gap-4 shadow-2xs">
                 <div>
                   <h4 className="text-xs font-bold text-rose-900 dark:text-rose-200">
                     Reset to Default Data
                   </h4>
-                  <p className="text-[11px] text-rose-700 dark:text-rose-300 mt-0.5">
+                  <p className="text-xs text-rose-800 dark:text-rose-300 mt-1 font-medium">
                     Restores the original authentic CV details of Muhammad Salman provided in the specification.
                   </p>
                 </div>
                 <button
                   onClick={() => setShowResetConfirm(true)}
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold shadow-xs whitespace-nowrap"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold shadow-xs whitespace-nowrap cursor-pointer"
                 >
                   <RotateCcw className="w-3.5 h-3.5" />
                   <span>Reset to Default</span>

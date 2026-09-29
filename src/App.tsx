@@ -1,8 +1,7 @@
-// Quota Test
 import { useState, useEffect } from 'react';
 import { useAppData } from './hooks/useAppData';
 import { useTheme } from './hooks/useTheme';
-import { storageService } from './services/storageService';
+import { adminAuthClient } from './services/adminAuthClient';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { Highlights } from './components/Highlights';
@@ -17,6 +16,7 @@ import { CVModal } from './components/CVModal';
 import { AdminLogin } from './components/admin/AdminLogin';
 import { AdminDashboard } from './components/admin/AdminDashboard';
 import { DEFAULT_APP_DATA } from './data/defaultData';
+import { Loader2 } from 'lucide-react';
 
 export default function App() {
   const { 
@@ -33,7 +33,8 @@ export default function App() {
 
   // Navigation & CV Modal state
   const [isCVOpen, setIsCVOpen] = useState(false);
-  const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(() => storageService.isAdminLoggedIn());
+  const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false);
+  const [isCheckingAuth, setIsCheckingAuth] = useState(false);
 
   const checkIsAdminRoute = () => {
     if (typeof window === 'undefined') return false;
@@ -53,6 +54,28 @@ export default function App() {
   const [currentRoute, setCurrentRoute] = useState<'home' | 'admin'>(() => {
     return checkIsAdminRoute() ? 'admin' : 'home';
   });
+
+  // Verify server session whenever on admin route
+  useEffect(() => {
+    let isMounted = true;
+    if (currentRoute === 'admin') {
+      setIsCheckingAuth(true);
+      adminAuthClient.checkAuth().then((authenticated) => {
+        if (isMounted) {
+          setIsAdminLoggedIn(authenticated);
+          setIsCheckingAuth(false);
+        }
+      }).catch(() => {
+        if (isMounted) {
+          setIsAdminLoggedIn(false);
+          setIsCheckingAuth(false);
+        }
+      });
+    }
+    return () => {
+      isMounted = false;
+    };
+  }, [currentRoute]);
 
   // State for Experience main navigation selection & subtle background test effect
   const [isExperienceSelected, setIsExperienceSelected] = useState<boolean>(() => {
@@ -109,16 +132,6 @@ export default function App() {
     };
   }, [currentRoute]);
 
-  const navigateToAdmin = () => {
-    setCurrentRoute('admin');
-    try {
-      window.history.pushState({ route: 'admin' }, '', '/admin');
-    } catch {
-      window.location.hash = '#admin';
-    }
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   const navigateToHome = () => {
     setCurrentRoute('home');
     try {
@@ -133,14 +146,28 @@ export default function App() {
     setIsAdminLoggedIn(true);
   };
 
-  const handleAdminLogout = () => {
-    storageService.logoutAdmin();
+  const handleAdminLogout = async () => {
+    await adminAuthClient.logout();
     setIsAdminLoggedIn(false);
     navigateToHome();
   };
 
   // If on /admin route: render dedicated Admin View directly
   if (currentRoute === 'admin') {
+    if (isCheckingAuth) {
+      return (
+        <div className="min-h-screen bg-slate-100 dark:bg-slate-950 flex flex-col items-center justify-center p-4">
+          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-slate-900 to-emerald-950 text-emerald-400 font-bold flex items-center justify-center text-lg border border-emerald-500/30 mb-4 shadow-md">
+            MS
+          </div>
+          <div className="flex items-center gap-2 text-xs font-semibold text-slate-600 dark:text-slate-300">
+            <Loader2 className="w-4 h-4 animate-spin text-[#0F766E] dark:text-teal-400" />
+            <span>Verifying admin security session...</span>
+          </div>
+        </div>
+      );
+    }
+
     return (
       <div className="min-h-screen bg-slate-100 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-200">
         {isAdminLoggedIn ? (
@@ -197,8 +224,6 @@ export default function App() {
         currentTheme={theme}
         onThemeChange={setTheme}
         onOpenCV={() => setIsCVOpen(true)}
-        onOpenAdmin={navigateToAdmin}
-        isAdminLoggedIn={isAdminLoggedIn}
         isExperienceSelected={isExperienceSelected}
         onSelectNav={handleNavSelect}
       />
@@ -263,7 +288,6 @@ export default function App() {
       {/* Corporate Footer */}
       <Footer
         profile={profile}
-        onOpenAdmin={navigateToAdmin}
         onOpenCV={() => setIsCVOpen(true)}
       />
 

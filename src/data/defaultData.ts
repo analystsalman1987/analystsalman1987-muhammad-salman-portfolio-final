@@ -466,7 +466,6 @@ export const DEFAULT_APP_DATA: AppData = {
   ],
   settings: {
     theme: 'light',
-    adminPin: '@Hmed726726',
     sectionVisibility: {
       hero: true,
       about: true,

@@ -5,11 +5,10 @@ import { ARABIC_TRANSLATIONS } from '../data/arabicData';
 
 interface FooterProps {
   profile: ProfileInfo;
-  onOpenAdmin: () => void;
   onOpenCV: () => void;
 }
 
-export function Footer({ profile, onOpenAdmin, onOpenCV }: FooterProps) {
+export function Footer({ profile, onOpenCV }: FooterProps) {
   const currentYear = new Date().getFullYear();
   const { isRTL } = useLanguage();
   const t = ARABIC_TRANSLATIONS.footer;
@@ -93,18 +92,6 @@ export function Footer({ profile, onOpenAdmin, onOpenCV }: FooterProps) {
               <li>
                 <a href="#software" className="hover:text-teal-300 dark:hover:text-[#0F766E] transition-colors">
                   {isRTL ? t.softwareLink : 'ERP & Accounting Software'}
-                </a>
-              </li>
-              <li>
-                <a
-                  href="/admin"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    onOpenAdmin();
-                  }}
-                  className="text-slate-400 dark:text-[#475569] hover:text-teal-300 dark:hover:text-[#0F766E] transition-colors text-start flex items-center gap-1 cursor-pointer"
-                >
-                  <span>{isRTL ? t.adminLink : 'Admin Panel'}</span>
                 </a>
               </li>
             </ul>

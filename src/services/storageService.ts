@@ -3,7 +3,6 @@ import { DEFAULT_APP_DATA } from '../data/defaultData';
 
 const STORAGE_KEY = 'ms_accountant_profile_v1';
 const MESSAGES_KEY = 'ms_accountant_messages_v1';
-const ADMIN_SESSION_KEY = 'ms_admin_authenticated';
 
 type StorageListener = (data: AppData) => void;
 const listeners: Set<StorageListener> = new Set();
@@ -59,15 +58,10 @@ export const storageService = {
           settings: {
             ...DEFAULT_APP_DATA.settings,
             ...(parsed.settings || {}),
-            adminPin: '@Hmed726726',
           },
         };
         this.saveAppData(upgraded);
         return upgraded;
-      }
-      if (parsed.settings?.adminPin === 'admin123') {
-        parsed.settings.adminPin = '@Hmed726726';
-        this.saveAppData(parsed);
       }
       if (parsed.profile?.heroIntro && parsed.profile.heroIntro.includes('specializing in financial')) {
         parsed.profile.heroIntro = DEFAULT_APP_DATA.profile.heroIntro;
@@ -173,34 +167,6 @@ export const storageService = {
 
   clearAllMessages(): void {
     safeStorage.removeItem(MESSAGES_KEY);
-  },
-
-  // Admin Session management
-  isAdminLoggedIn(): boolean {
-    return safeStorage.getItem(ADMIN_SESSION_KEY) === 'true';
-  },
-
-  loginAdmin(pin: string, correctPin: string = '@Hmed726726'): boolean {
-    const entered = pin.trim();
-    if (entered === '@Hmed726726' || entered === '[@Hmed726726]') {
-      safeStorage.setItem(ADMIN_SESSION_KEY, 'true');
-      return true;
-    }
-    const appData = this.getAppData();
-    const configuredPin = appData.settings?.adminPin;
-    if (configuredPin && configuredPin !== 'admin123' && (entered === configuredPin.trim() || entered === `[${configuredPin.trim()}]`)) {
-      safeStorage.setItem(ADMIN_SESSION_KEY, 'true');
-      return true;
-    }
-    if (correctPin && correctPin !== 'admin123' && entered === correctPin.trim()) {
-      safeStorage.setItem(ADMIN_SESSION_KEY, 'true');
-      return true;
-    }
-    return false;
-  },
-
-  logoutAdmin(): void {
-    safeStorage.removeItem(ADMIN_SESSION_KEY);
   },
 
   // Helper to compress an uploaded image via Canvas to fit safely inside localStorage

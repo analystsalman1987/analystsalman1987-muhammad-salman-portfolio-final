@@ -5,7 +5,6 @@ import {
   X, 
   Sun, 
   Moon, 
-  Lock, 
   ChevronRight
 } from 'lucide-react';
 import { ThemeMode } from '../types';
@@ -16,8 +15,6 @@ interface NavbarProps {
   currentTheme: ThemeMode;
   onThemeChange: (theme: ThemeMode) => void;
   onOpenCV: () => void;
-  onOpenAdmin: () => void;
-  isAdminLoggedIn?: boolean;
   isExperienceSelected?: boolean;
   onSelectNav?: (href: string) => void;
 }
@@ -26,8 +23,6 @@ export function Navbar({
   currentTheme,
   onThemeChange,
   onOpenCV,
-  onOpenAdmin,
-  isAdminLoggedIn = false,
   isExperienceSelected = false,
   onSelectNav,
 }: NavbarProps) {
@@ -177,24 +172,6 @@ export function Navbar({
               <FileText className="w-3.5 h-3.5" />
               <span>{isRTL ? ARABIC_TRANSLATIONS.nav.cv : 'CV / Resume'}</span>
             </button>
-
-            {/* Admin button */}
-            <a
-              href="/admin"
-              onClick={(e) => {
-                e.preventDefault();
-                onOpenAdmin();
-              }}
-              className={`inline-flex items-center gap-1.5 px-3 py-2 text-xs font-medium rounded-lg transition-all border cursor-pointer ${
-                isAdminLoggedIn
-                  ? 'bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 border-amber-300 dark:border-amber-700'
-                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800'
-              }`}
-              title="Admin Panel"
-            >
-              <Lock className="w-3.5 h-3.5" />
-              <span>{isAdminLoggedIn ? (isRTL ? 'المشرف نشط' : 'Admin Active') : (isRTL ? ARABIC_TRANSLATIONS.nav.admin : 'Admin')}</span>
-            </a>
           </div>
 
           {/* Mobile buttons: Language switch + Theme + Hamburger */}
@@ -362,7 +339,7 @@ export function Navbar({
             </div>
           </div>
 
-          <div className="pt-3 border-t border-slate-200 dark:border-slate-800 flex flex-col gap-2.5">
+          <div className="pt-3 border-t border-slate-200 dark:border-slate-800">
             <button
               onClick={() => {
                 setMobileMenuOpen(false);
@@ -373,19 +350,6 @@ export function Navbar({
               <FileText className="w-4 h-4" />
               <span>{isRTL ? 'عرض وتحميل السيرة الذاتية' : 'View & Download CV'}</span>
             </button>
-
-            <a
-              href="/admin"
-              onClick={(e) => {
-                e.preventDefault();
-                setMobileMenuOpen(false);
-                onOpenAdmin();
-              }}
-              className="w-full flex items-center justify-center gap-2 px-4 py-2 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
-            >
-              <Lock className="w-4 h-4" />
-              <span>{isAdminLoggedIn ? (isRTL ? 'فتح لوحة الإدارة' : 'Open Admin Dashboard') : (isRTL ? 'تسجيل دخول الإدارة' : 'Admin Login')}</span>
-            </a>
           </div>
         </div>
       )}
