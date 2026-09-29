@@ -10,9 +10,9 @@ type Category =
 interface SoftwareItem {
   name: string;
   category: Category;
-  logo?: string;
+  logo: string;
   fallback: string;
-  brandColor: string;
+  nameColor: string;
 }
 
 const softwareItems: SoftwareItem[] = [
@@ -21,72 +21,77 @@ const softwareItems: SoftwareItem[] = [
     category: "ERP",
     logo: "/images/software/oracle-logo.svg",
     fallback: "OFIS",
-    brandColor: "text-slate-900 dark:text-slate-100",
+    nameColor: "text-slate-900 dark:text-white",
   },
   {
     name: "QuickBooks",
     category: "Accounting",
     logo: "/images/software/quickbooks-logo.svg",
     fallback: "QuickBooks",
-    brandColor: "text-green-700 dark:text-green-400",
+    nameColor: "text-green-700 dark:text-green-400",
   },
   {
     name: "Arqami",
     category: "ERP",
+    logo: "/images/software/arqami-logo.png",
     fallback: "ARQAMI",
-    brandColor: "text-sky-700 dark:text-sky-400",
+    nameColor: "text-blue-800 dark:text-blue-300",
   },
   {
     name: "Delta Financial",
     category: "Financial",
     logo: "/images/software/delta-logo.svg",
     fallback: "DELTA",
-    brandColor: "text-indigo-700 dark:text-indigo-400",
+    nameColor: "text-indigo-700 dark:text-indigo-300",
   },
   {
     name: "SMACC",
     category: "ERP",
     logo: "/images/software/smacc-logo.png",
     fallback: "SMACC",
-    brandColor: "text-blue-700 dark:text-blue-400",
+    nameColor: "text-blue-700 dark:text-blue-300",
   },
   {
     name: "Daftra",
     category: "Cloud",
+    logo: "/images/software/daftra-logo.png",
     fallback: "DAFTRA",
-    brandColor: "text-blue-700 dark:text-blue-400",
+    nameColor: "text-blue-700 dark:text-blue-300",
   },
   {
     name: "Qoyod",
     category: "Cloud",
+    logo: "/images/software/qoyod-logo.png",
     fallback: "QOYOD",
-    brandColor: "text-blue-900 dark:text-blue-300",
+    nameColor: "text-blue-900 dark:text-blue-300",
   },
   {
     name: "Peachtree",
     category: "Accounting",
+    logo: "/images/software/peachtree-logo.png",
     fallback: "PEACHTREE",
-    brandColor: "text-orange-600 dark:text-orange-400",
+    nameColor: "text-orange-600 dark:text-orange-400",
   },
   {
     name: "Tally",
     category: "Accounting",
+    logo: "/images/software/tally-logo.png",
     fallback: "TALLY",
-    brandColor: "text-red-700 dark:text-red-400",
+    nameColor: "text-red-700 dark:text-red-400",
   },
   {
     name: "Advanced Microsoft Excel",
     category: "Productivity",
     logo: "/images/software/excel-logo.svg",
     fallback: "EXCEL",
-    brandColor: "text-emerald-700 dark:text-emerald-400",
+    nameColor: "text-emerald-700 dark:text-emerald-400",
   },
   {
     name: "Microsoft Office",
     category: "Productivity",
     logo: "/images/software/office-logo.svg",
     fallback: "OFFICE",
-    brandColor: "text-orange-600 dark:text-orange-400",
+    nameColor: "text-orange-600 dark:text-orange-400",
   },
 ];
 
@@ -110,11 +115,11 @@ const categoryStyles: Record<Category, string> = {
 function SoftwareLogo({ item }: { item: SoftwareItem }) {
   const [logoError, setLogoError] = useState(false);
 
-  if (!item.logo || logoError) {
+  if (logoError) {
     return (
-      <div className="flex h-[52px] w-full items-center justify-center">
+      <div className="flex h-[58px] w-full items-center justify-center">
         <span
-          className={`text-center text-[12px] font-black tracking-[0.04em] opacity-100 ${item.brandColor}`}
+          className={`text-center text-[12px] font-black tracking-wide opacity-100 ${item.nameColor}`}
         >
           {item.fallback}
         </span>
@@ -128,7 +133,7 @@ function SoftwareLogo({ item }: { item: SoftwareItem }) {
       alt={`${item.name} logo`}
       loading="lazy"
       onError={() => setLogoError(true)}
-      className="h-[52px] max-w-full object-contain opacity-100 transition-transform duration-300 group-hover:scale-110"
+      className="h-[58px] w-full max-w-[120px] object-contain opacity-100 transition-transform duration-300 group-hover:scale-110"
     />
   );
 }
@@ -141,25 +146,21 @@ export function Software() {
     >
       <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
 
-        {/* HEADER */}
+        {/* SECTION HEADER */}
         <div className="mb-12 text-center">
+
           <span className="inline-flex rounded-full border border-teal-300 bg-white px-5 py-2 text-xs font-extrabold uppercase tracking-[0.20em] text-teal-700 shadow-sm dark:border-teal-700 dark:bg-slate-800 dark:text-teal-300">
             ERP &amp; SOFTWARE
           </span>
 
-          <h2 className="mt-5 text-3xl font-black tracking-tight sm:text-4xl lg:text-[42px]">
-            <span className="text-slate-900 dark:text-white">
-              ERP Systems &amp;{" "}
-            </span>
-
-            <span className="text-teal-700 dark:text-teal-400">
-              Accounting Software
-            </span>
+          {/* MAIN HEADING - ONE COLOR / ONE FORMAT */}
+          <h2 className="mt-5 text-3xl font-black tracking-tight !text-slate-900 opacity-100 sm:text-4xl lg:text-[42px] dark:!text-white">
+            ERP Systems &amp; Accounting Software
           </h2>
 
           <div className="mx-auto mt-4 h-1 w-16 rounded-full bg-teal-600" />
 
-          <p className="mx-auto mt-5 max-w-3xl text-sm font-medium leading-7 text-slate-700 sm:text-base dark:text-slate-300">
+          <p className="mx-auto mt-5 max-w-3xl text-sm font-medium leading-7 !text-slate-700 opacity-100 sm:text-base dark:!text-slate-300">
             Tools and systems I have worked with for accounting, reporting,
             inventory, AP/AR and financial management.
           </p>
@@ -167,13 +168,14 @@ export function Software() {
 
         {/* SOFTWARE GRID */}
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
+
           {softwareItems.map((item) => (
             <div
               key={item.name}
               className="
                 group
                 flex
-                min-h-[94px]
+                min-h-[100px]
                 items-center
                 rounded-2xl
                 border
@@ -181,21 +183,22 @@ export function Software() {
                 bg-white
                 px-5
                 py-4
-                shadow-[0_5px_18px_rgba(15,23,42,0.07)]
+                shadow-[0_5px_18px_rgba(15,23,42,0.08)]
                 transition-all
                 duration-300
                 ease-out
                 hover:-translate-y-2
                 hover:border-teal-400
-                hover:shadow-[0_18px_38px_rgba(13,148,136,0.18)]
+                hover:shadow-[0_18px_38px_rgba(13,148,136,0.20)]
                 dark:border-slate-700
                 dark:bg-slate-800
                 dark:hover:border-teal-500
+                dark:hover:shadow-[0_18px_38px_rgba(20,184,166,0.14)]
               "
             >
 
               {/* LOGO */}
-              <div className="flex w-[110px] shrink-0 items-center justify-center pr-4 opacity-100">
+              <div className="flex w-[120px] shrink-0 items-center justify-center pr-4 opacity-100">
                 <SoftwareLogo item={item} />
               </div>
 
@@ -204,8 +207,9 @@ export function Software() {
 
               {/* SOFTWARE NAME + CATEGORY */}
               <div className="flex min-w-0 flex-1 items-center justify-between gap-3 pl-4">
+
                 <h3
-                  className={`min-w-0 text-[16px] font-black leading-5 opacity-100 ${item.brandColor}`}
+                  className={`min-w-0 text-[16px] font-black leading-5 opacity-100 ${item.nameColor}`}
                 >
                   {item.name}
                 </h3>
@@ -227,6 +231,7 @@ export function Software() {
                 >
                   {item.category}
                 </span>
+
               </div>
             </div>
           ))}
