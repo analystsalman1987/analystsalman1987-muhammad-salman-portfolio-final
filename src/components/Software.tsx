@@ -1,266 +1,340 @@
-import { useState } from 'react';
-import { 
-  Database, 
-  Layers, 
-  FileSpreadsheet, 
-  Server, 
-  AppWindow,
-  CheckCircle,
-  ChevronDown
-} from 'lucide-react';
-import { SoftwareItem } from '../types';
-import { useLanguage } from '../context/LanguageContext';
-import { ARABIC_TRANSLATIONS } from '../data/arabicData';
+import React from 'react';
 
-interface SoftwareProps {
-  software: SoftwareItem[];
-}
+type Category =
+  | 'ERP'
+  | 'Accounting'
+  | 'Cloud'
+  | 'Financial'
+  | 'Productivity';
 
-export function Software({ software }: SoftwareProps) {
-  // Collapsed by default
-  const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set());
-  const { isRTL } = useLanguage();
-  const t = ARABIC_TRANSLATIONS.software;
+type SoftwareItem = {
+  name: string;
+  logo: string;
+  category: Category;
+};
 
-  if (!software || software.length === 0) {
-    return (
-      <section id="software" className="py-20 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
-        <div className="max-w-7xl mx-auto px-4 text-center text-slate-500">
-          {isRTL ? 'سيتم إضافة المعلومات قريباً.' : 'Information will be added soon.'}
-        </div>
-      </section>
-    );
-  }
+const softwareItems: SoftwareItem[] = [
+  {
+    name: 'OFIS',
+    logo: '/images/ofis-logo.png',
+    category: 'ERP',
+  },
+  {
+    name: 'QuickBooks',
+    logo: '/images/quickbooks-logo.png',
+    category: 'Accounting',
+  },
+  {
+    name: 'Arqami',
+    logo: '/images/arqami-logo.png',
+    category: 'Cloud',
+  },
+  {
+    name: 'Delta Financial',
+    logo: '/images/delta-financial-logo.png',
+    category: 'Financial',
+  },
+  {
+    name: 'SMACC',
+    logo: '/images/smacc-logo.png',
+    category: 'ERP',
+  },
+  {
+    name: 'Daftra',
+    logo: '/images/daftra-logo.png',
+    category: 'Cloud',
+  },
+  {
+    name: 'Qoyod',
+    logo: '/images/qoyod-logo.png',
+    category: 'Cloud',
+  },
+  {
+    name: 'Peachtree',
+    logo: '/images/peachtree-logo.png',
+    category: 'Accounting',
+  },
+  {
+    name: 'Tally',
+    logo: '/images/tally-logo.png',
+    category: 'Accounting',
+  },
+  {
+    name: 'Advanced Microsoft Excel',
+    logo: '/images/excel-logo.png',
+    category: 'Productivity',
+  },
+  {
+    name: 'Microsoft Office',
+    logo: '/images/microsoft-office-logo.png',
+    category: 'Productivity',
+  },
+];
 
-  const toggleExpand = (id: string) => {
-    setExpandedIds((prev) => {
-      const next = new Set(prev);
-      if (next.has(id)) {
-        next.delete(id);
-      } else {
-        next.add(id);
-      }
-      return next;
-    });
-  };
+const categoryStyles: Record<Category, string> = {
+  ERP:
+    'bg-sky-100 text-sky-700 border-sky-200 dark:bg-sky-950/60 dark:text-sky-300 dark:border-sky-800',
 
-  const allExpanded = software.length > 0 && expandedIds.size === software.length;
+  Accounting:
+    'bg-emerald-100 text-emerald-700 border-emerald-200 dark:bg-emerald-950/60 dark:text-emerald-300 dark:border-emerald-800',
 
-  const toggleAll = () => {
-    if (allExpanded) {
-      setExpandedIds(new Set());
-    } else {
-      setExpandedIds(new Set(software.map((s) => s.id)));
-    }
-  };
+  Cloud:
+    'bg-violet-100 text-violet-700 border-violet-200 dark:bg-violet-950/60 dark:text-violet-300 dark:border-violet-800',
 
-  const getSoftwareIcon = (name: string) => {
-    const lower = name.toLowerCase();
-    if (lower.includes('excel')) return FileSpreadsheet;
-    if (lower.includes('oracle')) return Database;
-    if (lower.includes('smacc')) return Server;
-    if (lower.includes('quickbooks')) return Layers;
-    return AppWindow;
-  };
+  Financial:
+    'bg-teal-100 text-teal-700 border-teal-200 dark:bg-teal-950/60 dark:text-teal-300 dark:border-teal-800',
 
-  const getSoftwareLogo = (name: string) => {
-    const lower = name.toLowerCase();
-    if (lower.includes('oracle')) {
-      return {
-        src: '/images/software/oracle-logo.svg',
-        alt: 'Oracle ERP',
-        className: 'h-4 sm:h-4.5 w-auto object-contain',
-        containerClassName: 'h-11 px-3 min-w-11',
-      };
-    }
-    if (lower.includes('quickbooks')) {
-      return {
-        src: '/images/software/quickbooks-logo.svg',
-        alt: 'Intuit QuickBooks',
-        className: 'h-5 sm:h-5.5 w-auto object-contain',
-        containerClassName: 'h-11 px-3 min-w-11',
-      };
-    }
-    if (lower.includes('excel') || lower.includes('إكسل')) {
-      return {
-        src: '/images/software/excel-logo.svg',
-        alt: 'Microsoft Excel',
-        className: 'h-6 sm:h-7 w-auto object-contain',
-        containerClassName: 'h-11 w-11 px-2',
-      };
-    }
-    if (lower.includes('office') || lower.includes('أوفيس')) {
-      return {
-        src: '/images/software/office-logo.svg',
-        alt: 'Microsoft Office',
-        className: 'h-6 sm:h-7 w-auto object-contain',
-        containerClassName: 'h-11 w-11 px-2',
-      };
-    }
-    if (lower.includes('smacc')) {
-      return {
-        src: '/images/software/smacc-logo.png',
-        alt: 'SMACC Cloud Accounting',
-        className: 'h-7 sm:h-7.5 w-auto object-contain',
-        containerClassName: 'h-11 px-2.5 min-w-11',
-      };
-    }
-    if (lower.includes('delta')) {
-      return {
-        src: '/images/software/delta-logo.svg',
-        alt: 'Delta Financial Software',
-        className: 'h-7 sm:h-8 w-auto object-contain',
-        containerClassName: 'h-11 px-2.5 min-w-11',
-      };
-    }
-    return null;
-  };
+  Productivity:
+    'bg-amber-100 text-amber-700 border-amber-200 dark:bg-amber-950/60 dark:text-amber-300 dark:border-amber-800',
+};
 
+export default function Software() {
   return (
-    <section id="software" className="py-20 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 transition-colors">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
-          <div className="flex flex-col items-start gap-1.5 max-w-3xl">
-            <span className="block text-xs font-bold tracking-widest text-[#0F766E] dark:text-teal-400 uppercase">
-              {isRTL ? t.tag : 'Systems & Infrastructure'}
-            </span>
-            <div>
-              <h2 className="main-heading-3d text-3xl font-extrabold sm:text-4xl tracking-tight">
-                {isRTL ? t.title : 'ERP & Software Experience'}
-              </h2>
-            </div>
-            <p className="mt-1 text-sm text-[#64748B] dark:text-slate-400">
-              {isRTL ? t.subtitle : 'Operational expertise navigating enterprise ERP platforms, accounting systems, and financial spreadsheet modeling.'}
-            </p>
-          </div>
+    <section
+      id="software"
+      className="
+        relative
+        overflow-hidden
+        border-b border-slate-200
+        bg-[#f7fbfb]
+        py-14
+        dark:border-slate-800
+        dark:bg-slate-900
+        sm:py-16
+      "
+    >
+      <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
 
-          {/* Quick toggle all button */}
-          <button
-            type="button"
-            onClick={toggleAll}
-            className="self-start sm:self-auto inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold text-[#1F2937] dark:text-slate-300 bg-[#F4F6F8] hover:bg-[#E6F4F1] dark:bg-slate-800 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 transition-colors cursor-pointer select-none"
+        {/* HEADER */}
+        <div className="mb-9">
+          <span
+            className="
+              mb-2 block
+              text-[12px]
+              font-extrabold
+              uppercase
+              tracking-[0.20em]
+              text-[#087d69]
+              dark:text-teal-400
+              sm:text-[13px]
+            "
           >
-            <Layers className="w-3.5 h-3.5 text-[#0F766E] dark:text-teal-400" />
-            <span>{allExpanded ? (isRTL ? t.collapseAll : 'Collapse All') : (isRTL ? t.expandAll : 'Expand All')}</span>
-          </button>
+            ERP &amp; SOFTWARE
+          </span>
+
+          <h2
+            className="
+              text-[29px]
+              font-extrabold
+              leading-tight
+              tracking-[-0.025em]
+              text-[#12364d]
+              dark:text-slate-100
+              sm:text-[34px]
+              lg:text-[39px]
+            "
+          >
+            ERP Systems &amp; Accounting Software
+          </h2>
+
+          <p
+            className="
+              mt-2
+              max-w-[900px]
+              text-[14px]
+              font-medium
+              leading-relaxed
+              text-slate-600
+              dark:text-slate-300
+              sm:text-[15px]
+            "
+          >
+            Tools and systems I have worked with for accounting, reporting,
+            inventory, AP/AR and financial management.
+          </p>
         </div>
 
-        {/* Software Grid (Expandable Cards) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {software.map((item, idx) => {
-            const isExpanded = expandedIds.has(item.id);
-            const Icon = getSoftwareIcon(item.name);
-            const logoInfo = getSoftwareLogo(item.name);
-            const arItem = t.items.find((x) => x.id === item.id) || t.items[idx];
-            const name = isRTL && arItem ? arItem.name : item.name;
-            const category = isRTL && arItem ? arItem.category : item.category;
-            const badge = isRTL && arItem ? arItem.badge : item.badge;
-            const description = isRTL && arItem ? arItem.description : item.description;
+        {/* SOFTWARE GRID */}
+        <div
+          className="
+            grid
+            grid-cols-1
+            gap-4
+            md:grid-cols-2
+            xl:grid-cols-3
+          "
+        >
+          {softwareItems.map((software) => (
+            <div
+              key={software.name}
+              className="
+                group
+                relative
+                flex
+                min-h-[82px]
+                items-center
+                overflow-hidden
+                rounded-[18px]
+                border
+                border-slate-200
+                bg-white
+                px-4
+                py-3
 
-            return (
+                shadow-[0_4px_12px_rgba(15,23,42,0.06)]
+
+                transition-all
+                duration-300
+                ease-out
+
+                hover:-translate-y-[5px]
+                hover:border-teal-300
+                hover:shadow-[0_14px_28px_rgba(13,148,136,0.18),0_5px_9px_rgba(15,23,42,0.08)]
+
+                dark:border-slate-700
+                dark:bg-slate-800
+                dark:shadow-[0_4px_12px_rgba(0,0,0,0.16)]
+
+                dark:hover:border-teal-500/60
+                dark:hover:shadow-[0_14px_28px_rgba(13,148,136,0.15),0_5px_9px_rgba(0,0,0,0.25)]
+              "
+            >
+              {/* SUBTLE HOVER / 3D LIGHT */}
               <div
-                key={item.id}
-                className={`rounded-2xl border transition-all duration-200 flex flex-col justify-between overflow-hidden shadow-xs ${
-                  isExpanded
-                    ? 'bg-white dark:bg-slate-800/60 border-[#0F766E]/50 dark:border-teal-500/50 ring-1 ring-[#0F766E]/20'
-                    : 'bg-[#F4F6F8] dark:bg-slate-800/40 border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700'
-                }`}
+                className="
+                  pointer-events-none
+                  absolute
+                  inset-0
+                  opacity-0
+                  transition-opacity
+                  duration-300
+                  group-hover:opacity-100
+                  bg-gradient-to-br
+                  from-teal-50/80
+                  via-transparent
+                  to-transparent
+                  dark:from-teal-900/20
+                "
+              />
+
+              {/* LOGO */}
+              <div
+                className="
+                  relative
+                  z-10
+                  flex
+                  h-[54px]
+                  w-[105px]
+                  shrink-0
+                  items-center
+                  justify-center
+                  px-2
+                "
               >
-                {/* Clickable Header / Summary */}
-                <div
-                  role="button"
-                  tabIndex={0}
-                  onClick={() => toggleExpand(item.id)}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      e.preventDefault();
-                      toggleExpand(item.id);
-                    }
-                  }}
-                  aria-expanded={isExpanded}
-                  className="p-6 cursor-pointer select-none focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#0F766E]"
-                >
-                  <div className="flex items-start justify-between gap-3 mb-4">
-                    <div 
-                      className={`rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/80 text-[#0F766E] dark:text-teal-400 flex items-center justify-center shadow-xs transition-colors overflow-hidden ${
-                        logoInfo ? logoInfo.containerClassName : 'w-11 h-11'
-                      }`}
-                    >
-                      {logoInfo ? (
-                        <img
-                          src={logoInfo.src}
-                          alt={logoInfo.alt}
-                          referrerPolicy="no-referrer"
-                          className={logoInfo.className}
-                          loading="lazy"
-                        />
-                      ) : (
-                        <Icon className="w-6 h-6" />
-                      )}
-                    </div>
-                    {badge && (
-                      <span className="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-[#E6F4F1] text-[#0F766E] dark:bg-teal-950/70 dark:text-teal-300 border border-[#0F766E]/30 dark:border-teal-800">
-                        {badge}
-                      </span>
-                    )}
-                  </div>
-
-                  <div className="flex items-start justify-between gap-2">
-                    <div>
-                      <h3 className="text-base font-bold text-[#0F2747] dark:text-white group-hover:text-[#0F766E] dark:group-hover:text-teal-400 transition-colors">
-                        {name}
-                      </h3>
-                      <p className="text-xs font-semibold text-[#0F766E] dark:text-teal-400 mt-0.5">
-                        {category}
-                      </p>
-                    </div>
-
-                    <div
-                      className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-semibold shrink-0 transition-all ${
-                        isExpanded
-                          ? 'bg-[#0F766E] text-white'
-                          : 'bg-[#E6F4F1] text-[#0F766E] hover:bg-[#d5eee8] dark:bg-teal-950/60 dark:text-teal-300 border border-[#0F766E]/30 dark:border-teal-800'
-                      }`}
-                    >
-                      <span>{isExpanded ? (isRTL ? t.hide : 'Hide') : (isRTL ? t.details : 'Details')}</span>
-                      <ChevronDown
-                        className={`w-3.5 h-3.5 transition-transform duration-300 ${
-                          isExpanded ? 'rotate-180' : ''
-                        }`}
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Expandable Details Area */}
-                <div
-                  className={`grid transition-all duration-300 ease-in-out ${
-                    isExpanded
-                      ? 'grid-rows-[1fr] opacity-100 border-t border-slate-200/80 dark:border-slate-700/60 bg-white dark:bg-slate-900/40'
-                      : 'grid-rows-[0fr] opacity-0'
-                  }`}
-                >
-                  <div className="overflow-hidden">
-                    <div className="p-6 pt-4 space-y-3">
-                      <p className="text-xs text-[#1F2937] dark:text-slate-300 leading-relaxed font-normal">
-                        {description}
-                      </p>
-
-                      <div className="pt-3 border-t border-slate-200/60 dark:border-slate-800/80 flex items-center gap-1.5 text-xs text-[#64748B] dark:text-slate-300 font-medium">
-                        <CheckCircle className="w-3.5 h-3.5 text-[#0F766E] dark:text-teal-400" />
-                        <span>{isRTL ? t.verified : 'Production Environment Experience'}</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
+                <img
+                  src={software.logo}
+                  alt={`${software.name} logo`}
+                  loading="lazy"
+                  className="
+                    max-h-[44px]
+                    max-w-[90px]
+                    object-contain
+                    transition-transform
+                    duration-300
+                    group-hover:scale-[1.06]
+                  "
+                />
               </div>
-            );
-          })}
-        </div>
 
+              {/* DIVIDER */}
+              <div
+                className="
+                  relative
+                  z-10
+                  mx-3
+                  h-[42px]
+                  w-px
+                  shrink-0
+                  bg-slate-200
+                  dark:bg-slate-600
+                "
+              />
+
+              {/* SOFTWARE NAME */}
+              <div className="relative z-10 min-w-0 flex-1">
+                <h3
+                  className="
+                    text-[14px]
+                    font-extrabold
+                    leading-tight
+                    tracking-[-0.01em]
+                    text-[#15354b]
+                    transition-all
+                    duration-300
+
+                    group-hover:translate-x-[2px]
+                    group-hover:text-[#087d69]
+
+                    dark:text-slate-100
+                    dark:group-hover:text-teal-300
+
+                    sm:text-[15px]
+                  "
+                >
+                  {software.name}
+                </h3>
+              </div>
+
+              {/* CATEGORY */}
+              <span
+                className={`
+                  relative
+                  z-10
+                  ml-3
+                  inline-flex
+                  min-w-[76px]
+                  shrink-0
+                  items-center
+                  justify-center
+                  rounded-lg
+                  border
+                  px-3
+                  py-[6px]
+                  text-[10px]
+                  font-extrabold
+                  leading-none
+
+                  transition-transform
+                  duration-300
+                  group-hover:scale-[1.04]
+
+                  ${categoryStyles[software.category]}
+                `}
+              >
+                {software.category}
+              </span>
+
+              {/* HOVER DEPTH LINE */}
+              <div
+                className="
+                  pointer-events-none
+                  absolute
+                  bottom-0
+                  left-[8%]
+                  right-[8%]
+                  h-[2px]
+                  rounded-full
+                  bg-transparent
+                  transition-all
+                  duration-300
+
+                  group-hover:bg-teal-400/60
+                  group-hover:shadow-[0_3px_9px_rgba(20,184,166,0.45)]
+                "
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
