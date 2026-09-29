@@ -1,3 +1,11 @@
+import {
+  CalendarDays,
+  GraduationCap,
+  FileText,
+  CheckCircle2,
+  Car,
+} from 'lucide-react';
+
 import { ProfileInfo } from '../types';
 import { useLanguage } from '../context/LanguageContext';
 import { ARABIC_TRANSLATIONS } from '../data/arabicData';
@@ -13,72 +21,164 @@ export function About({ profile: _profile }: AboutProps) {
   return (
     <section
       id="about"
-      className="relative py-20 border-b border-slate-200 dark:border-slate-800 transition-colors overflow-hidden"
+      className="
+        relative overflow-hidden
+        border-b border-slate-200
+        dark:border-slate-800
+        py-16 sm:py-20
+      "
     >
-      {/* FINAL EXISTING ABOUT BACKGROUND */}
+      {/* =========================================================
+          MAIN ABOUT BACKGROUND
+          Keep the existing approved background asset.
+      ========================================================== */}
       <div
-        className="absolute inset-0 pointer-events-none z-0"
+        className="pointer-events-none absolute inset-0 z-0"
         aria-hidden="true"
       >
         <img
           src="/images/about_accounting_background.jpg"
           alt=""
-          referrerPolicy="no-referrer"
-          className="w-full h-full object-cover object-center opacity-[0.42] dark:opacity-[0.18] select-none"
-          loading="lazy"
+          className="
+            h-full w-full
+            object-cover object-center
+            opacity-[0.52]
+            dark:opacity-[0.20]
+          "
         />
 
-        <div className="absolute inset-0 bg-gradient-to-r from-[#F2FAF7]/72 via-[#F2FAF7]/62 to-[#EDF8F5]/52 dark:from-slate-900/90 dark:via-slate-900/84 dark:to-slate-900/80" />
+        {/* Soft light green/teal treatment */}
+        <div
+          className="
+            absolute inset-0
+            bg-gradient-to-r
+            from-[#edf8f4]/80
+            via-[#edf8f4]/67
+            to-[#e8f5f1]/42
+            dark:from-slate-900/92
+            dark:via-slate-900/84
+            dark:to-slate-900/72
+          "
+        />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-        {/* ORIGINAL / FINAL HEADING FORMAT */}
-        <div className="flex flex-col items-start gap-1.5 max-w-3xl mb-9">
-          <span className="block text-xs font-bold tracking-widest text-[#0F766E] dark:text-teal-400 uppercase">
-            {isRTL ? t.tag : 'Profile Overview'}
-          </span>
-
-          <div>
-            <h2 className="main-heading-3d text-3xl font-extrabold sm:text-4xl tracking-tight">
-              {isRTL ? t.title : 'About Muhammad Salman'}
-            </h2>
-          </div>
-        </div>
-
-        {/* FINAL TWO-COLUMN ABOUT LAYOUT */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
-
-          {/* =====================================================
+      <div
+        className="
+          relative z-10
+          mx-auto
+          max-w-[1380px]
+          px-5 sm:px-8 lg:px-12
+        "
+      >
+        {/* =========================================================
+            TWO COLUMN FINAL COMPOSITION
+        ========================================================== */}
+        <div
+          className="
+            grid grid-cols-1
+            items-stretch
+            gap-8
+            lg:grid-cols-[48%_52%]
+            lg:gap-0
+          "
+        >
+          {/* =======================================================
               LEFT SIDE
-          ====================================================== */}
-          <div className="lg:col-span-6 flex flex-col">
+          ======================================================== */}
+          <div
+            className="
+              relative z-20
+              flex flex-col
+              lg:pr-10
+              xl:pr-14
+            "
+          >
+            {/* FINAL APPROVED HEADING STYLE */}
+            <div className="mb-7">
+              <span
+                className="
+                  mb-2 block
+                  text-[12px] sm:text-[13px]
+                  font-extrabold
+                  uppercase
+                  tracking-[0.16em]
+                  text-[#087d69]
+                  dark:text-teal-400
+                "
+              >
+                {isRTL ? t.tag : 'ABOUT ME'}
+              </span>
 
-            {/* EXACT APPROVED PARAGRAPHS — NO CARD */}
-            <div className="space-y-5 text-base sm:text-lg text-slate-800 dark:text-slate-100 leading-relaxed font-normal">
+              <h2
+                className="
+                  text-[31px] sm:text-[36px] lg:text-[39px]
+                  font-extrabold
+                  leading-tight
+                  tracking-[-0.025em]
+                  text-[#17364d]
+                  dark:text-slate-100
+                "
+              >
+                {isRTL ? t.title : 'Professional Summary'}
+              </h2>
+            </div>
+
+            {/* =====================================================
+                APPROVED FINAL PARAGRAPHS
+            ====================================================== */}
+            <div
+              className="
+                max-w-[690px]
+                space-y-5
+                text-[15px] sm:text-[16px]
+                font-medium
+                leading-[1.75]
+                text-[#334155]
+                dark:text-slate-200
+              "
+            >
               <p>
                 {isRTL
-                  ? (
-                      t.summaryP1 ||
-                      'مع أكثر من 14 عاماً من الخبرة في المحاسبة والمالية، عملت عبر بيئات أعمال متنوعة في المملكة العربية السعودية وباكستان، دعماً للعمليات المحاسبية اليومية، والتقارير المالية، والتسويات، وحسابات الذمم الدائنة والمدينة، وأنشطة الإقفال الشهري.'
-                    )
+                  ? t.summaryP1
                   : 'With more than 14 years of accounting and finance experience, I have worked across diverse business environments in Saudi Arabia and Pakistan, supporting day-to-day accounting operations, financial reporting, reconciliations, accounts payable and receivable, and month-end activities.'}
               </p>
 
               <p>
                 {isRTL
-                  ? (
-                      t.summaryP2 ||
-                      'تشمل خبرتي المهنية الامتثال لضريبة القيمة المضافة لهيئة الزكاة والضريبة والجمارك (ZATCA)، وتكاليف المخزون، وإدارة النقدية والعهدة النثرية، وتسويات حسابات العملاء والموردين، والتحصيلات، والعمليات المحاسبية القائمة على أنظمة تخطيط موارد المؤسسات (ERP). أركز على الحفاظ على سجلات مالية دقيقة، وضوابط داخلية فعالة، وتوفير معلومات مالية دقيقة وفي الوقت المناسب لدعم العمليات التشغيلية للأعمال.'
-                    )
+                  ? t.summaryP2
                   : 'My professional experience includes ZATCA VAT compliance, inventory and costing, cash and petty cash management, customer and supplier account reconciliation, collections, and ERP-based accounting processes. I focus on maintaining accurate financial records, effective internal controls, and timely financial information to support business operations.'}
               </p>
             </div>
 
-            {/* COMPLIANCE + LICENSE */}
-            <div className="pt-4 mt-6 border-t border-slate-300/70 dark:border-slate-700 flex flex-wrap items-center justify-between gap-3 text-xs font-semibold text-slate-700 dark:text-slate-300">
-              <div className="flex items-center gap-2">
-                <span className="inline-block w-2 h-2 rounded-full bg-[#0F766E] shrink-0" />
+            {/* =====================================================
+                COMPLIANCE / LICENSE
+            ====================================================== */}
+            <div
+              className="
+                mt-7
+                flex flex-col
+                gap-3
+                border-t border-slate-400/25
+                pt-5
+                sm:flex-row
+                sm:items-center
+                sm:justify-between
+              "
+            >
+              <div
+                className="
+                  flex items-start gap-2
+                  text-[11px] sm:text-[12px]
+                  font-semibold
+                  leading-relaxed
+                  text-[#334155]
+                  dark:text-slate-300
+                "
+              >
+                <CheckCircle2
+                  size={16}
+                  className="mt-[1px] shrink-0 text-[#087d69]"
+                />
 
                 <span>
                   {isRTL
@@ -87,131 +187,359 @@ export function About({ profile: _profile }: AboutProps) {
                 </span>
               </div>
 
-              <span className="px-2.5 py-1 rounded-md bg-[#E6F4F1]/90 dark:bg-teal-950/70 text-[#0F766E] dark:text-teal-300 font-bold border border-[#0F766E]/20">
-                {isRTL
-                  ? t.drivingLicense
-                  : 'Valid Saudi Driving License'}
-              </span>
+              <div
+                className="
+                  inline-flex shrink-0
+                  items-center gap-1.5
+                  self-start
+                  rounded-md
+                  border border-[#087d69]/20
+                  bg-[#e5f4ef]/80
+                  px-2.5 py-1.5
+                  text-[10px] sm:text-[11px]
+                  font-bold
+                  text-[#087d69]
+                  dark:bg-teal-950/50
+                  dark:text-teal-300
+                "
+              >
+                <Car size={13} />
+
+                <span>
+                  {isRTL
+                    ? t.drivingLicense
+                    : 'Valid Saudi Driving License'}
+                </span>
+              </div>
             </div>
 
-            {/* FINAL THREE CARDS */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-7">
+            {/* =====================================================
+                FINAL THREE LARGE ICON CARDS
+            ====================================================== */}
+            <div
+              className="
+                mt-7
+                grid grid-cols-1
+                gap-4
+                sm:grid-cols-3
+              "
+            >
+              {/* YEARS EXPERIENCE */}
+              <div
+                className="
+                  flex min-h-[145px]
+                  flex-col
+                  items-center
+                  justify-center
+                  rounded-[14px]
+                  border border-slate-200/80
+                  bg-white/88
+                  px-3 py-5
+                  text-center
+                  shadow-[0_8px_24px_rgba(15,23,42,0.07)]
+                  backdrop-blur-[2px]
+                  dark:border-slate-700
+                  dark:bg-slate-800/82
+                "
+              >
+                <div
+                  className="
+                    mb-3
+                    flex h-[44px] w-[44px]
+                    items-center justify-center
+                    rounded-full
+                    bg-[#e7f5f1]
+                    text-[#087d69]
+                    dark:bg-teal-950/70
+                    dark:text-teal-300
+                  "
+                >
+                  <CalendarDays size={22} strokeWidth={1.8} />
+                </div>
 
-              {/* 14+ */}
-              <div className="p-4 rounded-xl bg-white/88 dark:bg-slate-800/70 border border-slate-200/80 dark:border-slate-700 shadow-sm text-center flex flex-col justify-center items-center min-h-[105px]">
-                <span
-                  className="block text-2xl sm:text-3xl font-extrabold text-[#0F766E] dark:text-teal-400"
-                  style={{
-                    textShadow:
-                      '0 1px 0 rgba(255,255,255,0.65), 0 2px 3px rgba(15,118,110,0.16)'
-                  }}
+                <div
+                  className="
+                    text-[27px]
+                    font-extrabold
+                    leading-none
+                    text-[#087d69]
+                    dark:text-teal-400
+                  "
                 >
                   14+
-                </span>
+                </div>
 
-                <span className="text-[11px] font-semibold text-slate-600 dark:text-slate-300 mt-1">
+                <div
+                  className="
+                    mt-2
+                    text-[11px]
+                    font-bold
+                    text-slate-600
+                    dark:text-slate-300
+                  "
+                >
                   {isRTL ? t.yearsExpLabel : 'Years Experience'}
-                </span>
+                </div>
               </div>
 
               {/* MBA / BBA */}
-              <div className="p-4 rounded-xl bg-white/88 dark:bg-slate-800/70 border border-slate-200/80 dark:border-slate-700 shadow-sm text-center flex flex-col justify-center items-center min-h-[105px]">
-                <span
-                  className="block text-lg sm:text-xl font-extrabold text-[#0F766E] dark:text-teal-400 whitespace-nowrap leading-tight"
-                  style={{
-                    textShadow:
-                      '0 1px 0 rgba(255,255,255,0.65), 0 2px 3px rgba(15,118,110,0.16)'
-                  }}
+              <div
+                className="
+                  flex min-h-[145px]
+                  flex-col
+                  items-center
+                  justify-center
+                  rounded-[14px]
+                  border border-slate-200/80
+                  bg-white/88
+                  px-3 py-5
+                  text-center
+                  shadow-[0_8px_24px_rgba(15,23,42,0.07)]
+                  backdrop-blur-[2px]
+                  dark:border-slate-700
+                  dark:bg-slate-800/82
+                "
+              >
+                <div
+                  className="
+                    mb-3
+                    flex h-[44px] w-[44px]
+                    items-center justify-center
+                    rounded-full
+                    bg-[#e7f5f1]
+                    text-[#087d69]
+                    dark:bg-teal-950/70
+                    dark:text-teal-300
+                  "
                 >
-                  {isRTL ? t.mbaFinance : 'MBA / BBA'}
-                </span>
+                  <GraduationCap size={23} strokeWidth={1.8} />
+                </div>
 
-                <span className="text-[10px] sm:text-[11px] font-semibold text-slate-600 dark:text-slate-300 leading-tight mt-1">
-                  {isRTL
-                    ? t.mbaFinanceLabel
-                    : 'Accounting & Finance'}
-                </span>
+                <div
+                  className="
+                    whitespace-nowrap
+                    text-[21px]
+                    font-extrabold
+                    leading-none
+                    text-[#087d69]
+                    dark:text-teal-400
+                  "
+                >
+                  MBA / BBA
+                </div>
+
+                <div
+                  className="
+                    mt-2
+                    text-[10px] sm:text-[11px]
+                    font-bold
+                    leading-tight
+                    text-slate-600
+                    dark:text-slate-300
+                  "
+                >
+                  Accounting &amp; Finance
+                </div>
               </div>
 
               {/* ZATCA */}
-              <div className="p-4 rounded-xl bg-white/88 dark:bg-slate-800/70 border border-slate-200/80 dark:border-slate-700 shadow-sm text-center flex flex-col justify-center items-center min-h-[105px]">
-                <span
-                  className="block text-2xl sm:text-3xl font-extrabold text-[#0F766E] dark:text-teal-400"
-                  style={{
-                    textShadow:
-                      '0 1px 0 rgba(255,255,255,0.65), 0 2px 3px rgba(15,118,110,0.16)'
-                  }}
+              <div
+                className="
+                  flex min-h-[145px]
+                  flex-col
+                  items-center
+                  justify-center
+                  rounded-[14px]
+                  border border-slate-200/80
+                  bg-white/88
+                  px-3 py-5
+                  text-center
+                  shadow-[0_8px_24px_rgba(15,23,42,0.07)]
+                  backdrop-blur-[2px]
+                  dark:border-slate-700
+                  dark:bg-slate-800/82
+                "
+              >
+                <div
+                  className="
+                    mb-3
+                    flex h-[44px] w-[44px]
+                    items-center justify-center
+                    rounded-full
+                    bg-[#e7f5f1]
+                    text-[#087d69]
+                    dark:bg-teal-950/70
+                    dark:text-teal-300
+                  "
+                >
+                  <FileText size={22} strokeWidth={1.8} />
+                </div>
+
+                <div
+                  className="
+                    text-[24px]
+                    font-extrabold
+                    leading-none
+                    text-[#087d69]
+                    dark:text-teal-400
+                  "
                 >
                   ZATCA
-                </span>
+                </div>
 
-                <span className="text-[10px] sm:text-[11px] font-semibold text-slate-600 dark:text-slate-300 leading-tight mt-1">
-                  {isRTL
-                    ? t.zatcaVatLabel
-                    : 'VAT Reporting & Submission'}
-                </span>
+                <div
+                  className="
+                    mt-2
+                    text-[10px] sm:text-[11px]
+                    font-bold
+                    leading-tight
+                    text-slate-600
+                    dark:text-slate-300
+                  "
+                >
+                  VAT Reporting &amp; Submission
+                </div>
               </div>
-
             </div>
           </div>
 
-          {/* =====================================================
-              RIGHT SIDE
-              SAME IMAGE — TRUE FEATHER / MERGE EFFECT
-          ====================================================== */}
-          <div className="lg:col-span-6 relative min-h-[420px] sm:min-h-[470px]">
+          {/* =======================================================
+              RIGHT SIDE — FINAL LARGE IMAGE
 
-            {/* IMAGE LAYER WITH REAL TRANSPARENT EDGE MASK */}
+              IMPORTANT:
+              This is NOT styled as a card.
+              The image intentionally extends toward the left and
+              uses a real CSS mask to dissolve into the section.
+          ======================================================== */}
+          <div
+            className="
+              relative
+              z-10
+              min-h-[470px]
+              sm:min-h-[520px]
+              lg:min-h-[610px]
+            "
+          >
+            {/* LARGE MERGED IMAGE */}
             <div
-              className="absolute inset-0"
+              className="
+                absolute
+                inset-y-0
+                -left-10
+                right-0
+                lg:-left-20
+                xl:-left-24
+              "
               style={{
                 WebkitMaskImage:
-                  'linear-gradient(to right, transparent 0%, black 13%, black 92%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 10%, black 100%)',
-                WebkitMaskComposite: 'source-in',
+                  'linear-gradient(to right, transparent 0%, rgba(0,0,0,.18) 5%, black 17%, black 92%, transparent 100%)',
                 maskImage:
-                  'linear-gradient(to right, transparent 0%, black 13%, black 92%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 10%, black 100%)',
-                maskComposite: 'intersect'
+                  'linear-gradient(to right, transparent 0%, rgba(0,0,0,.18) 5%, black 17%, black 92%, transparent 100%)',
               }}
             >
               <img
                 src="/images/accounting_workplace.jpg"
-                alt="Accounting and Financial Operations Workplace"
-                referrerPolicy="no-referrer"
-                className="absolute inset-0 w-full h-full object-cover object-center opacity-[0.96] dark:opacity-[0.90]"
+                alt="Accounting and finance professional workspace"
+                className="
+                  absolute inset-0
+                  h-full w-full
+                  object-cover object-center
+                  opacity-[0.96]
+                  dark:opacity-[0.82]
+                "
                 loading="lazy"
+              />
+
+              {/* TOP FADE */}
+              <div
+                className="
+                  pointer-events-none
+                  absolute inset-x-0 top-0
+                  h-[18%]
+                  bg-gradient-to-b
+                  from-[#edf8f4]/70
+                  via-[#edf8f4]/20
+                  to-transparent
+                  dark:from-slate-900/65
+                  dark:via-slate-900/15
+                  dark:to-transparent
+                "
+              />
+
+              {/* RIGHT FADE */}
+              <div
+                className="
+                  pointer-events-none
+                  absolute inset-y-0 right-0
+                  w-[9%]
+                  bg-gradient-to-l
+                  from-[#edf8f4]/45
+                  to-transparent
+                  dark:from-slate-900/40
+                  dark:to-transparent
+                "
+              />
+
+              {/* BOTTOM DARK GRADIENT LIKE FINAL REFERENCE */}
+              <div
+                className="
+                  pointer-events-none
+                  absolute inset-x-0 bottom-0
+                  h-[46%]
+                  bg-gradient-to-t
+                  from-[#082f3e]/95
+                  via-[#0a3a49]/60
+                  to-transparent
+                "
               />
             </div>
 
-            {/* EXTRA SOFT LEFT TRANSITION */}
-            <div className="pointer-events-none absolute inset-y-0 left-0 w-[16%] bg-gradient-to-r from-[#F2FAF7]/55 via-[#F2FAF7]/15 to-transparent dark:from-slate-900/50 dark:via-slate-900/10 dark:to-transparent" />
-
-            {/* SOFT BOTTOM GRADIENT INSIDE IMAGE */}
+            {/* =====================================================
+                FINANCIAL OPERATIONS CONTENT
+            ====================================================== */}
             <div
-              className="pointer-events-none absolute inset-x-[5%] bottom-0 h-[48%]"
-              style={{
-                background:
-                  'linear-gradient(to top, rgba(5,43,59,0.94) 0%, rgba(8,54,70,0.62) 42%, rgba(8,54,70,0) 100%)'
-              }}
-            />
-
-            {/* FINAL APPROVED IMAGE CONTENT */}
-            <div className="absolute left-[8%] right-[7%] bottom-7 sm:bottom-9">
-              <h3 className="text-xs sm:text-sm font-extrabold uppercase tracking-[0.10em] text-teal-300">
+              className="
+                absolute
+                bottom-8
+                left-5 right-7
+                z-20
+                sm:bottom-10
+                sm:left-8 sm:right-10
+                lg:left-10
+                xl:left-12
+              "
+            >
+              <h3
+                className="
+                  text-[12px] sm:text-[13px]
+                  font-extrabold
+                  uppercase
+                  tracking-[0.09em]
+                  text-[#35d3b4]
+                "
+              >
                 {isRTL
                   ? t.governanceBadge
                   : 'FINANCIAL OPERATIONS & CONTROLS'}
               </h3>
 
-              <div className="w-20 h-[2px] bg-teal-400/90 my-3" />
+              <div className="my-3 h-[2px] w-[74px] bg-[#35d3b4]" />
 
-              <p className="max-w-xl text-xs sm:text-sm text-white leading-relaxed font-medium">
+              <p
+                className="
+                  max-w-[610px]
+                  text-[12px] sm:text-[13px]
+                  font-medium
+                  leading-[1.7]
+                  text-white
+                "
+              >
                 {isRTL
                   ? t.governanceDesc
                   : 'Dedicated to accurate ledger maintenance, audit-ready financial schedules, balance confirmations, and ZATCA statutory tax compliance across enterprise operations.'}
               </p>
             </div>
           </div>
-
         </div>
       </div>
     </section>
