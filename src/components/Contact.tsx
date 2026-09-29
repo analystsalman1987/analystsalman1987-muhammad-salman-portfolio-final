@@ -143,10 +143,10 @@ export function Contact({ profile }: ContactProps) {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
           
           {/* Contact Direct Cards (Left) */}
-          <div className="lg:col-span-5 h-full flex flex-col justify-between gap-3.5 sm:gap-4">
+          <div className="lg:col-span-5 flex flex-col gap-3.5 sm:gap-4">
             
             {/* Email Card */}
             <a
@@ -252,24 +252,22 @@ export function Contact({ profile }: ContactProps) {
           </div>
 
           {/* Contact Form (Right) */}
-          <div className="lg:col-span-7 h-full flex flex-col">
-            <div className="p-6 sm:p-7 rounded-2xl bg-[#F4F6F8] dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 flex-1 flex flex-col justify-between">
+          <div className="lg:col-span-7 self-start">
+            <div className="p-5 sm:p-6 rounded-2xl bg-[#F4F6F8] dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 shadow-sm">
               
-              <div className="flex items-center justify-between mb-5">
-                <div>
-                  <h3 className="text-lg font-bold text-[#0F2747] dark:text-white">
-                    {isRTL ? t.formTitle : 'Send a Message'}
-                  </h3>
-                  <p className="text-xs text-[#64748B] dark:text-slate-400 mt-0.5">
-                    {isRTL ? t.formSub : 'Feel free to send a message directly or open your email client.'}
-                  </p>
-                </div>
+              <div className="mb-4">
+                <h3 className="text-lg font-bold text-[#0F2747] dark:text-white">
+                  {isRTL ? t.formTitle : 'Send a Message'}
+                </h3>
+                <p className="text-xs text-[#64748B] dark:text-slate-400 mt-0.5">
+                  {isRTL ? t.formSub : 'Feel free to send a message directly or open your email client.'}
+                </p>
               </div>
 
               {submitted ? (
-                <div className="p-6 text-center space-y-4 rounded-xl bg-[#E6F4F1] dark:bg-teal-950/40 border border-[#0F766E]/30 dark:border-teal-800">
-                  <div className="w-12 h-12 rounded-full bg-white dark:bg-teal-900/60 text-[#0F766E] dark:text-teal-400 flex items-center justify-center mx-auto shadow-xs">
-                    <CheckCircle className="w-6 h-6" />
+                <div className="p-5 text-center space-y-3.5 rounded-xl bg-[#E6F4F1] dark:bg-teal-950/40 border border-[#0F766E]/30 dark:border-teal-800">
+                  <div className="w-11 h-11 rounded-full bg-white dark:bg-teal-900/60 text-[#0F766E] dark:text-teal-400 flex items-center justify-center mx-auto shadow-xs">
+                    <CheckCircle className="w-5 h-5" />
                   </div>
                   <div>
                     <h4 className="text-base font-bold text-[#0F2747] dark:text-teal-200">
@@ -280,18 +278,18 @@ export function Contact({ profile }: ContactProps) {
                     </p>
                   </div>
 
-                  <div className="flex flex-wrap gap-3 justify-center pt-2">
+                  <div className="flex flex-wrap gap-2.5 justify-center pt-1.5">
                     <button
                       type="button"
                       onClick={resetForm}
-                      className="px-4 py-2.5 rounded-lg bg-white dark:bg-slate-800 text-[#1F2937] dark:text-slate-300 text-xs font-semibold border border-slate-200 dark:border-slate-700 hover:bg-[#F4F6F8] dark:hover:bg-slate-700 transition-colors cursor-pointer"
+                      className="px-4 py-2 rounded-lg bg-white dark:bg-slate-800 text-[#1F2937] dark:text-slate-300 text-xs font-semibold border border-slate-200 dark:border-slate-700 hover:bg-[#F4F6F8] dark:hover:bg-slate-700 transition-colors cursor-pointer"
                     >
                       {isRTL ? t.writeAnotherBtn : 'Send Another Message'}
                     </button>
                     <button
                       type="button"
                       onClick={handleOpenEmailClient}
-                      className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-lg text-[#0F766E] dark:text-teal-300 hover:bg-[#E6F4F1]/60 dark:hover:bg-slate-800 text-xs font-semibold transition-colors cursor-pointer"
+                      className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-[#0F766E] dark:text-teal-300 hover:bg-[#E6F4F1]/60 dark:hover:bg-slate-800 text-xs font-semibold transition-colors cursor-pointer"
                     >
                       <ExternalLink className="w-3.5 h-3.5" />
                       <span>{isRTL ? t.directEmailBtn : 'Direct Email Client'}</span>
@@ -299,17 +297,17 @@ export function Contact({ profile }: ContactProps) {
                   </div>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-3.5">
                   {error && (
-                    <div className="p-3.5 rounded-lg bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900 text-rose-700 dark:text-rose-300 text-xs flex items-center gap-2">
+                    <div className="p-3 rounded-lg bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900 text-rose-700 dark:text-rose-300 text-xs flex items-center gap-2">
                       <AlertCircle className="w-4 h-4 shrink-0 text-rose-600 dark:text-rose-400" />
                       <span>{error}</span>
                     </div>
                   )}
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                     <div>
-                      <label className="block text-xs font-bold text-[#1F2937] dark:text-slate-300 mb-1.5">
+                      <label className="block text-xs font-bold text-[#1F2937] dark:text-slate-300 mb-1">
                         {isRTL ? t.nameLabel : 'Your Name *'}
                       </label>
                       <input
@@ -324,7 +322,7 @@ export function Contact({ profile }: ContactProps) {
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold text-[#1F2937] dark:text-slate-300 mb-1.5">
+                      <label className="block text-xs font-bold text-[#1F2937] dark:text-slate-300 mb-1">
                         {isRTL ? t.emailInputLabel : 'Your Email *'}
                       </label>
                       <input
@@ -340,7 +338,7 @@ export function Contact({ profile }: ContactProps) {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-[#1F2937] dark:text-slate-300 mb-1.5">
+                    <label className="block text-xs font-bold text-[#1F2937] dark:text-slate-300 mb-1">
                       {isRTL ? t.subjectLabel : 'Subject'}
                     </label>
                     <input
@@ -354,13 +352,13 @@ export function Contact({ profile }: ContactProps) {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-[#1F2937] dark:text-slate-300 mb-1.5">
+                    <label className="block text-xs font-bold text-[#1F2937] dark:text-slate-300 mb-1">
                       {isRTL ? t.messageLabel : 'Message *'}
                     </label>
                     <textarea
                       required
                       disabled={isSending}
-                      rows={4}
+                      rows={3}
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       placeholder={isRTL ? t.messagePlaceholder : 'Write your inquiry or proposal here...'}
@@ -368,11 +366,11 @@ export function Contact({ profile }: ContactProps) {
                     />
                   </div>
 
-                  <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3">
+                  <div className="pt-1.5 flex flex-col sm:flex-row items-center justify-between gap-3">
                     <button
                       type="submit"
                       disabled={isSending}
-                      className={`w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-[#0F766E] hover:bg-[#0c625c] text-white font-semibold text-xs transition-all shadow-xs cursor-pointer ${
+                      className={`w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-[#0F766E] hover:bg-[#0c625c] text-white font-semibold text-xs transition-all shadow-xs cursor-pointer ${
                         isSending ? 'opacity-70 cursor-not-allowed' : ''
                       }`}
                     >
@@ -392,7 +390,7 @@ export function Contact({ profile }: ContactProps) {
                     <button
                       type="button"
                       onClick={handleOpenEmailClient}
-                      className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-4 py-3 rounded-lg text-[#0F766E] dark:text-teal-300 hover:bg-[#E6F4F1]/60 dark:hover:bg-slate-800 text-xs font-semibold transition-colors cursor-pointer"
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-lg text-[#0F766E] dark:text-teal-300 hover:bg-[#E6F4F1]/60 dark:hover:bg-slate-800 text-xs font-semibold transition-colors cursor-pointer"
                     >
                       <ExternalLink className="w-3.5 h-3.5" />
                       <span>{isRTL ? t.directEmailBtn : 'Direct Email Client'}</span>

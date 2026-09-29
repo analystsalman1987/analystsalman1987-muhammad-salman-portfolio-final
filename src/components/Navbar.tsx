@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { 
-  FileText, 
   Menu, 
   X, 
   Sun, 
@@ -14,7 +13,7 @@ import { ARABIC_TRANSLATIONS } from '../data/arabicData';
 interface NavbarProps {
   currentTheme: ThemeMode;
   onThemeChange: (theme: ThemeMode) => void;
-  onOpenCV: () => void;
+  onOpenCV?: () => void;
   isExperienceSelected?: boolean;
   onSelectNav?: (href: string) => void;
 }
@@ -22,7 +21,6 @@ interface NavbarProps {
 export function Navbar({
   currentTheme,
   onThemeChange,
-  onOpenCV,
   isExperienceSelected = false,
   onSelectNav,
 }: NavbarProps) {
@@ -162,15 +160,6 @@ export function Navbar({
                   </span>
                 </>
               )}
-            </button>
-
-            {/* View CV button */}
-            <button
-              onClick={onOpenCV}
-              className="inline-flex items-center gap-2 px-3.5 py-2 text-xs font-semibold text-[#0F766E] dark:text-teal-300 bg-[#E6F4F1] dark:bg-teal-950/60 hover:bg-[#d5eee8] dark:hover:bg-teal-900/60 border border-[#0F766E]/30 dark:border-teal-800 rounded-lg transition-all shadow-xs cursor-pointer"
-            >
-              <FileText className="w-3.5 h-3.5" />
-              <span>{isRTL ? ARABIC_TRANSLATIONS.nav.cv : 'CV / Resume'}</span>
             </button>
           </div>
 
@@ -337,19 +326,6 @@ export function Navbar({
                 <span>{isRTL ? 'داكن' : 'Dark'}</span>
               </button>
             </div>
-          </div>
-
-          <div className="pt-3 border-t border-slate-200 dark:border-slate-800">
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onOpenCV();
-              }}
-              className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-[#0F766E] hover:bg-[#0c625c] text-white rounded-lg text-sm font-semibold shadow-xs cursor-pointer"
-            >
-              <FileText className="w-4 h-4" />
-              <span>{isRTL ? 'عرض وتحميل السيرة الذاتية' : 'View & Download CV'}</span>
-            </button>
           </div>
         </div>
       )}
