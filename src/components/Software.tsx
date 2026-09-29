@@ -12,7 +12,7 @@ interface SoftwareItem {
   category: Category;
   logo?: string;
   fallback: string;
-  nameColor?: string;
+  brandColor: string;
 }
 
 const softwareItems: SoftwareItem[] = [
@@ -21,72 +21,72 @@ const softwareItems: SoftwareItem[] = [
     category: "ERP",
     logo: "/images/software/oracle-logo.svg",
     fallback: "OFIS",
-    nameColor: "text-slate-900 dark:text-white",
+    brandColor: "text-slate-900 dark:text-slate-100",
   },
   {
     name: "QuickBooks",
     category: "Accounting",
     logo: "/images/software/quickbooks-logo.svg",
     fallback: "QuickBooks",
-    nameColor: "text-green-700 dark:text-green-400",
+    brandColor: "text-green-700 dark:text-green-400",
   },
   {
     name: "Arqami",
     category: "ERP",
     fallback: "ARQAMI",
-    nameColor: "text-sky-700 dark:text-sky-400",
+    brandColor: "text-sky-700 dark:text-sky-400",
   },
   {
     name: "Delta Financial",
     category: "Financial",
     logo: "/images/software/delta-logo.svg",
     fallback: "DELTA",
-    nameColor: "text-indigo-700 dark:text-indigo-400",
+    brandColor: "text-indigo-700 dark:text-indigo-400",
   },
   {
     name: "SMACC",
     category: "ERP",
     logo: "/images/software/smacc-logo.png",
     fallback: "SMACC",
-    nameColor: "text-blue-700 dark:text-blue-400",
+    brandColor: "text-blue-700 dark:text-blue-400",
   },
   {
     name: "Daftra",
     category: "Cloud",
     fallback: "DAFTRA",
-    nameColor: "text-blue-700 dark:text-blue-400",
+    brandColor: "text-blue-700 dark:text-blue-400",
   },
   {
     name: "Qoyod",
     category: "Cloud",
     fallback: "QOYOD",
-    nameColor: "text-blue-900 dark:text-blue-300",
+    brandColor: "text-blue-900 dark:text-blue-300",
   },
   {
     name: "Peachtree",
     category: "Accounting",
     fallback: "PEACHTREE",
-    nameColor: "text-orange-600 dark:text-orange-400",
+    brandColor: "text-orange-600 dark:text-orange-400",
   },
   {
     name: "Tally",
     category: "Accounting",
     fallback: "TALLY",
-    nameColor: "text-red-700 dark:text-red-400",
+    brandColor: "text-red-700 dark:text-red-400",
   },
   {
     name: "Advanced Microsoft Excel",
     category: "Productivity",
     logo: "/images/software/excel-logo.svg",
     fallback: "EXCEL",
-    nameColor: "text-emerald-700 dark:text-emerald-400",
+    brandColor: "text-emerald-700 dark:text-emerald-400",
   },
   {
     name: "Microsoft Office",
     category: "Productivity",
     logo: "/images/software/office-logo.svg",
     fallback: "OFFICE",
-    nameColor: "text-orange-600 dark:text-orange-400",
+    brandColor: "text-orange-600 dark:text-orange-400",
   },
 ];
 
@@ -113,7 +113,9 @@ function SoftwareLogo({ item }: { item: SoftwareItem }) {
   if (!item.logo || logoError) {
     return (
       <div className="flex h-[52px] w-full items-center justify-center">
-        <span className="text-center text-[12px] font-black tracking-[0.06em] text-slate-800 dark:text-slate-100">
+        <span
+          className={`text-center text-[12px] font-black tracking-[0.04em] opacity-100 ${item.brandColor}`}
+        >
           {item.fallback}
         </span>
       </div>
@@ -126,7 +128,7 @@ function SoftwareLogo({ item }: { item: SoftwareItem }) {
       alt={`${item.name} logo`}
       loading="lazy"
       onError={() => setLogoError(true)}
-      className="h-[52px] max-w-full object-contain transition-transform duration-300 group-hover:scale-110"
+      className="h-[52px] max-w-full object-contain opacity-100 transition-transform duration-300 group-hover:scale-110"
     />
   );
 }
@@ -139,15 +141,17 @@ export function Software() {
     >
       <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
 
-        {/* Section Header */}
+        {/* HEADER */}
         <div className="mb-12 text-center">
-
           <span className="inline-flex rounded-full border border-teal-300 bg-white px-5 py-2 text-xs font-extrabold uppercase tracking-[0.20em] text-teal-700 shadow-sm dark:border-teal-700 dark:bg-slate-800 dark:text-teal-300">
-            ERP &amp; Software
+            ERP &amp; SOFTWARE
           </span>
 
-          <h2 className="mt-5 text-3xl font-black tracking-tight text-slate-900 sm:text-4xl lg:text-[42px] dark:text-white">
-            ERP Systems &amp;{" "}
+          <h2 className="mt-5 text-3xl font-black tracking-tight sm:text-4xl lg:text-[42px]">
+            <span className="text-slate-900 dark:text-white">
+              ERP Systems &amp;{" "}
+            </span>
+
             <span className="text-teal-700 dark:text-teal-400">
               Accounting Software
             </span>
@@ -155,13 +159,13 @@ export function Software() {
 
           <div className="mx-auto mt-4 h-1 w-16 rounded-full bg-teal-600" />
 
-          <p className="mx-auto mt-5 max-w-3xl text-sm font-medium leading-7 text-slate-600 sm:text-base dark:text-slate-300">
+          <p className="mx-auto mt-5 max-w-3xl text-sm font-medium leading-7 text-slate-700 sm:text-base dark:text-slate-300">
             Tools and systems I have worked with for accounting, reporting,
             inventory, AP/AR and financial management.
           </p>
         </div>
 
-        {/* Software Cards */}
+        {/* SOFTWARE GRID */}
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
           {softwareItems.map((item) => (
             <div
@@ -181,31 +185,27 @@ export function Software() {
                 transition-all
                 duration-300
                 ease-out
-
                 hover:-translate-y-2
                 hover:border-teal-400
                 hover:shadow-[0_18px_38px_rgba(13,148,136,0.18)]
-
                 dark:border-slate-700
                 dark:bg-slate-800
                 dark:hover:border-teal-500
-                dark:hover:shadow-[0_18px_38px_rgba(20,184,166,0.12)]
               "
             >
 
-              {/* Logo */}
-              <div className="flex w-[110px] shrink-0 items-center justify-center pr-4">
+              {/* LOGO */}
+              <div className="flex w-[110px] shrink-0 items-center justify-center pr-4 opacity-100">
                 <SoftwareLogo item={item} />
               </div>
 
-              {/* Divider */}
-              <div className="h-14 w-px shrink-0 bg-slate-200 transition-colors duration-300 group-hover:bg-teal-400 dark:bg-slate-600" />
+              {/* DIVIDER */}
+              <div className="h-14 w-px shrink-0 bg-slate-300 transition-colors duration-300 group-hover:bg-teal-400 dark:bg-slate-600" />
 
-              {/* Name + Category */}
+              {/* SOFTWARE NAME + CATEGORY */}
               <div className="flex min-w-0 flex-1 items-center justify-between gap-3 pl-4">
-
                 <h3
-                  className={`min-w-0 text-[16px] font-extrabold leading-5 transition-all duration-300 group-hover:translate-x-0.5 ${item.nameColor}`}
+                  className={`min-w-0 text-[16px] font-black leading-5 opacity-100 ${item.brandColor}`}
                 >
                   {item.name}
                 </h3>
@@ -221,12 +221,12 @@ export function Software() {
                     font-extrabold
                     uppercase
                     tracking-wide
+                    opacity-100
                     ${categoryStyles[item.category]}
                   `}
                 >
                   {item.category}
                 </span>
-
               </div>
             </div>
           ))}
