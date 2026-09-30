@@ -79,11 +79,11 @@ export default function App() {
 
   // State for Experience main navigation selection & subtle background test effect
   const [isExperienceSelected, setIsExperienceSelected] = useState<boolean>(() => {
-    return typeof window !== 'undefined' && window.location.hash === '#experience';
+    return typeof window !== 'undefined' && (window.location.hash === '#experience' || window.location.hash === '#experience-remote');
   });
 
   const handleNavSelect = (href: string) => {
-    if (href === '#experience') {
+    if (href === '#experience' || href === '#experience-remote' || href.startsWith('#experience')) {
       setIsExperienceSelected(true);
     } else {
       setIsExperienceSelected(false);

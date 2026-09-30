@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { 
   Menu, 
   X, 
   Sun, 
   Moon, 
-  ChevronRight
+  ChevronRight,
+  ChevronDown
 } from 'lucide-react';
 import { ThemeMode } from '../types';
 import { useLanguage } from '../context/LanguageContext';
@@ -25,7 +26,20 @@ export function Navbar({
   onSelectNav,
 }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [desktopExpOpen, setDesktopExpOpen] = useState(false);
+  const [mobileExpOpen, setMobileExpOpen] = useState(false);
+  const desktopExpRef = useRef<HTMLDivElement>(null);
   const { language, setLanguage, isRTL } = useLanguage();
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (desktopExpRef.current && !desktopExpRef.current.contains(e.target as Node)) {
+        setDesktopExpOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const toggleTheme = () => {
     onThemeChange(currentTheme === 'dark' ? 'light' : 'dark');
@@ -43,6 +57,8 @@ export function Navbar({
 
   const handleNavClick = (href: string) => {
     setMobileMenuOpen(false);
+    setMobileExpOpen(false);
+    setDesktopExpOpen(false);
     onSelectNav?.(href);
     const element = document.querySelector(href);
     if (element) {
@@ -78,6 +94,72 @@ export function Navbar({
             {navLinks.map((link) => {
               const isExp = link.href === '#experience';
               const isHighlighted = isExp && isExperienceSelected;
+
+              if (isExp) {
+                return (
+                  <div
+                    key={link.href}
+                    ref={desktopExpRef}
+                    className="relative"
+                    onMouseEnter={() => setDesktopExpOpen(true)}
+                    onMouseLeave={() => setDesktopExpOpen(false)}
+                  >
+                    <button
+                      type="button"
+                      onClick={() => setDesktopExpOpen((prev) => !prev)}
+                      className={`inline-flex items-center gap-1.5 px-3 py-2 text-sm rounded-md transition-all duration-300 cursor-pointer ${
+                        isHighlighted || desktopExpOpen
+                          ? 'font-bold text-[#0F766E] dark:text-teal-300 bg-[#E6F4F1] dark:bg-teal-950/80 border border-[#0F766E]/30 dark:border-teal-800 shadow-2xs scale-102'
+                          : 'font-medium text-[#1F2937] hover:text-[#0F766E] dark:text-slate-300 dark:hover:text-teal-400 hover:bg-[#E6F4F1]/70 dark:hover:bg-slate-800/60'
+                      }`}
+                      aria-expanded={desktopExpOpen}
+                      aria-haspopup="true"
+                    >
+                      <span>{link.name}</span>
+                      <ChevronDown
+                        className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                          desktopExpOpen ? 'rotate-180 text-[#0F766E] dark:text-teal-300' : 'text-slate-400'
+                        }`}
+                      />
+                    </button>
+
+                    {/* Desktop Dropdown */}
+                    {desktopExpOpen && (
+                      <div
+                        className={`absolute top-full ${
+                          isRTL ? 'right-0' : 'left-0'
+                        } mt-1 w-64 bg-white dark:bg-slate-900 rounded-xl shadow-xl border border-slate-200 dark:border-slate-800 py-1.5 z-50 animate-in fade-in zoom-in-95 duration-150 backdrop-blur-md`}
+                      >
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setDesktopExpOpen(false);
+                            handleNavClick('#experience');
+                          }}
+                          className={`w-full flex items-center justify-between px-3.5 py-2.5 text-xs sm:text-sm font-semibold text-[#1F2937] dark:text-slate-200 hover:bg-[#E6F4F1] dark:hover:bg-slate-800 hover:text-[#0F766E] dark:hover:text-teal-300 transition-colors ${
+                            isRTL ? 'text-right' : 'text-left'
+                          } cursor-pointer`}
+                        >
+                          <span>{isRTL ? (ARABIC_TRANSLATIONS.nav.experienceFullTime || 'الخبرة بدوام كامل') : 'Full-Time Experience'}</span>
+                        </button>
+
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setDesktopExpOpen(false);
+                            handleNavClick('#experience-remote');
+                          }}
+                          className={`w-full flex items-center justify-between px-3.5 py-2.5 text-xs sm:text-sm font-semibold text-[#1F2937] dark:text-slate-200 hover:bg-[#E6F4F1] dark:hover:bg-slate-800 hover:text-[#0F766E] dark:hover:text-teal-300 transition-colors ${
+                            isRTL ? 'text-right' : 'text-left'
+                          } cursor-pointer`}
+                        >
+                          <span>{isRTL ? (ARABIC_TRANSLATIONS.nav.experienceRemote || 'الخبرة عن بُعد / دوام جزئي') : 'Remote / Part-Time Experience'}</span>
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                );
+              }
 
               return (
                 <button
@@ -238,6 +320,62 @@ export function Navbar({
             {navLinks.map((link) => {
               const isExp = link.href === '#experience';
               const isHighlighted = isExp && isExperienceSelected;
+
+              if (isExp) {
+                return (
+                  <div key={link.href} className="flex flex-col">
+                    <button
+                      type="button"
+                      onClick={() => setMobileExpOpen((prev) => !prev)}
+                      className={`flex items-center justify-between w-full px-3 py-2.5 ${isRTL ? 'text-right' : 'text-left'} text-sm rounded-md transition-all duration-300 cursor-pointer ${
+                        isHighlighted || mobileExpOpen
+                          ? 'font-bold text-[#0F766E] dark:text-teal-300 bg-[#E6F4F1] dark:bg-teal-950/80 border border-[#0F766E]/30 dark:border-teal-800'
+                          : 'font-medium text-[#1F2937] dark:text-slate-200 hover:bg-[#E6F4F1]/60 dark:hover:bg-slate-800/80 hover:text-[#0F766E]'
+                      }`}
+                      aria-expanded={mobileExpOpen}
+                    >
+                      <span>{link.name}</span>
+                      <ChevronDown
+                        className={`w-4 h-4 transition-transform duration-200 ${
+                          mobileExpOpen ? 'rotate-180 text-[#0F766E] dark:text-teal-300' : 'text-slate-400'
+                        }`}
+                      />
+                    </button>
+
+                    {/* Mobile Sub-options */}
+                    {mobileExpOpen && (
+                      <div className={`mt-1 mb-2 ${isRTL ? 'pr-4 pl-2 border-r-2 mr-2' : 'pl-4 pr-2 border-l-2 ml-2'} border-[#0F766E]/40 space-y-1`}>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setMobileExpOpen(false);
+                            handleNavClick('#experience');
+                          }}
+                          className={`w-full flex items-center justify-between px-3 py-2 text-xs font-semibold text-[#1F2937] dark:text-slate-200 hover:bg-[#E6F4F1] dark:hover:bg-slate-800 rounded-md hover:text-[#0F766E] dark:hover:text-teal-300 ${
+                            isRTL ? 'text-right' : 'text-left'
+                          } cursor-pointer`}
+                        >
+                          <span>{isRTL ? (ARABIC_TRANSLATIONS.nav.experienceFullTime || 'الخبرة بدوام كامل') : 'Full-Time Experience'}</span>
+                          <ChevronRight className={`w-3.5 h-3.5 text-slate-400 ${isRTL ? 'rotate-180' : ''}`} />
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setMobileExpOpen(false);
+                            handleNavClick('#experience-remote');
+                          }}
+                          className={`w-full flex items-center justify-between px-3 py-2 text-xs font-semibold text-[#1F2937] dark:text-slate-200 hover:bg-[#E6F4F1] dark:hover:bg-slate-800 rounded-md hover:text-[#0F766E] dark:hover:text-teal-300 ${
+                            isRTL ? 'text-right' : 'text-left'
+                          } cursor-pointer`}
+                        >
+                          <span>{isRTL ? (ARABIC_TRANSLATIONS.nav.experienceRemote || 'الخبرة عن بُعد / دوام جزئي') : 'Remote / Part-Time Experience'}</span>
+                          <ChevronRight className={`w-3.5 h-3.5 text-slate-400 ${isRTL ? 'rotate-180' : ''}`} />
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                );
+              }
 
               return (
                 <button

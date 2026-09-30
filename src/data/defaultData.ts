@@ -1,7 +1,7 @@
 import { AppData } from '../types';
 
 export const DEFAULT_APP_DATA: AppData = {
-  version: 12,
+  version: 13,
   lastUpdated: new Date().toISOString(),
   profile: {
     fullName: 'Muhammad Salman',
@@ -370,6 +370,54 @@ export const DEFAULT_APP_DATA: AppData = {
         'Customer Service: Coordinate with customers regarding account-related requirements and queries.',
         'Financial Records: Maintain accurate financial and account records.',
         'Daily Reporting: Support daily transaction reporting, end-of-day reconciliation, and branch accounting activities.',
+      ],
+    },
+    {
+      id: 'job-aali',
+      role: 'Remote Accountant / Accounting Support',
+      company: 'Aali Services Company',
+      location: 'Makkah, Saudi Arabia',
+      period: 'Remote / Part-Time',
+      isCurrent: true,
+      responsibilities: [
+        'Daily bookkeeping and accounting records maintenance in Daftra ERP.',
+        'Accounts payable and receivable management with customer and vendor balance tracking.',
+        'Bank and cash transactions reconciliation and periodic financial statement preparation.',
+        'Sales and purchase invoice processing and supporting document verification.',
+        'VAT record maintenance and ZATCA compliance support.',
+      ],
+    },
+    {
+      id: 'job-peregrine',
+      role: 'Remote Accounting Support',
+      company: 'Peregrine Services',
+      location: 'Canada',
+      period: 'Remote / Part-Time',
+      isCurrent: false,
+      responsibilities: [
+        'Invoice and expense recording',
+        'Accounting data entry and record maintenance',
+        'Bank reconciliation',
+        'Preparation of quarterly accounting batches',
+        'Preparation of quarterly tax reports',
+        'Management review and confirmation of financial information',
+        'Identification and follow-up of accounting discrepancies',
+      ],
+    },
+    {
+      id: 'job-erthal',
+      role: 'Remote Accountant / Accounting Support',
+      company: 'Erthal Company',
+      location: 'Saudi Arabia',
+      period: 'Remote / Part-Time',
+      isCurrent: false,
+      responsibilities: [
+        'Review of weekly sales and expenses',
+        'Preparation and review of monthly sales reports',
+        'Preparation of quarterly VAT reports',
+        'VAT return submission through the ZATCA portal',
+        'Accounting records review and reconciliation',
+        'Supporting documentation and audit requirements',
       ],
     },
   ],
