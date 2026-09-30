@@ -33,7 +33,7 @@ const softwareItems: SoftwareItem[] = [
   {
     name: 'Arqami',
     category: 'ERP',
-    logo: '/images/software/Arqami logo.png',
+    logo: '/images/software/Arqami Logo.png',
     fallback: 'ARQAMI',
     nameColor: 'text-blue-800 dark:text-blue-300',
   },
