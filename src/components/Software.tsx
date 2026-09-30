@@ -117,11 +117,11 @@ function SoftwareLogo({ item }: { item: SoftwareItem }) {
 
   if (logoError) {
     return (
-      <div className="flex h-[62px] w-full items-center justify-center">
+      <div className="flex h-[48px] w-full items-center justify-center">
         <span
           className={`
             text-center
-            text-[12px]
+            text-[11px]
             font-extrabold
             tracking-wide
             !opacity-100
@@ -141,9 +141,9 @@ function SoftwareLogo({ item }: { item: SoftwareItem }) {
       loading="lazy"
       onError={() => setLogoError(true)}
       className="
-        h-[62px]
+        h-[48px]
         w-full
-        max-w-[145px]
+        max-w-[105px]
         object-contain
         !opacity-100
         transition-transform
@@ -188,41 +188,42 @@ export function Software(_props?: SoftwareProps) {
         "
       >
         {/* SECTION HEADER */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
-          <div className="flex flex-col items-start gap-1.5 max-w-3xl">
-            <span className="block text-xs font-bold tracking-widest text-[#0F766E] dark:text-teal-400 uppercase">
+        <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div className="flex max-w-3xl flex-col items-start gap-1.5">
+            <span className="block text-xs font-bold uppercase tracking-widest text-[#0F766E] dark:text-teal-400">
               ERP &amp; SOFTWARE
             </span>
 
             <div>
-              <h2 className="main-heading-3d text-3xl font-extrabold sm:text-4xl tracking-tight">
+              <h2 className="main-heading-3d text-3xl font-extrabold tracking-tight sm:text-4xl">
                 ERP Systems &amp; Accounting Software
               </h2>
             </div>
 
             <p className="mt-1 text-sm text-[#64748B] dark:text-slate-400">
-              Tools and systems I have worked with for accounting, reporting, inventory, AP/AR and financial management.
+              Tools and systems I have worked with for accounting, reporting,
+              inventory, AP/AR and financial management.
             </p>
           </div>
         </div>
 
         {/* SOFTWARE CARDS */}
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {softwareItems.map((item) => (
             <div
               key={item.name}
               className="
                 group
                 flex
-                min-h-[105px]
+                min-h-[82px]
                 items-center
-                rounded-[14px]
+                rounded-xl
                 border
                 border-slate-200/90
                 bg-white
-                px-5
-                py-4
-                shadow-[0_8px_24px_rgba(15,23,42,0.07)]
+                px-4
+                py-3
+                shadow-[0_6px_18px_rgba(15,23,42,0.06)]
                 transition-all
                 duration-300
                 ease-out
@@ -237,24 +238,15 @@ export function Software(_props?: SoftwareProps) {
                 dark:hover:shadow-[0_18px_38px_rgba(20,184,166,0.12)]
               "
             >
-              {/* OFFICIAL SOFTWARE LOGO */}
-              <div
-                className="
-                  flex
-                  flex-1
-                  items-center
-                  justify-start
-                  pr-5
-                  !opacity-100
-                "
-              >
+              {/* SOFTWARE LOGO */}
+              <div className="flex min-w-0 flex-1 items-center justify-center pr-3">
                 <SoftwareLogo item={item} />
               </div>
 
               {/* VERTICAL DIVIDER */}
               <div
                 className="
-                  h-14
+                  h-10
                   w-px
                   shrink-0
                   bg-slate-300
@@ -266,25 +258,16 @@ export function Software(_props?: SoftwareProps) {
                 "
               />
 
-              {/* CATEGORY ONLY */}
-              <div
-                className="
-                  flex
-                  min-w-[120px]
-                  shrink-0
-                  items-center
-                  justify-end
-                  pl-5
-                "
-              >
+              {/* CATEGORY BADGE */}
+              <div className="flex min-w-[86px] shrink-0 items-center justify-center pl-3">
                 <span
                   className={`
                     shrink-0
                     rounded-full
                     border
-                    px-2.5
+                    px-2
                     py-1
-                    text-[9px]
+                    text-[8px]
                     font-extrabold
                     uppercase
                     tracking-wide
