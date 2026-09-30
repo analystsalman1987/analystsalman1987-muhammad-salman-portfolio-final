@@ -143,7 +143,7 @@ function SoftwareLogo({ item }: { item: SoftwareItem }) {
       className="
         h-[62px]
         w-full
-        max-w-[125px]
+        max-w-[145px]
         object-contain
         !opacity-100
         transition-transform
@@ -187,29 +187,26 @@ export function Software(_props?: SoftwareProps) {
           lg:px-12
         "
       >
-        {/* =========================================================
-            SECTION HEADER (STANDARDIZED LEFT-ALIGNED SYSTEM)
-        ========================================================== */}
+        {/* SECTION HEADER */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
           <div className="flex flex-col items-start gap-1.5 max-w-3xl">
             <span className="block text-xs font-bold tracking-widest text-[#0F766E] dark:text-teal-400 uppercase">
               ERP &amp; SOFTWARE
             </span>
+
             <div>
               <h2 className="main-heading-3d text-3xl font-extrabold sm:text-4xl tracking-tight">
                 ERP Systems &amp; Accounting Software
               </h2>
             </div>
+
             <p className="mt-1 text-sm text-[#64748B] dark:text-slate-400">
               Tools and systems I have worked with for accounting, reporting, inventory, AP/AR and financial management.
             </p>
           </div>
         </div>
 
-        {/* =========================================================
-            SOFTWARE CARDS
-        ========================================================== */}
-
+        {/* SOFTWARE CARDS */}
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
           {softwareItems.map((item) => (
             <div
@@ -240,16 +237,14 @@ export function Software(_props?: SoftwareProps) {
                 dark:hover:shadow-[0_18px_38px_rgba(20,184,166,0.12)]
               "
             >
-              {/* LOGO */}
-
+              {/* OFFICIAL SOFTWARE LOGO */}
               <div
                 className="
                   flex
-                  w-[125px]
-                  shrink-0
+                  flex-1
                   items-center
-                  justify-center
-                  pr-4
+                  justify-start
+                  pr-5
                   !opacity-100
                 "
               >
@@ -257,7 +252,6 @@ export function Software(_props?: SoftwareProps) {
               </div>
 
               {/* VERTICAL DIVIDER */}
-
               <div
                 className="
                   h-14
@@ -272,32 +266,17 @@ export function Software(_props?: SoftwareProps) {
                 "
               />
 
-              {/* SOFTWARE NAME + CATEGORY */}
-
+              {/* CATEGORY ONLY */}
               <div
                 className="
                   flex
-                  min-w-0
-                  flex-1
+                  min-w-[120px]
+                  shrink-0
                   items-center
-                  justify-between
-                  gap-3
-                  pl-4
+                  justify-end
+                  pl-5
                 "
               >
-                <h3
-                  className={`
-                    min-w-0
-                    text-[16px]
-                    font-extrabold
-                    leading-5
-                    !opacity-100
-                    ${item.nameColor}
-                  `}
-                >
-                  {item.name}
-                </h3>
-
                 <span
                   className={`
                     shrink-0
