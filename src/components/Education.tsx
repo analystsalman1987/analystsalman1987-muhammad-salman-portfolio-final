@@ -63,7 +63,7 @@ export function EducationLanguages({ education, languages }: EducationLanguagesP
                 {isRTL ? t.tag : 'Academic Background'}
               </span>
               <div>
-                <h2 className="main-heading-3d text-3xl font-extrabold tracking-tight">
+                <h2 className="main-heading-3d text-3xl font-extrabold sm:text-4xl tracking-tight">
                   {isRTL ? t.title : 'Education'}
                 </h2>
               </div>
@@ -213,7 +213,7 @@ export function EducationLanguages({ education, languages }: EducationLanguagesP
                 {isRTL ? t.languagesTag : 'Communication'}
               </span>
               <div>
-                <h2 className="main-heading-3d text-3xl font-extrabold tracking-tight">
+                <h2 className="main-heading-3d text-3xl font-extrabold sm:text-4xl tracking-tight">
                   {isRTL ? t.languagesTitle : 'Languages'}
                 </h2>
               </div>

@@ -112,6 +112,46 @@ html.dark .company-3d-text {
     0 3px 6px rgba(15, 39, 71, 0.08);
 }
 
+/* Subtle professional 3D raised / embossed effect for Green/Teal metric labels */
+.mini-card-3d-text {
+  color: #0F766E !important;
+  text-shadow: 
+    0 1px 0 rgba(255, 255, 255, 0.95),
+    0 1.5px 2px rgba(15, 118, 110, 0.30),
+    0 3px 6px rgba(15, 39, 71, 0.10);
+  letter-spacing: -0.01em;
+}
+
+.dark .mini-card-3d-text,
+[data-theme="dark"] .mini-card-3d-text,
+html.dark .mini-card-3d-text {
+  color: #0F766E !important;
+  text-shadow: 
+    0 1px 0 rgba(255, 255, 255, 0.95),
+    0 1.5px 2px rgba(15, 118, 110, 0.24),
+    0 3px 6px rgba(15, 39, 71, 0.08);
+}
+
+/* Subtle professional 3D raised / embossed effect for Hero Company Card Name */
+.hero-company-3d {
+  color: #0F2747;
+  text-shadow: 
+    0 1px 0 rgba(255, 255, 255, 0.95),
+    0 1.5px 2px rgba(15, 39, 71, 0.22),
+    0 3px 5px rgba(15, 118, 110, 0.12);
+  letter-spacing: -0.01em;
+}
+
+.dark .hero-company-3d,
+[data-theme="dark"] .hero-company-3d,
+html.dark .hero-company-3d {
+  color: #0F2747;
+  text-shadow: 
+    0 1px 0 rgba(255, 255, 255, 0.95),
+    0 1.5px 2px rgba(15, 39, 71, 0.18),
+    0 3px 5px rgba(15, 118, 110, 0.10);
+}
+
 /* ==========================================================================
    Main Headings 3D Embossed Effect (Hero Name & All Section Titles)
    ========================================================================== */

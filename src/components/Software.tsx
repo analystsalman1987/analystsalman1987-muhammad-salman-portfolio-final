@@ -17,10 +17,10 @@ interface SoftwareItem {
 
 const softwareItems: SoftwareItem[] = [
   {
-    name: 'OFIS',
+    name: 'OFIS (Powered by Oracle)',
     category: 'ERP',
     logo: '/images/software/oracle-logo.svg',
-    fallback: 'OFIS',
+    fallback: 'OFIS (Powered by Oracle)',
     nameColor: 'text-[#17364d] dark:text-slate-100',
   },
   {
@@ -154,7 +154,11 @@ function SoftwareLogo({ item }: { item: SoftwareItem }) {
   );
 }
 
-export function Software() {
+interface SoftwareProps {
+  software?: unknown;
+}
+
+export function Software(_props?: SoftwareProps) {
   return (
     <section
       id="software"
@@ -184,60 +188,22 @@ export function Software() {
         "
       >
         {/* =========================================================
-            HEADING
-            SAME STYLE AS ABOUT SECTION
+            SECTION HEADER (STANDARDIZED LEFT-ALIGNED SYSTEM)
         ========================================================== */}
-
-        <div className="mb-10">
-          <span
-            className="
-              mb-2
-              block
-              text-[12px]
-              font-extrabold
-              uppercase
-              tracking-[0.16em]
-              !text-[#087d69]
-              !opacity-100
-              sm:text-[13px]
-              dark:!text-teal-400
-            "
-          >
-            ERP &amp; SOFTWARE
-          </span>
-
-          <h2
-            className="
-              text-[31px]
-              font-extrabold
-              leading-tight
-              tracking-[-0.025em]
-              !text-[#17364d]
-              !opacity-100
-              sm:text-[36px]
-              lg:text-[39px]
-              dark:!text-slate-100
-            "
-          >
-            ERP Systems &amp; Accounting Software
-          </h2>
-
-          <p
-            className="
-              mt-4
-              max-w-[850px]
-              text-[15px]
-              font-medium
-              leading-[1.75]
-              !text-[#334155]
-              !opacity-100
-              sm:text-[16px]
-              dark:!text-slate-300
-            "
-          >
-            Tools and systems I have worked with for accounting, reporting,
-            inventory, AP/AR and financial management.
-          </p>
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
+          <div className="flex flex-col items-start gap-1.5 max-w-3xl">
+            <span className="block text-xs font-bold tracking-widest text-[#0F766E] dark:text-teal-400 uppercase">
+              ERP &amp; SOFTWARE
+            </span>
+            <div>
+              <h2 className="main-heading-3d text-3xl font-extrabold sm:text-4xl tracking-tight">
+                ERP Systems &amp; Accounting Software
+              </h2>
+            </div>
+            <p className="mt-1 text-sm text-[#64748B] dark:text-slate-400">
+              Tools and systems I have worked with for accounting, reporting, inventory, AP/AR and financial management.
+            </p>
+          </div>
         </div>
 
         {/* =========================================================

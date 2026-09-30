@@ -17,6 +17,46 @@ interface ExperienceProps {
   onToggleSelect?: () => void;
 }
 
+interface SoftwareChip {
+  name: string;
+  logo: string;
+  logoClass?: string;
+}
+
+const JOB_SOFTWARE_MAP: Record<string, SoftwareChip[]> = {
+  'job-1': [
+    { name: 'OFIS (Powered by Oracle)', logo: '/images/software/oracle-logo.svg', logoClass: 'h-3.5 sm:h-4 w-auto object-contain' },
+  ],
+  'job-2': [
+    { name: 'Arqami', logo: '/images/software/Arqami logo.png', logoClass: 'h-4 sm:h-4.5 w-auto object-contain' },
+    { name: 'Daftra', logo: '/images/software/Daftra logo.png', logoClass: 'h-4 sm:h-4.5 w-auto object-contain' },
+  ],
+  'job-3': [
+    { name: 'Delta Financial', logo: '/images/software/delta-logo.svg', logoClass: 'h-4 sm:h-4.5 w-auto object-contain' },
+  ],
+  'job-4': [
+    { name: 'QuickBooks', logo: '/images/software/quickbooks-logo.svg', logoClass: 'h-4 sm:h-4.5 w-auto object-contain' },
+  ],
+  'job-5': [
+    { name: 'Peachtree', logo: '/images/software/Peachtree logo.png', logoClass: 'h-4 sm:h-4.5 w-auto object-contain' },
+  ],
+  'job-6': [
+    { name: 'SMACC', logo: '/images/software/smacc-logo.png', logoClass: 'h-4 sm:h-4.5 w-auto object-contain' },
+  ],
+};
+
+const getJobSoftware = (jobId: string, company: string): SoftwareChip[] => {
+  if (JOB_SOFTWARE_MAP[jobId]) return JOB_SOFTWARE_MAP[jobId];
+  const comp = company.toLowerCase();
+  if (comp.includes('alyami')) return JOB_SOFTWARE_MAP['job-1'];
+  if (comp.includes('iqtat')) return JOB_SOFTWARE_MAP['job-2'];
+  if (comp.includes('palestine')) return JOB_SOFTWARE_MAP['job-3'];
+  if (comp.includes('raya')) return JOB_SOFTWARE_MAP['job-4'];
+  if (comp.includes('waheed')) return JOB_SOFTWARE_MAP['job-5'];
+  if (comp.includes('honda')) return JOB_SOFTWARE_MAP['job-6'];
+  return [];
+};
+
 export function Experience({ experience, isSelected = false, onToggleSelect }: ExperienceProps) {
   // All cards collapsed by default
   const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set());
@@ -316,48 +356,6 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
                           </h4>
                         </div>
 
-                        {/* Professional Accounting Workflow Visual — Ahmed Alyami Group */}
-                        {job.id === 'job-1' && (
-                          <div className="mb-4 rounded-xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-[#F8FAFC] dark:bg-slate-800/40 p-3 sm:p-3.5 flex flex-col sm:flex-row items-center gap-3.5 shadow-2xs">
-                            <img
-                              src="/images/work_finance_analysis.jpg"
-                              alt="Corporate Financial Analysis & Operations"
-                              referrerPolicy="no-referrer"
-                              className="w-full sm:w-44 h-28 sm:h-24 object-cover rounded-lg shrink-0 shadow-2xs"
-                              loading="lazy"
-                            />
-                            <div className="space-y-1 text-center sm:text-left">
-                              <span className="text-xs sm:text-sm font-bold text-[#0F2747] dark:text-white block">
-                                {isRTL && arJob?.workflowTitle ? arJob.workflowTitle : 'Corporate Accounting Operations & Financial Analysis'}
-                              </span>
-                              <p className="text-[11px] sm:text-xs text-[#64748B] dark:text-slate-400 leading-relaxed">
-                                {isRTL && arJob?.workflowDesc ? arJob.workflowDesc : 'End-to-end ERP operations covering quotation and sales order processing, accounts receivable & payable cycle, vendor reconciliations, cost accounting, and ZATCA VAT compliance.'}
-                              </p>
-                            </div>
-                          </div>
-                        )}
-
-                        {/* Professional Accounting Workflow Visual — Iqtat Trading Co. */}
-                        {job.id === 'job-2' && (
-                          <div className="mb-4 rounded-xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-[#F8FAFC] dark:bg-slate-800/40 p-3 sm:p-3.5 flex flex-col sm:flex-row items-center gap-3.5 shadow-2xs">
-                            <img
-                              src="/images/work_audit_reports.jpg"
-                              alt="Ledger Auditing & Statement Reconciliations"
-                              referrerPolicy="no-referrer"
-                              className="w-full sm:w-44 h-28 sm:h-24 object-cover rounded-lg shrink-0 shadow-2xs"
-                              loading="lazy"
-                            />
-                            <div className="space-y-1 text-center sm:text-left">
-                              <span className="text-xs sm:text-sm font-bold text-[#0F2747] dark:text-white block">
-                                {isRTL && arJob?.workflowTitle ? arJob.workflowTitle : 'Ledger Reconciliations & Statements of Account'}
-                              </span>
-                              <p className="text-[11px] sm:text-xs text-[#64748B] dark:text-slate-400 leading-relaxed">
-                                {isRTL && arJob?.workflowDesc ? arJob.workflowDesc : 'Multi-branch general ledger maintenance, supplier & customer SOA audits, inventory costing, bank transaction verification, and month-end financial reporting.'}
-                              </p>
-                            </div>
-                          </div>
-                        )}
-
                         <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
                           {responsibilities.map((resp, idx) => {
                             const colonIndex = resp.indexOf(':');
@@ -385,6 +383,37 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
                             );
                           })}
                         </ul>
+
+                        {/* Software Information Row */}
+                        {(() => {
+                          const softwareList = getJobSoftware(job.id, job.company);
+                          if (!softwareList || softwareList.length === 0) return null;
+                          return (
+                            <div className="mt-4 pt-3.5 border-t border-slate-200/80 dark:border-slate-800/80 flex flex-wrap items-center gap-2 sm:gap-3">
+                              <span className="text-xs sm:text-sm font-bold text-[#0F2747] dark:text-slate-100 shrink-0">
+                                {isRTL ? 'البرامج المستخدمة:' : 'Software:'}
+                              </span>
+                              <div className="flex flex-wrap items-center gap-2">
+                                {softwareList.map((sw, sIdx) => (
+                                  <div
+                                    key={sIdx}
+                                    className="inline-flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-white dark:bg-slate-800 border border-slate-200/90 dark:border-slate-700/80 shadow-2xs hover:border-[#0F766E]/40 transition-colors"
+                                  >
+                                    <img
+                                      src={sw.logo}
+                                      alt={sw.name}
+                                      className={sw.logoClass || 'h-4 sm:h-4.5 w-auto object-contain shrink-0'}
+                                      loading="lazy"
+                                    />
+                                    <span className="text-xs font-semibold text-[#1F2937] dark:text-slate-200">
+                                      {sw.name}
+                                    </span>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          );
+                        })()}
                       </div>
                     </div>
                   </div>

@@ -93,34 +93,16 @@ export function About({ profile: _profile }: AboutProps) {
               xl:pr-14
             "
           >
-            {/* FINAL APPROVED HEADING STYLE */}
-            <div className="mb-7">
-              <span
-                className="
-                  mb-2 block
-                  text-[12px] sm:text-[13px]
-                  font-extrabold
-                  uppercase
-                  tracking-[0.16em]
-                  text-[#087d69]
-                  dark:text-teal-400
-                "
-              >
+            {/* Section Header: Standardized Left-Aligned System */}
+            <div className="flex flex-col items-start gap-1.5 max-w-3xl mb-7">
+              <span className="block text-xs font-bold tracking-widest text-[#0F766E] dark:text-teal-400 uppercase">
                 {isRTL ? t.tag : 'ABOUT ME'}
               </span>
-
-              <h2
-                className="
-                  text-[31px] sm:text-[36px] lg:text-[39px]
-                  font-extrabold
-                  leading-tight
-                  tracking-[-0.025em]
-                  text-[#17364d]
-                  dark:text-slate-100
-                "
-              >
-                {isRTL ? t.title : 'Professional Summary'}
-              </h2>
+              <div>
+                <h2 className="main-heading-3d text-3xl font-extrabold sm:text-4xl tracking-tight">
+                  {isRTL ? t.title : 'Professional Summary'}
+                </h2>
+              </div>
             </div>
 
             {/* =====================================================
@@ -262,8 +244,7 @@ export function About({ profile: _profile }: AboutProps) {
                     text-[27px]
                     font-extrabold
                     leading-none
-                    text-[#087d69]
-                    dark:text-teal-400
+                    mini-card-3d-text
                   "
                 >
                   14+
@@ -321,8 +302,7 @@ export function About({ profile: _profile }: AboutProps) {
                     text-[21px]
                     font-extrabold
                     leading-none
-                    text-[#087d69]
-                    dark:text-teal-400
+                    mini-card-3d-text
                   "
                 >
                   MBA / BBA
@@ -380,8 +360,7 @@ export function About({ profile: _profile }: AboutProps) {
                     text-[24px]
                     font-extrabold
                     leading-none
-                    text-[#087d69]
-                    dark:text-teal-400
+                    mini-card-3d-text
                   "
                 >
                   ZATCA
@@ -404,12 +383,13 @@ export function About({ profile: _profile }: AboutProps) {
           </div>
 
           {/* =======================================================
-              RIGHT SIDE — FINAL LARGE IMAGE
+              RIGHT SIDE — FINAL LARGE IMAGE WITH 4-SIDE & 4-CORNER DISSOLVE
 
               IMPORTANT:
               This is NOT styled as a card.
-              The image intentionally extends toward the left and
-              uses a real CSS mask to dissolve into the section.
+              The image intentionally uses radial-gradient masking
+              so all 4 sides and all 4 corners dissolve naturally
+              into the full About background with no hard straight edges.
           ======================================================== */}
           <div
             className="
@@ -418,23 +398,28 @@ export function About({ profile: _profile }: AboutProps) {
               min-h-[470px]
               sm:min-h-[520px]
               lg:min-h-[610px]
+              flex flex-col justify-end
             "
           >
-            {/* LARGE MERGED IMAGE */}
+            {/* LARGE MERGED IMAGE WITH 4-SIDE & 4-CORNER RADIAL MASK */}
             <div
               className="
                 absolute
-                inset-y-0
-                -left-10
-                right-0
-                lg:-left-20
-                xl:-left-24
+                inset-0
+                -left-6
+                -right-6
+                -top-4
+                -bottom-4
+                lg:-left-12
+                lg:-right-10
+                pointer-events-none
+                overflow-hidden
               "
               style={{
                 WebkitMaskImage:
-                  'linear-gradient(to right, transparent 0%, rgba(0,0,0,.18) 5%, black 17%, black 92%, transparent 100%)',
+                  'radial-gradient(ellipse 62% 54% at 50% 46%, black 28%, rgba(0,0,0,0.85) 48%, rgba(0,0,0,0.35) 70%, transparent 95%)',
                 maskImage:
-                  'linear-gradient(to right, transparent 0%, rgba(0,0,0,.18) 5%, black 17%, black 92%, transparent 100%)',
+                  'radial-gradient(ellipse 62% 54% at 50% 46%, black 28%, rgba(0,0,0,0.85) 48%, rgba(0,0,0,0.35) 70%, transparent 95%)',
               }}
             >
               <img
@@ -444,8 +429,9 @@ export function About({ profile: _profile }: AboutProps) {
                   absolute inset-0
                   h-full w-full
                   object-cover object-center
-                  opacity-[0.96]
-                  dark:opacity-[0.82]
+                  opacity-[0.92]
+                  filter brightness-[1.03] contrast-[1.01]
+                  dark:opacity-[0.80]
                 "
                 loading="lazy"
               />
@@ -455,13 +441,13 @@ export function About({ profile: _profile }: AboutProps) {
                 className="
                   pointer-events-none
                   absolute inset-x-0 top-0
-                  h-[18%]
+                  h-[22%]
                   bg-gradient-to-b
-                  from-[#edf8f4]/70
-                  via-[#edf8f4]/20
+                  from-[#edf8f4]/80
+                  via-[#edf8f4]/25
                   to-transparent
-                  dark:from-slate-900/65
-                  dark:via-slate-900/15
+                  dark:from-slate-900/75
+                  dark:via-slate-900/20
                   dark:to-transparent
                 "
               />
@@ -471,44 +457,69 @@ export function About({ profile: _profile }: AboutProps) {
                 className="
                   pointer-events-none
                   absolute inset-y-0 right-0
-                  w-[9%]
+                  w-[14%]
                   bg-gradient-to-l
-                  from-[#edf8f4]/45
+                  from-[#edf8f4]/60
                   to-transparent
-                  dark:from-slate-900/40
+                  dark:from-slate-900/55
                   dark:to-transparent
                 "
               />
 
-              {/* BOTTOM DARK GRADIENT LIKE FINAL REFERENCE */}
+              {/* LEFT FADE */}
+              <div
+                className="
+                  pointer-events-none
+                  absolute inset-y-0 left-0
+                  w-[14%]
+                  bg-gradient-to-r
+                  from-[#edf8f4]/60
+                  to-transparent
+                  dark:from-slate-900/55
+                  dark:to-transparent
+                "
+              />
+
+              {/* BOTTOM SOFT DARK GRADIENT */}
               <div
                 className="
                   pointer-events-none
                   absolute inset-x-0 bottom-0
-                  h-[46%]
+                  h-[48%]
                   bg-gradient-to-t
-                  from-[#082f3e]/95
-                  via-[#0a3a49]/60
+                  from-[#082f3e]/88
+                  via-[#0a3a49]/50
                   to-transparent
                 "
               />
             </div>
 
             {/* =====================================================
-                FINANCIAL OPERATIONS CONTENT
+                FINANCIAL OPERATIONS CONTENT (INSIDE BOTTOM OF IMAGE)
             ====================================================== */}
             <div
               className="
-                absolute
-                bottom-8
-                left-5 right-7
+                relative
                 z-20
-                sm:bottom-10
-                sm:left-8 sm:right-10
-                lg:left-10
-                xl:left-12
+                p-5 sm:p-7 lg:p-9
               "
             >
+              {/* Localized soft dark gradient behind text for 100% readability */}
+              <div 
+                className="
+                  pointer-events-none
+                  absolute inset-0 -z-10
+                  bg-gradient-to-t
+                  from-[#082f3e]/92
+                  via-[#0a3a49]/65
+                  to-transparent
+                "
+                style={{
+                  WebkitMaskImage: 'radial-gradient(ellipse 85% 90% at 50% 100%, black 50%, rgba(0,0,0,0.6) 80%, transparent 100%)',
+                  maskImage: 'radial-gradient(ellipse 85% 90% at 50% 100%, black 50%, rgba(0,0,0,0.6) 80%, transparent 100%)',
+                }}
+              />
+
               <h3
                 className="
                   text-[12px] sm:text-[13px]
@@ -523,7 +534,7 @@ export function About({ profile: _profile }: AboutProps) {
                   : 'FINANCIAL OPERATIONS & CONTROLS'}
               </h3>
 
-              <div className="my-3 h-[2px] w-[74px] bg-[#35d3b4]" />
+              <div className="my-2.5 h-[2px] w-[70px] bg-[#35d3b4]" />
 
               <p
                 className="
