@@ -64,8 +64,8 @@ const defaultIconById: Record<string, LucideIcon> = {
  * exp-12 = Professional & Coordination Skills
  */
 const expertiseImages: Record<string, string> = {
-  'exp-1': '/images/accounts-receivable.webp',
-  'exp-2': '/images/accounts-payable.webp',
+  'exp-1': '/images/Accounts Receivable & Collections.png.webp',
+  'exp-2': '/images/Accounts Payable & Supplier Management.png.webp',
   'exp-12': '/images/professional-coordination.jpg',
 };
 
@@ -154,10 +154,7 @@ export function Expertise({ expertise }: ExpertiseProps) {
                   isExpanded ? 'z-[100]' : 'z-10'
                 }`}
               >
-                {/* ==================================================
-                    MAIN CARD
-                    OPEN = FULL LIGHT GREEN / TEAL THEME
-                   ================================================== */}
+                {/* MAIN EXPERTISE CARD */}
                 <div
                   className={`
                     relative z-[120]
@@ -167,14 +164,14 @@ export function Expertise({ expertise }: ExpertiseProps) {
                     ${
                       isExpanded
                         ? `
-                          bg-[#E6F4F1]
-                          dark:bg-[#123D3A]
+                          bg-[#F3FAF8]
+                          dark:bg-[#173936]
 
-                          border-[#0F766E]
-                          dark:border-teal-400/70
+                          border-[#A7D7CE]
+                          dark:border-teal-500/45
 
-                          shadow-[0_12px_30px_rgba(15,118,110,0.20)]
-                          ring-1 ring-[#0F766E]/20
+                          shadow-[0_10px_28px_rgba(15,118,110,0.10)]
+                          ring-1 ring-[#0F766E]/10
 
                           ${
                             isLeftColumn
@@ -223,7 +220,7 @@ export function Expertise({ expertise }: ExpertiseProps) {
                       group
                       focus:outline-none
                       focus-visible:ring-2
-                      focus-visible:ring-[#0F766E]/50
+                      focus-visible:ring-[#0F766E]/40
                       focus-visible:ring-inset
                       touch-manipulation
 
@@ -255,11 +252,11 @@ export function Expertise({ expertise }: ExpertiseProps) {
                           ${
                             isExpanded
                               ? `
-                                bg-[#0F766E]
-                                text-white
-                                dark:bg-teal-400
-                                dark:text-[#073B36]
-                                shadow-[0_4px_12px_rgba(15,118,110,0.25)]
+                                bg-[#DDF1EC]
+                                text-[#0F766E]
+                                dark:bg-teal-900/50
+                                dark:text-teal-300
+                                shadow-sm
                               `
                               : `
                                 bg-[#E6F4F1]
@@ -277,14 +274,14 @@ export function Expertise({ expertise }: ExpertiseProps) {
                       <h3
                         className={`
                           text-sm sm:text-base
-                          font-extrabold
+                          font-bold
                           leading-snug
                           transition-colors
 
                           ${
                             isExpanded
                               ? `
-                                text-[#075E54]
+                                text-[#176C61]
                                 dark:text-teal-100
                               `
                               : `
@@ -307,19 +304,19 @@ export function Expertise({ expertise }: ExpertiseProps) {
                         px-2.5 py-1
                         rounded-md
                         text-[10px] sm:text-[11px]
-                        font-bold
+                        font-medium
                         shrink-0
                         transition-all
 
                         ${
                           isExpanded
                             ? `
-                              bg-[#0F766E]/10
-                              text-[#075E54]
-                              dark:bg-teal-300/10
-                              dark:text-teal-100
-                              border border-[#0F766E]/35
-                              dark:border-teal-300/30
+                              bg-white/60
+                              text-[#176C61]
+                              dark:bg-teal-950/25
+                              dark:text-teal-200
+                              border border-[#A7D7CE]
+                              dark:border-teal-500/30
                             `
                             : `
                               bg-teal-500/[0.05]
@@ -331,7 +328,6 @@ export function Expertise({ expertise }: ExpertiseProps) {
                         }
                       `}
                     >
-                      {/* RIGHT COLUMN -> PANEL LEFT */}
                       {!isLeftColumn && (
                         <span
                           className="hidden lg:inline text-[15px] leading-none font-bold"
@@ -351,7 +347,6 @@ export function Expertise({ expertise }: ExpertiseProps) {
                             : 'Details'}
                       </span>
 
-                      {/* LEFT COLUMN -> PANEL RIGHT */}
                       {isLeftColumn && (
                         <span
                           className="hidden lg:inline text-[15px] leading-none font-bold"
@@ -373,9 +368,7 @@ export function Expertise({ expertise }: ExpertiseProps) {
                   </button>
                 </div>
 
-                {/* ==================================================
-                    MOBILE / TABLET DETAILS
-                   ================================================== */}
+                {/* MOBILE / TABLET EXPANDED CONTENT */}
                 <div
                   id={`expertise-panel-${item.id}`}
                   className={`
@@ -398,13 +391,13 @@ export function Expertise({ expertise }: ExpertiseProps) {
                         rounded-xl
 
                         border
-                        border-[#0F766E]/60
-                        dark:border-teal-400/50
+                        border-[#BBDDD6]
+                        dark:border-teal-500/35
 
-                        bg-[#EAF7F4]
-                        dark:bg-[#123D3A]
+                        bg-[#F5FBF9]
+                        dark:bg-[#173936]
 
-                        shadow-[0_12px_30px_rgba(15,118,110,0.16)]
+                        shadow-[0_10px_28px_rgba(15,118,110,0.08)]
                       "
                     >
                       {hasImage && (
@@ -419,11 +412,9 @@ export function Expertise({ expertise }: ExpertiseProps) {
                             loading="lazy"
                           />
 
-                          {/* GREEN IMAGE TINT */}
-                          <div className="absolute inset-0 bg-[#0F766E]/10 mix-blend-multiply dark:bg-teal-500/10" />
+                          <div className="absolute inset-0 bg-[#DDF1EC]/[0.06] dark:bg-teal-900/10" />
 
-                          {/* IMAGE -> GREEN PANEL MERGE */}
-                          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#EAF7F4]/25 to-[#EAF7F4] dark:from-transparent dark:via-[#123D3A]/30 dark:to-[#123D3A]" />
+                          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#F5FBF9]/15 to-[#F5FBF9] dark:from-transparent dark:via-[#173936]/30 dark:to-[#173936]" />
                         </div>
                       )}
 
@@ -435,13 +426,12 @@ export function Expertise({ expertise }: ExpertiseProps) {
                               className="
                                 flex items-start gap-2.5
                                 text-xs sm:text-sm
-                                text-[#163D38]
-                                dark:text-teal-50/90
+                                text-[#294A46]
+                                dark:text-slate-200
                                 leading-relaxed
                               "
                             >
                               <CheckCircle2 className="w-3.5 h-3.5 text-[#0F766E] dark:text-teal-300 shrink-0 mt-0.5" />
-
                               <span>{detail}</span>
                             </li>
                           ))}
@@ -451,13 +441,7 @@ export function Expertise({ expertise }: ExpertiseProps) {
                   </div>
                 </div>
 
-                {/* ==================================================
-                    DESKTOP EXPANDED PANEL
-
-                    SAME LEVEL AS HEADING
-                    FLOATS ABOVE OTHER CARDS
-                    ZERO GAP / SEAMLESS JOIN
-                   ================================================== */}
+                {/* DESKTOP EXPANDED PANEL */}
                 <div
                   className={`
                     hidden lg:block
@@ -466,11 +450,7 @@ export function Expertise({ expertise }: ExpertiseProps) {
                     w-[calc(100%+1.25rem)]
                     transition-all duration-300 ease-out
 
-                    ${
-                      isLeftColumn
-                        ? 'left-full'
-                        : 'right-full'
-                    }
+                    ${isLeftColumn ? 'left-full' : 'right-full'}
 
                     ${
                       isExpanded
@@ -497,21 +477,20 @@ export function Expertise({ expertise }: ExpertiseProps) {
                   `}
                   aria-hidden={!isExpanded}
                 >
-                  {/* LARGE GREEN DETAIL PANEL */}
                   <div
                     className={`
                       relative
                       min-h-[320px]
                       overflow-hidden
 
-                      bg-[#EAF7F4]
-                      dark:bg-[#123D3A]
+                      bg-[#F5FBF9]
+                      dark:bg-[#173936]
 
-                      shadow-[0_18px_45px_rgba(15,118,110,0.22)]
-                      dark:shadow-[0_18px_45px_rgba(0,0,0,0.38)]
+                      shadow-[0_16px_40px_rgba(15,118,110,0.11)]
+                      dark:shadow-[0_18px_45px_rgba(0,0,0,0.32)]
 
-                      border-[#0F766E]
-                      dark:border-teal-400/70
+                      border-[#A7D7CE]
+                      dark:border-teal-500/45
 
                       ${
                         isLeftColumn
@@ -530,14 +509,12 @@ export function Expertise({ expertise }: ExpertiseProps) {
                       }
                     `}
                   >
-                    {/* ==================================================
-                        IMAGE AREA
-                       ================================================== */}
+                    {/* IMAGE */}
                     {hasImage && (
                       <>
                         {isLeftColumn ? (
                           <>
-                            {/* LEFT CARD -> IMAGE ON FAR RIGHT */}
+                            {/* LEFT CARD -> IMAGE RIGHT */}
                             <div
                               className="
                                 absolute
@@ -555,14 +532,14 @@ export function Expertise({ expertise }: ExpertiseProps) {
                                   absolute inset-0
                                   w-full h-full
                                   object-cover object-center
-                                  opacity-[0.94]
-                                  dark:opacity-[0.65]
+                                  opacity-[0.88]
+                                  dark:opacity-[0.62]
                                 "
                                 loading="lazy"
                               />
 
-                              {/* TEAL COLOR TINT */}
-                              <div className="absolute inset-0 bg-[#0F766E]/10 mix-blend-multiply dark:bg-teal-500/10" />
+                              {/* VERY LIGHT MINT TINT */}
+                              <div className="absolute inset-0 bg-[#DFF3EE]/[0.08] dark:bg-teal-900/10" />
 
                               {/* IMAGE FADES TOWARD TEXT */}
                               <div
@@ -570,18 +547,18 @@ export function Expertise({ expertise }: ExpertiseProps) {
                                   absolute inset-0
                                   bg-gradient-to-r
 
-                                  from-[#EAF7F4]
-                                  via-[#EAF7F4]/55
+                                  from-[#F5FBF9]
+                                  via-[#F5FBF9]/50
                                   to-transparent
 
-                                  dark:from-[#123D3A]
-                                  dark:via-[#123D3A]/55
+                                  dark:from-[#173936]
+                                  dark:via-[#173936]/55
                                   dark:to-transparent
                                 "
                               />
                             </div>
 
-                            {/* STRONG TEXT-SIDE GREEN MERGE */}
+                            {/* TEXT-SIDE SOFT MERGE */}
                             <div
                               className="
                                 absolute inset-0 z-[1]
@@ -589,17 +566,17 @@ export function Expertise({ expertise }: ExpertiseProps) {
 
                                 bg-gradient-to-r
 
-                                from-[#EAF7F4]
+                                from-[#F5FBF9]
                                 from-[0%]
 
-                                via-[#EAF7F4]/95
-                                via-[40%]
+                                via-[#F5FBF9]/96
+                                via-[39%]
 
                                 to-transparent
-                                to-[74%]
+                                to-[73%]
 
-                                dark:from-[#123D3A]
-                                dark:via-[#123D3A]/95
+                                dark:from-[#173936]
+                                dark:via-[#173936]/95
                                 dark:to-transparent
                               "
                               aria-hidden="true"
@@ -607,7 +584,7 @@ export function Expertise({ expertise }: ExpertiseProps) {
                           </>
                         ) : (
                           <>
-                            {/* RIGHT CARD -> IMAGE ON FAR LEFT */}
+                            {/* RIGHT CARD -> IMAGE LEFT */}
                             <div
                               className="
                                 absolute
@@ -625,14 +602,14 @@ export function Expertise({ expertise }: ExpertiseProps) {
                                   absolute inset-0
                                   w-full h-full
                                   object-cover object-center
-                                  opacity-[0.94]
-                                  dark:opacity-[0.65]
+                                  opacity-[0.88]
+                                  dark:opacity-[0.62]
                                 "
                                 loading="lazy"
                               />
 
-                              {/* TEAL COLOR TINT */}
-                              <div className="absolute inset-0 bg-[#0F766E]/10 mix-blend-multiply dark:bg-teal-500/10" />
+                              {/* VERY LIGHT MINT TINT */}
+                              <div className="absolute inset-0 bg-[#DFF3EE]/[0.08] dark:bg-teal-900/10" />
 
                               {/* IMAGE FADES TOWARD TEXT */}
                               <div
@@ -640,18 +617,18 @@ export function Expertise({ expertise }: ExpertiseProps) {
                                   absolute inset-0
                                   bg-gradient-to-l
 
-                                  from-[#EAF7F4]
-                                  via-[#EAF7F4]/55
+                                  from-[#F5FBF9]
+                                  via-[#F5FBF9]/50
                                   to-transparent
 
-                                  dark:from-[#123D3A]
-                                  dark:via-[#123D3A]/55
+                                  dark:from-[#173936]
+                                  dark:via-[#173936]/55
                                   dark:to-transparent
                                 "
                               />
                             </div>
 
-                            {/* STRONG TEXT-SIDE GREEN MERGE */}
+                            {/* TEXT-SIDE SOFT MERGE */}
                             <div
                               className="
                                 absolute inset-0 z-[1]
@@ -659,17 +636,17 @@ export function Expertise({ expertise }: ExpertiseProps) {
 
                                 bg-gradient-to-l
 
-                                from-[#EAF7F4]
+                                from-[#F5FBF9]
                                 from-[0%]
 
-                                via-[#EAF7F4]/95
-                                via-[40%]
+                                via-[#F5FBF9]/96
+                                via-[39%]
 
                                 to-transparent
-                                to-[74%]
+                                to-[73%]
 
-                                dark:from-[#123D3A]
-                                dark:via-[#123D3A]/95
+                                dark:from-[#173936]
+                                dark:via-[#173936]/95
                                 dark:to-transparent
                               "
                               aria-hidden="true"
@@ -677,30 +654,25 @@ export function Expertise({ expertise }: ExpertiseProps) {
                           </>
                         )}
 
-                        {/* TOP / BOTTOM SOFT GREEN INTEGRATION */}
+                        {/* TOP / BOTTOM SOFTNESS */}
                         <div
                           className="
                             absolute inset-0 z-[2]
                             pointer-events-none
-
                             bg-gradient-to-b
-
-                            from-[#EAF7F4]/10
+                            from-white/[0.04]
                             via-transparent
-                            to-[#EAF7F4]/20
-
-                            dark:from-[#123D3A]/10
+                            to-[#F5FBF9]/10
+                            dark:from-transparent
                             dark:via-transparent
-                            dark:to-[#123D3A]/20
+                            dark:to-[#173936]/15
                           "
                           aria-hidden="true"
                         />
                       </>
                     )}
 
-                    {/* ==================================================
-                        DETAILS CONTENT
-                       ================================================== */}
+                    {/* DETAILS */}
                     <div
                       className={`
                         relative z-10
@@ -727,8 +699,8 @@ export function Expertise({ expertise }: ExpertiseProps) {
                               flex items-start gap-2.5
                               text-sm
                               font-medium
-                              text-[#163D38]
-                              dark:text-teal-50/90
+                              text-[#294A46]
+                              dark:text-slate-200
                               leading-relaxed
                             "
                           >
@@ -740,21 +712,20 @@ export function Expertise({ expertise }: ExpertiseProps) {
                                 shrink-0 mt-0.5
                               "
                             />
-
                             <span>{detail}</span>
                           </li>
                         ))}
                       </ul>
                     </div>
 
-                    {/* VERY SUBTLE GREEN GLOW */}
+                    {/* SUBTLE OUTER FINISH */}
                     <div
                       className="
                         absolute inset-0
                         pointer-events-none
                         ring-1
                         ring-inset
-                        ring-[#0F766E]/10
+                        ring-[#0F766E]/[0.06]
                         dark:ring-teal-300/10
                       "
                       aria-hidden="true"
