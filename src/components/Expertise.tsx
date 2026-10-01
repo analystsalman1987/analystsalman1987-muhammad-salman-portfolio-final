@@ -56,6 +56,19 @@ const defaultIconById: Record<string, LucideIcon> = {
   'exp-12': Building2,
 };
 
+/*
+ * EXPERTISE IMAGES
+ *
+ * exp-1 = Accounts Receivable & Collections
+ * exp-2 = Accounts Payable & Supplier Management
+ * exp-12 = Professional & Coordination Skills
+ */
+const expertiseImages: Record<string, string> = {
+  'exp-1': '/images/accounts-receivable.webp',
+  'exp-2': '/images/accounts-payable.webp',
+  'exp-12': '/images/professional-coordination.jpg',
+};
+
 export function Expertise({ expertise }: ExpertiseProps) {
   const [expandedId, setExpandedId] = useState<string | null>(null);
 
@@ -70,17 +83,6 @@ export function Expertise({ expertise }: ExpertiseProps) {
   const toggleExpand = (id: string) => {
     setExpandedId((current) => (current === id ? null : id));
   };
-
-  const expandedIndex = expandedId
-    ? items.findIndex((item) => item.id === expandedId)
-    : -1;
-
-  const lastRowStartIndex =
-    Math.floor((items.length - 1) / 2) * 2;
-
-  const isLastRowExpanded =
-    expandedIndex >= lastRowStartIndex &&
-    expandedIndex !== -1;
 
   return (
     <section
@@ -122,13 +124,10 @@ export function Expertise({ expertise }: ExpertiseProps) {
         </div>
 
         {/* EXPERTISE GRID */}
-        <div
-          className={`grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5 items-start transition-[padding] duration-300 ${
-            isLastRowExpanded ? 'lg:pb-[430px]' : 'lg:pb-0'
-          }`}
-        >
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5 items-start">
           {items.map((item, idx) => {
             const isExpanded = expandedId === item.id;
+            const isLeftColumn = idx % 2 === 0;
 
             const Icon =
               (item.iconName && iconMap[item.iconName]) ||
@@ -145,29 +144,24 @@ export function Expertise({ expertise }: ExpertiseProps) {
             const details =
               (isRTL && arItem ? arItem.details : item.details) || [];
 
-            const isLeftColumn = idx % 2 === 0;
-
-            /*
-             * Uploaded image currently used for:
-             * Professional & Coordination Skills
-             */
-            const hasCoordinationImage = item.id === 'exp-12';
+            const imagePath = expertiseImages[item.id];
+            const hasImage = Boolean(imagePath);
 
             return (
               <div
                 key={item.id || idx}
                 className={`relative ${
-                  isExpanded ? 'z-[90]' : 'z-10'
+                  isExpanded ? 'z-[100]' : 'z-10'
                 }`}
               >
                 {/* ==================================================
-                    SMALL MAIN CARD
+                    MAIN EXPERTISE CARD
                    ================================================== */}
                 <div
                   className={`
-                    relative z-[110]
+                    relative z-[120]
                     border
-                    transition-all duration-200
+                    transition-all duration-300
 
                     ${
                       isExpanded
@@ -179,8 +173,16 @@ export function Expertise({ expertise }: ExpertiseProps) {
 
                           ${
                             isLeftColumn
-                              ? 'lg:rounded-l-xl lg:rounded-r-none lg:border-r-0'
-                              : 'lg:rounded-r-xl lg:rounded-l-none lg:border-l-0'
+                              ? `
+                                lg:rounded-l-xl
+                                lg:rounded-r-none
+                                lg:border-r-0
+                              `
+                              : `
+                                lg:rounded-r-xl
+                                lg:rounded-l-none
+                                lg:border-l-0
+                              `
                           }
                         `
                         : `
@@ -194,20 +196,6 @@ export function Expertise({ expertise }: ExpertiseProps) {
                           hover:-translate-y-[1px]
                         `
                     }
-
-                    ${!isExpanded ? 'rounded-xl' : 'rounded-xl lg:rounded-none'}
-
-                    ${
-                      isExpanded && isLeftColumn
-                        ? 'lg:rounded-l-xl'
-                        : ''
-                    }
-
-                    ${
-                      isExpanded && !isLeftColumn
-                        ? 'lg:rounded-r-xl'
-                        : ''
-                    }
                   `}
                 >
                   <button
@@ -220,7 +208,9 @@ export function Expertise({ expertise }: ExpertiseProps) {
                       text-left rtl:text-right
                       p-4 sm:p-5
                       flex items-center justify-between gap-3
-                      cursor-pointer select-none group
+                      cursor-pointer
+                      select-none
+                      group
                       focus:outline-none
                       focus-visible:ring-2
                       focus-visible:ring-[#0F766E]/50
@@ -229,13 +219,13 @@ export function Expertise({ expertise }: ExpertiseProps) {
 
                       ${
                         isExpanded && isLeftColumn
-                          ? 'rounded-l-xl rounded-r-none'
+                          ? 'lg:rounded-l-xl lg:rounded-r-none'
                           : ''
                       }
 
                       ${
                         isExpanded && !isLeftColumn
-                          ? 'rounded-r-xl rounded-l-none'
+                          ? 'lg:rounded-r-xl lg:rounded-l-none'
                           : ''
                       }
 
@@ -246,14 +236,28 @@ export function Expertise({ expertise }: ExpertiseProps) {
                     <div className="flex items-center gap-3.5 min-w-0">
                       <div
                         className={`
-                          w-10 h-10 rounded-lg
-                          flex items-center justify-center shrink-0
+                          w-10 h-10
+                          rounded-lg
+                          flex items-center justify-center
+                          shrink-0
                           transition-all duration-200
 
                           ${
                             isExpanded
-                              ? 'bg-[#0F766E] text-white dark:bg-teal-500 dark:text-slate-950 shadow-sm'
-                              : 'bg-[#E6F4F1] dark:bg-teal-950/70 text-[#0F766E] dark:text-teal-300 group-hover:scale-105'
+                              ? `
+                                bg-[#0F766E]
+                                text-white
+                                dark:bg-teal-500
+                                dark:text-slate-950
+                                shadow-sm
+                              `
+                              : `
+                                bg-[#E6F4F1]
+                                dark:bg-teal-950/70
+                                text-[#0F766E]
+                                dark:text-teal-300
+                                group-hover:scale-105
+                              `
                           }
                         `}
                       >
@@ -264,13 +268,18 @@ export function Expertise({ expertise }: ExpertiseProps) {
                         className={`
                           text-sm sm:text-base
                           font-bold
-                          transition-colors
                           leading-snug
+                          transition-colors
 
                           ${
                             isExpanded
                               ? 'text-[#0F766E] dark:text-teal-300'
-                              : 'text-[#0F2747] dark:text-slate-100 group-hover:text-[#0F766E] dark:group-hover:text-teal-400'
+                              : `
+                                text-[#0F2747]
+                                dark:text-slate-100
+                                group-hover:text-[#0F766E]
+                                dark:group-hover:text-teal-400
+                              `
                           }
                         `}
                       >
@@ -278,25 +287,36 @@ export function Expertise({ expertise }: ExpertiseProps) {
                       </h3>
                     </div>
 
-                    {/* DETAILS / COLLAPSE */}
+                    {/* DETAILS / COLLAPSE BUTTON */}
                     <div
                       className={`
                         inline-flex items-center gap-1.5
                         px-2.5 py-1
                         rounded
                         text-[10px] sm:text-[11px]
-                        font-medium shrink-0
+                        font-medium
+                        shrink-0
                         transition-all
 
                         ${
                           isExpanded
-                            ? 'bg-teal-600/[0.10] text-[#0F766E] dark:text-teal-300 border border-teal-500/40'
-                            : 'bg-teal-500/[0.05] text-[#0F766E] dark:text-teal-300 border border-teal-500/20 group-hover:bg-teal-500/[0.10]'
+                            ? `
+                              bg-teal-600/[0.10]
+                              text-[#0F766E]
+                              dark:text-teal-300
+                              border border-teal-500/40
+                            `
+                            : `
+                              bg-teal-500/[0.05]
+                              text-[#0F766E]
+                              dark:text-teal-300
+                              border border-teal-500/20
+                              group-hover:bg-teal-500/[0.10]
+                            `
                         }
                       `}
                     >
-                      {/* RIGHT COLUMN:
-                          expanded panel opens LEFT */}
+                      {/* RIGHT COLUMN OPENS TO LEFT */}
                       {!isLeftColumn && (
                         <span
                           className="hidden lg:inline text-[15px] leading-none font-bold"
@@ -316,8 +336,7 @@ export function Expertise({ expertise }: ExpertiseProps) {
                             : 'Details'}
                       </span>
 
-                      {/* LEFT COLUMN:
-                          expanded panel opens RIGHT */}
+                      {/* LEFT COLUMN OPENS TO RIGHT */}
                       {isLeftColumn && (
                         <span
                           className="hidden lg:inline text-[15px] leading-none font-bold"
@@ -327,7 +346,7 @@ export function Expertise({ expertise }: ExpertiseProps) {
                         </span>
                       )}
 
-                      {/* MOBILE */}
+                      {/* MOBILE CHEVRON */}
                       <ChevronDown
                         className={`
                           lg:hidden
@@ -341,12 +360,13 @@ export function Expertise({ expertise }: ExpertiseProps) {
                 </div>
 
                 {/* ==================================================
-                    MOBILE / TABLET DETAILS
+                    MOBILE / TABLET EXPANDED CONTENT
                    ================================================== */}
                 <div
                   id={`expertise-panel-${item.id}`}
                   className={`
-                    lg:hidden grid
+                    lg:hidden
+                    grid
                     transition-all duration-300 ease-in-out
 
                     ${
@@ -357,18 +377,56 @@ export function Expertise({ expertise }: ExpertiseProps) {
                   `}
                 >
                   <div className="overflow-hidden">
-                    <div className="rounded-xl border border-[#0F766E]/30 dark:border-teal-500/30 bg-white/95 dark:bg-slate-900/95 shadow-lg p-4 sm:p-5">
-                      <ul className="space-y-2.5">
-                        {details.map((detail, dIdx) => (
-                          <li
-                            key={dIdx}
-                            className="flex items-start gap-2.5 text-xs sm:text-sm text-[#1F2937] dark:text-slate-300 leading-relaxed"
-                          >
-                            <CheckCircle2 className="w-3.5 h-3.5 text-[#0F766E] dark:text-teal-400 shrink-0 mt-0.5" />
-                            <span>{detail}</span>
-                          </li>
-                        ))}
-                      </ul>
+                    <div
+                      className="
+                        relative
+                        overflow-hidden
+                        rounded-xl
+                        border
+                        border-[#0F766E]/30
+                        dark:border-teal-500/30
+                        bg-white/95
+                        dark:bg-slate-900/95
+                        shadow-lg
+                      "
+                    >
+                      {/* MOBILE IMAGE */}
+                      {hasImage && (
+                        <div
+                          className="relative h-36 w-full overflow-hidden"
+                          aria-hidden="true"
+                        >
+                          <img
+                            src={imagePath}
+                            alt=""
+                            className="absolute inset-0 w-full h-full object-cover object-center"
+                            loading="lazy"
+                          />
+
+                          <div className="absolute inset-0 bg-gradient-to-b from-white/5 via-white/15 to-white dark:from-slate-900/5 dark:via-slate-900/20 dark:to-slate-900" />
+                        </div>
+                      )}
+
+                      <div className="relative z-10 p-4 sm:p-5">
+                        <ul className="space-y-2.5">
+                          {details.map((detail, dIdx) => (
+                            <li
+                              key={dIdx}
+                              className="
+                                flex items-start gap-2.5
+                                text-xs sm:text-sm
+                                text-[#1F2937]
+                                dark:text-slate-300
+                                leading-relaxed
+                              "
+                            >
+                              <CheckCircle2 className="w-3.5 h-3.5 text-[#0F766E] dark:text-teal-400 shrink-0 mt-0.5" />
+
+                              <span>{detail}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -376,20 +434,17 @@ export function Expertise({ expertise }: ExpertiseProps) {
                 {/* ==================================================
                     DESKTOP EXPANDED PANEL
 
-                    IMPORTANT FIX:
-                    z-[100] / parent z-[90] keeps the entire selected
-                    item above all the remaining Expertise cards.
+                    LEFT CARD  -> panel opens RIGHT
+                    RIGHT CARD -> panel opens LEFT
 
-                    Panel still starts at top-0.
-                    It does NOT move down.
-
-                    Facing edges remain merged with zero gap.
+                    Panel starts at same vertical position as card.
+                    High z-index keeps it above lower cards.
                    ================================================== */}
                 <div
                   className={`
                     hidden lg:block
                     absolute top-0
-                    z-[100]
+                    z-[110]
                     w-[calc(100%+1.25rem)]
                     transition-all duration-300 ease-out
 
@@ -401,10 +456,25 @@ export function Expertise({ expertise }: ExpertiseProps) {
 
                     ${
                       isExpanded
-                        ? 'opacity-100 visible translate-x-0 pointer-events-auto'
+                        ? `
+                          opacity-100
+                          visible
+                          translate-x-0
+                          pointer-events-auto
+                        `
                         : isLeftColumn
-                          ? 'opacity-0 invisible -translate-x-2 pointer-events-none'
-                          : 'opacity-0 invisible translate-x-2 pointer-events-none'
+                          ? `
+                            opacity-0
+                            invisible
+                            -translate-x-2
+                            pointer-events-none
+                          `
+                          : `
+                            opacity-0
+                            invisible
+                            translate-x-2
+                            pointer-events-none
+                          `
                     }
                   `}
                   aria-hidden={!isExpanded}
@@ -415,7 +485,8 @@ export function Expertise({ expertise }: ExpertiseProps) {
                       relative
                       min-h-[320px]
                       overflow-hidden
-                      bg-white dark:bg-slate-900
+                      bg-white
+                      dark:bg-slate-900
 
                       shadow-[0_18px_45px_rgba(15,39,71,0.18)]
                       dark:shadow-[0_18px_45px_rgba(0,0,0,0.38)]
@@ -440,51 +511,179 @@ export function Expertise({ expertise }: ExpertiseProps) {
                       }
                     `}
                   >
-                    {/* ==================================================
-                        PROFESSIONAL & COORDINATION SKILLS IMAGE
+                    {/* ================================================
+                        EXPERTISE IMAGE
 
-                        Uploaded image:
-                        /images/expertise/professional-coordination.jpg
+                        LEFT COLUMN CARD:
+                        image appears on FAR RIGHT.
+                        Clear at outer edge and fades toward text.
 
-                        Right side = clear
-                        Left side = smooth fade
-                       ================================================== */}
-                    {hasCoordinationImage && (
+                        RIGHT COLUMN CARD:
+                        image appears on FAR LEFT.
+                        Clear at outer edge and fades toward text.
+                       ================================================ */}
+
+                    {hasImage && (
                       <>
+                        {isLeftColumn ? (
+                          <>
+                            {/* IMAGE ON RIGHT */}
+                            <div
+                              className="
+                                absolute
+                                inset-y-0 right-0
+                                w-[55%]
+                                z-0
+                                pointer-events-none
+                              "
+                              aria-hidden="true"
+                            >
+                              <img
+                                src={imagePath}
+                                alt=""
+                                className="
+                                  absolute inset-0
+                                  w-full h-full
+                                  object-cover object-center
+                                  opacity-[0.92]
+                                  dark:opacity-[0.68]
+                                "
+                                loading="lazy"
+                              />
+
+                              {/* Fade image toward LEFT / text */}
+                              <div
+                                className="
+                                  absolute inset-0
+                                  bg-gradient-to-r
+                                  from-white
+                                  via-white/45
+                                  to-transparent
+                                  dark:from-slate-900
+                                  dark:via-slate-900/45
+                                  dark:to-transparent
+                                "
+                              />
+                            </div>
+
+                            {/* Strong readable text-side blend */}
+                            <div
+                              className="
+                                absolute inset-0 z-[1]
+                                pointer-events-none
+                                bg-gradient-to-r
+                                from-white
+                                from-[0%]
+                                via-white/95
+                                via-[42%]
+                                to-transparent
+                                to-[72%]
+
+                                dark:from-slate-900
+                                dark:via-slate-900/95
+                                dark:to-transparent
+                              "
+                              aria-hidden="true"
+                            />
+                          </>
+                        ) : (
+                          <>
+                            {/* IMAGE ON LEFT */}
+                            <div
+                              className="
+                                absolute
+                                inset-y-0 left-0
+                                w-[55%]
+                                z-0
+                                pointer-events-none
+                              "
+                              aria-hidden="true"
+                            >
+                              <img
+                                src={imagePath}
+                                alt=""
+                                className="
+                                  absolute inset-0
+                                  w-full h-full
+                                  object-cover object-center
+                                  opacity-[0.92]
+                                  dark:opacity-[0.68]
+                                "
+                                loading="lazy"
+                              />
+
+                              {/* Fade image toward RIGHT / text */}
+                              <div
+                                className="
+                                  absolute inset-0
+                                  bg-gradient-to-l
+                                  from-white
+                                  via-white/45
+                                  to-transparent
+                                  dark:from-slate-900
+                                  dark:via-slate-900/45
+                                  dark:to-transparent
+                                "
+                              />
+                            </div>
+
+                            {/* Strong readable text-side blend */}
+                            <div
+                              className="
+                                absolute inset-0 z-[1]
+                                pointer-events-none
+                                bg-gradient-to-l
+                                from-white
+                                from-[0%]
+                                via-white/95
+                                via-[42%]
+                                to-transparent
+                                to-[72%]
+
+                                dark:from-slate-900
+                                dark:via-slate-900/95
+                                dark:to-transparent
+                              "
+                              aria-hidden="true"
+                            />
+                          </>
+                        )}
+
+                        {/* Soft top / bottom integration */}
                         <div
-                          className="absolute inset-y-0 right-0 w-[62%] z-0 pointer-events-none"
-                          aria-hidden="true"
-                        >
-                          <img
-                            src="/images/expertise/professional-coordination.jpg"
-                            alt=""
-                            className="absolute inset-0 w-full h-full object-cover object-center opacity-[0.96] dark:opacity-[0.68]"
-                            loading="lazy"
-                          />
-
-                          {/* LEFT FADE */}
-                          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/30 to-transparent dark:from-slate-900 dark:via-slate-900/38 dark:to-transparent" />
-
-                          {/* TOP / BOTTOM SOFT BLEND */}
-                          <div className="absolute inset-0 bg-gradient-to-b from-white/5 via-transparent to-white/10 dark:from-slate-900/10 dark:via-transparent dark:to-slate-900/15" />
-                        </div>
-
-                        {/* TEXT-SIDE MERGE */}
-                        <div
-                          className="absolute inset-0 z-[1] pointer-events-none bg-gradient-to-r from-white from-[0%] via-white/95 via-[38%] to-transparent to-[74%] dark:from-slate-900 dark:via-slate-900/95 dark:to-transparent"
+                          className="
+                            absolute inset-0 z-[2]
+                            pointer-events-none
+                            bg-gradient-to-b
+                            from-white/10
+                            via-transparent
+                            to-white/15
+                            dark:from-slate-900/10
+                            dark:via-transparent
+                            dark:to-slate-900/20
+                          "
                           aria-hidden="true"
                         />
                       </>
                     )}
 
-                    {/* DETAILS */}
+                    {/* ================================================
+                        DETAILS TEXT
+                       ================================================ */}
                     <div
                       className={`
-                        relative z-10 p-6
+                        relative z-10
+                        p-6
 
                         ${
-                          hasCoordinationImage
-                            ? 'pr-[38%]'
+                          hasImage && isLeftColumn
+                            ? 'pr-[36%]'
+                            : ''
+                        }
+
+                        ${
+                          hasImage && !isLeftColumn
+                            ? 'pl-[36%]'
                             : ''
                         }
                       `}
@@ -493,9 +692,16 @@ export function Expertise({ expertise }: ExpertiseProps) {
                         {details.map((detail, dIdx) => (
                           <li
                             key={dIdx}
-                            className="flex items-start gap-2.5 text-sm text-[#1F2937] dark:text-slate-300 leading-relaxed"
+                            className="
+                              flex items-start gap-2.5
+                              text-sm
+                              text-[#1F2937]
+                              dark:text-slate-300
+                              leading-relaxed
+                            "
                           >
                             <CheckCircle2 className="w-4 h-4 text-[#0F766E] dark:text-teal-400 shrink-0 mt-0.5" />
+
                             <span>{detail}</span>
                           </li>
                         ))}
