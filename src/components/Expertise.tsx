@@ -148,28 +148,24 @@ export function Expertise({ expertise }: ExpertiseProps) {
             const isLeftColumn = idx % 2 === 0;
 
             /*
-             * Uploaded image:
-             * Professional & Coordination Skills only
+             * Uploaded image currently used for:
+             * Professional & Coordination Skills
              */
             const hasCoordinationImage = item.id === 'exp-12';
 
             return (
               <div
                 key={item.id || idx}
-                className="relative"
+                className={`relative ${
+                  isExpanded ? 'z-[90]' : 'z-10'
+                }`}
               >
                 {/* ==================================================
                     SMALL MAIN CARD
-
-                    IMPORTANT:
-                    When expanded, the side facing the large panel
-                    loses its radius + border.
-
-                    This removes the visible JOIN completely.
                    ================================================== */}
                 <div
                   className={`
-                    relative z-[60]
+                    relative z-[110]
                     border
                     transition-all duration-200
 
@@ -200,11 +196,13 @@ export function Expertise({ expertise }: ExpertiseProps) {
                     }
 
                     ${!isExpanded ? 'rounded-xl' : 'rounded-xl lg:rounded-none'}
+
                     ${
                       isExpanded && isLeftColumn
                         ? 'lg:rounded-l-xl'
                         : ''
                     }
+
                     ${
                       isExpanded && !isLeftColumn
                         ? 'lg:rounded-r-xl'
@@ -297,7 +295,8 @@ export function Expertise({ expertise }: ExpertiseProps) {
                         }
                       `}
                     >
-                      {/* RIGHT COLUMN */}
+                      {/* RIGHT COLUMN:
+                          expanded panel opens LEFT */}
                       {!isLeftColumn && (
                         <span
                           className="hidden lg:inline text-[15px] leading-none font-bold"
@@ -317,7 +316,8 @@ export function Expertise({ expertise }: ExpertiseProps) {
                             : 'Details'}
                       </span>
 
-                      {/* LEFT COLUMN */}
+                      {/* LEFT COLUMN:
+                          expanded panel opens RIGHT */}
                       {isLeftColumn && (
                         <span
                           className="hidden lg:inline text-[15px] leading-none font-bold"
@@ -341,7 +341,7 @@ export function Expertise({ expertise }: ExpertiseProps) {
                 </div>
 
                 {/* ==================================================
-                    MOBILE / TABLET
+                    MOBILE / TABLET DETAILS
                    ================================================== */}
                 <div
                   id={`expertise-panel-${item.id}`}
@@ -365,7 +365,6 @@ export function Expertise({ expertise }: ExpertiseProps) {
                             className="flex items-start gap-2.5 text-xs sm:text-sm text-[#1F2937] dark:text-slate-300 leading-relaxed"
                           >
                             <CheckCircle2 className="w-3.5 h-3.5 text-[#0F766E] dark:text-teal-400 shrink-0 mt-0.5" />
-
                             <span>{detail}</span>
                           </li>
                         ))}
@@ -375,25 +374,22 @@ export function Expertise({ expertise }: ExpertiseProps) {
                 </div>
 
                 {/* ==================================================
-                    DESKTOP LARGE PANEL
+                    DESKTOP EXPANDED PANEL
 
-                    KEY FIX:
-                    There is NO GAP.
+                    IMPORTANT FIX:
+                    z-[100] / parent z-[90] keeps the entire selected
+                    item above all the remaining Expertise cards.
 
-                    Left card:
-                    panel begins exactly at 100% of card width.
+                    Panel still starts at top-0.
+                    It does NOT move down.
 
-                    Right card:
-                    panel ends exactly at 100% of card width.
-
-                    Inner borders/radii are removed.
-                    Therefore small + large area appears as ONE piece.
+                    Facing edges remain merged with zero gap.
                    ================================================== */}
                 <div
                   className={`
                     hidden lg:block
                     absolute top-0
-                    z-50
+                    z-[100]
                     w-[calc(100%+1.25rem)]
                     transition-all duration-300 ease-out
 
@@ -413,6 +409,7 @@ export function Expertise({ expertise }: ExpertiseProps) {
                   `}
                   aria-hidden={!isExpanded}
                 >
+                  {/* LARGE DETAIL PANEL */}
                   <div
                     className={`
                       relative
@@ -444,7 +441,13 @@ export function Expertise({ expertise }: ExpertiseProps) {
                     `}
                   >
                     {/* ==================================================
-                        PROFESSIONAL & COORDINATION IMAGE
+                        PROFESSIONAL & COORDINATION SKILLS IMAGE
+
+                        Uploaded image:
+                        /images/expertise/professional-coordination.jpg
+
+                        Right side = clear
+                        Left side = smooth fade
                        ================================================== */}
                     {hasCoordinationImage && (
                       <>
@@ -466,7 +469,7 @@ export function Expertise({ expertise }: ExpertiseProps) {
                           <div className="absolute inset-0 bg-gradient-to-b from-white/5 via-transparent to-white/10 dark:from-slate-900/10 dark:via-transparent dark:to-slate-900/15" />
                         </div>
 
-                        {/* LONG TEXT-SIDE MERGE */}
+                        {/* TEXT-SIDE MERGE */}
                         <div
                           className="absolute inset-0 z-[1] pointer-events-none bg-gradient-to-r from-white from-[0%] via-white/95 via-[38%] to-transparent to-[74%] dark:from-slate-900 dark:via-slate-900/95 dark:to-transparent"
                           aria-hidden="true"
@@ -474,9 +477,7 @@ export function Expertise({ expertise }: ExpertiseProps) {
                       </>
                     )}
 
-                    {/* ==================================================
-                        DETAILS
-                       ================================================== */}
+                    {/* DETAILS */}
                     <div
                       className={`
                         relative z-10 p-6
@@ -495,7 +496,6 @@ export function Expertise({ expertise }: ExpertiseProps) {
                             className="flex items-start gap-2.5 text-sm text-[#1F2937] dark:text-slate-300 leading-relaxed"
                           >
                             <CheckCircle2 className="w-4 h-4 text-[#0F766E] dark:text-teal-400 shrink-0 mt-0.5" />
-
                             <span>{detail}</span>
                           </li>
                         ))}
