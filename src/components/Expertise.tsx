@@ -153,18 +153,11 @@ export function Expertise({ expertise }: ExpertiseProps) {
                 }`}
               >
                 {/* Clickable Header Button / Summary Area */}
-                <div
-                  role="button"
-                  tabIndex={0}
+                <button
+                  type="button"
                   aria-expanded={isExpanded}
                   onClick={() => toggleExpand(item.id)}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      e.preventDefault();
-                      toggleExpand(item.id);
-                    }
-                  }}
-                  className="p-4 sm:p-5 flex items-center justify-between gap-3 cursor-pointer select-none group"
+                  className="w-full text-left rtl:text-right p-4 sm:p-5 flex items-center justify-between gap-3 cursor-pointer select-none group focus:outline-hidden touch-manipulation"
                 >
                   <div className="flex items-center gap-3.5 min-w-0">
                     <div className="w-10 h-10 rounded-lg bg-[#E6F4F1] dark:bg-teal-950/70 text-[#0F766E] dark:text-teal-300 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
@@ -190,7 +183,7 @@ export function Expertise({ expertise }: ExpertiseProps) {
                       }`} 
                     />
                   </div>
-                </div>
+                </button>
 
                 {/* Expandable Detailed Capabilities Content */}
                 <div 

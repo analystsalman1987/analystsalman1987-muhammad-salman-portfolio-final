@@ -97,18 +97,12 @@ export function EducationLanguages({ education, languages }: EducationLanguagesP
                       }`}
                     >
                       {/* Clickable Card Header */}
-                      <div
-                        role="button"
-                        tabIndex={0}
+                      <button
+                        type="button"
                         onClick={() => toggleEdu(item.id)}
-                        onKeyDown={(e) => {
-                          if (e.key === 'Enter' || e.key === ' ') {
-                            e.preventDefault();
-                            toggleEdu(item.id);
-                          }
-                        }}
+                        aria-expanded={isExpanded}
                         aria-label={`View ${degree} details`}
-                        className="p-5 sm:p-6 cursor-pointer select-none focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#0F766E] group"
+                        className="w-full text-left rtl:text-right p-5 sm:p-6 cursor-pointer select-none focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#0F766E] touch-manipulation group block"
                       >
                         <div className="flex items-start gap-4">
                           <div className="w-12 h-12 rounded-xl bg-[#E6F4F1] dark:bg-teal-950/70 text-[#0F766E] dark:text-teal-400 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
@@ -134,11 +128,9 @@ export function EducationLanguages({ education, languages }: EducationLanguagesP
                                   {period}
                                 </span>
 
-                                {/* Details expansion toggle */}
-                                <button
-                                  type="button"
-                                  onClick={(e) => toggleEdu(item.id, e)}
-                                  className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-semibold transition-all cursor-pointer ${
+                                {/* Details expansion toggle badge */}
+                                <span
+                                  className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-semibold transition-all ${
                                     isExpanded
                                       ? 'bg-[#0F766E] text-white'
                                       : 'bg-[#F4F6F8] text-[#475569] hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700'
@@ -151,12 +143,12 @@ export function EducationLanguages({ education, languages }: EducationLanguagesP
                                       isExpanded ? 'rotate-180' : ''
                                     }`}
                                   />
-                                </button>
+                                </span>
                               </div>
                             </div>
                           </div>
                         </div>
-                      </div>
+                      </button>
 
                       {/* Expandable Details Area */}
                       <div

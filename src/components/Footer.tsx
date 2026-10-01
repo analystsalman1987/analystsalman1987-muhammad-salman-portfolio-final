@@ -2,6 +2,7 @@ import { ArrowUp, Mail, Phone, MapPin } from 'lucide-react';
 import { ProfileInfo } from '../types';
 import { useLanguage } from '../context/LanguageContext';
 import { ARABIC_TRANSLATIONS } from '../data/arabicData';
+import { LikeButton } from './LikeButton';
 
 interface FooterProps {
   profile: ProfileInfo;
@@ -78,8 +79,9 @@ export function Footer({ profile, onOpenCV }: FooterProps) {
             <ul className="space-y-2">
               <li>
                 <button
+                  type="button"
                   onClick={onOpenCV}
-                  className="hover:text-teal-300 dark:hover:text-[#0F766E] transition-colors text-start cursor-pointer"
+                  className="hover:text-teal-300 dark:hover:text-[#0F766E] transition-colors text-start cursor-pointer select-none touch-manipulation"
                 >
                   {isRTL ? t.cvLink : 'View & Print CV / Resume'}
                 </button>
@@ -105,13 +107,17 @@ export function Footer({ profile, onOpenCV }: FooterProps) {
             © {currentYear} Muhammad Salman. {isRTL ? t.copyright : 'All rights reserved.'}
           </div>
           
-          <button
-            onClick={scrollToTop}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800/80 dark:bg-white text-slate-300 dark:text-[#334155] hover:bg-[#0F766E] dark:hover:bg-[#0F766E] hover:text-white dark:hover:text-white border dark:border-[#CBD5E1] text-xs transition-colors cursor-pointer"
-          >
-            <span>{isRTL ? t.backToTop : 'Back to top'}</span>
-            <ArrowUp className="w-3.5 h-3.5" />
-          </button>
+          <div className="flex items-center gap-3">
+            <LikeButton />
+            <button
+              type="button"
+              onClick={scrollToTop}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800/80 dark:bg-white text-slate-300 dark:text-[#334155] hover:bg-[#0F766E] dark:hover:bg-[#0F766E] hover:text-white dark:hover:text-white border dark:border-[#CBD5E1] text-xs transition-colors cursor-pointer select-none touch-manipulation"
+            >
+              <span>{isRTL ? t.backToTop : 'Back to top'}</span>
+              <ArrowUp className="w-3.5 h-3.5" />
+            </button>
+          </div>
         </div>
 
       </div>

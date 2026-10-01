@@ -17,6 +17,7 @@ import { AdminLogin } from './components/admin/AdminLogin';
 import { AdminDashboard } from './components/admin/AdminDashboard';
 import { DEFAULT_APP_DATA } from './data/defaultData';
 import { Loader2 } from 'lucide-react';
+import { Analytics } from '@vercel/analytics/react';
 
 export default function App() {
   const { 
@@ -297,6 +298,9 @@ export default function App() {
         onClose={() => setIsCVOpen(false)}
         data={data}
       />
+
+      {/* Official Vercel Web Analytics */}
+      <Analytics />
 
     </div>
   );

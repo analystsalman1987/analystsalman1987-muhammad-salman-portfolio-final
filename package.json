@@ -12,6 +12,8 @@
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
     "@tailwindcss/vite": "^4.3.3",
+    "@upstash/redis": "^1.39.0",
+    "@vercel/analytics": "^2.0.1",
     "@vitejs/plugin-react": "^6.1.1",
     "lucide-react": "^0.546.0",
     "react": "^19.0.1",

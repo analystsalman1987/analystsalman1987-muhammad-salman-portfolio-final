@@ -305,18 +305,11 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
           }`}
         >
           {/* Clickable Header Button / Summary Area */}
-          <div
-            role="button"
-            tabIndex={0}
+          <button
+            type="button"
             onClick={() => toggleExpand(job.id)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                toggleExpand(job.id);
-              }
-            }}
             aria-expanded={isExpanded}
-            className="relative p-5 sm:p-6 cursor-pointer select-none focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#0F766E]"
+            className="w-full text-left rtl:text-right relative p-5 sm:p-6 cursor-pointer select-none focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#0F766E] touch-manipulation block"
           >
             <div className="relative flex flex-col sm:flex-row sm:items-start justify-between gap-3 sm:gap-4">
               {/* LEFT SIDE: 1. Company Name, 2. Designation / Job Title, 3. Location */}
@@ -352,10 +345,10 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
                 )}
               </div>
 
-              {/* CENTER / RESPONSIBILITIES BUTTON */}
+              {/* CENTER / RESPONSIBILITIES BADGE */}
               <div className="flex justify-center sm:absolute sm:left-1/2 sm:-translate-x-1/2 sm:bottom-2 z-10 pointer-events-none">
-                <div 
-                  className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[10px] sm:text-[11px] font-medium leading-none tracking-tight transition-all pointer-events-auto cursor-pointer ${
+                <span 
+                  className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[10px] sm:text-[11px] font-medium leading-none tracking-tight transition-all ${
                     isExpanded
                       ? 'bg-teal-600/[0.08] hover:bg-teal-600/[0.14] text-[#0F766E] dark:text-teal-200 dark:bg-teal-400/[0.10] border border-teal-500/30 shadow-2xs'
                       : 'bg-teal-600/[0.04] hover:bg-teal-600/[0.09] text-[#0F766E] dark:text-teal-300 dark:bg-teal-400/[0.04] border border-teal-500/20 shadow-2xs backdrop-blur-2xs'
@@ -367,7 +360,7 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
                       isExpanded ? 'rotate-180 text-[#0F766E] dark:text-teal-300' : 'text-[#0F766E] dark:text-teal-400'
                     }`} 
                   />
-                </div>
+                </span>
               </div>
 
               {/* RIGHT SIDE: Company logo on right, Employment date positioned neatly below the logo */}
@@ -423,7 +416,7 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
                 </div>
               </div>
             </div>
-          </div>
+          </button>
 
           {/* Expandable Responsibilities Content */}
           <div 
@@ -605,7 +598,7 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
               type="button"
               onClick={() => toggleCategory('full-time')}
               aria-expanded={isFullTimeOpen}
-              className="w-full flex items-center justify-between gap-4 px-5 sm:px-6 py-4 text-left hover:bg-[#F4F6F8]/80 dark:hover:bg-slate-800/50 transition-colors cursor-pointer"
+              className="w-full flex items-center justify-between gap-4 px-5 sm:px-6 py-4 text-left rtl:text-right hover:bg-[#F4F6F8]/80 dark:hover:bg-slate-800/50 transition-colors cursor-pointer select-none touch-manipulation"
             >
               <div className="flex items-center gap-3">
                 <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[#E6F4F1] dark:bg-teal-950/70 text-[#0F766E] dark:text-teal-300">
@@ -650,7 +643,7 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
               type="button"
               onClick={() => toggleCategory('remote')}
               aria-expanded={isRemoteOpen}
-              className="w-full flex items-center justify-between gap-4 px-5 sm:px-6 py-4 text-left hover:bg-[#F4F6F8]/80 dark:hover:bg-slate-800/50 transition-colors cursor-pointer"
+              className="w-full flex items-center justify-between gap-4 px-5 sm:px-6 py-4 text-left rtl:text-right hover:bg-[#F4F6F8]/80 dark:hover:bg-slate-800/50 transition-colors cursor-pointer select-none touch-manipulation"
             >
               <div className="flex items-center gap-3">
                 <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[#E6F4F1] dark:bg-teal-950/70 text-[#0F766E] dark:text-teal-300">

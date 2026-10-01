@@ -30,6 +30,10 @@ export default defineConfig(() => {
               const handler = (await import('./api/admin/logout.ts')).default;
               return handler(req, res);
             }
+            if (url === '/api/likes') {
+              const handler = (await import('./api/likes.ts')).default;
+              return handler(req, res);
+            }
             next();
           });
         },

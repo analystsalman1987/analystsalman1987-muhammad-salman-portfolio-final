@@ -167,8 +167,9 @@ export function Hero({ profile, onOpenCV }: HeroProps) {
             {/* Call to action buttons */}
             <div className={`pt-2 flex flex-wrap gap-3.5 justify-center ${isRTL ? 'lg:justify-start' : 'lg:justify-start'}`}>
               <button
+                type="button"
                 onClick={onOpenCV}
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg bg-[#0F2747] hover:bg-[#16365f] text-white font-semibold text-sm transition-all shadow-sm hover:shadow cursor-pointer"
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg bg-[#0F2747] hover:bg-[#16365f] text-white font-semibold text-sm transition-all shadow-sm hover:shadow cursor-pointer select-none touch-manipulation"
               >
                 <FileDown className="w-4 h-4" />
                 <span>{isRTL ? ARABIC_TRANSLATIONS.hero.downloadCv : 'Download CV'}</span>

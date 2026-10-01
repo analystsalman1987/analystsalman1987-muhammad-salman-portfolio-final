@@ -135,17 +135,24 @@ export function CVModal({ isOpen, onClose, data }: CVModalProps) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/80 backdrop-blur-sm flex justify-center p-3 sm:p-6 print:p-0 print:bg-white print:static">
+    <div 
+      onClick={onClose}
+      className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/80 backdrop-blur-sm flex justify-center p-3 sm:p-6 print:p-0 print:bg-white print:static"
+    >
       
       {/* Modal Card */}
-      <div className="relative w-full max-w-4xl bg-slate-100 dark:bg-slate-900 rounded-2xl shadow-2xl flex flex-col my-auto border border-slate-300 dark:border-slate-800 print:border-none print:shadow-none print:m-0 print:w-full print:max-w-none">
+      <div 
+        onClick={(e) => e.stopPropagation()}
+        className="relative w-full max-w-4xl bg-slate-100 dark:bg-slate-900 rounded-2xl shadow-2xl flex flex-col my-auto border border-slate-300 dark:border-slate-800 print:border-none print:shadow-none print:m-0 print:w-full print:max-w-none"
+      >
         
         {/* Modal Toolbar (hidden on print) */}
         <div className="sticky top-0 z-20 flex items-center justify-between p-4 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 rounded-t-2xl no-print">
           <div className="flex items-center gap-2">
             <button
+              type="button"
               onClick={onClose}
-              className="p-1.5 text-slate-500 hover:text-slate-900 dark:hover:text-white rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+              className="p-1.5 text-slate-500 hover:text-slate-900 dark:hover:text-white rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer select-none touch-manipulation"
               title={isRTL ? 'إغلاق' : 'Close'}
             >
               <ArrowLeft className={`w-5 h-5 ${isRTL ? 'rotate-180' : ''}`} />
@@ -163,8 +170,9 @@ export function CVModal({ isOpen, onClose, data }: CVModalProps) {
           <div className="flex items-center gap-2">
             {/* Copy button */}
             <button
+              type="button"
               onClick={handleCopyText}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg bg-[#F4F6F8] dark:bg-slate-800 hover:bg-[#E6F4F1] dark:hover:bg-slate-700 text-[#1F2937] dark:text-slate-300 transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg bg-[#F4F6F8] dark:bg-slate-800 hover:bg-[#E6F4F1] dark:hover:bg-slate-700 text-[#1F2937] dark:text-slate-300 transition-colors cursor-pointer select-none touch-manipulation"
             >
               {copied ? <Check className="w-3.5 h-3.5 text-[#0F766E]" /> : <Copy className="w-3.5 h-3.5" />}
               <span>{copied ? (isRTL ? t.copied : 'Copied!') : (isRTL ? t.copyText : 'Copy Text')}</span>
@@ -172,8 +180,9 @@ export function CVModal({ isOpen, onClose, data }: CVModalProps) {
 
             {/* Print / Save to PDF button */}
             <button
+              type="button"
               onClick={handlePrint}
-              className="inline-flex items-center gap-1.5 px-4 py-1.5 text-xs font-bold rounded-lg bg-[#0F766E] hover:bg-[#0c625c] text-white shadow-xs transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-4 py-1.5 text-xs font-bold rounded-lg bg-[#0F766E] hover:bg-[#0c625c] text-white shadow-xs transition-colors cursor-pointer select-none touch-manipulation"
             >
               <Printer className="w-3.5 h-3.5" />
               <span>{isRTL ? t.printPdf : 'Print / Save as PDF'}</span>
@@ -181,8 +190,9 @@ export function CVModal({ isOpen, onClose, data }: CVModalProps) {
 
             {/* Close button */}
             <button
+              type="button"
               onClick={onClose}
-              className="p-1.5 text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800"
+              className="p-1.5 text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer select-none touch-manipulation"
             >
               <X className="w-5 h-5" />
             </button>
