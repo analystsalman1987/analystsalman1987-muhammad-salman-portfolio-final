@@ -87,9 +87,7 @@ export function Expertise({ expertise }: ExpertiseProps) {
       id="expertise"
       className="relative py-20 scroll-mt-20 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 transition-colors overflow-hidden"
     >
-      {/* =====================================================
-          EXISTING SECTION BACKGROUND
-         ===================================================== */}
+      {/* SECTION BACKGROUND */}
       <div
         className="absolute inset-0 pointer-events-none z-0"
         aria-hidden="true"
@@ -97,7 +95,7 @@ export function Expertise({ expertise }: ExpertiseProps) {
         <img
           src="/images/accounting_workplace.jpg"
           alt=""
-          className="w-full h-full object-cover object-center opacity-[0.20] dark:opacity-[0.14] filter contrast-105 select-none"
+          className="w-full h-full object-cover object-center opacity-[0.20] dark:opacity-[0.14] contrast-105 select-none"
           loading="lazy"
         />
 
@@ -106,9 +104,7 @@ export function Expertise({ expertise }: ExpertiseProps) {
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        {/* =====================================================
-            SECTION HEADER
-           ===================================================== */}
+        {/* SECTION HEADER */}
         <div className="flex flex-col items-start gap-1.5 max-w-3xl mb-12">
           <span className="block text-xs font-bold tracking-widest text-[#0F766E] dark:text-teal-400 uppercase">
             {isRTL ? t.tag : 'Technical Capabilities'}
@@ -125,19 +121,10 @@ export function Expertise({ expertise }: ExpertiseProps) {
           </p>
         </div>
 
-        {/* =====================================================
-            EXPERTISE GRID
-
-            Cards remain in their original positions.
-
-            Last row receives bottom safety space only when
-            expanded, so Work Experience is not covered.
-           ===================================================== */}
+        {/* EXPERTISE GRID */}
         <div
-          className={`grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5 items-start transition-[padding] duration-300 ease-out ${
-            isLastRowExpanded
-              ? 'lg:pb-[430px]'
-              : 'lg:pb-0'
+          className={`grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5 items-start transition-[padding] duration-300 ${
+            isLastRowExpanded ? 'lg:pb-[430px]' : 'lg:pb-0'
           }`}
         >
           {items.map((item, idx) => {
@@ -153,91 +140,164 @@ export function Expertise({ expertise }: ExpertiseProps) {
               t.items[idx];
 
             const title =
-              isRTL && arItem
-                ? arItem.title
-                : item.title;
+              isRTL && arItem ? arItem.title : item.title;
 
             const details =
-              (isRTL && arItem
-                ? arItem.details
-                : item.details) || [];
+              (isRTL && arItem ? arItem.details : item.details) || [];
 
-            /*
-             * Desktop:
-             * even index = LEFT
-             * odd index = RIGHT
-             */
             const isLeftColumn = idx % 2 === 0;
 
             /*
-             * Uploaded image currently used ONLY for:
-             * Professional & Coordination Skills
+             * Uploaded image:
+             * Professional & Coordination Skills only
              */
-            const hasCoordinationImage =
-              item.id === 'exp-12';
+            const hasCoordinationImage = item.id === 'exp-12';
 
             return (
               <div
                 key={item.id || idx}
                 className="relative"
               >
-                {/* =================================================
-                    MAIN CARD
-                   ================================================= */}
+                {/* ==================================================
+                    SMALL MAIN CARD
+
+                    IMPORTANT:
+                    When expanded, the side facing the large panel
+                    loses its radius + border.
+
+                    This removes the visible JOIN completely.
+                   ================================================== */}
                 <div
-                  className={`relative z-[60] rounded-xl border transition-all duration-200 ${
-                    isExpanded
-                      ? 'bg-white dark:bg-slate-800/95 border-[#0F766E]/60 dark:border-teal-500/60 shadow-[0_10px_28px_rgba(15,118,110,0.14)] ring-1 ring-[#0F766E]/20'
-                      : 'bg-[#F4F6F8] dark:bg-slate-800/40 border-slate-200/90 dark:border-slate-800 shadow-sm hover:border-[#0F766E]/40 hover:bg-slate-100/70 dark:hover:bg-slate-800/60 hover:-translate-y-[1px]'
-                  }`}
+                  className={`
+                    relative z-[60]
+                    border
+                    transition-all duration-200
+
+                    ${
+                      isExpanded
+                        ? `
+                          bg-white dark:bg-slate-800/95
+                          border-[#0F766E]/60 dark:border-teal-500/60
+                          shadow-[0_10px_28px_rgba(15,118,110,0.14)]
+                          ring-1 ring-[#0F766E]/20
+
+                          ${
+                            isLeftColumn
+                              ? 'lg:rounded-l-xl lg:rounded-r-none lg:border-r-0'
+                              : 'lg:rounded-r-xl lg:rounded-l-none lg:border-l-0'
+                          }
+                        `
+                        : `
+                          rounded-xl
+                          bg-[#F4F6F8] dark:bg-slate-800/40
+                          border-slate-200/90 dark:border-slate-800
+                          shadow-sm
+                          hover:border-[#0F766E]/40
+                          hover:bg-slate-100/70
+                          dark:hover:bg-slate-800/60
+                          hover:-translate-y-[1px]
+                        `
+                    }
+
+                    ${!isExpanded ? 'rounded-xl' : 'rounded-xl lg:rounded-none'}
+                    ${
+                      isExpanded && isLeftColumn
+                        ? 'lg:rounded-l-xl'
+                        : ''
+                    }
+                    ${
+                      isExpanded && !isLeftColumn
+                        ? 'lg:rounded-r-xl'
+                        : ''
+                    }
+                  `}
                 >
                   <button
                     type="button"
                     aria-expanded={isExpanded}
                     aria-controls={`expertise-panel-${item.id}`}
                     onClick={() => toggleExpand(item.id)}
-                    className="w-full text-left rtl:text-right p-4 sm:p-5 flex items-center justify-between gap-3 cursor-pointer select-none group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0F766E]/50 focus-visible:ring-inset rounded-xl touch-manipulation"
+                    className={`
+                      w-full
+                      text-left rtl:text-right
+                      p-4 sm:p-5
+                      flex items-center justify-between gap-3
+                      cursor-pointer select-none group
+                      focus:outline-none
+                      focus-visible:ring-2
+                      focus-visible:ring-[#0F766E]/50
+                      focus-visible:ring-inset
+                      touch-manipulation
+
+                      ${
+                        isExpanded && isLeftColumn
+                          ? 'rounded-l-xl rounded-r-none'
+                          : ''
+                      }
+
+                      ${
+                        isExpanded && !isLeftColumn
+                          ? 'rounded-r-xl rounded-l-none'
+                          : ''
+                      }
+
+                      ${!isExpanded ? 'rounded-xl' : ''}
+                    `}
                   >
                     {/* ICON + TITLE */}
                     <div className="flex items-center gap-3.5 min-w-0">
                       <div
-                        className={`w-10 h-10 rounded-lg flex items-center justify-center shrink-0 transition-all duration-200 ${
-                          isExpanded
-                            ? 'bg-[#0F766E] text-white dark:bg-teal-500 dark:text-slate-950 shadow-sm'
-                            : 'bg-[#E6F4F1] dark:bg-teal-950/70 text-[#0F766E] dark:text-teal-300 group-hover:scale-105'
-                        }`}
+                        className={`
+                          w-10 h-10 rounded-lg
+                          flex items-center justify-center shrink-0
+                          transition-all duration-200
+
+                          ${
+                            isExpanded
+                              ? 'bg-[#0F766E] text-white dark:bg-teal-500 dark:text-slate-950 shadow-sm'
+                              : 'bg-[#E6F4F1] dark:bg-teal-950/70 text-[#0F766E] dark:text-teal-300 group-hover:scale-105'
+                          }
+                        `}
                       >
                         <Icon className="w-5 h-5" />
                       </div>
 
                       <h3
-                        className={`text-sm sm:text-base font-bold transition-colors leading-snug ${
-                          isExpanded
-                            ? 'text-[#0F766E] dark:text-teal-300'
-                            : 'text-[#0F2747] dark:text-slate-100 group-hover:text-[#0F766E] dark:group-hover:text-teal-400'
-                        }`}
+                        className={`
+                          text-sm sm:text-base
+                          font-bold
+                          transition-colors
+                          leading-snug
+
+                          ${
+                            isExpanded
+                              ? 'text-[#0F766E] dark:text-teal-300'
+                              : 'text-[#0F2747] dark:text-slate-100 group-hover:text-[#0F766E] dark:group-hover:text-teal-400'
+                          }
+                        `}
                       >
                         {title}
                       </h3>
                     </div>
 
-                    {/* =================================================
-                        DETAILS / COLLAPSE
-
-                        LEFT CARD:
-                        Details →
-
-                        RIGHT CARD:
-                        ← Details
-                       ================================================= */}
+                    {/* DETAILS / COLLAPSE */}
                     <div
-                      className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded text-[10px] sm:text-[11px] font-medium shrink-0 transition-all ${
-                        isExpanded
-                          ? 'bg-teal-600/[0.10] text-[#0F766E] dark:text-teal-300 border border-teal-500/40'
-                          : 'bg-teal-500/[0.05] text-[#0F766E] dark:text-teal-300 border border-teal-500/20 group-hover:bg-teal-500/[0.10]'
-                      }`}
+                      className={`
+                        inline-flex items-center gap-1.5
+                        px-2.5 py-1
+                        rounded
+                        text-[10px] sm:text-[11px]
+                        font-medium shrink-0
+                        transition-all
+
+                        ${
+                          isExpanded
+                            ? 'bg-teal-600/[0.10] text-[#0F766E] dark:text-teal-300 border border-teal-500/40'
+                            : 'bg-teal-500/[0.05] text-[#0F766E] dark:text-teal-300 border border-teal-500/20 group-hover:bg-teal-500/[0.10]'
+                        }
+                      `}
                     >
-                      {/* RIGHT CARD DESKTOP */}
+                      {/* RIGHT COLUMN */}
                       {!isLeftColumn && (
                         <span
                           className="hidden lg:inline text-[15px] leading-none font-bold"
@@ -257,7 +317,7 @@ export function Expertise({ expertise }: ExpertiseProps) {
                             : 'Details'}
                       </span>
 
-                      {/* LEFT CARD DESKTOP */}
+                      {/* LEFT COLUMN */}
                       {isLeftColumn && (
                         <span
                           className="hidden lg:inline text-[15px] leading-none font-bold"
@@ -269,26 +329,32 @@ export function Expertise({ expertise }: ExpertiseProps) {
 
                       {/* MOBILE */}
                       <ChevronDown
-                        className={`lg:hidden w-3.5 h-3.5 transition-transform duration-300 ${
-                          isExpanded
-                            ? 'rotate-180'
-                            : ''
-                        }`}
+                        className={`
+                          lg:hidden
+                          w-3.5 h-3.5
+                          transition-transform duration-300
+                          ${isExpanded ? 'rotate-180' : ''}
+                        `}
                       />
                     </div>
                   </button>
                 </div>
 
-                {/* =================================================
-                    MOBILE / TABLET DETAIL
-                   ================================================= */}
+                {/* ==================================================
+                    MOBILE / TABLET
+                   ================================================== */}
                 <div
                   id={`expertise-panel-${item.id}`}
-                  className={`lg:hidden grid transition-all duration-300 ease-in-out ${
-                    isExpanded
-                      ? 'grid-rows-[1fr] opacity-100 mt-2'
-                      : 'grid-rows-[0fr] opacity-0 mt-0'
-                  }`}
+                  className={`
+                    lg:hidden grid
+                    transition-all duration-300 ease-in-out
+
+                    ${
+                      isExpanded
+                        ? 'grid-rows-[1fr] opacity-100 mt-2'
+                        : 'grid-rows-[0fr] opacity-0 mt-0'
+                    }
+                  `}
                 >
                   <div className="overflow-hidden">
                     <div className="rounded-xl border border-[#0F766E]/30 dark:border-teal-500/30 bg-white/95 dark:bg-slate-900/95 shadow-lg p-4 sm:p-5">
@@ -308,68 +374,78 @@ export function Expertise({ expertise }: ExpertiseProps) {
                   </div>
                 </div>
 
-                {/* =================================================
-                    DESKTOP EXPANDED PANEL
+                {/* ==================================================
+                    DESKTOP LARGE PANEL
 
-                    NO:
-                    - diamond
-                    - arrow connector
-                    - separate connector box
-                    - repeated heading
+                    KEY FIX:
+                    There is NO GAP.
 
-                    The panel sits directly against the selected
-                    card and uses a continuous teal outer edge.
-                   ================================================= */}
+                    Left card:
+                    panel begins exactly at 100% of card width.
+
+                    Right card:
+                    panel ends exactly at 100% of card width.
+
+                    Inner borders/radii are removed.
+                    Therefore small + large area appears as ONE piece.
+                   ================================================== */}
                 <div
-                  className={`hidden lg:block absolute top-0 z-50 w-[calc(100%+1.25rem)] transition-all duration-300 ease-out ${
-                    isLeftColumn
-                      ? 'left-[calc(100%+1.25rem)]'
-                      : 'right-[calc(100%+1.25rem)]'
-                  } ${
-                    isExpanded
-                      ? 'opacity-100 visible translate-x-0 pointer-events-auto'
-                      : isLeftColumn
-                        ? 'opacity-0 invisible -translate-x-2 pointer-events-none'
-                        : 'opacity-0 invisible translate-x-2 pointer-events-none'
-                  }`}
+                  className={`
+                    hidden lg:block
+                    absolute top-0
+                    z-50
+                    w-[calc(100%+1.25rem)]
+                    transition-all duration-300 ease-out
+
+                    ${
+                      isLeftColumn
+                        ? 'left-full'
+                        : 'right-full'
+                    }
+
+                    ${
+                      isExpanded
+                        ? 'opacity-100 visible translate-x-0 pointer-events-auto'
+                        : isLeftColumn
+                          ? 'opacity-0 invisible -translate-x-2 pointer-events-none'
+                          : 'opacity-0 invisible translate-x-2 pointer-events-none'
+                    }
+                  `}
                   aria-hidden={!isExpanded}
                 >
-                  {/* =================================================
-                      SEAMLESS EXTENSION STRIP
-
-                      This visually extends the selected card's
-                      teal border directly into the large panel.
-
-                      No arrow / diamond / middle box.
-                     ================================================= */}
                   <div
-                    className={`absolute top-0 h-[102px] w-[22px] z-40 bg-white dark:bg-slate-800/95 ${
-                      isLeftColumn
-                        ? '-left-[21px] border-y border-[#0F766E]/60 dark:border-teal-500/60'
-                        : '-right-[21px] border-y border-[#0F766E]/60 dark:border-teal-500/60'
-                    }`}
-                    aria-hidden="true"
-                  />
+                    className={`
+                      relative
+                      min-h-[320px]
+                      overflow-hidden
+                      bg-white dark:bg-slate-900
 
-                  {/* =================================================
-                      LARGE CONTINUOUS DETAIL PANEL
-                     ================================================= */}
-                  <div
-                    className={`relative min-h-[320px] overflow-hidden bg-white dark:bg-slate-900 shadow-[0_18px_45px_rgba(15,39,71,0.18)] dark:shadow-[0_18px_45px_rgba(0,0,0,0.38)] ${
-                      isLeftColumn
-                        ? 'rounded-r-xl rounded-bl-xl border-y border-r border-[#0F766E]/60 dark:border-teal-500/60'
-                        : 'rounded-l-xl rounded-br-xl border-y border-l border-[#0F766E]/60 dark:border-teal-500/60'
-                    }`}
+                      shadow-[0_18px_45px_rgba(15,39,71,0.18)]
+                      dark:shadow-[0_18px_45px_rgba(0,0,0,0.38)]
+
+                      border-[#0F766E]/60
+                      dark:border-teal-500/60
+
+                      ${
+                        isLeftColumn
+                          ? `
+                            rounded-r-xl
+                            rounded-l-none
+                            border-y border-r
+                            border-l-0
+                          `
+                          : `
+                            rounded-l-xl
+                            rounded-r-none
+                            border-y border-l
+                            border-r-0
+                          `
+                      }
+                    `}
                   >
-                    {/* =================================================
-                        PROFESSIONAL & COORDINATION SKILLS IMAGE
-
-                        Uploaded file:
-                        /images/expertise/professional-coordination.jpg
-
-                        Right = visible / stronger
-                        Left = fades smoothly into text area
-                       ================================================= */}
+                    {/* ==================================================
+                        PROFESSIONAL & COORDINATION IMAGE
+                       ================================================== */}
                     {hasCoordinationImage && (
                       <>
                         <div
@@ -383,14 +459,14 @@ export function Expertise({ expertise }: ExpertiseProps) {
                             loading="lazy"
                           />
 
-                          {/* IMAGE FADES TOWARD LEFT */}
+                          {/* LEFT FADE */}
                           <div className="absolute inset-0 bg-gradient-to-r from-white via-white/30 to-transparent dark:from-slate-900 dark:via-slate-900/38 dark:to-transparent" />
 
-                          {/* SOFT TOP / BOTTOM BLEND */}
+                          {/* TOP / BOTTOM SOFT BLEND */}
                           <div className="absolute inset-0 bg-gradient-to-b from-white/5 via-transparent to-white/10 dark:from-slate-900/10 dark:via-transparent dark:to-slate-900/15" />
                         </div>
 
-                        {/* TEXT-SIDE FADE */}
+                        {/* LONG TEXT-SIDE MERGE */}
                         <div
                           className="absolute inset-0 z-[1] pointer-events-none bg-gradient-to-r from-white from-[0%] via-white/95 via-[38%] to-transparent to-[74%] dark:from-slate-900 dark:via-slate-900/95 dark:to-transparent"
                           aria-hidden="true"
@@ -398,18 +474,19 @@ export function Expertise({ expertise }: ExpertiseProps) {
                       </>
                     )}
 
-                    {/* =================================================
-                        DETAIL CONTENT
-
-                        No repeated title.
-                        Bullets begin directly inside extension.
-                       ================================================= */}
+                    {/* ==================================================
+                        DETAILS
+                       ================================================== */}
                     <div
-                      className={`relative z-10 p-6 ${
-                        hasCoordinationImage
-                          ? 'pr-[38%]'
-                          : ''
-                      }`}
+                      className={`
+                        relative z-10 p-6
+
+                        ${
+                          hasCoordinationImage
+                            ? 'pr-[38%]'
+                            : ''
+                        }
+                      `}
                     >
                       <ul className="space-y-3">
                         {details.map((detail, dIdx) => (
@@ -424,24 +501,6 @@ export function Expertise({ expertise }: ExpertiseProps) {
                         ))}
                       </ul>
                     </div>
-
-                    {/* =================================================
-                        CONTINUOUS GREEN OUTER EDGE
-
-                        LEFT card -> panel is on RIGHT,
-                        so left panel edge continues selected card.
-
-                        RIGHT card -> panel is on LEFT,
-                        so right panel edge continues selected card.
-                       ================================================= */}
-                    <div
-                      className={`absolute top-0 bottom-0 w-[3px] bg-[#0F766E]/65 dark:bg-teal-400/55 z-30 ${
-                        isLeftColumn
-                          ? 'left-0'
-                          : 'right-0'
-                      }`}
-                      aria-hidden="true"
-                    />
                   </div>
                 </div>
               </div>
