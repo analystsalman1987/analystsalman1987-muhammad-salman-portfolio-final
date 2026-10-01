@@ -63,7 +63,7 @@ export function Highlights({ highlights }: HighlightsProps) {
             {isRTL ? t.tag : 'Executive Overview'}
           </span>
           <div>
-            <h2 className="main-heading-3d text-2xl font-bold sm:text-3xl tracking-tight">
+            <h2 className="main-heading-3d text-3xl font-extrabold sm:text-4xl tracking-tight">
               {isRTL ? t.title : 'Professional Highlights'}
             </h2>
           </div>

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { 
   Calendar, 
   MapPin, 
@@ -131,9 +131,31 @@ const defaultErthalJob: WorkExperienceItem = {
 export function Experience({ experience, isSelected = false, onToggleSelect }: ExperienceProps) {
   // All cards collapsed by default
   const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set());
-  const [openExperienceGroup, setOpenExperienceGroup] = useState<'full-time' | 'remote' | null>(null);
+  const [openCategories, setOpenCategories] = useState<Set<'full-time' | 'remote'>>(new Set());
   const { isRTL } = useLanguage();
   const t = ARABIC_TRANSLATIONS.experience;
+
+  useEffect(() => {
+    const handleShowCategories = () => {
+      setOpenCategories(new Set());
+    };
+    const handleOpenFullTime = () => {
+      setOpenCategories(new Set(['full-time']));
+    };
+    const handleOpenRemote = () => {
+      setOpenCategories(new Set(['remote']));
+    };
+
+    window.addEventListener('experience-show-categories', handleShowCategories);
+    window.addEventListener('experience-open-full-time', handleOpenFullTime);
+    window.addEventListener('experience-open-remote', handleOpenRemote);
+
+    return () => {
+      window.removeEventListener('experience-show-categories', handleShowCategories);
+      window.removeEventListener('experience-open-full-time', handleOpenFullTime);
+      window.removeEventListener('experience-open-remote', handleOpenRemote);
+    };
+  }, []);
 
   // 1. Separate formal career timeline jobs (strictly the 6 formal jobs)
   const formalJobs = (experience || []).filter(
@@ -190,13 +212,34 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
     });
   };
 
-  const allExpanded = allRenderedJobs.length > 0 && expandedIds.size === allRenderedJobs.length;
+  const toggleCategory = (category: 'full-time' | 'remote') => {
+    setOpenCategories((prev) => {
+      const next = new Set(prev);
+      if (next.has(category)) {
+        next.delete(category);
+      } else {
+        next.add(category);
+      }
+      return next;
+    });
+  };
+
+  const isFullTimeOpen = openCategories.has('full-time');
+  const isRemoteOpen = openCategories.has('remote');
+
+  const allExpanded =
+    isFullTimeOpen &&
+    isRemoteOpen &&
+    allRenderedJobs.length > 0 &&
+    expandedIds.size === allRenderedJobs.length;
 
   const toggleAll = () => {
     if (allExpanded) {
       setExpandedIds(new Set());
+      setOpenCategories(new Set());
     } else {
       setExpandedIds(new Set(allRenderedJobs.map((j) => j.id)));
+      setOpenCategories(new Set(['full-time', 'remote']));
     }
   };
 
@@ -205,15 +248,21 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
     const id = (job.id || '').toLowerCase();
 
     if (comp.includes('aali') || id.includes('aali')) {
-      return 'A service-based company providing water boiler and spare parts supply, arrangement, installation, and related support services.';
+      return isRTL
+        ? 'شركة خدمية متخصصة في توريد وتأمين وتركيب سخانات المياه وقطع الغيار وخدمات الدعم الفني المرتبطة بها.'
+        : 'A service-based company providing water boiler and spare parts supply, arrangement, installation, and related support services.';
     }
 
     if (comp.includes('peregrine') || id.includes('peregrine')) {
-      return 'A service-based business involved in land/property acquisition and resale, including renovation-related activities.';
+      return isRTL
+        ? 'شركة خدمية تعمل في مجال الاستحواذ على الأراضي والعقارات وإعادة بيعها، بما في ذلك أعمال التجديد والتطوير العقاري.'
+        : 'A service-based business involved in land/property acquisition and resale, including renovation-related activities.';
     }
 
     if (comp.includes('erthal') || id.includes('erthal')) {
-      return 'A taxi transportation company where drivers make weekly cash deposits and submit expense bills, supported by weekly and monthly accounting and operational reporting.';
+      return isRTL
+        ? 'شركة نقل وتوجيه مركبات الأجرة، يقوم السائقون فيها بإيداعات نقدية أسبوعية وتقديم فواتير المصروفات، مدعومة بتقارير محاسبية وتشغيلية أسبوعية وشهرية.'
+        : 'A taxi transportation company where drivers make weekly cash deposits and submit expense bills, supported by weekly and monthly accounting and operational reporting.';
     }
 
     return '';
@@ -295,7 +344,9 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
 
                 {remoteOverview && (
                   <p className="pt-1 text-xs sm:text-sm leading-relaxed text-[#64748B] dark:text-slate-400 max-w-xl">
-                    <span className="font-bold text-[#0F2747] dark:text-slate-200">Company Overview: </span>
+                    <span className="font-bold text-[#0F2747] dark:text-slate-200">
+                      {isRTL ? 'نبذة عن الشركة: ' : 'Company Overview: '}
+                    </span>
                     {remoteOverview}
                   </p>
                 )}
@@ -552,12 +603,8 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
           <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-900/30 overflow-hidden shadow-xs">
             <button
               type="button"
-              onClick={() =>
-                setOpenExperienceGroup((current) =>
-                  current === 'full-time' ? null : 'full-time'
-                )
-              }
-              aria-expanded={openExperienceGroup === 'full-time'}
+              onClick={() => toggleCategory('full-time')}
+              aria-expanded={isFullTimeOpen}
               className="w-full flex items-center justify-between gap-4 px-5 sm:px-6 py-4 text-left hover:bg-[#F4F6F8]/80 dark:hover:bg-slate-800/50 transition-colors cursor-pointer"
             >
               <div className="flex items-center gap-3">
@@ -575,14 +622,14 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
               </div>
               <ChevronDown
                 className={`w-5 h-5 shrink-0 text-[#0F766E] dark:text-teal-400 transition-transform duration-300 ${
-                  openExperienceGroup === 'full-time' ? 'rotate-180' : ''
+                  isFullTimeOpen ? 'rotate-180' : ''
                 }`}
               />
             </button>
 
             <div
               className={`grid transition-all duration-300 ease-in-out ${
-                openExperienceGroup === 'full-time'
+                isFullTimeOpen
                   ? 'grid-rows-[1fr] opacity-100 border-t border-slate-200/80 dark:border-slate-800/80'
                   : 'grid-rows-[0fr] opacity-0'
               }`}
@@ -601,12 +648,8 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
           <div id="experience-remote" className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-900/30 overflow-hidden shadow-xs scroll-mt-24">
             <button
               type="button"
-              onClick={() =>
-                setOpenExperienceGroup((current) =>
-                  current === 'remote' ? null : 'remote'
-                )
-              }
-              aria-expanded={openExperienceGroup === 'remote'}
+              onClick={() => toggleCategory('remote')}
+              aria-expanded={isRemoteOpen}
               className="w-full flex items-center justify-between gap-4 px-5 sm:px-6 py-4 text-left hover:bg-[#F4F6F8]/80 dark:hover:bg-slate-800/50 transition-colors cursor-pointer"
             >
               <div className="flex items-center gap-3">
@@ -624,14 +667,14 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
               </div>
               <ChevronDown
                 className={`w-5 h-5 shrink-0 text-[#0F766E] dark:text-teal-400 transition-transform duration-300 ${
-                  openExperienceGroup === 'remote' ? 'rotate-180' : ''
+                  isRemoteOpen ? 'rotate-180' : ''
                 }`}
               />
             </button>
 
             <div
               className={`grid transition-all duration-300 ease-in-out ${
-                openExperienceGroup === 'remote'
+                isRemoteOpen
                   ? 'grid-rows-[1fr] opacity-100 border-t border-slate-200/80 dark:border-slate-800/80'
                   : 'grid-rows-[0fr] opacity-0'
               }`}

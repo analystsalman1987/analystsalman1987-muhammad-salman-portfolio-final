@@ -195,7 +195,7 @@ export function Software(_props?: SoftwareProps) {
             </span>
 
             <div>
-              <h2 className="main-heading-3d text-3xl font-extrabold tracking-tight sm:text-4xl">
+              <h2 className="main-heading-3d text-3xl font-extrabold sm:text-4xl tracking-tight">
                 ERP Systems &amp; Accounting Software
               </h2>
             </div>

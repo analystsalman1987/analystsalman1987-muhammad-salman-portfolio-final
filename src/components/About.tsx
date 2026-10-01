@@ -42,22 +42,22 @@ export function About({ profile: _profile }: AboutProps) {
           className="
             h-full w-full
             object-cover object-center
-            opacity-[0.52]
-            dark:opacity-[0.20]
+            opacity-[0.22]
+            dark:opacity-[0.14]
           "
         />
 
-        {/* Soft light green/teal treatment */}
+        {/* Soft light clean teal/white treatment */}
         <div
           className="
             absolute inset-0
             bg-gradient-to-r
-            from-[#edf8f4]/80
-            via-[#edf8f4]/67
-            to-[#e8f5f1]/42
-            dark:from-slate-900/92
-            dark:via-slate-900/84
-            dark:to-slate-900/72
+            from-[#f9fbfb]/96
+            via-[#f4faf7]/90
+            to-[#edf7f4]/80
+            dark:from-slate-900/96
+            dark:via-slate-900/90
+            dark:to-slate-900/80
           "
         />
       </div>
@@ -209,19 +209,29 @@ export function About({ profile: _profile }: AboutProps) {
               {/* YEARS EXPERIENCE */}
               <div
                 className="
+                  group
                   flex min-h-[145px]
                   flex-col
                   items-center
                   justify-center
-                  rounded-[14px]
-                  border border-slate-200/80
-                  bg-white/88
+                  rounded-xl
+                  border border-slate-200/90
+                  bg-white/95
                   px-3 py-5
                   text-center
-                  shadow-[0_8px_24px_rgba(15,23,42,0.07)]
-                  backdrop-blur-[2px]
-                  dark:border-slate-700
-                  dark:bg-slate-800/82
+                  shadow-[0_6px_18px_rgba(15,23,42,0.06)]
+                  backdrop-blur-xs
+                  transition-all
+                  duration-300
+                  ease-out
+                  hover:-translate-y-1.5
+                  hover:border-[#087d69]/55
+                  hover:shadow-[0_18px_38px_rgba(8,125,105,0.18)]
+                  dark:border-slate-700/80
+                  dark:bg-slate-800/90
+                  dark:hover:border-teal-400/60
+                  dark:hover:shadow-[0_18px_38px_rgba(20,184,166,0.16)]
+                  cursor-default
                 "
               >
                 <div
@@ -232,6 +242,9 @@ export function About({ profile: _profile }: AboutProps) {
                     rounded-full
                     bg-[#e7f5f1]
                     text-[#087d69]
+                    transition-transform
+                    duration-300
+                    group-hover:scale-110
                     dark:bg-teal-950/70
                     dark:text-teal-300
                   "
@@ -266,19 +279,29 @@ export function About({ profile: _profile }: AboutProps) {
               {/* MBA / BBA */}
               <div
                 className="
+                  group
                   flex min-h-[145px]
                   flex-col
                   items-center
                   justify-center
-                  rounded-[14px]
-                  border border-slate-200/80
-                  bg-white/88
+                  rounded-xl
+                  border border-slate-200/90
+                  bg-white/95
                   px-3 py-5
                   text-center
-                  shadow-[0_8px_24px_rgba(15,23,42,0.07)]
-                  backdrop-blur-[2px]
-                  dark:border-slate-700
-                  dark:bg-slate-800/82
+                  shadow-[0_6px_18px_rgba(15,23,42,0.06)]
+                  backdrop-blur-xs
+                  transition-all
+                  duration-300
+                  ease-out
+                  hover:-translate-y-1.5
+                  hover:border-[#087d69]/55
+                  hover:shadow-[0_18px_38px_rgba(8,125,105,0.18)]
+                  dark:border-slate-700/80
+                  dark:bg-slate-800/90
+                  dark:hover:border-teal-400/60
+                  dark:hover:shadow-[0_18px_38px_rgba(20,184,166,0.16)]
+                  cursor-default
                 "
               >
                 <div
@@ -289,6 +312,9 @@ export function About({ profile: _profile }: AboutProps) {
                     rounded-full
                     bg-[#e7f5f1]
                     text-[#087d69]
+                    transition-transform
+                    duration-300
+                    group-hover:scale-110
                     dark:bg-teal-950/70
                     dark:text-teal-300
                   "
@@ -325,19 +351,29 @@ export function About({ profile: _profile }: AboutProps) {
               {/* ZATCA */}
               <div
                 className="
+                  group
                   flex min-h-[145px]
                   flex-col
                   items-center
                   justify-center
-                  rounded-[14px]
-                  border border-slate-200/80
-                  bg-white/88
+                  rounded-xl
+                  border border-slate-200/90
+                  bg-white/95
                   px-3 py-5
                   text-center
-                  shadow-[0_8px_24px_rgba(15,23,42,0.07)]
-                  backdrop-blur-[2px]
-                  dark:border-slate-700
-                  dark:bg-slate-800/82
+                  shadow-[0_6px_18px_rgba(15,23,42,0.06)]
+                  backdrop-blur-xs
+                  transition-all
+                  duration-300
+                  ease-out
+                  hover:-translate-y-1.5
+                  hover:border-[#087d69]/55
+                  hover:shadow-[0_18px_38px_rgba(8,125,105,0.18)]
+                  dark:border-slate-700/80
+                  dark:bg-slate-800/90
+                  dark:hover:border-teal-400/60
+                  dark:hover:shadow-[0_18px_38px_rgba(20,184,166,0.16)]
+                  cursor-default
                 "
               >
                 <div
@@ -348,6 +384,9 @@ export function About({ profile: _profile }: AboutProps) {
                     rounded-full
                     bg-[#e7f5f1]
                     text-[#087d69]
+                    transition-transform
+                    duration-300
+                    group-hover:scale-110
                     dark:bg-teal-950/70
                     dark:text-teal-300
                   "
@@ -417,21 +456,21 @@ export function About({ profile: _profile }: AboutProps) {
               "
               style={{
                 WebkitMaskImage:
-                  'radial-gradient(ellipse 62% 54% at 50% 46%, black 28%, rgba(0,0,0,0.85) 48%, rgba(0,0,0,0.35) 70%, transparent 95%)',
+                  'radial-gradient(ellipse 56% 48% at 50% 46%, black 22%, rgba(0,0,0,0.85) 44%, rgba(0,0,0,0.35) 68%, transparent 95%)',
                 maskImage:
-                  'radial-gradient(ellipse 62% 54% at 50% 46%, black 28%, rgba(0,0,0,0.85) 48%, rgba(0,0,0,0.35) 70%, transparent 95%)',
+                  'radial-gradient(ellipse 56% 48% at 50% 46%, black 22%, rgba(0,0,0,0.85) 44%, rgba(0,0,0,0.35) 68%, transparent 95%)',
               }}
             >
               <img
-                src="/images/accounting_workplace.jpg"
+                src="/images/about-financial-reporting.png"
                 alt="Accounting and finance professional workspace"
                 className="
                   absolute inset-0
                   h-full w-full
                   object-cover object-center
-                  opacity-[0.92]
-                  filter brightness-[1.03] contrast-[1.01]
-                  dark:opacity-[0.80]
+                  opacity-[0.84]
+                  filter brightness-[1.08] contrast-[0.97]
+                  dark:opacity-[0.76]
                 "
                 loading="lazy"
               />
@@ -441,13 +480,13 @@ export function About({ profile: _profile }: AboutProps) {
                 className="
                   pointer-events-none
                   absolute inset-x-0 top-0
-                  h-[22%]
+                  h-[28%]
                   bg-gradient-to-b
-                  from-[#edf8f4]/80
-                  via-[#edf8f4]/25
+                  from-[#f9fbfb]/95
+                  via-[#f4faf7]/50
                   to-transparent
-                  dark:from-slate-900/75
-                  dark:via-slate-900/20
+                  dark:from-slate-900/92
+                  dark:via-slate-900/40
                   dark:to-transparent
                 "
               />
@@ -457,11 +496,12 @@ export function About({ profile: _profile }: AboutProps) {
                 className="
                   pointer-events-none
                   absolute inset-y-0 right-0
-                  w-[14%]
+                  w-[20%]
                   bg-gradient-to-l
-                  from-[#edf8f4]/60
+                  from-[#f9fbfb]/90
+                  via-[#f4faf7]/40
                   to-transparent
-                  dark:from-slate-900/55
+                  dark:from-slate-900/85
                   dark:to-transparent
                 "
               />
@@ -471,11 +511,12 @@ export function About({ profile: _profile }: AboutProps) {
                 className="
                   pointer-events-none
                   absolute inset-y-0 left-0
-                  w-[14%]
+                  w-[20%]
                   bg-gradient-to-r
-                  from-[#edf8f4]/60
+                  from-[#f9fbfb]/90
+                  via-[#f4faf7]/40
                   to-transparent
-                  dark:from-slate-900/55
+                  dark:from-slate-900/85
                   dark:to-transparent
                 "
               />
@@ -487,8 +528,8 @@ export function About({ profile: _profile }: AboutProps) {
                   absolute inset-x-0 bottom-0
                   h-[48%]
                   bg-gradient-to-t
-                  from-[#082f3e]/88
-                  via-[#0a3a49]/50
+                  from-[#052633]/96
+                  via-[#083344]/65
                   to-transparent
                 "
               />
@@ -510,13 +551,13 @@ export function About({ profile: _profile }: AboutProps) {
                   pointer-events-none
                   absolute inset-0 -z-10
                   bg-gradient-to-t
-                  from-[#082f3e]/92
-                  via-[#0a3a49]/65
+                  from-[#052633]/96
+                  via-[#083344]/80
                   to-transparent
                 "
                 style={{
-                  WebkitMaskImage: 'radial-gradient(ellipse 85% 90% at 50% 100%, black 50%, rgba(0,0,0,0.6) 80%, transparent 100%)',
-                  maskImage: 'radial-gradient(ellipse 85% 90% at 50% 100%, black 50%, rgba(0,0,0,0.6) 80%, transparent 100%)',
+                  WebkitMaskImage: 'radial-gradient(ellipse 90% 92% at 50% 100%, black 55%, rgba(0,0,0,0.7) 82%, transparent 100%)',
+                  maskImage: 'radial-gradient(ellipse 90% 92% at 50% 100%, black 55%, rgba(0,0,0,0.7) 82%, transparent 100%)',
                 }}
               />
 
@@ -525,8 +566,9 @@ export function About({ profile: _profile }: AboutProps) {
                   text-[12px] sm:text-[13px]
                   font-extrabold
                   uppercase
-                  tracking-[0.09em]
+                  tracking-[0.1em]
                   text-[#35d3b4]
+                  drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]
                 "
               >
                 {isRTL
@@ -539,10 +581,11 @@ export function About({ profile: _profile }: AboutProps) {
               <p
                 className="
                   max-w-[610px]
-                  text-[12px] sm:text-[13px]
-                  font-medium
-                  leading-[1.7]
+                  text-[13px] sm:text-[14px]
+                  font-bold
+                  leading-[1.75]
                   text-white
+                  drop-shadow-[0_1.5px_3px_rgba(0,0,0,0.85)]
                 "
               >
                 {isRTL

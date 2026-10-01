@@ -121,7 +121,7 @@ export function Hero({ profile, onOpenCV }: HeroProps) {
             </div>
 
             {/* Compact Professional Current Company Card */}
-            <div className="mt-4 sm:mt-5 px-4 py-3 rounded-xl bg-white/92 dark:bg-slate-800/90 border border-slate-200/90 dark:border-slate-700/80 shadow-md text-center max-w-[280px] sm:max-w-[300px] w-full">
+            <div className="mt-4 sm:mt-5 px-4 py-3 rounded-xl bg-white/95 dark:bg-slate-800/90 border border-slate-200/90 dark:border-slate-700/80 shadow-[0_6px_18px_rgba(15,23,42,0.06)] backdrop-blur-xs transition-all duration-300 ease-out hover:-translate-y-1.5 hover:border-[#087d69]/55 hover:shadow-[0_18px_38px_rgba(8,125,105,0.18)] dark:hover:border-teal-400/60 dark:hover:shadow-[0_18px_38px_rgba(20,184,166,0.16)] text-center max-w-[280px] sm:max-w-[300px] w-full cursor-default select-none">
               <div className="text-[13px] sm:text-sm font-extrabold leading-snug tracking-tight hero-company-3d">
                 {isRTL ? (ARABIC_TRANSLATIONS.hero.companyArabic || 'شركة أحمد يحيى اليامي للمقاولات') : 'Ahmed Yahya Alyami Contracting Co.'}
               </div>

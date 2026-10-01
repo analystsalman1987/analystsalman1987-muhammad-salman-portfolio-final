@@ -433,7 +433,7 @@ export const ARABIC_TRANSLATIONS = {
         role: 'محاسب عن بُعد / دعم محاسبي',
         company: 'Aali Services Company',
         companyArabic: 'شركة عالي للخدمات',
-        location: 'مكة المكرمة، المملكة العربية السعودية',
+        location: 'جدة، المملكة العربية السعودية',
         period: 'عن بُعد / دوام جزئي',
         isCurrent: true,
         responsibilities: [
@@ -467,7 +467,7 @@ export const ARABIC_TRANSLATIONS = {
         role: 'محاسب عن بُعد / دعم محاسبي',
         company: 'Erthal Company',
         companyArabic: 'شركة إرثال',
-        location: 'المملكة العربية السعودية',
+        location: 'جدة، المملكة العربية السعودية',
         period: 'عن بُعد / دوام جزئي',
         isCurrent: false,
         responsibilities: [

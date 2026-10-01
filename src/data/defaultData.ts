@@ -376,7 +376,7 @@ export const DEFAULT_APP_DATA: AppData = {
       id: 'job-aali',
       role: 'Remote Accountant / Accounting Support',
       company: 'Aali Services Company',
-      location: 'Makkah, Saudi Arabia',
+      location: 'Jeddah, Saudi Arabia',
       period: 'Remote / Part-Time',
       isCurrent: true,
       responsibilities: [
@@ -408,7 +408,7 @@ export const DEFAULT_APP_DATA: AppData = {
       id: 'job-erthal',
       role: 'Remote Accountant / Accounting Support',
       company: 'Erthal Company',
-      location: 'Saudi Arabia',
+      location: 'Jeddah, Saudi Arabia',
       period: 'Remote / Part-Time',
       isCurrent: false,
       responsibilities: [
