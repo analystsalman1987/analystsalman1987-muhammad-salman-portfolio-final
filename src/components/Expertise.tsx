@@ -57,24 +57,20 @@ const defaultIconById: Record<string, LucideIcon> = {
 };
 
 /*
-  EXPERTISE IMAGES
-
-  exp-3 — General Ledger & Reconciliation
-  intentionally has no image for now.
-*/
+ * EXACT IMAGE PATHS FROM public/images
+ */
 const expertiseImages: Record<string, string> = {
-  'exp-1': '/images/Accounts Receivable & Collections.png',
-  'exp-2': '/images/Accounts Payable & Supplier Management.png',
-
+  'exp-1': '/images/Accounts Receivable & Collections.png.webp',
+  'exp-2': '/images/Accounts Payable & Supplier Management.png.webp',
+  'exp-3': '/images/General Ledger & Reconciliation.png',
   'exp-4': '/images/Financial Reporting & Month-End Closing.png',
   'exp-5': '/images/ZATCA VAT & Tax Compliance.png',
   'exp-6': '/images/Sales & Purchase Accounting Cycle.png',
-  'exp-7': '/images/Inventory & Costing.png',
+  'exp-7': '/images/warehouse inventory, stock sheets, costing documents.png',
   'exp-8': '/images/Cash & Petty Cash Management.png',
   'exp-9': '/images/ERP & Accounting Systems.png',
   'exp-10': '/images/Advanced Excel & Data Management.png',
   'exp-11': '/images/Documentation & Internal Controls.png',
-
   'exp-12': '/images/professional-coordination.jpg',
 };
 
@@ -118,10 +114,8 @@ export function Expertise({ expertise }: ExpertiseProps) {
           src="/images/accounting_workplace.jpg"
           alt=""
           className="
-            w-full
-            h-full
-            object-cover
-            object-center
+            w-full h-full
+            object-cover object-center
             opacity-[0.20]
             dark:opacity-[0.14]
             contrast-105
@@ -132,8 +126,7 @@ export function Expertise({ expertise }: ExpertiseProps) {
 
         <div
           className="
-            absolute
-            inset-0
+            absolute inset-0
             bg-gradient-to-b
             from-white/80
             via-white/45
@@ -173,7 +166,7 @@ export function Expertise({ expertise }: ExpertiseProps) {
           </p>
         </div>
 
-        {/* GRID */}
+        {/* EXPERTISE GRID */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5 items-start">
           {items.map((item, idx) => {
             const isExpanded = expandedId === item.id;
@@ -186,18 +179,13 @@ export function Expertise({ expertise }: ExpertiseProps) {
               Calculator;
 
             const arItem =
-              t.items.find((x) => x.id === item.id) ||
-              t.items[idx];
+              t.items.find((x) => x.id === item.id) || t.items[idx];
 
             const title =
-              isRTL && arItem
-                ? arItem.title
-                : item.title;
+              isRTL && arItem ? arItem.title : item.title;
 
             const details =
-              (isRTL && arItem
-                ? arItem.details
-                : item.details) || [];
+              (isRTL && arItem ? arItem.details : item.details) || [];
 
             const imagePath = expertiseImages[item.id];
             const hasImage = Boolean(imagePath);
@@ -208,7 +196,6 @@ export function Expertise({ expertise }: ExpertiseProps) {
                 className={`
                   relative
                   ${isExpanded ? 'z-[100]' : 'z-10'}
-
                   ${
                     isExpanded && isLastRow
                       ? 'lg:mb-[340px]'
@@ -235,7 +222,6 @@ export function Expertise({ expertise }: ExpertiseProps) {
                           dark:border-teal-500/45
 
                           shadow-[0_10px_28px_rgba(15,118,110,0.08)]
-                          dark:shadow-[0_10px_28px_rgba(0,0,0,0.20)]
 
                           ${
                             isLeftColumn
@@ -253,7 +239,6 @@ export function Expertise({ expertise }: ExpertiseProps) {
                         `
                         : `
                           rounded-xl
-
                           bg-[#F4F6F8]
                           dark:bg-slate-800/40
 
@@ -283,6 +268,7 @@ export function Expertise({ expertise }: ExpertiseProps) {
                       w-full
                       text-left
                       rtl:text-right
+
                       p-4
                       sm:p-5
 
@@ -321,8 +307,7 @@ export function Expertise({ expertise }: ExpertiseProps) {
                     <div className="flex items-center gap-3.5 min-w-0">
                       <div
                         className={`
-                          w-10
-                          h-10
+                          w-10 h-10
                           rounded-lg
 
                           flex
@@ -330,6 +315,7 @@ export function Expertise({ expertise }: ExpertiseProps) {
                           justify-center
 
                           shrink-0
+
                           transition-all
                           duration-200
 
@@ -389,7 +375,7 @@ export function Expertise({ expertise }: ExpertiseProps) {
                       </h3>
                     </div>
 
-                    {/* DETAILS BUTTON */}
+                    {/* DETAILS / COLLAPSE */}
                     <div
                       className={`
                         inline-flex
@@ -437,13 +423,7 @@ export function Expertise({ expertise }: ExpertiseProps) {
                     >
                       {!isLeftColumn && (
                         <span
-                          className="
-                            hidden
-                            lg:inline
-                            text-[15px]
-                            leading-none
-                            font-bold
-                          "
+                          className="hidden lg:inline text-[15px] leading-none font-bold"
                           aria-hidden="true"
                         >
                           ←
@@ -462,13 +442,7 @@ export function Expertise({ expertise }: ExpertiseProps) {
 
                       {isLeftColumn && (
                         <span
-                          className="
-                            hidden
-                            lg:inline
-                            text-[15px]
-                            leading-none
-                            font-bold
-                          "
+                          className="hidden lg:inline text-[15px] leading-none font-bold"
                           aria-hidden="true"
                         >
                           →
@@ -478,11 +452,9 @@ export function Expertise({ expertise }: ExpertiseProps) {
                       <ChevronDown
                         className={`
                           lg:hidden
-                          w-3.5
-                          h-3.5
+                          w-3.5 h-3.5
                           transition-transform
                           duration-300
-
                           ${isExpanded ? 'rotate-180' : ''}
                         `}
                       />
@@ -496,6 +468,7 @@ export function Expertise({ expertise }: ExpertiseProps) {
                   className={`
                     lg:hidden
                     grid
+
                     transition-all
                     duration-300
                     ease-in-out
@@ -524,54 +497,43 @@ export function Expertise({ expertise }: ExpertiseProps) {
                         shadow-[0_10px_28px_rgba(15,118,110,0.07)]
                       "
                     >
-                      {/* MOBILE IMAGE */}
                       {hasImage && (
                         <div
-                          className="
-                            relative
-                            h-40
-                            sm:h-48
-                            w-full
-                            overflow-hidden
-                          "
+                          className="relative h-44 sm:h-52 w-full overflow-hidden"
                           aria-hidden="true"
                         >
                           <img
                             src={imagePath}
                             alt=""
                             className="
-                              absolute
-                              inset-0
-                              w-full
-                              h-full
+                              absolute inset-0
+                              w-full h-full
                               object-cover
                               object-center
                             "
                             loading="lazy"
                           />
 
-                          <div className="absolute inset-0 bg-[#EAF6F3]/[0.04] dark:bg-teal-900/10" />
+                          <div className="absolute inset-0 bg-[#EAF6F3]/[0.03] dark:bg-teal-900/10" />
 
                           <div
                             className="
-                              absolute
-                              inset-0
+                              absolute inset-0
 
                               bg-gradient-to-b
 
                               from-transparent
-                              via-[#F5FBF9]/10
+                              via-[#F5FBF9]/5
                               to-[#F5FBF9]
 
                               dark:from-transparent
-                              dark:via-[#173936]/25
+                              dark:via-[#173936]/20
                               dark:to-[#173936]
                             "
                           />
                         </div>
                       )}
 
-                      {/* MOBILE DETAILS */}
                       <div className="relative z-10 p-4 sm:p-5">
                         <ul className="space-y-2.5">
                           {details.map((detail, dIdx) => (
@@ -593,12 +555,9 @@ export function Expertise({ expertise }: ExpertiseProps) {
                             >
                               <CheckCircle2
                                 className="
-                                  w-3.5
-                                  h-3.5
-
+                                  w-3.5 h-3.5
                                   text-[#0F766E]
                                   dark:text-teal-300
-
                                   shrink-0
                                   mt-0.5
                                 "
@@ -695,20 +654,19 @@ export function Expertise({ expertise }: ExpertiseProps) {
                       }
                     `}
                   >
-                    {/* DESKTOP IMAGE */}
+                    {/* IMAGE */}
                     {hasImage && (
                       <>
                         {isLeftColumn ? (
                           <>
-                            {/* LEFT COLUMN CARD:
-                                IMAGE ON FAR RIGHT */}
+                            {/* LEFT CARD -> IMAGE ON RIGHT */}
                             <div
                               className="
                                 absolute
                                 inset-y-0
                                 right-0
 
-                                w-[60%]
+                                w-[62%]
 
                                 z-0
                                 pointer-events-none
@@ -720,53 +678,46 @@ export function Expertise({ expertise }: ExpertiseProps) {
                                 src={imagePath}
                                 alt=""
                                 className="
-                                  absolute
-                                  inset-0
-
-                                  w-full
-                                  h-full
-
+                                  absolute inset-0
+                                  w-full h-full
                                   object-cover
                                   object-center
 
-                                  opacity-[0.92]
-                                  dark:opacity-[0.64]
+                                  opacity-[0.96]
+                                  dark:opacity-[0.68]
                                 "
                                 loading="lazy"
                               />
 
-                              {/* VERY SOFT MINT TINT */}
-                              <div className="absolute inset-0 bg-[#EAF6F3]/[0.04] dark:bg-teal-900/10" />
+                              <div className="absolute inset-0 bg-[#EAF6F3]/[0.02] dark:bg-teal-900/[0.08]" />
 
-                              {/* FADE FROM TEXT TO IMAGE */}
+                              {/* FADE TOWARD TEXT */}
                               <div
                                 className="
-                                  absolute
-                                  inset-0
+                                  absolute inset-0
 
                                   bg-gradient-to-r
 
                                   from-[#F5FBF9]
                                   from-[0%]
 
-                                  via-[#F5FBF9]/85
+                                  via-[#F5FBF9]/75
                                   via-[24%]
 
                                   to-transparent
-                                  to-[68%]
+                                  to-[65%]
 
                                   dark:from-[#173936]
-                                  dark:via-[#173936]/85
+                                  dark:via-[#173936]/80
                                   dark:to-transparent
                                 "
                               />
                             </div>
 
-                            {/* EXTRA TEXT PROTECTION */}
+                            {/* TEXT PROTECTION */}
                             <div
                               className="
-                                absolute
-                                inset-0
+                                absolute inset-0
                                 z-[1]
                                 pointer-events-none
 
@@ -775,14 +726,14 @@ export function Expertise({ expertise }: ExpertiseProps) {
                                 from-[#F5FBF9]
                                 from-[0%]
 
-                                via-[#F5FBF9]/97
-                                via-[37%]
+                                via-[#F5FBF9]/96
+                                via-[34%]
 
                                 to-transparent
-                                to-[72%]
+                                to-[69%]
 
                                 dark:from-[#173936]
-                                dark:via-[#173936]/96
+                                dark:via-[#173936]/95
                                 dark:to-transparent
                               "
                               aria-hidden="true"
@@ -790,15 +741,14 @@ export function Expertise({ expertise }: ExpertiseProps) {
                           </>
                         ) : (
                           <>
-                            {/* RIGHT COLUMN CARD:
-                                IMAGE ON FAR LEFT */}
+                            {/* RIGHT CARD -> IMAGE ON LEFT */}
                             <div
                               className="
                                 absolute
                                 inset-y-0
                                 left-0
 
-                                w-[60%]
+                                w-[62%]
 
                                 z-0
                                 pointer-events-none
@@ -810,53 +760,46 @@ export function Expertise({ expertise }: ExpertiseProps) {
                                 src={imagePath}
                                 alt=""
                                 className="
-                                  absolute
-                                  inset-0
-
-                                  w-full
-                                  h-full
-
+                                  absolute inset-0
+                                  w-full h-full
                                   object-cover
                                   object-center
 
-                                  opacity-[0.92]
-                                  dark:opacity-[0.64]
+                                  opacity-[0.96]
+                                  dark:opacity-[0.68]
                                 "
                                 loading="lazy"
                               />
 
-                              {/* VERY SOFT MINT TINT */}
-                              <div className="absolute inset-0 bg-[#EAF6F3]/[0.04] dark:bg-teal-900/10" />
+                              <div className="absolute inset-0 bg-[#EAF6F3]/[0.02] dark:bg-teal-900/[0.08]" />
 
-                              {/* FADE FROM TEXT TO IMAGE */}
+                              {/* FADE TOWARD TEXT */}
                               <div
                                 className="
-                                  absolute
-                                  inset-0
+                                  absolute inset-0
 
                                   bg-gradient-to-l
 
                                   from-[#F5FBF9]
                                   from-[0%]
 
-                                  via-[#F5FBF9]/85
+                                  via-[#F5FBF9]/75
                                   via-[24%]
 
                                   to-transparent
-                                  to-[68%]
+                                  to-[65%]
 
                                   dark:from-[#173936]
-                                  dark:via-[#173936]/85
+                                  dark:via-[#173936]/80
                                   dark:to-transparent
                                 "
                               />
                             </div>
 
-                            {/* EXTRA TEXT PROTECTION */}
+                            {/* TEXT PROTECTION */}
                             <div
                               className="
-                                absolute
-                                inset-0
+                                absolute inset-0
                                 z-[1]
                                 pointer-events-none
 
@@ -865,14 +808,14 @@ export function Expertise({ expertise }: ExpertiseProps) {
                                 from-[#F5FBF9]
                                 from-[0%]
 
-                                via-[#F5FBF9]/97
-                                via-[37%]
+                                via-[#F5FBF9]/96
+                                via-[34%]
 
                                 to-transparent
-                                to-[72%]
+                                to-[69%]
 
                                 dark:from-[#173936]
-                                dark:via-[#173936]/96
+                                dark:via-[#173936]/95
                                 dark:to-transparent
                               "
                               aria-hidden="true"
@@ -880,17 +823,15 @@ export function Expertise({ expertise }: ExpertiseProps) {
                           </>
                         )}
 
-                        {/* TOP/BOTTOM SOFT BLEND */}
                         <div
                           className="
-                            absolute
-                            inset-0
+                            absolute inset-0
                             z-[2]
                             pointer-events-none
 
                             bg-gradient-to-b
 
-                            from-white/[0.03]
+                            from-white/[0.02]
                             via-transparent
                             to-[#F5FBF9]/10
 
@@ -903,7 +844,7 @@ export function Expertise({ expertise }: ExpertiseProps) {
                       </>
                     )}
 
-                    {/* DESKTOP DETAILS */}
+                    {/* DETAILS */}
                     <div
                       className={`
                         relative
@@ -912,13 +853,13 @@ export function Expertise({ expertise }: ExpertiseProps) {
 
                         ${
                           hasImage && isLeftColumn
-                            ? 'pr-[35%]'
+                            ? 'pr-[36%]'
                             : ''
                         }
 
                         ${
                           hasImage && !isLeftColumn
-                            ? 'pl-[35%]'
+                            ? 'pl-[36%]'
                             : ''
                         }
                       `}
@@ -943,8 +884,7 @@ export function Expertise({ expertise }: ExpertiseProps) {
                           >
                             <CheckCircle2
                               className="
-                                w-4
-                                h-4
+                                w-4 h-4
 
                                 text-[#0F766E]
                                 dark:text-teal-300
@@ -960,12 +900,9 @@ export function Expertise({ expertise }: ExpertiseProps) {
                       </ul>
                     </div>
 
-                    {/* SOFT INNER FINISH */}
                     <div
                       className="
-                        absolute
-                        inset-0
-
+                        absolute inset-0
                         pointer-events-none
 
                         ring-1
