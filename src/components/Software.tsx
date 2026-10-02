@@ -95,23 +95,6 @@ const softwareItems: SoftwareItem[] = [
   },
 ];
 
-const categoryStyles: Record<Category, string> = {
-  ERP:
-    'border-cyan-300 bg-cyan-50 text-cyan-700 dark:!border-white dark:!bg-white dark:!text-slate-950',
-
-  Accounting:
-    'border-emerald-300 bg-emerald-50 text-emerald-700 dark:!border-white dark:!bg-white dark:!text-slate-950',
-
-  Cloud:
-    'border-sky-300 bg-sky-50 text-sky-700 dark:!border-white dark:!bg-white dark:!text-slate-950',
-
-  Financial:
-    'border-indigo-300 bg-indigo-50 text-indigo-700 dark:!border-white dark:!bg-white dark:!text-slate-950',
-
-  Productivity:
-    'border-violet-300 bg-violet-50 text-violet-700 dark:!border-white dark:!bg-white dark:!text-slate-950',
-};
-
 function SoftwareLogo({ item }: { item: SoftwareItem }) {
   const [logoError, setLogoError] = useState(false);
 
@@ -213,7 +196,7 @@ export function Software(_props?: SoftwareProps) {
             </span>
 
             <div>
-              <h2 className="main-heading-3d text-3xl font-extrabold sm:text-4xl tracking-tight dark:text-slate-100">
+              <h2 className="main-heading-3d text-3xl font-extrabold tracking-tight dark:text-slate-100 sm:text-4xl">
                 ERP Systems &amp; Accounting Software
               </h2>
             </div>
@@ -281,19 +264,31 @@ export function Software(_props?: SoftwareProps) {
               {/* CATEGORY BADGE */}
               <div className="flex min-w-[86px] shrink-0 items-center justify-center pl-3">
                 <span
-                  className={`
+                  className="
                     shrink-0
                     rounded-full
                     border
-                    px-2
+                    border-slate-300
+                    bg-white
+                    px-2.5
                     py-1
                     text-[8px]
                     font-extrabold
                     uppercase
                     tracking-wide
+                    !text-black
                     !opacity-100
-                    ${categoryStyles[item.category]}
-                  `}
+                    shadow-sm
+
+                    dark:!border-slate-300
+                    dark:!bg-white
+                    dark:!text-black
+                  "
+                  style={{
+                    color: '#000000',
+                    backgroundColor: '#ffffff',
+                    opacity: 1,
+                  }}
                 >
                   {item.category}
                 </span>
