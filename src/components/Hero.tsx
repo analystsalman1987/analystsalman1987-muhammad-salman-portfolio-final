@@ -316,8 +316,8 @@ export function Hero({ profile, onOpenCV }: HeroProps) {
                   font-extrabold
                   leading-snug
                   tracking-tight
-                  dark:!text-slate-100
-                  dark:[text-shadow:0_1px_1px_rgba(0,0,0,0.65)]
+                  dark:!text-black
+                  dark:![text-shadow:none]
                   sm:text-sm
                 "
               >
