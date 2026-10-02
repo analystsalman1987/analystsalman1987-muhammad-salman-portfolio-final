@@ -95,6 +95,27 @@ const softwareItems: SoftwareItem[] = [
   },
 ];
 
+/*
+  Category colors remain different in BOTH Light and Dark mode.
+  Text is intentionally darker and bolder for maximum readability.
+*/
+const categoryStyles: Record<Category, string> = {
+  ERP:
+    'border-cyan-400 bg-cyan-100 text-cyan-950 dark:border-cyan-400 dark:bg-cyan-300 dark:text-cyan-950',
+
+  Accounting:
+    'border-emerald-400 bg-emerald-100 text-emerald-950 dark:border-emerald-400 dark:bg-emerald-300 dark:text-emerald-950',
+
+  Cloud:
+    'border-sky-400 bg-sky-100 text-sky-950 dark:border-sky-400 dark:bg-sky-300 dark:text-sky-950',
+
+  Financial:
+    'border-indigo-400 bg-indigo-100 text-indigo-950 dark:border-indigo-400 dark:bg-indigo-300 dark:text-indigo-950',
+
+  Productivity:
+    'border-violet-400 bg-violet-100 text-violet-950 dark:border-violet-400 dark:bg-violet-300 dark:text-violet-950',
+};
+
 function SoftwareLogo({ item }: { item: SoftwareItem }) {
   const [logoError, setLogoError] = useState(false);
 
@@ -191,6 +212,7 @@ export function Software(_props?: SoftwareProps) {
         {/* SECTION HEADER */}
         <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div className="flex max-w-3xl flex-col items-start gap-1.5">
+
             <span className="block text-xs font-bold uppercase tracking-widest text-[#0F766E] dark:text-teal-300">
               ERP &amp; SOFTWARE
             </span>
@@ -205,11 +227,13 @@ export function Software(_props?: SoftwareProps) {
               Tools and systems I have worked with for accounting, reporting,
               inventory, AP/AR and financial management.
             </p>
+
           </div>
         </div>
 
         {/* SOFTWARE CARDS */}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+
           {softwareItems.map((item) => (
             <div
               key={item.name}
@@ -236,11 +260,13 @@ export function Software(_props?: SoftwareProps) {
                 dark:border-slate-600/90
                 dark:bg-slate-800
                 dark:shadow-[0_8px_22px_rgba(0,0,0,0.22)]
+
                 dark:hover:border-teal-400/70
                 dark:hover:bg-slate-800
                 dark:hover:shadow-[0_18px_38px_rgba(20,184,166,0.16)]
               "
             >
+
               {/* SOFTWARE LOGO */}
               <div className="flex min-w-0 flex-1 items-center justify-center pr-3">
                 <SoftwareLogo item={item} />
@@ -263,38 +289,31 @@ export function Software(_props?: SoftwareProps) {
 
               {/* CATEGORY BADGE */}
               <div className="flex min-w-[86px] shrink-0 items-center justify-center pl-3">
+
                 <span
-                  className="
+                  className={`
                     shrink-0
                     rounded-full
                     border
-                    border-slate-300
-                    bg-white
                     px-2.5
                     py-1
-                    text-[8px]
-                    font-extrabold
+                    text-[9px]
+                    font-black
                     uppercase
-                    tracking-wide
-                    !text-black
+                    tracking-[0.02em]
                     !opacity-100
                     shadow-sm
-
-                    dark:!border-slate-300
-                    dark:!bg-white
-                    dark:!text-black
-                  "
-                  style={{
-                    color: '#000000',
-                    backgroundColor: '#ffffff',
-                    opacity: 1,
-                  }}
+                    ${categoryStyles[item.category]}
+                  `}
                 >
                   {item.category}
                 </span>
+
               </div>
+
             </div>
           ))}
+
         </div>
       </div>
     </section>
