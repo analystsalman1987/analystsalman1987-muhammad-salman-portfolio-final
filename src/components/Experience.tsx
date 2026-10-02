@@ -28,7 +28,7 @@ const JOB_SOFTWARE_MAP: Record<string, SoftwareChip[]> = {
     { name: 'OFIS (Powered by Oracle)', logo: '/images/software/oracle-logo.svg', logoClass: 'h-3.5 sm:h-4 w-auto object-contain' },
   ],
   'job-2': [
-    { name: 'Arqami', logo: '/images/software/Arqami logo.png', logoClass: 'h-4 sm:h-4.5 w-auto object-contain' },
+    { name: 'Arqami', logo: '/images/software/Arqami Logo.png', logoClass: 'h-4 sm:h-4.5 w-auto object-contain' },
     { name: 'Daftra', logo: '/images/software/Daftra logo.png', logoClass: 'h-4 sm:h-4.5 w-auto object-contain' },
   ],
   'job-3': [

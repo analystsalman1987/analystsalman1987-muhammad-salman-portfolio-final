@@ -15,7 +15,12 @@ interface HeroProps {
 
 export function Hero({ profile, onOpenCV }: HeroProps) {
   const [isHomeActive, setIsHomeActive] = useState(true);
+  const [imageError, setImageError] = useState(false);
   const { isRTL } = useLanguage();
+
+  useEffect(() => {
+    setImageError(false);
+  }, [profile.avatarUrl]);
 
   useEffect(() => {
     // Detect if Home is selected via hash or scroll
@@ -104,12 +109,13 @@ export function Hero({ profile, onOpenCV }: HeroProps) {
             
             {/* Circular Profile Photo */}
             <div className="relative">
-              {profile.avatarUrl ? (
+              {profile.avatarUrl && !imageError ? (
                 <img
                   src={profile.avatarUrl}
                   alt={profile.fullName || 'Muhammad Salman'}
                   className="w-48 h-48 sm:w-56 sm:h-56 rounded-full object-cover object-top border-4 border-[#0F766E]/40 dark:border-teal-500/40 shadow-xl shadow-slate-900/10 dark:shadow-slate-950/30"
                   loading="eager"
+                  onError={() => setImageError(true)}
                 />
               ) : (
                 <div className="w-48 h-48 sm:w-56 sm:h-56 rounded-full bg-gradient-to-br from-[#0F2747] via-slate-900 to-[#0F766E]/40 border-4 border-[#0F766E]/40 flex flex-col items-center justify-center text-center p-4 shadow-xl">
@@ -120,15 +126,25 @@ export function Hero({ profile, onOpenCV }: HeroProps) {
               )}
             </div>
 
-            {/* Compact Professional Current Company Card */}
-            <div className="mt-4 sm:mt-5 px-4 py-3 rounded-xl bg-white/95 dark:bg-slate-800/90 border border-slate-200/90 dark:border-slate-700/80 shadow-[0_6px_18px_rgba(15,23,42,0.06)] backdrop-blur-xs transition-all duration-300 ease-out hover:-translate-y-1.5 hover:border-[#087d69]/55 hover:shadow-[0_18px_38px_rgba(8,125,105,0.18)] dark:hover:border-teal-400/60 dark:hover:shadow-[0_18px_38px_rgba(20,184,166,0.16)] text-center max-w-[280px] sm:max-w-[300px] w-full cursor-default select-none">
+            {/* Compact Professional Current Company Card (Clickable External Link) */}
+            <a
+              href="https://www.ayalyami.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={
+                isRTL
+                  ? 'زيارة الموقع الرسمي لشركة أحمد يحيى اليامي للمقاولات (يفتح في علامة تبويب جديدة)'
+                  : 'Visit official website of Ahmed Yahya Alyami Contracting Co. (opens in a new tab)'
+              }
+              className="mt-4 sm:mt-5 px-4 py-3 rounded-xl bg-white/95 dark:bg-slate-800/90 border border-teal-600/20 dark:border-teal-500/25 shadow-[0_2px_8px_rgba(15,23,42,0.06),0_1px_2px_rgba(15,118,110,0.05)] dark:shadow-[0_4px_12px_rgba(0,0,0,0.25),0_1px_2px_rgba(20,184,166,0.06)] backdrop-blur-xs transition-all duration-250 ease-out hover:-translate-y-[2.5px] hover:border-[#0F766E]/45 dark:hover:border-teal-400/50 hover:shadow-[0_8px_20px_rgba(15,118,110,0.12),0_2px_6px_rgba(15,39,71,0.06)] dark:hover:shadow-[0_8px_20px_rgba(0,0,0,0.35),0_2px_6px_rgba(20,184,166,0.12)] text-center max-w-[280px] sm:max-w-[300px] w-full block cursor-pointer select-none touch-manipulation focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#0F766E]"
+            >
               <div className="text-[13px] sm:text-sm font-extrabold leading-snug tracking-tight hero-company-3d">
                 {isRTL ? (ARABIC_TRANSLATIONS.hero.companyArabic || 'شركة أحمد يحيى اليامي للمقاولات') : 'Ahmed Yahya Alyami Contracting Co.'}
               </div>
               <div className="text-xs font-semibold text-[#0F766E] dark:text-teal-400 mt-1 tracking-normal">
                 {isRTL ? 'فبراير 2025 – حتى الآن' : 'Feb 2025 – Present'}
               </div>
-            </div>
+            </a>
 
           </div>
 
