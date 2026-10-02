@@ -97,19 +97,19 @@ const softwareItems: SoftwareItem[] = [
 
 const categoryStyles: Record<Category, string> = {
   ERP:
-    'border-cyan-300 bg-cyan-50 text-cyan-700 dark:border-cyan-500/70 dark:bg-cyan-950/80 dark:text-cyan-200',
+    'border-cyan-300 bg-cyan-50 text-cyan-700 dark:!border-white dark:!bg-white dark:!text-slate-950',
 
   Accounting:
-    'border-emerald-300 bg-emerald-50 text-emerald-700 dark:border-emerald-500/70 dark:bg-emerald-950/80 dark:text-emerald-200',
+    'border-emerald-300 bg-emerald-50 text-emerald-700 dark:!border-white dark:!bg-white dark:!text-slate-950',
 
   Cloud:
-    'border-sky-300 bg-sky-50 text-sky-700 dark:border-sky-500/70 dark:bg-sky-950/80 dark:text-sky-200',
+    'border-sky-300 bg-sky-50 text-sky-700 dark:!border-white dark:!bg-white dark:!text-slate-950',
 
   Financial:
-    'border-indigo-300 bg-indigo-50 text-indigo-700 dark:border-indigo-500/70 dark:bg-indigo-950/80 dark:text-indigo-200',
+    'border-indigo-300 bg-indigo-50 text-indigo-700 dark:!border-white dark:!bg-white dark:!text-slate-950',
 
   Productivity:
-    'border-violet-300 bg-violet-50 text-violet-700 dark:border-violet-500/70 dark:bg-violet-950/80 dark:text-violet-200',
+    'border-violet-300 bg-violet-50 text-violet-700 dark:!border-white dark:!bg-white dark:!text-slate-950',
 };
 
 function SoftwareLogo({ item }: { item: SoftwareItem }) {
