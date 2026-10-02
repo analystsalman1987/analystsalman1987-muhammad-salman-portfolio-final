@@ -28,88 +28,88 @@ const softwareItems: SoftwareItem[] = [
     category: 'Accounting',
     logo: '/images/software/quickbooks-logo.svg',
     fallback: 'QuickBooks',
-    nameColor: 'text-green-700 dark:text-green-400',
+    nameColor: 'text-green-700 dark:text-green-300',
   },
   {
     name: 'Arqami',
     category: 'ERP',
     logo: '/images/software/Arqami Logo.png',
     fallback: 'ARQAMI',
-    nameColor: 'text-blue-800 dark:text-blue-300',
+    nameColor: 'text-blue-800 dark:text-blue-200',
   },
   {
     name: 'Delta Financial',
     category: 'Financial',
     logo: '/images/software/delta-logo.svg',
     fallback: 'DELTA',
-    nameColor: 'text-indigo-700 dark:text-indigo-300',
+    nameColor: 'text-indigo-700 dark:text-indigo-200',
   },
   {
     name: 'SMACC',
     category: 'ERP',
     logo: '/images/software/smacc-logo.png',
     fallback: 'SMACC',
-    nameColor: 'text-blue-700 dark:text-blue-300',
+    nameColor: 'text-blue-700 dark:text-blue-200',
   },
   {
     name: 'Daftra',
     category: 'Cloud',
     logo: '/images/software/Daftra logo.png',
     fallback: 'DAFTRA',
-    nameColor: 'text-blue-700 dark:text-blue-300',
+    nameColor: 'text-blue-700 dark:text-blue-200',
   },
   {
     name: 'Qoyod',
     category: 'Cloud',
     logo: '/images/software/Qoyod logo.png',
     fallback: 'QOYOD',
-    nameColor: 'text-blue-900 dark:text-blue-300',
+    nameColor: 'text-blue-900 dark:text-blue-200',
   },
   {
     name: 'Peachtree',
     category: 'Accounting',
     logo: '/images/software/Peachtree logo.png',
     fallback: 'PEACHTREE',
-    nameColor: 'text-orange-600 dark:text-orange-400',
+    nameColor: 'text-orange-600 dark:text-orange-300',
   },
   {
     name: 'Tally',
     category: 'Accounting',
     logo: '/images/software/Tally logo.png',
     fallback: 'TALLY',
-    nameColor: 'text-red-700 dark:text-red-400',
+    nameColor: 'text-red-700 dark:text-red-300',
   },
   {
     name: 'Advanced Microsoft Excel',
     category: 'Productivity',
     logo: '/images/software/excel-logo.svg',
     fallback: 'EXCEL',
-    nameColor: 'text-emerald-700 dark:text-emerald-400',
+    nameColor: 'text-emerald-700 dark:text-emerald-300',
   },
   {
     name: 'Microsoft Office',
     category: 'Productivity',
     logo: '/images/software/office-logo.svg',
     fallback: 'OFFICE',
-    nameColor: 'text-orange-600 dark:text-orange-400',
+    nameColor: 'text-orange-600 dark:text-orange-300',
   },
 ];
 
 const categoryStyles: Record<Category, string> = {
   ERP:
-    'border-cyan-300 bg-cyan-50 text-cyan-700 dark:border-cyan-700 dark:bg-cyan-950/40 dark:text-cyan-300',
+    'border-cyan-300 bg-cyan-50 text-cyan-700 dark:border-cyan-500/70 dark:bg-cyan-950/80 dark:text-cyan-200',
 
   Accounting:
-    'border-emerald-300 bg-emerald-50 text-emerald-700 dark:border-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300',
+    'border-emerald-300 bg-emerald-50 text-emerald-700 dark:border-emerald-500/70 dark:bg-emerald-950/80 dark:text-emerald-200',
 
   Cloud:
-    'border-sky-300 bg-sky-50 text-sky-700 dark:border-sky-700 dark:bg-sky-950/40 dark:text-sky-300',
+    'border-sky-300 bg-sky-50 text-sky-700 dark:border-sky-500/70 dark:bg-sky-950/80 dark:text-sky-200',
 
   Financial:
-    'border-indigo-300 bg-indigo-50 text-indigo-700 dark:border-indigo-700 dark:bg-indigo-950/40 dark:text-indigo-300',
+    'border-indigo-300 bg-indigo-50 text-indigo-700 dark:border-indigo-500/70 dark:bg-indigo-950/80 dark:text-indigo-200',
 
   Productivity:
-    'border-violet-300 bg-violet-50 text-violet-700 dark:border-violet-700 dark:bg-violet-950/40 dark:text-violet-300',
+    'border-violet-300 bg-violet-50 text-violet-700 dark:border-violet-500/70 dark:bg-violet-950/80 dark:text-violet-200',
 };
 
 function SoftwareLogo({ item }: { item: SoftwareItem }) {
@@ -135,22 +135,40 @@ function SoftwareLogo({ item }: { item: SoftwareItem }) {
   }
 
   return (
-    <img
-      src={item.logo}
-      alt={`${item.name} logo`}
-      loading="lazy"
-      onError={() => setLogoError(true)}
+    <div
       className="
-        h-[48px]
+        flex
+        min-h-[58px]
         w-full
-        max-w-[105px]
-        object-contain
-        !opacity-100
-        transition-transform
+        max-w-[120px]
+        items-center
+        justify-center
+        rounded-lg
+        px-2
+        py-1
+        transition-colors
         duration-300
-        group-hover:scale-110
+        dark:bg-white/[0.96]
+        dark:shadow-[0_1px_4px_rgba(0,0,0,0.18)]
       "
-    />
+    >
+      <img
+        src={item.logo}
+        alt={`${item.name} logo`}
+        loading="lazy"
+        onError={() => setLogoError(true)}
+        className="
+          h-[48px]
+          w-full
+          max-w-[105px]
+          object-contain
+          !opacity-100
+          transition-transform
+          duration-300
+          group-hover:scale-110
+        "
+      />
+    </div>
   );
 }
 
@@ -171,7 +189,7 @@ export function Software(_props?: SoftwareProps) {
         py-16
         transition-colors
         duration-300
-        dark:border-slate-800
+        dark:border-slate-700
         dark:bg-slate-900
         sm:py-20
       "
@@ -190,17 +208,17 @@ export function Software(_props?: SoftwareProps) {
         {/* SECTION HEADER */}
         <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div className="flex max-w-3xl flex-col items-start gap-1.5">
-            <span className="block text-xs font-bold uppercase tracking-widest text-[#0F766E] dark:text-teal-400">
+            <span className="block text-xs font-bold uppercase tracking-widest text-[#0F766E] dark:text-teal-300">
               ERP &amp; SOFTWARE
             </span>
 
             <div>
-              <h2 className="main-heading-3d text-3xl font-extrabold sm:text-4xl tracking-tight">
+              <h2 className="main-heading-3d text-3xl font-extrabold sm:text-4xl tracking-tight dark:text-slate-100">
                 ERP Systems &amp; Accounting Software
               </h2>
             </div>
 
-            <p className="mt-1 text-sm text-[#64748B] dark:text-slate-400">
+            <p className="mt-1 text-sm text-[#64748B] dark:text-slate-300">
               Tools and systems I have worked with for accounting, reporting,
               inventory, AP/AR and financial management.
             </p>
@@ -232,10 +250,12 @@ export function Software(_props?: SoftwareProps) {
                 hover:border-[#087d69]/50
                 hover:shadow-[0_18px_38px_rgba(8,125,105,0.18)]
 
-                dark:border-slate-700
+                dark:border-slate-600/90
                 dark:bg-slate-800
-                dark:hover:border-teal-500/60
-                dark:hover:shadow-[0_18px_38px_rgba(20,184,166,0.12)]
+                dark:shadow-[0_8px_22px_rgba(0,0,0,0.22)]
+                dark:hover:border-teal-400/70
+                dark:hover:bg-slate-800
+                dark:hover:shadow-[0_18px_38px_rgba(20,184,166,0.16)]
               "
             >
               {/* SOFTWARE LOGO */}
@@ -253,8 +273,8 @@ export function Software(_props?: SoftwareProps) {
                   transition-colors
                   duration-300
                   group-hover:bg-[#087d69]/60
-                  dark:bg-slate-600
-                  dark:group-hover:bg-teal-500/60
+                  dark:bg-slate-500
+                  dark:group-hover:bg-teal-400/70
                 "
               />
 
