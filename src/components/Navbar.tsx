@@ -339,7 +339,7 @@ export function Navbar({
                         window.dispatchEvent(new CustomEvent('experience-show-categories'));
                         handleNavClick('#experience');
                       }}
-                      className={`flex items-center justify-between w-full px-3 py-2.5 ${isRTL ? 'text-right' : 'text-left'} text-sm rounded-md transition-all duration-300 cursor-pointer ${
+                      className={`flex items-center justify-between w-full px-3 py-2.5 ${isRTL ? 'text-right' : 'text-left'} text-sm rounded-md transition-all duration-300 cursor-pointer touch-manipulation ${
                         isHighlighted
                           ? 'font-bold text-[#0F766E] dark:text-teal-300 bg-[#E6F4F1] dark:bg-teal-950/80 border border-[#0F766E]/30 dark:border-teal-800'
                           : 'font-medium text-[#1F2937] dark:text-slate-200 hover:bg-[#E6F4F1]/60 dark:hover:bg-slate-800/80 hover:text-[#0F766E]'
@@ -357,9 +357,9 @@ export function Navbar({
                           window.dispatchEvent(new CustomEvent('experience-open-full-time'));
                           handleNavClick('#experience');
                         }}
-                        className={`w-full flex items-center justify-between px-3 py-2 text-xs font-semibold text-[#1F2937] dark:text-slate-200 hover:bg-[#E6F4F1] dark:hover:bg-slate-800 rounded-md hover:text-[#0F766E] dark:hover:text-teal-300 ${
+                        className={`w-full flex items-center justify-between px-3 py-2 text-xs font-semibold text-[#1F2937] dark:text-slate-200 hover:bg-[#E6F4F1] dark:hover:bg-slate-800 rounded-md hover:text-[#0F766E] dark:hover:text-teal-300 cursor-pointer touch-manipulation ${
                           isRTL ? 'text-right' : 'text-left'
-                        } cursor-pointer`}
+                        }`}
                       >
                         <span>{isRTL ? (ARABIC_TRANSLATIONS.nav.experienceFullTime || 'الخبرة بدوام كامل') : 'Full-Time Experience'}</span>
                         <ChevronRight className={`w-3.5 h-3.5 text-slate-400 ${isRTL ? 'rotate-180' : ''}`} />
@@ -370,9 +370,9 @@ export function Navbar({
                           window.dispatchEvent(new CustomEvent('experience-open-remote'));
                           handleNavClick('#experience');
                         }}
-                        className={`w-full flex items-center justify-between px-3 py-2 text-xs font-semibold text-[#1F2937] dark:text-slate-200 hover:bg-[#E6F4F1] dark:hover:bg-slate-800 rounded-md hover:text-[#0F766E] dark:hover:text-teal-300 ${
+                        className={`w-full flex items-center justify-between px-3 py-2 text-xs font-semibold text-[#1F2937] dark:text-slate-200 hover:bg-[#E6F4F1] dark:hover:bg-slate-800 rounded-md hover:text-[#0F766E] dark:hover:text-teal-300 cursor-pointer touch-manipulation ${
                           isRTL ? 'text-right' : 'text-left'
-                        } cursor-pointer`}
+                        }`}
                       >
                         <span>{isRTL ? (ARABIC_TRANSLATIONS.nav.experienceRemote || 'الخبرة عن بُعد / دوام جزئي') : 'Remote / Part-Time Experience'}</span>
                         <ChevronRight className={`w-3.5 h-3.5 text-slate-400 ${isRTL ? 'rotate-180' : ''}`} />
@@ -384,9 +384,10 @@ export function Navbar({
 
               return (
                 <button
+                  type="button"
                   key={link.href}
                   onClick={() => handleNavClick(link.href)}
-                  className={`flex items-center justify-between w-full px-3 py-2.5 ${isRTL ? 'text-right' : 'text-left'} text-sm rounded-md transition-all duration-300 cursor-pointer ${
+                  className={`flex items-center justify-between w-full px-3 py-2.5 ${isRTL ? 'text-right' : 'text-left'} text-sm rounded-md transition-all duration-300 cursor-pointer touch-manipulation ${
                     isHighlighted
                       ? 'font-bold text-[#0F766E] dark:text-teal-300 bg-[#E6F4F1] dark:bg-teal-950/80 border border-[#0F766E]/30 dark:border-teal-800'
                       : 'font-medium text-[#1F2937] dark:text-slate-200 hover:bg-[#E6F4F1]/60 dark:hover:bg-slate-800/80 hover:text-[#0F766E]'

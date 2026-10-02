@@ -89,6 +89,14 @@ export function Expertise({ expertise }: ExpertiseProps) {
     setExpandedId((current) => (current === id ? null : id));
   };
 
+  const expandedIndex = expandedId
+    ? items.findIndex((x) => x.id === expandedId)
+    : -1;
+  const isLastRowExpanded =
+    expandedIndex >= items.length - 2 && expandedIndex !== -1;
+  const isSecondLastRowExpanded =
+    expandedIndex >= items.length - 4 && expandedIndex < items.length - 2;
+
   return (
     <section
       id="expertise"
@@ -171,8 +179,6 @@ export function Expertise({ expertise }: ExpertiseProps) {
           {items.map((item, idx) => {
             const isExpanded = expandedId === item.id;
             const isLeftColumn = idx % 2 === 0;
-            const isLastRow = idx >= items.length - 2;
-
             const Icon =
               (item.iconName && iconMap[item.iconName]) ||
               defaultIconById[item.id] ||
@@ -193,15 +199,7 @@ export function Expertise({ expertise }: ExpertiseProps) {
             return (
               <div
                 key={item.id || idx}
-                className={`
-                  relative
-                  ${isExpanded ? 'z-[100]' : 'z-10'}
-                  ${
-                    isExpanded && isLastRow
-                      ? 'lg:mb-[340px]'
-                      : ''
-                  }
-                `}
+                className={`relative ${isExpanded ? 'z-[100]' : 'z-10'}`}
               >
                 {/* MAIN CARD */}
                 <div
@@ -741,12 +739,12 @@ export function Expertise({ expertise }: ExpertiseProps) {
                           </>
                         ) : (
                           <>
-                            {/* RIGHT CARD -> IMAGE ON LEFT */}
+                            {/* RIGHT CARD -> IMAGE ON RIGHT (ADJACENT TO CARD) */}
                             <div
                               className="
                                 absolute
                                 inset-y-0
-                                left-0
+                                right-0
 
                                 w-[62%]
 
@@ -778,7 +776,7 @@ export function Expertise({ expertise }: ExpertiseProps) {
                                 className="
                                   absolute inset-0
 
-                                  bg-gradient-to-l
+                                  bg-gradient-to-r
 
                                   from-[#F5FBF9]
                                   from-[0%]
@@ -803,7 +801,7 @@ export function Expertise({ expertise }: ExpertiseProps) {
                                 z-[1]
                                 pointer-events-none
 
-                                bg-gradient-to-l
+                                bg-gradient-to-r
 
                                 from-[#F5FBF9]
                                 from-[0%]
@@ -852,14 +850,8 @@ export function Expertise({ expertise }: ExpertiseProps) {
                         p-6
 
                         ${
-                          hasImage && isLeftColumn
+                          hasImage
                             ? 'pr-[36%]'
-                            : ''
-                        }
-
-                        ${
-                          hasImage && !isLeftColumn
-                            ? 'pl-[36%]'
                             : ''
                         }
                       `}
@@ -919,6 +911,26 @@ export function Expertise({ expertise }: ExpertiseProps) {
             );
           })}
         </div>
+
+        {/* DYNAMIC DESKTOP SECTION-BOTTOM CLEARANCE (ONLY FOR LAST TWO ROWS) */}
+        <div
+          className={`
+            hidden
+            lg:block
+            transition-all
+            duration-300
+            ease-out
+            overflow-hidden
+            ${
+              isLastRowExpanded
+                ? 'h-[320px]'
+                : isSecondLastRowExpanded
+                  ? 'h-[120px]'
+                  : 'h-0'
+            }
+          `}
+          aria-hidden="true"
+        />
       </div>
     </section>
   );
