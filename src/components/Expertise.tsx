@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import {
   ArrowLeftRight,
   Receipt,
@@ -76,6 +76,8 @@ const expertiseImages: Record<string, string> = {
 
 export function Expertise({ expertise }: ExpertiseProps) {
   const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [isHoverSupported, setIsHoverSupported] = useState(false);
+  const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const { isRTL } = useLanguage();
   const t = ARABIC_TRANSLATIONS.expertise;
@@ -85,8 +87,51 @@ export function Expertise({ expertise }: ExpertiseProps) {
       ? expertise
       : DEFAULT_APP_DATA.expertise;
 
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const mql = window.matchMedia('(hover: hover) and (pointer: fine)');
+    setIsHoverSupported(mql.matches);
+
+    const handler = (e: MediaQueryListEvent) => {
+      setIsHoverSupported(e.matches);
+    };
+    mql.addEventListener?.('change', handler);
+    return () => {
+      mql.removeEventListener?.('change', handler);
+      if (closeTimeoutRef.current) {
+        clearTimeout(closeTimeoutRef.current);
+      }
+    };
+  }, []);
+
   const toggleExpand = (id: string) => {
     setExpandedId((current) => (current === id ? null : id));
+  };
+
+  const handlePointerEnter = (id: string, e: React.PointerEvent) => {
+    if (!isHoverSupported || e.pointerType === 'touch') return;
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+    setExpandedId(id);
+  };
+
+  const handlePointerLeave = (e: React.PointerEvent) => {
+    if (!isHoverSupported || e.pointerType === 'touch') return;
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+    }
+    closeTimeoutRef.current = setTimeout(() => {
+      setExpandedId(null);
+    }, 120);
+  };
+
+  const handleCardClick = (id: string, e: React.MouseEvent) => {
+    // On touch/mobile devices or keyboard interaction, toggle expand
+    if (!isHoverSupported || e.detail === 0) {
+      toggleExpand(id);
+    }
   };
 
   const expandedIndex = expandedId
@@ -200,6 +245,8 @@ export function Expertise({ expertise }: ExpertiseProps) {
               <div
                 key={item.id || idx}
                 className={`relative ${isExpanded ? 'z-[100]' : 'z-10'}`}
+                onPointerEnter={(e) => handlePointerEnter(item.id, e)}
+                onPointerLeave={handlePointerLeave}
               >
                 {/* MAIN CARD */}
                 <div
@@ -261,7 +308,7 @@ export function Expertise({ expertise }: ExpertiseProps) {
                     type="button"
                     aria-expanded={isExpanded}
                     aria-controls={`expertise-panel-${item.id}`}
-                    onClick={() => toggleExpand(item.id)}
+                    onClick={(e) => handleCardClick(item.id, e)}
                     className={`
                       w-full
                       text-left
