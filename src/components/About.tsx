@@ -43,7 +43,6 @@ export function About({ profile: _profile }: AboutProps) {
         className="pointer-events-none absolute inset-0 z-0 overflow-hidden select-none"
         aria-hidden="true"
       >
-        {/* Soft Ambient Midnight and Gold Depth */}
         <div
           className="
             absolute
@@ -70,7 +69,6 @@ export function About({ profile: _profile }: AboutProps) {
           "
         />
 
-        {/* Subtle Architectural Grid Lines */}
         <div
           className="
             absolute
@@ -97,7 +95,6 @@ export function About({ profile: _profile }: AboutProps) {
               ${isRTL ? 'lg:text-right' : 'lg:text-left'}
             `}
           >
-            {/* Section Tag & Heading */}
             <div className="space-y-2">
               <span className="inline-block text-xs font-bold tracking-[0.25em] text-[#D8B56A] uppercase">
                 {isRTL ? t.tag : 'ABOUT ME'}
@@ -108,7 +105,7 @@ export function About({ profile: _profile }: AboutProps) {
               </h2>
             </div>
 
-            {/* Approved Professional Summary */}
+            {/* APPROVED PROFESSIONAL SUMMARY */}
             <div className="space-y-4 text-sm leading-relaxed text-[#CBD5E1] sm:text-base sm:leading-[1.8]">
               <p>
                 {isRTL
@@ -123,10 +120,10 @@ export function About({ profile: _profile }: AboutProps) {
               </p>
             </div>
 
-            {/* THREE FACTUAL HIGHLIGHT CARDS */}
+            {/* HIGHLIGHT CARDS */}
             <div className="grid grid-cols-1 gap-3.5 pt-1 sm:grid-cols-3">
 
-              {/* 14+ Years */}
+              {/* 14+ YEARS */}
               <div
                 className="
                   flex
@@ -224,7 +221,9 @@ export function About({ profile: _profile }: AboutProps) {
                 </div>
 
                 <div className="mt-1 text-xs font-bold text-[#CBD5E1]">
-                  {isRTL ? 'إقرارات ضريبة القيمة المضافة' : 'VAT Reporting'}
+                  {isRTL
+                    ? 'إقرارات ضريبة القيمة المضافة'
+                    : 'VAT Reporting'}
                 </div>
               </div>
             </div>
@@ -256,6 +255,7 @@ export function About({ profile: _profile }: AboutProps) {
               </div>
 
               <div className="flex flex-wrap items-center gap-2.5">
+
                 <span
                   className="
                     inline-flex
@@ -275,7 +275,9 @@ export function About({ profile: _profile }: AboutProps) {
                   <Car className="h-3.5 w-3.5" />
 
                   <span>
-                    {isRTL ? t.drivingLicense : 'Valid Saudi Driving License'}
+                    {isRTL
+                      ? t.drivingLicense
+                      : 'Valid Saudi Driving License'}
                   </span>
                 </span>
 
@@ -314,11 +316,11 @@ export function About({ profile: _profile }: AboutProps) {
             </div>
           </div>
 
-          {/* RIGHT SIDE: REAL PHOTO */}
+          {/* RIGHT SIDE — REAL ORIGINAL PHOTO ONLY */}
           <div className="flex items-center justify-center lg:col-span-5 xl:col-span-5">
             <div className="relative mx-auto w-full max-w-[340px] sm:max-w-[380px] lg:max-w-[410px] xl:max-w-[440px]">
 
-              {/* Gold Rim Glow */}
+              {/* GOLD RIM GLOW */}
               <div
                 className="
                   pointer-events-none
@@ -335,7 +337,7 @@ export function About({ profile: _profile }: AboutProps) {
                 aria-hidden="true"
               />
 
-              {/* Photo Container */}
+              {/* PHOTO CONTAINER */}
               <div
                 className="
                   relative
@@ -352,10 +354,14 @@ export function About({ profile: _profile }: AboutProps) {
                   sm:rounded-3xl
                 "
               >
-                {/* EXACT REAL PHOTO FROM PUBLIC/IMAGES */}
+                {/* FINAL REAL PHOTO */}
                 <img
-                  src="/images/0D0A2507(1).JPG"
-                  alt={isRTL ? 'محمد سلمان - محاسب' : 'Muhammad Salman - Accountant'}
+                  src="/images/0D0A2507.JPG"
+                  alt={
+                    isRTL
+                      ? 'محمد سلمان - محاسب'
+                      : 'Muhammad Salman - Accountant'
+                  }
                   className="
                     h-full
                     w-full
@@ -366,7 +372,7 @@ export function About({ profile: _profile }: AboutProps) {
                   loading="eager"
                 />
 
-                {/* Inner Gold Border */}
+                {/* INNER GOLD BORDER */}
                 <div
                   className="
                     pointer-events-none
@@ -383,6 +389,7 @@ export function About({ profile: _profile }: AboutProps) {
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </section>
