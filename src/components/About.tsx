@@ -32,24 +32,21 @@ export function About({ profile: _profile }: AboutProps) {
         border-[#0D2538]
         bg-[#081A2B]
         py-12
-        transition-colors
-        duration-300
         sm:py-16
         lg:py-0
       "
     >
       {/* ============================================================
-          BACKGROUND ATMOSPHERE
+          ABOUT BACKGROUND
           ============================================================ */}
       <div
         className="pointer-events-none absolute inset-0 z-0 overflow-hidden select-none"
         aria-hidden="true"
       >
-        {/* Soft warm atmospheric glow near photograph */}
         <div
           className="
             absolute
-            top-[5%]
+            top-[8%]
             right-[-10%]
             h-[600px]
             w-[600px]
@@ -59,7 +56,6 @@ export function About({ profile: _profile }: AboutProps) {
           "
         />
 
-        {/* Deep navy depth */}
         <div
           className="
             absolute
@@ -73,12 +69,11 @@ export function About({ profile: _profile }: AboutProps) {
           "
         />
 
-        {/* Subtle architectural grid */}
         <div
           className="
             absolute
             inset-0
-            bg-[linear-gradient(to_right,#132E4312_1px,transparent_1px),linear-gradient(to_bottom,#132E4312_1px,transparent_1px)]
+            bg-[linear-gradient(to_right,#132E4310_1px,transparent_1px),linear-gradient(to_bottom,#132E4310_1px,transparent_1px)]
             bg-[size:4.5rem_4.5rem]
             [mask-image:radial-gradient(ellipse_70%_60%_at_45%_50%,#000_45%,transparent_100%)]
           "
@@ -92,7 +87,7 @@ export function About({ profile: _profile }: AboutProps) {
         <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-10 xl:gap-12">
 
           {/* ========================================================
-              LEFT SIDE — PROFESSIONAL SUMMARY
+              LEFT CONTENT
               ======================================================== */}
           <div
             className={`
@@ -105,7 +100,7 @@ export function About({ profile: _profile }: AboutProps) {
               ${isRTL ? 'lg:text-right' : 'lg:text-left'}
             `}
           >
-            {/* SECTION HEADING */}
+            {/* HEADING */}
             <div className="space-y-2">
               <span className="inline-block text-xs font-bold tracking-[0.25em] text-[#D8B56A] uppercase">
                 {isRTL ? t.tag : 'ABOUT ME'}
@@ -116,7 +111,7 @@ export function About({ profile: _profile }: AboutProps) {
               </h2>
             </div>
 
-            {/* APPROVED PROFESSIONAL SUMMARY */}
+            {/* PROFESSIONAL SUMMARY */}
             <div className="space-y-4 text-sm leading-relaxed text-[#CBD5E1] sm:text-base sm:leading-[1.8]">
               <p>
                 {isRTL
@@ -136,7 +131,7 @@ export function About({ profile: _profile }: AboutProps) {
                 ====================================================== */}
             <div className="grid grid-cols-1 gap-3.5 pt-1 sm:grid-cols-3">
 
-              {/* 14+ YEARS */}
+              {/* EXPERIENCE */}
               <div
                 className="
                   flex
@@ -145,7 +140,7 @@ export function About({ profile: _profile }: AboutProps) {
                   justify-center
                   rounded-xl
                   border
-                  border-[#D8B56A]/25
+                  border-[#D8B56A]/30
                   bg-[#0D2538]/80
                   p-4
                   text-center
@@ -154,7 +149,7 @@ export function About({ profile: _profile }: AboutProps) {
                   transition-all
                   duration-300
                   hover:-translate-y-1
-                  hover:border-[#D8B56A]/55
+                  hover:border-[#D8B56A]/60
                   hover:bg-[#102B40]
                 "
               >
@@ -171,7 +166,7 @@ export function About({ profile: _profile }: AboutProps) {
                 </div>
               </div>
 
-              {/* MBA / BBA */}
+              {/* EDUCATION */}
               <div
                 className="
                   flex
@@ -180,7 +175,7 @@ export function About({ profile: _profile }: AboutProps) {
                   justify-center
                   rounded-xl
                   border
-                  border-[#D8B56A]/25
+                  border-[#D8B56A]/30
                   bg-[#0D2538]/80
                   p-4
                   text-center
@@ -189,7 +184,7 @@ export function About({ profile: _profile }: AboutProps) {
                   transition-all
                   duration-300
                   hover:-translate-y-1
-                  hover:border-[#D8B56A]/55
+                  hover:border-[#D8B56A]/60
                   hover:bg-[#102B40]
                 "
               >
@@ -215,7 +210,7 @@ export function About({ profile: _profile }: AboutProps) {
                   justify-center
                   rounded-xl
                   border
-                  border-[#D8B56A]/25
+                  border-[#D8B56A]/30
                   bg-[#0D2538]/80
                   p-4
                   text-center
@@ -224,7 +219,7 @@ export function About({ profile: _profile }: AboutProps) {
                   transition-all
                   duration-300
                   hover:-translate-y-1
-                  hover:border-[#D8B56A]/55
+                  hover:border-[#D8B56A]/60
                   hover:bg-[#102B40]
                 "
               >
@@ -245,7 +240,7 @@ export function About({ profile: _profile }: AboutProps) {
             </div>
 
             {/* ======================================================
-                COMPLIANCE / CURRENT STATUS
+                STATUS / COMPLIANCE
                 ====================================================== */}
             <div
               className="
@@ -274,7 +269,7 @@ export function About({ profile: _profile }: AboutProps) {
 
               <div className="flex flex-wrap items-center gap-2.5">
 
-                {/* SAUDI DRIVING LICENSE */}
+                {/* DRIVING LICENSE */}
                 <span
                   className="
                     inline-flex
@@ -337,8 +332,8 @@ export function About({ profile: _profile }: AboutProps) {
           </div>
 
           {/* ========================================================
-              RIGHT SIDE — REAL ORIGINAL PHOTO
-              CLOUDY / FEATHERED BACKGROUND MERGE
+              RIGHT SIDE — REAL PHOTO
+              FACE / BODY / PHOTO CONTENT UNCHANGED
               ======================================================== */}
           <div className="flex items-center justify-center lg:col-span-5 xl:col-span-5">
             <div
@@ -352,29 +347,34 @@ export function About({ profile: _profile }: AboutProps) {
                 xl:max-w-[470px]
               "
             >
-              {/* LARGE SOFT ATMOSPHERIC HALO */}
+              {/* SUBTLE GOLD ATMOSPHERE BEHIND PHOTO */}
               <div
                 className="
                   pointer-events-none
                   absolute
-                  -inset-[12%]
-                  bg-[radial-gradient(ellipse_at_center,rgba(216,181,106,0.10)_0%,rgba(13,37,56,0.18)_42%,rgba(8,26,43,0)_72%)]
-                  blur-[45px]
+                  -inset-[10%]
+                  bg-[radial-gradient(ellipse_at_center,rgba(216,181,106,0.10)_0%,rgba(216,181,106,0.04)_42%,transparent_72%)]
+                  blur-[50px]
                 "
                 aria-hidden="true"
               />
 
-              {/* PHOTO AREA */}
+              {/* PHOTO CONTAINER — NO BORDER / NO CARD */}
               <div
                 className="
                   relative
                   aspect-[3/4]
                   w-full
                   overflow-hidden
-                  bg-[#081A2B]
+                  bg-transparent
                 "
               >
-                {/* ORIGINAL REAL PHOTO — NEVER MODIFIED */}
+                {/* ==================================================
+                    EXACT ORIGINAL REAL PHOTO
+                    NO AI EDIT
+                    NO FACE EDIT
+                    NO BODY EDIT
+                    ================================================== */}
                 <img
                   src="/images/0D0A2507.JPG"
                   alt={
@@ -395,144 +395,111 @@ export function About({ profile: _profile }: AboutProps) {
                 />
 
                 {/* ==================================================
-                    CLOUDY LEFT MIST
-                    Wide + blurred so no straight vertical edge
+                    FAR LEFT CLOUD
+                    Kept away from face/body.
                     ================================================== */}
                 <div
                   className="
                     pointer-events-none
                     absolute
-                    top-[-8%]
+                    top-[-10%]
                     bottom-[-8%]
-                    left-[-18%]
+                    left-[-24%]
                     z-10
-                    w-[48%]
-                    bg-[#081A2B]/95
-                    blur-[48px]
-                  "
-                  aria-hidden="true"
-                />
-
-                {/* SECOND SOFTER LEFT FEATHER */}
-                <div
-                  className="
-                    pointer-events-none
-                    absolute
-                    top-[-5%]
-                    bottom-[-5%]
-                    left-[-4%]
-                    z-10
-                    w-[27%]
-                    bg-[#081A2B]/55
-                    blur-[36px]
-                  "
-                  aria-hidden="true"
-                />
-
-                {/* ==================================================
-                    CLOUDY RIGHT MIST
-                    ================================================== */}
-                <div
-                  className="
-                    pointer-events-none
-                    absolute
-                    top-[-8%]
-                    right-[-18%]
-                    bottom-[-8%]
-                    z-10
-                    w-[48%]
-                    bg-[#081A2B]/95
-                    blur-[48px]
-                  "
-                  aria-hidden="true"
-                />
-
-                {/* SECOND SOFTER RIGHT FEATHER */}
-                <div
-                  className="
-                    pointer-events-none
-                    absolute
-                    top-[-5%]
-                    right-[-4%]
-                    bottom-[-5%]
-                    z-10
-                    w-[27%]
-                    bg-[#081A2B]/55
-                    blur-[36px]
-                  "
-                  aria-hidden="true"
-                />
-
-                {/* ==================================================
-                    CLOUDY TOP MIST
-                    ================================================== */}
-                <div
-                  className="
-                    pointer-events-none
-                    absolute
-                    top-[-14%]
-                    right-[-8%]
-                    left-[-8%]
-                    z-10
-                    h-[31%]
-                    bg-[#081A2B]/82
-                    blur-[48px]
-                  "
-                  aria-hidden="true"
-                />
-
-                {/* ==================================================
-                    CLOUDY BOTTOM MIST
-                    Stronger to blend lower body into page
-                    ================================================== */}
-                <div
-                  className="
-                    pointer-events-none
-                    absolute
-                    right-[-10%]
-                    bottom-[-17%]
-                    left-[-10%]
-                    z-10
-                    h-[42%]
+                    w-[42%]
                     bg-[#081A2B]
                     blur-[55px]
                   "
                   aria-hidden="true"
                 />
 
-                {/* SECOND BOTTOM FEATHER */}
                 <div
                   className="
                     pointer-events-none
                     absolute
-                    right-[-4%]
-                    bottom-[-2%]
-                    left-[-4%]
+                    top-[-8%]
+                    bottom-[-5%]
+                    left-[-12%]
                     z-10
-                    h-[24%]
-                    bg-[#081A2B]/60
-                    blur-[34px]
+                    w-[22%]
+                    bg-[#081A2B]/55
+                    blur-[42px]
                   "
                   aria-hidden="true"
                 />
 
                 {/* ==================================================
-                    MASTER ELLIPTICAL VIGNETTE
-                    Keeps face/torso center clear and dissolves perimeter
+                    FAR RIGHT CLOUD
+                    Kept away from face/body.
+                    ================================================== */}
+                <div
+                  className="
+                    pointer-events-none
+                    absolute
+                    top-[-10%]
+                    right-[-24%]
+                    bottom-[-8%]
+                    z-10
+                    w-[42%]
+                    bg-[#081A2B]
+                    blur-[55px]
+                  "
+                  aria-hidden="true"
+                />
+
+                <div
+                  className="
+                    pointer-events-none
+                    absolute
+                    top-[-8%]
+                    right-[-12%]
+                    bottom-[-5%]
+                    z-10
+                    w-[22%]
+                    bg-[#081A2B]/55
+                    blur-[42px]
+                  "
+                  aria-hidden="true"
+                />
+
+                {/* ==================================================
+                    TOP CLOUD
+                    Only outer top edge.
+                    ================================================== */}
+                <div
+                  className="
+                    pointer-events-none
+                    absolute
+                    top-[-18%]
+                    right-[-10%]
+                    left-[-10%]
+                    z-10
+                    h-[28%]
+                    bg-[#081A2B]/85
+                    blur-[55px]
+                  "
+                  aria-hidden="true"
+                />
+
+                {/* ==================================================
+                    VERY LIGHT CORNER VIGNETTE
+                    Wide clear center — does NOT approach face.
                     ================================================== */}
                 <div
                   className="
                     pointer-events-none
                     absolute
                     inset-0
-                    z-20
-                    bg-[radial-gradient(ellipse_55%_64%_at_52%_43%,transparent_0%,transparent_52%,rgba(8,26,43,0.16)_68%,rgba(8,26,43,0.62)_84%,#081A2B_100%)]
+                    z-10
+                    bg-[radial-gradient(ellipse_72%_82%_at_52%_46%,transparent_0%,transparent_68%,rgba(8,26,43,0.10)_79%,rgba(8,26,43,0.48)_94%,rgba(8,26,43,0.82)_100%)]
                   "
                   aria-hidden="true"
                 />
 
                 {/* ==================================================
-                    SOFT LOWER NAVY HAZE
+                    BOTTOM
+                    NO HEAVY CLOUD / NO BODY MERGE.
+                    Only tiny edge transition to avoid hard cut.
                     ================================================== */}
                 <div
                   className="
@@ -541,9 +508,9 @@ export function About({ profile: _profile }: AboutProps) {
                     right-0
                     bottom-0
                     left-0
-                    z-20
-                    h-[30%]
-                    bg-[linear-gradient(to_top,#081A2B_0%,rgba(8,26,43,0.78)_28%,rgba(8,26,43,0.28)_65%,transparent_100%)]
+                    z-10
+                    h-[7%]
+                    bg-[linear-gradient(to_top,rgba(8,26,43,0.35)_0%,rgba(8,26,43,0.08)_55%,transparent_100%)]
                   "
                   aria-hidden="true"
                 />
