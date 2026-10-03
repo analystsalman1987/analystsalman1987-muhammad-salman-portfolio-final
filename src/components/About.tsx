@@ -45,17 +45,17 @@ export function About({ profile: _profile }: AboutProps) {
         className="pointer-events-none absolute inset-0 z-0 overflow-hidden select-none"
         aria-hidden="true"
       >
-        {/* Soft warm light near portrait */}
+        {/* Soft warm atmospheric glow near photograph */}
         <div
           className="
             absolute
-            top-[8%]
-            right-[-8%]
-            h-[560px]
-            w-[560px]
+            top-[5%]
+            right-[-10%]
+            h-[600px]
+            w-[600px]
             rounded-full
-            bg-[#D8B56A]/10
-            blur-[150px]
+            bg-[#D8B56A]/8
+            blur-[170px]
           "
         />
 
@@ -63,17 +63,17 @@ export function About({ profile: _profile }: AboutProps) {
         <div
           className="
             absolute
-            -bottom-32
-            -left-24
-            h-[520px]
-            w-[520px]
+            -bottom-36
+            -left-28
+            h-[540px]
+            w-[540px]
             rounded-full
             bg-[#0D2538]/70
-            blur-[130px]
+            blur-[140px]
           "
         />
 
-        {/* Very subtle architectural grid */}
+        {/* Subtle architectural grid */}
         <div
           className="
             absolute
@@ -105,7 +105,7 @@ export function About({ profile: _profile }: AboutProps) {
               ${isRTL ? 'lg:text-right' : 'lg:text-left'}
             `}
           >
-            {/* Section heading */}
+            {/* SECTION HEADING */}
             <div className="space-y-2">
               <span className="inline-block text-xs font-bold tracking-[0.25em] text-[#D8B56A] uppercase">
                 {isRTL ? t.tag : 'ABOUT ME'}
@@ -274,7 +274,7 @@ export function About({ profile: _profile }: AboutProps) {
 
               <div className="flex flex-wrap items-center gap-2.5">
 
-                {/* Saudi Driving License */}
+                {/* SAUDI DRIVING LICENSE */}
                 <span
                   className="
                     inline-flex
@@ -300,7 +300,7 @@ export function About({ profile: _profile }: AboutProps) {
                   </span>
                 </span>
 
-                {/* Current Employer */}
+                {/* CURRENT EMPLOYER */}
                 <a
                   href="https://www.ayalyami.com"
                   target="_blank"
@@ -337,9 +337,8 @@ export function About({ profile: _profile }: AboutProps) {
           </div>
 
           {/* ========================================================
-              RIGHT SIDE — ORIGINAL REAL PHOTO
-              NO HARD FRAME / NO BORDER
-              EDGES BLEND INTO ABOUT BACKGROUND
+              RIGHT SIDE — REAL ORIGINAL PHOTO
+              CLOUDY / FEATHERED BACKGROUND MERGE
               ======================================================== */}
           <div className="flex items-center justify-center lg:col-span-5 xl:col-span-5">
             <div
@@ -353,32 +352,29 @@ export function About({ profile: _profile }: AboutProps) {
                 xl:max-w-[470px]
               "
             >
-              {/* Very soft ambient gold light behind image */}
+              {/* LARGE SOFT ATMOSPHERIC HALO */}
               <div
                 className="
                   pointer-events-none
                   absolute
-                  top-[8%]
-                  right-[4%]
-                  bottom-[8%]
-                  left-[4%]
-                  bg-[#D8B56A]/10
-                  blur-[70px]
+                  -inset-[12%]
+                  bg-[radial-gradient(ellipse_at_center,rgba(216,181,106,0.10)_0%,rgba(13,37,56,0.18)_42%,rgba(8,26,43,0)_72%)]
+                  blur-[45px]
                 "
                 aria-hidden="true"
               />
 
-              {/* PHOTO BLEND CONTAINER */}
+              {/* PHOTO AREA */}
               <div
                 className="
                   relative
                   aspect-[3/4]
                   w-full
                   overflow-hidden
-                  bg-transparent
+                  bg-[#081A2B]
                 "
               >
-                {/* ORIGINAL REAL PHOTO — UNEDITED */}
+                {/* ORIGINAL REAL PHOTO — NEVER MODIFIED */}
                 <img
                   src="/images/0D0A2507.JPG"
                   alt={
@@ -398,58 +394,146 @@ export function About({ profile: _profile }: AboutProps) {
                   loading="eager"
                 />
 
-                {/* LEFT EDGE NAVY FADE */}
+                {/* ==================================================
+                    CLOUDY LEFT MIST
+                    Wide + blurred so no straight vertical edge
+                    ================================================== */}
                 <div
                   className="
                     pointer-events-none
                     absolute
-                    inset-y-0
-                    left-0
+                    top-[-8%]
+                    bottom-[-8%]
+                    left-[-18%]
                     z-10
-                    w-[18%]
-                    bg-gradient-to-r
-                    from-[#081A2B]
-                    via-[#081A2B]/65
-                    to-transparent
+                    w-[48%]
+                    bg-[#081A2B]/95
+                    blur-[48px]
                   "
                   aria-hidden="true"
                 />
 
-                {/* RIGHT EDGE NAVY FADE */}
+                {/* SECOND SOFTER LEFT FEATHER */}
                 <div
                   className="
                     pointer-events-none
                     absolute
-                    inset-y-0
-                    right-0
+                    top-[-5%]
+                    bottom-[-5%]
+                    left-[-4%]
                     z-10
-                    w-[18%]
-                    bg-gradient-to-l
-                    from-[#081A2B]
-                    via-[#081A2B]/65
-                    to-transparent
+                    w-[27%]
+                    bg-[#081A2B]/55
+                    blur-[36px]
                   "
                   aria-hidden="true"
                 />
 
-                {/* TOP EDGE — VERY LIGHT FADE */}
+                {/* ==================================================
+                    CLOUDY RIGHT MIST
+                    ================================================== */}
                 <div
                   className="
                     pointer-events-none
                     absolute
-                    top-0
-                    right-0
-                    left-0
+                    top-[-8%]
+                    right-[-18%]
+                    bottom-[-8%]
                     z-10
-                    h-[8%]
-                    bg-gradient-to-b
-                    from-[#081A2B]/65
-                    to-transparent
+                    w-[48%]
+                    bg-[#081A2B]/95
+                    blur-[48px]
                   "
                   aria-hidden="true"
                 />
 
-                {/* BOTTOM EDGE — STRONGER NATURAL BLEND */}
+                {/* SECOND SOFTER RIGHT FEATHER */}
+                <div
+                  className="
+                    pointer-events-none
+                    absolute
+                    top-[-5%]
+                    right-[-4%]
+                    bottom-[-5%]
+                    z-10
+                    w-[27%]
+                    bg-[#081A2B]/55
+                    blur-[36px]
+                  "
+                  aria-hidden="true"
+                />
+
+                {/* ==================================================
+                    CLOUDY TOP MIST
+                    ================================================== */}
+                <div
+                  className="
+                    pointer-events-none
+                    absolute
+                    top-[-14%]
+                    right-[-8%]
+                    left-[-8%]
+                    z-10
+                    h-[31%]
+                    bg-[#081A2B]/82
+                    blur-[48px]
+                  "
+                  aria-hidden="true"
+                />
+
+                {/* ==================================================
+                    CLOUDY BOTTOM MIST
+                    Stronger to blend lower body into page
+                    ================================================== */}
+                <div
+                  className="
+                    pointer-events-none
+                    absolute
+                    right-[-10%]
+                    bottom-[-17%]
+                    left-[-10%]
+                    z-10
+                    h-[42%]
+                    bg-[#081A2B]
+                    blur-[55px]
+                  "
+                  aria-hidden="true"
+                />
+
+                {/* SECOND BOTTOM FEATHER */}
+                <div
+                  className="
+                    pointer-events-none
+                    absolute
+                    right-[-4%]
+                    bottom-[-2%]
+                    left-[-4%]
+                    z-10
+                    h-[24%]
+                    bg-[#081A2B]/60
+                    blur-[34px]
+                  "
+                  aria-hidden="true"
+                />
+
+                {/* ==================================================
+                    MASTER ELLIPTICAL VIGNETTE
+                    Keeps face/torso center clear and dissolves perimeter
+                    ================================================== */}
+                <div
+                  className="
+                    pointer-events-none
+                    absolute
+                    inset-0
+                    z-20
+                    bg-[radial-gradient(ellipse_55%_64%_at_52%_43%,transparent_0%,transparent_52%,rgba(8,26,43,0.16)_68%,rgba(8,26,43,0.62)_84%,#081A2B_100%)]
+                  "
+                  aria-hidden="true"
+                />
+
+                {/* ==================================================
+                    SOFT LOWER NAVY HAZE
+                    ================================================== */}
                 <div
                   className="
                     pointer-events-none
@@ -457,24 +541,9 @@ export function About({ profile: _profile }: AboutProps) {
                     right-0
                     bottom-0
                     left-0
-                    z-10
-                    h-[22%]
-                    bg-gradient-to-t
-                    from-[#081A2B]
-                    via-[#081A2B]/60
-                    to-transparent
-                  "
-                  aria-hidden="true"
-                />
-
-                {/* SOFT CORNER BLEND */}
-                <div
-                  className="
-                    pointer-events-none
-                    absolute
-                    inset-0
-                    z-10
-                    bg-[radial-gradient(ellipse_at_center,transparent_48%,rgba(8,26,43,0.12)_65%,rgba(8,26,43,0.78)_100%)]
+                    z-20
+                    h-[30%]
+                    bg-[linear-gradient(to_top,#081A2B_0%,rgba(8,26,43,0.78)_28%,rgba(8,26,43,0.28)_65%,transparent_100%)]
                   "
                   aria-hidden="true"
                 />
