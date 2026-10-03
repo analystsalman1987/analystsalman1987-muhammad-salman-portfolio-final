@@ -38,52 +38,62 @@ export function About({ profile: _profile }: AboutProps) {
         lg:py-0
       "
     >
-      {/* Background Architectural Glass Atmosphere */}
+      {/* ============================================================
+          BACKGROUND ATMOSPHERE
+          ============================================================ */}
       <div
         className="pointer-events-none absolute inset-0 z-0 overflow-hidden select-none"
         aria-hidden="true"
       >
+        {/* Soft warm light near portrait */}
         <div
           className="
             absolute
-            -top-32
-            -right-20
-            h-[450px]
-            w-[450px]
+            top-[8%]
+            right-[-8%]
+            h-[560px]
+            w-[560px]
             rounded-full
             bg-[#D8B56A]/10
+            blur-[150px]
+          "
+        />
+
+        {/* Deep navy depth */}
+        <div
+          className="
+            absolute
+            -bottom-32
+            -left-24
+            h-[520px]
+            w-[520px]
+            rounded-full
+            bg-[#0D2538]/70
             blur-[130px]
           "
         />
 
-        <div
-          className="
-            absolute
-            -bottom-28
-            -left-20
-            h-[480px]
-            w-[480px]
-            rounded-full
-            bg-[#0D2538]/70
-            blur-[120px]
-          "
-        />
-
+        {/* Very subtle architectural grid */}
         <div
           className="
             absolute
             inset-0
-            bg-[linear-gradient(to_right,#132E4315_1px,transparent_1px),linear-gradient(to_bottom,#132E4315_1px,transparent_1px)]
+            bg-[linear-gradient(to_right,#132E4312_1px,transparent_1px),linear-gradient(to_bottom,#132E4312_1px,transparent_1px)]
             bg-[size:4.5rem_4.5rem]
-            [mask-image:radial-gradient(ellipse_70%_60%_at_50%_50%,#000_50%,transparent_100%)]
+            [mask-image:radial-gradient(ellipse_70%_60%_at_45%_50%,#000_45%,transparent_100%)]
           "
         />
       </div>
 
+      {/* ============================================================
+          MAIN CONTENT
+          ============================================================ */}
       <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-12 xl:gap-16">
+        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-10 xl:gap-12">
 
-          {/* LEFT SIDE */}
+          {/* ========================================================
+              LEFT SIDE — PROFESSIONAL SUMMARY
+              ======================================================== */}
           <div
             className={`
               flex
@@ -95,6 +105,7 @@ export function About({ profile: _profile }: AboutProps) {
               ${isRTL ? 'lg:text-right' : 'lg:text-left'}
             `}
           >
+            {/* Section heading */}
             <div className="space-y-2">
               <span className="inline-block text-xs font-bold tracking-[0.25em] text-[#D8B56A] uppercase">
                 {isRTL ? t.tag : 'ABOUT ME'}
@@ -120,7 +131,9 @@ export function About({ profile: _profile }: AboutProps) {
               </p>
             </div>
 
-            {/* HIGHLIGHT CARDS */}
+            {/* ======================================================
+                HIGHLIGHT CARDS
+                ====================================================== */}
             <div className="grid grid-cols-1 gap-3.5 pt-1 sm:grid-cols-3">
 
               {/* 14+ YEARS */}
@@ -133,15 +146,16 @@ export function About({ profile: _profile }: AboutProps) {
                   rounded-xl
                   border
                   border-[#D8B56A]/25
-                  bg-[#0D2538]/85
+                  bg-[#0D2538]/80
                   p-4
                   text-center
                   shadow-md
-                  backdrop-blur-xs
+                  backdrop-blur-sm
                   transition-all
-                  duration-250
+                  duration-300
                   hover:-translate-y-1
-                  hover:border-[#D8B56A]/60
+                  hover:border-[#D8B56A]/55
+                  hover:bg-[#102B40]
                 "
               >
                 <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-lg bg-[#132E43] text-[#D8B56A]">
@@ -167,15 +181,16 @@ export function About({ profile: _profile }: AboutProps) {
                   rounded-xl
                   border
                   border-[#D8B56A]/25
-                  bg-[#0D2538]/85
+                  bg-[#0D2538]/80
                   p-4
                   text-center
                   shadow-md
-                  backdrop-blur-xs
+                  backdrop-blur-sm
                   transition-all
-                  duration-250
+                  duration-300
                   hover:-translate-y-1
-                  hover:border-[#D8B56A]/60
+                  hover:border-[#D8B56A]/55
+                  hover:bg-[#102B40]
                 "
               >
                 <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-lg bg-[#132E43] text-[#D8B56A]">
@@ -201,15 +216,16 @@ export function About({ profile: _profile }: AboutProps) {
                   rounded-xl
                   border
                   border-[#D8B56A]/25
-                  bg-[#0D2538]/85
+                  bg-[#0D2538]/80
                   p-4
                   text-center
                   shadow-md
-                  backdrop-blur-xs
+                  backdrop-blur-sm
                   transition-all
-                  duration-250
+                  duration-300
                   hover:-translate-y-1
-                  hover:border-[#D8B56A]/60
+                  hover:border-[#D8B56A]/55
+                  hover:bg-[#102B40]
                 "
               >
                 <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-lg bg-[#132E43] text-[#D8B56A]">
@@ -228,7 +244,9 @@ export function About({ profile: _profile }: AboutProps) {
               </div>
             </div>
 
-            {/* COMPLIANCE & CURRENT STATUS */}
+            {/* ======================================================
+                COMPLIANCE / CURRENT STATUS
+                ====================================================== */}
             <div
               className="
                 flex
@@ -256,6 +274,7 @@ export function About({ profile: _profile }: AboutProps) {
 
               <div className="flex flex-wrap items-center gap-2.5">
 
+                {/* Saudi Driving License */}
                 <span
                   className="
                     inline-flex
@@ -281,6 +300,7 @@ export function About({ profile: _profile }: AboutProps) {
                   </span>
                 </span>
 
+                {/* Current Employer */}
                 <a
                   href="https://www.ayalyami.com"
                   target="_blank"
@@ -316,45 +336,49 @@ export function About({ profile: _profile }: AboutProps) {
             </div>
           </div>
 
-          {/* RIGHT SIDE — REAL ORIGINAL PHOTO ONLY */}
+          {/* ========================================================
+              RIGHT SIDE — ORIGINAL REAL PHOTO
+              NO HARD FRAME / NO BORDER
+              EDGES BLEND INTO ABOUT BACKGROUND
+              ======================================================== */}
           <div className="flex items-center justify-center lg:col-span-5 xl:col-span-5">
-            <div className="relative mx-auto w-full max-w-[340px] sm:max-w-[380px] lg:max-w-[410px] xl:max-w-[440px]">
-
-              {/* GOLD RIM GLOW */}
+            <div
+              className="
+                relative
+                mx-auto
+                w-full
+                max-w-[360px]
+                sm:max-w-[400px]
+                lg:max-w-[440px]
+                xl:max-w-[470px]
+              "
+            >
+              {/* Very soft ambient gold light behind image */}
               <div
                 className="
                   pointer-events-none
                   absolute
-                  -inset-3
-                  rounded-[2rem]
-                  bg-gradient-to-tr
-                  from-[#D8B56A]/20
-                  via-[#132E43]/40
-                  to-transparent
-                  blur-2xl
-                  sm:-inset-4
+                  top-[8%]
+                  right-[4%]
+                  bottom-[8%]
+                  left-[4%]
+                  bg-[#D8B56A]/10
+                  blur-[70px]
                 "
                 aria-hidden="true"
               />
 
-              {/* PHOTO CONTAINER */}
+              {/* PHOTO BLEND CONTAINER */}
               <div
                 className="
                   relative
                   aspect-[3/4]
                   w-full
                   overflow-hidden
-                  rounded-2xl
-                  border
-                  border-[#D8B56A]/40
-                  bg-[#0D2538]
-                  shadow-2xl
-                  shadow-black/60
-                  backdrop-blur-md
-                  sm:rounded-3xl
+                  bg-transparent
                 "
               >
-                {/* FINAL REAL PHOTO */}
+                {/* ORIGINAL REAL PHOTO — UNEDITED */}
                 <img
                   src="/images/0D0A2507.JPG"
                   alt={
@@ -363,6 +387,8 @@ export function About({ profile: _profile }: AboutProps) {
                       : 'Muhammad Salman - Accountant'
                   }
                   className="
+                    absolute
+                    inset-0
                     h-full
                     w-full
                     select-none
@@ -372,17 +398,83 @@ export function About({ profile: _profile }: AboutProps) {
                   loading="eager"
                 />
 
-                {/* INNER GOLD BORDER */}
+                {/* LEFT EDGE NAVY FADE */}
+                <div
+                  className="
+                    pointer-events-none
+                    absolute
+                    inset-y-0
+                    left-0
+                    z-10
+                    w-[18%]
+                    bg-gradient-to-r
+                    from-[#081A2B]
+                    via-[#081A2B]/65
+                    to-transparent
+                  "
+                  aria-hidden="true"
+                />
+
+                {/* RIGHT EDGE NAVY FADE */}
+                <div
+                  className="
+                    pointer-events-none
+                    absolute
+                    inset-y-0
+                    right-0
+                    z-10
+                    w-[18%]
+                    bg-gradient-to-l
+                    from-[#081A2B]
+                    via-[#081A2B]/65
+                    to-transparent
+                  "
+                  aria-hidden="true"
+                />
+
+                {/* TOP EDGE — VERY LIGHT FADE */}
+                <div
+                  className="
+                    pointer-events-none
+                    absolute
+                    top-0
+                    right-0
+                    left-0
+                    z-10
+                    h-[8%]
+                    bg-gradient-to-b
+                    from-[#081A2B]/65
+                    to-transparent
+                  "
+                  aria-hidden="true"
+                />
+
+                {/* BOTTOM EDGE — STRONGER NATURAL BLEND */}
+                <div
+                  className="
+                    pointer-events-none
+                    absolute
+                    right-0
+                    bottom-0
+                    left-0
+                    z-10
+                    h-[22%]
+                    bg-gradient-to-t
+                    from-[#081A2B]
+                    via-[#081A2B]/60
+                    to-transparent
+                  "
+                  aria-hidden="true"
+                />
+
+                {/* SOFT CORNER BLEND */}
                 <div
                   className="
                     pointer-events-none
                     absolute
                     inset-0
-                    rounded-2xl
-                    ring-1
-                    ring-inset
-                    ring-[#D8B56A]/20
-                    sm:rounded-3xl
+                    z-10
+                    bg-[radial-gradient(ellipse_at_center,transparent_48%,rgba(8,26,43,0.12)_65%,rgba(8,26,43,0.78)_100%)]
                   "
                   aria-hidden="true"
                 />
