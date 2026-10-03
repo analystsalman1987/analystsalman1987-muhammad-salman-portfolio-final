@@ -1,767 +1,430 @@
-import { FileDown, ExternalLink } from 'lucide-react';
-import { ProfileInfo } from '../types';
-import { useLanguage } from '../context/LanguageContext';
-import { ARABIC_TRANSLATIONS } from '../data/arabicData';
+UPDATE ONLY THE HOME / HERO SECTION.
 
-interface HeroProps {
-  profile: ProfileInfo;
-  onOpenCV: () => void;
-  onSelectExperience?: () => void;
-}
+IMPORTANT:
+Do NOT modify the About section, profile photo, Experience, Expertise, ERP & Software, Education, Contact, Navbar structure, Admin functionality, CV functionality, language system, or any other working section.
 
-export function Hero({ onOpenCV }: HeroProps) {
-  const { isRTL } = useLanguage();
+I want to replace the CURRENT Hero background with a clearly visible, professional ANIMATED CORPORATE FINANCE CITY concept.
 
-  const linkedInUrl =
-    'https://www.linkedin.com/in/muhammad-salman-mba-finance-cpa-finalist-66908767/';
+============================================================
+1. HERO DESIGN DIRECTION
+============================================================
 
-  return (
-    <section
-      id="home"
-      className="
-        relative
-        flex
-        min-h-[calc(100svh-5rem)]
-        w-full
-        flex-col
-        items-center
-        justify-center
-        overflow-hidden
-        bg-[#071827]
-        px-4
-        py-8
-        text-center
-        sm:px-6
-        lg:h-[calc(100svh-5rem)]
-        lg:px-8
-        lg:py-0
-      "
-    >
-      {/* ============================================================
-          NAVY / GOLD ARCHITECTURAL GLASS BACKGROUND
-          No people, stars, particles, network or neon effects.
-          ============================================================ */}
-      <div
-        className="pointer-events-none absolute inset-0 z-0 overflow-hidden select-none"
-        aria-hidden="true"
-      >
-        {/* ----------------------------------------------------------
-            DEEP NAVY BASE
-            ---------------------------------------------------------- */}
-        <div
-          className="
-            absolute
-            -inset-16
-            bg-[radial-gradient(ellipse_90%_75%_at_50%_25%,#132E43_0%,#0D2538_30%,#081A2B_62%,#071827_100%)]
-          "
-        />
+Create a premium corporate/accounting Hero using:
 
-        {/* ----------------------------------------------------------
-            DISTANT CORPORATE SKYLINE
-            ---------------------------------------------------------- */}
-        <div className="absolute inset-x-0 bottom-0 h-[44%] opacity-35">
-          <svg
-            className="h-full w-full"
-            viewBox="0 0 1440 420"
-            preserveAspectRatio="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <defs>
-              <linearGradient
-                id="skylineFill"
-                x1="0"
-                y1="0"
-                x2="0"
-                y2="1"
-              >
-                <stop
-                  offset="0%"
-                  stopColor="#132E43"
-                  stopOpacity="0.55"
-                />
-                <stop
-                  offset="100%"
-                  stopColor="#071827"
-                  stopOpacity="0.95"
-                />
-              </linearGradient>
-            </defs>
+- Deep navy / midnight blue background:
+  #071827
+  #081A2B
+  #0D2538
+  #132E43
 
-            <path
-              d="
-                M0 420
-                L0 310
-                L80 310
-                L80 270
-                L145 270
-                L145 325
-                L225 325
-                L225 230
-                L290 230
-                L290 315
-                L360 315
-                L360 255
-                L425 255
-                L425 340
-                L505 340
-                L505 285
-                L570 285
-                L570 320
-                L650 320
-                L650 245
-                L715 245
-                L715 325
-                L795 325
-                L795 275
-                L860 275
-                L860 335
-                L940 335
-                L940 235
-                L1010 235
-                L1010 315
-                L1085 315
-                L1085 265
-                L1150 265
-                L1150 325
-                L1230 325
-                L1230 245
-                L1295 245
-                L1295 305
-                L1370 305
-                L1370 275
-                L1440 275
-                L1440 420
-                Z
-              "
-              fill="url(#skylineFill)"
-            />
-          </svg>
-        </div>
+- Champagne gold accents:
+  #C9A45C
+  #D8B56A
 
-        {/* ----------------------------------------------------------
-            MAIN MODERN GLASS FACADE
-            Vertical panels + mullions + horizontal floor divisions.
-            ---------------------------------------------------------- */}
-        <div className="absolute inset-0 opacity-[0.68]">
-          <svg
-            className="h-full w-full"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 1440 900"
-            preserveAspectRatio="none"
-          >
-            <defs>
-              <linearGradient
-                id="glassPanelA"
-                x1="0%"
-                y1="0%"
-                x2="100%"
-                y2="100%"
-              >
-                <stop
-                  offset="0%"
-                  stopColor="#D8B56A"
-                  stopOpacity="0.09"
-                />
-                <stop
-                  offset="30%"
-                  stopColor="#132E43"
-                  stopOpacity="0.28"
-                />
-                <stop
-                  offset="70%"
-                  stopColor="#0D2538"
-                  stopOpacity="0.42"
-                />
-                <stop
-                  offset="100%"
-                  stopColor="#071827"
-                  stopOpacity="0.12"
-                />
-              </linearGradient>
+- Main text:
+  #F8FAFC
+  #CBD5E1
 
-              <linearGradient
-                id="glassPanelB"
-                x1="100%"
-                y1="0%"
-                x2="0%"
-                y2="100%"
-              >
-                <stop
-                  offset="0%"
-                  stopColor="#F8FAFC"
-                  stopOpacity="0.06"
-                />
-                <stop
-                  offset="40%"
-                  stopColor="#132E43"
-                  stopOpacity="0.32"
-                />
-                <stop
-                  offset="100%"
-                  stopColor="#C9A45C"
-                  stopOpacity="0.07"
-                />
-              </linearGradient>
+The Hero must visually combine:
 
-              <linearGradient
-                id="glassPanelC"
-                x1="0%"
-                y1="100%"
-                x2="100%"
-                y2="0%"
-              >
-                <stop
-                  offset="0%"
-                  stopColor="#071827"
-                  stopOpacity="0.18"
-                />
-                <stop
-                  offset="55%"
-                  stopColor="#0D2538"
-                  stopOpacity="0.36"
-                />
-                <stop
-                  offset="100%"
-                  stopColor="#D8B56A"
-                  stopOpacity="0.08"
-                />
-              </linearGradient>
+A. Clearly visible modern corporate city/buildings
+B. Modern glass-office / financial environment
+C. Animated financial chart
+D. Animated financial bars
+E. Moving gold light/reflection
+F. Subtle building/window illumination
 
-              <linearGradient
-                id="goldMullion"
-                x1="0%"
-                y1="0%"
-                x2="0%"
-                y2="100%"
-              >
-                <stop
-                  offset="0%"
-                  stopColor="#D8B56A"
-                  stopOpacity="0.24"
-                />
-                <stop
-                  offset="50%"
-                  stopColor="#CBD5E1"
-                  stopOpacity="0.12"
-                />
-                <stop
-                  offset="100%"
-                  stopColor="#D8B56A"
-                  stopOpacity="0.08"
-                />
-              </linearGradient>
-            </defs>
+The result must look like a professional Accountant / Finance executive portfolio.
 
-            {/* Glass panel surfaces */}
-            <rect
-              x="0"
-              y="0"
-              width="180"
-              height="900"
-              fill="url(#glassPanelA)"
-            />
+DO NOT create:
+- stars
+- galaxy
+- particles
+- network mesh
+- Matrix effects
+- gaming effects
+- neon cyberpunk effects
+- random giant polygons
+- abstract shapes that hide the buildings
+- people or portraits
 
-            <rect
-              x="180"
-              y="0"
-              width="180"
-              height="900"
-              fill="url(#glassPanelB)"
-            />
+============================================================
+2. BUILDINGS MUST BE CLEARLY VISIBLE
+============================================================
 
-            <rect
-              x="360"
-              y="0"
-              width="180"
-              height="900"
-              fill="url(#glassPanelC)"
-            />
+This is very important.
 
-            <rect
-              x="540"
-              y="0"
-              width="180"
-              height="900"
-              fill="url(#glassPanelA)"
-            />
+The previous implementation made the buildings too dark or almost invisible.
 
-            <rect
-              x="720"
-              y="0"
-              width="180"
-              height="900"
-              fill="url(#glassPanelB)"
-            />
+The new Hero MUST have recognizable modern corporate buildings / city architecture.
 
-            <rect
-              x="900"
-              y="0"
-              width="180"
-              height="900"
-              fill="url(#glassPanelC)"
-            />
+Use a layered corporate skyline / glass-building environment.
 
-            <rect
-              x="1080"
-              y="0"
-              width="180"
-              height="900"
-              fill="url(#glassPanelA)"
-            />
+Buildings should be visible mainly:
 
-            <rect
-              x="1260"
-              y="0"
-              width="180"
-              height="900"
-              fill="url(#glassPanelB)"
-            />
+- on the left side
+- on the right side
+- in the lower background
 
-            {/* Vertical architectural mullions */}
-            {[
-              90,
-              180,
-              270,
-              360,
-              450,
-              540,
-              630,
-              720,
-              810,
-              900,
-              990,
-              1080,
-              1170,
-              1260,
-              1350
-            ].map((x) => (
-              <line
-                key={`vertical-${x}`}
-                x1={x}
-                y1="0"
-                x2={x}
-                y2="900"
-                stroke="url(#goldMullion)"
-                strokeWidth={x % 180 === 0 ? 1.4 : 0.65}
-              />
-            ))}
+Keep the CENTER darker and cleaner for the Hero text.
 
-            {/* Horizontal floor divisions */}
-            {[145, 290, 435, 580, 725].map((y) => (
-              <line
-                key={`horizontal-${y}`}
-                x1="0"
-                y1={y}
-                x2="1440"
-                y2={y}
-                stroke="#CBD5E1"
-                strokeOpacity="0.08"
-                strokeWidth="0.8"
-              />
-            ))}
+The buildings should include subtle:
 
-            {/* Architectural perspective lines */}
-            <line
-              x1="0"
-              y1="900"
-              x2="350"
-              y2="0"
-              stroke="#D8B56A"
-              strokeOpacity="0.08"
-              strokeWidth="1"
-            />
+- glass panels
+- vertical architectural lines
+- window divisions
+- reflected blue light
+- warm champagne-gold window illumination
+- city depth
 
-            <line
-              x1="1440"
-              y1="900"
-              x2="1090"
-              y2="0"
-              stroke="#D8B56A"
-              strokeOpacity="0.08"
-              strokeWidth="1"
-            />
-          </svg>
-        </div>
+Do NOT make buildings completely black silhouettes.
 
-        {/* ----------------------------------------------------------
-            SUBTLE GLASS DEPTH PANELS
-            Vertical, not oversized diagonal polygons.
-            ---------------------------------------------------------- */}
-        <div
-          className="
-            animate-arch-depth-a
-            absolute
-            top-[-8%]
-            left-[4%]
-            h-[116%]
-            w-[20%]
-            border-x
-            border-[#D8B56A]/10
-            bg-gradient-to-r
-            from-transparent
-            via-[#132E43]/12
-            to-transparent
-            backdrop-blur-[1px]
-          "
-        />
+They must visibly read as MODERN CORPORATE BUILDINGS.
 
-        <div
-          className="
-            animate-arch-depth-b
-            absolute
-            top-[-8%]
-            right-[5%]
-            h-[116%]
-            w-[18%]
-            border-x
-            border-[#CBD5E1]/8
-            bg-gradient-to-r
-            from-transparent
-            via-[#0D2538]/18
-            to-transparent
-            backdrop-blur-[1px]
-          "
-        />
+============================================================
+3. ACTUAL CONTINUOUS ANIMATION
+============================================================
 
-        {/* ----------------------------------------------------------
-            CHAMPAGNE GOLD SUNSET / BUILDING REFLECTION
-            ---------------------------------------------------------- */}
-        <div
-          className="
-            animate-gold-drift
-            absolute
-            top-[6%]
-            left-[5%]
-            h-[560px]
-            w-[560px]
-            rounded-full
-            bg-[radial-gradient(circle,rgba(216,181,106,0.20)_0%,rgba(201,164,92,0.10)_34%,rgba(216,181,106,0.03)_58%,transparent_74%)]
-            blur-[65px]
-          "
-        />
+The Hero MUST visibly animate after the page loads.
 
-        <div
-          className="
-            animate-gold-drift-2
-            absolute
-            right-[4%]
-            bottom-[5%]
-            h-[500px]
-            w-[500px]
-            rounded-full
-            bg-[radial-gradient(circle,rgba(201,164,92,0.16)_0%,rgba(216,181,106,0.07)_40%,transparent_72%)]
-            blur-[75px]
-          "
-        />
+Do NOT only add animation class names.
 
-        {/* ----------------------------------------------------------
-            LARGE MOVING GLASS REFLECTION
-            ---------------------------------------------------------- */}
-        <div
-          className="
-            animate-glass-reflection
-            absolute
-            -top-[35%]
-            -left-[45%]
-            h-[180%]
-            w-[65%]
-            rotate-[8deg]
-            bg-[linear-gradient(105deg,transparent_0%,rgba(255,255,255,0.02)_22%,rgba(216,181,106,0.07)_42%,rgba(255,255,255,0.10)_50%,rgba(216,181,106,0.05)_58%,transparent_78%)]
-            blur-[2px]
-          "
-        />
+You MUST implement all required @keyframes / CSS animation definitions in the appropriate stylesheet.
 
-        {/* ----------------------------------------------------------
-            NARROW GLASS LIGHT SWEEP
-            ---------------------------------------------------------- */}
-        <div
-          className="
-            animate-light-sweep
-            absolute
-            -top-[45%]
-            -left-[20%]
-            h-[190%]
-            w-[240px]
-            rotate-[7deg]
-            bg-[linear-gradient(90deg,transparent_0%,rgba(255,255,255,0.02)_28%,rgba(255,255,255,0.13)_47%,rgba(216,181,106,0.20)_50%,rgba(255,255,255,0.10)_53%,rgba(255,255,255,0.02)_72%,transparent_100%)]
-            blur-[1px]
-          "
-        />
+Verify that the animation actually runs in the browser.
 
-        {/* ----------------------------------------------------------
-            CENTRAL DARK GLASS AREA
-            Keeps name and buttons highly readable.
-            ---------------------------------------------------------- */}
-        <div
-          className="
-            absolute
-            inset-0
-            bg-[radial-gradient(ellipse_48%_48%_at_50%_50%,rgba(7,24,39,0.48)_0%,rgba(7,24,39,0.22)_52%,transparent_78%)]
-          "
-        />
+Animation should contain:
 
-        {/* ----------------------------------------------------------
-            EXECUTIVE EDGE VIGNETTE
-            ---------------------------------------------------------- */}
-        <div
-          className="
-            absolute
-            inset-0
-            bg-[radial-gradient(ellipse_75%_72%_at_50%_48%,transparent_42%,rgba(7,24,39,0.30)_72%,#071827_100%)]
-          "
-        />
-      </div>
+A. MOVING GOLD FINANCIAL LINE GRAPH
 
-      {/* ============================================================
-          MINIMAL HERO CONTENT
-          ============================================================ */}
-      <div
-        className="
-          relative
-          z-10
-          mx-auto
-          flex
-          w-full
-          max-w-5xl
-          flex-col
-          items-center
-          justify-center
-          space-y-6
-        "
-      >
-        {/* Welcome label */}
-        <div className="inline-flex items-center gap-2">
-          <span className="h-px w-6 bg-[#D8B56A]/60 sm:w-10" />
+Create a subtle champagne-gold financial line chart in the background.
 
-          <span
-            className="
-              text-[11px]
-              font-bold
-              tracking-[0.28em]
-              text-[#D8B56A]
-              uppercase
-              sm:text-xs
-              sm:tracking-[0.34em]
-            "
-          >
-            {isRTL
-              ? 'مرحباً بكم في ملفي المهني'
-              : 'WELCOME TO MY PORTFOLIO'}
-          </span>
+The line should:
+- slowly move/change position
+- have small data points
+- travel mainly through the right/lower-right background
+- remain behind the main Hero text
+- never obstruct MUHAMMAD SALMAN
 
-          <span className="h-px w-6 bg-[#D8B56A]/60 sm:w-10" />
-        </div>
+Use a professional slow animation.
 
-        {/* Name */}
-        <h1
-          className="
-            select-none
-            text-4xl
-            leading-[1.1]
-            font-extrabold
-            tracking-tight
-            sm:text-6xl
-            md:text-7xl
-            lg:text-[5.25rem]
-          "
-        >
-          <span className="text-[#F8FAFC] drop-shadow-[0_2px_12px_rgba(0,0,0,0.60)]">
-            {isRTL ? 'محمد' : 'MUHAMMAD'}
-          </span>
+Approximate animation duration:
+8–14 seconds, infinite, ease-in-out.
 
-          {' '}
+------------------------------------------------------------
 
-          <span className="text-[#D8B56A] drop-shadow-[0_2px_16px_rgba(216,181,106,0.22)]">
-            {isRTL ? 'سلمان' : 'SALMAN'}
-          </span>
-        </h1>
+B. ANIMATED FINANCIAL BAR CHART
 
-        {/* Designation */}
-        <p
-          className="
-            text-base
-            font-semibold
-            tracking-[0.25em]
-            text-[#CBD5E1]
-            uppercase
-            sm:text-xl
-            sm:tracking-[0.35em]
-            md:text-2xl
-          "
-        >
-          {isRTL
-            ? ARABIC_TRANSLATIONS.hero.role || 'محاسب'
-            : 'ACCOUNTANT'}
-        </p>
+Add subtle transparent blue/navy financial bars.
 
-        {/* ==========================================================
-            ACTION BUTTONS
-            ========================================================== */}
-        <div
-          className="
-            flex
-            flex-wrap
-            items-center
-            justify-center
-            gap-4
-            pt-4
-            sm:gap-5
-          "
-        >
-          {/* DOWNLOAD CV */}
-          <button
-            type="button"
-            onClick={onOpenCV}
-            className="
-              group
-              relative
-              inline-flex
-              cursor-pointer
-              touch-manipulation
-              select-none
-              items-center
-              gap-2.5
-              overflow-hidden
-              rounded-xl
-              border
-              border-[#D8B56A]/50
-              bg-[#0D2538]/95
-              px-7
-              py-3.5
-              text-sm
-              font-bold
-              text-[#F8FAFC]
-              shadow-lg
-              shadow-black/40
-              backdrop-blur-md
-              transition-all
-              duration-300
-              ease-out
-              hover:-translate-y-0.5
-              hover:border-[#D8B56A]
-              hover:bg-[#132E43]
-              hover:shadow-[#D8B56A]/10
-              focus:outline-none
-              focus-visible:ring-2
-              focus-visible:ring-[#D8B56A]
-            "
-          >
-            <span
-              className="
-                pointer-events-none
-                absolute
-                inset-0
-                -translate-x-full
-                bg-gradient-to-r
-                from-transparent
-                via-white/10
-                to-transparent
-                transition-transform
-                duration-700
-                group-hover:translate-x-full
-              "
-              aria-hidden="true"
-            />
+The bars should:
+- gently rise/fall
+- use different heights
+- remain semi-transparent
+- sit mostly in the lower/right background
+- feel like financial reporting/data visualization
 
-            <FileDown className="relative z-10 h-4 w-4 text-[#D8B56A]" />
+Animation duration:
+6–12 seconds, infinite.
 
-            <span className="relative z-10">
-              {isRTL
-                ? ARABIC_TRANSLATIONS.hero.downloadCv
-                : 'Download CV'}
-            </span>
-          </button>
+Do not make them flashy.
 
-          {/* ========================================================
-              LINKEDIN — FINAL LIVE PROFILE URL
-              ======================================================== */}
-          <a
-            href={linkedInUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={
-              isRTL
-                ? 'فتح الملف الشخصي على LinkedIn'
-                : 'Open Muhammad Salman LinkedIn Profile'
-            }
-            className="
-              group
-              relative
-              inline-flex
-              cursor-pointer
-              touch-manipulation
-              select-none
-              items-center
-              gap-2.5
-              overflow-hidden
-              rounded-xl
-              border
-              border-[#D8B56A]/45
-              bg-[#071827]/78
-              px-6
-              py-3.5
-              text-sm
-              font-semibold
-              text-[#CBD5E1]
-              shadow-md
-              shadow-black/30
-              backdrop-blur-md
-              transition-all
-              duration-300
-              ease-out
-              hover:-translate-y-0.5
-              hover:border-[#D8B56A]
-              hover:bg-[#0D2538]/90
-              hover:text-[#F8FAFC]
-              focus:outline-none
-              focus-visible:ring-2
-              focus-visible:ring-[#D8B56A]
-            "
-          >
-            {/* Subtle hover reflection */}
-            <span
-              className="
-                pointer-events-none
-                absolute
-                inset-0
-                -translate-x-full
-                bg-gradient-to-r
-                from-transparent
-                via-[#D8B56A]/8
-                to-transparent
-                transition-transform
-                duration-700
-                group-hover:translate-x-full
-              "
-              aria-hidden="true"
-            />
+------------------------------------------------------------
 
-            {/* LinkedIn icon */}
-            <svg
-              className="
-                relative
-                z-10
-                h-4
-                w-4
-                fill-current
-                text-[#D8B56A]
-              "
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.64 1.64 0 1 0 0-3.28 1.64 1.64 0 0 0 0 3.28m1.39 9.74v-8.37H5.07v8.37z" />
-            </svg>
+C. MOVING CHAMPAGNE-GOLD LIGHT SWEEP
 
-            <span className="relative z-10">
-              {isRTL
-                ? 'الملف الشخصي على LinkedIn'
-                : 'LinkedIn Profile'}
-            </span>
+Create a soft gold/glass reflection that slowly travels:
 
-            <ExternalLink className="relative z-10 h-3.5 w-3.5 opacity-60" />
-          </a>
-        </div>
-      </div>
-    </section>
-  );
-}
+LEFT → RIGHT → RESET
+
+across the corporate glass/building environment.
+
+The sweep should be:
+- wide
+- soft
+- blurred
+- semi-transparent
+- elegant
+- clearly visible enough to confirm animation is working
+
+Animation duration:
+10–16 seconds, infinite linear/ease-in-out.
+
+------------------------------------------------------------
+
+D. BUILDING WINDOW LIGHT ANIMATION
+
+Some building windows / glass sections should subtly change brightness.
+
+Use very small opacity changes between:
+
+navy blue → muted champagne gold → navy blue.
+
+This must feel like city/building illumination, NOT flashing lights.
+
+Animation duration:
+7–15 seconds.
+
+Use different delays so all windows do not pulse together.
+
+------------------------------------------------------------
+
+E. SUBTLE BACKGROUND DEPTH / PARALLAX
+
+At least two background architectural layers should move very slowly by a few pixels.
+
+Example:
+- far skyline moves slightly horizontally
+- nearer glass layer moves in the opposite direction
+
+Movement must be subtle.
+
+Duration:
+18–30 seconds.
+
+============================================================
+4. HERO CENTER MUST REMAIN CLEAN
+============================================================
+
+Maintain a dark navy readability area behind the main Hero content.
+
+The animation and buildings should be stronger toward the LEFT/RIGHT edges and lower background.
+
+The center should remain visually clean.
+
+Do NOT place financial numbers directly behind the name.
+
+============================================================
+5. HERO CONTENT — PRESERVE
+============================================================
+
+Keep the current minimal Hero content.
+
+WELCOME TO MY PORTFOLIO
+
+MUHAMMAD SALMAN
+
+ACCOUNTANT
+
+Download CV
+
+LinkedIn Profile
+
+Keep:
+
+MUHAMMAD = off-white / #F8FAFC
+
+SALMAN = champagne gold / #D8B56A
+
+Do NOT add:
+- profile photo
+- MBA/BBA
+- location
+- employer
+- 14+ experience card
+- VAT card
+- ERP card
+- professional summary
+- statistics
+- extra Hero cards
+
+Home must remain minimal.
+
+============================================================
+6. LINKEDIN — PRESERVE EXACT LIVE URL
+============================================================
+
+The existing LinkedIn Profile button MUST remain active.
+
+Use exactly:
+
+https://www.linkedin.com/in/muhammad-salman-mba-finance-cpa-finalist-66908767/
+
+Requirements:
+
+target="_blank"
+rel="noopener noreferrer"
+
+Do NOT create another LinkedIn button.
+
+Do NOT add LinkedIn to the Navbar.
+
+There must NOT be any message saying:
+
+"LinkedIn Profile URL is pending configuration before production deployment."
+
+Remove that message/state/function completely if any old code still exists.
+
+============================================================
+7. DOWNLOAD CV
+============================================================
+
+Preserve the existing working Download CV button and its current CV functionality.
+
+Do NOT replace the existing CV logic.
+
+============================================================
+8. HERO SCREEN FIT
+============================================================
+
+Preserve the current successful full-screen Hero behavior.
+
+Desktop / laptop:
+
+Hero should fill the available screen below the Navbar.
+
+Preserve equivalent behavior to:
+
+min-height: calc(100svh - 5rem)
+
+and desktop:
+
+height: calc(100svh - 5rem)
+
+Do NOT make the Hero taller than necessary.
+
+Do NOT introduce vertical scrolling inside the Hero.
+
+Keep the main content vertically and horizontally centered.
+
+Mobile/tablet must remain responsive and must not clip.
+
+============================================================
+9. NAVBAR
+============================================================
+
+Preserve the existing Navbar.
+
+Do NOT redesign it.
+
+Keep:
+- MS logo
+- Muhammad Salman
+- Accountant
+- navigation links
+- English / Arabic language control
+
+Do NOT restore the old Light/Dark theme toggle.
+
+The website remains the fixed Navy/Gold theme.
+
+============================================================
+10. PERFORMANCE
+============================================================
+
+Animation must be lightweight.
+
+Prefer:
+- CSS transforms
+- opacity
+- SVG
+- CSS gradients
+- GPU-friendly transform animations
+
+Avoid:
+- huge video files
+- external animation libraries
+- heavy canvas rendering
+- unnecessary JavaScript animation loops
+
+Do NOT use a video background.
+
+Do NOT use a GIF background.
+
+The moving preview was only a visual reference.
+
+Implement the final animation using CSS/SVG so it remains sharp and responsive.
+
+============================================================
+11. REDUCED MOTION
+============================================================
+
+Add:
+
+@media (prefers-reduced-motion: reduce)
+
+For users who request reduced motion:
+
+- stop or greatly reduce continuous movement
+- preserve the complete static Hero design
+- buildings/charts must still remain visible
+
+============================================================
+12. IMPORTANT — CSS MUST ACTUALLY EXIST
+============================================================
+
+Previously animation class names were added but the visible animation did not work correctly.
+
+DO NOT repeat this problem.
+
+If Hero.tsx uses classes such as:
+
+animate-finance-line
+animate-finance-bars
+animate-gold-sweep
+animate-city-depth
+animate-window-light
+
+then the corresponding @keyframes and animation CSS MUST actually exist in the stylesheet used by the application.
+
+Inspect the existing CSS structure first.
+
+Use the project's actual stylesheet.
+
+Do not reference undefined animation classes.
+
+============================================================
+13. DO NOT MODIFY OTHER SECTIONS
+============================================================
+
+Do NOT change:
+
+About.tsx
+the real profile photo
+Professional Highlights
+Core Professional Expertise
+Experience
+Remote / Part-Time Experience
+ERP & Software
+Education
+Contact
+Admin
+CV Modal
+Footer
+EmailJS
+analytics
+language translations
+mobile navigation
+
+This task is ONLY for the Home/Hero animation and any CSS strictly required for that Hero animation.
+
+============================================================
+14. FINAL VERIFICATION
+============================================================
+
+Before reporting completion:
+
+1. Run the production build.
+2. Confirm build passes with no TypeScript errors.
+3. Open the actual Hero preview.
+4. Wait at least 10–15 seconds.
+5. Confirm visually that:
+   - corporate buildings are clearly visible
+   - gold financial graph visibly moves
+   - financial bars visibly animate
+   - gold reflection/light sweep visibly travels
+   - subtle building lights animate
+   - background depth moves
+   - center text stays readable
+   - LinkedIn opens the exact profile
+   - Download CV still works
+   - Hero still fits one desktop screen below Navbar
+   - mobile layout does not clip
+
+DO NOT report "completed" merely because the code compiled.
+
+If the animation is not visibly moving in the actual preview, continue fixing it before reporting success.
+
+FINAL TARGET:
+
+A premium Navy/Gold animated corporate-finance Hero with clearly visible modern buildings, moving financial chart/bar elements, subtle city illumination and moving glass/gold reflections, while MUHAMMAD SALMAN / ACCOUNTANT / Download CV / LinkedIn remain clean, centered and professional.
