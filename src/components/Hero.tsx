@@ -1,204 +1,162 @@
-UPDATE ONLY THE HOME / HERO SECTION.
+FINALIZE THE CURRENT HERO ONLY.
 
 IMPORTANT:
-Do NOT modify the About section, profile photo, Experience, Expertise, ERP & Software, Education, Contact, Navbar structure, Admin functionality, CV functionality, language system, or any other working section.
+The project currently builds successfully with npm run build (Exit Code 0).
+DO NOT break or rewrite working functionality.
 
-I want to replace the CURRENT Hero background with a clearly visible, professional ANIMATED CORPORATE FINANCE CITY concept.
-
-============================================================
-1. HERO DESIGN DIRECTION
-============================================================
-
-Create a premium corporate/accounting Hero using:
-
-- Deep navy / midnight blue background:
-  #071827
-  #081A2B
-  #0D2538
-  #132E43
-
-- Champagne gold accents:
-  #C9A45C
-  #D8B56A
-
-- Main text:
-  #F8FAFC
-  #CBD5E1
-
-The Hero must visually combine:
-
-A. Clearly visible modern corporate city/buildings
-B. Modern glass-office / financial environment
-C. Animated financial chart
-D. Animated financial bars
-E. Moving gold light/reflection
-F. Subtle building/window illumination
-
-The result must look like a professional Accountant / Finance executive portfolio.
-
-DO NOT create:
-- stars
-- galaxy
-- particles
-- network mesh
-- Matrix effects
-- gaming effects
-- neon cyberpunk effects
-- random giant polygons
-- abstract shapes that hide the buildings
-- people or portraits
+Do NOT redesign the Hero from scratch.
+Improve the CURRENT Hero implementation only.
 
 ============================================================
-2. BUILDINGS MUST BE CLEARLY VISIBLE
+FINAL VISUAL TARGET
 ============================================================
 
-This is very important.
+Make the current Hero match this final concept:
 
-The previous implementation made the buildings too dark or almost invisible.
+PREMIUM CORPORATE FINANCE CITY
++ CLEARLY VISIBLE BUILDINGS
++ ACTUAL CONTINUOUS MOVEMENT
++ NAVY / CHAMPAGNE GOLD THEME
 
-The new Hero MUST have recognizable modern corporate buildings / city architecture.
-
-Use a layered corporate skyline / glass-building environment.
-
-Buildings should be visible mainly:
-
-- on the left side
-- on the right side
-- in the lower background
-
-Keep the CENTER darker and cleaner for the Hero text.
-
-The buildings should include subtle:
-
-- glass panels
-- vertical architectural lines
-- window divisions
-- reflected blue light
-- warm champagne-gold window illumination
-- city depth
-
-Do NOT make buildings completely black silhouettes.
-
-They must visibly read as MODERN CORPORATE BUILDINGS.
+The Hero must look professional for an Accountant / Finance portfolio,
+not like a gaming, crypto, cyberpunk, or trading website.
 
 ============================================================
-3. ACTUAL CONTINUOUS ANIMATION
+1. BUILDINGS — MUST BE CLEARLY VISIBLE
 ============================================================
 
-The Hero MUST visibly animate after the page loads.
+The modern corporate buildings are a major part of the design.
 
-Do NOT only add animation class names.
+Make the buildings clearly recognizable immediately when the Hero loads.
 
-You MUST implement all required @keyframes / CSS animation definitions in the appropriate stylesheet.
+Requirements:
 
-Verify that the animation actually runs in the browser.
+- Modern glass corporate skyscrapers
+- Visible on LEFT and RIGHT sides
+- Some skyline depth across the lower background
+- Keep the CENTER darker/cleaner for the text
+- Buildings must NOT look like almost-black silhouettes
+- Increase glass-panel/window visibility where necessary
+- Use subtle blue/navy reflections
+- Add selected muted champagne-gold illuminated windows
+- Preserve realistic architectural proportions
 
-Animation should contain:
+Buildings should remain visible throughout the animation.
 
-A. MOVING GOLD FINANCIAL LINE GRAPH
+Do NOT allow overlays, gradients, or darkness to hide them.
 
-Create a subtle champagne-gold financial line chart in the background.
+============================================================
+2. GOLD FINANCIAL GRAPH — ACTUALLY MOVE
+============================================================
 
-The line should:
-- slowly move/change position
-- have small data points
-- travel mainly through the right/lower-right background
-- remain behind the main Hero text
-- never obstruct MUHAMMAD SALMAN
+Keep/add a professional champagne-gold financial line graph.
 
-Use a professional slow animation.
+It must have VISIBLE continuous movement.
 
-Approximate animation duration:
-8–14 seconds, infinite, ease-in-out.
+Use:
+#C9A45C
+#D8B56A
 
-------------------------------------------------------------
+The graph should:
+- remain mostly toward the lower/right side
+- gently travel/change over time
+- contain subtle data points
+- remain behind the main content
+- never cross strongly through MUHAMMAD SALMAN
 
-B. ANIMATED FINANCIAL BAR CHART
+Animation:
+approximately 8–12 seconds
+infinite
+smooth ease-in-out
 
-Add subtle transparent blue/navy financial bars.
+Movement must be noticeable without being distracting.
 
-The bars should:
-- gently rise/fall
-- use different heights
-- remain semi-transparent
-- sit mostly in the lower/right background
-- feel like financial reporting/data visualization
+============================================================
+3. FINANCIAL BARS — ACTUALLY ANIMATE
+============================================================
 
-Animation duration:
-6–12 seconds, infinite.
+Keep/add transparent financial bars mainly in the lower background.
 
-Do not make them flashy.
+Bars should gently rise/fall using CSS transforms.
 
-------------------------------------------------------------
+Use different animation delays and durations.
 
-C. MOVING CHAMPAGNE-GOLD LIGHT SWEEP
+Do NOT animate all bars together.
 
-Create a soft gold/glass reflection that slowly travels:
+Animation:
+approximately 6–10 seconds
+infinite
+ease-in-out
 
-LEFT → RIGHT → RESET
+Keep opacity subtle.
 
-across the corporate glass/building environment.
+============================================================
+4. MOVING GOLD / GLASS REFLECTION
+============================================================
 
-The sweep should be:
-- wide
-- soft
-- blurred
-- semi-transparent
-- elegant
-- clearly visible enough to confirm animation is working
+Add a clearly visible but elegant soft reflection/light sweep.
 
-Animation duration:
-10–16 seconds, infinite linear/ease-in-out.
+It should slowly travel:
 
-------------------------------------------------------------
+LEFT → CENTER → RIGHT → RESET
 
-D. BUILDING WINDOW LIGHT ANIMATION
+Use:
+- champagne-gold tint
+- low opacity
+- blur
+- wide gradient
 
-Some building windows / glass sections should subtly change brightness.
+Animation:
+approximately 10–14 seconds
+infinite
 
-Use very small opacity changes between:
+It must be visible enough that a user can immediately confirm
+the Hero is animated.
 
-navy blue → muted champagne gold → navy blue.
+Do NOT make it bright or flashy.
 
-This must feel like city/building illumination, NOT flashing lights.
+============================================================
+5. BUILDING WINDOW LIGHT MOVEMENT
+============================================================
 
-Animation duration:
-7–15 seconds.
+Selected building windows should slowly pulse between:
 
-Use different delays so all windows do not pulse together.
+dark blue
+→ subtle warm champagne gold
+→ dark blue
 
-------------------------------------------------------------
+Use different delays.
 
-E. SUBTLE BACKGROUND DEPTH / PARALLAX
+Do NOT flash.
 
-At least two background architectural layers should move very slowly by a few pixels.
+This should create a subtle living corporate-city effect.
 
-Example:
-- far skyline moves slightly horizontally
-- nearer glass layer moves in the opposite direction
+============================================================
+6. DEPTH MOVEMENT
+============================================================
 
-Movement must be subtle.
+Use at least TWO architectural depth layers.
+
+Far layer:
+very slow horizontal movement.
+
+Near glass/building layer:
+very slow movement in the opposite direction.
+
+Movement only needs to be a few pixels.
 
 Duration:
 18–30 seconds.
 
-============================================================
-4. HERO CENTER MUST REMAIN CLEAN
-============================================================
-
-Maintain a dark navy readability area behind the main Hero content.
-
-The animation and buildings should be stronger toward the LEFT/RIGHT edges and lower background.
-
-The center should remain visually clean.
-
-Do NOT place financial numbers directly behind the name.
+This should create depth without making the buildings float unnaturally.
 
 ============================================================
-5. HERO CONTENT — PRESERVE
+7. KEEP CENTER CLEAN
 ============================================================
 
-Keep the current minimal Hero content.
+The center must remain darker than the edges.
+
+Keep excellent readability for:
 
 WELCOME TO MY PORTFOLIO
 
@@ -210,221 +168,173 @@ Download CV
 
 LinkedIn Profile
 
+Do NOT place strong buildings, graph lines, bars, or bright reflections
+directly behind the main name.
+
+============================================================
+8. PRESERVE CURRENT CONTENT
+============================================================
+
+Do NOT change the Hero wording.
+
 Keep:
 
-MUHAMMAD = off-white / #F8FAFC
+MUHAMMAD = off-white
+SALMAN = champagne gold
 
-SALMAN = champagne gold / #D8B56A
+Keep ACCOUNTANT.
 
-Do NOT add:
-- profile photo
-- MBA/BBA
-- location
-- employer
-- 14+ experience card
-- VAT card
-- ERP card
-- professional summary
-- statistics
-- extra Hero cards
+Keep the existing Download CV functionality exactly as it is.
 
-Home must remain minimal.
+Keep the existing LinkedIn Profile button.
 
-============================================================
-6. LINKEDIN — PRESERVE EXACT LIVE URL
-============================================================
-
-The existing LinkedIn Profile button MUST remain active.
-
-Use exactly:
+Exact LinkedIn URL:
 
 https://www.linkedin.com/in/muhammad-salman-mba-finance-cpa-finalist-66908767/
-
-Requirements:
 
 target="_blank"
 rel="noopener noreferrer"
 
-Do NOT create another LinkedIn button.
+Do NOT add any new Hero cards.
 
-Do NOT add LinkedIn to the Navbar.
-
-There must NOT be any message saying:
-
-"LinkedIn Profile URL is pending configuration before production deployment."
-
-Remove that message/state/function completely if any old code still exists.
-
-============================================================
-7. DOWNLOAD CV
-============================================================
-
-Preserve the existing working Download CV button and its current CV functionality.
-
-Do NOT replace the existing CV logic.
+Do NOT add:
+- portrait/person
+- MBA/BBA
+- location
+- employer
+- statistics
+- 14+ card
+- VAT card
+- ERP card
+- summary paragraph
 
 ============================================================
-8. HERO SCREEN FIT
+9. IMPORTANT ANIMATION IMPLEMENTATION
 ============================================================
 
-Preserve the current successful full-screen Hero behavior.
+Inspect the CURRENT Hero.tsx AND the stylesheet actually used by the app.
 
-Desktop / laptop:
+Do NOT merely create animation class names.
 
-Hero should fill the available screen below the Navbar.
-
-Preserve equivalent behavior to:
-
-min-height: calc(100svh - 5rem)
-
-and desktop:
-
-height: calc(100svh - 5rem)
-
-Do NOT make the Hero taller than necessary.
-
-Do NOT introduce vertical scrolling inside the Hero.
-
-Keep the main content vertically and horizontally centered.
-
-Mobile/tablet must remain responsive and must not clip.
-
-============================================================
-9. NAVBAR
-============================================================
-
-Preserve the existing Navbar.
-
-Do NOT redesign it.
-
-Keep:
-- MS logo
-- Muhammad Salman
-- Accountant
-- navigation links
-- English / Arabic language control
-
-Do NOT restore the old Light/Dark theme toggle.
-
-The website remains the fixed Navy/Gold theme.
-
-============================================================
-10. PERFORMANCE
-============================================================
-
-Animation must be lightweight.
+Every animation class used by Hero.tsx MUST have a matching real
+@keyframes definition.
 
 Prefer:
-- CSS transforms
+- transform
 - opacity
-- SVG
+- SVG stroke animation
 - CSS gradients
-- GPU-friendly transform animations
 
-Avoid:
-- huge video files
-- external animation libraries
-- heavy canvas rendering
-- unnecessary JavaScript animation loops
+Avoid heavy JavaScript animation loops.
 
-Do NOT use a video background.
+Do NOT use:
+- GIF
+- video
+- external animation library
+- canvas animation
 
-Do NOT use a GIF background.
-
-The moving preview was only a visual reference.
-
-Implement the final animation using CSS/SVG so it remains sharp and responsive.
+The final animation must be implemented with lightweight CSS/SVG.
 
 ============================================================
-11. REDUCED MOTION
+10. DO NOT BREAK THE CURRENT BUILD
 ============================================================
 
-Add:
+The current build is already successful.
+
+Preserve valid TSX syntax.
+
+Do not insert:
+- markdown fences
+- plain-English instructions into source files
+- malformed SVG attributes
+- invalid Tailwind syntax
+
+============================================================
+11. SCREEN FIT
+============================================================
+
+Preserve the current full-screen Hero fit below the Navbar.
+
+Desktop/laptop:
+Hero fits within the available viewport below Navbar.
+
+No unnecessary Hero vertical scrolling.
+
+Mobile/tablet:
+responsive and no clipping.
+
+============================================================
+12. REDUCED MOTION
+============================================================
+
+Keep/add:
 
 @media (prefers-reduced-motion: reduce)
 
-For users who request reduced motion:
-
-- stop or greatly reduce continuous movement
-- preserve the complete static Hero design
-- buildings/charts must still remain visible
+Disable/reduce continuous motion there while preserving the complete
+static visual design and visible buildings.
 
 ============================================================
-12. IMPORTANT — CSS MUST ACTUALLY EXIST
+13. ABSOLUTELY DO NOT TOUCH OTHER SECTIONS
 ============================================================
 
-Previously animation class names were added but the visible animation did not work correctly.
-
-DO NOT repeat this problem.
-
-If Hero.tsx uses classes such as:
-
-animate-finance-line
-animate-finance-bars
-animate-gold-sweep
-animate-city-depth
-animate-window-light
-
-then the corresponding @keyframes and animation CSS MUST actually exist in the stylesheet used by the application.
-
-Inspect the existing CSS structure first.
-
-Use the project's actual stylesheet.
-
-Do not reference undefined animation classes.
-
-============================================================
-13. DO NOT MODIFY OTHER SECTIONS
-============================================================
-
-Do NOT change:
+DO NOT modify:
 
 About.tsx
-the real profile photo
-Professional Highlights
-Core Professional Expertise
+/images/0D0A2507.JPG
+Navbar
+Expertise
 Experience
-Remote / Part-Time Experience
 ERP & Software
 Education
 Contact
 Admin
-CV Modal
-Footer
+CV functionality
 EmailJS
 analytics
-language translations
-mobile navigation
+language system
+Footer
 
-This task is ONLY for the Home/Hero animation and any CSS strictly required for that Hero animation.
+ONLY Hero.tsx and CSS strictly required for Hero animation may be changed.
 
 ============================================================
-14. FINAL VERIFICATION
+14. FINAL TEST — REQUIRED
 ============================================================
 
-Before reporting completion:
+After making the changes:
 
-1. Run the production build.
-2. Confirm build passes with no TypeScript errors.
-3. Open the actual Hero preview.
-4. Wait at least 10–15 seconds.
-5. Confirm visually that:
-   - corporate buildings are clearly visible
-   - gold financial graph visibly moves
-   - financial bars visibly animate
-   - gold reflection/light sweep visibly travels
-   - subtle building lights animate
-   - background depth moves
-   - center text stays readable
-   - LinkedIn opens the exact profile
-   - Download CV still works
-   - Hero still fits one desktop screen below Navbar
-   - mobile layout does not clip
+Run:
 
-DO NOT report "completed" merely because the code compiled.
+npm run build
 
-If the animation is not visibly moving in the actual preview, continue fixing it before reporting success.
+The final build MUST finish successfully with EXIT CODE 0.
 
-FINAL TARGET:
+Then open the actual preview and observe the Hero for AT LEAST 15 seconds.
 
-A premium Navy/Gold animated corporate-finance Hero with clearly visible modern buildings, moving financial chart/bar elements, subtle city illumination and moving glass/gold reflections, while MUHAMMAD SALMAN / ACCOUNTANT / Download CV / LinkedIn remain clean, centered and professional.
+Verify visually:
+
+✓ Corporate buildings are clearly visible
+✓ Buildings remain visible while animation runs
+✓ Gold financial graph visibly moves
+✓ Financial bars visibly animate
+✓ Gold/glass reflection travels across the scene
+✓ Some building lights subtly change
+✓ Background has slow depth movement
+✓ Center text remains clean/readable
+✓ Download CV still works
+✓ LinkedIn uses the exact URL
+✓ Hero fits the screen correctly
+✓ No other section changed
+
+If any animation is not visibly moving, FIX IT before reporting completion.
+
+If npm run build fails, repair ONLY the Hero-related error and rerun the
+build until EXIT CODE 0.
+
+Do NOT report completion simply because code was written.
+
+FINAL RESPONSE MUST STATE:
+1. Which Hero animation effects were implemented
+2. Whether buildings are clearly visible
+3. Whether actual movement was visually verified
+4. Final npm run build result
