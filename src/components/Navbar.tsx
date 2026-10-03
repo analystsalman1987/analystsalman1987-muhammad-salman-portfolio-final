@@ -2,8 +2,6 @@ import { useState, useRef, useEffect } from 'react';
 import { 
   Menu, 
   X, 
-  Sun, 
-  Moon, 
   ChevronRight,
   ChevronDown
 } from 'lucide-react';
@@ -12,16 +10,14 @@ import { useLanguage } from '../context/LanguageContext';
 import { ARABIC_TRANSLATIONS } from '../data/arabicData';
 
 interface NavbarProps {
-  currentTheme: ThemeMode;
-  onThemeChange: (theme: ThemeMode) => void;
+  currentTheme?: ThemeMode;
+  onThemeChange?: (theme: ThemeMode) => void;
   onOpenCV?: () => void;
   isExperienceSelected?: boolean;
   onSelectNav?: (href: string) => void;
 }
 
 export function Navbar({
-  currentTheme,
-  onThemeChange,
   isExperienceSelected = false,
   onSelectNav,
 }: NavbarProps) {
@@ -39,10 +35,6 @@ export function Navbar({
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
-
-  const toggleTheme = () => {
-    onThemeChange(currentTheme === 'dark' ? 'light' : 'dark');
-  };
 
   const navLinks = [
     { name: isRTL ? ARABIC_TRANSLATIONS.nav.home : 'Home', href: '#home' },
@@ -67,23 +59,23 @@ export function Navbar({
   };
 
   return (
-    <header className="sticky top-0 z-40 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors duration-200 no-print">
+    <header className="sticky top-0 z-40 bg-[#071827]/95 backdrop-blur-md border-b border-[#0D2538] transition-colors duration-200 no-print">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           
           {/* Brand Monogram & Name */}
           <a 
             href="#home" 
-            className="flex items-center gap-3.5 group focus:outline-none focus:ring-2 focus:ring-[#0F766E] rounded-lg p-1"
+            className="flex items-center gap-3.5 group focus:outline-hidden focus:ring-2 focus:ring-[#D8B56A] rounded-lg p-1"
           >
-            <div className="w-11 h-11 rounded-lg bg-[#0F2747] border border-[#0F766E]/40 text-teal-300 font-bold flex items-center justify-center text-lg tracking-wider shadow-sm group-hover:border-[#0F766E] transition-all">
+            <div className="w-11 h-11 rounded-lg bg-[#0D2538] border border-[#D8B56A]/50 text-[#D8B56A] font-extrabold flex items-center justify-center text-lg tracking-wider shadow-sm group-hover:border-[#D8B56A] transition-all">
               MS
             </div>
             <div>
-              <span className="block text-base font-bold text-[#0F2747] dark:text-slate-100 tracking-tight leading-none group-hover:text-[#0F766E] dark:group-hover:text-teal-400 transition-colors whitespace-nowrap">
+              <span className="block text-base font-bold text-[#F8FAFC] tracking-tight leading-none group-hover:text-[#D8B56A] transition-colors whitespace-nowrap">
                 {isRTL ? 'محمد سلمان' : 'Muhammad Salman'}
               </span>
-              <span className="block text-xs font-medium text-[#64748B] dark:text-slate-400 mt-1">
+              <span className="block text-xs font-medium text-[#CBD5E1] mt-1">
                 {isRTL ? 'محاسب' : 'Accountant'}
               </span>
             </div>
@@ -113,8 +105,8 @@ export function Navbar({
                       }}
                       className={`inline-flex items-center gap-1.5 px-3 py-2 text-sm rounded-md transition-all duration-300 cursor-pointer ${
                         isHighlighted || desktopExpOpen
-                          ? 'font-bold text-[#0F766E] dark:text-teal-300 bg-[#E6F4F1] dark:bg-teal-950/80 border border-[#0F766E]/30 dark:border-teal-800 shadow-2xs scale-102'
-                          : 'font-medium text-[#1F2937] hover:text-[#0F766E] dark:text-slate-300 dark:hover:text-teal-400 hover:bg-[#E6F4F1]/70 dark:hover:bg-slate-800/60'
+                          ? 'font-bold text-[#D8B56A] bg-[#0D2538] border border-[#D8B56A]/50 shadow-xs scale-102'
+                          : 'font-medium text-[#CBD5E1] hover:text-[#D8B56A] hover:bg-[#0D2538]/70'
                       }`}
                       aria-expanded={desktopExpOpen}
                       aria-haspopup="true"
@@ -122,7 +114,7 @@ export function Navbar({
                       <span>{link.name}</span>
                       <ChevronDown
                         className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                          desktopExpOpen ? 'rotate-180 text-[#0F766E] dark:text-teal-300' : 'text-slate-400'
+                          desktopExpOpen ? 'rotate-180 text-[#D8B56A]' : 'text-[#CBD5E1]'
                         }`}
                       />
                     </button>
@@ -134,7 +126,7 @@ export function Navbar({
                           isRTL ? 'right-0' : 'left-0'
                         } pt-1.5 w-64 z-50 animate-in fade-in zoom-in-95 duration-150`}
                       >
-                        <div className="bg-white dark:bg-slate-900 rounded-xl shadow-xl border border-slate-200 dark:border-slate-800 py-1.5 backdrop-blur-md">
+                        <div className="bg-[#0D2538] rounded-xl shadow-2xl border border-[#132E43] py-1.5 backdrop-blur-md">
                           <button
                             type="button"
                             onClick={() => {
@@ -142,7 +134,7 @@ export function Navbar({
                               setDesktopExpOpen(false);
                               handleNavClick('#experience');
                             }}
-                            className={`w-full flex items-center justify-between px-3.5 py-2.5 text-xs sm:text-sm font-semibold text-[#1F2937] dark:text-slate-200 hover:bg-[#E6F4F1] dark:hover:bg-slate-800 hover:text-[#0F766E] dark:hover:text-teal-300 transition-colors ${
+                            className={`w-full flex items-center justify-between px-3.5 py-2.5 text-xs sm:text-sm font-semibold text-[#CBD5E1] hover:bg-[#132E43] hover:text-[#D8B56A] transition-colors ${
                               isRTL ? 'text-right' : 'text-left'
                             } cursor-pointer`}
                           >
@@ -156,7 +148,7 @@ export function Navbar({
                               setDesktopExpOpen(false);
                               handleNavClick('#experience');
                             }}
-                            className={`w-full flex items-center justify-between px-3.5 py-2.5 text-xs sm:text-sm font-semibold text-[#1F2937] dark:text-slate-200 hover:bg-[#E6F4F1] dark:hover:bg-slate-800 hover:text-[#0F766E] dark:hover:text-teal-300 transition-colors ${
+                            className={`w-full flex items-center justify-between px-3.5 py-2.5 text-xs sm:text-sm font-semibold text-[#CBD5E1] hover:bg-[#132E43] hover:text-[#D8B56A] transition-colors ${
                               isRTL ? 'text-right' : 'text-left'
                             } cursor-pointer`}
                           >
@@ -175,8 +167,8 @@ export function Navbar({
                   onClick={() => handleNavClick(link.href)}
                   className={`px-3 py-2 text-sm rounded-md transition-all duration-300 cursor-pointer ${
                     isHighlighted
-                      ? 'font-bold text-[#0F766E] dark:text-teal-300 bg-[#E6F4F1] dark:bg-teal-950/80 border border-[#0F766E]/30 dark:border-teal-800 shadow-2xs scale-102'
-                      : 'font-medium text-[#1F2937] hover:text-[#0F766E] dark:text-slate-300 dark:hover:text-teal-400 hover:bg-[#E6F4F1]/70 dark:hover:bg-slate-800/60'
+                      ? 'font-bold text-[#D8B56A] bg-[#0D2538] border border-[#D8B56A]/50 shadow-xs scale-102'
+                      : 'font-medium text-[#CBD5E1] hover:text-[#D8B56A] hover:bg-[#0D2538]/70'
                   }`}
                 >
                   {link.name}
@@ -185,11 +177,10 @@ export function Navbar({
             })}
           </nav>
 
-          {/* Actions & Theme & CV */}
+          {/* Desktop Language Switcher (Theme toggle removed) */}
           <div className="hidden sm:flex items-center gap-2.5">
-            {/* Language Switcher: English / العربية */}
             <div 
-              className="inline-flex items-center p-0.5 rounded-lg bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/80 text-xs shadow-2xs"
+              className="inline-flex items-center p-0.5 rounded-lg bg-[#0D2538] border border-[#132E43] text-xs shadow-2xs"
               role="group"
               aria-label="Language selection"
             >
@@ -198,8 +189,8 @@ export function Navbar({
                 onClick={() => setLanguage('en')}
                 className={`px-2.5 py-1 rounded-md text-xs font-semibold transition-all cursor-pointer ${
                   language === 'en'
-                    ? 'bg-white dark:bg-slate-900 text-[#0F766E] dark:text-teal-300 shadow-2xs'
-                    : 'text-[#64748B] hover:text-[#0F2747] dark:text-slate-400 dark:hover:text-slate-200'
+                    ? 'bg-[#132E43] text-[#D8B56A] font-bold shadow-2xs'
+                    : 'text-[#CBD5E1] hover:text-[#F8FAFC]'
                 }`}
                 aria-label="Select English"
               >
@@ -210,54 +201,20 @@ export function Navbar({
                 onClick={() => setLanguage('ar')}
                 className={`px-2.5 py-1 rounded-md text-xs font-semibold transition-all cursor-pointer ${
                   language === 'ar'
-                    ? 'bg-white dark:bg-slate-900 text-[#0F766E] dark:text-teal-300 shadow-2xs'
-                    : 'text-[#64748B] hover:text-[#0F2747] dark:text-slate-400 dark:hover:text-slate-200'
+                    ? 'bg-[#132E43] text-[#D8B56A] font-bold shadow-2xs'
+                    : 'text-[#CBD5E1] hover:text-[#F8FAFC]'
                 }`}
                 aria-label="اختر العربية"
               >
                 العربية
               </button>
             </div>
-
-            {/* Theme switcher */}
-            <button
-              type="button"
-              onClick={toggleTheme}
-              className="inline-flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-semibold text-slate-700 dark:text-slate-200 bg-slate-100 hover:bg-slate-200/80 dark:bg-slate-800 dark:hover:bg-slate-700 rounded-lg transition-all border border-slate-200 dark:border-slate-700 cursor-pointer shadow-2xs"
-              title={
-                isRTL
-                  ? (currentTheme === 'dark' ? 'الوضع الليلي نشط (انقر للوضع النهاري)' : 'الوضع النهاري نشط (انقر للوضع الليلي)')
-                  : (currentTheme === 'dark' ? 'Dark Mode active (click for Light Mode)' : 'Light Mode active (click for Dark Mode)')
-              }
-              aria-label={
-                isRTL
-                  ? (currentTheme === 'dark' ? 'تبديل إلى الوضع النهاري' : 'تبديل إلى الوضع الليلي')
-                  : (currentTheme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode')
-              }
-            >
-              {currentTheme === 'dark' ? (
-                <>
-                  <Moon className="w-4 h-4 text-teal-400 shrink-0" />
-                  <span className="text-[11px] font-bold text-slate-200">
-                    {isRTL ? 'داكن' : 'Dark'}
-                  </span>
-                </>
-              ) : (
-                <>
-                  <Sun className="w-4 h-4 text-amber-500 shrink-0" />
-                  <span className="text-[11px] font-bold text-slate-700">
-                    {isRTL ? 'نهاري' : 'Light'}
-                  </span>
-                </>
-              )}
-            </button>
           </div>
 
-          {/* Mobile buttons: Language switch + Theme + Hamburger */}
+          {/* Mobile buttons: Language switch + Hamburger (Theme toggle removed) */}
           <div className="flex items-center gap-1.5 sm:gap-2 lg:hidden">
-            {/* Mobile Language switch */}
             <div 
-              className="inline-flex items-center p-0.5 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[11px] shadow-2xs"
+              className="inline-flex items-center p-0.5 rounded-lg bg-[#0D2538] border border-[#132E43] text-[11px] shadow-2xs"
               role="group"
               aria-label="Language selection"
             >
@@ -266,8 +223,8 @@ export function Navbar({
                 onClick={() => setLanguage('en')}
                 className={`px-2 py-0.5 rounded-md font-semibold transition-all cursor-pointer ${
                   language === 'en'
-                    ? 'bg-white dark:bg-slate-900 text-[#0F766E] dark:text-teal-300 shadow-2xs'
-                    : 'text-[#64748B] dark:text-slate-400'
+                    ? 'bg-[#132E43] text-[#D8B56A] font-bold shadow-2xs'
+                    : 'text-[#CBD5E1]'
                 }`}
                 aria-label="Select English"
               >
@@ -278,41 +235,19 @@ export function Navbar({
                 onClick={() => setLanguage('ar')}
                 className={`px-2 py-0.5 rounded-md font-semibold transition-all cursor-pointer ${
                   language === 'ar'
-                    ? 'bg-white dark:bg-slate-900 text-[#0F766E] dark:text-teal-300 shadow-2xs'
-                    : 'text-[#64748B] dark:text-slate-400'
+                    ? 'bg-[#132E43] text-[#D8B56A] font-bold shadow-2xs'
+                    : 'text-[#CBD5E1]'
                 }`}
                 aria-label="اختر العربية"
               >
                 العربية
               </button>
             </div>
-
-            <button
-              type="button"
-              onClick={toggleTheme}
-              className="p-1.5 sm:p-2 text-slate-600 dark:text-slate-300 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-slate-200/60 dark:border-slate-700/60 cursor-pointer"
-              title={
-                isRTL
-                  ? (currentTheme === 'dark' ? 'الوضع الليلي نشط' : 'الوضع النهاري نشط')
-                  : (currentTheme === 'dark' ? 'Dark Mode active' : 'Light Mode active')
-              }
-              aria-label={
-                isRTL
-                  ? (currentTheme === 'dark' ? 'تبديل إلى الوضع النهاري' : 'تبديل إلى الوضع الليلي')
-                  : (currentTheme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode')
-              }
-            >
-              {currentTheme === 'dark' ? (
-                <Moon className="w-4 h-4 text-teal-400" />
-              ) : (
-                <Sun className="w-4 h-4 text-amber-500" />
-              )}
-            </button>
 
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-1.5 sm:p-2 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg cursor-pointer select-none touch-manipulation"
+              className="p-1.5 sm:p-2 text-[#CBD5E1] hover:text-[#F8FAFC] hover:bg-[#0D2538] rounded-lg cursor-pointer select-none touch-manipulation transition-colors"
               aria-label={isRTL ? 'تبديل القائمة' : 'Toggle navigation menu'}
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -324,7 +259,7 @@ export function Navbar({
 
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
-        <div className="lg:hidden border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 pt-3 pb-6 space-y-2 shadow-xl animate-in slide-in-from-top duration-200">
+        <div className="lg:hidden border-b border-[#0D2538] bg-[#071827] px-4 pt-3 pb-6 space-y-3 shadow-2xl animate-in slide-in-from-top duration-200">
           <div className="grid grid-cols-1 gap-1">
             {navLinks.map((link) => {
               const isExp = link.href === '#experience';
@@ -341,28 +276,28 @@ export function Navbar({
                       }}
                       className={`flex items-center justify-between w-full px-3 py-2.5 ${isRTL ? 'text-right' : 'text-left'} text-sm rounded-md transition-all duration-300 cursor-pointer touch-manipulation ${
                         isHighlighted
-                          ? 'font-bold text-[#0F766E] dark:text-teal-300 bg-[#E6F4F1] dark:bg-teal-950/80 border border-[#0F766E]/30 dark:border-teal-800'
-                          : 'font-medium text-[#1F2937] dark:text-slate-200 hover:bg-[#E6F4F1]/60 dark:hover:bg-slate-800/80 hover:text-[#0F766E]'
+                          ? 'font-bold text-[#D8B56A] bg-[#0D2538] border border-[#D8B56A]/50'
+                          : 'font-medium text-[#CBD5E1] hover:bg-[#0D2538] hover:text-[#D8B56A]'
                       }`}
                     >
                       <span>{link.name}</span>
-                      <ChevronRight className={`w-4 h-4 ${isRTL ? 'rotate-180' : ''} ${isHighlighted ? 'text-[#0F766E] dark:text-teal-300' : 'text-slate-400'}`} />
+                      <ChevronRight className={`w-4 h-4 ${isRTL ? 'rotate-180' : ''} ${isHighlighted ? 'text-[#D8B56A]' : 'text-[#CBD5E1]'}`} />
                     </button>
 
                     {/* Mobile Experience Sub-options */}
-                    <div className={`my-1 ${isRTL ? 'pr-3 border-r-2 mr-2' : 'pl-3 border-l-2 ml-2'} border-[#0F766E]/30 space-y-1`}>
+                    <div className={`my-1 ${isRTL ? 'pr-3 border-r-2 mr-2' : 'pl-3 border-l-2 ml-2'} border-[#D8B56A]/30 space-y-1`}>
                       <button
                         type="button"
                         onClick={() => {
                           window.dispatchEvent(new CustomEvent('experience-open-full-time'));
                           handleNavClick('#experience');
                         }}
-                        className={`w-full flex items-center justify-between px-3 py-2 text-xs font-semibold text-[#1F2937] dark:text-slate-200 hover:bg-[#E6F4F1] dark:hover:bg-slate-800 rounded-md hover:text-[#0F766E] dark:hover:text-teal-300 cursor-pointer touch-manipulation ${
+                        className={`w-full flex items-center justify-between px-3 py-2 text-xs font-semibold text-[#CBD5E1] hover:bg-[#0D2538] rounded-md hover:text-[#D8B56A] cursor-pointer touch-manipulation ${
                           isRTL ? 'text-right' : 'text-left'
                         }`}
                       >
                         <span>{isRTL ? (ARABIC_TRANSLATIONS.nav.experienceFullTime || 'الخبرة بدوام كامل') : 'Full-Time Experience'}</span>
-                        <ChevronRight className={`w-3.5 h-3.5 text-slate-400 ${isRTL ? 'rotate-180' : ''}`} />
+                        <ChevronRight className={`w-3.5 h-3.5 text-[#CBD5E1] ${isRTL ? 'rotate-180' : ''}`} />
                       </button>
                       <button
                         type="button"
@@ -370,12 +305,12 @@ export function Navbar({
                           window.dispatchEvent(new CustomEvent('experience-open-remote'));
                           handleNavClick('#experience');
                         }}
-                        className={`w-full flex items-center justify-between px-3 py-2 text-xs font-semibold text-[#1F2937] dark:text-slate-200 hover:bg-[#E6F4F1] dark:hover:bg-slate-800 rounded-md hover:text-[#0F766E] dark:hover:text-teal-300 cursor-pointer touch-manipulation ${
+                        className={`w-full flex items-center justify-between px-3 py-2 text-xs font-semibold text-[#CBD5E1] hover:bg-[#0D2538] rounded-md hover:text-[#D8B56A] cursor-pointer touch-manipulation ${
                           isRTL ? 'text-right' : 'text-left'
                         }`}
                       >
                         <span>{isRTL ? (ARABIC_TRANSLATIONS.nav.experienceRemote || 'الخبرة عن بُعد / دوام جزئي') : 'Remote / Part-Time Experience'}</span>
-                        <ChevronRight className={`w-3.5 h-3.5 text-slate-400 ${isRTL ? 'rotate-180' : ''}`} />
+                        <ChevronRight className={`w-3.5 h-3.5 text-[#CBD5E1] ${isRTL ? 'rotate-180' : ''}`} />
                       </button>
                     </div>
                   </div>
@@ -389,24 +324,24 @@ export function Navbar({
                   onClick={() => handleNavClick(link.href)}
                   className={`flex items-center justify-between w-full px-3 py-2.5 ${isRTL ? 'text-right' : 'text-left'} text-sm rounded-md transition-all duration-300 cursor-pointer touch-manipulation ${
                     isHighlighted
-                      ? 'font-bold text-[#0F766E] dark:text-teal-300 bg-[#E6F4F1] dark:bg-teal-950/80 border border-[#0F766E]/30 dark:border-teal-800'
-                      : 'font-medium text-[#1F2937] dark:text-slate-200 hover:bg-[#E6F4F1]/60 dark:hover:bg-slate-800/80 hover:text-[#0F766E]'
+                      ? 'font-bold text-[#D8B56A] bg-[#0D2538] border border-[#D8B56A]/50'
+                      : 'font-medium text-[#CBD5E1] hover:bg-[#0D2538] hover:text-[#D8B56A]'
                   }`}
                 >
                   <span>{link.name}</span>
-                  <ChevronRight className={`w-4 h-4 ${isRTL ? 'rotate-180' : ''} ${isHighlighted ? 'text-[#0F766E] dark:text-teal-300' : 'text-slate-400'}`} />
+                  <ChevronRight className={`w-4 h-4 ${isRTL ? 'rotate-180' : ''} ${isHighlighted ? 'text-[#D8B56A]' : 'text-[#CBD5E1]'}`} />
                 </button>
               );
             })}
           </div>
 
           {/* Mobile Menu Language Selector */}
-          <div className="flex items-center justify-between px-3 py-2 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-200/80 dark:border-slate-800">
-            <span className="text-xs font-semibold text-[#1F2937] dark:text-slate-300">
+          <div className="flex items-center justify-between px-3.5 py-2.5 rounded-lg bg-[#0D2538] border border-[#132E43]">
+            <span className="text-xs font-semibold text-[#CBD5E1]">
               {isRTL ? 'اختيار اللغة' : 'Language / اللغة'}
             </span>
             <div 
-              className="inline-flex items-center p-0.5 rounded-lg bg-slate-200/80 dark:bg-slate-700/80 text-xs"
+              className="inline-flex items-center p-0.5 rounded-lg bg-[#132E43] text-xs"
               role="group"
               aria-label="Language selection"
             >
@@ -415,8 +350,8 @@ export function Navbar({
                 onClick={() => setLanguage('en')}
                 className={`px-2.5 py-1 rounded-md text-xs font-semibold transition-all cursor-pointer ${
                   language === 'en'
-                    ? 'bg-white dark:bg-slate-900 text-[#0F766E] dark:text-teal-300 shadow-2xs'
-                    : 'text-[#64748B] dark:text-slate-300'
+                    ? 'bg-[#0D2538] text-[#D8B56A] font-bold shadow-2xs'
+                    : 'text-[#CBD5E1]'
                 }`}
               >
                 English
@@ -426,48 +361,11 @@ export function Navbar({
                 onClick={() => setLanguage('ar')}
                 className={`px-2.5 py-1 rounded-md text-xs font-semibold transition-all cursor-pointer ${
                   language === 'ar'
-                    ? 'bg-white dark:bg-slate-900 text-[#0F766E] dark:text-teal-300 shadow-2xs'
-                    : 'text-[#64748B] dark:text-slate-300'
+                    ? 'bg-[#0D2538] text-[#D8B56A] font-bold shadow-2xs'
+                    : 'text-[#CBD5E1]'
                 }`}
               >
                 العربية
-              </button>
-            </div>
-          </div>
-
-          {/* Mobile Menu Theme Selector */}
-          <div className="flex items-center justify-between px-3 py-2 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-200/80 dark:border-slate-800">
-            <span className="text-xs font-semibold text-[#1F2937] dark:text-slate-300">
-              {isRTL ? 'المظهر' : 'Appearance'}
-            </span>
-            <div 
-              className="inline-flex items-center p-0.5 rounded-lg bg-slate-200/80 dark:bg-slate-700/80 text-xs"
-              role="group"
-              aria-label="Theme selection"
-            >
-              <button
-                type="button"
-                onClick={() => onThemeChange('light')}
-                className={`flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-semibold transition-all cursor-pointer ${
-                  currentTheme === 'light'
-                    ? 'bg-white dark:bg-slate-900 text-[#0F766E] dark:text-teal-300 shadow-2xs'
-                    : 'text-[#64748B] dark:text-slate-300'
-                }`}
-              >
-                <Sun className="w-3.5 h-3.5 text-amber-500" />
-                <span>{isRTL ? 'نهاري' : 'Light'}</span>
-              </button>
-              <button
-                type="button"
-                onClick={() => onThemeChange('dark')}
-                className={`flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-semibold transition-all cursor-pointer ${
-                  currentTheme === 'dark'
-                    ? 'bg-white dark:bg-slate-900 text-[#0F766E] dark:text-teal-300 shadow-2xs'
-                    : 'text-[#64748B] dark:text-slate-300'
-                }`}
-              >
-                <Moon className="w-3.5 h-3.5 text-teal-400" />
-                <span>{isRTL ? 'داكن' : 'Dark'}</span>
               </button>
             </div>
           </div>

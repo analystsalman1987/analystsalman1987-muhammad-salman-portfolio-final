@@ -4,14 +4,15 @@ import {
   FileText,
   CheckCircle2,
   Car,
+  Briefcase
 } from 'lucide-react';
-
 import { ProfileInfo } from '../types';
 import { useLanguage } from '../context/LanguageContext';
 import { ARABIC_TRANSLATIONS } from '../data/arabicData';
+import photo2507 from '../assets/images/0D0A2507(1).JPG';
 
 interface AboutProps {
-  profile: ProfileInfo;
+  profile?: ProfileInfo;
 }
 
 export function About({ profile: _profile }: AboutProps) {
@@ -22,103 +23,94 @@ export function About({ profile: _profile }: AboutProps) {
     <section
       id="about"
       className="
-        relative overflow-hidden
-        border-b border-slate-200
-        dark:border-slate-800
-        py-16 sm:py-20
+        relative
+        flex
+        min-h-[calc(100vh-5rem)]
+        flex-col
+        justify-center
+        overflow-hidden
+        border-b
+        border-[#0D2538]
+        bg-[#081A2B]
+        py-12
+        transition-colors
+        duration-300
+        sm:py-16
+        lg:py-0
       "
     >
-      {/* =========================================================
-          MAIN ABOUT BACKGROUND
-          Keep the existing approved background asset.
-      ========================================================== */}
+      {/* Background Architectural Glass Atmosphere */}
       <div
-        className="pointer-events-none absolute inset-0 z-0"
+        className="pointer-events-none absolute inset-0 z-0 overflow-hidden select-none"
         aria-hidden="true"
       >
-        <img
-          src="/images/about_accounting_background.jpg"
-          alt=""
+        {/* Soft Ambient Midnight and Gold Depth */}
+        <div
           className="
-            h-full w-full
-            object-cover object-center
-            opacity-[0.22]
-            dark:opacity-[0.14]
+            absolute
+            -top-32
+            -right-20
+            h-[450px]
+            w-[450px]
+            rounded-full
+            bg-[#D8B56A]/10
+            blur-[130px]
+          "
+        />
+        <div
+          className="
+            absolute
+            -bottom-28
+            -left-20
+            h-[480px]
+            w-[480px]
+            rounded-full
+            bg-[#0D2538]/70
+            blur-[120px]
           "
         />
 
-        {/* Soft light clean teal/white treatment */}
+        {/* Subtle Architectural Grid Lines */}
         <div
           className="
-            absolute inset-0
-            bg-gradient-to-r
-            from-[#f9fbfb]/96
-            via-[#f4faf7]/90
-            to-[#edf7f4]/80
-            dark:from-slate-900/96
-            dark:via-slate-900/90
-            dark:to-slate-900/80
+            absolute
+            inset-0
+            bg-[linear-gradient(to_right,#132E4315_1px,transparent_1px),linear-gradient(to_bottom,#132E4315_1px,transparent_1px)]
+            bg-[size:4.5rem_4.5rem]
+            [mask-image:radial-gradient(ellipse_70%_60%_at_50%_50%,#000_50%,transparent_100%)]
           "
         />
       </div>
 
-      <div
-        className="
-          relative z-10
-          mx-auto
-          max-w-[1380px]
-          px-5 sm:px-8 lg:px-12
-        "
-      >
-        {/* =========================================================
-            TWO COLUMN FINAL COMPOSITION
-        ========================================================== */}
-        <div
-          className="
-            grid grid-cols-1
-            items-stretch
-            gap-8
-            lg:grid-cols-[48%_52%]
-            lg:gap-0
-          "
-        >
-          {/* =======================================================
-              LEFT SIDE
-          ======================================================== */}
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-12 xl:gap-16">
+
+          {/* ================================================================
+              LEFT SIDE: PROFESSIONAL SUMMARY & FACTUAL CREDENTIALS
+              ================================================================ */}
           <div
-            className="
-              relative z-20
-              flex flex-col
-              lg:pr-10
-              xl:pr-14
-            "
+            className={`
+              flex
+              flex-col
+              justify-center
+              space-y-6
+              lg:col-span-7
+              xl:col-span-7
+              ${isRTL ? 'lg:text-right' : 'lg:text-left'}
+            `}
           >
-            {/* Section Header: Standardized Left-Aligned System */}
-            <div className="flex flex-col items-start gap-1.5 max-w-3xl mb-7">
-              <span className="block text-xs font-bold tracking-widest text-[#0F766E] dark:text-teal-400 uppercase">
+            {/* Section Tag & Heading */}
+            <div className="space-y-2">
+              <span className="inline-block text-xs font-bold tracking-[0.25em] text-[#D8B56A] uppercase">
                 {isRTL ? t.tag : 'ABOUT ME'}
               </span>
-              <div>
-                <h2 className="main-heading-3d text-3xl font-extrabold sm:text-4xl tracking-tight">
-                  {isRTL ? t.title : 'Professional Summary'}
-                </h2>
-              </div>
+              <h2 className="main-heading-3d text-3xl font-extrabold tracking-tight text-[#F8FAFC] sm:text-4xl lg:text-5xl">
+                {isRTL ? t.title : 'Professional Summary'}
+              </h2>
             </div>
 
-            {/* =====================================================
-                APPROVED FINAL PARAGRAPHS
-            ====================================================== */}
-            <div
-              className="
-                max-w-[690px]
-                space-y-5
-                text-[15px] sm:text-[16px]
-                font-medium
-                leading-[1.75]
-                text-[#334155]
-                dark:text-slate-200
-              "
-            >
+            {/* PRESERVED APPROVED TWO PARAGRAPHS VERBATIM */}
+            <div className="space-y-4 text-sm leading-relaxed text-[#CBD5E1] sm:text-base sm:leading-[1.8]">
               <p>
                 {isRTL
                   ? t.summaryP1
@@ -132,146 +124,34 @@ export function About({ profile: _profile }: AboutProps) {
               </p>
             </div>
 
-            {/* =====================================================
-                COMPLIANCE / LICENSE
-            ====================================================== */}
-            <div
-              className="
-                mt-7
-                flex flex-col
-                gap-3
-                border-t border-slate-400/25
-                pt-5
-                sm:flex-row
-                sm:items-center
-                sm:justify-between
-              "
-            >
+            {/* THREE CONCISE FACTUAL HIGHLIGHT CARDS */}
+            <div className="grid grid-cols-1 gap-3.5 pt-1 sm:grid-cols-3">
+              {/* 14+ Years */}
               <div
                 className="
-                  flex items-start gap-2
-                  text-[11px] sm:text-[12px]
-                  font-semibold
-                  leading-relaxed
-                  text-[#334155]
-                  dark:text-slate-300
-                "
-              >
-                <CheckCircle2
-                  size={16}
-                  className="mt-[1px] shrink-0 text-[#087d69]"
-                />
-
-                <span>
-                  {isRTL
-                    ? t.complianceNote
-                    : 'Operating with full compliance in Dammam, Kingdom of Saudi Arabia'}
-                </span>
-              </div>
-
-              <div
-                className="
-                  inline-flex shrink-0
-                  items-center gap-1.5
-                  self-start
-                  rounded-md
-                  border border-[#087d69]/20
-                  bg-[#e5f4ef]/80
-                  px-2.5 py-1.5
-                  text-[10px] sm:text-[11px]
-                  font-bold
-                  text-[#087d69]
-                  dark:bg-teal-950/50
-                  dark:text-teal-300
-                "
-              >
-                <Car size={13} />
-
-                <span>
-                  {isRTL
-                    ? t.drivingLicense
-                    : 'Valid Saudi Driving License'}
-                </span>
-              </div>
-            </div>
-
-            {/* =====================================================
-                FINAL THREE LARGE ICON CARDS
-            ====================================================== */}
-            <div
-              className="
-                mt-7
-                grid grid-cols-1
-                gap-4
-                sm:grid-cols-3
-              "
-            >
-              {/* YEARS EXPERIENCE */}
-              <div
-                className="
-                  group
-                  flex min-h-[145px]
+                  flex
                   flex-col
                   items-center
                   justify-center
                   rounded-xl
-                  border border-slate-200/90
-                  bg-white/95
-                  px-3 py-5
+                  border
+                  border-[#D8B56A]/25
+                  bg-[#0D2538]/85
+                  p-4
                   text-center
-                  shadow-[0_6px_18px_rgba(15,23,42,0.06)]
+                  shadow-md
                   backdrop-blur-xs
                   transition-all
-                  duration-300
-                  ease-out
-                  hover:-translate-y-1.5
-                  hover:border-[#087d69]/55
-                  hover:shadow-[0_18px_38px_rgba(8,125,105,0.18)]
-                  dark:border-slate-700/80
-                  dark:bg-slate-800/90
-                  dark:hover:border-teal-400/60
-                  dark:hover:shadow-[0_18px_38px_rgba(20,184,166,0.16)]
-                  cursor-default
+                  duration-250
+                  hover:-translate-y-1
+                  hover:border-[#D8B56A]/60
                 "
               >
-                <div
-                  className="
-                    mb-3
-                    flex h-[44px] w-[44px]
-                    items-center justify-center
-                    rounded-full
-                    bg-[#e7f5f1]
-                    text-[#087d69]
-                    transition-transform
-                    duration-300
-                    group-hover:scale-110
-                    dark:bg-teal-950/70
-                    dark:text-teal-300
-                  "
-                >
-                  <CalendarDays size={22} strokeWidth={1.8} />
+                <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-lg bg-[#132E43] text-[#D8B56A]">
+                  <CalendarDays className="h-5 w-5" />
                 </div>
-
-                <div
-                  className="
-                    text-[27px]
-                    font-extrabold
-                    leading-none
-                    mini-card-3d-text
-                  "
-                >
-                  14+
-                </div>
-
-                <div
-                  className="
-                    mt-2
-                    text-[11px]
-                    font-bold
-                    text-slate-600
-                    dark:text-slate-300
-                  "
-                >
+                <div className="text-2xl font-black text-[#F8FAFC]">14+</div>
+                <div className="mt-1 text-xs font-bold text-[#CBD5E1]">
                   {isRTL ? t.yearsExpLabel : 'Years Experience'}
                 </div>
               </div>
@@ -279,321 +159,227 @@ export function About({ profile: _profile }: AboutProps) {
               {/* MBA / BBA */}
               <div
                 className="
-                  group
-                  flex min-h-[145px]
+                  flex
                   flex-col
                   items-center
                   justify-center
                   rounded-xl
-                  border border-slate-200/90
-                  bg-white/95
-                  px-3 py-5
+                  border
+                  border-[#D8B56A]/25
+                  bg-[#0D2538]/85
+                  p-4
                   text-center
-                  shadow-[0_6px_18px_rgba(15,23,42,0.06)]
+                  shadow-md
                   backdrop-blur-xs
                   transition-all
-                  duration-300
-                  ease-out
-                  hover:-translate-y-1.5
-                  hover:border-[#087d69]/55
-                  hover:shadow-[0_18px_38px_rgba(8,125,105,0.18)]
-                  dark:border-slate-700/80
-                  dark:bg-slate-800/90
-                  dark:hover:border-teal-400/60
-                  dark:hover:shadow-[0_18px_38px_rgba(20,184,166,0.16)]
-                  cursor-default
+                  duration-250
+                  hover:-translate-y-1
+                  hover:border-[#D8B56A]/60
                 "
               >
-                <div
-                  className="
-                    mb-3
-                    flex h-[44px] w-[44px]
-                    items-center justify-center
-                    rounded-full
-                    bg-[#e7f5f1]
-                    text-[#087d69]
-                    transition-transform
-                    duration-300
-                    group-hover:scale-110
-                    dark:bg-teal-950/70
-                    dark:text-teal-300
-                  "
-                >
-                  <GraduationCap size={23} strokeWidth={1.8} />
+                <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-lg bg-[#132E43] text-[#D8B56A]">
+                  <GraduationCap className="h-5 w-5" />
                 </div>
-
-                <div
-                  className="
-                    whitespace-nowrap
-                    text-[21px]
-                    font-extrabold
-                    leading-none
-                    mini-card-3d-text
-                  "
-                >
-                  MBA / BBA
-                </div>
-
-                <div
-                  className="
-                    mt-2
-                    text-[10px] sm:text-[11px]
-                    font-bold
-                    leading-tight
-                    text-slate-600
-                    dark:text-slate-300
-                  "
-                >
-                  Accounting &amp; Finance
+                <div className="text-xl font-black text-[#F8FAFC]">MBA / BBA</div>
+                <div className="mt-1 text-xs font-bold text-[#CBD5E1]">
+                  {isRTL ? 'المحاسبة والمالية' : 'Accounting & Finance'}
                 </div>
               </div>
 
               {/* ZATCA */}
               <div
                 className="
-                  group
-                  flex min-h-[145px]
+                  flex
                   flex-col
                   items-center
                   justify-center
                   rounded-xl
-                  border border-slate-200/90
-                  bg-white/95
-                  px-3 py-5
+                  border
+                  border-[#D8B56A]/25
+                  bg-[#0D2538]/85
+                  p-4
                   text-center
-                  shadow-[0_6px_18px_rgba(15,23,42,0.06)]
+                  shadow-md
                   backdrop-blur-xs
                   transition-all
-                  duration-300
-                  ease-out
-                  hover:-translate-y-1.5
-                  hover:border-[#087d69]/55
-                  hover:shadow-[0_18px_38px_rgba(8,125,105,0.18)]
-                  dark:border-slate-700/80
-                  dark:bg-slate-800/90
-                  dark:hover:border-teal-400/60
-                  dark:hover:shadow-[0_18px_38px_rgba(20,184,166,0.16)]
-                  cursor-default
+                  duration-250
+                  hover:-translate-y-1
+                  hover:border-[#D8B56A]/60
                 "
               >
-                <div
-                  className="
-                    mb-3
-                    flex h-[44px] w-[44px]
-                    items-center justify-center
-                    rounded-full
-                    bg-[#e7f5f1]
-                    text-[#087d69]
-                    transition-transform
-                    duration-300
-                    group-hover:scale-110
-                    dark:bg-teal-950/70
-                    dark:text-teal-300
-                  "
-                >
-                  <FileText size={22} strokeWidth={1.8} />
+                <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-lg bg-[#132E43] text-[#D8B56A]">
+                  <FileText className="h-5 w-5" />
                 </div>
-
-                <div
-                  className="
-                    text-[24px]
-                    font-extrabold
-                    leading-none
-                    mini-card-3d-text
-                  "
-                >
-                  ZATCA
-                </div>
-
-                <div
-                  className="
-                    mt-2
-                    text-[10px] sm:text-[11px]
-                    font-bold
-                    leading-tight
-                    text-slate-600
-                    dark:text-slate-300
-                  "
-                >
-                  VAT Reporting &amp; Submission
+                <div className="text-xl font-black text-[#F8FAFC]">ZATCA</div>
+                <div className="mt-1 text-xs font-bold text-[#CBD5E1]">
+                  {isRTL ? 'إقرارات ضريبة القيمة المضافة' : 'VAT Reporting'}
                 </div>
               </div>
             </div>
-          </div>
 
-          {/* =======================================================
-              RIGHT SIDE — FINAL LARGE IMAGE WITH 4-SIDE & 4-CORNER DISSOLVE
-
-              IMPORTANT:
-              This is NOT styled as a card.
-              The image intentionally uses radial-gradient masking
-              so all 4 sides and all 4 corners dissolve naturally
-              into the full About background with no hard straight edges.
-          ======================================================== */}
-          <div
-            className="
-              relative
-              z-10
-              min-h-[470px]
-              sm:min-h-[520px]
-              lg:min-h-[610px]
-              flex flex-col justify-end
-            "
-          >
-            {/* LARGE MERGED IMAGE WITH 4-SIDE & 4-CORNER RADIAL MASK */}
+            {/* COMPLIANCE & CURRENT STATUS ROW */}
             <div
               className="
-                absolute
-                inset-0
-                -left-6
-                -right-6
-                -top-4
-                -bottom-4
-                lg:-left-12
-                lg:-right-10
-                pointer-events-none
-                overflow-hidden
+                flex
+                flex-wrap
+                items-center
+                justify-between
+                gap-3
+                border-t
+                border-[#132E43]
+                pt-4
+                text-xs
+                font-medium
+                text-[#CBD5E1]
               "
-              style={{
-                WebkitMaskImage:
-                  'radial-gradient(ellipse 56% 48% at 50% 46%, black 22%, rgba(0,0,0,0.85) 44%, rgba(0,0,0,0.35) 68%, transparent 95%)',
-                maskImage:
-                  'radial-gradient(ellipse 56% 48% at 50% 46%, black 22%, rgba(0,0,0,0.85) 44%, rgba(0,0,0,0.35) 68%, transparent 95%)',
-              }}
             >
-              <img
-                src="/images/about-financial-reporting.png"
-                alt="Accounting and finance professional workspace"
-                className="
-                  absolute inset-0
-                  h-full w-full
-                  object-cover object-center
-                  opacity-[0.84]
-                  filter brightness-[1.08] contrast-[0.97]
-                  dark:opacity-[0.76]
-                "
-                loading="lazy"
-              />
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="h-4 w-4 shrink-0 text-[#D8B56A]" />
+                <span>
+                  {isRTL
+                    ? t.complianceNote
+                    : 'Operating with full compliance in Dammam, Kingdom of Saudi Arabia'}
+                </span>
+              </div>
 
-              {/* TOP FADE */}
-              <div
-                className="
-                  pointer-events-none
-                  absolute inset-x-0 top-0
-                  h-[28%]
-                  bg-gradient-to-b
-                  from-[#f9fbfb]/95
-                  via-[#f4faf7]/50
-                  to-transparent
-                  dark:from-slate-900/92
-                  dark:via-slate-900/40
-                  dark:to-transparent
-                "
-              />
+              <div className="flex flex-wrap items-center gap-2.5">
+                <span
+                  className="
+                    inline-flex
+                    items-center
+                    gap-1.5
+                    rounded-md
+                    border
+                    border-[#D8B56A]/30
+                    bg-[#0D2538]
+                    px-2.5
+                    py-1
+                    text-[11px]
+                    font-semibold
+                    text-[#D8B56A]
+                  "
+                >
+                  <Car className="h-3.5 w-3.5" />
+                  <span>
+                    {isRTL ? t.drivingLicense : 'Valid Saudi Driving License'}
+                  </span>
+                </span>
 
-              {/* RIGHT FADE */}
-              <div
-                className="
-                  pointer-events-none
-                  absolute inset-y-0 right-0
-                  w-[20%]
-                  bg-gradient-to-l
-                  from-[#f9fbfb]/90
-                  via-[#f4faf7]/40
-                  to-transparent
-                  dark:from-slate-900/85
-                  dark:to-transparent
-                "
-              />
-
-              {/* LEFT FADE */}
-              <div
-                className="
-                  pointer-events-none
-                  absolute inset-y-0 left-0
-                  w-[20%]
-                  bg-gradient-to-r
-                  from-[#f9fbfb]/90
-                  via-[#f4faf7]/40
-                  to-transparent
-                  dark:from-slate-900/85
-                  dark:to-transparent
-                "
-              />
-
-              {/* BOTTOM SOFT DARK GRADIENT */}
-              <div
-                className="
-                  pointer-events-none
-                  absolute inset-x-0 bottom-0
-                  h-[48%]
-                  bg-gradient-to-t
-                  from-[#052633]/96
-                  via-[#083344]/65
-                  to-transparent
-                "
-              />
+                <a
+                  href="https://www.ayalyami.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="
+                    inline-flex
+                    items-center
+                    gap-1.5
+                    rounded-md
+                    border
+                    border-[#132E43]
+                    bg-[#0D2538]
+                    px-2.5
+                    py-1
+                    text-[11px]
+                    font-semibold
+                    text-[#CBD5E1]
+                    transition-colors
+                    hover:border-[#D8B56A]/50
+                    hover:text-[#F8FAFC]
+                  "
+                  title="Ahmed Yahya Alyami Contracting Co."
+                >
+                  <Briefcase className="h-3.5 w-3.5 text-[#D8B56A]" />
+                  <span>
+                    {isRTL
+                      ? 'شركة أحمد يحيى اليامي للمقاولات'
+                      : 'Ahmed Yahya Alyami Contracting Co.'}
+                  </span>
+                </a>
+              </div>
             </div>
 
-            {/* =====================================================
-                FINANCIAL OPERATIONS CONTENT (INSIDE BOTTOM OF IMAGE)
-            ====================================================== */}
-            <div
-              className="
-                relative
-                z-20
-                p-5 sm:p-7 lg:p-9
-              "
-            >
-              {/* Localized soft dark gradient behind text for 100% readability */}
-              <div 
+          </div>
+
+          {/* ================================================================
+              RIGHT SIDE: REAL UPLOADED PHOTOGRAPH (0D0A2507.JPG)
+              Appears ONCE in About. No AI, no replacements.
+              ================================================================ */}
+          <div className="flex items-center justify-center lg:col-span-5 xl:col-span-5">
+            <div className="relative mx-auto w-full max-w-[340px] sm:max-w-[380px] lg:max-w-[410px] xl:max-w-[440px]">
+              
+              {/* Soft Ambient Gold Rim Glow behind Photograph */}
+              <div
                 className="
                   pointer-events-none
-                  absolute inset-0 -z-10
-                  bg-gradient-to-t
-                  from-[#052633]/96
-                  via-[#083344]/80
+                  absolute
+                  -inset-3
+                  rounded-[2rem]
+                  bg-gradient-to-tr
+                  from-[#D8B56A]/20
+                  via-[#132E43]/40
                   to-transparent
+                  blur-2xl
+                  sm:-inset-4
                 "
-                style={{
-                  WebkitMaskImage: 'radial-gradient(ellipse 90% 92% at 50% 100%, black 55%, rgba(0,0,0,0.7) 82%, transparent 100%)',
-                  maskImage: 'radial-gradient(ellipse 90% 92% at 50% 100%, black 55%, rgba(0,0,0,0.7) 82%, transparent 100%)',
-                }}
+                aria-hidden="true"
               />
 
-              <h3
+              {/* Architectural Glass Container Frame */}
+              <div
                 className="
-                  text-[12px] sm:text-[13px]
-                  font-extrabold
-                  uppercase
-                  tracking-[0.1em]
-                  text-[#35d3b4]
-                  drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]
+                  relative
+                  aspect-[3/4]
+                  w-full
+                  overflow-hidden
+                  rounded-2xl
+                  border
+                  border-[#D8B56A]/40
+                  bg-[#0D2538]
+                  shadow-2xl
+                  shadow-black/60
+                  backdrop-blur-md
+                  sm:rounded-3xl
                 "
               >
-                {isRTL
-                  ? t.governanceBadge
-                  : 'FINANCIAL OPERATIONS & CONTROLS'}
-              </h3>
+                {/* Real Photograph (0D0A2507(1).JPG) - 100% Original Photo */}
+                <img
+                  src={photo2507}
+                  alt={isRTL ? 'محمد سلمان - محاسب' : 'Muhammad Salman - Accountant'}
+                  className="
+                    h-full
+                    w-full
+                    select-none
+                    object-cover
+                    object-[center_top]
+                  "
+                  loading="eager"
+                  onError={(e) => {
+                    const target = e.currentTarget;
+                    if (target.src !== '/images/0D0A2507(1).JPG') {
+                      target.src = '/images/0D0A2507(1).JPG';
+                    }
+                  }}
+                />
 
-              <div className="my-2.5 h-[2px] w-[70px] bg-[#35d3b4]" />
+                {/* Subtle Inner Gold Accent Border */}
+                <div
+                  className="
+                    pointer-events-none
+                    absolute
+                    inset-0
+                    rounded-2xl
+                    ring-1
+                    ring-inset
+                    ring-[#D8B56A]/20
+                    sm:rounded-3xl
+                  "
+                  aria-hidden="true"
+                />
+              </div>
 
-              <p
-                className="
-                  max-w-[610px]
-                  text-[13px] sm:text-[14px]
-                  font-bold
-                  leading-[1.75]
-                  text-white
-                  drop-shadow-[0_1.5px_3px_rgba(0,0,0,0.85)]
-                "
-              >
-                {isRTL
-                  ? t.governanceDesc
-                  : 'Dedicated to accurate ledger maintenance, audit-ready financial schedules, balance confirmations, and ZATCA statutory tax compliance across enterprise operations.'}
-              </p>
             </div>
           </div>
+
         </div>
       </div>
     </section>

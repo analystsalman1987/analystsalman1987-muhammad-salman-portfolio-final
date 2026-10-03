@@ -3,55 +3,50 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --color-navy: #0F2747;
-  --color-navy-dark: #0a1b32;
-  --color-navy-light: #16365f;
+  --color-navy: #071827;
+  --color-navy-dark: #05121e;
+  --color-navy-light: #0D2538;
+  --color-midnight: #0D2538;
+  --color-midnight-light: #132E43;
+
+  --color-gold: #D8B56A;
+  --color-gold-deep: #C9A45C;
+  --color-gold-light: #F4E7C5;
 
   --color-teal-primary: #0F766E;
   --color-teal-hover: #0c625c;
   --color-teal-light: #E6F4F1;
 
-  --color-light-gray: #F4F6F8;
-  --color-dark-text: #1F2937;
-  --color-muted-text: #64748B;
+  --color-light-gray: #0D2538;
+  --color-dark-text: #F8FAFC;
+  --color-muted-text: #CBD5E1;
 
-  /* Soft dim / slightly darker version of Light Mode (soft light grey/slate tint) */
-  --color-slate-950: #E8EDF3; /* Main page background */
-  --color-slate-900: #DEE5EC; /* Alternate section background */
-  --color-slate-850: #E7ECF1; /* Secondary cards / panels */
-  --color-slate-800: #F1F4F7; /* Main cards */
-  --color-slate-700: #CBD5E1; /* Borders & dividers */
+  /* Executive Deep Navy + Midnight Theme Palettes */
+  --color-slate-950: #071827; /* Main page background */
+  --color-slate-900: #081A2B; /* Alternate section background */
+  --color-slate-850: #0B2033; /* Secondary cards / panels */
+  --color-slate-800: #0D2538; /* Main cards */
+  --color-slate-700: #1B3850; /* Borders & dividers */
+  --color-slate-600: #335370;
+  --color-slate-500: #64748B;
+  --color-slate-400: #94A3B8;
+  --color-slate-300: #CBD5E1;
+  --color-slate-200: #E2E8F0;
+  --color-slate-100: #F8FAFC;
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    color: #1F2937;
-    background-color: #F4F6F8;
+    color: #F8FAFC;
+    background-color: #071827;
   }
 
   html.dark,
   [data-theme="dark"] {
-    /* Soft dim tint: bright and spacious light slate-grey */
-    --color-slate-950: #E8EDF3;
-    --color-slate-900: #DEE5EC;
-    --color-slate-850: #E7ECF1;
-    --color-slate-800: #F1F4F7;
-    --color-slate-700: #CBD5E1;
-    --color-slate-600: #94A3B8;
-    --color-slate-500: #64748B;
-    --color-slate-400: #475569;
-    --color-slate-300: #334155;
-    --color-slate-200: #1E293B;
-    --color-slate-100: #0F2747;
-
-    --color-teal-950: #D6EAE5;
-    --color-teal-900: #C2DFD9;
-    --color-teal-800: #99D5C8;
-
-    color: #1E293B;
-    background-color: #E8EDF3;
+    color: #F8FAFC;
+    background-color: #071827;
   }
 
   html[dir="rtl"] {
@@ -59,154 +54,50 @@
   }
 }
 
-/* Ensure typography in soft dim mode maintains clear dark slate/navy contrast on light backgrounds */
-html.dark .dark\:text-white,
-[data-theme="dark"] .dark\:text-white {
-  color: #0F2747;
-}
-
-html.dark .dark\:text-slate-100,
-[data-theme="dark"] .dark\:text-slate-100 {
-  color: #0F2747;
-}
-
-html.dark .dark\:text-slate-200,
-[data-theme="dark"] .dark\:text-slate-200 {
-  color: #1E293B;
-}
-
-html.dark .dark\:text-slate-300,
-[data-theme="dark"] .dark\:text-slate-300 {
-  color: #334155;
-}
-
-html.dark .dark\:text-slate-400,
-[data-theme="dark"] .dark\:text-slate-400 {
-  color: #475569;
-}
-
-html.dark .dark\:text-teal-200,
-[data-theme="dark"] .dark\:text-teal-200,
-html.dark .dark\:text-teal-300,
-[data-theme="dark"] .dark\:text-teal-300,
-html.dark .dark\:text-teal-400,
-[data-theme="dark"] .dark\:text-teal-400 {
-  color: #0F766E;
-}
-
 /* Subtle professional 3D raised / embossed effect for Work Experience Company Name */
 .company-3d-text {
-  text-shadow: 
-    0 1px 0 rgba(255, 255, 255, 0.95),
-    0 1.5px 2px rgba(15, 39, 71, 0.22),
-    0 3px 6px rgba(15, 39, 71, 0.08);
-  letter-spacing: -0.01em;
-}
-
-.dark .company-3d-text,
-[data-theme="dark"] .company-3d-text,
-html.dark .company-3d-text {
-  text-shadow: 
-    0 1px 0 rgba(255, 255, 255, 0.95),
-    0 1.5px 2px rgba(15, 39, 71, 0.18),
-    0 3px 6px rgba(15, 39, 71, 0.08);
-}
-
-/* Subtle professional 3D raised / embossed effect for Green/Teal metric labels */
-.mini-card-3d-text {
-  color: #0F766E !important;
-  text-shadow: 
-    0 1px 0 rgba(255, 255, 255, 0.95),
-    0 1.5px 2px rgba(15, 118, 110, 0.30),
-    0 3px 6px rgba(15, 39, 71, 0.10);
-  letter-spacing: -0.01em;
-}
-
-.dark .mini-card-3d-text,
-[data-theme="dark"] .mini-card-3d-text,
-html.dark .mini-card-3d-text {
-  color: #0F766E !important;
-  text-shadow: 
-    0 1px 0 rgba(255, 255, 255, 0.95),
-    0 1.5px 2px rgba(15, 118, 110, 0.24),
-    0 3px 6px rgba(15, 39, 71, 0.08);
-}
-
-/* Refined subtle depth for Hero Company Card Name */
-.hero-company-3d {
-  color: #0F2747;
-  text-shadow: 0 1px 1px rgba(15, 39, 71, 0.08);
-  letter-spacing: -0.01em;
-}
-
-.dark .hero-company-3d,
-[data-theme="dark"] .hero-company-3d,
-html.dark .hero-company-3d {
   color: #F8FAFC;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.30);
+  text-shadow: 
+    0 1px 2px rgba(0, 0, 0, 0.4),
+    0 2px 4px rgba(7, 24, 39, 0.6);
+  letter-spacing: -0.01em;
 }
 
-/* ==========================================================================
-   Main Headings 3D Embossed Effect (Hero Name & All Section Titles)
-   ========================================================================== */
-.main-heading-3d,
-.hero-name-3d {
-  display: inline-block;
-  color: #0F2747;
+/* Subtle professional 3D raised / embossed effect for Gold/Teal metric labels */
+.mini-card-3d-text {
+  color: #D8B56A !important;
   text-shadow: 
-    0 1px 0 rgba(255, 255, 255, 0.95),
-    0 2px 0 rgba(203, 213, 225, 0.85),
-    0 3px 2px rgba(15, 39, 71, 0.22),
-    0 5px 6px rgba(15, 39, 71, 0.14),
-    0 8px 14px rgba(15, 39, 71, 0.08);
+    0 1px 2px rgba(0, 0, 0, 0.5),
+    0 2px 6px rgba(216, 181, 106, 0.25);
+  letter-spacing: -0.01em;
+}
+
+/* Refined depth for Company Card Name */
+.hero-company-3d {
+  color: #F8FAFC;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.40);
+  letter-spacing: -0.01em;
+}
+
+/* Main Headings 3D Embossed Effect */
+.main-heading-3d {
+  display: inline-block;
+  color: #F8FAFC;
+  text-shadow: 
+    0 1px 0 rgba(255, 255, 255, 0.2),
+    0 2px 4px rgba(0, 0, 0, 0.5),
+    0 4px 10px rgba(7, 24, 39, 0.6);
   letter-spacing: -0.015em;
   transition: color 0.25s ease, text-shadow 0.25s ease;
-  cursor: pointer;
-  user-select: none;
 }
 
 @media (hover: hover) {
-  .main-heading-3d:hover,
-  .hero-name-3d:hover {
-    color: #0F766E !important;
+  .main-heading-3d:hover {
+    color: #D8B56A !important;
     text-shadow: 
-      0 1px 0 rgba(255, 255, 255, 0.95),
-      0 2px 0 rgba(153, 246, 228, 0.85),
-      0 3px 3px rgba(15, 118, 110, 0.32),
-      0 6px 10px rgba(15, 118, 110, 0.20),
-      0 10px 18px rgba(15, 39, 71, 0.12);
-  }
-}
-
-.dark .main-heading-3d,
-[data-theme="dark"] .main-heading-3d,
-html.dark .main-heading-3d,
-.dark .hero-name-3d,
-[data-theme="dark"] .hero-name-3d,
-html.dark .hero-name-3d {
-  color: #0F2747 !important;
-  text-shadow: 
-    0 1px 0 rgba(255, 255, 255, 0.95),
-    0 2px 0 rgba(203, 213, 225, 0.85),
-    0 3px 2px rgba(15, 39, 71, 0.20),
-    0 5px 6px rgba(15, 39, 71, 0.12),
-    0 8px 14px rgba(15, 39, 71, 0.08);
-}
-
-@media (hover: hover) {
-  .dark .main-heading-3d:hover,
-  [data-theme="dark"] .main-heading-3d:hover,
-  html.dark .main-heading-3d:hover,
-  .dark .hero-name-3d:hover,
-  [data-theme="dark"] .hero-name-3d:hover,
-  html.dark .hero-name-3d:hover {
-    color: #0F766E !important;
-    text-shadow: 
-      0 1px 0 rgba(255, 255, 255, 0.95),
-      0 2px 0 rgba(153, 246, 228, 0.85),
-      0 3px 3px rgba(15, 118, 110, 0.32),
-      0 6px 10px rgba(15, 118, 110, 0.20),
-      0 10px 18px rgba(15, 39, 71, 0.12);
+      0 1px 0 rgba(255, 255, 255, 0.25),
+      0 2px 6px rgba(216, 181, 106, 0.35),
+      0 6px 14px rgba(7, 24, 39, 0.7);
   }
 }
 
@@ -229,5 +120,179 @@ html.dark .hero-name-3d {
 @media screen {
   .print-only {
     display: none !important;
+  }
+}
+
+/* ==========================================================================
+   Home Live Moving Architectural Glass Background Keyframes
+   Strictly NO stars, NO particles, NO network dots, NO gaming/neon.
+   Visible, elegant movement within 5-8 seconds.
+   ========================================================================== */
+
+/* LAYER 1: Deep Navy / Midnight Base Shift */
+@keyframes navyBaseShift {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-24px, 18px, 0) scale(1.04);
+  }
+}
+
+/* LAYER 2: Moving Glass Reflection (14-18s) - Visible traveling reflection */
+@keyframes movingGlassReflection {
+  0% {
+    transform: translate3d(-35%, -18%, 0) rotate(24deg);
+    opacity: 0.18;
+  }
+  50% {
+    transform: translate3d(25%, 12%, 0) rotate(24deg);
+    opacity: 0.45;
+  }
+  100% {
+    transform: translate3d(-35%, -18%, 0) rotate(24deg);
+    opacity: 0.18;
+  }
+}
+
+/* LAYER 3: Champagne Gold Light Drift (18-24s) - Soft warm travelling illumination */
+@keyframes champagneGoldDrift {
+  0% {
+    transform: translate3d(-18%, -14%, 0) scale(1);
+    opacity: 0.24;
+  }
+  40% {
+    transform: translate3d(24%, 16%, 0) scale(1.15);
+    opacity: 0.35;
+  }
+  75% {
+    transform: translate3d(-10%, 24%, 0) scale(0.94);
+    opacity: 0.22;
+  }
+  100% {
+    transform: translate3d(-18%, -14%, 0) scale(1);
+    opacity: 0.24;
+  }
+}
+
+/* LAYER 4: Glass Light Sweep (10-16s) - Narrow reflection gleam travelling across facade */
+@keyframes glassLightSweep {
+  0% {
+    transform: translate3d(-120%, -60%, 0) rotate(28deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.65;
+  }
+  50% {
+    opacity: 0.85;
+  }
+  85% {
+    opacity: 0.40;
+  }
+  100% {
+    transform: translate3d(140%, 70%, 0) rotate(28deg);
+    opacity: 0;
+  }
+}
+
+/* LAYER 5: Architectural Depth Parallax A (22-30s) */
+@keyframes archDepthLayerA {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(38px, -24px, 0) rotate(0.8deg);
+  }
+}
+
+/* LAYER 5: Architectural Depth Parallax B (22-30s) */
+@keyframes archDepthLayerB {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(-32px, 22px, 0) rotate(-0.7deg);
+  }
+}
+
+/* Animation Classes */
+.animate-navy-base {
+  animation: navyBaseShift 22s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-glass-reflection {
+  animation: movingGlassReflection 16s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.animate-gold-drift {
+  animation: champagneGoldDrift 20s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.animate-gold-drift-2 {
+  animation: champagneGoldDrift 24s ease-in-out 6s infinite reverse;
+  will-change: transform, opacity;
+}
+
+.animate-light-sweep {
+  animation: glassLightSweep 13s cubic-bezier(0.35, 0.05, 0.25, 1) infinite;
+  will-change: transform, opacity;
+}
+
+.animate-arch-depth-a {
+  animation: archDepthLayerA 24s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-arch-depth-b {
+  animation: archDepthLayerB 28s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Backward-compatible legacy classes for any other references */
+.animate-gold-light-1 {
+  animation: champagneGoldDrift 20s ease-in-out infinite;
+}
+.animate-gold-light-2 {
+  animation: champagneGoldDrift 24s ease-in-out 6s infinite reverse;
+}
+.animate-navy-shift {
+  animation: navyBaseShift 22s ease-in-out infinite;
+}
+.animate-arch-depth {
+  animation: archDepthLayerA 24s ease-in-out infinite;
+}
+.animate-glass-layer {
+  animation: archDepthLayerB 28s ease-in-out infinite;
+}
+.animate-glass-sweep {
+  animation: glassLightSweep 13s cubic-bezier(0.35, 0.05, 0.25, 1) infinite;
+}
+
+/* Mask utility for soft edge fades */
+.hero-portrait-mask {
+  mask-image: linear-gradient(to bottom, black 78%, rgba(0, 0, 0, 0.7) 90%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 78%, rgba(0, 0, 0, 0.7) 90%, transparent 100%);
+}
+
+/* Accessibility: Stop/reduce motion when user prefers reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-navy-base,
+  .animate-glass-reflection,
+  .animate-gold-drift,
+  .animate-gold-drift-2,
+  .animate-light-sweep,
+  .animate-arch-depth-a,
+  .animate-arch-depth-b,
+  .animate-gold-light-1,
+  .animate-gold-light-2,
+  .animate-navy-shift,
+  .animate-arch-depth,
+  .animate-glass-layer,
+  .animate-glass-sweep {
+    animation: none !important;
   }
 }
