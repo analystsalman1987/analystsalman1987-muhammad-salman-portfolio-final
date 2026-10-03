@@ -9,7 +9,6 @@ import {
 import { ProfileInfo } from '../types';
 import { useLanguage } from '../context/LanguageContext';
 import { ARABIC_TRANSLATIONS } from '../data/arabicData';
-import photo2507 from '../assets/images/0D0A2507(1).JPG';
 
 interface AboutProps {
   profile?: ProfileInfo;
@@ -57,6 +56,7 @@ export function About({ profile: _profile }: AboutProps) {
             blur-[130px]
           "
         />
+
         <div
           className="
             absolute
@@ -85,9 +85,7 @@ export function About({ profile: _profile }: AboutProps) {
       <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-12 xl:gap-16">
 
-          {/* ================================================================
-              LEFT SIDE: PROFESSIONAL SUMMARY & FACTUAL CREDENTIALS
-              ================================================================ */}
+          {/* LEFT SIDE */}
           <div
             className={`
               flex
@@ -104,12 +102,13 @@ export function About({ profile: _profile }: AboutProps) {
               <span className="inline-block text-xs font-bold tracking-[0.25em] text-[#D8B56A] uppercase">
                 {isRTL ? t.tag : 'ABOUT ME'}
               </span>
+
               <h2 className="main-heading-3d text-3xl font-extrabold tracking-tight text-[#F8FAFC] sm:text-4xl lg:text-5xl">
                 {isRTL ? t.title : 'Professional Summary'}
               </h2>
             </div>
 
-            {/* PRESERVED APPROVED TWO PARAGRAPHS VERBATIM */}
+            {/* Approved Professional Summary */}
             <div className="space-y-4 text-sm leading-relaxed text-[#CBD5E1] sm:text-base sm:leading-[1.8]">
               <p>
                 {isRTL
@@ -124,8 +123,9 @@ export function About({ profile: _profile }: AboutProps) {
               </p>
             </div>
 
-            {/* THREE CONCISE FACTUAL HIGHLIGHT CARDS */}
+            {/* THREE FACTUAL HIGHLIGHT CARDS */}
             <div className="grid grid-cols-1 gap-3.5 pt-1 sm:grid-cols-3">
+
               {/* 14+ Years */}
               <div
                 className="
@@ -150,7 +150,11 @@ export function About({ profile: _profile }: AboutProps) {
                 <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-lg bg-[#132E43] text-[#D8B56A]">
                   <CalendarDays className="h-5 w-5" />
                 </div>
-                <div className="text-2xl font-black text-[#F8FAFC]">14+</div>
+
+                <div className="text-2xl font-black text-[#F8FAFC]">
+                  14+
+                </div>
+
                 <div className="mt-1 text-xs font-bold text-[#CBD5E1]">
                   {isRTL ? t.yearsExpLabel : 'Years Experience'}
                 </div>
@@ -180,7 +184,11 @@ export function About({ profile: _profile }: AboutProps) {
                 <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-lg bg-[#132E43] text-[#D8B56A]">
                   <GraduationCap className="h-5 w-5" />
                 </div>
-                <div className="text-xl font-black text-[#F8FAFC]">MBA / BBA</div>
+
+                <div className="text-xl font-black text-[#F8FAFC]">
+                  MBA / BBA
+                </div>
+
                 <div className="mt-1 text-xs font-bold text-[#CBD5E1]">
                   {isRTL ? 'المحاسبة والمالية' : 'Accounting & Finance'}
                 </div>
@@ -210,14 +218,18 @@ export function About({ profile: _profile }: AboutProps) {
                 <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-lg bg-[#132E43] text-[#D8B56A]">
                   <FileText className="h-5 w-5" />
                 </div>
-                <div className="text-xl font-black text-[#F8FAFC]">ZATCA</div>
+
+                <div className="text-xl font-black text-[#F8FAFC]">
+                  ZATCA
+                </div>
+
                 <div className="mt-1 text-xs font-bold text-[#CBD5E1]">
                   {isRTL ? 'إقرارات ضريبة القيمة المضافة' : 'VAT Reporting'}
                 </div>
               </div>
             </div>
 
-            {/* COMPLIANCE & CURRENT STATUS ROW */}
+            {/* COMPLIANCE & CURRENT STATUS */}
             <div
               className="
                 flex
@@ -235,6 +247,7 @@ export function About({ profile: _profile }: AboutProps) {
             >
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="h-4 w-4 shrink-0 text-[#D8B56A]" />
+
                 <span>
                   {isRTL
                     ? t.complianceNote
@@ -260,6 +273,7 @@ export function About({ profile: _profile }: AboutProps) {
                   "
                 >
                   <Car className="h-3.5 w-3.5" />
+
                   <span>
                     {isRTL ? t.drivingLicense : 'Valid Saudi Driving License'}
                   </span>
@@ -289,6 +303,7 @@ export function About({ profile: _profile }: AboutProps) {
                   title="Ahmed Yahya Alyami Contracting Co."
                 >
                   <Briefcase className="h-3.5 w-3.5 text-[#D8B56A]" />
+
                   <span>
                     {isRTL
                       ? 'شركة أحمد يحيى اليامي للمقاولات'
@@ -297,17 +312,13 @@ export function About({ profile: _profile }: AboutProps) {
                 </a>
               </div>
             </div>
-
           </div>
 
-          {/* ================================================================
-              RIGHT SIDE: REAL UPLOADED PHOTOGRAPH (0D0A2507.JPG)
-              Appears ONCE in About. No AI, no replacements.
-              ================================================================ */}
+          {/* RIGHT SIDE: REAL PHOTO */}
           <div className="flex items-center justify-center lg:col-span-5 xl:col-span-5">
             <div className="relative mx-auto w-full max-w-[340px] sm:max-w-[380px] lg:max-w-[410px] xl:max-w-[440px]">
-              
-              {/* Soft Ambient Gold Rim Glow behind Photograph */}
+
+              {/* Gold Rim Glow */}
               <div
                 className="
                   pointer-events-none
@@ -324,7 +335,7 @@ export function About({ profile: _profile }: AboutProps) {
                 aria-hidden="true"
               />
 
-              {/* Architectural Glass Container Frame */}
+              {/* Photo Container */}
               <div
                 className="
                   relative
@@ -341,9 +352,9 @@ export function About({ profile: _profile }: AboutProps) {
                   sm:rounded-3xl
                 "
               >
-                {/* Real Photograph (0D0A2507(1).JPG) - 100% Original Photo */}
+                {/* EXACT REAL PHOTO FROM PUBLIC/IMAGES */}
                 <img
-                  src={photo2507}
+                  src="/images/0D0A2507(1).JPG"
                   alt={isRTL ? 'محمد سلمان - محاسب' : 'Muhammad Salman - Accountant'}
                   className="
                     h-full
@@ -353,15 +364,9 @@ export function About({ profile: _profile }: AboutProps) {
                     object-[center_top]
                   "
                   loading="eager"
-                  onError={(e) => {
-                    const target = e.currentTarget;
-                    if (target.src !== '/images/0D0A2507(1).JPG') {
-                      target.src = '/images/0D0A2507(1).JPG';
-                    }
-                  }}
                 />
 
-                {/* Subtle Inner Gold Accent Border */}
+                {/* Inner Gold Border */}
                 <div
                   className="
                     pointer-events-none
@@ -376,10 +381,8 @@ export function About({ profile: _profile }: AboutProps) {
                   aria-hidden="true"
                 />
               </div>
-
             </div>
           </div>
-
         </div>
       </div>
     </section>
