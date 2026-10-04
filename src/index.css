@@ -196,135 +196,201 @@
   }
 }
 
-/* Horizontal corporate light sweep across city (LEFT -> RIGHT -> RESET) */
+/* Horizontal corporate light sweep across city (LEFT -> RIGHT -> RESET, 10-14s) */
 @keyframes corporateLightSweep {
   0% {
-    transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100vw, 0, 0);
     opacity: 0;
   }
-  15% {
-    opacity: 0.45;
+  8% {
+    opacity: 0.60;
   }
   50% {
-    opacity: 0.70;
+    opacity: 0.85;
   }
-  85% {
-    opacity: 0.35;
+  92% {
+    opacity: 0.60;
   }
   100% {
-    transform: translate3d(200%, 0, 0);
+    transform: translate3d(200vw, 0, 0);
     opacity: 0;
   }
 }
 
-/* Moving Financial Graph Wave Animation */
-@keyframes financialGraphPulse {
+/* Moving Financial Graph Gentle Float (8-12s) */
+@keyframes financialGraphFloat {
   0%, 100% {
     transform: translate3d(0, 0, 0);
-    opacity: 0.75;
   }
   50% {
-    transform: translate3d(-8px, -6px, 0);
+    transform: translate3d(0, -9px, 0);
+  }
+}
+
+/* Streaming Dashed Trajectory */
+@keyframes graphDashFlow {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -120;
+  }
+}
+
+/* Subtle Glowing Trendline Pulse */
+@keyframes graphGlowPulse {
+  0%, 100% {
+    stroke-opacity: 0.75;
+    stroke-width: 2.2;
+  }
+  50% {
+    stroke-opacity: 1.0;
+    stroke-width: 2.7;
+  }
+}
+
+/* Financial Data Points Node Pulse */
+@keyframes graphNodePulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.80;
+  }
+  50% {
+    transform: scale(1.35);
+    opacity: 1;
+  }
+}
+
+/* Animated Financial Bar Heights - Rising & Falling (5-9s) */
+@keyframes finBarPulse1 {
+  0%, 100% {
+    transform: scaleY(0.40);
+    opacity: 0.45;
+  }
+  50% {
+    transform: scaleY(1.20);
+    opacity: 0.90;
+  }
+}
+
+@keyframes finBarPulse2 {
+  0%, 100% {
+    transform: scaleY(1.10);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scaleY(0.35);
+    opacity: 0.40;
+  }
+}
+
+@keyframes finBarPulse3 {
+  0%, 100% {
+    transform: scaleY(0.50);
+    opacity: 0.50;
+  }
+  50% {
+    transform: scaleY(1.25);
     opacity: 0.95;
   }
 }
 
-/* Animated Financial Bar Heights (Individual Speeds) */
-@keyframes financialBarPulseA {
+@keyframes finBarPulse4 {
   0%, 100% {
-    transform: scaleY(0.65);
+    transform: scaleY(0.90);
+    opacity: 0.75;
+  }
+  50% {
+    transform: scaleY(0.30);
     opacity: 0.35;
   }
-  50% {
-    transform: scaleY(1.0);
-    opacity: 0.70;
-  }
 }
 
-@keyframes financialBarPulseB {
+@keyframes finBarPulse5 {
   0%, 100% {
-    transform: scaleY(0.95);
-    opacity: 0.65;
+    transform: scaleY(0.35);
+    opacity: 0.40;
   }
   50% {
-    transform: scaleY(0.50);
-    opacity: 0.30;
+    transform: scaleY(1.15);
+    opacity: 0.85;
   }
 }
 
-@keyframes financialBarPulseC {
-  0%, 100% {
-    transform: scaleY(0.40);
-    opacity: 0.25;
-  }
-  50% {
-    transform: scaleY(0.85);
-    opacity: 0.60;
-  }
-}
-
-@keyframes financialBarPulseD {
-  0%, 100% {
-    transform: scaleY(0.75);
-    opacity: 0.50;
-  }
-  50% {
-    transform: scaleY(1.05);
-    opacity: 0.80;
-  }
-}
-
-/* Building Window Lights Pulse */
+/* Building Window Lights Pulse - Slowly brighten/dim (Navy/Cool-Blue <-> Champagne-Gold, 6-12s) */
 @keyframes windowGlowA {
   0%, 100% {
     opacity: 0.20;
-    fill: #CBD5E1;
+    fill: #1E3A5F;
   }
-  50% {
-    opacity: 0.90;
+  35% {
+    opacity: 0.60;
+    fill: #7DD3FC;
+  }
+  65% {
+    opacity: 0.95;
     fill: #D8B56A;
+  }
+  85% {
+    opacity: 0.70;
+    fill: #F4E7C5;
   }
 }
 
 @keyframes windowGlowB {
   0%, 100% {
-    opacity: 0.75;
+    opacity: 0.95;
     fill: #D8B56A;
   }
-  50% {
-    opacity: 0.15;
-    fill: #132E43;
+  30% {
+    opacity: 0.65;
+    fill: #CBD5E1;
+  }
+  60% {
+    opacity: 0.20;
+    fill: #0D2538;
+  }
+  85% {
+    opacity: 0.55;
+    fill: #38BDF8;
   }
 }
 
 @keyframes windowGlowC {
   0%, 100% {
-    opacity: 0.30;
+    opacity: 0.35;
+    fill: #38BDF8;
+  }
+  40% {
+    opacity: 0.95;
+    fill: #D8B56A;
+  }
+  75% {
+    opacity: 0.70;
     fill: #CBD5E1;
   }
-  50% {
-    opacity: 0.85;
-    fill: #C9A45C;
+  90% {
+    opacity: 0.25;
+    fill: #132E43;
   }
 }
 
-/* LAYER 5: Architectural Depth Parallax A (22-30s) */
+/* LAYER 5: Architectural Depth Parallax (20-30s) */
 @keyframes archDepthLayerA {
   0%, 100% {
-    transform: translate3d(0, 0, 0) rotate(0deg);
+    transform: translateY(0);
   }
   50% {
-    transform: translate3d(38px, -24px, 0) rotate(0.8deg);
+    transform: translateY(-3px);
   }
 }
 
-/* LAYER 5: Architectural Depth Parallax B (22-30s) */
 @keyframes archDepthLayerB {
   0%, 100% {
-    transform: translate3d(0, 0, 0) rotate(0deg);
+    transform: translateY(0);
   }
   50% {
-    transform: translate3d(-32px, 22px, 0) rotate(-0.7deg);
+    transform: translateY(-5px);
   }
 }
 
@@ -360,53 +426,79 @@
 }
 
 .animate-financial-graph {
-  animation: financialGraphPulse 9s ease-in-out infinite;
-  will-change: transform, opacity;
+  animation: financialGraphFloat 10s ease-in-out infinite;
+  will-change: transform;
 }
 
-.animate-fin-bar-1 {
-  animation: financialBarPulseA 6.5s ease-in-out infinite;
-  transform-origin: bottom;
-  will-change: transform, opacity;
+.animate-graph-dash {
+  animation: graphDashFlow 9s linear infinite;
+  will-change: stroke-dashoffset;
 }
 
-.animate-fin-bar-2 {
-  animation: financialBarPulseB 8.5s ease-in-out 1.2s infinite;
-  transform-origin: bottom;
-  will-change: transform, opacity;
+.animate-graph-line {
+  animation: graphGlowPulse 8s ease-in-out infinite;
+  will-change: stroke-opacity, stroke-width;
 }
 
-.animate-fin-bar-3 {
-  animation: financialBarPulseC 7.2s ease-in-out 0.6s infinite;
-  transform-origin: bottom;
-  will-change: transform, opacity;
+.animate-graph-node-1 {
+  animation: graphNodePulse 4.5s ease-in-out 0s infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.animate-graph-node-2 {
+  animation: graphNodePulse 5.0s ease-in-out 1.2s infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.animate-graph-node-3 {
+  animation: graphNodePulse 4.8s ease-in-out 2.4s infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.animate-graph-node-4 {
+  animation: graphNodePulse 5.2s ease-in-out 0.8s infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.animate-graph-node-5 {
+  animation: graphNodePulse 4.6s ease-in-out 1.8s infinite;
+  transform-box: fill-box;
+  transform-origin: center;
 }
 
-.animate-fin-bar-4 {
-  animation: financialBarPulseD 9.8s ease-in-out 2s infinite;
-  transform-origin: bottom;
-  will-change: transform, opacity;
-}
+.animate-fin-bar-1 { animation: finBarPulse1 5.8s ease-in-out 0s infinite; transform-origin: bottom; will-change: transform, opacity; }
+.animate-fin-bar-2 { animation: finBarPulse2 8.2s ease-in-out 1.2s infinite; transform-origin: bottom; will-change: transform, opacity; }
+.animate-fin-bar-3 { animation: finBarPulse3 6.5s ease-in-out 0.5s infinite; transform-origin: bottom; will-change: transform, opacity; }
+.animate-fin-bar-4 { animation: finBarPulse4 7.8s ease-in-out 2.1s infinite; transform-origin: bottom; will-change: transform, opacity; }
+.animate-fin-bar-5 { animation: finBarPulse5 5.2s ease-in-out 1.5s infinite; transform-origin: bottom; will-change: transform, opacity; }
+.animate-fin-bar-6 { animation: finBarPulse1 8.8s ease-in-out 2.8s infinite; transform-origin: bottom; will-change: transform, opacity; }
+.animate-fin-bar-7 { animation: finBarPulse3 7.0s ease-in-out 0.9s infinite; transform-origin: bottom; will-change: transform, opacity; }
+.animate-fin-bar-8 { animation: finBarPulse4 6.0s ease-in-out 1.7s infinite; transform-origin: bottom; will-change: transform, opacity; }
+.animate-fin-bar-9 { animation: finBarPulse2 7.4s ease-in-out 0.3s infinite; transform-origin: bottom; will-change: transform, opacity; }
+.animate-fin-bar-10 { animation: finBarPulse5 8.5s ease-in-out 2.4s infinite; transform-origin: bottom; will-change: transform, opacity; }
 
 .animate-window-glow-a {
-  animation: windowGlowA 7s ease-in-out infinite;
+  animation: windowGlowA 7.5s ease-in-out infinite;
+  will-change: opacity, fill;
 }
 
 .animate-window-glow-b {
-  animation: windowGlowB 8.5s ease-in-out 2s infinite;
+  animation: windowGlowB 9.5s ease-in-out 1.8s infinite;
+  will-change: opacity, fill;
 }
 
 .animate-window-glow-c {
-  animation: windowGlowC 10s ease-in-out 4s infinite;
+  animation: windowGlowC 11.5s ease-in-out 3.5s infinite;
+  will-change: opacity, fill;
 }
 
 .animate-arch-depth-a {
-  animation: archDepthLayerA 24s ease-in-out infinite;
+  animation: archDepthLayerA 22s ease-in-out infinite;
   will-change: transform;
 }
 
 .animate-arch-depth-b {
-  animation: archDepthLayerB 28s ease-in-out infinite;
+  animation: archDepthLayerB 27s ease-in-out infinite;
   will-change: transform;
 }
 

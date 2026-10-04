@@ -116,181 +116,232 @@ export function Hero({ onOpenCV }: HeroProps) {
             </defs>
 
             {/* ----------------------------------------------------
-                BACKGROUND SKYLINE HORIZON (Lower Distant Buildings)
+                BACKGROUND BUSINESS DISTRICT SKYLINE (Flat-Top Horizon)
+                Pure rectangular corporate building silhouettes
                 ---------------------------------------------------- */}
             <path
               d="
                 M 0 900
-                L 0 540 L 70 540 L 70 490 L 140 490 L 140 550
-                L 230 550 L 230 460 L 300 460 L 300 560
-                L 390 560 L 390 510 L 460 510 L 460 580
-                L 560 580 L 560 530 L 630 530 L 630 590
-                L 760 590 L 760 540 L 830 540 L 830 580
-                L 930 580 L 930 500 L 1010 500 L 1010 560
-                L 1100 560 L 1100 480 L 1170 480 L 1170 550
-                L 1260 550 L 1260 470 L 1330 470 L 1330 530
-                L 1440 530 L 1440 900
+                L 0 550 L 55 550 L 55 490 L 115 490 L 115 540
+                L 190 540 L 190 460 L 260 460 L 260 550
+                L 330 550 L 330 500 L 400 500 L 400 570
+                L 470 570 L 470 530 L 540 530 L 540 580
+                L 620 580 L 620 540 L 690 540 L 690 590
+                L 770 590 L 770 540 L 840 540 L 840 580
+                L 910 580 L 910 510 L 980 510 L 980 560
+                L 1050 560 L 1050 470 L 1120 470 L 1120 540
+                L 1200 540 L 1200 480 L 1270 480 L 1270 530
+                L 1340 530 L 1340 500 L 1400 500 L 1400 550
+                L 1440 550 L 1440 900
                 Z
               "
               fill="#081A2B"
-              opacity="0.85"
+              opacity="0.80"
             />
 
             {/* ====================================================
-                LEFT CORPORATE TOWERS (Clearly Visible & Detailed)
+                LEFT CORPORATE TOWERS (Straight Rectangular Glass Skyscrapers)
                 ==================================================== */}
-            {/* Tower L1 (Far Left Main Spire High-Rise: x=0 to 190) */}
-            <g className="animate-arch-depth-a">
-              {/* Main Body */}
-              <polygon
-                points="10,900 10,180 60,110 120,110 185,180 185,900"
-                fill="url(#towerGlassL1)"
+            {/* Tower L3 (Background High-Rise: x=270 to 390) */}
+            <g className="animate-arch-depth-b" opacity="0.75">
+              <rect x="295" y="305" width="70" height="15" fill="#0D2538" stroke="#CBD5E1" strokeWidth="0.6" strokeOpacity="0.4" />
+              <rect
+                x="270"
+                y="320"
+                width="120"
+                height="580"
+                fill="url(#towerGlassL2)"
                 stroke="url(#towerMullionGold)"
-                strokeWidth="1.2"
+                strokeWidth="0.8"
               />
-              {/* Spire Pinnacle */}
-              <line x1="90" y1="110" x2="90" y2="40" stroke="#D8B56A" strokeWidth="1.5" strokeOpacity="0.8" />
-              <circle cx="90" cy="40" r="2.5" fill="#D8B56A" />
-
-              {/* Vertical Mullion Lines */}
-              <line x1="45" y1="180" x2="45" y2="900" stroke="url(#towerMullionBlue)" strokeWidth="0.8" />
-              <line x1="90" y1="110" x2="90" y2="900" stroke="url(#towerMullionGold)" strokeWidth="1.2" />
-              <line x1="140" y1="180" x2="140" y2="900" stroke="url(#towerMullionBlue)" strokeWidth="0.8" />
-
-              {/* Horizontal Floor Slabs */}
-              {[210, 250, 290, 330, 370, 410, 450, 490, 530, 570, 610, 650, 690, 730, 770, 810, 850].map((y) => (
-                <line key={`l1-floor-${y}`} x1="12" y1={y} x2="183" y2={y} stroke="#CBD5E1" strokeOpacity="0.22" strokeWidth="0.75" />
+              <line x1="310" y1="320" x2="310" y2="900" stroke="url(#towerMullionBlue)" strokeWidth="0.6" />
+              <line x1="350" y1="320" x2="350" y2="900" stroke="url(#towerMullionGold)" strokeWidth="0.7" />
+              {[350, 390, 430, 470, 510, 550, 590, 630, 670, 710, 750, 790, 830].map((y) => (
+                <line key={`l3-floor-${y}`} x1="271" y1={y} x2="389" y2={y} stroke="#CBD5E1" strokeOpacity="0.16" strokeWidth="0.6" />
               ))}
-
-              {/* Illuminated Office Windows (Gold & Cool White) */}
-              <rect x="25" y="260" width="12" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-a" />
-              <rect x="105" y="260" width="12" height="6" rx="1" fill="#CBD5E1" opacity="0.65" />
-              <rect x="60" y="300" width="14" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-b" />
-              <rect x="150" y="340" width="12" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-c" />
-              <rect x="25" y="380" width="12" height="6" rx="1" fill="#CBD5E1" opacity="0.70" />
-              <rect x="105" y="420" width="14" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-a" />
-              <rect x="60" y="460" width="12" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-b" />
-              <rect x="150" y="500" width="12" height="6" rx="1" fill="#CBD5E1" opacity="0.60" />
-              <rect x="25" y="540" width="12" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-c" />
-              <rect x="105" y="580" width="12" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-a" />
-              <rect x="60" y="620" width="14" height="6" rx="1" fill="#CBD5E1" opacity="0.75" />
+              <rect x="282" y="365" width="12" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-c" />
+              <rect x="322" y="445" width="12" height="6" rx="1" fill="#CBD5E1" opacity="0.60" />
+              <rect x="360" y="525" width="12" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-a" />
             </g>
 
-            {/* Tower L2 (Midground Stepped Corporate Tower: x=175 to 330) */}
+            {/* Tower L2 (Midground Stepped Flat-Top Corporate Tower: x=150 to 295) */}
             <g className="animate-arch-depth-b">
-              {/* Stepped Crown */}
-              <rect x="235" y="195" width="45" height="30" fill="#132E43" stroke="#D8B56A" strokeWidth="0.8" strokeOpacity="0.5" />
-              <line x1="257" y1="195" x2="257" y2="160" stroke="#D8B56A" strokeWidth="1.2" strokeOpacity="0.7" />
+              {/* Stepped Flat Mechanical Crown */}
+              <rect x="180" y="195" width="85" height="20" fill="#102C45" stroke="#D8B56A" strokeWidth="0.9" strokeOpacity="0.6" />
 
-              {/* Main Tower Body */}
+              {/* Main Straight Rectangular Skyscraper Body */}
               <rect
-                x="175"
-                y="225"
-                width="155"
-                height="675"
+                x="150"
+                y="215"
+                width="145"
+                height="685"
                 fill="url(#towerGlassL2)"
                 stroke="url(#towerMullionGold)"
                 strokeWidth="1.1"
               />
 
               {/* Vertical Mullions */}
-              <line x1="215" y1="225" x2="215" y2="900" stroke="url(#towerMullionBlue)" strokeWidth="0.75" />
-              <line x1="255" y1="225" x2="255" y2="900" stroke="url(#towerMullionGold)" strokeWidth="0.9" />
-              <line x1="295" y1="225" x2="295" y2="900" stroke="url(#towerMullionBlue)" strokeWidth="0.75" />
+              <line x1="185" y1="215" x2="185" y2="900" stroke="url(#towerMullionBlue)" strokeWidth="0.75" />
+              <line x1="222" y1="215" x2="222" y2="900" stroke="url(#towerMullionGold)" strokeWidth="0.9" />
+              <line x1="260" y1="215" x2="260" y2="900" stroke="url(#towerMullionBlue)" strokeWidth="0.75" />
 
               {/* Horizontal Floor Slabs */}
-              {[255, 295, 335, 375, 415, 455, 495, 535, 575, 615, 655, 695, 735, 775, 815, 855].map((y) => (
-                <line key={`l2-floor-${y}`} x1="176" y1={y} x2="329" y2={y} stroke="#CBD5E1" strokeOpacity="0.20" strokeWidth="0.75" />
+              {[243, 271, 299, 327, 355, 383, 411, 439, 467, 495, 523, 551, 579, 607, 635, 663, 691, 719, 747, 775, 803, 831, 859].map((y) => (
+                <line key={`l2-floor-${y}`} x1="151" y1={y} x2="294" y2={y} stroke="#CBD5E1" strokeOpacity="0.20" strokeWidth="0.75" />
               ))}
 
               {/* Window Lights */}
-              <rect x="190" y="270" width="14" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-c" />
-              <rect x="230" y="310" width="14" height="6" rx="1" fill="#CBD5E1" opacity="0.65" />
-              <rect x="270" y="350" width="14" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-a" />
-              <rect x="230" y="390" width="14" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-b" />
-              <rect x="190" y="430" width="14" height="6" rx="1" fill="#CBD5E1" opacity="0.75" />
-              <rect x="270" y="470" width="14" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-c" />
-              <rect x="230" y="550" width="14" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-a" />
-              <rect x="190" y="590" width="14" height="6" rx="1" fill="#CBD5E1" opacity="0.65" />
-              <rect x="270" y="630" width="14" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-b" />
+              <rect x="160" y="255" width="13" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-c" />
+              <rect x="198" y="283" width="13" height="6" rx="1" fill="#CBD5E1" opacity="0.65" />
+              <rect x="235" y="339" width="13" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-a" />
+              <rect x="272" y="395" width="13" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-b" />
+              <rect x="160" y="423" width="13" height="6" rx="1" fill="#CBD5E1" opacity="0.75" />
+              <rect x="198" y="479" width="13" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-c" />
+              <rect x="235" y="563" width="13" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-a" />
+              <rect x="272" y="619" width="13" height="6" rx="1" fill="#CBD5E1" opacity="0.65" />
+              <rect x="198" y="675" width="13" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-b" />
+            </g>
+
+            {/* Tower L1 (Foreground Primary Corporate Skyscraper: x=15 to 165) */}
+            <g className="animate-arch-depth-a">
+              {/* Flat Mechanical Penthouse Roof Box */}
+              <rect x="45" y="118" width="90" height="22" fill="#132E43" stroke="#D8B56A" strokeWidth="1.0" strokeOpacity="0.7" />
+
+              {/* Main Straight Rectangular Skyscraper Body */}
+              <rect
+                x="15"
+                y="140"
+                width="150"
+                height="760"
+                fill="url(#towerGlassL1)"
+                stroke="url(#towerMullionGold)"
+                strokeWidth="1.2"
+              />
+
+              {/* Vertical Mullion Lines */}
+              <line x1="52" y1="140" x2="52" y2="900" stroke="url(#towerMullionBlue)" strokeWidth="0.8" />
+              <line x1="90" y1="140" x2="90" y2="900" stroke="url(#towerMullionGold)" strokeWidth="1.2" />
+              <line x1="127" y1="140" x2="127" y2="900" stroke="url(#towerMullionBlue)" strokeWidth="0.8" />
+
+              {/* Horizontal Floor Slabs */}
+              {[166, 192, 218, 244, 270, 296, 322, 348, 374, 400, 426, 452, 478, 504, 530, 556, 582, 608, 634, 660, 686, 712, 738, 764, 790, 816, 842, 868].map((y) => (
+                <line key={`l1-floor-${y}`} x1="16" y1={y} x2="164" y2={y} stroke="#CBD5E1" strokeOpacity="0.22" strokeWidth="0.75" />
+              ))}
+
+              {/* Illuminated Office Windows (Gold & Cool White) */}
+              <rect x="25" y="200" width="13" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-a" />
+              <rect x="100" y="226" width="13" height="6" rx="1" fill="#CBD5E1" opacity="0.65" />
+              <rect x="62" y="278" width="13" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-b" />
+              <rect x="137" y="330" width="13" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-c" />
+              <rect x="25" y="382" width="13" height="6" rx="1" fill="#CBD5E1" opacity="0.70" />
+              <rect x="100" y="434" width="13" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-a" />
+              <rect x="62" y="486" width="13" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-b" />
+              <rect x="137" y="538" width="13" height="6" rx="1" fill="#CBD5E1" opacity="0.60" />
+              <rect x="25" y="590" width="13" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-c" />
+              <rect x="100" y="642" width="13" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-a" />
+              <rect x="62" y="694" width="13" height="6" rx="1" fill="#CBD5E1" opacity="0.75" />
             </g>
 
             {/* ====================================================
-                RIGHT CORPORATE TOWERS (Clearly Visible & Detailed)
+                RIGHT CORPORATE TOWERS (Straight Rectangular Glass Skyscrapers)
                 ==================================================== */}
-            {/* Tower R2 (Mid-Right Stepped Financial Center: x=1110 to 1270) */}
-            <g className="animate-arch-depth-b">
-              {/* Crown Box */}
-              <rect x="1165" y="160" width="50" height="35" fill="#132E43" stroke="#D8B56A" strokeWidth="0.8" strokeOpacity="0.5" />
-              <line x1="1190" y1="160" x2="1190" y2="120" stroke="#D8B56A" strokeWidth="1.2" strokeOpacity="0.7" />
-
-              {/* Main Body */}
+            {/* Tower R3 (Background High-Rise: x=1050 to 1170) */}
+            <g className="animate-arch-depth-b" opacity="0.75">
+              <rect x="1075" y="295" width="70" height="15" fill="#0D2538" stroke="#CBD5E1" strokeWidth="0.6" strokeOpacity="0.4" />
               <rect
-                x="1110"
-                y="195"
-                width="160"
-                height="705"
+                x="1050"
+                y="310"
+                width="120"
+                height="590"
+                fill="url(#towerGlassR2)"
+                stroke="url(#towerMullionGold)"
+                strokeWidth="0.8"
+              />
+              <line x1="1090" y1="310" x2="1090" y2="900" stroke="url(#towerMullionBlue)" strokeWidth="0.6" />
+              <line x1="1130" y1="310" x2="1130" y2="900" stroke="url(#towerMullionGold)" strokeWidth="0.7" />
+              {[340, 380, 420, 460, 500, 540, 580, 620, 660, 700, 740, 780, 820].map((y) => (
+                <line key={`r3-floor-${y}`} x1="1051" y1={y} x2="1169" y2={y} stroke="#CBD5E1" strokeOpacity="0.16" strokeWidth="0.6" />
+              ))}
+              <rect x="1062" y="355" width="12" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-b" />
+              <rect x="1102" y="435" width="12" height="6" rx="1" fill="#CBD5E1" opacity="0.60" />
+              <rect x="1140" y="515" width="12" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-a" />
+            </g>
+
+            {/* Tower R2 (Midground Stepped Flat-Top Corporate Tower: x=1140 to 1290) */}
+            <g className="animate-arch-depth-b">
+              {/* Stepped Flat Mechanical Crown */}
+              <rect x="1170" y="185" width="90" height="20" fill="#102C45" stroke="#D8B56A" strokeWidth="0.9" strokeOpacity="0.6" />
+
+              {/* Main Straight Rectangular Skyscraper Body */}
+              <rect
+                x="1140"
+                y="205"
+                width="150"
+                height="695"
                 fill="url(#towerGlassR2)"
                 stroke="url(#towerMullionGold)"
                 strokeWidth="1.1"
               />
 
               {/* Vertical Mullions */}
-              <line x1="1150" y1="195" x2="1150" y2="900" stroke="url(#towerMullionBlue)" strokeWidth="0.75" />
-              <line x1="1190" y1="195" x2="1190" y2="900" stroke="url(#towerMullionGold)" strokeWidth="0.9" />
-              <line x1="1230" y1="195" x2="1230" y2="900" stroke="url(#towerMullionBlue)" strokeWidth="0.75" />
+              <line x1="1177" y1="205" x2="1177" y2="900" stroke="url(#towerMullionBlue)" strokeWidth="0.75" />
+              <line x1="1215" y1="205" x2="1215" y2="900" stroke="url(#towerMullionGold)" strokeWidth="0.9" />
+              <line x1="1252" y1="205" x2="1252" y2="900" stroke="url(#towerMullionBlue)" strokeWidth="0.75" />
 
               {/* Floor Slabs */}
-              {[225, 265, 305, 345, 385, 425, 465, 505, 545, 585, 625, 665, 705, 745, 785, 825].map((y) => (
-                <line key={`r2-floor-${y}`} x1="1111" y1={y} x2="1269" y2={y} stroke="#CBD5E1" strokeOpacity="0.20" strokeWidth="0.75" />
+              {[233, 261, 289, 317, 345, 373, 401, 429, 457, 485, 513, 541, 569, 597, 625, 653, 681, 709, 737, 765, 793, 821, 849].map((y) => (
+                <line key={`r2-floor-${y}`} x1="1141" y1={y} x2="1289" y2={y} stroke="#CBD5E1" strokeOpacity="0.20" strokeWidth="0.75" />
               ))}
 
               {/* Windows */}
-              <rect x="1125" y="240" width="14" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-b" />
-              <rect x="1165" y="280" width="14" height="6" rx="1" fill="#CBD5E1" opacity="0.70" />
-              <rect x="1205" y="320" width="14" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-a" />
-              <rect x="1125" y="360" width="14" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-c" />
-              <rect x="1205" y="400" width="14" height="6" rx="1" fill="#CBD5E1" opacity="0.65" />
-              <rect x="1165" y="440" width="14" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-b" />
-              <rect x="1125" y="520" width="14" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-a" />
-              <rect x="1205" y="560" width="14" height="6" rx="1" fill="#CBD5E1" opacity="0.75" />
-              <rect x="1165" y="600" width="14" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-c" />
+              <rect x="1150" y="245" width="13" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-b" />
+              <rect x="1188" y="273" width="13" height="6" rx="1" fill="#CBD5E1" opacity="0.70" />
+              <rect x="1226" y="329" width="13" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-a" />
+              <rect x="1264" y="385" width="13" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-c" />
+              <rect x="1150" y="441" width="13" height="6" rx="1" fill="#CBD5E1" opacity="0.65" />
+              <rect x="1188" y="497" width="13" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-b" />
+              <rect x="1226" y="581" width="13" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-a" />
+              <rect x="1264" y="637" width="13" height="6" rx="1" fill="#CBD5E1" opacity="0.75" />
+              <rect x="1188" y="693" width="13" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-c" />
             </g>
 
-            {/* Tower R1 (Far Right Angled Iconic Glass Skyscraper: x=1255 to 1440) */}
+            {/* Tower R1 (Foreground Primary Corporate Skyscraper: x=1270 to 1425) */}
             <g className="animate-arch-depth-a">
-              {/* Main Angled Chamfer Body */}
-              <polygon
-                points="1255,900 1255,160 1325,90 1395,90 1435,140 1435,900"
+              {/* Flat Mechanical Penthouse Roof Box */}
+              <rect x="1300" y="108" width="95" height="22" fill="#132E43" stroke="#D8B56A" strokeWidth="1.0" strokeOpacity="0.7" />
+
+              {/* Main Straight Rectangular Skyscraper Body */}
+              <rect
+                x="1270"
+                y="130"
+                width="155"
+                height="770"
                 fill="url(#towerGlassR1)"
                 stroke="url(#towerMullionGold)"
                 strokeWidth="1.2"
               />
-              {/* Roof Spire */}
-              <line x1="1360" y1="90" x2="1360" y2="30" stroke="#D8B56A" strokeWidth="1.5" strokeOpacity="0.8" />
-              <circle cx="1360" cy="30" r="2.5" fill="#D8B56A" />
 
               {/* Vertical Mullions */}
-              <line x1="1300" y1="160" x2="1300" y2="900" stroke="url(#towerMullionBlue)" strokeWidth="0.8" />
-              <line x1="1345" y1="90" x2="1345" y2="900" stroke="url(#towerMullionGold)" strokeWidth="1.1" />
-              <line x1="1390" y1="90" x2="1390" y2="900" stroke="url(#towerMullionBlue)" strokeWidth="0.8" />
+              <line x1="1308" y1="130" x2="1308" y2="900" stroke="url(#towerMullionBlue)" strokeWidth="0.8" />
+              <line x1="1347" y1="130" x2="1347" y2="900" stroke="url(#towerMullionGold)" strokeWidth="1.2" />
+              <line x1="1386" y1="130" x2="1386" y2="900" stroke="url(#towerMullionBlue)" strokeWidth="0.8" />
 
               {/* Floor Divisions */}
-              {[180, 220, 260, 300, 340, 380, 420, 460, 500, 540, 580, 620, 660, 700, 740, 780, 820, 860].map((y) => (
-                <line key={`r1-floor-${y}`} x1="1257" y1={y} x2="1433" y2={y} stroke="#CBD5E1" strokeOpacity="0.22" strokeWidth="0.75" />
+              {[156, 182, 208, 234, 260, 286, 312, 338, 364, 390, 416, 442, 468, 494, 520, 546, 572, 598, 624, 650, 676, 702, 728, 754, 780, 806, 832, 858].map((y) => (
+                <line key={`r1-floor-${y}`} x1="1271" y1={y} x2="1424" y2={y} stroke="#CBD5E1" strokeOpacity="0.22" strokeWidth="0.75" />
               ))}
 
               {/* Windows */}
-              <rect x="1275" y="240" width="12" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-a" />
-              <rect x="1315" y="280" width="12" height="6" rx="1" fill="#CBD5E1" opacity="0.70" />
-              <rect x="1365" y="320" width="12" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-b" />
-              <rect x="1405" y="360" width="12" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-c" />
-              <rect x="1275" y="400" width="12" height="6" rx="1" fill="#CBD5E1" opacity="0.65" />
-              <rect x="1365" y="440" width="12" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-a" />
-              <rect x="1315" y="480" width="12" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-b" />
-              <rect x="1405" y="520" width="12" height="6" rx="1" fill="#CBD5E1" opacity="0.75" />
-              <rect x="1275" y="560" width="12" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-c" />
-              <rect x="1365" y="600" width="12" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-a" />
+              <rect x="1280" y="190" width="13" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-a" />
+              <rect x="1357" y="216" width="13" height="6" rx="1" fill="#CBD5E1" opacity="0.70" />
+              <rect x="1319" y="268" width="13" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-b" />
+              <rect x="1396" y="320" width="13" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-c" />
+              <rect x="1280" y="372" width="13" height="6" rx="1" fill="#CBD5E1" opacity="0.65" />
+              <rect x="1357" y="424" width="13" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-a" />
+              <rect x="1319" y="476" width="13" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-b" />
+              <rect x="1396" y="528" width="13" height="6" rx="1" fill="#CBD5E1" opacity="0.75" />
+              <rect x="1280" y="580" width="13" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-c" />
+              <rect x="1357" y="632" width="13" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-a" />
             </g>
 
             {/* ====================================================
@@ -314,6 +365,7 @@ export function Hero({ onOpenCV }: HeroProps) {
 
               {/* Main Ascending Gold Trend Line */}
               <path
+                className="animate-graph-line"
                 d="
                   M 620 740
                   C 740 730, 840 700, 950 670
@@ -329,6 +381,7 @@ export function Hero({ onOpenCV }: HeroProps) {
 
               {/* Supporting Secondary Dotted Trajectory */}
               <path
+                className="animate-graph-dash"
                 d="
                   M 680 755
                   C 780 745, 870 720, 980 690
@@ -338,16 +391,16 @@ export function Hero({ onOpenCV }: HeroProps) {
                 fill="none"
                 stroke="#CBD5E1"
                 strokeWidth="1.2"
-                strokeDasharray="4 6"
+                strokeDasharray="6 8"
                 strokeOpacity="0.45"
               />
 
               {/* Glowing Financial Data Points */}
-              <circle cx="780" cy="718" r="3.5" fill="#D8B56A" stroke="#071827" strokeWidth="1.5" />
-              <circle cx="950" cy="670" r="4.0" fill="#F8FAFC" stroke="#D8B56A" strokeWidth="1.5" />
-              <circle cx="1120" cy="605" r="3.5" fill="#D8B56A" stroke="#071827" strokeWidth="1.5" />
-              <circle cx="1260" cy="550" r="4.5" fill="#F8FAFC" stroke="#D8B56A" strokeWidth="2.0" />
-              <circle cx="1380" cy="495" r="4.0" fill="#D8B56A" stroke="#071827" strokeWidth="1.5" />
+              <circle cx="780" cy="718" r="3.5" fill="#D8B56A" stroke="#071827" strokeWidth="1.5" className="animate-graph-node-1" />
+              <circle cx="950" cy="670" r="4.0" fill="#F8FAFC" stroke="#D8B56A" strokeWidth="1.5" className="animate-graph-node-2" />
+              <circle cx="1120" cy="605" r="3.5" fill="#D8B56A" stroke="#071827" strokeWidth="1.5" className="animate-graph-node-3" />
+              <circle cx="1260" cy="550" r="4.5" fill="#F8FAFC" stroke="#D8B56A" strokeWidth="2.0" className="animate-graph-node-4" />
+              <circle cx="1380" cy="495" r="4.0" fill="#D8B56A" stroke="#071827" strokeWidth="1.5" className="animate-graph-node-5" />
             </g>
           </svg>
         </div>
@@ -356,17 +409,17 @@ export function Hero({ onOpenCV }: HeroProps) {
             4. ANIMATED FINANCIAL BARS (LOWER BACKGROUND)
             Semi-transparent blue/teal/gold bars rising & falling
             ---------------------------------------------------------- */}
-        <div className="absolute inset-x-0 bottom-0 z-0 flex h-48 items-end justify-center gap-2.5 px-6 opacity-60 sm:gap-4 lg:gap-6">
-          <div className="animate-fin-bar-1 h-14 w-3.5 rounded-t-sm bg-gradient-to-t from-[#0D2538]/70 via-[#132E43]/45 to-[#D8B56A]/30 border-t border-[#D8B56A]/40" />
-          <div className="animate-fin-bar-2 h-24 w-3.5 rounded-t-sm bg-gradient-to-t from-[#0D2538]/70 via-[#132E43]/45 to-[#38BDF8]/25 border-t border-[#38BDF8]/40" />
-          <div className="animate-fin-bar-3 h-18 w-3.5 rounded-t-sm bg-gradient-to-t from-[#0D2538]/70 via-[#132E43]/45 to-[#D8B56A]/30 border-t border-[#D8B56A]/40" />
-          <div className="animate-fin-bar-4 h-32 w-3.5 rounded-t-sm bg-gradient-to-t from-[#0D2538]/70 via-[#132E43]/45 to-[#D8B56A]/35 border-t border-[#D8B56A]/50" />
-          <div className="animate-fin-bar-1 h-20 w-3.5 rounded-t-sm bg-gradient-to-t from-[#0D2538]/70 via-[#132E43]/45 to-[#38BDF8]/25 border-t border-[#38BDF8]/40" />
-          <div className="animate-fin-bar-2 h-28 w-3.5 rounded-t-sm bg-gradient-to-t from-[#0D2538]/70 via-[#132E43]/45 to-[#D8B56A]/30 border-t border-[#D8B56A]/40" />
-          <div className="animate-fin-bar-3 h-16 w-3.5 rounded-t-sm bg-gradient-to-t from-[#0D2538]/70 via-[#132E43]/45 to-[#38BDF8]/25 border-t border-[#38BDF8]/40" />
-          <div className="animate-fin-bar-4 h-36 w-3.5 rounded-t-sm bg-gradient-to-t from-[#0D2538]/70 via-[#132E43]/45 to-[#D8B56A]/35 border-t border-[#D8B56A]/50" />
-          <div className="animate-fin-bar-2 h-22 w-3.5 rounded-t-sm bg-gradient-to-t from-[#0D2538]/70 via-[#132E43]/45 to-[#D8B56A]/30 border-t border-[#D8B56A]/40" />
-          <div className="animate-fin-bar-1 h-30 w-3.5 rounded-t-sm bg-gradient-to-t from-[#0D2538]/70 via-[#132E43]/45 to-[#38BDF8]/25 border-t border-[#38BDF8]/40" />
+        <div className="absolute inset-x-0 bottom-0 z-0 flex h-48 items-end justify-center gap-2.5 px-6 opacity-75 sm:gap-4 lg:gap-6">
+          <div className="animate-fin-bar-1 origin-bottom h-14 w-3.5 rounded-t-sm bg-gradient-to-t from-[#0D2538]/70 via-[#132E43]/45 to-[#D8B56A]/30 border-t border-[#D8B56A]/40" />
+          <div className="animate-fin-bar-2 origin-bottom h-24 w-3.5 rounded-t-sm bg-gradient-to-t from-[#0D2538]/70 via-[#132E43]/45 to-[#38BDF8]/25 border-t border-[#38BDF8]/40" />
+          <div className="animate-fin-bar-3 origin-bottom h-18 w-3.5 rounded-t-sm bg-gradient-to-t from-[#0D2538]/70 via-[#132E43]/45 to-[#D8B56A]/30 border-t border-[#D8B56A]/40" />
+          <div className="animate-fin-bar-4 origin-bottom h-32 w-3.5 rounded-t-sm bg-gradient-to-t from-[#0D2538]/70 via-[#132E43]/45 to-[#D8B56A]/35 border-t border-[#D8B56A]/50" />
+          <div className="animate-fin-bar-5 origin-bottom h-20 w-3.5 rounded-t-sm bg-gradient-to-t from-[#0D2538]/70 via-[#132E43]/45 to-[#38BDF8]/25 border-t border-[#38BDF8]/40" />
+          <div className="animate-fin-bar-6 origin-bottom h-28 w-3.5 rounded-t-sm bg-gradient-to-t from-[#0D2538]/70 via-[#132E43]/45 to-[#D8B56A]/30 border-t border-[#D8B56A]/40" />
+          <div className="animate-fin-bar-7 origin-bottom h-16 w-3.5 rounded-t-sm bg-gradient-to-t from-[#0D2538]/70 via-[#132E43]/45 to-[#38BDF8]/25 border-t border-[#38BDF8]/40" />
+          <div className="animate-fin-bar-8 origin-bottom h-36 w-3.5 rounded-t-sm bg-gradient-to-t from-[#0D2538]/70 via-[#132E43]/45 to-[#D8B56A]/35 border-t border-[#D8B56A]/50" />
+          <div className="animate-fin-bar-9 origin-bottom h-22 w-3.5 rounded-t-sm bg-gradient-to-t from-[#0D2538]/70 via-[#132E43]/45 to-[#D8B56A]/30 border-t border-[#D8B56A]/40" />
+          <div className="animate-fin-bar-10 origin-bottom h-30 w-3.5 rounded-t-sm bg-gradient-to-t from-[#0D2538]/70 via-[#132E43]/45 to-[#38BDF8]/25 border-t border-[#38BDF8]/40" />
         </div>
 
         {/* ----------------------------------------------------------
@@ -407,14 +460,15 @@ export function Hero({ onOpenCV }: HeroProps) {
         <div
           className="
             animate-corp-light-sweep
+            pointer-events-none
             absolute
             top-0
-            left-0
-            h-full
-            w-[420px]
-            rotate-[15deg]
-            bg-[linear-gradient(90deg,transparent_0%,rgba(216,181,106,0.04)_30%,rgba(255,255,255,0.12)_50%,rgba(216,181,106,0.18)_55%,rgba(216,181,106,0.04)_75%,transparent_100%)]
-            blur-[8px]
+            bottom-0
+            w-[380px]
+            sm:w-[500px]
+            rotate-[16deg]
+            bg-[linear-gradient(90deg,transparent_0%,rgba(216,181,106,0.03)_25%,rgba(255,255,255,0.12)_48%,rgba(216,181,106,0.22)_52%,rgba(216,181,106,0.06)_75%,transparent_100%)]
+            blur-[10px]
           "
         />
 
