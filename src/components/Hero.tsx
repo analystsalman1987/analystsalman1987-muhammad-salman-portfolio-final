@@ -88,6 +88,17 @@ export function Hero({ onOpenCV }: HeroProps) {
         {/* RIGHT PROFESSIONAL FOOTPRINT */}
         <div className="map-wrap absolute z-10" aria-hidden="true">
           <svg className="h-full w-full overflow-visible" viewBox="0 0 1000 560">
+            <defs>
+              <radialGradient id="mapEdgeFade" cx="50%" cy="48%" r="67%">
+                <stop offset="0%" stopColor="white" stopOpacity="1" />
+                <stop offset="68%" stopColor="white" stopOpacity="1" />
+                <stop offset="88%" stopColor="white" stopOpacity=".62" />
+                <stop offset="100%" stopColor="white" stopOpacity="0" />
+              </radialGradient>
+              <mask id="mapFeatherMask">
+                <rect x="0" y="28" width="1000" height="520" fill="url(#mapEdgeFade)" />
+              </mask>
+            </defs>
             {/* LOCKED GOLDEN WORLD MAP IMAGE — uploaded at public/images/Golden World Map.png */}
             <g className="locked-golden-map">
               <image
@@ -98,14 +109,7 @@ export function Hero({ onOpenCV }: HeroProps) {
                 width="944"
                 height="472"
                 preserveAspectRatio="xMidYMid meet"
-              />
-              <rect
-                className="locked-map-glow"
-                x="35"
-                y="70"
-                width="910"
-                height="430"
-                rx="38"
+                mask="url(#mapFeatherMask)"
               />
             </g>
 
@@ -169,15 +173,21 @@ export function Hero({ onOpenCV }: HeroProps) {
 
         {/* LOWER MOVING WAVES */}
         <div className="lower-waves absolute z-[8]" aria-hidden="true">
-          <svg viewBox="0 0 1200 180" preserveAspectRatio="none">
-            <path
-              className="wave wave-gold"
-              d="M0 112 C130 66 230 150 360 104 C500 55 600 142 735 96 C870 50 990 132 1200 74"
-            />
-            <path
-              className="wave wave-blue"
-              d="M0 139 C145 105 260 166 405 126 C540 88 650 154 790 116 C930 77 1045 140 1200 104"
-            />
+          <svg viewBox="0 0 1200 190" preserveAspectRatio="none">
+            <g className="wave-family wave-family-gold">
+              <path className="wave wave-gold wave-gold-main" d="M-40 92 C120 28 240 146 390 91 C535 38 655 144 805 86 C955 30 1080 126 1240 62" />
+              <path className="wave wave-gold thin g1" d="M-40 101 C120 43 245 154 395 101 C545 49 660 151 810 96 C960 44 1085 135 1240 76" />
+              <path className="wave wave-gold thin g2" d="M-40 110 C125 56 250 162 400 111 C550 61 670 158 820 106 C970 57 1090 143 1240 89" />
+              <path className="wave wave-gold thin g3" d="M-40 119 C130 69 255 169 405 121 C555 74 675 165 825 116 C975 70 1095 151 1240 102" />
+              <path className="wave wave-gold thin g4" d="M-40 128 C135 82 260 176 410 131 C560 87 680 172 830 126 C980 83 1100 159 1240 115" />
+            </g>
+            <g className="wave-family wave-family-blue">
+              <path className="wave wave-blue wave-blue-main" d="M-40 133 C115 94 245 174 400 132 C550 91 675 169 830 126 C980 85 1100 153 1240 116" />
+              <path className="wave wave-blue thin b1" d="M-40 142 C120 106 250 181 405 142 C555 103 680 176 835 136 C985 98 1105 161 1240 128" />
+              <path className="wave wave-blue thin b2" d="M-40 151 C125 118 255 188 410 152 C560 115 685 183 840 146 C990 111 1110 169 1240 140" />
+              <path className="wave wave-blue thin b3" d="M-40 160 C130 130 260 195 415 162 C565 127 690 190 845 156 C995 124 1115 177 1240 152" />
+            </g>
+            <path className="golden-shine" d="M-40 92 C120 28 240 146 390 91 C535 38 655 144 805 86 C955 30 1080 126 1240 62" />
           </svg>
         </div>
 
@@ -302,13 +312,6 @@ export function Hero({ onOpenCV }: HeroProps) {
           animation: lockedMapBreath 8s ease-in-out infinite;
         }
 
-        .locked-map-glow {
-          fill: transparent;
-          stroke: rgba(216,181,106,.045);
-          stroke-width: 1;
-          filter: drop-shadow(0 0 18px rgba(216,181,106,.08));
-          animation: lockedMapGlow 7s ease-in-out infinite;
-        }
 
         @keyframes lockedMapDrift {
           0%, 100% { transform: translate3d(0, 2px, 0) scale(1); }
@@ -318,11 +321,6 @@ export function Hero({ onOpenCV }: HeroProps) {
         @keyframes lockedMapBreath {
           0%, 100% { opacity: .78; }
           50% { opacity: .90; }
-        }
-
-        @keyframes lockedMapGlow {
-          0%, 100% { opacity: .30; }
-          50% { opacity: .72; }
         }
 
         /* ROUTES: CANADA/PAKISTAN -> SAUDI ARABIA */
@@ -531,10 +529,10 @@ export function Hero({ onOpenCV }: HeroProps) {
 
         /* TWO LOWER MORPHING WAVES */
         .lower-waves {
-          left: 35%;
-          right: 1.5%;
-          bottom: 0.5%;
-          height: 160px;
+          left: 30%;
+          right: 0;
+          bottom: -1%;
+          height: 190px;
           pointer-events: none;
           opacity: 1;
           filter: drop-shadow(0 0 7px rgba(216,181,106,.05));
@@ -568,6 +566,49 @@ export function Hero({ onOpenCV }: HeroProps) {
           stroke-dasharray: none;
           transform-origin: center;
           animation: blueWaveMorph 25s ease-in-out infinite;
+        }
+
+        .wave.thin {
+          stroke-width: .72;
+          opacity: .34;
+          filter: none;
+        }
+
+        .wave-family-gold {
+          animation: ribbonGoldDrift 18s ease-in-out infinite alternate;
+        }
+
+        .wave-family-blue {
+          animation: ribbonBlueDrift 22s ease-in-out infinite alternate;
+        }
+
+        .g1 { opacity: .48; } .g2 { opacity: .38; } .g3 { opacity: .28; } .g4 { opacity: .20; }
+        .b1 { opacity: .36; } .b2 { opacity: .28; } .b3 { opacity: .20; }
+
+        .golden-shine {
+          fill: none;
+          stroke: rgba(255,224,150,.96);
+          stroke-width: 2.2;
+          stroke-linecap: round;
+          stroke-dasharray: 90 1110;
+          filter: drop-shadow(0 0 5px rgba(255,210,105,.95)) drop-shadow(0 0 12px rgba(216,181,106,.62));
+          animation: goldenShineTravel 8.5s linear infinite;
+        }
+
+        @keyframes ribbonGoldDrift {
+          0% { transform: translate3d(-8px,3px,0); }
+          100% { transform: translate3d(10px,-5px,0); }
+        }
+
+        @keyframes ribbonBlueDrift {
+          0% { transform: translate3d(8px,2px,0); }
+          100% { transform: translate3d(-10px,-4px,0); }
+        }
+
+        @keyframes goldenShineTravel {
+          from { stroke-dashoffset: 0; opacity: .58; }
+          45% { opacity: 1; }
+          to { stroke-dashoffset: -1200; opacity: .58; }
         }
 
         @keyframes goldWaveMorph {
