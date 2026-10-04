@@ -143,24 +143,40 @@ export function Hero({ onOpenCV }: HeroProps) {
         />
 
         {/* ====================================================
-            LEFT REAL SKYLINE — FINAL LOCKED TREATMENT
-            Full image preserved. No crop. It can extend beneath
-            the finance graph. All visible inner edges feather
-            naturally into the navy/gold Hero background.
+            LEFT SKYLINE — FULL HEIGHT / LOCKED GOLDEN TREATMENT
+            The real photo now fills the Hero from top to bottom
+            and extends beneath the finance graph.
         ===================================================== */}
         <div
           className="
             hero-locked-skyline
             absolute
-            bottom-0
+            inset-y-0
             left-0
             z-[1]
-            w-[80%]
-            sm:w-[78%]
-            lg:w-[76%]
-            xl:w-[74%]
+            w-[82%]
+            sm:w-[80%]
+            lg:w-[78%]
+            xl:w-[76%]
           "
         >
+          {/* Warm sunset/golden atmosphere BEHIND the skyline */}
+          <div className="absolute inset-0 bg-[#0A1D2E]" />
+          <div
+            className="
+              absolute
+              inset-0
+              bg-[radial-gradient(ellipse_72%_58%_at_28%_44%,rgba(236,193,103,0.38)_0%,rgba(216,181,106,0.24)_24%,rgba(185,132,54,0.12)_48%,transparent_73%)]
+            "
+          />
+          <div
+            className="
+              absolute
+              inset-0
+              bg-[radial-gradient(ellipse_52%_35%_at_39%_62%,rgba(231,183,87,0.24)_0%,rgba(201,164,92,0.11)_43%,transparent_76%)]
+            "
+          />
+
           <img
             src="/images/hero-distant-buildings.jpg"
             alt=""
@@ -168,72 +184,86 @@ export function Hero({ onOpenCV }: HeroProps) {
             loading="eager"
             className="
               hero-locked-skyline-image
-              block
-              h-auto
+              absolute
+              inset-0
+              h-full
               w-full
-              object-contain
+              object-cover
               object-left-bottom
             "
           />
 
-          {/* Warm gold atmosphere retained over the real photo */}
+          {/* Golden light over the sky/buildings, matching locked reference */}
           <div
             className="
               absolute
               inset-0
-              bg-[radial-gradient(ellipse_72%_58%_at_34%_54%,rgba(216,181,106,0.14)_0%,rgba(201,164,92,0.075)_38%,transparent_72%)]
+              bg-[linear-gradient(105deg,rgba(232,188,94,0.19)_0%,rgba(216,181,106,0.12)_29%,rgba(201,164,92,0.055)_49%,transparent_69%)]
+              mix-blend-screen
             "
           />
-
-          {/* Navy integration without changing the real building colours */}
           <div
             className="
               absolute
               inset-0
-              bg-[linear-gradient(90deg,rgba(7,24,39,0.04)_0%,rgba(7,24,39,0.05)_42%,rgba(7,24,39,0.22)_64%,rgba(7,24,39,0.72)_84%,#071827_100%)]
+              bg-[radial-gradient(ellipse_62%_46%_at_27%_43%,rgba(255,214,126,0.16)_0%,rgba(216,181,106,0.085)_43%,transparent_76%)]
+              mix-blend-screen
             "
           />
 
-          {/* Soft top feather — removes the visible photo border */}
+          {/* Right-side navy blend: no visible rectangular photo edge */}
+          <div
+            className="
+              absolute
+              inset-y-0
+              right-0
+              w-[48%]
+              bg-gradient-to-r
+              from-transparent
+              via-[#071827]/48
+              to-[#071827]
+            "
+          />
+
+          {/* Soft top integration, while keeping skyline full-height */}
           <div
             className="
               absolute
               inset-x-0
               top-0
-              h-[15%]
+              h-[16%]
               bg-gradient-to-b
-              from-[#071827]
-              via-[#071827]/35
+              from-[#071827]/34
               to-transparent
             "
           />
 
-          {/* Very light bottom integration */}
+          {/* Soft bottom integration */}
           <div
             className="
               absolute
               inset-x-0
               bottom-0
-              h-[5%]
+              h-[8%]
               bg-gradient-to-t
-              from-[#071827]/35
+              from-[#071827]/58
               to-transparent
             "
           />
         </div>
 
-        {/* Warm transition between skyline and finance side */}
+        {/* Golden/navy atmosphere carries behind centre and graph */}
         <div
           className="
             absolute
-            bottom-[8%]
-            left-[39%]
+            bottom-[7%]
+            left-[20%]
             z-[1]
-            h-[58%]
-            w-[31%]
+            h-[72%]
+            w-[55%]
             rounded-full
-            bg-[radial-gradient(ellipse,rgba(201,164,92,0.075)_0%,rgba(13,37,56,0.12)_42%,transparent_74%)]
-            blur-[62px]
+            bg-[radial-gradient(ellipse,rgba(216,181,106,0.105)_0%,rgba(201,164,92,0.05)_38%,rgba(13,37,56,0.06)_58%,transparent_76%)]
+            blur-[72px]
           "
         />
 
@@ -771,66 +801,56 @@ export function Hero({ onOpenCV }: HeroProps) {
       <style>{`
         .hero-locked-skyline {
           /*
-           * Keep the complete photograph visible.
-           * The photo itself is not recoloured or cropped.
-           * Only the internal top/right edges are feathered.
+           * Full-height skyline with a soft centre-facing feather.
+           * The outer left edge stays solid so the image can fill
+           * the Hero; the right edge dissolves into navy.
            */
           -webkit-mask-image:
             linear-gradient(
               to right,
               #000 0%,
-              #000 62%,
-              rgba(0,0,0,.96) 69%,
-              rgba(0,0,0,.82) 76%,
-              rgba(0,0,0,.52) 84%,
-              rgba(0,0,0,.18) 93%,
-              transparent 100%
-            ),
-            linear-gradient(
-              to top,
-              #000 0%,
-              #000 84%,
-              rgba(0,0,0,.78) 90%,
-              rgba(0,0,0,.28) 96%,
+              #000 55%,
+              rgba(0,0,0,.98) 63%,
+              rgba(0,0,0,.90) 70%,
+              rgba(0,0,0,.68) 78%,
+              rgba(0,0,0,.38) 87%,
+              rgba(0,0,0,.12) 95%,
               transparent 100%
             );
-
           mask-image:
             linear-gradient(
               to right,
               #000 0%,
-              #000 62%,
-              rgba(0,0,0,.96) 69%,
-              rgba(0,0,0,.82) 76%,
-              rgba(0,0,0,.52) 84%,
-              rgba(0,0,0,.18) 93%,
-              transparent 100%
-            ),
-            linear-gradient(
-              to top,
-              #000 0%,
-              #000 84%,
-              rgba(0,0,0,.78) 90%,
-              rgba(0,0,0,.28) 96%,
+              #000 55%,
+              rgba(0,0,0,.98) 63%,
+              rgba(0,0,0,.90) 70%,
+              rgba(0,0,0,.68) 78%,
+              rgba(0,0,0,.38) 87%,
+              rgba(0,0,0,.12) 95%,
               transparent 100%
             );
-
-          -webkit-mask-composite: source-in;
-          mask-composite: intersect;
         }
 
         .hero-locked-skyline-image {
           /*
-           * IMPORTANT: no brightness, hue, saturation or colour filter.
-           * The building photograph keeps its real original colour.
+           * Keep the buildings photographic/real while warming the
+           * cool source photo toward the champagne-gold locked look.
            */
-          filter: none;
+          filter:
+            saturate(1.04)
+            contrast(1.03)
+            brightness(.90)
+            sepia(.10);
         }
 
         @media (max-width: 767px) {
           .hero-locked-skyline {
-            width: 94%;
-            opacity: .72;
+            width: 100%;
+            opacity: .67;
+          }
+
+          .hero-locked-skyline-image {
+            object-position: 20% bottom;
           }
         }
 
