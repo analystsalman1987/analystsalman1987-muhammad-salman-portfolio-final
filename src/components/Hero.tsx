@@ -36,7 +36,7 @@ export function Hero(_props: HeroProps) {
     <section
       id="home"
       dir={isRTL ? 'rtl' : 'ltr'}
-      className="hero-final relative min-h-[calc(100svh-5rem)] overflow-hidden bg-[#071827] lg:h-[calc(100svh-5rem)] lg:min-h-[650px]"
+      className="hero-final relative min-h-[calc(100svh-5rem)] overflow-hidden bg-[#051D2E] lg:h-[calc(100svh-5rem)] lg:min-h-[650px]"
     >
       <div className="hero-bg absolute inset-0" aria-hidden="true" />
 
@@ -60,12 +60,11 @@ export function Hero(_props: HeroProps) {
               <image
                 className="locked-map-image"
                 href="/images/Golden World Map.png"
-                x="4"
-                y="26"
-                width="992"
-                height="510"
+                x="-75"
+                y="-48"
+                width="1150"
+                height="657"
                 preserveAspectRatio="xMidYMid meet"
-                mask="url(#mapFeatherMask)"
               />
             </g>
 
@@ -76,26 +75,26 @@ export function Hero(_props: HeroProps) {
             <path
               className="route route-canada"
               pathLength="1000"
-              d="M218 151 C350 118 505 170 605 278"
+              d="M169 119 C330 95 505 150 624 257"
             />
             <path
               className="route route-pakistan"
               pathLength="1000"
-              d="M720 264 C680 245 642 247 605 278"
+              d="M721 234 C690 225 657 235 624 257"
             />
 
             {/* CANADA */}
-            <circle className="map-node map-node-canada" cx="218" cy="151" r="4.5" />
-            <circle className="map-pulse map-pulse-canada" cx="218" cy="151" r="8" />
+            <circle className="map-node map-node-canada" cx="169" cy="119" r="4.5" />
+            <circle className="map-pulse map-pulse-canada" cx="169" cy="119" r="8" />
 
             {/* PAKISTAN */}
-            <circle className="map-node" cx="720" cy="264" r="4.5" />
-            <circle className="map-pulse" cx="720" cy="264" r="8" />
+            <circle className="map-node" cx="721" cy="234" r="4.5" />
+            <circle className="map-pulse" cx="721" cy="234" r="8" />
 
             {/* SAUDI ARABIA — MAIN DESTINATION */}
-            <circle className="saudi-halo" cx="605" cy="278" r="17" />
-            <circle className="map-node map-node-saudi" cx="605" cy="278" r="6.5" />
-            <circle className="map-pulse map-pulse-saudi" cx="605" cy="278" r="11" />
+            <circle className="saudi-halo" cx="624" cy="257" r="17" />
+            <circle className="map-node map-node-saudi" cx="624" cy="257" r="6.5" />
+            <circle className="map-pulse map-pulse-saudi" cx="624" cy="257" r="11" />
           </svg>
 
           <div className="country country-ca">
@@ -235,14 +234,10 @@ export function Hero(_props: HeroProps) {
 
         /* LOCKED FINAL MAP COMPOSITION — LARGE, SEAMLESS, UNDER THE NAME */
         .map-wrap {
-          left: 1.5%;
-          right: 1.5%;
-          top: 2%;
-          bottom: 10%;
-          width: auto;
-          height: auto;
-          -webkit-mask-image: radial-gradient(ellipse 86% 78% at 50% 48%, #000 62%, rgba(0,0,0,.94) 74%, transparent 98%);
-          mask-image: radial-gradient(ellipse 86% 78% at 50% 48%, #000 62%, rgba(0,0,0,.94) 74%, transparent 98%);
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          overflow: hidden;
         }
 
         /* LOCKED GOLDEN WORLD MAP IMAGE */
@@ -388,22 +383,22 @@ export function Hero(_props: HeroProps) {
 
         /* Positions aligned to the SVG nodes */
         .country-ca {
-          left: 15.5%;
-          top: 17%;
+          left: 17%;
+          top: 18%;
           border-color: rgba(120,189,227,.38);
         }
 
         .country-ca small { color: #8BC6E6; }
 
         .country-pk {
-          left: 68%;
-          top: 42%;
+          left: 72%;
+          top: 39%;
           animation-delay: -4s;
         }
 
         .country-sa {
-          left: 54.5%;
-          top: 48%;
+          left: 61%;
+          top: 43%;
           border-color: rgba(216,181,106,.55);
           box-shadow: 0 0 22px rgba(216,181,106,.08), 0 10px 28px rgba(0,0,0,.22);
           animation-delay: -7s;
@@ -611,13 +606,10 @@ export function Hero(_props: HeroProps) {
 
 
           .map-wrap {
-            left: -6%;
-            right: -6%;
-            top: 12%;
-            bottom: 10%;
-            width: auto;
-            height: auto;
-            opacity: .72;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            opacity: .78;
           }
 
           .lower-waves {
@@ -648,8 +640,7 @@ export function Hero(_props: HeroProps) {
         @media (max-width: 640px) {
 
           .map-wrap {
-            left: -18%;
-            right: -18%;
+            inset: 0;
           }
 
           .lower-waves {
