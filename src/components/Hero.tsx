@@ -33,34 +33,55 @@ export function Hero({ onOpenCV }: HeroProps) {
         text-center
         sm:px-6
         lg:h-[calc(100svh-5rem)]
+        lg:min-h-[calc(100svh-5rem)]
         lg:px-8
         lg:py-0
       "
     >
-      {/* ============================================================
-          ACTIVE CORPORATE FINANCE CITY & ARCHITECTURAL GLASS BACKGROUND
-          Clearly visible skyscrapers, financial graph, bars & reflections.
-          ============================================================ */}
+      {/* =========================================================
+          HERO BACKGROUND
+          Real distant corporate buildings + finance animation
+          ========================================================= */}
       <div
         className="pointer-events-none absolute inset-0 z-0 overflow-hidden select-none"
         aria-hidden="true"
       >
-        {/* ----------------------------------------------------------
-            1. DEEP NAVY BASE GRADIENT
-            ---------------------------------------------------------- */}
-        <div
-          className="
-            absolute
-            -inset-16
-            bg-[radial-gradient(ellipse_90%_75%_at_50%_25%,#132E43_0%,#0D2538_30%,#081A2B_62%,#071827_100%)]
-          "
-        />
+        {/* Deep Navy Base */}
+        <div className="absolute -inset-12 bg-[radial-gradient(ellipse_95%_85%_at_50%_30%,#132E43_0%,#0D2538_30%,#081A2B_64%,#071827_100%)]" />
 
-        {/* ----------------------------------------------------------
-            2. MODERN CORPORATE SKYSCRAPERS & FINANCIAL CITY (SVG)
-            Clearly visible on Left, Right, and lower background horizon
-            ---------------------------------------------------------- */}
-        <div className="absolute inset-0 opacity-90">
+        {/* =======================================================
+            REAL CORPORATE BUILDINGS
+            LEFT / LOWER-LEFT ONLY
+            ======================================================= */}
+        <div className="hero-real-city absolute bottom-0 left-0 z-[1] h-[58%] w-[46%] overflow-hidden sm:h-[62%] sm:w-[43%] lg:h-[66%] lg:w-[39%] xl:w-[38%]">
+          <img
+            src="/images/hero-distant-buildings.jpg"
+            alt=""
+            className="hero-real-city-image h-full w-full object-cover object-left-bottom"
+            loading="eager"
+            draggable={false}
+          />
+
+          {/* Navy treatment over photograph */}
+          <div className="absolute inset-0 bg-[#071827]/25 mix-blend-multiply" />
+
+          {/* Gold/blue atmospheric tint */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#071827]/35 via-[#0D2538]/10 to-[#071827]/30" />
+
+          {/* Fade photograph smoothly into center */}
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-[#071827]" />
+
+          {/* Fade upper edge */}
+          <div className="absolute inset-x-0 top-0 h-[32%] bg-gradient-to-b from-[#071827] to-transparent" />
+        </div>
+
+        {/* Very subtle floor reflection under buildings */}
+        <div className="hero-city-reflection absolute bottom-0 left-0 z-[1] h-[16%] w-[45%] bg-[linear-gradient(180deg,rgba(216,181,106,0.06),rgba(19,46,67,0.12)_35%,transparent_100%)] blur-xl" />
+
+        {/* =======================================================
+            RIGHT-SIDE FINANCIAL GRAPH
+            ======================================================= */}
+        <div className="absolute inset-0 z-[2]">
           <svg
             className="h-full w-full"
             xmlns="http://www.w3.org/2000/svg"
@@ -68,435 +89,275 @@ export function Hero({ onOpenCV }: HeroProps) {
             preserveAspectRatio="none"
           >
             <defs>
-              {/* Glass Tower Facade Gradients */}
-              <linearGradient id="towerGlassL1" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#1B3A54" stopOpacity="0.85" />
-                <stop offset="45%" stopColor="#0E273C" stopOpacity="0.90" />
-                <stop offset="100%" stopColor="#081A2B" stopOpacity="0.95" />
+              <linearGradient
+                id="heroGraphArea"
+                x1="0%"
+                y1="0%"
+                x2="0%"
+                y2="100%"
+              >
+                <stop
+                  offset="0%"
+                  stopColor="#D8B56A"
+                  stopOpacity="0.18"
+                />
+                <stop
+                  offset="48%"
+                  stopColor="#C9A45C"
+                  stopOpacity="0.07"
+                />
+                <stop
+                  offset="100%"
+                  stopColor="#071827"
+                  stopOpacity="0"
+                />
               </linearGradient>
 
-              <linearGradient id="towerGlassL2" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#224563" stopOpacity="0.80" />
-                <stop offset="50%" stopColor="#122E46" stopOpacity="0.88" />
-                <stop offset="100%" stopColor="#071827" stopOpacity="0.95" />
+              <linearGradient
+                id="heroGraphGold"
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="0%"
+              >
+                <stop
+                  offset="0%"
+                  stopColor="#C9A45C"
+                  stopOpacity="0.35"
+                />
+                <stop
+                  offset="35%"
+                  stopColor="#D8B56A"
+                  stopOpacity="0.75"
+                />
+                <stop
+                  offset="100%"
+                  stopColor="#F4E7C5"
+                  stopOpacity="1"
+                />
               </linearGradient>
 
-              <linearGradient id="towerGlassR1" x1="100%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="#254868" stopOpacity="0.82" />
-                <stop offset="40%" stopColor="#14324D" stopOpacity="0.88" />
-                <stop offset="100%" stopColor="#071827" stopOpacity="0.95" />
-              </linearGradient>
-
-              <linearGradient id="towerGlassR2" x1="100%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="#1E3E5C" stopOpacity="0.85" />
-                <stop offset="50%" stopColor="#102C45" stopOpacity="0.90" />
-                <stop offset="100%" stopColor="#081A2B" stopOpacity="0.95" />
-              </linearGradient>
-
-              {/* Gold Architectural Mullion Stroke */}
-              <linearGradient id="towerMullionGold" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="#D8B56A" stopOpacity="0.65" />
-                <stop offset="60%" stopColor="#CBD5E1" stopOpacity="0.30" />
-                <stop offset="100%" stopColor="#D8B56A" stopOpacity="0.15" />
-              </linearGradient>
-
-              {/* Blue Glass Highlight Stroke */}
-              <linearGradient id="towerMullionBlue" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="#93C5FD" stopOpacity="0.55" />
-                <stop offset="50%" stopColor="#38BDF8" stopOpacity="0.25" />
-                <stop offset="100%" stopColor="#1E3A5F" stopOpacity="0.10" />
-              </linearGradient>
-
-              {/* Financial Graph Fill Gradient */}
-              <linearGradient id="financialGraphFill" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="#D8B56A" stopOpacity="0.20" />
-                <stop offset="60%" stopColor="#C9A45C" stopOpacity="0.06" />
-                <stop offset="100%" stopColor="#071827" stopOpacity="0.00" />
-              </linearGradient>
+              <filter
+                id="heroGoldGlow"
+                x="-30%"
+                y="-30%"
+                width="160%"
+                height="160%"
+              >
+                <feGaussianBlur
+                  stdDeviation="4"
+                  result="blur"
+                />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
             </defs>
 
-            {/* ----------------------------------------------------
-                BACKGROUND BUSINESS DISTRICT SKYLINE (Flat-Top Horizon)
-                Pure rectangular corporate building silhouettes
-                ---------------------------------------------------- */}
+            {/* Subtle financial grid — right only */}
+            <g className="hero-fin-grid">
+              {[760, 840, 920, 1000, 1080, 1160, 1240, 1320, 1400].map(
+                (x) => (
+                  <line
+                    key={`v-${x}`}
+                    x1={x}
+                    y1="260"
+                    x2={x}
+                    y2="820"
+                    stroke="#CBD5E1"
+                    strokeOpacity="0.055"
+                    strokeWidth="1"
+                  />
+                ),
+              )}
+
+              {[340, 420, 500, 580, 660, 740, 820].map((y) => (
+                <line
+                  key={`h-${y}`}
+                  x1="720"
+                  y1={y}
+                  x2="1440"
+                  y2={y}
+                  stroke="#CBD5E1"
+                  strokeOpacity="0.05"
+                  strokeWidth="1"
+                />
+              ))}
+            </g>
+
+            {/* Graph soft area */}
             <path
+              className="hero-graph-area"
               d="
-                M 0 900
-                L 0 550 L 55 550 L 55 490 L 115 490 L 115 540
-                L 190 540 L 190 460 L 260 460 L 260 550
-                L 330 550 L 330 500 L 400 500 L 400 570
-                L 470 570 L 470 530 L 540 530 L 540 580
-                L 620 580 L 620 540 L 690 540 L 690 590
-                L 770 590 L 770 540 L 840 540 L 840 580
-                L 910 580 L 910 510 L 980 510 L 980 560
-                L 1050 560 L 1050 470 L 1120 470 L 1120 540
-                L 1200 540 L 1200 480 L 1270 480 L 1270 530
-                L 1340 530 L 1340 500 L 1400 500 L 1400 550
-                L 1440 550 L 1440 900
+                M 680 760
+                C 760 748, 825 728, 900 710
+                C 975 690, 1030 670, 1080 640
+                C 1135 607, 1165 565, 1215 545
+                C 1265 525, 1300 485, 1340 440
+                C 1375 400, 1405 365, 1440 330
+                L 1440 850
+                L 680 850
                 Z
               "
-              fill="#081A2B"
-              opacity="0.80"
+              fill="url(#heroGraphArea)"
             />
 
-            {/* ====================================================
-                LEFT CORPORATE TOWERS (Straight Rectangular Glass Skyscrapers)
-                ==================================================== */}
-            {/* Tower L3 (Background High-Rise: x=270 to 390) */}
-            <g className="animate-arch-depth-b" opacity="0.75">
-              <rect x="295" y="305" width="70" height="15" fill="#0D2538" stroke="#CBD5E1" strokeWidth="0.6" strokeOpacity="0.4" />
-              <rect
-                x="270"
-                y="320"
-                width="120"
-                height="580"
-                fill="url(#towerGlassL2)"
-                stroke="url(#towerMullionGold)"
-                strokeWidth="0.8"
-              />
-              <line x1="310" y1="320" x2="310" y2="900" stroke="url(#towerMullionBlue)" strokeWidth="0.6" />
-              <line x1="350" y1="320" x2="350" y2="900" stroke="url(#towerMullionGold)" strokeWidth="0.7" />
-              {[350, 390, 430, 470, 510, 550, 590, 630, 670, 710, 750, 790, 830].map((y) => (
-                <line key={`l3-floor-${y}`} x1="271" y1={y} x2="389" y2={y} stroke="#CBD5E1" strokeOpacity="0.16" strokeWidth="0.6" />
-              ))}
-              <rect x="282" y="365" width="12" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-c" />
-              <rect x="322" y="445" width="12" height="6" rx="1" fill="#CBD5E1" opacity="0.60" />
-              <rect x="360" y="525" width="12" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-a" />
-            </g>
+            {/* Secondary moving dotted trajectory */}
+            <path
+              className="hero-graph-dashed"
+              d="
+                M 700 785
+                C 790 770, 855 750, 925 730
+                C 995 710, 1050 690, 1100 660
+                C 1150 630, 1190 600, 1235 575
+                C 1290 545, 1340 500, 1390 455
+                C 1410 438, 1425 422, 1440 405
+              "
+              fill="none"
+              stroke="#CBD5E1"
+              strokeWidth="1.2"
+              strokeDasharray="7 11"
+              strokeOpacity="0.28"
+            />
 
-            {/* Tower L2 (Midground Stepped Flat-Top Corporate Tower: x=150 to 295) */}
-            <g className="animate-arch-depth-b">
-              {/* Stepped Flat Mechanical Crown */}
-              <rect x="180" y="195" width="85" height="20" fill="#102C45" stroke="#D8B56A" strokeWidth="0.9" strokeOpacity="0.6" />
+            {/* Glow underneath main graph */}
+            <path
+              className="hero-graph-glow"
+              d="
+                M 680 760
+                C 760 748, 825 728, 900 710
+                C 975 690, 1030 670, 1080 640
+                C 1135 607, 1165 565, 1215 545
+                C 1265 525, 1300 485, 1340 440
+                C 1375 400, 1405 365, 1440 330
+              "
+              fill="none"
+              stroke="#D8B56A"
+              strokeWidth="7"
+              strokeLinecap="round"
+              strokeOpacity="0.10"
+            />
 
-              {/* Main Straight Rectangular Skyscraper Body */}
-              <rect
-                x="150"
-                y="215"
-                width="145"
-                height="685"
-                fill="url(#towerGlassL2)"
-                stroke="url(#towerMullionGold)"
-                strokeWidth="1.1"
-              />
+            {/* MAIN GOLD LINE — ACTUAL DRAW/TRAVEL */}
+            <path
+              className="hero-graph-line"
+              d="
+                M 680 760
+                C 760 748, 825 728, 900 710
+                C 975 690, 1030 670, 1080 640
+                C 1135 607, 1165 565, 1215 545
+                C 1265 525, 1300 485, 1340 440
+                C 1375 400, 1405 365, 1440 330
+              "
+              fill="none"
+              stroke="url(#heroGraphGold)"
+              strokeWidth="3"
+              strokeLinecap="round"
+              filter="url(#heroGoldGlow)"
+              pathLength="1000"
+            />
 
-              {/* Vertical Mullions */}
-              <line x1="185" y1="215" x2="185" y2="900" stroke="url(#towerMullionBlue)" strokeWidth="0.75" />
-              <line x1="222" y1="215" x2="222" y2="900" stroke="url(#towerMullionGold)" strokeWidth="0.9" />
-              <line x1="260" y1="215" x2="260" y2="900" stroke="url(#towerMullionBlue)" strokeWidth="0.75" />
+            {/* Traveling highlight */}
+            <path
+              className="hero-graph-traveler"
+              d="
+                M 680 760
+                C 760 748, 825 728, 900 710
+                C 975 690, 1030 670, 1080 640
+                C 1135 607, 1165 565, 1215 545
+                C 1265 525, 1300 485, 1340 440
+                C 1375 400, 1405 365, 1440 330
+              "
+              fill="none"
+              stroke="#F4E7C5"
+              strokeWidth="5"
+              strokeLinecap="round"
+              strokeDasharray="24 976"
+              pathLength="1000"
+              filter="url(#heroGoldGlow)"
+            />
 
-              {/* Horizontal Floor Slabs */}
-              {[243, 271, 299, 327, 355, 383, 411, 439, 467, 495, 523, 551, 579, 607, 635, 663, 691, 719, 747, 775, 803, 831, 859].map((y) => (
-                <line key={`l2-floor-${y}`} x1="151" y1={y} x2="294" y2={y} stroke="#CBD5E1" strokeOpacity="0.20" strokeWidth="0.75" />
-              ))}
-
-              {/* Window Lights */}
-              <rect x="160" y="255" width="13" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-c" />
-              <rect x="198" y="283" width="13" height="6" rx="1" fill="#CBD5E1" opacity="0.65" />
-              <rect x="235" y="339" width="13" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-a" />
-              <rect x="272" y="395" width="13" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-b" />
-              <rect x="160" y="423" width="13" height="6" rx="1" fill="#CBD5E1" opacity="0.75" />
-              <rect x="198" y="479" width="13" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-c" />
-              <rect x="235" y="563" width="13" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-a" />
-              <rect x="272" y="619" width="13" height="6" rx="1" fill="#CBD5E1" opacity="0.65" />
-              <rect x="198" y="675" width="13" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-b" />
-            </g>
-
-            {/* Tower L1 (Foreground Primary Corporate Skyscraper: x=15 to 165) */}
-            <g className="animate-arch-depth-a">
-              {/* Flat Mechanical Penthouse Roof Box */}
-              <rect x="45" y="118" width="90" height="22" fill="#132E43" stroke="#D8B56A" strokeWidth="1.0" strokeOpacity="0.7" />
-
-              {/* Main Straight Rectangular Skyscraper Body */}
-              <rect
-                x="15"
-                y="140"
-                width="150"
-                height="760"
-                fill="url(#towerGlassL1)"
-                stroke="url(#towerMullionGold)"
-                strokeWidth="1.2"
-              />
-
-              {/* Vertical Mullion Lines */}
-              <line x1="52" y1="140" x2="52" y2="900" stroke="url(#towerMullionBlue)" strokeWidth="0.8" />
-              <line x1="90" y1="140" x2="90" y2="900" stroke="url(#towerMullionGold)" strokeWidth="1.2" />
-              <line x1="127" y1="140" x2="127" y2="900" stroke="url(#towerMullionBlue)" strokeWidth="0.8" />
-
-              {/* Horizontal Floor Slabs */}
-              {[166, 192, 218, 244, 270, 296, 322, 348, 374, 400, 426, 452, 478, 504, 530, 556, 582, 608, 634, 660, 686, 712, 738, 764, 790, 816, 842, 868].map((y) => (
-                <line key={`l1-floor-${y}`} x1="16" y1={y} x2="164" y2={y} stroke="#CBD5E1" strokeOpacity="0.22" strokeWidth="0.75" />
-              ))}
-
-              {/* Illuminated Office Windows (Gold & Cool White) */}
-              <rect x="25" y="200" width="13" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-a" />
-              <rect x="100" y="226" width="13" height="6" rx="1" fill="#CBD5E1" opacity="0.65" />
-              <rect x="62" y="278" width="13" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-b" />
-              <rect x="137" y="330" width="13" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-c" />
-              <rect x="25" y="382" width="13" height="6" rx="1" fill="#CBD5E1" opacity="0.70" />
-              <rect x="100" y="434" width="13" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-a" />
-              <rect x="62" y="486" width="13" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-b" />
-              <rect x="137" y="538" width="13" height="6" rx="1" fill="#CBD5E1" opacity="0.60" />
-              <rect x="25" y="590" width="13" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-c" />
-              <rect x="100" y="642" width="13" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-a" />
-              <rect x="62" y="694" width="13" height="6" rx="1" fill="#CBD5E1" opacity="0.75" />
-            </g>
-
-            {/* ====================================================
-                RIGHT CORPORATE TOWERS (Straight Rectangular Glass Skyscrapers)
-                ==================================================== */}
-            {/* Tower R3 (Background High-Rise: x=1050 to 1170) */}
-            <g className="animate-arch-depth-b" opacity="0.75">
-              <rect x="1075" y="295" width="70" height="15" fill="#0D2538" stroke="#CBD5E1" strokeWidth="0.6" strokeOpacity="0.4" />
-              <rect
-                x="1050"
-                y="310"
-                width="120"
-                height="590"
-                fill="url(#towerGlassR2)"
-                stroke="url(#towerMullionGold)"
-                strokeWidth="0.8"
-              />
-              <line x1="1090" y1="310" x2="1090" y2="900" stroke="url(#towerMullionBlue)" strokeWidth="0.6" />
-              <line x1="1130" y1="310" x2="1130" y2="900" stroke="url(#towerMullionGold)" strokeWidth="0.7" />
-              {[340, 380, 420, 460, 500, 540, 580, 620, 660, 700, 740, 780, 820].map((y) => (
-                <line key={`r3-floor-${y}`} x1="1051" y1={y} x2="1169" y2={y} stroke="#CBD5E1" strokeOpacity="0.16" strokeWidth="0.6" />
-              ))}
-              <rect x="1062" y="355" width="12" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-b" />
-              <rect x="1102" y="435" width="12" height="6" rx="1" fill="#CBD5E1" opacity="0.60" />
-              <rect x="1140" y="515" width="12" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-a" />
-            </g>
-
-            {/* Tower R2 (Midground Stepped Flat-Top Corporate Tower: x=1140 to 1290) */}
-            <g className="animate-arch-depth-b">
-              {/* Stepped Flat Mechanical Crown */}
-              <rect x="1170" y="185" width="90" height="20" fill="#102C45" stroke="#D8B56A" strokeWidth="0.9" strokeOpacity="0.6" />
-
-              {/* Main Straight Rectangular Skyscraper Body */}
-              <rect
-                x="1140"
-                y="205"
-                width="150"
-                height="695"
-                fill="url(#towerGlassR2)"
-                stroke="url(#towerMullionGold)"
-                strokeWidth="1.1"
+            {/* Sequential glowing nodes */}
+            <g>
+              <circle
+                cx="900"
+                cy="710"
+                r="5"
+                className="hero-node hero-node-1"
+                fill="#D8B56A"
+                stroke="#071827"
+                strokeWidth="2"
               />
 
-              {/* Vertical Mullions */}
-              <line x1="1177" y1="205" x2="1177" y2="900" stroke="url(#towerMullionBlue)" strokeWidth="0.75" />
-              <line x1="1215" y1="205" x2="1215" y2="900" stroke="url(#towerMullionGold)" strokeWidth="0.9" />
-              <line x1="1252" y1="205" x2="1252" y2="900" stroke="url(#towerMullionBlue)" strokeWidth="0.75" />
-
-              {/* Floor Slabs */}
-              {[233, 261, 289, 317, 345, 373, 401, 429, 457, 485, 513, 541, 569, 597, 625, 653, 681, 709, 737, 765, 793, 821, 849].map((y) => (
-                <line key={`r2-floor-${y}`} x1="1141" y1={y} x2="1289" y2={y} stroke="#CBD5E1" strokeOpacity="0.20" strokeWidth="0.75" />
-              ))}
-
-              {/* Windows */}
-              <rect x="1150" y="245" width="13" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-b" />
-              <rect x="1188" y="273" width="13" height="6" rx="1" fill="#CBD5E1" opacity="0.70" />
-              <rect x="1226" y="329" width="13" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-a" />
-              <rect x="1264" y="385" width="13" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-c" />
-              <rect x="1150" y="441" width="13" height="6" rx="1" fill="#CBD5E1" opacity="0.65" />
-              <rect x="1188" y="497" width="13" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-b" />
-              <rect x="1226" y="581" width="13" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-a" />
-              <rect x="1264" y="637" width="13" height="6" rx="1" fill="#CBD5E1" opacity="0.75" />
-              <rect x="1188" y="693" width="13" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-c" />
-            </g>
-
-            {/* Tower R1 (Foreground Primary Corporate Skyscraper: x=1270 to 1425) */}
-            <g className="animate-arch-depth-a">
-              {/* Flat Mechanical Penthouse Roof Box */}
-              <rect x="1300" y="108" width="95" height="22" fill="#132E43" stroke="#D8B56A" strokeWidth="1.0" strokeOpacity="0.7" />
-
-              {/* Main Straight Rectangular Skyscraper Body */}
-              <rect
-                x="1270"
-                y="130"
-                width="155"
-                height="770"
-                fill="url(#towerGlassR1)"
-                stroke="url(#towerMullionGold)"
-                strokeWidth="1.2"
-              />
-
-              {/* Vertical Mullions */}
-              <line x1="1308" y1="130" x2="1308" y2="900" stroke="url(#towerMullionBlue)" strokeWidth="0.8" />
-              <line x1="1347" y1="130" x2="1347" y2="900" stroke="url(#towerMullionGold)" strokeWidth="1.2" />
-              <line x1="1386" y1="130" x2="1386" y2="900" stroke="url(#towerMullionBlue)" strokeWidth="0.8" />
-
-              {/* Floor Divisions */}
-              {[156, 182, 208, 234, 260, 286, 312, 338, 364, 390, 416, 442, 468, 494, 520, 546, 572, 598, 624, 650, 676, 702, 728, 754, 780, 806, 832, 858].map((y) => (
-                <line key={`r1-floor-${y}`} x1="1271" y1={y} x2="1424" y2={y} stroke="#CBD5E1" strokeOpacity="0.22" strokeWidth="0.75" />
-              ))}
-
-              {/* Windows */}
-              <rect x="1280" y="190" width="13" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-a" />
-              <rect x="1357" y="216" width="13" height="6" rx="1" fill="#CBD5E1" opacity="0.70" />
-              <rect x="1319" y="268" width="13" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-b" />
-              <rect x="1396" y="320" width="13" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-c" />
-              <rect x="1280" y="372" width="13" height="6" rx="1" fill="#CBD5E1" opacity="0.65" />
-              <rect x="1357" y="424" width="13" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-a" />
-              <rect x="1319" y="476" width="13" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-b" />
-              <rect x="1396" y="528" width="13" height="6" rx="1" fill="#CBD5E1" opacity="0.75" />
-              <rect x="1280" y="580" width="13" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-c" />
-              <rect x="1357" y="632" width="13" height="6" rx="1" fill="#D8B56A" className="animate-window-glow-a" />
-            </g>
-
-            {/* ====================================================
-                3. MOVING CHAMPAGNE-GOLD FINANCIAL LINE GRAPH
-                Ascending trendline in lower-right background
-                ==================================================== */}
-            <g className="animate-financial-graph">
-              {/* Area Gradient Fill Below Graph */}
-              <path
-                d="
-                  M 620 740
-                  C 740 730, 840 700, 950 670
-                  C 1060 640, 1140 590, 1260 550
-                  C 1340 520, 1390 490, 1440 470
-                  L 1440 850
-                  L 620 850
-                  Z
-                "
-                fill="url(#financialGraphFill)"
-              />
-
-              {/* Main Ascending Gold Trend Line */}
-              <path
-                className="animate-graph-line"
-                d="
-                  M 620 740
-                  C 740 730, 840 700, 950 670
-                  C 1060 640, 1140 590, 1260 550
-                  C 1340 520, 1390 490, 1440 470
-                "
-                fill="none"
+              <circle
+                cx="1080"
+                cy="640"
+                r="5"
+                className="hero-node hero-node-2"
+                fill="#F8FAFC"
                 stroke="#D8B56A"
-                strokeWidth="2.2"
-                strokeLinecap="round"
-                strokeOpacity="0.85"
+                strokeWidth="2"
               />
 
-              {/* Supporting Secondary Dotted Trajectory */}
-              <path
-                className="animate-graph-dash"
-                d="
-                  M 680 755
-                  C 780 745, 870 720, 980 690
-                  C 1080 660, 1180 615, 1290 575
-                  C 1360 550, 1400 525, 1440 505
-                "
-                fill="none"
-                stroke="#CBD5E1"
-                strokeWidth="1.2"
-                strokeDasharray="6 8"
-                strokeOpacity="0.45"
+              <circle
+                cx="1215"
+                cy="545"
+                r="5"
+                className="hero-node hero-node-3"
+                fill="#D8B56A"
+                stroke="#071827"
+                strokeWidth="2"
               />
 
-              {/* Glowing Financial Data Points */}
-              <circle cx="780" cy="718" r="3.5" fill="#D8B56A" stroke="#071827" strokeWidth="1.5" className="animate-graph-node-1" />
-              <circle cx="950" cy="670" r="4.0" fill="#F8FAFC" stroke="#D8B56A" strokeWidth="1.5" className="animate-graph-node-2" />
-              <circle cx="1120" cy="605" r="3.5" fill="#D8B56A" stroke="#071827" strokeWidth="1.5" className="animate-graph-node-3" />
-              <circle cx="1260" cy="550" r="4.5" fill="#F8FAFC" stroke="#D8B56A" strokeWidth="2.0" className="animate-graph-node-4" />
-              <circle cx="1380" cy="495" r="4.0" fill="#D8B56A" stroke="#071827" strokeWidth="1.5" className="animate-graph-node-5" />
+              <circle
+                cx="1340"
+                cy="440"
+                r="6"
+                className="hero-node hero-node-4"
+                fill="#F8FAFC"
+                stroke="#D8B56A"
+                strokeWidth="2"
+              />
             </g>
           </svg>
         </div>
 
-        {/* ----------------------------------------------------------
-            4. ANIMATED FINANCIAL BARS (LOWER BACKGROUND)
-            Semi-transparent blue/teal/gold bars rising & falling
-            ---------------------------------------------------------- */}
-        <div className="absolute inset-x-0 bottom-0 z-0 flex h-48 items-end justify-center gap-2.5 px-6 opacity-75 sm:gap-4 lg:gap-6">
-          <div className="animate-fin-bar-1 origin-bottom h-14 w-3.5 rounded-t-sm bg-gradient-to-t from-[#0D2538]/70 via-[#132E43]/45 to-[#D8B56A]/30 border-t border-[#D8B56A]/40" />
-          <div className="animate-fin-bar-2 origin-bottom h-24 w-3.5 rounded-t-sm bg-gradient-to-t from-[#0D2538]/70 via-[#132E43]/45 to-[#38BDF8]/25 border-t border-[#38BDF8]/40" />
-          <div className="animate-fin-bar-3 origin-bottom h-18 w-3.5 rounded-t-sm bg-gradient-to-t from-[#0D2538]/70 via-[#132E43]/45 to-[#D8B56A]/30 border-t border-[#D8B56A]/40" />
-          <div className="animate-fin-bar-4 origin-bottom h-32 w-3.5 rounded-t-sm bg-gradient-to-t from-[#0D2538]/70 via-[#132E43]/45 to-[#D8B56A]/35 border-t border-[#D8B56A]/50" />
-          <div className="animate-fin-bar-5 origin-bottom h-20 w-3.5 rounded-t-sm bg-gradient-to-t from-[#0D2538]/70 via-[#132E43]/45 to-[#38BDF8]/25 border-t border-[#38BDF8]/40" />
-          <div className="animate-fin-bar-6 origin-bottom h-28 w-3.5 rounded-t-sm bg-gradient-to-t from-[#0D2538]/70 via-[#132E43]/45 to-[#D8B56A]/30 border-t border-[#D8B56A]/40" />
-          <div className="animate-fin-bar-7 origin-bottom h-16 w-3.5 rounded-t-sm bg-gradient-to-t from-[#0D2538]/70 via-[#132E43]/45 to-[#38BDF8]/25 border-t border-[#38BDF8]/40" />
-          <div className="animate-fin-bar-8 origin-bottom h-36 w-3.5 rounded-t-sm bg-gradient-to-t from-[#0D2538]/70 via-[#132E43]/45 to-[#D8B56A]/35 border-t border-[#D8B56A]/50" />
-          <div className="animate-fin-bar-9 origin-bottom h-22 w-3.5 rounded-t-sm bg-gradient-to-t from-[#0D2538]/70 via-[#132E43]/45 to-[#D8B56A]/30 border-t border-[#D8B56A]/40" />
-          <div className="animate-fin-bar-10 origin-bottom h-30 w-3.5 rounded-t-sm bg-gradient-to-t from-[#0D2538]/70 via-[#132E43]/45 to-[#38BDF8]/25 border-t border-[#38BDF8]/40" />
+        {/* =======================================================
+            ANIMATED FINANCIAL BARS — RIGHT / LOWER-RIGHT
+            ======================================================= */}
+        <div className="hero-bars absolute right-[2%] bottom-[5%] z-[2] flex h-[30%] w-[45%] items-end justify-end gap-[clamp(6px,1vw,16px)] opacity-70">
+          <span className="hero-bar hero-bar-1 h-[24%]" />
+          <span className="hero-bar hero-bar-2 h-[38%]" />
+          <span className="hero-bar hero-bar-3 h-[29%]" />
+          <span className="hero-bar hero-bar-4 h-[48%]" />
+          <span className="hero-bar hero-bar-5 h-[35%]" />
+          <span className="hero-bar hero-bar-6 h-[60%]" />
+          <span className="hero-bar hero-bar-7 h-[44%]" />
+          <span className="hero-bar hero-bar-8 h-[72%]" />
+          <span className="hero-bar hero-bar-9 h-[55%]" />
+          <span className="hero-bar hero-bar-10 h-[82%]" />
         </div>
 
-        {/* ----------------------------------------------------------
-            5. MOVING GOLD / GLASS REFLECTION LIGHT SWEEPS
-            Slowly glides across corporate city (LEFT -> RIGHT -> RESET)
-            ---------------------------------------------------------- */}
-        {/* Broad Ambient Gold Drift (Left-Center) */}
-        <div
-          className="
-            animate-gold-drift
-            absolute
-            top-[10%]
-            left-[12%]
-            h-[540px]
-            w-[540px]
-            rounded-full
-            bg-[radial-gradient(circle,rgba(216,181,106,0.18)_0%,rgba(201,164,92,0.08)_35%,transparent_70%)]
-            blur-[65px]
-          "
-        />
+        {/* Moving warm glow */}
+        <div className="hero-gold-ambient absolute right-[4%] bottom-[8%] z-[2] h-[55%] w-[48%] rounded-full bg-[radial-gradient(circle,rgba(216,181,106,0.12)_0%,rgba(201,164,92,0.045)_42%,transparent_72%)] blur-[55px]" />
 
-        {/* Secondary Gold Ambient Glow (Right-Lower) */}
-        <div
-          className="
-            animate-gold-drift-2
-            absolute
-            right-[8%]
-            bottom-[10%]
-            h-[480px]
-            w-[480px]
-            rounded-full
-            bg-[radial-gradient(circle,rgba(201,164,92,0.15)_0%,rgba(216,181,106,0.06)_40%,transparent_70%)]
-            blur-[70px]
-          "
-        />
+        {/* Moving reflection sweep */}
+        <div className="hero-light-sweep absolute top-[-25%] z-[3] h-[150%] w-[18%] rotate-[17deg] bg-[linear-gradient(90deg,transparent_0%,rgba(255,255,255,0.025)_30%,rgba(216,181,106,0.14)_50%,rgba(255,255,255,0.04)_58%,transparent_100%)] blur-[8px]" />
 
-        {/* Moving Corporate Light Sweep Across Buildings */}
-        <div
-          className="
-            animate-corp-light-sweep
-            pointer-events-none
-            absolute
-            top-0
-            bottom-0
-            w-[380px]
-            sm:w-[500px]
-            rotate-[16deg]
-            bg-[linear-gradient(90deg,transparent_0%,rgba(216,181,106,0.03)_25%,rgba(255,255,255,0.12)_48%,rgba(216,181,106,0.22)_52%,rgba(216,181,106,0.06)_75%,transparent_100%)]
-            blur-[10px]
-          "
-        />
+        {/* Center text protection */}
+        <div className="absolute inset-0 z-[4] bg-[radial-gradient(ellipse_48%_48%_at_50%_48%,rgba(7,24,39,0.84)_0%,rgba(7,24,39,0.62)_48%,rgba(7,24,39,0.18)_76%,transparent_100%)]" />
 
-        {/* ----------------------------------------------------------
-            6. CENTRAL DARK GLASS AREA & VIGNETTE
-            Protects the name and buttons for pristine contrast
-            ---------------------------------------------------------- */}
-        <div
-          className="
-            absolute
-            inset-0
-            bg-[radial-gradient(ellipse_52%_52%_at_50%_48%,rgba(7,24,39,0.72)_0%,rgba(7,24,39,0.38)_55%,transparent_82%)]
-          "
-        />
+        {/* Overall executive vignette */}
+        <div className="absolute inset-0 z-[5] bg-[radial-gradient(ellipse_88%_82%_at_50%_48%,transparent_44%,rgba(7,24,39,0.22)_72%,#071827_100%)]" />
 
-        {/* Executive Edge Vignette */}
-        <div
-          className="
-            absolute
-            inset-0
-            bg-[radial-gradient(ellipse_80%_75%_at_50%_50%,transparent_45%,rgba(7,24,39,0.30)_75%,#071827_100%)]
-          "
-        />
+        {/* Bottom reflective floor fade */}
+        <div className="absolute inset-x-0 bottom-0 z-[5] h-[16%] bg-gradient-to-t from-[#071827] via-[#071827]/60 to-transparent" />
       </div>
 
-      {/* ============================================================
-          CURRENT APPROVED HERO CONTENT (100% UNCHANGED)
-          ============================================================ */}
+      {/* =========================================================
+          APPROVED HERO CONTENT
+          ========================================================= */}
       <div
         className="
           relative
@@ -511,7 +372,7 @@ export function Hero({ onOpenCV }: HeroProps) {
           space-y-6
         "
       >
-        {/* Welcome label */}
+        {/* Welcome */}
         <div className="inline-flex items-center gap-2">
           <span className="h-px w-6 bg-[#D8B56A]/60 sm:w-10" />
 
@@ -534,7 +395,7 @@ export function Hero({ onOpenCV }: HeroProps) {
           <span className="h-px w-6 bg-[#D8B56A]/60 sm:w-10" />
         </div>
 
-        {/* Name: MUHAMMAD SALMAN */}
+        {/* Name */}
         <h1
           className="
             select-none
@@ -558,7 +419,7 @@ export function Hero({ onOpenCV }: HeroProps) {
           </span>
         </h1>
 
-        {/* Designation: ACCOUNTANT */}
+        {/* Designation */}
         <p
           className="
             text-base
@@ -576,21 +437,9 @@ export function Hero({ onOpenCV }: HeroProps) {
             : 'ACCOUNTANT'}
         </p>
 
-        {/* ==========================================================
-            ACTION BUTTONS
-            ========================================================== */}
-        <div
-          className="
-            flex
-            flex-wrap
-            items-center
-            justify-center
-            gap-4
-            pt-4
-            sm:gap-5
-          "
-        >
-          {/* DOWNLOAD CV */}
+        {/* Buttons */}
+        <div className="flex flex-wrap items-center justify-center gap-4 pt-4 sm:gap-5">
+          {/* Download CV */}
           <button
             type="button"
             onClick={onOpenCV}
@@ -622,7 +471,6 @@ export function Hero({ onOpenCV }: HeroProps) {
               hover:-translate-y-0.5
               hover:border-[#D8B56A]
               hover:bg-[#132E43]
-              hover:shadow-[#D8B56A]/10
               focus:outline-none
               focus-visible:ring-2
               focus-visible:ring-[#D8B56A]
@@ -654,9 +502,7 @@ export function Hero({ onOpenCV }: HeroProps) {
             </span>
           </button>
 
-          {/* ========================================================
-              LINKEDIN — FINAL LIVE PROFILE URL
-              ======================================================== */}
+          {/* LinkedIn */}
           <a
             href={linkedInUrl}
             target="_blank"
@@ -700,7 +546,6 @@ export function Hero({ onOpenCV }: HeroProps) {
               focus-visible:ring-[#D8B56A]
             "
           >
-            {/* Subtle hover reflection */}
             <span
               className="
                 pointer-events-none
@@ -709,7 +554,7 @@ export function Hero({ onOpenCV }: HeroProps) {
                 -translate-x-full
                 bg-gradient-to-r
                 from-transparent
-                via-[#D8B56A]/8
+                via-[#D8B56A]/10
                 to-transparent
                 transition-transform
                 duration-700
@@ -718,16 +563,8 @@ export function Hero({ onOpenCV }: HeroProps) {
               aria-hidden="true"
             />
 
-            {/* LinkedIn icon */}
             <svg
-              className="
-                relative
-                z-10
-                h-4
-                w-4
-                fill-current
-                text-[#D8B56A]
-              "
+              className="relative z-10 h-4 w-4 fill-current text-[#D8B56A]"
               viewBox="0 0 24 24"
               aria-hidden="true"
             >
@@ -744,6 +581,424 @@ export function Hero({ onOpenCV }: HeroProps) {
           </a>
         </div>
       </div>
+
+      {/* =========================================================
+          HERO-ONLY ANIMATIONS
+          Isolated here so the rest of the website is untouched.
+          ========================================================= */}
+      <style>{`
+        .hero-real-city {
+          -webkit-mask-image:
+            linear-gradient(to right, #000 0%, #000 58%, rgba(0,0,0,.82) 72%, transparent 100%),
+            linear-gradient(to top, #000 0%, #000 72%, transparent 100%);
+          mask-image:
+            linear-gradient(to right, #000 0%, #000 58%, rgba(0,0,0,.82) 72%, transparent 100%),
+            linear-gradient(to top, #000 0%, #000 72%, transparent 100%);
+          -webkit-mask-composite: source-in;
+          mask-composite: intersect;
+        }
+
+        .hero-real-city-image {
+          filter:
+            brightness(.54)
+            contrast(1.12)
+            saturate(.82)
+            sepia(.08)
+            hue-rotate(168deg);
+          transform: scale(1.03);
+          transform-origin: left bottom;
+        }
+
+        .hero-city-reflection {
+          animation: heroCityReflection 7s ease-in-out infinite;
+        }
+
+        .hero-graph-area {
+          animation: heroGraphArea 7.2s ease-in-out infinite;
+        }
+
+        .hero-graph-line {
+          stroke-dasharray: 1000;
+          stroke-dashoffset: 1000;
+          animation: heroGraphDraw 7.2s ease-in-out infinite;
+        }
+
+        .hero-graph-glow {
+          stroke-dasharray: 1000;
+          stroke-dashoffset: 1000;
+          animation: heroGraphGlowDraw 7.2s ease-in-out infinite;
+        }
+
+        .hero-graph-traveler {
+          stroke-dashoffset: 1024;
+          animation: heroGraphTraveler 7.2s linear infinite;
+        }
+
+        .hero-graph-dashed {
+          animation: heroDashFlow 5.5s linear infinite;
+        }
+
+        .hero-node {
+          opacity: 0;
+          transform-box: fill-box;
+          transform-origin: center;
+        }
+
+        .hero-node-1 {
+          animation: heroNodePulse 7.2s ease-in-out 1.0s infinite;
+        }
+
+        .hero-node-2 {
+          animation: heroNodePulse 7.2s ease-in-out 1.55s infinite;
+        }
+
+        .hero-node-3 {
+          animation: heroNodePulse 7.2s ease-in-out 2.1s infinite;
+        }
+
+        .hero-node-4 {
+          animation: heroNodePulse 7.2s ease-in-out 2.65s infinite;
+        }
+
+        .hero-bar {
+          display: block;
+          width: clamp(7px, 0.8vw, 13px);
+          transform-origin: bottom;
+          border-top: 1px solid rgba(216,181,106,.52);
+          border-radius: 2px 2px 0 0;
+          background:
+            linear-gradient(
+              to top,
+              rgba(13,37,56,.40),
+              rgba(30,73,105,.42) 50%,
+              rgba(216,181,106,.32)
+            );
+          box-shadow:
+            0 -2px 8px rgba(216,181,106,.07),
+            inset 0 0 10px rgba(56,189,248,.06);
+        }
+
+        .hero-bar-1 {
+          animation: heroBarA 4.8s ease-in-out .1s infinite;
+        }
+
+        .hero-bar-2 {
+          animation: heroBarB 5.5s ease-in-out .7s infinite;
+        }
+
+        .hero-bar-3 {
+          animation: heroBarC 4.4s ease-in-out 1.2s infinite;
+        }
+
+        .hero-bar-4 {
+          animation: heroBarA 6s ease-in-out 1.8s infinite;
+        }
+
+        .hero-bar-5 {
+          animation: heroBarB 4.7s ease-in-out 2.3s infinite;
+        }
+
+        .hero-bar-6 {
+          animation: heroBarC 5.8s ease-in-out .4s infinite;
+        }
+
+        .hero-bar-7 {
+          animation: heroBarA 5.1s ease-in-out 1.1s infinite;
+        }
+
+        .hero-bar-8 {
+          animation: heroBarB 6.2s ease-in-out 1.6s infinite;
+        }
+
+        .hero-bar-9 {
+          animation: heroBarC 5.4s ease-in-out 2s infinite;
+        }
+
+        .hero-bar-10 {
+          animation: heroBarA 6.4s ease-in-out 2.5s infinite;
+        }
+
+        .hero-light-sweep {
+          left: -28%;
+          animation: heroLightSweep 9s cubic-bezier(.35,.05,.25,1) infinite;
+        }
+
+        .hero-gold-ambient {
+          animation: heroGoldAmbient 8s ease-in-out infinite;
+        }
+
+        @keyframes heroGraphDraw {
+          0% {
+            stroke-dashoffset: 1000;
+            opacity: 0;
+          }
+
+          7% {
+            opacity: 1;
+          }
+
+          48% {
+            stroke-dashoffset: 0;
+            opacity: 1;
+          }
+
+          82% {
+            stroke-dashoffset: 0;
+            opacity: 1;
+          }
+
+          94% {
+            stroke-dashoffset: 0;
+            opacity: .18;
+          }
+
+          100% {
+            stroke-dashoffset: 1000;
+            opacity: 0;
+          }
+        }
+
+        @keyframes heroGraphGlowDraw {
+          0% {
+            stroke-dashoffset: 1000;
+            opacity: 0;
+          }
+
+          8% {
+            opacity: .15;
+          }
+
+          48% {
+            stroke-dashoffset: 0;
+            opacity: .45;
+          }
+
+          82% {
+            stroke-dashoffset: 0;
+            opacity: .30;
+          }
+
+          100% {
+            stroke-dashoffset: 1000;
+            opacity: 0;
+          }
+        }
+
+        @keyframes heroGraphTraveler {
+          0% {
+            stroke-dashoffset: 1024;
+            opacity: 0;
+          }
+
+          8% {
+            opacity: 1;
+          }
+
+          68% {
+            stroke-dashoffset: 0;
+            opacity: 1;
+          }
+
+          86% {
+            stroke-dashoffset: -500;
+            opacity: .35;
+          }
+
+          100% {
+            stroke-dashoffset: -1000;
+            opacity: 0;
+          }
+        }
+
+        @keyframes heroDashFlow {
+          from {
+            stroke-dashoffset: 0;
+          }
+
+          to {
+            stroke-dashoffset: -144;
+          }
+        }
+
+        @keyframes heroNodePulse {
+          0%, 8%, 100% {
+            opacity: 0;
+            transform: scale(.65);
+          }
+
+          18% {
+            opacity: 1;
+            transform: scale(1.55);
+          }
+
+          28% {
+            opacity: .95;
+            transform: scale(1);
+          }
+
+          70% {
+            opacity: .80;
+            transform: scale(1);
+          }
+
+          82% {
+            opacity: 0;
+            transform: scale(.75);
+          }
+        }
+
+        @keyframes heroGraphArea {
+          0%, 100% {
+            opacity: .12;
+          }
+
+          45%, 75% {
+            opacity: .72;
+          }
+        }
+
+        @keyframes heroBarA {
+          0%, 100% {
+            transform: scaleY(.34);
+            opacity: .32;
+          }
+
+          45% {
+            transform: scaleY(1);
+            opacity: .88;
+          }
+
+          72% {
+            transform: scaleY(.58);
+            opacity: .55;
+          }
+        }
+
+        @keyframes heroBarB {
+          0%, 100% {
+            transform: scaleY(.82);
+            opacity: .72;
+          }
+
+          38% {
+            transform: scaleY(.30);
+            opacity: .30;
+          }
+
+          72% {
+            transform: scaleY(1.08);
+            opacity: .92;
+          }
+        }
+
+        @keyframes heroBarC {
+          0%, 100% {
+            transform: scaleY(.48);
+            opacity: .42;
+          }
+
+          35% {
+            transform: scaleY(1.05);
+            opacity: .90;
+          }
+
+          68% {
+            transform: scaleY(.32);
+            opacity: .35;
+          }
+        }
+
+        @keyframes heroLightSweep {
+          0% {
+            transform: translate3d(-15vw,0,0) rotate(17deg);
+            opacity: 0;
+          }
+
+          12% {
+            opacity: .28;
+          }
+
+          48% {
+            opacity: .80;
+          }
+
+          86% {
+            opacity: .32;
+          }
+
+          100% {
+            transform: translate3d(155vw,0,0) rotate(17deg);
+            opacity: 0;
+          }
+        }
+
+        @keyframes heroGoldAmbient {
+          0%, 100% {
+            transform: translate3d(0,0,0) scale(.92);
+            opacity: .55;
+          }
+
+          50% {
+            transform: translate3d(-4%,-3%,0) scale(1.08);
+            opacity: 1;
+          }
+        }
+
+        @keyframes heroCityReflection {
+          0%, 100% {
+            opacity: .28;
+            transform: translateX(-2%);
+          }
+
+          50% {
+            opacity: .62;
+            transform: translateX(5%);
+          }
+        }
+
+        @media (max-width: 767px) {
+          .hero-real-city {
+            width: 62%;
+            height: 45%;
+            opacity: .64;
+          }
+
+          .hero-bars {
+            width: 58%;
+            opacity: .40;
+          }
+
+          .hero-fin-grid {
+            opacity: .45;
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .hero-city-reflection,
+          .hero-graph-area,
+          .hero-graph-line,
+          .hero-graph-glow,
+          .hero-graph-traveler,
+          .hero-graph-dashed,
+          .hero-node,
+          .hero-bar,
+          .hero-light-sweep,
+          .hero-gold-ambient {
+            animation: none !important;
+          }
+
+          .hero-graph-line,
+          .hero-graph-glow {
+            stroke-dashoffset: 0;
+            opacity: 1;
+          }
+
+          .hero-node {
+            opacity: .85;
+            transform: scale(1);
+          }
+        }
+      `}</style>
     </section>
   );
 }
