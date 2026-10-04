@@ -43,7 +43,7 @@ export function Hero({ onOpenCV }: HeroProps) {
       <div className="hero-bg absolute inset-0" aria-hidden="true" />
 
       <div className="relative mx-auto h-full min-h-[calc(100svh-5rem)] max-w-[1920px] lg:min-h-[650px]">
-        {/* LEFT CONTENT */}
+        {/* LEFT CONTENT — LOCKED */}
         <div
           className={`hero-copy absolute z-30 top-[48%] w-[37%] -translate-y-1/2 ${
             isRTL ? 'right-[6vw] text-right' : 'left-[6vw] text-left'
@@ -85,12 +85,10 @@ export function Hero({ onOpenCV }: HeroProps) {
           </div>
         </div>
 
-        {/* RIGHT MAP / PROFESSIONAL FOOTPRINT */}
-        <div className="map-wrap absolute right-[1vw] top-[4%] z-10 h-[88%] w-[62vw]" aria-hidden="true">
+        {/* RIGHT PROFESSIONAL FOOTPRINT */}
+        <div className="map-wrap absolute z-10" aria-hidden="true">
           <svg className="h-full w-full overflow-visible" viewBox="0 0 1000 560">
-            <path className="map-grid" d="M90 180H930M70 280H950M90 380H930M250 80V485M500 60V500M750 80V485" />
-
-            {/* Visible inline world map: no external image dependency */}
+            {/* GOLD WORLD MAP */}
             <path className="world" d="M88 169 L115 137 151 126 183 105 226 104 257 119 286 112 312 132 302 151 278 160 266 181 239 190 220 216 196 221 177 246 153 238 145 215 119 203 99 188Z" />
             <path className="world" d="M231 246 L257 257 276 282 281 316 300 341 292 375 275 397 269 429 249 462 232 439 226 405 211 377 205 341 214 308 202 278Z" />
             <path className="world" d="M444 139 L472 116 511 113 536 126 563 118 594 130 619 124 649 140 685 139 716 153 752 148 785 161 817 160 849 181 838 199 803 205 782 224 748 223 724 239 691 233 665 249 638 245 616 263 590 254 564 263 542 249 516 250 494 232 469 228 453 208 430 199 423 176Z" />
@@ -98,32 +96,56 @@ export function Hero({ onOpenCV }: HeroProps) {
             <path className="world" d="M744 287 L772 275 797 284 808 306 795 327 769 335 747 321 735 303Z" />
             <path className="world" d="M818 375 L847 362 879 370 895 392 884 414 852 423 824 410 809 391Z" />
 
-            <path className="geo-detail" d="M128 154 C166 165 205 163 253 142 M159 202 C193 188 229 178 272 174 M459 163 C511 151 562 151 615 159 M532 201 C582 184 635 181 688 191 M659 215 C708 198 759 194 809 199 M493 294 C524 304 551 322 572 347 M225 291 C245 315 260 346 271 378 M829 390 C849 382 870 385 885 398" />
+            <path
+              className="geo-detail"
+              d="M128 154 C166 165 205 163 253 142 M159 202 C193 188 229 178 272 174
+                 M459 163 C511 151 562 151 615 159 M532 201 C582 184 635 181 688 191
+                 M659 215 C708 198 759 194 809 199 M493 294 C524 304 551 322 572 347
+                 M225 291 C245 315 260 346 271 378 M829 390 C849 382 870 385 885 398"
+            />
 
-            {/* Saudi Arabia ↔ Pakistan ↔ Canada */}
-            <path className="route route-gold" d="M605 278 C646 245 681 246 720 264" />
-            <path className="route route-gold" d="M605 278 C500 176 352 120 218 151" />
-            <path className="route route-blue" d="M720 264 C605 151 401 104 218 151" />
+            {/*
+              FLOW DIRECTION IS TOWARD SAUDI ARABIA.
+              Paths are deliberately drawn FROM Canada/Pakistan TO Saudi Arabia.
+            */}
+            <path
+              className="route route-canada"
+              pathLength="1000"
+              d="M218 151 C350 118 505 170 605 278"
+            />
+            <path
+              className="route route-pakistan"
+              pathLength="1000"
+              d="M720 264 C680 245 642 247 605 278"
+            />
 
-            <circle className="map-node" cx="605" cy="278" r="5" />
-            <circle className="map-pulse" cx="605" cy="278" r="9" />
-            <circle className="map-node" cx="720" cy="264" r="5" />
-            <circle className="map-pulse" cx="720" cy="264" r="9" />
-            <circle className="map-node map-node-blue" cx="218" cy="151" r="5" />
-            <circle className="map-pulse map-pulse-blue" cx="218" cy="151" r="9" />
+            {/* CANADA */}
+            <circle className="map-node map-node-canada" cx="218" cy="151" r="4.5" />
+            <circle className="map-pulse map-pulse-canada" cx="218" cy="151" r="8" />
+
+            {/* PAKISTAN */}
+            <circle className="map-node" cx="720" cy="264" r="4.5" />
+            <circle className="map-pulse" cx="720" cy="264" r="8" />
+
+            {/* SAUDI ARABIA — MAIN DESTINATION */}
+            <circle className="saudi-halo" cx="605" cy="278" r="17" />
+            <circle className="map-node map-node-saudi" cx="605" cy="278" r="6.5" />
+            <circle className="map-pulse map-pulse-saudi" cx="605" cy="278" r="11" />
           </svg>
 
-          <div className="country country-sa">
-            <b>SAUDI ARABIA</b>
-            <small>PROFESSIONAL EXPERIENCE</small>
+          <div className="country country-ca">
+            <b>CANADA</b>
+            <small>REMOTE EXPERIENCE</small>
           </div>
+
           <div className="country country-pk">
             <b>PAKISTAN</b>
             <small>PROFESSIONAL EXPERIENCE</small>
           </div>
-          <div className="country country-ca">
-            <b>CANADA</b>
-            <small>REMOTE EXPERIENCE</small>
+
+          <div className="country country-sa">
+            <b>SAUDI ARABIA</b>
+            <small>PROFESSIONAL EXPERIENCE</small>
           </div>
 
           {points.map((point) => (
@@ -140,8 +162,25 @@ export function Hero({ onOpenCV }: HeroProps) {
           ))}
         </div>
 
-        {/* LOCKED MOVING ROUND ELEMENT — retained until exact reference animation is supplied */}
-        <div className="network-orb absolute right-[5%] top-[7%] z-20 hidden h-[105px] w-[105px] lg:block" aria-hidden="true">
+        {/* LOWER MOVING WAVES */}
+        <div className="lower-waves absolute z-[8]" aria-hidden="true">
+          <svg viewBox="0 0 1200 180" preserveAspectRatio="none">
+            <path
+              className="wave wave-gold"
+              d="M0 112 C130 66 230 150 360 104 C500 55 600 142 735 96 C870 50 990 132 1200 74"
+            />
+            <path
+              className="wave wave-blue"
+              d="M0 139 C145 105 260 166 405 126 C540 88 650 154 790 116 C930 77 1045 140 1200 104"
+            />
+          </svg>
+        </div>
+
+        {/* CURRENT ROUND ELEMENT — UNCHANGED FOR NOW */}
+        <div
+          className="network-orb absolute right-[5%] top-[7%] z-20 hidden h-[105px] w-[105px] lg:block"
+          aria-hidden="true"
+        >
           <span className="orb-line orb-line-a" />
           <span className="orb-line orb-line-b" />
         </div>
@@ -155,8 +194,8 @@ export function Hero({ onOpenCV }: HeroProps) {
 
         .hero-bg {
           background:
-            radial-gradient(circle at 72% 44%, rgba(111,184,223,.09), transparent 28%),
-            radial-gradient(circle at 67% 55%, rgba(216,181,106,.065), transparent 34%),
+            radial-gradient(circle at 74% 44%, rgba(216,181,106,.065), transparent 27%),
+            radial-gradient(circle at 79% 58%, rgba(111,184,223,.07), transparent 31%),
             linear-gradient(135deg,#071827 0%,#081A2B 52%,#0D2538 100%);
         }
 
@@ -166,76 +205,116 @@ export function Hero({ onOpenCV }: HeroProps) {
           inset: 0;
           z-index: 1;
           pointer-events: none;
-          opacity: .18;
-          background-image: radial-gradient(rgba(216,181,106,.13) .65px, transparent .65px);
-          background-size: 29px 29px;
-          -webkit-mask-image: linear-gradient(90deg, transparent 28%, #000 60%, #000 100%);
-          mask-image: linear-gradient(90deg, transparent 28%, #000 60%, #000 100%);
+          opacity: .13;
+          background-image: radial-gradient(rgba(216,181,106,.12) .6px, transparent .6px);
+          background-size: 30px 30px;
+          -webkit-mask-image: linear-gradient(90deg, transparent 36%, #000 65%, #000 100%);
+          mask-image: linear-gradient(90deg, transparent 36%, #000 65%, #000 100%);
+        }
+
+        /* MAP: SMALLER + RIGHT-SHIFTED SO IT NEVER COVERS THE NAME */
+        .map-wrap {
+          right: 1.8vw;
+          top: 8%;
+          width: 54vw;
+          height: 72%;
         }
 
         .world {
-          fill: rgba(111,184,223,.035);
-          stroke: rgba(139,198,230,.52);
-          stroke-width: 1.35;
+          fill: rgba(216,181,106,.018);
+          stroke: rgba(216,181,106,.58);
+          stroke-width: 1.3;
           vector-effect: non-scaling-stroke;
-          filter: drop-shadow(0 0 7px rgba(111,184,223,.08));
-        }
-
-        .map-grid {
-          fill: none;
-          stroke: rgba(111,184,223,.045);
-          stroke-width: 1;
+          filter: drop-shadow(0 0 5px rgba(216,181,106,.12));
         }
 
         .geo-detail {
           fill: none;
-          stroke: rgba(139,198,230,.16);
-          stroke-width: .8;
-          stroke-dasharray: 2 5;
+          stroke: rgba(201,164,92,.18);
+          stroke-width: .75;
+          stroke-dasharray: 2 6;
         }
 
+        /* ROUTES: CANADA/PAKISTAN -> SAUDI ARABIA */
         .route {
           fill: none;
           stroke-linecap: round;
-          stroke-width: 1.6;
-          stroke-dasharray: 5 11;
-          animation: routeFlow 13s linear infinite;
+          stroke-width: 1.75;
+          stroke-dasharray: 38 962;
+          stroke-dashoffset: 1000;
+          animation: routeToSaudi 8.5s linear infinite;
+          filter: drop-shadow(0 0 4px rgba(216,181,106,.22));
         }
 
-        .route-gold { stroke: #D8B56A; }
-        .route-blue {
-          stroke: #6FB8DF;
-          animation-duration: 16s;
+        .route-canada {
+          stroke: #78BDE3;
+          animation-duration: 10.5s;
         }
 
-        @keyframes routeFlow {
-          to { stroke-dashoffset: -320; }
+        .route-pakistan {
+          stroke: #D8B56A;
+          animation-duration: 7.5s;
+          animation-delay: -2.5s;
+        }
+
+        @keyframes routeToSaudi {
+          from { stroke-dashoffset: 1000; opacity: .45; }
+          20% { opacity: .95; }
+          80% { opacity: .95; }
+          to { stroke-dashoffset: 0; opacity: .45; }
         }
 
         .map-node {
           fill: #D8B56A;
-          filter: drop-shadow(0 0 7px rgba(216,181,106,.9));
+          filter: drop-shadow(0 0 7px rgba(216,181,106,.75));
         }
 
-        .map-node-blue { fill: #6FB8DF; }
+        .map-node-canada {
+          fill: #78BDE3;
+          filter: drop-shadow(0 0 7px rgba(120,189,227,.65));
+        }
+
+        .map-node-saudi {
+          fill: #E4C477;
+          filter: drop-shadow(0 0 11px rgba(216,181,106,.95));
+        }
+
+        .saudi-halo {
+          fill: rgba(216,181,106,.07);
+          stroke: rgba(216,181,106,.32);
+          stroke-width: 1;
+          transform-box: fill-box;
+          transform-origin: center;
+          animation: saudiHalo 4.2s ease-in-out infinite;
+        }
+
+        @keyframes saudiHalo {
+          0%,100% { transform: scale(.85); opacity: .35; }
+          50% { transform: scale(1.35); opacity: .7; }
+        }
 
         .map-pulse {
           fill: none;
           stroke: #D8B56A;
-          stroke-width: 1.2;
+          stroke-width: 1.15;
           transform-box: fill-box;
           transform-origin: center;
-          animation: mapPulse 3.4s ease-out infinite;
+          animation: mapPulse 3.8s ease-out infinite;
         }
 
-        .map-pulse-blue {
-          stroke: #6FB8DF;
-          animation-delay: -1.3s;
+        .map-pulse-canada {
+          stroke: #78BDE3;
+          animation-delay: -1.2s;
+        }
+
+        .map-pulse-saudi {
+          stroke-width: 1.45;
+          animation-duration: 3.2s;
         }
 
         @keyframes mapPulse {
-          0% { transform: scale(.55); opacity: .9; }
-          100% { transform: scale(3.2); opacity: 0; }
+          0% { transform: scale(.55); opacity: .85; }
+          100% { transform: scale(3); opacity: 0; }
         }
 
         .country {
@@ -243,8 +322,8 @@ export function Hero({ onOpenCV }: HeroProps) {
           z-index: 25;
           padding: 8px 11px;
           border-radius: 10px;
-          background: rgba(7,24,39,.87);
-          border: 1px solid rgba(216,181,106,.34);
+          background: rgba(7,24,39,.88);
+          border: 1px solid rgba(216,181,106,.36);
           backdrop-filter: blur(9px);
           box-shadow: 0 10px 28px rgba(0,0,0,.22);
           animation: countryFloat 11s ease-in-out infinite;
@@ -266,22 +345,35 @@ export function Hero({ onOpenCV }: HeroProps) {
           white-space: nowrap;
         }
 
-        .country-sa { left: 59%; top: 47%; }
-        .country-pk { left: 69%; top: 39%; animation-delay: -4s; }
+        /* Positions aligned to the SVG nodes */
         .country-ca {
-          left: 20%;
-          top: 19%;
-          border-color: rgba(111,184,223,.36);
-          animation-delay: -7s;
+          left: 15.5%;
+          top: 17%;
+          border-color: rgba(120,189,227,.38);
         }
 
         .country-ca small { color: #8BC6E6; }
+
+        .country-pk {
+          left: 68%;
+          top: 42%;
+          animation-delay: -4s;
+        }
+
+        .country-sa {
+          left: 54.5%;
+          top: 48%;
+          border-color: rgba(216,181,106,.55);
+          box-shadow: 0 0 22px rgba(216,181,106,.08), 0 10px 28px rgba(0,0,0,.22);
+          animation-delay: -7s;
+        }
 
         @keyframes countryFloat {
           0%,100% { transform: translateY(6px); }
           50% { transform: translateY(-13px); }
         }
 
+        /* ALL 17 POINTS */
         .skill-point {
           position: absolute;
           z-index: 22;
@@ -303,8 +395,9 @@ export function Hero({ onOpenCV }: HeroProps) {
         }
 
         .skill-point.gold {
-          border-color: rgba(216,181,106,.35);
+          border-color: rgba(216,181,106,.38);
           color: #F4E3B7;
+          box-shadow: 0 0 14px rgba(216,181,106,.05);
         }
 
         .skill-point.keep {
@@ -323,28 +416,88 @@ export function Hero({ onOpenCV }: HeroProps) {
         }
 
         @keyframes pointFloatOnly {
-          0%,100% { transform: translateY(10px); opacity:.9; }
+          0%,100% { transform: translateY(10px); opacity:.92; }
           50% { transform: translateY(-17px) scale(1.035); opacity:1; }
         }
 
-        .p1{left:40%;top:3%}
-        .p2{left:23%;top:8%}
-        .p3{left:4%;top:39%}
-        .p4{right:1%;top:37%}
-        .p5{left:34%;top:24%}
-        .p6{left:10%;top:60%}
-        .p7{left:28%;bottom:7%}
-        .p8{right:19%;top:4%}
-        .p9{right:5%;bottom:9%}
-        .p10{left:48%;bottom:2%}
-        .p11{right:29%;bottom:15%}
-        .p12{left:2%;bottom:22%}
-        .p13{left:17%;top:29%}
-        .p14{right:34%;top:14%}
-        .p15{right:1%;top:67%}
-        .p16{left:43%;top:71%}
-        .p17{right:17%;top:61%}
+        /* Balanced around the smaller right-side map */
+        .p1  { left: 38%; top: 1%; }
+        .p2  { left: 12%; top: 7%; }
+        .p3  { left: 2%; top: 40%; }
+        .p4  { right: 0%; top: 34%; }
+        .p5  { left: 34%; top: 25%; }
+        .p6  { left: 7%; top: 64%; }
+        .p7  { left: 24%; bottom: 0%; }
+        .p8  { right: 20%; top: 1%; }
+        .p9  { right: 3%; bottom: 1%; }
+        .p10 { left: 50%; bottom: -7%; }
+        .p11 { right: 29%; bottom: 10%; }
+        .p12 { left: 0%; bottom: 15%; }
+        .p13 { left: 8%; top: 31%; }
+        .p14 { right: 34%; top: 13%; }
+        .p15 { right: 0%; top: 68%; }
+        .p16 { left: 39%; top: 76%; }
+        .p17 { right: 17%; top: 61%; }
 
+        /* TWO LOWER MORPHING WAVES */
+        .lower-waves {
+          left: 38%;
+          right: 1.5%;
+          bottom: 2.5%;
+          height: 145px;
+          pointer-events: none;
+          opacity: .9;
+        }
+
+        .lower-waves svg {
+          width: 100%;
+          height: 100%;
+          overflow: visible;
+        }
+
+        .wave {
+          fill: none;
+          stroke-linecap: round;
+          vector-effect: non-scaling-stroke;
+          will-change: d, transform;
+        }
+
+        .wave-gold {
+          stroke: rgba(216,181,106,.72);
+          stroke-width: 1.55;
+          filter: drop-shadow(0 0 5px rgba(216,181,106,.18));
+          animation: goldWaveMorph 20s ease-in-out infinite;
+        }
+
+        .wave-blue {
+          stroke: rgba(111,184,223,.40);
+          stroke-width: 1.15;
+          animation: blueWaveMorph 25s ease-in-out infinite;
+        }
+
+        @keyframes goldWaveMorph {
+          0%,100% {
+            d: path("M0 112 C130 66 230 150 360 104 C500 55 600 142 735 96 C870 50 990 132 1200 74");
+            transform: translateY(0);
+          }
+          50% {
+            d: path("M0 104 C125 145 250 64 382 111 C520 160 628 67 760 105 C900 145 1030 58 1200 96");
+            transform: translateY(-6px);
+          }
+        }
+
+        @keyframes blueWaveMorph {
+          0%,100% {
+            d: path("M0 139 C145 105 260 166 405 126 C540 88 650 154 790 116 C930 77 1045 140 1200 104");
+            transform: translateY(3px);
+          }
+          50% {
+            d: path("M0 128 C145 158 278 96 420 137 C555 176 680 101 815 132 C950 164 1060 96 1200 122");
+            transform: translateY(-4px);
+          }
+        }
+
+        /* ROUND ELEMENT — KEPT AS-IS */
         .network-orb {
           border: 1px solid rgba(216,181,106,.43);
           border-radius: 50%;
@@ -390,7 +543,7 @@ export function Hero({ onOpenCV }: HeroProps) {
           }
 
           .hero-copy {
-            top: 29%;
+            top: 28%;
             left: 6vw !important;
             right: auto !important;
             width: 88%;
@@ -398,10 +551,18 @@ export function Hero({ onOpenCV }: HeroProps) {
           }
 
           .map-wrap {
-            top: 42%;
-            right: -34vw;
-            width: 115vw;
-            height: 54%;
+            right: -24vw;
+            top: 40%;
+            width: 104vw;
+            height: 49%;
+          }
+
+          .lower-waves {
+            left: 5%;
+            right: 2%;
+            bottom: 1%;
+            height: 105px;
+            opacity: .65;
           }
 
           .country {
@@ -432,6 +593,16 @@ export function Hero({ onOpenCV }: HeroProps) {
 
           .hero-copy .flex {
             flex-wrap: wrap;
+          }
+
+          .map-wrap {
+            right: -36vw;
+            width: 122vw;
+          }
+
+          .lower-waves {
+            bottom: 0;
+            height: 85px;
           }
         }
       `}</style>
