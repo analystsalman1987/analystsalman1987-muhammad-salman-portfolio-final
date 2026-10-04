@@ -143,9 +143,10 @@ export function Hero({ onOpenCV }: HeroProps) {
         />
 
         {/* ====================================================
-            LEFT REAL SKYLINE
-            Starts from visual centre and continues to far left.
-            Original building/photo colours retained.
+            LEFT REAL SKYLINE — FINAL LOCKED TREATMENT
+            Full image preserved. No crop. It can extend beneath
+            the finance graph. All visible inner edges feather
+            naturally into the navy/gold Hero background.
         ===================================================== */}
         <div
           className="
@@ -154,8 +155,10 @@ export function Hero({ onOpenCV }: HeroProps) {
             bottom-0
             left-0
             z-[1]
-            h-[72%]
-            w-[52%]
+            w-[80%]
+            sm:w-[78%]
+            lg:w-[76%]
+            xl:w-[74%]
           "
         >
           <img
@@ -164,38 +167,43 @@ export function Hero({ onOpenCV }: HeroProps) {
             draggable={false}
             loading="eager"
             className="
-              absolute
-              inset-0
-              h-full
+              hero-locked-skyline-image
+              block
+              h-auto
               w-full
-              object-cover
+              object-contain
               object-left-bottom
             "
           />
 
-          {/* Only transition into centre — no colour filter */}
+          {/* Warm gold atmosphere retained over the real photo */}
           <div
             className="
               absolute
-              inset-y-0
-              right-0
-              w-[36%]
-              bg-gradient-to-r
-              from-transparent
-              via-[#071827]/45
-              to-[#071827]
+              inset-0
+              bg-[radial-gradient(ellipse_72%_58%_at_34%_54%,rgba(216,181,106,0.14)_0%,rgba(201,164,92,0.075)_38%,transparent_72%)]
             "
           />
 
-          {/* Gentle top integration */}
+          {/* Navy integration without changing the real building colours */}
+          <div
+            className="
+              absolute
+              inset-0
+              bg-[linear-gradient(90deg,rgba(7,24,39,0.04)_0%,rgba(7,24,39,0.05)_42%,rgba(7,24,39,0.22)_64%,rgba(7,24,39,0.72)_84%,#071827_100%)]
+            "
+          />
+
+          {/* Soft top feather — removes the visible photo border */}
           <div
             className="
               absolute
               inset-x-0
               top-0
-              h-[18%]
+              h-[15%]
               bg-gradient-to-b
-              from-[#071827]/60
+              from-[#071827]
+              via-[#071827]/35
               to-transparent
             "
           />
@@ -206,26 +214,26 @@ export function Hero({ onOpenCV }: HeroProps) {
               absolute
               inset-x-0
               bottom-0
-              h-[8%]
+              h-[5%]
               bg-gradient-to-t
-              from-[#071827]/45
+              from-[#071827]/35
               to-transparent
             "
           />
         </div>
 
-        {/* Centre feather between skyline and finance visual */}
+        {/* Warm transition between skyline and finance side */}
         <div
           className="
             absolute
-            bottom-0
-            left-[43%]
-            z-[2]
-            h-[72%]
-            w-[12%]
+            bottom-[8%]
+            left-[39%]
+            z-[1]
+            h-[58%]
+            w-[31%]
             rounded-full
-            bg-[#071827]/60
-            blur-[52px]
+            bg-[radial-gradient(ellipse,rgba(201,164,92,0.075)_0%,rgba(13,37,56,0.12)_42%,transparent_74%)]
+            blur-[62px]
           "
         />
 
@@ -763,17 +771,27 @@ export function Hero({ onOpenCV }: HeroProps) {
       <style>{`
         .hero-locked-skyline {
           /*
-           * Preserve the original photograph.
-           * Only feather the centre-facing edge.
+           * Keep the complete photograph visible.
+           * The photo itself is not recoloured or cropped.
+           * Only the internal top/right edges are feathered.
            */
           -webkit-mask-image:
             linear-gradient(
               to right,
               #000 0%,
-              #000 72%,
-              rgba(0,0,0,.96) 78%,
-              rgba(0,0,0,.74) 86%,
-              rgba(0,0,0,.28) 95%,
+              #000 62%,
+              rgba(0,0,0,.96) 69%,
+              rgba(0,0,0,.82) 76%,
+              rgba(0,0,0,.52) 84%,
+              rgba(0,0,0,.18) 93%,
+              transparent 100%
+            ),
+            linear-gradient(
+              to top,
+              #000 0%,
+              #000 84%,
+              rgba(0,0,0,.78) 90%,
+              rgba(0,0,0,.28) 96%,
               transparent 100%
             );
 
@@ -781,19 +799,38 @@ export function Hero({ onOpenCV }: HeroProps) {
             linear-gradient(
               to right,
               #000 0%,
-              #000 72%,
-              rgba(0,0,0,.96) 78%,
-              rgba(0,0,0,.74) 86%,
-              rgba(0,0,0,.28) 95%,
+              #000 62%,
+              rgba(0,0,0,.96) 69%,
+              rgba(0,0,0,.82) 76%,
+              rgba(0,0,0,.52) 84%,
+              rgba(0,0,0,.18) 93%,
+              transparent 100%
+            ),
+            linear-gradient(
+              to top,
+              #000 0%,
+              #000 84%,
+              rgba(0,0,0,.78) 90%,
+              rgba(0,0,0,.28) 96%,
               transparent 100%
             );
+
+          -webkit-mask-composite: source-in;
+          mask-composite: intersect;
+        }
+
+        .hero-locked-skyline-image {
+          /*
+           * IMPORTANT: no brightness, hue, saturation or colour filter.
+           * The building photograph keeps its real original colour.
+           */
+          filter: none;
         }
 
         @media (max-width: 767px) {
           .hero-locked-skyline {
-            width: 67%;
-            height: 47%;
-            opacity: .70;
+            width: 94%;
+            opacity: .72;
           }
         }
 
