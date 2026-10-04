@@ -38,326 +38,834 @@ export function Hero({ onOpenCV }: HeroProps) {
         lg:py-0
       "
     >
-      {/* =========================================================
-          HERO BACKGROUND
-          Real distant corporate buildings + finance animation
-          ========================================================= */}
+      {/* ============================================================
+          FINAL HERO BACKGROUND
+          Real distant buildings + native SVG finance animation
+          ============================================================ */}
       <div
         className="pointer-events-none absolute inset-0 z-0 overflow-hidden select-none"
         aria-hidden="true"
       >
         {/* Deep Navy Base */}
-        <div className="absolute -inset-12 bg-[radial-gradient(ellipse_95%_85%_at_50%_30%,#132E43_0%,#0D2538_30%,#081A2B_64%,#071827_100%)]" />
+        <div className="absolute inset-0 bg-[#071827]" />
 
-        {/* =======================================================
-            REAL CORPORATE BUILDINGS
-            LEFT / LOWER-LEFT ONLY
-            ======================================================= */}
-        <div className="hero-real-city absolute bottom-0 left-0 z-[1] h-[58%] w-[46%] overflow-hidden sm:h-[62%] sm:w-[43%] lg:h-[66%] lg:w-[39%] xl:w-[38%]">
+        <div
+          className="
+            absolute
+            -inset-16
+            bg-[radial-gradient(ellipse_95%_82%_at_50%_30%,#132E43_0%,#0D2538_30%,#081A2B_63%,#071827_100%)]
+          "
+        />
+
+        {/* ==========================================================
+            REAL BUILDINGS
+            SMALL + DISTANT + LOWER LEFT
+            ========================================================== */}
+        <div
+          className="
+            absolute
+            bottom-0
+            left-0
+            z-[1]
+            h-[38%]
+            w-[48%]
+            overflow-hidden
+            sm:h-[40%]
+            sm:w-[45%]
+            lg:h-[42%]
+            lg:w-[42%]
+            xl:w-[40%]
+          "
+          style={{
+            WebkitMaskImage:
+              'linear-gradient(to right, black 0%, black 58%, rgba(0,0,0,0.82) 72%, transparent 100%)',
+            maskImage:
+              'linear-gradient(to right, black 0%, black 58%, rgba(0,0,0,0.82) 72%, transparent 100%)',
+          }}
+        >
           <img
             src="/images/hero-distant-buildings.jpg"
             alt=""
-            className="hero-real-city-image h-full w-full object-cover object-left-bottom"
-            loading="eager"
             draggable={false}
+            loading="eager"
+            className="
+              absolute
+              bottom-0
+              left-0
+              h-auto
+              w-full
+              object-contain
+              object-left-bottom
+              opacity-[0.82]
+            "
+            style={{
+              filter:
+                'brightness(0.58) contrast(1.16) saturate(0.72) sepia(0.10)',
+            }}
           />
 
-          {/* Navy treatment over photograph */}
-          <div className="absolute inset-0 bg-[#071827]/25 mix-blend-multiply" />
+          {/* Navy blend */}
+          <div className="absolute inset-0 bg-[#071827]/20 mix-blend-multiply" />
 
-          {/* Gold/blue atmospheric tint */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#071827]/35 via-[#0D2538]/10 to-[#071827]/30" />
+          {/* Top fade */}
+          <div className="absolute inset-x-0 top-0 h-[42%] bg-gradient-to-b from-[#071827] via-[#071827]/60 to-transparent" />
 
-          {/* Fade photograph smoothly into center */}
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-[#071827]" />
+          {/* Right fade */}
+          <div className="absolute inset-y-0 right-0 w-[45%] bg-gradient-to-r from-transparent via-[#071827]/45 to-[#071827]" />
 
-          {/* Fade upper edge */}
-          <div className="absolute inset-x-0 top-0 h-[32%] bg-gradient-to-b from-[#071827] to-transparent" />
+          {/* Bottom integration */}
+          <div className="absolute inset-x-0 bottom-0 h-[16%] bg-gradient-to-t from-[#071827]/75 to-transparent" />
         </div>
 
-        {/* Very subtle floor reflection under buildings */}
-        <div className="hero-city-reflection absolute bottom-0 left-0 z-[1] h-[16%] w-[45%] bg-[linear-gradient(180deg,rgba(216,181,106,0.06),rgba(19,46,67,0.12)_35%,transparent_100%)] blur-xl" />
+        {/* Subtle gold reflection below buildings */}
+        <div
+          className="
+            absolute
+            bottom-0
+            left-0
+            z-[1]
+            h-[12%]
+            w-[42%]
+            bg-[radial-gradient(ellipse_at_bottom,rgba(216,181,106,0.08)_0%,rgba(13,37,56,0.08)_45%,transparent_75%)]
+            blur-2xl
+          "
+        />
 
-        {/* =======================================================
-            RIGHT-SIDE FINANCIAL GRAPH
-            ======================================================= */}
-        <div className="absolute inset-0 z-[2]">
-          <svg
-            className="h-full w-full"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 1440 900"
-            preserveAspectRatio="none"
+        {/* ==========================================================
+            FINANCIAL GRAPH
+            RIGHT SIDE ONLY
+            Native SVG animation for clearly visible movement
+            ========================================================== */}
+        <svg
+          className="absolute inset-0 z-[2] h-full w-full"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1440 900"
+          preserveAspectRatio="none"
+        >
+          <defs>
+            <linearGradient
+              id="finalHeroGraphFill"
+              x1="0%"
+              y1="0%"
+              x2="0%"
+              y2="100%"
+            >
+              <stop
+                offset="0%"
+                stopColor="#D8B56A"
+                stopOpacity="0.16"
+              />
+              <stop
+                offset="52%"
+                stopColor="#C9A45C"
+                stopOpacity="0.055"
+              />
+              <stop
+                offset="100%"
+                stopColor="#071827"
+                stopOpacity="0"
+              />
+            </linearGradient>
+
+            <linearGradient
+              id="finalHeroGold"
+              x1="0%"
+              y1="0%"
+              x2="100%"
+              y2="0%"
+            >
+              <stop
+                offset="0%"
+                stopColor="#C9A45C"
+                stopOpacity="0.45"
+              />
+              <stop
+                offset="40%"
+                stopColor="#D8B56A"
+                stopOpacity="0.90"
+              />
+              <stop
+                offset="100%"
+                stopColor="#F4E7C5"
+                stopOpacity="1"
+              />
+            </linearGradient>
+
+            <linearGradient
+              id="finalHeroBar"
+              x1="0%"
+              y1="100%"
+              x2="0%"
+              y2="0%"
+            >
+              <stop
+                offset="0%"
+                stopColor="#0D2538"
+                stopOpacity="0.18"
+              />
+              <stop
+                offset="55%"
+                stopColor="#315B78"
+                stopOpacity="0.35"
+              />
+              <stop
+                offset="100%"
+                stopColor="#D8B56A"
+                stopOpacity="0.50"
+              />
+            </linearGradient>
+
+            <linearGradient
+              id="finalHeroSweep"
+              x1="0%"
+              y1="0%"
+              x2="100%"
+              y2="0%"
+            >
+              <stop
+                offset="0%"
+                stopColor="#D8B56A"
+                stopOpacity="0"
+              />
+              <stop
+                offset="42%"
+                stopColor="#D8B56A"
+                stopOpacity="0.02"
+              />
+              <stop
+                offset="50%"
+                stopColor="#F4E7C5"
+                stopOpacity="0.22"
+              />
+              <stop
+                offset="58%"
+                stopColor="#D8B56A"
+                stopOpacity="0.06"
+              />
+              <stop
+                offset="100%"
+                stopColor="#D8B56A"
+                stopOpacity="0"
+              />
+            </linearGradient>
+
+            <filter
+              id="finalHeroGlow"
+              x="-40%"
+              y="-40%"
+              width="180%"
+              height="180%"
+            >
+              <feGaussianBlur
+                stdDeviation="4"
+                result="blur"
+              />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+
+            <filter
+              id="finalHeroStrongGlow"
+              x="-80%"
+              y="-80%"
+              width="260%"
+              height="260%"
+            >
+              <feGaussianBlur
+                stdDeviation="8"
+                result="blur"
+              />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+
+          {/* --------------------------------------------------------
+              SUBTLE FINANCIAL GRID — RIGHT SIDE
+              -------------------------------------------------------- */}
+          <g opacity="0.13">
+            <line x1="850" y1="300" x2="850" y2="825" stroke="#CBD5E1" />
+            <line x1="950" y1="300" x2="950" y2="825" stroke="#CBD5E1" />
+            <line x1="1050" y1="300" x2="1050" y2="825" stroke="#CBD5E1" />
+            <line x1="1150" y1="300" x2="1150" y2="825" stroke="#CBD5E1" />
+            <line x1="1250" y1="300" x2="1250" y2="825" stroke="#CBD5E1" />
+            <line x1="1350" y1="300" x2="1350" y2="825" stroke="#CBD5E1" />
+
+            <line x1="790" y1="400" x2="1440" y2="400" stroke="#CBD5E1" />
+            <line x1="790" y1="500" x2="1440" y2="500" stroke="#CBD5E1" />
+            <line x1="790" y1="600" x2="1440" y2="600" stroke="#CBD5E1" />
+            <line x1="790" y1="700" x2="1440" y2="700" stroke="#CBD5E1" />
+            <line x1="790" y1="800" x2="1440" y2="800" stroke="#CBD5E1" />
+          </g>
+
+          {/* --------------------------------------------------------
+              GRAPH AREA
+              -------------------------------------------------------- */}
+          <path
+            d="
+              M 760 765
+              C 830 755, 885 738, 940 720
+              C 1000 700, 1055 675, 1100 645
+              C 1150 612, 1185 580, 1225 550
+              C 1270 515, 1300 475, 1340 430
+              C 1375 390, 1405 350, 1440 315
+              L 1440 850
+              L 760 850
+              Z
+            "
+            fill="url(#finalHeroGraphFill)"
           >
-            <defs>
-              <linearGradient
-                id="heroGraphArea"
-                x1="0%"
-                y1="0%"
-                x2="0%"
-                y2="100%"
-              >
-                <stop
-                  offset="0%"
-                  stopColor="#D8B56A"
-                  stopOpacity="0.18"
-                />
-                <stop
-                  offset="48%"
-                  stopColor="#C9A45C"
-                  stopOpacity="0.07"
-                />
-                <stop
-                  offset="100%"
-                  stopColor="#071827"
-                  stopOpacity="0"
-                />
-              </linearGradient>
+            <animate
+              attributeName="opacity"
+              values="0.18;0.70;0.70;0.18"
+              keyTimes="0;0.35;0.78;1"
+              dur="7s"
+              repeatCount="indefinite"
+            />
+          </path>
 
-              <linearGradient
-                id="heroGraphGold"
-                x1="0%"
-                y1="0%"
-                x2="100%"
-                y2="0%"
-              >
-                <stop
-                  offset="0%"
-                  stopColor="#C9A45C"
-                  stopOpacity="0.35"
-                />
-                <stop
-                  offset="35%"
-                  stopColor="#D8B56A"
-                  stopOpacity="0.75"
-                />
-                <stop
-                  offset="100%"
-                  stopColor="#F4E7C5"
-                  stopOpacity="1"
-                />
-              </linearGradient>
+          {/* --------------------------------------------------------
+              SECONDARY MOVING DASHED LINE
+              -------------------------------------------------------- */}
+          <path
+            d="
+              M 785 790
+              C 850 780, 910 760, 965 742
+              C 1020 723, 1070 700, 1120 670
+              C 1170 640, 1210 610, 1250 580
+              C 1300 545, 1345 500, 1385 455
+              C 1405 433, 1425 412, 1440 395
+            "
+            fill="none"
+            stroke="#CBD5E1"
+            strokeWidth="1.4"
+            strokeDasharray="8 12"
+            strokeOpacity="0.35"
+          >
+            <animate
+              attributeName="stroke-dashoffset"
+              from="0"
+              to="-200"
+              dur="5s"
+              repeatCount="indefinite"
+            />
+          </path>
 
-              <filter
-                id="heroGoldGlow"
-                x="-30%"
-                y="-30%"
-                width="160%"
-                height="160%"
-              >
-                <feGaussianBlur
-                  stdDeviation="4"
-                  result="blur"
-                />
-                <feMerge>
-                  <feMergeNode in="blur" />
-                  <feMergeNode in="SourceGraphic" />
-                </feMerge>
-              </filter>
-            </defs>
+          {/* --------------------------------------------------------
+              SOFT GOLD GLOW UNDER MAIN GRAPH
+              -------------------------------------------------------- */}
+          <path
+            d="
+              M 760 765
+              C 830 755, 885 738, 940 720
+              C 1000 700, 1055 675, 1100 645
+              C 1150 612, 1185 580, 1225 550
+              C 1270 515, 1300 475, 1340 430
+              C 1375 390, 1405 350, 1440 315
+            "
+            fill="none"
+            stroke="#D8B56A"
+            strokeWidth="9"
+            strokeLinecap="round"
+            strokeOpacity="0.08"
+            pathLength="1000"
+            strokeDasharray="1000"
+            filter="url(#finalHeroGlow)"
+          >
+            <animate
+              attributeName="stroke-dashoffset"
+              values="1000;0;0;1000"
+              keyTimes="0;0.48;0.84;1"
+              dur="7s"
+              repeatCount="indefinite"
+            />
+          </path>
 
-            {/* Subtle financial grid — right only */}
-            <g className="hero-fin-grid">
-              {[760, 840, 920, 1000, 1080, 1160, 1240, 1320, 1400].map(
-                (x) => (
-                  <line
-                    key={`v-${x}`}
-                    x1={x}
-                    y1="260"
-                    x2={x}
-                    y2="820"
-                    stroke="#CBD5E1"
-                    strokeOpacity="0.055"
-                    strokeWidth="1"
-                  />
-                ),
-              )}
-
-              {[340, 420, 500, 580, 660, 740, 820].map((y) => (
-                <line
-                  key={`h-${y}`}
-                  x1="720"
-                  y1={y}
-                  x2="1440"
-                  y2={y}
-                  stroke="#CBD5E1"
-                  strokeOpacity="0.05"
-                  strokeWidth="1"
-                />
-              ))}
-            </g>
-
-            {/* Graph soft area */}
-            <path
-              className="hero-graph-area"
-              d="
-                M 680 760
-                C 760 748, 825 728, 900 710
-                C 975 690, 1030 670, 1080 640
-                C 1135 607, 1165 565, 1215 545
-                C 1265 525, 1300 485, 1340 440
-                C 1375 400, 1405 365, 1440 330
-                L 1440 850
-                L 680 850
-                Z
-              "
-              fill="url(#heroGraphArea)"
+          {/* --------------------------------------------------------
+              MAIN GOLD GRAPH
+              ACTUAL LEFT -> RIGHT DRAW
+              -------------------------------------------------------- */}
+          <path
+            d="
+              M 760 765
+              C 830 755, 885 738, 940 720
+              C 1000 700, 1055 675, 1100 645
+              C 1150 612, 1185 580, 1225 550
+              C 1270 515, 1300 475, 1340 430
+              C 1375 390, 1405 350, 1440 315
+            "
+            fill="none"
+            stroke="url(#finalHeroGold)"
+            strokeWidth="3.5"
+            strokeLinecap="round"
+            pathLength="1000"
+            strokeDasharray="1000"
+            strokeDashoffset="1000"
+            filter="url(#finalHeroGlow)"
+          >
+            <animate
+              attributeName="stroke-dashoffset"
+              values="1000;0;0;1000"
+              keyTimes="0;0.48;0.84;1"
+              dur="7s"
+              repeatCount="indefinite"
             />
 
-            {/* Secondary moving dotted trajectory */}
-            <path
-              className="hero-graph-dashed"
-              d="
-                M 700 785
-                C 790 770, 855 750, 925 730
-                C 995 710, 1050 690, 1100 660
-                C 1150 630, 1190 600, 1235 575
-                C 1290 545, 1340 500, 1390 455
-                C 1410 438, 1425 422, 1440 405
-              "
-              fill="none"
-              stroke="#CBD5E1"
-              strokeWidth="1.2"
-              strokeDasharray="7 11"
-              strokeOpacity="0.28"
+            <animate
+              attributeName="stroke-opacity"
+              values="0;1;1;0"
+              keyTimes="0;0.08;0.84;1"
+              dur="7s"
+              repeatCount="indefinite"
+            />
+          </path>
+
+          {/* --------------------------------------------------------
+              BRIGHT TRAVELING SEGMENT
+              -------------------------------------------------------- */}
+          <path
+            d="
+              M 760 765
+              C 830 755, 885 738, 940 720
+              C 1000 700, 1055 675, 1100 645
+              C 1150 612, 1185 580, 1225 550
+              C 1270 515, 1300 475, 1340 430
+              C 1375 390, 1405 350, 1440 315
+            "
+            fill="none"
+            stroke="#F4E7C5"
+            strokeWidth="5.5"
+            strokeLinecap="round"
+            pathLength="1000"
+            strokeDasharray="38 962"
+            strokeDashoffset="1000"
+            filter="url(#finalHeroStrongGlow)"
+          >
+            <animate
+              attributeName="stroke-dashoffset"
+              from="1000"
+              to="-1000"
+              dur="7s"
+              repeatCount="indefinite"
             />
 
-            {/* Glow underneath main graph */}
-            <path
-              className="hero-graph-glow"
-              d="
-                M 680 760
-                C 760 748, 825 728, 900 710
-                C 975 690, 1030 670, 1080 640
-                C 1135 607, 1165 565, 1215 545
-                C 1265 525, 1300 485, 1340 440
-                C 1375 400, 1405 365, 1440 330
-              "
-              fill="none"
-              stroke="#D8B56A"
-              strokeWidth="7"
-              strokeLinecap="round"
-              strokeOpacity="0.10"
+            <animate
+              attributeName="stroke-opacity"
+              values="0;1;1;0"
+              keyTimes="0;0.10;0.86;1"
+              dur="7s"
+              repeatCount="indefinite"
             />
+          </path>
 
-            {/* MAIN GOLD LINE — ACTUAL DRAW/TRAVEL */}
-            <path
-              className="hero-graph-line"
-              d="
-                M 680 760
-                C 760 748, 825 728, 900 710
-                C 975 690, 1030 670, 1080 640
-                C 1135 607, 1165 565, 1215 545
-                C 1265 525, 1300 485, 1340 440
-                C 1375 400, 1405 365, 1440 330
-              "
-              fill="none"
-              stroke="url(#heroGraphGold)"
-              strokeWidth="3"
-              strokeLinecap="round"
-              filter="url(#heroGoldGlow)"
-              pathLength="1000"
+          {/* --------------------------------------------------------
+              SEQUENTIAL GRAPH NODES
+              -------------------------------------------------------- */}
+          <circle
+            cx="940"
+            cy="720"
+            r="4"
+            fill="#D8B56A"
+            stroke="#071827"
+            strokeWidth="2"
+            opacity="0"
+            filter="url(#finalHeroGlow)"
+          >
+            <animate
+              attributeName="opacity"
+              values="0;0;1;1;0"
+              keyTimes="0;0.16;0.23;0.82;1"
+              dur="7s"
+              repeatCount="indefinite"
             />
-
-            {/* Traveling highlight */}
-            <path
-              className="hero-graph-traveler"
-              d="
-                M 680 760
-                C 760 748, 825 728, 900 710
-                C 975 690, 1030 670, 1080 640
-                C 1135 607, 1165 565, 1215 545
-                C 1265 525, 1300 485, 1340 440
-                C 1375 400, 1405 365, 1440 330
-              "
-              fill="none"
-              stroke="#F4E7C5"
-              strokeWidth="5"
-              strokeLinecap="round"
-              strokeDasharray="24 976"
-              pathLength="1000"
-              filter="url(#heroGoldGlow)"
+            <animate
+              attributeName="r"
+              values="3;3;7;4;3"
+              keyTimes="0;0.16;0.23;0.55;1"
+              dur="7s"
+              repeatCount="indefinite"
             />
+          </circle>
 
-            {/* Sequential glowing nodes */}
-            <g>
-              <circle
-                cx="900"
-                cy="710"
-                r="5"
-                className="hero-node hero-node-1"
-                fill="#D8B56A"
-                stroke="#071827"
-                strokeWidth="2"
+          <circle
+            cx="1100"
+            cy="645"
+            r="4"
+            fill="#F8FAFC"
+            stroke="#D8B56A"
+            strokeWidth="2"
+            opacity="0"
+            filter="url(#finalHeroGlow)"
+          >
+            <animate
+              attributeName="opacity"
+              values="0;0;1;1;0"
+              keyTimes="0;0.28;0.35;0.82;1"
+              dur="7s"
+              repeatCount="indefinite"
+            />
+            <animate
+              attributeName="r"
+              values="3;3;7;4;3"
+              keyTimes="0;0.28;0.35;0.60;1"
+              dur="7s"
+              repeatCount="indefinite"
+            />
+          </circle>
+
+          <circle
+            cx="1225"
+            cy="550"
+            r="4"
+            fill="#D8B56A"
+            stroke="#071827"
+            strokeWidth="2"
+            opacity="0"
+            filter="url(#finalHeroGlow)"
+          >
+            <animate
+              attributeName="opacity"
+              values="0;0;1;1;0"
+              keyTimes="0;0.38;0.45;0.82;1"
+              dur="7s"
+              repeatCount="indefinite"
+            />
+            <animate
+              attributeName="r"
+              values="3;3;7;4;3"
+              keyTimes="0;0.38;0.45;0.66;1"
+              dur="7s"
+              repeatCount="indefinite"
+            />
+          </circle>
+
+          <circle
+            cx="1340"
+            cy="430"
+            r="5"
+            fill="#F8FAFC"
+            stroke="#D8B56A"
+            strokeWidth="2"
+            opacity="0"
+            filter="url(#finalHeroGlow)"
+          >
+            <animate
+              attributeName="opacity"
+              values="0;0;1;1;0"
+              keyTimes="0;0.46;0.53;0.82;1"
+              dur="7s"
+              repeatCount="indefinite"
+            />
+            <animate
+              attributeName="r"
+              values="3;3;8;5;3"
+              keyTimes="0;0.46;0.53;0.70;1"
+              dur="7s"
+              repeatCount="indefinite"
+            />
+          </circle>
+
+          {/* --------------------------------------------------------
+              MOVING FINANCIAL BARS
+              Native SVG height/y animations
+              -------------------------------------------------------- */}
+          <g opacity="0.72">
+            <rect
+              x="900"
+              y="755"
+              width="13"
+              height="70"
+              rx="2"
+              fill="url(#finalHeroBar)"
+            >
+              <animate
+                attributeName="y"
+                values="780;735;760;780"
+                dur="4.4s"
+                repeatCount="indefinite"
               />
-
-              <circle
-                cx="1080"
-                cy="640"
-                r="5"
-                className="hero-node hero-node-2"
-                fill="#F8FAFC"
-                stroke="#D8B56A"
-                strokeWidth="2"
+              <animate
+                attributeName="height"
+                values="45;90;65;45"
+                dur="4.4s"
+                repeatCount="indefinite"
               />
+            </rect>
 
-              <circle
-                cx="1215"
-                cy="545"
-                r="5"
-                className="hero-node hero-node-3"
-                fill="#D8B56A"
-                stroke="#071827"
-                strokeWidth="2"
+            <rect
+              x="930"
+              y="720"
+              width="13"
+              height="105"
+              rx="2"
+              fill="url(#finalHeroBar)"
+            >
+              <animate
+                attributeName="y"
+                values="740;775;710;740"
+                dur="5.3s"
+                begin=".4s"
+                repeatCount="indefinite"
               />
-
-              <circle
-                cx="1340"
-                cy="440"
-                r="6"
-                className="hero-node hero-node-4"
-                fill="#F8FAFC"
-                stroke="#D8B56A"
-                strokeWidth="2"
+              <animate
+                attributeName="height"
+                values="85;50;115;85"
+                dur="5.3s"
+                begin=".4s"
+                repeatCount="indefinite"
               />
-            </g>
-          </svg>
-        </div>
+            </rect>
 
-        {/* =======================================================
-            ANIMATED FINANCIAL BARS — RIGHT / LOWER-RIGHT
-            ======================================================= */}
-        <div className="hero-bars absolute right-[2%] bottom-[5%] z-[2] flex h-[30%] w-[45%] items-end justify-end gap-[clamp(6px,1vw,16px)] opacity-70">
-          <span className="hero-bar hero-bar-1 h-[24%]" />
-          <span className="hero-bar hero-bar-2 h-[38%]" />
-          <span className="hero-bar hero-bar-3 h-[29%]" />
-          <span className="hero-bar hero-bar-4 h-[48%]" />
-          <span className="hero-bar hero-bar-5 h-[35%]" />
-          <span className="hero-bar hero-bar-6 h-[60%]" />
-          <span className="hero-bar hero-bar-7 h-[44%]" />
-          <span className="hero-bar hero-bar-8 h-[72%]" />
-          <span className="hero-bar hero-bar-9 h-[55%]" />
-          <span className="hero-bar hero-bar-10 h-[82%]" />
-        </div>
+            <rect
+              x="960"
+              y="745"
+              width="13"
+              height="80"
+              rx="2"
+              fill="url(#finalHeroBar)"
+            >
+              <animate
+                attributeName="y"
+                values="770;715;750;770"
+                dur="4.8s"
+                begin=".8s"
+                repeatCount="indefinite"
+              />
+              <animate
+                attributeName="height"
+                values="55;110;75;55"
+                dur="4.8s"
+                begin=".8s"
+                repeatCount="indefinite"
+              />
+            </rect>
 
-        {/* Moving warm glow */}
-        <div className="hero-gold-ambient absolute right-[4%] bottom-[8%] z-[2] h-[55%] w-[48%] rounded-full bg-[radial-gradient(circle,rgba(216,181,106,0.12)_0%,rgba(201,164,92,0.045)_42%,transparent_72%)] blur-[55px]" />
+            <rect
+              x="990"
+              y="695"
+              width="13"
+              height="130"
+              rx="2"
+              fill="url(#finalHeroBar)"
+            >
+              <animate
+                attributeName="y"
+                values="715;770;680;715"
+                dur="5.8s"
+                begin="1.1s"
+                repeatCount="indefinite"
+              />
+              <animate
+                attributeName="height"
+                values="110;55;145;110"
+                dur="5.8s"
+                begin="1.1s"
+                repeatCount="indefinite"
+              />
+            </rect>
 
-        {/* Moving reflection sweep */}
-        <div className="hero-light-sweep absolute top-[-25%] z-[3] h-[150%] w-[18%] rotate-[17deg] bg-[linear-gradient(90deg,transparent_0%,rgba(255,255,255,0.025)_30%,rgba(216,181,106,0.14)_50%,rgba(255,255,255,0.04)_58%,transparent_100%)] blur-[8px]" />
+            <rect
+              x="1020"
+              y="735"
+              width="13"
+              height="90"
+              rx="2"
+              fill="url(#finalHeroBar)"
+            >
+              <animate
+                attributeName="y"
+                values="760;700;740;760"
+                dur="4.6s"
+                begin="1.5s"
+                repeatCount="indefinite"
+              />
+              <animate
+                attributeName="height"
+                values="65;125;85;65"
+                dur="4.6s"
+                begin="1.5s"
+                repeatCount="indefinite"
+              />
+            </rect>
 
-        {/* Center text protection */}
-        <div className="absolute inset-0 z-[4] bg-[radial-gradient(ellipse_48%_48%_at_50%_48%,rgba(7,24,39,0.84)_0%,rgba(7,24,39,0.62)_48%,rgba(7,24,39,0.18)_76%,transparent_100%)]" />
+            <rect
+              x="1050"
+              y="675"
+              width="13"
+              height="150"
+              rx="2"
+              fill="url(#finalHeroBar)"
+            >
+              <animate
+                attributeName="y"
+                values="690;755;660;690"
+                dur="6s"
+                begin=".2s"
+                repeatCount="indefinite"
+              />
+              <animate
+                attributeName="height"
+                values="135;70;165;135"
+                dur="6s"
+                begin=".2s"
+                repeatCount="indefinite"
+              />
+            </rect>
 
-        {/* Overall executive vignette */}
-        <div className="absolute inset-0 z-[5] bg-[radial-gradient(ellipse_88%_82%_at_50%_48%,transparent_44%,rgba(7,24,39,0.22)_72%,#071827_100%)]" />
+            <rect
+              x="1080"
+              y="725"
+              width="13"
+              height="100"
+              rx="2"
+              fill="url(#finalHeroBar)"
+            >
+              <animate
+                attributeName="y"
+                values="750;690;730;750"
+                dur="5.1s"
+                begin=".9s"
+                repeatCount="indefinite"
+              />
+              <animate
+                attributeName="height"
+                values="75;135;95;75"
+                dur="5.1s"
+                begin=".9s"
+                repeatCount="indefinite"
+              />
+            </rect>
 
-        {/* Bottom reflective floor fade */}
-        <div className="absolute inset-x-0 bottom-0 z-[5] h-[16%] bg-gradient-to-t from-[#071827] via-[#071827]/60 to-transparent" />
+            <rect
+              x="1110"
+              y="655"
+              width="13"
+              height="170"
+              rx="2"
+              fill="url(#finalHeroBar)"
+            >
+              <animate
+                attributeName="y"
+                values="675;745;640;675"
+                dur="6.3s"
+                begin="1.4s"
+                repeatCount="indefinite"
+              />
+              <animate
+                attributeName="height"
+                values="150;80;185;150"
+                dur="6.3s"
+                begin="1.4s"
+                repeatCount="indefinite"
+              />
+            </rect>
+
+            <rect
+              x="1140"
+              y="705"
+              width="13"
+              height="120"
+              rx="2"
+              fill="url(#finalHeroBar)"
+            >
+              <animate
+                attributeName="y"
+                values="730;670;710;730"
+                dur="5.5s"
+                begin="1.8s"
+                repeatCount="indefinite"
+              />
+              <animate
+                attributeName="height"
+                values="95;155;115;95"
+                dur="5.5s"
+                begin="1.8s"
+                repeatCount="indefinite"
+              />
+            </rect>
+          </g>
+
+          {/* --------------------------------------------------------
+              MOVING GOLD REFLECTION SWEEP
+              -------------------------------------------------------- */}
+          <g opacity="0">
+            <rect
+              x="-350"
+              y="-100"
+              width="250"
+              height="1100"
+              fill="url(#finalHeroSweep)"
+              transform="rotate(15 0 450)"
+            />
+
+            <animate
+              attributeName="opacity"
+              values="0;0.75;0.75;0"
+              keyTimes="0;0.12;0.82;1"
+              dur="9s"
+              repeatCount="indefinite"
+            />
+
+            <animateTransform
+              attributeName="transform"
+              type="translate"
+              from="0 0"
+              to="2050 0"
+              dur="9s"
+              repeatCount="indefinite"
+            />
+          </g>
+        </svg>
+
+        {/* Right-side gold atmospheric glow */}
+        <div
+          className="
+            absolute
+            right-[2%]
+            bottom-[4%]
+            z-[2]
+            h-[55%]
+            w-[48%]
+            rounded-full
+            bg-[radial-gradient(circle,rgba(216,181,106,0.10)_0%,rgba(201,164,92,0.04)_42%,transparent_72%)]
+            blur-[60px]
+          "
+        />
+
+        {/* ==========================================================
+            CENTRAL CLEAN/DARK AREA
+            Keeps name perfectly readable
+            ========================================================== */}
+        <div
+          className="
+            absolute
+            inset-0
+            z-[3]
+            bg-[radial-gradient(ellipse_47%_50%_at_50%_47%,rgba(7,24,39,0.88)_0%,rgba(7,24,39,0.66)_48%,rgba(7,24,39,0.20)_75%,transparent_100%)]
+          "
+        />
+
+        {/* Executive vignette */}
+        <div
+          className="
+            absolute
+            inset-0
+            z-[4]
+            bg-[radial-gradient(ellipse_88%_82%_at_50%_48%,transparent_44%,rgba(7,24,39,0.22)_72%,#071827_100%)]
+          "
+        />
+
+        {/* Bottom integration */}
+        <div className="absolute inset-x-0 bottom-0 z-[5] h-[12%] bg-gradient-to-t from-[#071827] via-[#071827]/60 to-transparent" />
       </div>
 
-      {/* =========================================================
-          APPROVED HERO CONTENT
-          ========================================================= */}
+      {/* ============================================================
+          HERO CONTENT
+          ============================================================ */}
       <div
         className="
           relative
@@ -419,7 +927,7 @@ export function Hero({ onOpenCV }: HeroProps) {
           </span>
         </h1>
 
-        {/* Designation */}
+        {/* Accountant */}
         <p
           className="
             text-base
@@ -581,424 +1089,6 @@ export function Hero({ onOpenCV }: HeroProps) {
           </a>
         </div>
       </div>
-
-      {/* =========================================================
-          HERO-ONLY ANIMATIONS
-          Isolated here so the rest of the website is untouched.
-          ========================================================= */}
-      <style>{`
-        .hero-real-city {
-          -webkit-mask-image:
-            linear-gradient(to right, #000 0%, #000 58%, rgba(0,0,0,.82) 72%, transparent 100%),
-            linear-gradient(to top, #000 0%, #000 72%, transparent 100%);
-          mask-image:
-            linear-gradient(to right, #000 0%, #000 58%, rgba(0,0,0,.82) 72%, transparent 100%),
-            linear-gradient(to top, #000 0%, #000 72%, transparent 100%);
-          -webkit-mask-composite: source-in;
-          mask-composite: intersect;
-        }
-
-        .hero-real-city-image {
-          filter:
-            brightness(.54)
-            contrast(1.12)
-            saturate(.82)
-            sepia(.08)
-            hue-rotate(168deg);
-          transform: scale(1.03);
-          transform-origin: left bottom;
-        }
-
-        .hero-city-reflection {
-          animation: heroCityReflection 7s ease-in-out infinite;
-        }
-
-        .hero-graph-area {
-          animation: heroGraphArea 7.2s ease-in-out infinite;
-        }
-
-        .hero-graph-line {
-          stroke-dasharray: 1000;
-          stroke-dashoffset: 1000;
-          animation: heroGraphDraw 7.2s ease-in-out infinite;
-        }
-
-        .hero-graph-glow {
-          stroke-dasharray: 1000;
-          stroke-dashoffset: 1000;
-          animation: heroGraphGlowDraw 7.2s ease-in-out infinite;
-        }
-
-        .hero-graph-traveler {
-          stroke-dashoffset: 1024;
-          animation: heroGraphTraveler 7.2s linear infinite;
-        }
-
-        .hero-graph-dashed {
-          animation: heroDashFlow 5.5s linear infinite;
-        }
-
-        .hero-node {
-          opacity: 0;
-          transform-box: fill-box;
-          transform-origin: center;
-        }
-
-        .hero-node-1 {
-          animation: heroNodePulse 7.2s ease-in-out 1.0s infinite;
-        }
-
-        .hero-node-2 {
-          animation: heroNodePulse 7.2s ease-in-out 1.55s infinite;
-        }
-
-        .hero-node-3 {
-          animation: heroNodePulse 7.2s ease-in-out 2.1s infinite;
-        }
-
-        .hero-node-4 {
-          animation: heroNodePulse 7.2s ease-in-out 2.65s infinite;
-        }
-
-        .hero-bar {
-          display: block;
-          width: clamp(7px, 0.8vw, 13px);
-          transform-origin: bottom;
-          border-top: 1px solid rgba(216,181,106,.52);
-          border-radius: 2px 2px 0 0;
-          background:
-            linear-gradient(
-              to top,
-              rgba(13,37,56,.40),
-              rgba(30,73,105,.42) 50%,
-              rgba(216,181,106,.32)
-            );
-          box-shadow:
-            0 -2px 8px rgba(216,181,106,.07),
-            inset 0 0 10px rgba(56,189,248,.06);
-        }
-
-        .hero-bar-1 {
-          animation: heroBarA 4.8s ease-in-out .1s infinite;
-        }
-
-        .hero-bar-2 {
-          animation: heroBarB 5.5s ease-in-out .7s infinite;
-        }
-
-        .hero-bar-3 {
-          animation: heroBarC 4.4s ease-in-out 1.2s infinite;
-        }
-
-        .hero-bar-4 {
-          animation: heroBarA 6s ease-in-out 1.8s infinite;
-        }
-
-        .hero-bar-5 {
-          animation: heroBarB 4.7s ease-in-out 2.3s infinite;
-        }
-
-        .hero-bar-6 {
-          animation: heroBarC 5.8s ease-in-out .4s infinite;
-        }
-
-        .hero-bar-7 {
-          animation: heroBarA 5.1s ease-in-out 1.1s infinite;
-        }
-
-        .hero-bar-8 {
-          animation: heroBarB 6.2s ease-in-out 1.6s infinite;
-        }
-
-        .hero-bar-9 {
-          animation: heroBarC 5.4s ease-in-out 2s infinite;
-        }
-
-        .hero-bar-10 {
-          animation: heroBarA 6.4s ease-in-out 2.5s infinite;
-        }
-
-        .hero-light-sweep {
-          left: -28%;
-          animation: heroLightSweep 9s cubic-bezier(.35,.05,.25,1) infinite;
-        }
-
-        .hero-gold-ambient {
-          animation: heroGoldAmbient 8s ease-in-out infinite;
-        }
-
-        @keyframes heroGraphDraw {
-          0% {
-            stroke-dashoffset: 1000;
-            opacity: 0;
-          }
-
-          7% {
-            opacity: 1;
-          }
-
-          48% {
-            stroke-dashoffset: 0;
-            opacity: 1;
-          }
-
-          82% {
-            stroke-dashoffset: 0;
-            opacity: 1;
-          }
-
-          94% {
-            stroke-dashoffset: 0;
-            opacity: .18;
-          }
-
-          100% {
-            stroke-dashoffset: 1000;
-            opacity: 0;
-          }
-        }
-
-        @keyframes heroGraphGlowDraw {
-          0% {
-            stroke-dashoffset: 1000;
-            opacity: 0;
-          }
-
-          8% {
-            opacity: .15;
-          }
-
-          48% {
-            stroke-dashoffset: 0;
-            opacity: .45;
-          }
-
-          82% {
-            stroke-dashoffset: 0;
-            opacity: .30;
-          }
-
-          100% {
-            stroke-dashoffset: 1000;
-            opacity: 0;
-          }
-        }
-
-        @keyframes heroGraphTraveler {
-          0% {
-            stroke-dashoffset: 1024;
-            opacity: 0;
-          }
-
-          8% {
-            opacity: 1;
-          }
-
-          68% {
-            stroke-dashoffset: 0;
-            opacity: 1;
-          }
-
-          86% {
-            stroke-dashoffset: -500;
-            opacity: .35;
-          }
-
-          100% {
-            stroke-dashoffset: -1000;
-            opacity: 0;
-          }
-        }
-
-        @keyframes heroDashFlow {
-          from {
-            stroke-dashoffset: 0;
-          }
-
-          to {
-            stroke-dashoffset: -144;
-          }
-        }
-
-        @keyframes heroNodePulse {
-          0%, 8%, 100% {
-            opacity: 0;
-            transform: scale(.65);
-          }
-
-          18% {
-            opacity: 1;
-            transform: scale(1.55);
-          }
-
-          28% {
-            opacity: .95;
-            transform: scale(1);
-          }
-
-          70% {
-            opacity: .80;
-            transform: scale(1);
-          }
-
-          82% {
-            opacity: 0;
-            transform: scale(.75);
-          }
-        }
-
-        @keyframes heroGraphArea {
-          0%, 100% {
-            opacity: .12;
-          }
-
-          45%, 75% {
-            opacity: .72;
-          }
-        }
-
-        @keyframes heroBarA {
-          0%, 100% {
-            transform: scaleY(.34);
-            opacity: .32;
-          }
-
-          45% {
-            transform: scaleY(1);
-            opacity: .88;
-          }
-
-          72% {
-            transform: scaleY(.58);
-            opacity: .55;
-          }
-        }
-
-        @keyframes heroBarB {
-          0%, 100% {
-            transform: scaleY(.82);
-            opacity: .72;
-          }
-
-          38% {
-            transform: scaleY(.30);
-            opacity: .30;
-          }
-
-          72% {
-            transform: scaleY(1.08);
-            opacity: .92;
-          }
-        }
-
-        @keyframes heroBarC {
-          0%, 100% {
-            transform: scaleY(.48);
-            opacity: .42;
-          }
-
-          35% {
-            transform: scaleY(1.05);
-            opacity: .90;
-          }
-
-          68% {
-            transform: scaleY(.32);
-            opacity: .35;
-          }
-        }
-
-        @keyframes heroLightSweep {
-          0% {
-            transform: translate3d(-15vw,0,0) rotate(17deg);
-            opacity: 0;
-          }
-
-          12% {
-            opacity: .28;
-          }
-
-          48% {
-            opacity: .80;
-          }
-
-          86% {
-            opacity: .32;
-          }
-
-          100% {
-            transform: translate3d(155vw,0,0) rotate(17deg);
-            opacity: 0;
-          }
-        }
-
-        @keyframes heroGoldAmbient {
-          0%, 100% {
-            transform: translate3d(0,0,0) scale(.92);
-            opacity: .55;
-          }
-
-          50% {
-            transform: translate3d(-4%,-3%,0) scale(1.08);
-            opacity: 1;
-          }
-        }
-
-        @keyframes heroCityReflection {
-          0%, 100% {
-            opacity: .28;
-            transform: translateX(-2%);
-          }
-
-          50% {
-            opacity: .62;
-            transform: translateX(5%);
-          }
-        }
-
-        @media (max-width: 767px) {
-          .hero-real-city {
-            width: 62%;
-            height: 45%;
-            opacity: .64;
-          }
-
-          .hero-bars {
-            width: 58%;
-            opacity: .40;
-          }
-
-          .hero-fin-grid {
-            opacity: .45;
-          }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          .hero-city-reflection,
-          .hero-graph-area,
-          .hero-graph-line,
-          .hero-graph-glow,
-          .hero-graph-traveler,
-          .hero-graph-dashed,
-          .hero-node,
-          .hero-bar,
-          .hero-light-sweep,
-          .hero-gold-ambient {
-            animation: none !important;
-          }
-
-          .hero-graph-line,
-          .hero-graph-glow {
-            stroke-dashoffset: 0;
-            opacity: 1;
-          }
-
-          .hero-node {
-            opacity: .85;
-            transform: scale(1);
-          }
-        }
-      `}</style>
     </section>
   );
 }
