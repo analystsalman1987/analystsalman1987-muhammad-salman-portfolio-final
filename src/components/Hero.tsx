@@ -7,24 +7,28 @@ interface HeroProps {
   onSelectExperience?: () => void;
 }
 
-const points = [
-  { label: '14+ Years Exp', cls: 'p1 gold keep', duration: '15s', delay: '-2s' },
-  { label: 'Financial Reporting', cls: 'p2', duration: '18s', delay: '-8s' },
-  { label: 'Receivables', cls: 'p3', duration: '16s', delay: '-4s' },
-  { label: 'VAT Reports & Submission', cls: 'p4 gold', duration: '19s', delay: '-11s' },
-  { label: 'ERP Software', cls: 'p5 keep', duration: '17s', delay: '-6s' },
-  { label: 'Reconciliations', cls: 'p6', duration: '20s', delay: '-13s' },
-  { label: 'Costing', cls: 'p7', duration: '15.5s', delay: '-9s' },
-  { label: 'MS Office', cls: 'p8', duration: '18.5s', delay: '-3s' },
-  { label: 'Monthly Closing', cls: 'p9', duration: '17.5s', delay: '-12s' },
-  { label: 'Cash Handling', cls: 'p10', duration: '20.5s', delay: '-5s' },
-  { label: 'Petty Cash', cls: 'p11', duration: '16.5s', delay: '-10s' },
-  { label: 'Payables', cls: 'p12', duration: '19.5s', delay: '-7s' },
-  { label: 'Oracle', cls: 'p13', duration: '14.5s', delay: '-1s' },
-  { label: 'Qoyod', cls: 'p14', duration: '18s', delay: '-14s' },
-  { label: 'QuickBooks', cls: 'p15', duration: '16s', delay: '-8s' },
-  { label: 'P&L Account', cls: 'p16 gold keep', duration: '21s', delay: '-15s' },
-  { label: 'Balance Sheet', cls: 'p17 gold', duration: '17s', delay: '-2s' },
+const leftPoints = [
+  '14+ Years Exp',
+  'ERP Software',
+  'Oracle',
+  'Qoyod',
+  'QuickBooks',
+  'MS Office',
+  'Advanced Excel',
+];
+
+const rightPoints = [
+  'Financial Reporting',
+  'Receivables',
+  'VAT Reports & Submission',
+  'Reconciliations',
+  'Costing',
+  'Monthly Closing',
+  'Cash Handling',
+  'Petty Cash',
+  'Payables',
+  'P&L Account',
+  'Balance Sheet',
 ];
 
 export function Hero(_props: HeroProps) {
@@ -101,18 +105,35 @@ export function Hero(_props: HeroProps) {
             <small>PROFESSIONAL EXPERIENCE</small>
           </div>
 
-          {points.map((point) => (
-            <div
-              key={point.label}
-              className={`skill-point ${point.cls}`}
-              style={{
-                animationDuration: point.duration,
-                animationDelay: point.delay,
-              }}
-            >
-              {point.label}
-            </div>
-          ))}
+          <div className="skill-column skill-column-left" aria-label="Software and general experience">
+            {leftPoints.map((label, index) => (
+              <div
+                key={label}
+                className="skill-point side-point left-side-point"
+                style={{
+                  top: `${8 + index * 13}%`,
+                  animationDelay: `${index * 2}s`,
+                }}
+              >
+                {label}
+              </div>
+            ))}
+          </div>
+
+          <div className="skill-column skill-column-right" aria-label="Accounting and finance expertise">
+            {rightPoints.map((label, index) => (
+              <div
+                key={label}
+                className="skill-point side-point right-side-point"
+                style={{
+                  top: `${4 + index * 8.6}%`,
+                  animationDelay: `${index * 2}s`,
+                }}
+              >
+                {label}
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Globe and lower waves intentionally removed while finalizing map fit. */}
@@ -367,14 +388,25 @@ export function Hero(_props: HeroProps) {
           50% { transform: translateY(-13px); }
         }
 
-        /* ALL 17 POINTS */
-        .skill-point {
+        /* SIDE POINT COLUMNS — map stays clean in the centre. */
+        .skill-column {
           position: absolute;
           z-index: 22;
-          padding: 7px 10px;
+          top: 7%;
+          bottom: 7%;
+          width: 190px;
+          pointer-events: none;
+        }
+
+        .skill-column-left { left: 7.5%; }
+        .skill-column-right { right: 7.5%; }
+
+        .skill-point {
+          position: absolute;
+          padding: 7px 11px;
           border-radius: 999px;
-          border: 1px solid rgba(111,184,223,.24);
-          background: rgba(7,24,39,.78);
+          border: 1px solid rgba(111,184,223,.26);
+          background: rgba(7,24,39,.82);
           backdrop-filter: blur(8px);
           box-shadow: 0 8px 24px rgba(0,0,0,.18);
           color: #DCE7EE;
@@ -382,56 +414,34 @@ export function Hero(_props: HeroProps) {
           font-weight: 760;
           line-height: 1;
           white-space: nowrap;
-          animation-name: pointFloatFade;
-          animation-timing-function: ease-in-out;
-          animation-iteration-count: infinite;
+          opacity: 0;
           will-change: transform, opacity;
         }
 
-        .skill-point.gold {
+        .left-side-point {
+          left: 0;
+          border-color: rgba(111,184,223,.32);
+          animation: leftPointSequence 14s ease-in-out infinite;
+        }
+
+        .right-side-point {
+          right: 0;
           border-color: rgba(216,181,106,.38);
           color: #F4E3B7;
-          box-shadow: 0 0 14px rgba(216,181,106,.05);
+          animation: rightPointSequence 22s ease-in-out infinite;
         }
 
-        .skill-point.keep {
-          animation-name: pointFloatOnly;
+        @keyframes leftPointSequence {
+          0%, 5% { opacity:0; transform:translateY(10px) scale(.97); }
+          8%, 11% { opacity:1; transform:translateY(0) scale(1); }
+          13.5%, 100% { opacity:0; transform:translateY(-8px) scale(.98); }
         }
 
-        @keyframes pointFloatFade {
-          0%   { transform: translate(0,9px) scale(.98); opacity:.92; }
-          18%  { transform: translate(3px,-10px) scale(1.02); opacity:1; }
-          38%  { transform: translate(-2px,-18px) scale(1); opacity:.9; }
-          51%  { transform: translate(2px,-9px) scale(.98); opacity:.14; }
-          59%  { transform: translate(0,-5px) scale(.97); opacity:0; }
-          68%  { transform: translate(-2px,1px) scale(.98); opacity:.2; }
-          79%  { transform: translate(2px,10px) scale(1.02); opacity:1; }
-          100% { transform: translate(0,9px) scale(.98); opacity:.92; }
+        @keyframes rightPointSequence {
+          0%, 3% { opacity:0; transform:translateY(10px) scale(.97); }
+          5%, 7% { opacity:1; transform:translateY(0) scale(1); }
+          8.7%, 100% { opacity:0; transform:translateY(-8px) scale(.98); }
         }
-
-        @keyframes pointFloatOnly {
-          0%,100% { transform: translateY(10px); opacity:.92; }
-          50% { transform: translateY(-17px) scale(1.035); opacity:1; }
-        }
-
-        /* All 17 points locked INSIDE the map/viewport safe area */
-        .p1  { left: 39%; top: 10%; }
-        .p2  { left: 16%; top: 16%; }
-        .p3  { left: 12%; top: 43%; }
-        .p4  { right: 16%; top: 38%; }
-        .p5  { left: 34%; top: 28%; }
-        .p6  { left: 16%; top: 62%; }
-        .p7  { left: 29%; bottom: 18%; }
-        .p8  { right: 22%; top: 16%; }
-        .p9  { right: 16%; bottom: 18%; }
-        .p10 { left: 48%; bottom: 18%; }
-        .p11 { right: 29%; bottom: 19%; }
-        .p12 { left: 16%; bottom: 20%; }
-        .p13 { left: 20%; top: 34%; }
-        .p14 { right: 34%; top: 18%; }
-        .p15 { right: 16%; top: 64%; }
-        .p16 { left: 39%; top: 72%; }
-        .p17 { right: 21%; top: 58%; }
 
         /* Map-fit tuning: adjust only these image values later if needed. */
         @media (max-width: 1023px) {
@@ -460,9 +470,9 @@ export function Hero(_props: HeroProps) {
             font-size: 7px;
           }
 
-          .p2,.p6,.p8,.p10,.p11,.p14,.p17 {
-            display:none;
-          }
+          .skill-column { width: 125px; top: 8%; bottom: 8%; }
+          .skill-column-left { left: 2.5%; }
+          .skill-column-right { right: 2.5%; }
         }
 
         @media (max-width: 640px) {
