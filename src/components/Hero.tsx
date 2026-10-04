@@ -19,69 +19,55 @@ export function Hero({ onOpenCV }: HeroProps) {
     <section
       id="home"
       className="
-        relative
-        flex
+        relative flex w-full flex-col items-center justify-center
         min-h-[calc(100svh-5rem)]
-        w-full
-        flex-col
-        items-center
-        justify-center
-        overflow-hidden
-        bg-[#071827]
-        px-4
-        py-8
-        text-center
-        sm:px-6
         lg:h-[calc(100svh-5rem)]
         lg:min-h-[calc(100svh-5rem)]
-        lg:px-8
-        lg:py-0
+        overflow-hidden
+        bg-[#071827]
+        px-4 py-8
+        sm:px-6
+        lg:px-8 lg:py-0
+        text-center
       "
     >
-      {/* ============================================================
-          FINAL HERO BACKGROUND
-          Real distant buildings + native SVG finance animation
-          ============================================================ */}
+      {/* =========================================================
+          BACKGROUND
+      ========================================================== */}
       <div
         className="pointer-events-none absolute inset-0 z-0 overflow-hidden select-none"
         aria-hidden="true"
       >
-        {/* Deep Navy Base */}
+        {/* Base navy */}
         <div className="absolute inset-0 bg-[#071827]" />
 
         <div
           className="
-            absolute
-            -inset-16
-            bg-[radial-gradient(ellipse_95%_82%_at_50%_30%,#132E43_0%,#0D2538_30%,#081A2B_63%,#071827_100%)]
+            absolute -inset-16
+            bg-[radial-gradient(ellipse_95%_85%_at_50%_35%,#132E43_0%,#0D2538_32%,#081A2B_65%,#071827_100%)]
           "
         />
 
-        {/* ==========================================================
-            REAL BUILDINGS
-            SMALL + DISTANT + LOWER LEFT
-            ========================================================== */}
+        {/* =====================================================
+            LEFT — REAL BUILDING PHOTO
+            Original colors retained.
+            Only edges fade softly into navy.
+        ====================================================== */}
         <div
           className="
+            hero-skyline
             absolute
-            bottom-0
-            left-0
+            bottom-0 left-0
             z-[1]
-            h-[38%]
+            h-[58%]
             w-[48%]
-            overflow-hidden
-            sm:h-[40%]
-            sm:w-[45%]
-            lg:h-[42%]
-            lg:w-[42%]
-            xl:w-[40%]
+            sm:h-[61%]
+            sm:w-[47%]
+            lg:h-[64%]
+            lg:w-[46%]
+            xl:h-[66%]
+            xl:w-[45%]
           "
-          style={{
-            WebkitMaskImage:
-              'linear-gradient(to right, black 0%, black 58%, rgba(0,0,0,0.82) 72%, transparent 100%)',
-            maskImage:
-              'linear-gradient(to right, black 0%, black 58%, rgba(0,0,0,0.82) 72%, transparent 100%)',
-          }}
         >
           <img
             src="/images/hero-distant-buildings.jpg"
@@ -90,85 +76,103 @@ export function Hero({ onOpenCV }: HeroProps) {
             loading="eager"
             className="
               absolute
-              bottom-0
-              left-0
-              h-auto
-              w-full
-              object-contain
+              bottom-0 left-0
+              h-full w-full
+              object-cover
               object-left-bottom
-              opacity-[0.82]
             "
-            style={{
-              filter:
-                'brightness(0.58) contrast(1.16) saturate(0.72) sepia(0.10)',
-            }}
           />
 
-          {/* Navy blend */}
-          <div className="absolute inset-0 bg-[#071827]/20 mix-blend-multiply" />
+          {/* very light navy integration — does not recolor buildings */}
+          <div
+            className="
+              absolute inset-0
+              bg-gradient-to-r
+              from-transparent
+              via-transparent
+              to-[#071827]
+            "
+          />
 
-          {/* Top fade */}
-          <div className="absolute inset-x-0 top-0 h-[42%] bg-gradient-to-b from-[#071827] via-[#071827]/60 to-transparent" />
+          {/* top edge fade */}
+          <div
+            className="
+              absolute inset-x-0 top-0
+              h-[24%]
+              bg-gradient-to-b
+              from-[#071827]
+              via-[#071827]/45
+              to-transparent
+            "
+          />
 
-          {/* Right fade */}
-          <div className="absolute inset-y-0 right-0 w-[45%] bg-gradient-to-r from-transparent via-[#071827]/45 to-[#071827]" />
-
-          {/* Bottom integration */}
-          <div className="absolute inset-x-0 bottom-0 h-[16%] bg-gradient-to-t from-[#071827]/75 to-transparent" />
+          {/* bottom edge integration */}
+          <div
+            className="
+              absolute inset-x-0 bottom-0
+              h-[9%]
+              bg-gradient-to-t
+              from-[#071827]/65
+              to-transparent
+            "
+          />
         </div>
 
-        {/* Subtle gold reflection below buildings */}
+        {/* Soft building-side feather */}
         <div
           className="
             absolute
-            bottom-0
-            left-0
-            z-[1]
-            h-[12%]
-            w-[42%]
-            bg-[radial-gradient(ellipse_at_bottom,rgba(216,181,106,0.08)_0%,rgba(13,37,56,0.08)_45%,transparent_75%)]
-            blur-2xl
+            bottom-[3%]
+            left-[37%]
+            z-[2]
+            h-[55%]
+            w-[12%]
+            rounded-full
+            bg-[#071827]/75
+            blur-[45px]
           "
         />
 
-        {/* ==========================================================
-            FINANCIAL GRAPH
-            RIGHT SIDE ONLY
-            Native SVG animation for clearly visible movement
-            ========================================================== */}
+        {/* =====================================================
+            RIGHT — ACCOUNTING / FINANCE VISUAL
+        ====================================================== */}
         <svg
           className="absolute inset-0 z-[2] h-full w-full"
-          xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 1440 900"
           preserveAspectRatio="none"
+          xmlns="http://www.w3.org/2000/svg"
         >
           <defs>
+            {/* dark gold graph */}
             <linearGradient
-              id="finalHeroGraphFill"
+              id="heroDarkGold"
               x1="0%"
-              y1="0%"
-              x2="0%"
-              y2="100%"
+              y1="100%"
+              x2="100%"
+              y2="0%"
             >
               <stop
                 offset="0%"
-                stopColor="#D8B56A"
-                stopOpacity="0.16"
+                stopColor="#8F7134"
+                stopOpacity="0.58"
               />
+
               <stop
-                offset="52%"
-                stopColor="#C9A45C"
-                stopOpacity="0.055"
+                offset="50%"
+                stopColor="#B58E43"
+                stopOpacity="0.82"
               />
+
               <stop
                 offset="100%"
-                stopColor="#071827"
-                stopOpacity="0"
+                stopColor="#D8B56A"
+                stopOpacity="0.95"
               />
             </linearGradient>
 
+            {/* bright moving streak */}
             <linearGradient
-              id="finalHeroGold"
+              id="heroBrightGold"
               x1="0%"
               y1="0%"
               x2="100%"
@@ -176,23 +180,38 @@ export function Hero({ onOpenCV }: HeroProps) {
             >
               <stop
                 offset="0%"
-                stopColor="#C9A45C"
+                stopColor="#D8B56A"
+                stopOpacity="0"
+              />
+
+              <stop
+                offset="25%"
+                stopColor="#D8B56A"
+                stopOpacity="0.35"
+              />
+
+              <stop
+                offset="50%"
+                stopColor="#FFF2C9"
+                stopOpacity="1"
+              />
+
+              <stop
+                offset="75%"
+                stopColor="#D8B56A"
                 stopOpacity="0.45"
               />
-              <stop
-                offset="40%"
-                stopColor="#D8B56A"
-                stopOpacity="0.90"
-              />
+
               <stop
                 offset="100%"
-                stopColor="#F4E7C5"
-                stopOpacity="1"
+                stopColor="#D8B56A"
+                stopOpacity="0"
               />
             </linearGradient>
 
+            {/* bars */}
             <linearGradient
-              id="finalHeroBar"
+              id="heroBarBlue"
               x1="0%"
               y1="100%"
               x2="0%"
@@ -200,66 +219,50 @@ export function Hero({ onOpenCV }: HeroProps) {
             >
               <stop
                 offset="0%"
-                stopColor="#0D2538"
-                stopOpacity="0.18"
+                stopColor="#183448"
+                stopOpacity="0.55"
               />
-              <stop
-                offset="55%"
-                stopColor="#315B78"
-                stopOpacity="0.35"
-              />
+
               <stop
                 offset="100%"
-                stopColor="#D8B56A"
-                stopOpacity="0.50"
+                stopColor="#7890A0"
+                stopOpacity="0.72"
               />
             </linearGradient>
 
             <linearGradient
-              id="finalHeroSweep"
+              id="heroBarGold"
               x1="0%"
-              y1="0%"
-              x2="100%"
+              y1="100%"
+              x2="0%"
               y2="0%"
             >
               <stop
                 offset="0%"
-                stopColor="#D8B56A"
-                stopOpacity="0"
+                stopColor="#6D552A"
+                stopOpacity="0.58"
               />
-              <stop
-                offset="42%"
-                stopColor="#D8B56A"
-                stopOpacity="0.02"
-              />
-              <stop
-                offset="50%"
-                stopColor="#F4E7C5"
-                stopOpacity="0.22"
-              />
-              <stop
-                offset="58%"
-                stopColor="#D8B56A"
-                stopOpacity="0.06"
-              />
+
               <stop
                 offset="100%"
                 stopColor="#D8B56A"
-                stopOpacity="0"
+                stopOpacity="0.82"
               />
             </linearGradient>
 
+            {/* graph glow */}
             <filter
-              id="finalHeroGlow"
-              x="-40%"
-              y="-40%"
-              width="180%"
-              height="180%"
+              id="heroGraphGlow"
+              x="-50%"
+              y="-50%"
+              width="200%"
+              height="200%"
             >
               <feGaussianBlur
-                stdDeviation="4"
+                stdDeviation="5"
                 result="blur"
               />
+
               <feMerge>
                 <feMergeNode in="blur" />
                 <feMergeNode in="SourceGraphic" />
@@ -267,16 +270,17 @@ export function Hero({ onOpenCV }: HeroProps) {
             </filter>
 
             <filter
-              id="finalHeroStrongGlow"
-              x="-80%"
-              y="-80%"
-              width="260%"
-              height="260%"
+              id="heroSoftGlow"
+              x="-100%"
+              y="-100%"
+              width="300%"
+              height="300%"
             >
               <feGaussianBlur
-                stdDeviation="8"
+                stdDeviation="9"
                 result="blur"
               />
+
               <feMerge>
                 <feMergeNode in="blur" />
                 <feMergeNode in="SourceGraphic" />
@@ -284,596 +288,500 @@ export function Hero({ onOpenCV }: HeroProps) {
             </filter>
           </defs>
 
-          {/* --------------------------------------------------------
-              SUBTLE FINANCIAL GRID — RIGHT SIDE
-              -------------------------------------------------------- */}
-          <g opacity="0.13">
-            <line x1="850" y1="300" x2="850" y2="825" stroke="#CBD5E1" />
-            <line x1="950" y1="300" x2="950" y2="825" stroke="#CBD5E1" />
-            <line x1="1050" y1="300" x2="1050" y2="825" stroke="#CBD5E1" />
-            <line x1="1150" y1="300" x2="1150" y2="825" stroke="#CBD5E1" />
-            <line x1="1250" y1="300" x2="1250" y2="825" stroke="#CBD5E1" />
-            <line x1="1350" y1="300" x2="1350" y2="825" stroke="#CBD5E1" />
-
-            <line x1="790" y1="400" x2="1440" y2="400" stroke="#CBD5E1" />
-            <line x1="790" y1="500" x2="1440" y2="500" stroke="#CBD5E1" />
-            <line x1="790" y1="600" x2="1440" y2="600" stroke="#CBD5E1" />
-            <line x1="790" y1="700" x2="1440" y2="700" stroke="#CBD5E1" />
-            <line x1="790" y1="800" x2="1440" y2="800" stroke="#CBD5E1" />
-          </g>
-
-          {/* --------------------------------------------------------
-              GRAPH AREA
-              -------------------------------------------------------- */}
-          <path
-            d="
-              M 760 765
-              C 830 755, 885 738, 940 720
-              C 1000 700, 1055 675, 1100 645
-              C 1150 612, 1185 580, 1225 550
-              C 1270 515, 1300 475, 1340 430
-              C 1375 390, 1405 350, 1440 315
-              L 1440 850
-              L 760 850
-              Z
-            "
-            fill="url(#finalHeroGraphFill)"
-          >
-            <animate
-              attributeName="opacity"
-              values="0.18;0.70;0.70;0.18"
-              keyTimes="0;0.35;0.78;1"
-              dur="7s"
-              repeatCount="indefinite"
-            />
-          </path>
-
-          {/* --------------------------------------------------------
-              SECONDARY MOVING DASHED LINE
-              -------------------------------------------------------- */}
-          <path
-            d="
-              M 785 790
-              C 850 780, 910 760, 965 742
-              C 1020 723, 1070 700, 1120 670
-              C 1170 640, 1210 610, 1250 580
-              C 1300 545, 1345 500, 1385 455
-              C 1405 433, 1425 412, 1440 395
-            "
-            fill="none"
-            stroke="#CBD5E1"
-            strokeWidth="1.4"
-            strokeDasharray="8 12"
-            strokeOpacity="0.35"
-          >
-            <animate
-              attributeName="stroke-dashoffset"
-              from="0"
-              to="-200"
-              dur="5s"
-              repeatCount="indefinite"
-            />
-          </path>
-
-          {/* --------------------------------------------------------
-              SOFT GOLD GLOW UNDER MAIN GRAPH
-              -------------------------------------------------------- */}
-          <path
-            d="
-              M 760 765
-              C 830 755, 885 738, 940 720
-              C 1000 700, 1055 675, 1100 645
-              C 1150 612, 1185 580, 1225 550
-              C 1270 515, 1300 475, 1340 430
-              C 1375 390, 1405 350, 1440 315
-            "
-            fill="none"
-            stroke="#D8B56A"
-            strokeWidth="9"
-            strokeLinecap="round"
-            strokeOpacity="0.08"
-            pathLength="1000"
-            strokeDasharray="1000"
-            filter="url(#finalHeroGlow)"
-          >
-            <animate
-              attributeName="stroke-dashoffset"
-              values="1000;0;0;1000"
-              keyTimes="0;0.48;0.84;1"
-              dur="7s"
-              repeatCount="indefinite"
-            />
-          </path>
-
-          {/* --------------------------------------------------------
-              MAIN GOLD GRAPH
-              ACTUAL LEFT -> RIGHT DRAW
-              -------------------------------------------------------- */}
-          <path
-            d="
-              M 760 765
-              C 830 755, 885 738, 940 720
-              C 1000 700, 1055 675, 1100 645
-              C 1150 612, 1185 580, 1225 550
-              C 1270 515, 1300 475, 1340 430
-              C 1375 390, 1405 350, 1440 315
-            "
-            fill="none"
-            stroke="url(#finalHeroGold)"
-            strokeWidth="3.5"
-            strokeLinecap="round"
-            pathLength="1000"
-            strokeDasharray="1000"
-            strokeDashoffset="1000"
-            filter="url(#finalHeroGlow)"
-          >
-            <animate
-              attributeName="stroke-dashoffset"
-              values="1000;0;0;1000"
-              keyTimes="0;0.48;0.84;1"
-              dur="7s"
-              repeatCount="indefinite"
-            />
-
-            <animate
-              attributeName="stroke-opacity"
-              values="0;1;1;0"
-              keyTimes="0;0.08;0.84;1"
-              dur="7s"
-              repeatCount="indefinite"
-            />
-          </path>
-
-          {/* --------------------------------------------------------
-              BRIGHT TRAVELING SEGMENT
-              -------------------------------------------------------- */}
-          <path
-            d="
-              M 760 765
-              C 830 755, 885 738, 940 720
-              C 1000 700, 1055 675, 1100 645
-              C 1150 612, 1185 580, 1225 550
-              C 1270 515, 1300 475, 1340 430
-              C 1375 390, 1405 350, 1440 315
-            "
-            fill="none"
-            stroke="#F4E7C5"
-            strokeWidth="5.5"
-            strokeLinecap="round"
-            pathLength="1000"
-            strokeDasharray="38 962"
-            strokeDashoffset="1000"
-            filter="url(#finalHeroStrongGlow)"
-          >
-            <animate
-              attributeName="stroke-dashoffset"
-              from="1000"
-              to="-1000"
-              dur="7s"
-              repeatCount="indefinite"
-            />
-
-            <animate
-              attributeName="stroke-opacity"
-              values="0;1;1;0"
-              keyTimes="0;0.10;0.86;1"
-              dur="7s"
-              repeatCount="indefinite"
-            />
-          </path>
-
-          {/* --------------------------------------------------------
-              SEQUENTIAL GRAPH NODES
-              -------------------------------------------------------- */}
-          <circle
-            cx="940"
-            cy="720"
-            r="4"
-            fill="#D8B56A"
-            stroke="#071827"
-            strokeWidth="2"
-            opacity="0"
-            filter="url(#finalHeroGlow)"
-          >
-            <animate
-              attributeName="opacity"
-              values="0;0;1;1;0"
-              keyTimes="0;0.16;0.23;0.82;1"
-              dur="7s"
-              repeatCount="indefinite"
-            />
-            <animate
-              attributeName="r"
-              values="3;3;7;4;3"
-              keyTimes="0;0.16;0.23;0.55;1"
-              dur="7s"
-              repeatCount="indefinite"
-            />
-          </circle>
-
-          <circle
-            cx="1100"
-            cy="645"
-            r="4"
-            fill="#F8FAFC"
-            stroke="#D8B56A"
-            strokeWidth="2"
-            opacity="0"
-            filter="url(#finalHeroGlow)"
-          >
-            <animate
-              attributeName="opacity"
-              values="0;0;1;1;0"
-              keyTimes="0;0.28;0.35;0.82;1"
-              dur="7s"
-              repeatCount="indefinite"
-            />
-            <animate
-              attributeName="r"
-              values="3;3;7;4;3"
-              keyTimes="0;0.28;0.35;0.60;1"
-              dur="7s"
-              repeatCount="indefinite"
-            />
-          </circle>
-
-          <circle
-            cx="1225"
-            cy="550"
-            r="4"
-            fill="#D8B56A"
-            stroke="#071827"
-            strokeWidth="2"
-            opacity="0"
-            filter="url(#finalHeroGlow)"
-          >
-            <animate
-              attributeName="opacity"
-              values="0;0;1;1;0"
-              keyTimes="0;0.38;0.45;0.82;1"
-              dur="7s"
-              repeatCount="indefinite"
-            />
-            <animate
-              attributeName="r"
-              values="3;3;7;4;3"
-              keyTimes="0;0.38;0.45;0.66;1"
-              dur="7s"
-              repeatCount="indefinite"
-            />
-          </circle>
-
-          <circle
-            cx="1340"
-            cy="430"
-            r="5"
-            fill="#F8FAFC"
-            stroke="#D8B56A"
-            strokeWidth="2"
-            opacity="0"
-            filter="url(#finalHeroGlow)"
-          >
-            <animate
-              attributeName="opacity"
-              values="0;0;1;1;0"
-              keyTimes="0;0.46;0.53;0.82;1"
-              dur="7s"
-              repeatCount="indefinite"
-            />
-            <animate
-              attributeName="r"
-              values="3;3;8;5;3"
-              keyTimes="0;0.46;0.53;0.70;1"
-              dur="7s"
-              repeatCount="indefinite"
-            />
-          </circle>
-
-          {/* --------------------------------------------------------
-              MOVING FINANCIAL BARS
-              Native SVG height/y animations
-              -------------------------------------------------------- */}
-          <g opacity="0.72">
+          {/* =================================================
+              14 MOVING BARS
+              NO BACKGROUND GRID / BOXES
+          ================================================== */}
+          <g opacity="0.82">
             <rect
-              x="900"
+              x="760"
               y="755"
-              width="13"
+              width="15"
               height="70"
               rx="2"
-              fill="url(#finalHeroBar)"
+              fill="url(#heroBarBlue)"
             >
               <animate
                 attributeName="y"
-                values="780;735;760;780"
-                dur="4.4s"
+                values="770;735;755;770"
+                dur="5.4s"
                 repeatCount="indefinite"
               />
               <animate
                 attributeName="height"
-                values="45;90;65;45"
-                dur="4.4s"
+                values="55;90;70;55"
+                dur="5.4s"
                 repeatCount="indefinite"
               />
             </rect>
 
             <rect
-              x="930"
-              y="720"
-              width="13"
-              height="105"
-              rx="2"
-              fill="url(#finalHeroBar)"
-            >
-              <animate
-                attributeName="y"
-                values="740;775;710;740"
-                dur="5.3s"
-                begin=".4s"
-                repeatCount="indefinite"
-              />
-              <animate
-                attributeName="height"
-                values="85;50;115;85"
-                dur="5.3s"
-                begin=".4s"
-                repeatCount="indefinite"
-              />
-            </rect>
-
-            <rect
-              x="960"
-              y="745"
-              width="13"
-              height="80"
-              rx="2"
-              fill="url(#finalHeroBar)"
-            >
-              <animate
-                attributeName="y"
-                values="770;715;750;770"
-                dur="4.8s"
-                begin=".8s"
-                repeatCount="indefinite"
-              />
-              <animate
-                attributeName="height"
-                values="55;110;75;55"
-                dur="4.8s"
-                begin=".8s"
-                repeatCount="indefinite"
-              />
-            </rect>
-
-            <rect
-              x="990"
-              y="695"
-              width="13"
-              height="130"
-              rx="2"
-              fill="url(#finalHeroBar)"
-            >
-              <animate
-                attributeName="y"
-                values="715;770;680;715"
-                dur="5.8s"
-                begin="1.1s"
-                repeatCount="indefinite"
-              />
-              <animate
-                attributeName="height"
-                values="110;55;145;110"
-                dur="5.8s"
-                begin="1.1s"
-                repeatCount="indefinite"
-              />
-            </rect>
-
-            <rect
-              x="1020"
+              x="798"
               y="735"
-              width="13"
+              width="15"
               height="90"
               rx="2"
-              fill="url(#finalHeroBar)"
+              fill="url(#heroBarGold)"
             >
               <animate
                 attributeName="y"
-                values="760;700;740;760"
-                dur="4.6s"
-                begin="1.5s"
+                values="750;710;735;750"
+                dur="5.9s"
+                begin=".3s"
                 repeatCount="indefinite"
               />
               <animate
                 attributeName="height"
-                values="65;125;85;65"
-                dur="4.6s"
-                begin="1.5s"
+                values="75;115;90;75"
+                dur="5.9s"
+                begin=".3s"
                 repeatCount="indefinite"
               />
             </rect>
 
             <rect
-              x="1050"
-              y="675"
-              width="13"
-              height="150"
+              x="836"
+              y="715"
+              width="15"
+              height="110"
               rx="2"
-              fill="url(#finalHeroBar)"
+              fill="url(#heroBarBlue)"
             >
               <animate
                 attributeName="y"
-                values="690;755;660;690"
-                dur="6s"
-                begin=".2s"
+                values="735;690;715;735"
+                dur="6.3s"
+                begin=".6s"
                 repeatCount="indefinite"
               />
               <animate
                 attributeName="height"
-                values="135;70;165;135"
-                dur="6s"
-                begin=".2s"
+                values="90;135;110;90"
+                dur="6.3s"
+                begin=".6s"
                 repeatCount="indefinite"
               />
             </rect>
 
             <rect
-              x="1080"
+              x="874"
+              y="690"
+              width="15"
+              height="135"
+              rx="2"
+              fill="url(#heroBarGold)"
+            >
+              <animate
+                attributeName="y"
+                values="710;660;690;710"
+                dur="5.6s"
+                begin=".9s"
+                repeatCount="indefinite"
+              />
+              <animate
+                attributeName="height"
+                values="115;165;135;115"
+                dur="5.6s"
+                begin=".9s"
+                repeatCount="indefinite"
+              />
+            </rect>
+
+            <rect
+              x="912"
               y="725"
-              width="13"
+              width="15"
               height="100"
               rx="2"
-              fill="url(#finalHeroBar)"
+              fill="url(#heroBarBlue)"
             >
               <animate
                 attributeName="y"
-                values="750;690;730;750"
-                dur="5.1s"
-                begin=".9s"
+                values="745;700;725;745"
+                dur="6.1s"
+                begin="1.2s"
                 repeatCount="indefinite"
               />
               <animate
                 attributeName="height"
-                values="75;135;95;75"
-                dur="5.1s"
-                begin=".9s"
+                values="80;125;100;80"
+                dur="6.1s"
+                begin="1.2s"
                 repeatCount="indefinite"
               />
             </rect>
 
             <rect
-              x="1110"
-              y="655"
-              width="13"
-              height="170"
+              x="950"
+              y="670"
+              width="15"
+              height="155"
               rx="2"
-              fill="url(#finalHeroBar)"
+              fill="url(#heroBarGold)"
             >
               <animate
                 attributeName="y"
-                values="675;745;640;675"
-                dur="6.3s"
-                begin="1.4s"
+                values="690;635;670;690"
+                dur="6.7s"
+                begin=".2s"
                 repeatCount="indefinite"
               />
               <animate
                 attributeName="height"
-                values="150;80;185;150"
-                dur="6.3s"
-                begin="1.4s"
+                values="135;190;155;135"
+                dur="6.7s"
+                begin=".2s"
+                repeatCount="indefinite"
+              />
+            </rect>
+
+            <rect
+              x="988"
+              y="710"
+              width="15"
+              height="115"
+              rx="2"
+              fill="url(#heroBarBlue)"
+            >
+              <animate
+                attributeName="y"
+                values="730;680;710;730"
+                dur="5.7s"
+                begin=".7s"
+                repeatCount="indefinite"
+              />
+              <animate
+                attributeName="height"
+                values="95;145;115;95"
+                dur="5.7s"
+                begin=".7s"
+                repeatCount="indefinite"
+              />
+            </rect>
+
+            <rect
+              x="1026"
+              y="645"
+              width="15"
+              height="180"
+              rx="2"
+              fill="url(#heroBarGold)"
+            >
+              <animate
+                attributeName="y"
+                values="670;610;645;670"
+                dur="6.8s"
+                begin="1.1s"
+                repeatCount="indefinite"
+              />
+              <animate
+                attributeName="height"
+                values="155;215;180;155"
+                dur="6.8s"
+                begin="1.1s"
+                repeatCount="indefinite"
+              />
+            </rect>
+
+            <rect
+              x="1064"
+              y="695"
+              width="15"
+              height="130"
+              rx="2"
+              fill="url(#heroBarBlue)"
+            >
+              <animate
+                attributeName="y"
+                values="715;665;695;715"
+                dur="5.5s"
+                begin="1.5s"
+                repeatCount="indefinite"
+              />
+              <animate
+                attributeName="height"
+                values="110;160;130;110"
+                dur="5.5s"
+                begin="1.5s"
+                repeatCount="indefinite"
+              />
+            </rect>
+
+            <rect
+              x="1102"
+              y="620"
+              width="15"
+              height="205"
+              rx="2"
+              fill="url(#heroBarGold)"
+            >
+              <animate
+                attributeName="y"
+                values="650;585;620;650"
+                dur="7s"
+                begin=".4s"
+                repeatCount="indefinite"
+              />
+              <animate
+                attributeName="height"
+                values="175;240;205;175"
+                dur="7s"
+                begin=".4s"
                 repeatCount="indefinite"
               />
             </rect>
 
             <rect
               x="1140"
-              y="705"
-              width="13"
-              height="120"
+              y="680"
+              width="15"
+              height="145"
               rx="2"
-              fill="url(#finalHeroBar)"
+              fill="url(#heroBarBlue)"
             >
               <animate
                 attributeName="y"
-                values="730;670;710;730"
-                dur="5.5s"
-                begin="1.8s"
+                values="700;650;680;700"
+                dur="6s"
+                begin=".8s"
                 repeatCount="indefinite"
               />
               <animate
                 attributeName="height"
-                values="95;155;115;95"
-                dur="5.5s"
-                begin="1.8s"
+                values="125;175;145;125"
+                dur="6s"
+                begin=".8s"
+                repeatCount="indefinite"
+              />
+            </rect>
+
+            <rect
+              x="1178"
+              y="600"
+              width="15"
+              height="225"
+              rx="2"
+              fill="url(#heroBarGold)"
+            >
+              <animate
+                attributeName="y"
+                values="630;560;600;630"
+                dur="7.2s"
+                begin="1.2s"
+                repeatCount="indefinite"
+              />
+              <animate
+                attributeName="height"
+                values="195;265;225;195"
+                dur="7.2s"
+                begin="1.2s"
+                repeatCount="indefinite"
+              />
+            </rect>
+
+            <rect
+              x="1216"
+              y="655"
+              width="15"
+              height="170"
+              rx="2"
+              fill="url(#heroBarBlue)"
+            >
+              <animate
+                attributeName="y"
+                values="680;625;655;680"
+                dur="5.8s"
+                begin="1.6s"
+                repeatCount="indefinite"
+              />
+              <animate
+                attributeName="height"
+                values="145;200;170;145"
+                dur="5.8s"
+                begin="1.6s"
+                repeatCount="indefinite"
+              />
+            </rect>
+
+            <rect
+              x="1254"
+              y="570"
+              width="15"
+              height="255"
+              rx="2"
+              fill="url(#heroBarGold)"
+            >
+              <animate
+                attributeName="y"
+                values="605;535;570;605"
+                dur="7.4s"
+                begin=".6s"
+                repeatCount="indefinite"
+              />
+              <animate
+                attributeName="height"
+                values="220;290;255;220"
+                dur="7.4s"
+                begin=".6s"
                 repeatCount="indefinite"
               />
             </rect>
           </g>
 
-          {/* --------------------------------------------------------
-              MOVING GOLD REFLECTION SWEEP
-              -------------------------------------------------------- */}
-          <g opacity="0">
-            <rect
-              x="-350"
-              y="-100"
-              width="250"
-              height="1100"
-              fill="url(#finalHeroSweep)"
-              transform="rotate(15 0 450)"
-            />
+          {/* =================================================
+              DARK GOLD ZIGZAG FINANCIAL LINE
+              NO DOTS
+          ================================================== */}
 
+          {/* soft glow underneath */}
+          <path
+            d="
+              M 730 720
+              L 790 685
+              L 850 625
+              L 900 650
+              L 960 570
+              L 1015 605
+              L 1070 515
+              L 1125 550
+              L 1180 445
+              L 1230 490
+              L 1285 365
+              L 1335 410
+              L 1400 245
+            "
+            fill="none"
+            stroke="#C9A45C"
+            strokeWidth="10"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            opacity="0.07"
+            filter="url(#heroSoftGlow)"
+          />
+
+          {/* permanent dark-gold zigzag */}
+          <path
+            d="
+              M 730 720
+              L 790 685
+              L 850 625
+              L 900 650
+              L 960 570
+              L 1015 605
+              L 1070 515
+              L 1125 550
+              L 1180 445
+              L 1230 490
+              L 1285 365
+              L 1335 410
+              L 1400 245
+            "
+            fill="none"
+            stroke="url(#heroDarkGold)"
+            strokeWidth="4"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+
+          {/* =================================================
+              ONE CONTINUOUS MOVING GOLD STREAK
+              NO CIRCLES
+              NO DOTS
+              SLOW 10 SECOND MOVEMENT
+          ================================================== */}
+          <path
+            d="
+              M 730 720
+              L 790 685
+              L 850 625
+              L 900 650
+              L 960 570
+              L 1015 605
+              L 1070 515
+              L 1125 550
+              L 1180 445
+              L 1230 490
+              L 1285 365
+              L 1335 410
+              L 1400 245
+            "
+            fill="none"
+            stroke="url(#heroBrightGold)"
+            strokeWidth="6"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            pathLength="1000"
+            strokeDasharray="145 855"
+            strokeDashoffset="1000"
+            filter="url(#heroGraphGlow)"
+          >
             <animate
-              attributeName="opacity"
-              values="0;0.75;0.75;0"
-              keyTimes="0;0.12;0.82;1"
-              dur="9s"
+              attributeName="stroke-dashoffset"
+              from="1000"
+              to="-1000"
+              dur="10s"
               repeatCount="indefinite"
             />
-
-            <animateTransform
-              attributeName="transform"
-              type="translate"
-              from="0 0"
-              to="2050 0"
-              dur="9s"
-              repeatCount="indefinite"
-            />
-          </g>
+          </path>
         </svg>
 
-        {/* Right-side gold atmospheric glow */}
+        {/* =====================================================
+            SUBTLE RIGHT GOLD ATMOSPHERE
+        ====================================================== */}
         <div
           className="
             absolute
-            right-[2%]
+            right-[-5%]
             bottom-[4%]
-            z-[2]
-            h-[55%]
-            w-[48%]
+            z-[1]
+            h-[62%]
+            w-[50%]
             rounded-full
-            bg-[radial-gradient(circle,rgba(216,181,106,0.10)_0%,rgba(201,164,92,0.04)_42%,transparent_72%)]
-            blur-[60px]
+            bg-[radial-gradient(circle,rgba(216,181,106,0.08)_0%,rgba(201,164,92,0.025)_43%,transparent_72%)]
+            blur-[70px]
           "
         />
 
-        {/* ==========================================================
-            CENTRAL CLEAN/DARK AREA
-            Keeps name perfectly readable
-            ========================================================== */}
+        {/* =====================================================
+            CENTER READING AREA
+            Keeps text clean without hiding left/right visuals
+        ====================================================== */}
         <div
           className="
-            absolute
-            inset-0
-            z-[3]
-            bg-[radial-gradient(ellipse_47%_50%_at_50%_47%,rgba(7,24,39,0.88)_0%,rgba(7,24,39,0.66)_48%,rgba(7,24,39,0.20)_75%,transparent_100%)]
+            absolute inset-0 z-[3]
+            bg-[radial-gradient(ellipse_42%_46%_at_50%_43%,rgba(7,24,39,0.80)_0%,rgba(7,24,39,0.52)_50%,rgba(7,24,39,0.12)_76%,transparent_100%)]
           "
         />
 
-        {/* Executive vignette */}
+        {/* outer vignette */}
         <div
           className="
-            absolute
-            inset-0
-            z-[4]
-            bg-[radial-gradient(ellipse_88%_82%_at_50%_48%,transparent_44%,rgba(7,24,39,0.22)_72%,#071827_100%)]
+            absolute inset-0 z-[4]
+            bg-[radial-gradient(ellipse_94%_88%_at_50%_48%,transparent_50%,rgba(7,24,39,0.18)_76%,#071827_100%)]
           "
         />
 
-        {/* Bottom integration */}
-        <div className="absolute inset-x-0 bottom-0 z-[5] h-[12%] bg-gradient-to-t from-[#071827] via-[#071827]/60 to-transparent" />
+        {/* bottom fade */}
+        <div
+          className="
+            absolute inset-x-0 bottom-0 z-[5]
+            h-[10%]
+            bg-gradient-to-t
+            from-[#071827]
+            via-[#071827]/55
+            to-transparent
+          "
+        />
       </div>
 
-      {/* ============================================================
-          HERO CONTENT
-          ============================================================ */}
+      {/* =========================================================
+          CENTER CONTENT
+      ========================================================== */}
       <div
         className="
-          relative
-          z-10
+          relative z-10
           mx-auto
-          flex
-          w-full
-          max-w-5xl
+          flex w-full max-w-5xl
           flex-col
           items-center
           justify-center
@@ -918,9 +826,7 @@ export function Hero({ onOpenCV }: HeroProps) {
         >
           <span className="text-[#F8FAFC] drop-shadow-[0_2px_12px_rgba(0,0,0,0.60)]">
             {isRTL ? 'محمد' : 'MUHAMMAD'}
-          </span>
-
-          {' '}
+          </span>{' '}
 
           <span className="text-[#D8B56A] drop-shadow-[0_2px_16px_rgba(216,181,106,0.22)]">
             {isRTL ? 'سلمان' : 'SALMAN'}
@@ -952,8 +858,7 @@ export function Hero({ onOpenCV }: HeroProps) {
             type="button"
             onClick={onOpenCV}
             className="
-              group
-              relative
+              group relative
               inline-flex
               cursor-pointer
               touch-manipulation
@@ -962,20 +867,14 @@ export function Hero({ onOpenCV }: HeroProps) {
               gap-2.5
               overflow-hidden
               rounded-xl
-              border
-              border-[#D8B56A]/50
+              border border-[#D8B56A]/50
               bg-[#0D2538]/95
-              px-7
-              py-3.5
-              text-sm
-              font-bold
+              px-7 py-3.5
+              text-sm font-bold
               text-[#F8FAFC]
-              shadow-lg
-              shadow-black/40
+              shadow-lg shadow-black/40
               backdrop-blur-md
-              transition-all
-              duration-300
-              ease-out
+              transition-all duration-300 ease-out
               hover:-translate-y-0.5
               hover:border-[#D8B56A]
               hover:bg-[#132E43]
@@ -987,8 +886,7 @@ export function Hero({ onOpenCV }: HeroProps) {
             <span
               className="
                 pointer-events-none
-                absolute
-                inset-0
+                absolute inset-0
                 -translate-x-full
                 bg-gradient-to-r
                 from-transparent
@@ -998,7 +896,6 @@ export function Hero({ onOpenCV }: HeroProps) {
                 duration-700
                 group-hover:translate-x-full
               "
-              aria-hidden="true"
             />
 
             <FileDown className="relative z-10 h-4 w-4 text-[#D8B56A]" />
@@ -1021,8 +918,7 @@ export function Hero({ onOpenCV }: HeroProps) {
                 : 'Open Muhammad Salman LinkedIn Profile'
             }
             className="
-              group
-              relative
+              group relative
               inline-flex
               cursor-pointer
               touch-manipulation
@@ -1031,20 +927,14 @@ export function Hero({ onOpenCV }: HeroProps) {
               gap-2.5
               overflow-hidden
               rounded-xl
-              border
-              border-[#D8B56A]/45
+              border border-[#D8B56A]/45
               bg-[#071827]/78
-              px-6
-              py-3.5
-              text-sm
-              font-semibold
+              px-6 py-3.5
+              text-sm font-semibold
               text-[#CBD5E1]
-              shadow-md
-              shadow-black/30
+              shadow-md shadow-black/30
               backdrop-blur-md
-              transition-all
-              duration-300
-              ease-out
+              transition-all duration-300 ease-out
               hover:-translate-y-0.5
               hover:border-[#D8B56A]
               hover:bg-[#0D2538]/90
@@ -1057,8 +947,7 @@ export function Hero({ onOpenCV }: HeroProps) {
             <span
               className="
                 pointer-events-none
-                absolute
-                inset-0
+                absolute inset-0
                 -translate-x-full
                 bg-gradient-to-r
                 from-transparent
@@ -1068,7 +957,6 @@ export function Hero({ onOpenCV }: HeroProps) {
                 duration-700
                 group-hover:translate-x-full
               "
-              aria-hidden="true"
             />
 
             <svg
@@ -1089,6 +977,70 @@ export function Hero({ onOpenCV }: HeroProps) {
           </a>
         </div>
       </div>
+
+      {/* =========================================================
+          LOCAL HERO CSS
+          No index.css change required
+      ========================================================== */}
+      <style>{`
+        .hero-skyline {
+          /*
+           * Keep the real photograph intact.
+           * Only feather the outer boundaries into the Hero.
+           */
+          -webkit-mask-image:
+            linear-gradient(
+              to right,
+              rgba(0,0,0,1) 0%,
+              rgba(0,0,0,1) 68%,
+              rgba(0,0,0,.88) 78%,
+              rgba(0,0,0,.48) 90%,
+              transparent 100%
+            ),
+            linear-gradient(
+              to top,
+              rgba(0,0,0,1) 0%,
+              rgba(0,0,0,1) 80%,
+              rgba(0,0,0,.55) 93%,
+              transparent 100%
+            );
+
+          mask-image:
+            linear-gradient(
+              to right,
+              rgba(0,0,0,1) 0%,
+              rgba(0,0,0,1) 68%,
+              rgba(0,0,0,.88) 78%,
+              rgba(0,0,0,.48) 90%,
+              transparent 100%
+            ),
+            linear-gradient(
+              to top,
+              rgba(0,0,0,1) 0%,
+              rgba(0,0,0,1) 80%,
+              rgba(0,0,0,.55) 93%,
+              transparent 100%
+            );
+
+          -webkit-mask-composite: source-in;
+          mask-composite: intersect;
+        }
+
+        @media (max-width: 767px) {
+          .hero-skyline {
+            width: 58%;
+            height: 43%;
+            opacity: .72;
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          #home svg animate,
+          #home svg animateTransform {
+            display: none;
+          }
+        }
+      `}</style>
     </section>
   );
 }
