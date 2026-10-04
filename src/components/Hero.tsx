@@ -19,21 +19,21 @@ export function Hero({ onOpenCV }: HeroProps) {
   // Floating profile points inspired by the reference interaction style.
   // Kept behind the main name/buttons so the locked centre content stays clear.
   const floatingPoints = [
-    { label: '14+ Years Exp', pos: 'left-[5%] top-[16%]', tone: 'gold', motion: 'pulse', delay: '0s', dur: '7.8s' },
-    { label: 'Financial Reporting', pos: 'left-[22%] top-[12%]', tone: 'blue', motion: 'vertical', delay: '-2s', dur: '9.5s' },
-    { label: 'Receivables', pos: 'left-[45%] top-[18%]', tone: 'gold', motion: 'zoom', delay: '-3.2s', dur: '8.4s' },
-    { label: 'VAT Reports & Submission', pos: 'left-[58%] top-[12%]', tone: 'blue', motion: 'drift', delay: '-1.4s', dur: '10.5s' },
-    { label: 'ERP Software', pos: 'left-[7%] top-[47%]', tone: 'blue', motion: 'zoom', delay: '-4.8s', dur: '9.2s' },
-    { label: 'Reconciliations', pos: 'right-[14%] top-[39%]', tone: 'gold', motion: 'pulse', delay: '-2.7s', dur: '8.8s' },
-    { label: 'Costing', pos: 'left-[17%] bottom-[18%]', tone: 'blue', motion: 'vertical', delay: '-5.1s', dur: '10s' },
-    { label: 'MS Office', pos: 'right-[22%] bottom-[16%]', tone: 'blue', motion: 'drift', delay: '-2.3s', dur: '9.7s' },
-    { label: 'Monthly Closing', pos: 'left-[32%] bottom-[11%]', tone: 'gold', motion: 'pulse', delay: '-4.1s', dur: '9.1s' },
-    { label: 'Cash Handling', pos: 'right-[7%] bottom-[27%]', tone: 'gold', motion: 'vertical', delay: '-1.1s', dur: '10.2s' },
-    { label: 'Petty Cash', pos: 'left-[4%] bottom-[33%]', tone: 'gold', motion: 'drift', delay: '-3.6s', dur: '8.9s' },
-    { label: 'Payables', pos: 'right-[39%] bottom-[7%]', tone: 'blue', motion: 'zoom', delay: '-5.4s', dur: '9.6s' },
-    { label: 'Oracle', pos: 'left-[30%] top-[25%]', tone: 'gold', motion: 'pulse', delay: '-2.2s', dur: '8.2s' },
-    { label: 'Qoyod', pos: 'right-[8%] top-[25%]', tone: 'blue', motion: 'vertical', delay: '-6s', dur: '10.4s' },
-    { label: 'QuickBooks', pos: 'right-[3%] bottom-[9%]', tone: 'gold', motion: 'zoom', delay: '-4.3s', dur: '9s' },
+    { label: '14+ Years Exp', pos: 'left-[5%] top-[16%]', tone: 'gold', motion: 'pulse', delay: '0s', dur: '12.5s' },
+    { label: 'Financial Reporting', pos: 'left-[22%] top-[12%]', tone: 'blue', motion: 'vertical', delay: '-2s', dur: '15s' },
+    { label: 'Receivables', pos: 'left-[45%] top-[18%]', tone: 'gold', motion: 'zoom', delay: '-3.2s', dur: '13.5s' },
+    { label: 'VAT Reports & Submission', pos: 'left-[58%] top-[12%]', tone: 'blue', motion: 'drift', delay: '-1.4s', dur: '16s' },
+    { label: 'ERP Software', pos: 'left-[7%] top-[47%]', tone: 'blue', motion: 'zoom', delay: '-4.8s', dur: '14.5s' },
+    { label: 'Reconciliations', pos: 'right-[14%] top-[39%]', tone: 'gold', motion: 'pulse', delay: '-2.7s', dur: '13.8s' },
+    { label: 'Costing', pos: 'left-[17%] bottom-[18%]', tone: 'blue', motion: 'vertical', delay: '-5.1s', dur: '15.5s' },
+    { label: 'MS Office', pos: 'right-[22%] bottom-[16%]', tone: 'blue', motion: 'drift', delay: '-2.3s', dur: '15.2s' },
+    { label: 'Monthly Closing', pos: 'left-[32%] bottom-[11%]', tone: 'gold', motion: 'pulse', delay: '-4.1s', dur: '14.2s' },
+    { label: 'Cash Handling', pos: 'right-[7%] bottom-[27%]', tone: 'gold', motion: 'vertical', delay: '-1.1s', dur: '16.2s' },
+    { label: 'Petty Cash', pos: 'left-[4%] bottom-[33%]', tone: 'gold', motion: 'drift', delay: '-3.6s', dur: '14s' },
+    { label: 'Payables', pos: 'right-[39%] bottom-[7%]', tone: 'blue', motion: 'zoom', delay: '-5.4s', dur: '15.3s' },
+    { label: 'Oracle', pos: 'left-[30%] top-[25%]', tone: 'gold', motion: 'pulse', delay: '-2.2s', dur: '13s' },
+    { label: 'Qoyod', pos: 'right-[8%] top-[25%]', tone: 'blue', motion: 'vertical', delay: '-6s', dur: '16.5s' },
+    { label: 'QuickBooks', pos: 'right-[3%] bottom-[9%]', tone: 'gold', motion: 'zoom', delay: '-4.3s', dur: '14.3s' },
   ];
 
   /*
@@ -615,7 +615,7 @@ export function Hero({ onOpenCV }: HeroProps) {
         >
           <animate
             attributeName="d"
-            dur="9s"
+            dur="18s"
             repeatCount="indefinite"
             values="
               M -30 275 C 180 215, 320 350, 510 290 S 810 205, 1010 265 S 1260 330, 1470 245;
@@ -631,7 +631,7 @@ export function Hero({ onOpenCV }: HeroProps) {
         >
           <animate
             attributeName="d"
-            dur="11s"
+            dur="22s"
             repeatCount="indefinite"
             values="
               M -30 615 C 170 530, 320 500, 505 555 S 790 650, 980 585 S 1250 490, 1470 535;
@@ -957,10 +957,10 @@ export function Hero({ onOpenCV }: HeroProps) {
           will-change: transform;
         }
         .hero-flow-line-a {
-          animation: heroFlowLineA 8.5s ease-in-out infinite alternate;
+          animation: heroFlowLineA 18s ease-in-out infinite alternate;
         }
         .hero-flow-line-b {
-          animation: heroFlowLineB 10.5s ease-in-out infinite alternate;
+          animation: heroFlowLineB 22s ease-in-out infinite alternate;
         }
         @keyframes heroFlowLineA {
           0% { transform: translate3d(0,-18px,0); }
@@ -1029,20 +1029,28 @@ export function Hero({ onOpenCV }: HeroProps) {
         .hero-motion-pulse { animation-name: heroPointPulse; }
 
         @keyframes heroPointVertical {
-          0%,100% { transform: translate3d(0, 18px, 0); }
-          50% { transform: translate3d(0, -34px, 0); }
+          0%,100% { transform: translate3d(-8px, 22px, 0); opacity:.82; }
+          25% { transform: translate3d(8px, 2px, 0); opacity:.96; }
+          50% { transform: translate3d(15px, -32px, 0); opacity:1; }
+          75% { transform: translate3d(2px, -8px, 0); opacity:.92; }
         }
         @keyframes heroPointZoom {
-          0%,100% { transform: translate3d(0, 8px, 0) scale(.90); opacity: .72; }
-          50% { transform: translate3d(0, -12px, 0) scale(1.18); opacity: 1; }
+          0%,100% { transform: translate3d(-10px, 14px, 0) scale(.92); opacity:.76; }
+          35% { transform: translate3d(6px, -5px, 0) scale(1.02); opacity:.92; }
+          60% { transform: translate3d(16px, -22px, 0) scale(1.17); opacity:1; }
+          82% { transform: translate3d(2px, -4px, 0) scale(1.04); opacity:.94; }
         }
         @keyframes heroPointDrift {
-          0%,100% { transform: translate3d(-28px, 12px, 0); }
-          50% { transform: translate3d(30px, -24px, 0); }
+          0%,100% { transform: translate3d(-32px, 15px, 0); opacity:.80; }
+          30% { transform: translate3d(-5px, -10px, 0); opacity:.94; }
+          58% { transform: translate3d(32px, -25px, 0); opacity:1; }
+          82% { transform: translate3d(12px, 5px, 0); opacity:.90; }
         }
         @keyframes heroPointPulse {
-          0%,30%,100% { transform: translate3d(0, 10px, 0) scale(.96); filter: brightness(.95); font-weight: 750; }
-          50%,68% { transform: translate3d(0, -18px, 0) scale(1.12); filter: brightness(1.55); font-weight: 900; }
+          0%,28%,100% { transform: translate3d(-8px, 12px, 0) scale(.96); filter:brightness(.95); opacity:.82; }
+          45% { transform: translate3d(4px, -10px, 0) scale(1.03); filter:brightness(1.12); opacity:.94; }
+          58%,70% { transform: translate3d(14px, -24px, 0) scale(1.12); filter:brightness(1.55) drop-shadow(0 0 7px rgba(216,181,106,.38)); opacity:1; }
+          84% { transform: translate3d(3px, -5px, 0) scale(1.03); filter:brightness(1.08); opacity:.92; }
         }
 
         .hero-globe-halo {
