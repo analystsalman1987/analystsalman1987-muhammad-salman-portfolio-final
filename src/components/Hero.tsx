@@ -194,9 +194,42 @@ export function Hero({ onOpenCV }: HeroProps) {
 
         .hero-bg {
           background:
-            radial-gradient(circle at 74% 44%, rgba(216,181,106,.065), transparent 27%),
-            radial-gradient(circle at 79% 58%, rgba(111,184,223,.07), transparent 31%),
-            linear-gradient(135deg,#071827 0%,#081A2B 52%,#0D2538 100%);
+            radial-gradient(circle at 72% 43%, rgba(216,181,106,.095), transparent 25%),
+            radial-gradient(circle at 80% 57%, rgba(111,184,223,.095), transparent 30%),
+            radial-gradient(circle at 48% 20%, rgba(111,184,223,.035), transparent 24%),
+            linear-gradient(135deg,#061522 0%,#081A2B 48%,#0D2538 100%);
+        }
+
+        .hero-bg::before,
+        .hero-bg::after {
+          content: "";
+          position: absolute;
+          border-radius: 50%;
+          pointer-events: none;
+          filter: blur(1px);
+          animation: ambientBreath 14s ease-in-out infinite;
+        }
+
+        .hero-bg::before {
+          width: 42vw;
+          height: 42vw;
+          right: 8%;
+          top: 10%;
+          background: radial-gradient(circle, rgba(216,181,106,.035) 0%, rgba(216,181,106,.012) 38%, transparent 70%);
+        }
+
+        .hero-bg::after {
+          width: 34vw;
+          height: 34vw;
+          right: 28%;
+          bottom: -12%;
+          background: radial-gradient(circle, rgba(111,184,223,.045) 0%, rgba(111,184,223,.012) 42%, transparent 72%);
+          animation-delay: -7s;
+        }
+
+        @keyframes ambientBreath {
+          0%,100% { transform: translate3d(0,0,0) scale(.96); opacity:.55; }
+          50% { transform: translate3d(12px,-10px,0) scale(1.06); opacity:1; }
         }
 
         .hero-final::after {
@@ -205,8 +238,11 @@ export function Hero({ onOpenCV }: HeroProps) {
           inset: 0;
           z-index: 1;
           pointer-events: none;
-          opacity: .13;
-          background-image: radial-gradient(rgba(216,181,106,.12) .6px, transparent .6px);
+          opacity: .18;
+          background-image:
+            radial-gradient(rgba(216,181,106,.16) .65px, transparent .75px),
+            radial-gradient(rgba(111,184,223,.10) .55px, transparent .7px);
+          background-position: 0 0, 15px 15px;
           background-size: 30px 30px;
           -webkit-mask-image: linear-gradient(90deg, transparent 36%, #000 65%, #000 100%);
           mask-image: linear-gradient(90deg, transparent 36%, #000 65%, #000 100%);
@@ -221,11 +257,11 @@ export function Hero({ onOpenCV }: HeroProps) {
         }
 
         .world {
-          fill: rgba(216,181,106,.018);
-          stroke: rgba(216,181,106,.58);
+          fill: rgba(216,181,106,.022);
+          stroke: rgba(216,181,106,.66);
           stroke-width: 1.3;
           vector-effect: non-scaling-stroke;
-          filter: drop-shadow(0 0 5px rgba(216,181,106,.12));
+          filter: drop-shadow(0 0 6px rgba(216,181,106,.18));
         }
 
         .geo-detail {
@@ -441,12 +477,13 @@ export function Hero({ onOpenCV }: HeroProps) {
 
         /* TWO LOWER MORPHING WAVES */
         .lower-waves {
-          left: 38%;
+          left: 35%;
           right: 1.5%;
-          bottom: 2.5%;
-          height: 145px;
+          bottom: 0.5%;
+          height: 160px;
           pointer-events: none;
-          opacity: .9;
+          opacity: 1;
+          filter: drop-shadow(0 0 7px rgba(216,181,106,.05));
         }
 
         .lower-waves svg {
@@ -463,34 +500,57 @@ export function Hero({ onOpenCV }: HeroProps) {
         }
 
         .wave-gold {
-          stroke: rgba(216,181,106,.72);
-          stroke-width: 1.55;
-          filter: drop-shadow(0 0 5px rgba(216,181,106,.18));
+          stroke: rgba(216,181,106,.78);
+          stroke-width: 1.6;
+          stroke-dasharray: 420 18;
+          filter: drop-shadow(0 0 5px rgba(216,181,106,.20));
+          transform-origin: center;
           animation: goldWaveMorph 20s ease-in-out infinite;
         }
 
         .wave-blue {
-          stroke: rgba(111,184,223,.40);
-          stroke-width: 1.15;
+          stroke: rgba(111,184,223,.46);
+          stroke-width: 1.2;
+          stroke-dasharray: 360 22;
+          transform-origin: center;
           animation: blueWaveMorph 25s ease-in-out infinite;
         }
 
         @keyframes goldWaveMorph {
           0%,100% {
-            d: path("M0 112 C130 66 230 150 360 104 C500 55 600 142 735 96 C870 50 990 132 1200 74");
-            transform: translateY(0);
+            transform: translate3d(0,4px,0) scaleY(.92);
+            stroke-dashoffset: 0;
+            opacity: .72;
           }
-          50% {
-            d: path("M0 104 C125 145 250 64 382 111 C520 160 628 67 760 105 C900 145 1030 58 1200 96");
-            transform: translateY(-6px);
+          35% {
+            transform: translate3d(-14px,-8px,0) scaleY(1.08);
+            stroke-dashoffset: -22;
+            opacity: .95;
+          }
+          70% {
+            transform: translate3d(10px,2px,0) scaleY(.98);
+            stroke-dashoffset: -44;
+            opacity: .8;
           }
         }
 
         @keyframes blueWaveMorph {
           0%,100% {
-            d: path("M0 139 C145 105 260 166 405 126 C540 88 650 154 790 116 C930 77 1045 140 1200 104");
-            transform: translateY(3px);
+            transform: translate3d(0,5px,0) scaleY(.95);
+            stroke-dashoffset: 0;
+            opacity: .46;
           }
+          45% {
+            transform: translate3d(16px,-6px,0) scaleY(1.10);
+            stroke-dashoffset: 24;
+            opacity: .68;
+          }
+          75% {
+            transform: translate3d(-8px,1px,0) scaleY(1);
+            stroke-dashoffset: 48;
+            opacity: .52;
+          }
+        }
           50% {
             d: path("M0 128 C145 158 278 96 420 137 C555 176 680 101 815 132 C950 164 1060 96 1200 122");
             transform: translateY(-4px);
