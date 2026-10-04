@@ -610,15 +610,37 @@ export function Hero({ onOpenCV }: HeroProps) {
           </filter>
         </defs>
         <path
-          className="hero-flow-line hero-flow-line-a"
           d="M -30 275 C 180 215, 320 350, 510 290 S 810 205, 1010 265 S 1260 330, 1470 245"
-          fill="none" stroke="#67B7E8" strokeWidth="1.8" opacity=".42"
-        />
+          fill="none" stroke="#67B7E8" strokeWidth="2" opacity=".55"
+        >
+          <animate
+            attributeName="d"
+            dur="9s"
+            repeatCount="indefinite"
+            values="
+              M -30 275 C 180 215, 320 350, 510 290 S 810 205, 1010 265 S 1260 330, 1470 245;
+              M -30 245 C 180 285, 320 215, 510 325 S 810 275, 1010 225 S 1260 285, 1470 220;
+              M -30 305 C 180 245, 320 385, 510 260 S 810 165, 1010 305 S 1260 365, 1470 270;
+              M -30 275 C 180 215, 320 350, 510 290 S 810 205, 1010 265 S 1260 330, 1470 245
+            "
+          />
+        </path>
         <path
-          className="hero-flow-line hero-flow-line-b"
           d="M -30 615 C 170 530, 320 500, 505 555 S 790 650, 980 585 S 1250 490, 1470 535"
-          fill="none" stroke="#D8B56A" strokeWidth="1.7" opacity=".38"
-        />
+          fill="none" stroke="#D8B56A" strokeWidth="1.9" opacity=".50"
+        >
+          <animate
+            attributeName="d"
+            dur="11s"
+            repeatCount="indefinite"
+            values="
+              M -30 615 C 170 530, 320 500, 505 555 S 790 650, 980 585 S 1250 490, 1470 535;
+              M -30 575 C 170 625, 320 455, 505 595 S 790 585, 980 630 S 1250 545, 1470 500;
+              M -30 645 C 170 500, 320 570, 505 515 S 790 690, 980 545 S 1250 455, 1470 575;
+              M -30 615 C 170 530, 320 500, 505 555 S 790 650, 980 585 S 1250 490, 1470 535
+            "
+          />
+        </path>
 
       </svg>
 
@@ -925,8 +947,8 @@ export function Hero({ onOpenCV }: HeroProps) {
 
         .hero-locked-skyline-image {
           /* Light/soft skyline so foreground motion, pills and graph read clearly. */
-          filter: brightness(1.24) saturate(.72) contrast(.86);
-          opacity: .72;
+          filter: brightness(.72) saturate(.68) contrast(.90);
+          opacity: .58;
         }
 
         .hero-flow-line {
@@ -956,9 +978,9 @@ export function Hero({ onOpenCV }: HeroProps) {
           will-change: transform;
         }
         @keyframes heroGlobeTravel {
-          0% { transform: translate3d(-10px,12px,0) scale(.96); }
-          50% { transform: translate3d(8px,-18px,0) scale(1.04); }
-          100% { transform: translate3d(16px,7px,0) scale(.99); }
+          0% { transform: translate3d(-28px,24px,0) scale(.92) rotate(-4deg); }
+          50% { transform: translate3d(18px,-34px,0) scale(1.08) rotate(5deg); }
+          100% { transform: translate3d(32px,14px,0) scale(.97) rotate(-2deg); }
         }
 
         .hero-floating-point {
@@ -1007,20 +1029,20 @@ export function Hero({ onOpenCV }: HeroProps) {
         .hero-motion-pulse { animation-name: heroPointPulse; }
 
         @keyframes heroPointVertical {
-          0%,100% { transform: translate3d(0, 0, 0); }
-          50% { transform: translate3d(0, -24px, 0); }
+          0%,100% { transform: translate3d(0, 18px, 0); }
+          50% { transform: translate3d(0, -34px, 0); }
         }
         @keyframes heroPointZoom {
-          0%,100% { transform: scale(.96); opacity: .78; }
-          50% { transform: scale(1.12); opacity: 1; }
+          0%,100% { transform: translate3d(0, 8px, 0) scale(.90); opacity: .72; }
+          50% { transform: translate3d(0, -12px, 0) scale(1.18); opacity: 1; }
         }
         @keyframes heroPointDrift {
-          0%,100% { transform: translate3d(-12px, 0, 0); }
-          50% { transform: translate3d(16px, -8px, 0); }
+          0%,100% { transform: translate3d(-28px, 12px, 0); }
+          50% { transform: translate3d(30px, -24px, 0); }
         }
         @keyframes heroPointPulse {
-          0%,35%,100% { transform: scale(1); filter: brightness(1); font-weight: 750; }
-          50%,68% { transform: scale(1.06); filter: brightness(1.35); font-weight: 900; }
+          0%,30%,100% { transform: translate3d(0, 10px, 0) scale(.96); filter: brightness(.95); font-weight: 750; }
+          50%,68% { transform: translate3d(0, -18px, 0) scale(1.12); filter: brightness(1.55); font-weight: 900; }
         }
 
         .hero-globe-halo {
