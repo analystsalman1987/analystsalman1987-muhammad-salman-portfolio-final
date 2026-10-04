@@ -612,10 +612,11 @@ export function Hero({ onOpenCV }: HeroProps) {
         <path
           d="M -30 275 C 180 215, 320 350, 510 290 S 810 205, 1010 265 S 1260 330, 1470 245"
           fill="none" stroke="#67B7E8" strokeWidth="2" opacity=".55"
+          className="hero-flow-line hero-flow-line-a"
         >
           <animate
             attributeName="d"
-            dur="18s"
+            dur="24s"
             repeatCount="indefinite"
             values="
               M -30 275 C 180 215, 320 350, 510 290 S 810 205, 1010 265 S 1260 330, 1470 245;
@@ -628,10 +629,11 @@ export function Hero({ onOpenCV }: HeroProps) {
         <path
           d="M -30 615 C 170 530, 320 500, 505 555 S 790 650, 980 585 S 1250 490, 1470 535"
           fill="none" stroke="#D8B56A" strokeWidth="1.9" opacity=".50"
+          className="hero-flow-line hero-flow-line-b"
         >
           <animate
             attributeName="d"
-            dur="22s"
+            dur="28s"
             repeatCount="indefinite"
             values="
               M -30 615 C 170 530, 320 500, 505 555 S 790 650, 980 585 S 1250 490, 1470 535;
@@ -653,8 +655,25 @@ export function Hero({ onOpenCV }: HeroProps) {
             <ellipse cx="100" cy="100" rx="66" ry="27" fill="none" stroke="rgba(103,183,232,.46)" strokeWidth="1" />
             <ellipse cx="100" cy="100" rx="27" ry="66" fill="none" stroke="rgba(216,181,106,.42)" strokeWidth="1" />
             <ellipse cx="100" cy="100" rx="58" ry="43" fill="none" stroke="rgba(103,183,232,.25)" strokeWidth=".8" transform="rotate(42 100 100)" />
-            <path d="M42 78 L70 52 L104 63 L139 47 L160 78 L145 111 L166 137 L124 154 L92 137 L56 149 L39 113 Z"
-              fill="none" stroke="rgba(111,195,238,.48)" strokeWidth=".8" className="hero-globe-shape" />
+            <path
+              d="M42 78 L70 52 L104 63 L139 47 L160 78 L145 111 L166 137 L124 154 L92 137 L56 149 L39 113 Z"
+              fill="none"
+              stroke="rgba(111,195,238,.48)"
+              strokeWidth=".8"
+              className="hero-globe-shape"
+            >
+              <animate
+                attributeName="d"
+                dur="12s"
+                repeatCount="indefinite"
+                values="
+                  M42 78 L70 52 L104 63 L139 47 L160 78 L145 111 L166 137 L124 154 L92 137 L56 149 L39 113 Z;
+                  M36 88 L65 45 L109 55 L148 54 L169 86 L137 116 L158 146 L117 160 L84 132 L49 143 L34 105 Z;
+                  M47 69 L77 58 L99 48 L132 39 L154 70 L153 105 L171 128 L132 148 L101 149 L62 157 L43 119 Z;
+                  M42 78 L70 52 L104 63 L139 47 L160 78 L145 111 L166 137 L124 154 L92 137 L56 149 L39 113 Z
+                "
+              />
+            </path>
             {[[42,78],[70,52],[104,63],[139,47],[160,78],[145,111],[166,137],[124,154],[92,137],[56,149],[39,113],[100,100]].map(([cx,cy], i) => (
               <circle key={i} cx={cx} cy={cy} r={i % 4 === 0 ? 3.2 : 2.1} fill={i % 3 === 0 ? '#D8B56A' : '#7CC7F2'} className="hero-globe-node" style={{ animationDelay: `${-i * .42}s` }} />
             ))}
@@ -957,10 +976,10 @@ export function Hero({ onOpenCV }: HeroProps) {
           will-change: transform;
         }
         .hero-flow-line-a {
-          animation: heroFlowLineA 18s ease-in-out infinite alternate;
+          animation: heroFlowLineA 24s ease-in-out infinite alternate;
         }
         .hero-flow-line-b {
-          animation: heroFlowLineB 22s ease-in-out infinite alternate;
+          animation: heroFlowLineB 28s ease-in-out infinite alternate;
         }
         @keyframes heroFlowLineA {
           0% { transform: translate3d(0,-18px,0); }
@@ -974,7 +993,7 @@ export function Hero({ onOpenCV }: HeroProps) {
         }
 
         .hero-network-globe-motion {
-          animation: heroGlobeTravel 8s ease-in-out infinite alternate;
+          animation: heroGlobeTravel 11s ease-in-out infinite alternate;
           will-change: transform;
         }
         @keyframes heroGlobeTravel {
@@ -993,10 +1012,10 @@ export function Hero({ onOpenCV }: HeroProps) {
           box-shadow: 0 8px 28px rgba(0, 0, 0, 0.24);
           font-size: 13px;
           line-height: 1;
-          font-weight: 750;
+          font-weight: 800;
           letter-spacing: .02em;
           white-space: nowrap;
-          opacity: .90;
+          opacity: .94;
           animation-timing-function: ease-in-out;
           animation-iteration-count: infinite;
           will-change: transform, opacity, filter;
@@ -1029,28 +1048,22 @@ export function Hero({ onOpenCV }: HeroProps) {
         .hero-motion-pulse { animation-name: heroPointPulse; }
 
         @keyframes heroPointVertical {
-          0%,100% { transform: translate3d(-8px, 22px, 0); opacity:.82; }
-          25% { transform: translate3d(8px, 2px, 0); opacity:.96; }
-          50% { transform: translate3d(15px, -32px, 0); opacity:1; }
-          75% { transform: translate3d(2px, -8px, 0); opacity:.92; }
+          0%,100% { transform: translate3d(0, 34px, 0); opacity:.86; }
+          50% { transform: translate3d(0, -42px, 0); opacity:1; }
         }
         @keyframes heroPointZoom {
-          0%,100% { transform: translate3d(-10px, 14px, 0) scale(.92); opacity:.76; }
-          35% { transform: translate3d(6px, -5px, 0) scale(1.02); opacity:.92; }
-          60% { transform: translate3d(16px, -22px, 0) scale(1.17); opacity:1; }
-          82% { transform: translate3d(2px, -4px, 0) scale(1.04); opacity:.94; }
+          0%,100% { transform: translate3d(0, 30px, 0) scale(.96); opacity:.86; }
+          50% { transform: translate3d(0, -40px, 0) scale(1.10); opacity:1; }
         }
         @keyframes heroPointDrift {
-          0%,100% { transform: translate3d(-32px, 15px, 0); opacity:.80; }
-          30% { transform: translate3d(-5px, -10px, 0); opacity:.94; }
-          58% { transform: translate3d(32px, -25px, 0); opacity:1; }
-          82% { transform: translate3d(12px, 5px, 0); opacity:.90; }
+          0%,100% { transform: translate3d(-8px, 32px, 0); opacity:.87; }
+          50% { transform: translate3d(10px, -40px, 0); opacity:1; }
         }
         @keyframes heroPointPulse {
-          0%,28%,100% { transform: translate3d(-8px, 12px, 0) scale(.96); filter:brightness(.95); opacity:.82; }
-          45% { transform: translate3d(4px, -10px, 0) scale(1.03); filter:brightness(1.12); opacity:.94; }
-          58%,70% { transform: translate3d(14px, -24px, 0) scale(1.12); filter:brightness(1.55) drop-shadow(0 0 7px rgba(216,181,106,.38)); opacity:1; }
-          84% { transform: translate3d(3px, -5px, 0) scale(1.03); filter:brightness(1.08); opacity:.92; }
+          0%,100% { transform: translate3d(0, 30px, 0) scale(.98); filter:brightness(1); opacity:.88; }
+          42% { transform: translate3d(0, -18px, 0) scale(1.02); filter:brightness(1.12); opacity:.96; }
+          58% { transform: translate3d(0, -42px, 0) scale(1.08); filter:brightness(1.48) drop-shadow(0 0 8px rgba(216,181,106,.42)); opacity:1; }
+          72% { transform: translate3d(0, -20px, 0) scale(1.03); filter:brightness(1.16); opacity:.97; }
         }
 
         .hero-globe-halo {
@@ -1060,7 +1073,7 @@ export function Hero({ onOpenCV }: HeroProps) {
           filter:blur(15px);
           animation:heroGlobeHalo 5.5s ease-in-out infinite;
         }
-        .hero-globe-spin { transform-origin:100px 100px; animation:heroGlobeSpin 20s linear infinite; }
+        .hero-globe-spin { transform-origin:100px 100px; animation:heroGlobeSpin 24s linear infinite; }
         .hero-globe-orbit { transform-origin:100px 100px; animation:heroGlobeOrbit 9s ease-in-out infinite alternate; }
         .hero-globe-node { animation:heroGlobeNode 3.4s ease-in-out infinite; }
         .hero-globe-shape { transform-origin:100px 100px; animation:heroGlobeMorph 7s ease-in-out infinite; }
@@ -1142,25 +1155,8 @@ export function Hero({ onOpenCV }: HeroProps) {
           }
         }
 
-        @media (prefers-reduced-motion: reduce) {
-          #home svg animate,
-          #home svg animateTransform {
-            display: none;
-          }
-
-          .hero-floating-point,
-          .hero-water-shimmer,
-          .hero-flow-line,
-          .hero-network-globe-motion,
-          .hero-globe-spin,
-          .hero-globe-orbit,
-          .hero-globe-node,
-          .hero-globe-shape,
-          .hero-globe-orbit-dot,
-          .hero-globe-halo {
-            animation: none !important;
-          }
-        }
+        /* Keep the requested Hero motion active.  Do not disable the floating
+           points, centre lines or globe through OS reduced-motion settings. */
       `}</style>
     </section>
   );
