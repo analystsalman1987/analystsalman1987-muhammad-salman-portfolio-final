@@ -49,9 +49,9 @@ export function Hero(_props: HeroProps) {
               <image
                 className="locked-map-image"
                 href="/images/Golden World Map.png"
-                x="-75"
+                x="-92"
                 y="-48"
-                width="1150"
+                width="1184"
                 height="657"
                 preserveAspectRatio="xMidYMid meet"
               />
@@ -183,17 +183,17 @@ export function Hero(_props: HeroProps) {
         /* LOCKED FINAL MAP COMPOSITION — LARGE, SEAMLESS, UNDER THE NAME */
         .map-wrap {
           /* Slight overscan puts the PNG boundary outside the visible Hero. */
-          inset: -3.5% -2.5%;
+          inset: -3.5% -4.25%;
           width: auto;
           height: auto;
           overflow: hidden;
           /* Four-side feather: image fades into the exact Hero navy on every edge/corner. */
           -webkit-mask-image:
-            linear-gradient(to right, transparent 0%, #000 5.5%, #000 94.5%, transparent 100%),
+            linear-gradient(to right, transparent 0%, #000 4.25%, #000 95.75%, transparent 100%),
             linear-gradient(to bottom, transparent 0%, #000 6.5%, #000 93.5%, transparent 100%);
           -webkit-mask-composite: source-in;
           mask-image:
-            linear-gradient(to right, transparent 0%, #000 5.5%, #000 94.5%, transparent 100%),
+            linear-gradient(to right, transparent 0%, #000 4.25%, #000 95.75%, transparent 100%),
             linear-gradient(to bottom, transparent 0%, #000 6.5%, #000 93.5%, transparent 100%);
           mask-composite: intersect;
         }
