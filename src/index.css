@@ -196,6 +196,118 @@
   }
 }
 
+/* Horizontal corporate light sweep across city (LEFT -> RIGHT -> RESET) */
+@keyframes corporateLightSweep {
+  0% {
+    transform: translate3d(-100%, 0, 0);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 0.70;
+  }
+  85% {
+    opacity: 0.35;
+  }
+  100% {
+    transform: translate3d(200%, 0, 0);
+    opacity: 0;
+  }
+}
+
+/* Moving Financial Graph Wave Animation */
+@keyframes financialGraphPulse {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.75;
+  }
+  50% {
+    transform: translate3d(-8px, -6px, 0);
+    opacity: 0.95;
+  }
+}
+
+/* Animated Financial Bar Heights (Individual Speeds) */
+@keyframes financialBarPulseA {
+  0%, 100% {
+    transform: scaleY(0.65);
+    opacity: 0.35;
+  }
+  50% {
+    transform: scaleY(1.0);
+    opacity: 0.70;
+  }
+}
+
+@keyframes financialBarPulseB {
+  0%, 100% {
+    transform: scaleY(0.95);
+    opacity: 0.65;
+  }
+  50% {
+    transform: scaleY(0.50);
+    opacity: 0.30;
+  }
+}
+
+@keyframes financialBarPulseC {
+  0%, 100% {
+    transform: scaleY(0.40);
+    opacity: 0.25;
+  }
+  50% {
+    transform: scaleY(0.85);
+    opacity: 0.60;
+  }
+}
+
+@keyframes financialBarPulseD {
+  0%, 100% {
+    transform: scaleY(0.75);
+    opacity: 0.50;
+  }
+  50% {
+    transform: scaleY(1.05);
+    opacity: 0.80;
+  }
+}
+
+/* Building Window Lights Pulse */
+@keyframes windowGlowA {
+  0%, 100% {
+    opacity: 0.20;
+    fill: #CBD5E1;
+  }
+  50% {
+    opacity: 0.90;
+    fill: #D8B56A;
+  }
+}
+
+@keyframes windowGlowB {
+  0%, 100% {
+    opacity: 0.75;
+    fill: #D8B56A;
+  }
+  50% {
+    opacity: 0.15;
+    fill: #132E43;
+  }
+}
+
+@keyframes windowGlowC {
+  0%, 100% {
+    opacity: 0.30;
+    fill: #CBD5E1;
+  }
+  50% {
+    opacity: 0.85;
+    fill: #C9A45C;
+  }
+}
+
 /* LAYER 5: Architectural Depth Parallax A (22-30s) */
 @keyframes archDepthLayerA {
   0%, 100% {
@@ -242,6 +354,52 @@
   will-change: transform, opacity;
 }
 
+.animate-corp-light-sweep {
+  animation: corporateLightSweep 12s cubic-bezier(0.35, 0.05, 0.25, 1) infinite;
+  will-change: transform, opacity;
+}
+
+.animate-financial-graph {
+  animation: financialGraphPulse 9s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.animate-fin-bar-1 {
+  animation: financialBarPulseA 6.5s ease-in-out infinite;
+  transform-origin: bottom;
+  will-change: transform, opacity;
+}
+
+.animate-fin-bar-2 {
+  animation: financialBarPulseB 8.5s ease-in-out 1.2s infinite;
+  transform-origin: bottom;
+  will-change: transform, opacity;
+}
+
+.animate-fin-bar-3 {
+  animation: financialBarPulseC 7.2s ease-in-out 0.6s infinite;
+  transform-origin: bottom;
+  will-change: transform, opacity;
+}
+
+.animate-fin-bar-4 {
+  animation: financialBarPulseD 9.8s ease-in-out 2s infinite;
+  transform-origin: bottom;
+  will-change: transform, opacity;
+}
+
+.animate-window-glow-a {
+  animation: windowGlowA 7s ease-in-out infinite;
+}
+
+.animate-window-glow-b {
+  animation: windowGlowB 8.5s ease-in-out 2s infinite;
+}
+
+.animate-window-glow-c {
+  animation: windowGlowC 10s ease-in-out 4s infinite;
+}
+
 .animate-arch-depth-a {
   animation: archDepthLayerA 24s ease-in-out infinite;
   will-change: transform;
@@ -285,6 +443,15 @@
   .animate-gold-drift,
   .animate-gold-drift-2,
   .animate-light-sweep,
+  .animate-corp-light-sweep,
+  .animate-financial-graph,
+  .animate-fin-bar-1,
+  .animate-fin-bar-2,
+  .animate-fin-bar-3,
+  .animate-fin-bar-4,
+  .animate-window-glow-a,
+  .animate-window-glow-b,
+  .animate-window-glow-c,
   .animate-arch-depth-a,
   .animate-arch-depth-b,
   .animate-gold-light-1,
