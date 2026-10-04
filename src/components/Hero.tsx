@@ -407,14 +407,15 @@ export function Hero(_props: HeroProps) {
         .network-side {
           position: absolute;
           z-index: 24;
-          top: 5.5%;
-          bottom: 5.5%;
-          width: 31%;
+          top: 2.5%;
+          bottom: 2.5%;
+          width: 23%;
           pointer-events: none;
         }
 
-        .network-left { left: 2.2%; }
-        .network-right { right: 2.2%; }
+        /* Keep nodes in the dark/blue outer water/margin zones, not on continents. */
+        .network-left { left: .8%; }
+        .network-right { right: .8%; }
 
         .network-lines {
           position: absolute;
@@ -426,7 +427,7 @@ export function Hero(_props: HeroProps) {
 
         .network-base {
           fill: none;
-          stroke: rgba(87,117,139,.34);
+          stroke: rgba(87,117,139,.27);
           stroke-width: 1.15;
           stroke-linecap: round;
         }
@@ -473,8 +474,10 @@ export function Hero(_props: HeroProps) {
           line-height: 1;
           text-align: center;
           white-space: nowrap;
-          animation: networkFloat 7s ease-in-out infinite;
-          will-change: transform;
+          animation:
+            networkFloat 7s ease-in-out infinite,
+            nodePhase 16s ease-in-out infinite;
+          will-change: transform, opacity;
         }
 
         .network-node::before {
@@ -512,7 +515,9 @@ export function Hero(_props: HeroProps) {
           color: #FFF4D6;
           font-size: 10px;
           box-shadow: 0 0 25px rgba(216,181,106,.14), 0 8px 22px rgba(0,0,0,.18);
-          animation: masterNodePulse 4.2s ease-in-out infinite;
+          animation:
+            masterNodePulse 4.2s ease-in-out infinite,
+            nodePhase 16s ease-in-out infinite;
         }
 
         @keyframes networkFloat {
@@ -525,29 +530,37 @@ export function Hero(_props: HeroProps) {
           50% { transform: translate(-50%,-50%) scale(1.035); }
         }
 
-        /* LEFT positions — systems / experience */
-        .left-n1 { left: 22%; top: 12%; animation-delay:-1s; }
-        .left-n2 { left: 62%; top: 26%; animation-delay:-3s; }
-        .left-n3 { left: 24%; top: 42%; animation-delay:-5s; }
-        .left-n4 { left: 72%; top: 54%; animation-delay:-2s; }
-        .left-n5 { left: 30%; top: 68%; animation-delay:-4s; }
-        .left-n6 { left: 72%; top: 80%; animation-delay:-6s; }
-        .left-n7 { left: 32%; top: 92%; animation-delay:-.5s; }
+        /* Some nodes remain readable while others fade out and return.
+           Different phase delays keep the network alive without hiding everything together. */
+        @keyframes nodePhase {
+          0%,18%,48%,100% { opacity: 1; }
+          29%,38% { opacity: .10; }
+        }
 
-        /* RIGHT positions — accounting process converging into Financial Reporting */
-        .right-fr { left: 76%; top: 12%; }
-        .right-pl { left: 35%; top: 31%; animation-delay:-1s; }
-        .right-bs { left: 76%; top: 35%; animation-delay:-2s; }
-        .right-revenue { left: 16%; top: 48%; animation-delay:-3s; }
-        .right-expenses { left: 43%; top: 51%; animation-delay:-4s; }
-        .right-ar { left: 67%; top: 52%; animation-delay:-1.5s; }
-        .right-ap { left: 91%; top: 55%; animation-delay:-3.5s; }
-        .right-inventory { left: 77%; top: 69%; animation-delay:-5s; }
-        .right-costing { left: 36%; top: 66%; animation-delay:-2.2s; }
-        .right-recon { left: 16%; top: 76%; animation-delay:-4.7s; }
-        .right-cash { left: 50%; top: 80%; animation-delay:-1.2s; }
-        .right-vat { left: 80%; top: 83%; animation-delay:-3.2s; }
-        .right-close { left: 20%; top: 92%; animation-delay:-5.4s; }
+        /* LEFT — use the outer Pacific/Atlantic blue space, top to bottom. */
+        .left-n1 { left: 16%; top: 8%;  animation-delay:-1s,-1s; }
+        .left-n2 { left: 72%; top: 20%; animation-delay:-3s,-7s; }
+        .left-n3 { left: 15%; top: 34%; animation-delay:-5s,-11s; }
+        .left-n4 { left: 76%; top: 47%; animation-delay:-2s,-4s; }
+        .left-n5 { left: 17%; top: 61%; animation-delay:-4s,-13s; }
+        .left-n6 { left: 76%; top: 75%; animation-delay:-6s,-9s; }
+        .left-n7 { left: 20%; top: 91%; animation-delay:-.5s,-5s; }
+
+        /* RIGHT — accounting network stays in the outer dark/blue zone.
+           Long curved paths are intentional so labels do not sit on the map. */
+        .right-fr      { left: 78%; top: 7%;  animation-delay:0s,-1s; }
+        .right-pl      { left: 22%; top: 18%; animation-delay:-1s,-8s; }
+        .right-bs      { left: 78%; top: 25%; animation-delay:-2s,-12s; }
+        .right-revenue { left: 18%; top: 34%; animation-delay:-3s,-4s; }
+        .right-expenses{ left: 72%; top: 40%; animation-delay:-4s,-14s; }
+        .right-ar      { left: 18%; top: 49%; animation-delay:-1.5s,-6s; }
+        .right-ap      { left: 78%; top: 55%; animation-delay:-3.5s,-10s; }
+        .right-inventory{left: 18%; top: 63%; animation-delay:-5s,-2s; }
+        .right-costing { left: 76%; top: 69%; animation-delay:-2.2s,-13s; }
+        .right-recon   { left: 18%; top: 76%; animation-delay:-4.7s,-7s; }
+        .right-cash    { left: 75%; top: 82%; animation-delay:-1.2s,-11s; }
+        .right-vat     { left: 20%; top: 89%; animation-delay:-3.2s,-5s; }
+        .right-close   { left: 75%; top: 94%; animation-delay:-5.4s,-15s; }
 
         /* Map-fit tuning: adjust only these image values later if needed. */
         @media (max-width: 1023px) {
