@@ -81,83 +81,27 @@ export function Hero(_props: HeroProps) {
             <small>PROFESSIONAL EXPERIENCE</small>
           </div>
 
-          {/* LEFT — SYSTEMS / EXPERIENCE NETWORK */}
-          <div className="network-side network-left" aria-label="Systems and experience">
-            <svg className="network-lines" viewBox="0 0 360 620" preserveAspectRatio="none">
-              <path className="network-base" d="M78 78 C132 118 178 120 224 162" />
-              <path className="network-flow network-flow-blue" d="M78 78 C132 118 178 120 224 162" />
-              <path className="network-base" d="M224 162 C170 206 126 220 86 264" />
-              <path className="network-flow network-flow-blue delay-1" d="M224 162 C170 206 126 220 86 264" />
-              <path className="network-base" d="M86 264 C145 300 204 292 256 338" />
-              <path className="network-flow network-flow-blue delay-2" d="M86 264 C145 300 204 292 256 338" />
-              <path className="network-base" d="M256 338 C205 380 146 386 98 426" />
-              <path className="network-flow network-flow-blue delay-3" d="M256 338 C205 380 146 386 98 426" />
-              <path className="network-base" d="M98 426 C150 466 206 458 254 500" />
-              <path className="network-flow network-flow-blue delay-4" d="M98 426 C150 466 206 458 254 500" />
-              <path className="network-base" d="M254 500 C205 532 158 548 108 574" />
-              <path className="network-flow network-flow-blue delay-5" d="M254 500 C205 532 158 548 108 574" />
-            </svg>
+          {/* FREE-FLOATING SKILL POINTS — ONLY IN DARK / WATER AREAS */}
+          <div className="free-points-layer" aria-label="Professional skills">
+            <div className="free-point fp1">14+ Years Exp</div>
+            <div className="free-point fp2">ERP Software</div>
+            <div className="free-point fp3">Oracle</div>
+            <div className="free-point fp4">Qoyod</div>
+            <div className="free-point fp5">QuickBooks</div>
+            <div className="free-point fp6">MS Office</div>
+            <div className="free-point fp7">Advanced Excel</div>
 
-            <div className="network-node blue-node left-n1">14+ Years Exp</div>
-            <div className="network-node blue-node left-n2">ERP Software</div>
-            <div className="network-node blue-node left-n3">Oracle</div>
-            <div className="network-node blue-node left-n4">Qoyod</div>
-            <div className="network-node blue-node left-n5">QuickBooks</div>
-            <div className="network-node blue-node left-n6">MS Office</div>
-            <div className="network-node blue-node left-n7">Advanced Excel</div>
-          </div>
-
-          {/* RIGHT — ACCOUNTING PROCESS → FINANCIAL REPORTING */}
-          <div className="network-side network-right" aria-label="Accounting process to financial reporting">
-            <svg className="network-lines" viewBox="0 0 430 620" preserveAspectRatio="none">
-              {/* P&L and Balance Sheet converge into Financial Reporting */}
-              <path className="network-base" d="M150 196 C205 148 258 112 324 78" />
-              <path className="network-flow" d="M150 196 C205 148 258 112 324 78" />
-              <path className="network-base" d="M324 220 C338 168 338 120 324 78" />
-              <path className="network-flow delay-2" d="M324 220 C338 168 338 120 324 78" />
-
-              {/* Revenue + Expenses → P&L */}
-              <path className="network-base" d="M70 300 C88 255 112 220 150 196" />
-              <path className="network-flow delay-1" d="M70 300 C88 255 112 220 150 196" />
-              <path className="network-base" d="M185 316 C184 260 170 222 150 196" />
-              <path className="network-flow delay-3" d="M185 316 C184 260 170 222 150 196" />
-
-              {/* AR + AP + Inventory → Balance Sheet */}
-              <path className="network-base" d="M286 320 C304 286 316 250 324 220" />
-              <path className="network-flow delay-1" d="M286 320 C304 286 316 250 324 220" />
-              <path className="network-base" d="M386 338 C365 292 345 250 324 220" />
-              <path className="network-flow delay-4" d="M386 338 C365 292 345 250 324 220" />
-              <path className="network-base" d="M330 426 C342 360 338 286 324 220" />
-              <path className="network-flow delay-5" d="M330 426 C342 360 338 286 324 220" />
-
-              {/* Processing layer */}
-              <path className="network-base" d="M150 410 C132 370 104 330 70 300" />
-              <path className="network-flow delay-2" d="M150 410 C132 370 104 330 70 300" />
-              <path className="network-base" d="M72 474 C98 442 124 422 150 410" />
-              <path className="network-flow delay-4" d="M72 474 C98 442 124 422 150 410" />
-              <path className="network-base" d="M214 492 C190 462 168 432 150 410" />
-              <path className="network-flow delay-1" d="M214 492 C190 462 168 432 150 410" />
-              <path className="network-base" d="M340 514 C340 478 336 450 330 426" />
-              <path className="network-flow delay-3" d="M340 514 C340 478 336 450 330 426" />
-
-              {/* Monthly Closing pulls the process upward into statements/reporting */}
-              <path className="network-base" d="M92 566 C110 520 128 458 150 410 C166 350 166 260 150 196" />
-              <path className="network-flow network-flow-slow" d="M92 566 C110 520 128 458 150 410 C166 350 166 260 150 196" />
-            </svg>
-
-            <div className="network-node master-node right-fr">Financial Reporting</div>
-            <div className="network-node gold-node right-pl">P&amp;L Account</div>
-            <div className="network-node gold-node right-bs">Balance Sheet</div>
-            <div className="network-node gold-node right-revenue">Revenue</div>
-            <div className="network-node gold-node right-expenses">Expenses</div>
-            <div className="network-node gold-node right-ar">Receivables</div>
-            <div className="network-node gold-node right-ap">Payables</div>
-            <div className="network-node gold-node right-inventory">Inventory</div>
-            <div className="network-node gold-node right-costing">Costing</div>
-            <div className="network-node gold-node right-recon">Reconciliation</div>
-            <div className="network-node gold-node right-cash">Cash / Petty Cash</div>
-            <div className="network-node gold-node right-vat">VAT Reporting</div>
-            <div className="network-node gold-node right-close">Monthly Closing</div>
+            <div className="free-point accounting fp8">Financial Reporting</div>
+            <div className="free-point accounting fp9">Receivables</div>
+            <div className="free-point accounting fp10">VAT Reports &amp; Submission</div>
+            <div className="free-point accounting fp11">Reconciliations</div>
+            <div className="free-point accounting fp12">Costing</div>
+            <div className="free-point accounting fp13">Monthly Closing</div>
+            <div className="free-point accounting fp14">Cash Handling</div>
+            <div className="free-point accounting fp15">Petty Cash</div>
+            <div className="free-point accounting fp16">Payables</div>
+            <div className="free-point accounting fp17">P&amp;L Account</div>
+            <div className="free-point accounting fp18">Balance Sheet</div>
           </div>
         </div>
 
@@ -403,69 +347,25 @@ export function Hero(_props: HeroProps) {
           50% { transform: translateY(-13px); }
         }
 
-        /* TWO-SIDE CONNECTED NETWORK — CURVED PATHS, NO STRAIGHT-LINE CHART LOOK */
-        .network-side {
-          position: absolute;
-          z-index: 24;
-          top: 2.5%;
-          bottom: 2.5%;
-          width: 23%;
-          pointer-events: none;
-        }
-
-        /* Keep nodes in the dark/blue outer water/margin zones, not on continents. */
-        .network-left { left: .8%; }
-        .network-right { right: .8%; }
-
-        .network-lines {
+        /* FREE-FLOATING POINTS — NO CONNECTION LINES.
+           Positions are intentionally placed in dark/ocean/background zones,
+           away from the main golden land masses and country information boxes. */
+        .free-points-layer {
           position: absolute;
           inset: 0;
-          width: 100%;
-          height: 100%;
-          overflow: visible;
+          z-index: 24;
+          pointer-events: none;
+          overflow: hidden;
         }
 
-        .network-base {
-          fill: none;
-          stroke: rgba(87,117,139,.27);
-          stroke-width: 1.15;
-          stroke-linecap: round;
-        }
-
-        .network-flow {
-          fill: none;
-          stroke: #D8B56A;
-          stroke-width: 1.8;
-          stroke-linecap: round;
-          stroke-dasharray: 10 34;
-          animation: networkDash 6.4s linear infinite;
-          filter: drop-shadow(0 0 4px rgba(216,181,106,.38));
-        }
-
-        .network-flow-blue {
-          stroke: #78BDE3;
-          opacity: .72;
-          filter: drop-shadow(0 0 4px rgba(120,189,227,.32));
-        }
-
-        .network-flow-slow { animation-duration: 8.5s; }
-        .delay-1 { animation-delay: -1.2s; }
-        .delay-2 { animation-delay: -2.4s; }
-        .delay-3 { animation-delay: -3.6s; }
-        .delay-4 { animation-delay: -4.8s; }
-        .delay-5 { animation-delay: -6s; }
-
-        @keyframes networkDash {
-          to { stroke-dashoffset: -176; }
-        }
-
-        .network-node {
+        .free-point {
           position: absolute;
           transform: translate(-50%,-50%);
-          min-width: 92px;
+          min-width: 88px;
           padding: 7px 10px;
+          border: 1px solid rgba(105,183,231,.30);
           border-radius: 999px;
-          background: rgba(7,24,39,.84);
+          background: rgba(7,24,39,.82);
           backdrop-filter: blur(7px);
           box-shadow: 0 8px 22px rgba(0,0,0,.18);
           color: #E5EDF2;
@@ -475,92 +375,68 @@ export function Hero(_props: HeroProps) {
           text-align: center;
           white-space: nowrap;
           animation:
-            networkFloat 7s ease-in-out infinite,
-            nodePhase 16s ease-in-out infinite;
+            freePointFloat 7.5s ease-in-out infinite,
+            freePointFade 17s ease-in-out infinite;
           will-change: transform, opacity;
         }
 
-        .network-node::before {
+        .free-point::before {
           content: "";
           display: inline-block;
           width: 5px;
           height: 5px;
           margin-right: 6px;
           border-radius: 50%;
+          background: #69B7E7;
+          box-shadow: 0 0 7px rgba(105,183,231,.75);
           vertical-align: 1px;
         }
 
-        .blue-node {
-          border: 1px solid rgba(120,189,227,.34);
-        }
-        .blue-node::before {
-          background: #78BDE3;
-          box-shadow: 0 0 7px rgba(120,189,227,.75);
-        }
-
-        .gold-node {
-          border: 1px solid rgba(216,181,106,.38);
+        .free-point.accounting {
+          border-color: rgba(216,181,106,.34);
           color: #F4E3B7;
         }
-        .gold-node::before,
-        .master-node::before {
+
+        .free-point.accounting::before {
           background: #D8B56A;
-          box-shadow: 0 0 8px rgba(216,181,106,.8);
+          box-shadow: 0 0 8px rgba(216,181,106,.78);
         }
 
-        .master-node {
-          min-width: 142px;
-          padding: 10px 13px;
-          border: 1px solid rgba(216,181,106,.72);
-          color: #FFF4D6;
-          font-size: 10px;
-          box-shadow: 0 0 25px rgba(216,181,106,.14), 0 8px 22px rgba(0,0,0,.18);
-          animation:
-            masterNodePulse 4.2s ease-in-out infinite,
-            nodePhase 16s ease-in-out infinite;
-        }
-
-        @keyframes networkFloat {
-          0%,100% { transform: translate(-50%,-50%) translate(0,6px); }
+        @keyframes freePointFloat {
+          0%,100% { transform: translate(-50%,-50%) translate(0,7px); }
           50% { transform: translate(-50%,-50%) translate(3px,-9px); }
         }
 
-        @keyframes masterNodePulse {
-          0%,100% { transform: translate(-50%,-50%) scale(1); }
-          50% { transform: translate(-50%,-50%) scale(1.035); }
+        /* Different points disappear and return at different times.
+           The whole screen never disappears at once. */
+        @keyframes freePointFade {
+          0%,16%,48%,100% { opacity: .96; }
+          28%,37% { opacity: .08; }
         }
 
-        /* Some nodes remain readable while others fade out and return.
-           Different phase delays keep the network alive without hiding everything together. */
-        @keyframes nodePhase {
-          0%,18%,48%,100% { opacity: 1; }
-          29%,38% { opacity: .10; }
-        }
+        /* LEFT / PACIFIC / ATLANTIC DARK AREAS */
+        .fp1  { left: 7%;  top: 11%; animation-delay:-1s,-1s; }
+        .fp2  { left: 32%; top: 17%; animation-delay:-3s,-8s; }
+        .fp3  { left: 7%;  top: 36%; animation-delay:-5s,-12s; }
+        .fp4  { left: 27%; top: 55%; animation-delay:-2s,-5s; }
+        .fp5  { left: 8%;  top: 69%; animation-delay:-4s,-14s; }
+        .fp6  { left: 27%; top: 82%; animation-delay:-6s,-10s; }
+        .fp7  { left: 8%;  top: 94%; animation-delay:-.5s,-6s; }
 
-        /* LEFT — use the outer Pacific/Atlantic blue space, top to bottom. */
-        .left-n1 { left: 16%; top: 8%;  animation-delay:-1s,-1s; }
-        .left-n2 { left: 72%; top: 20%; animation-delay:-3s,-7s; }
-        .left-n3 { left: 15%; top: 34%; animation-delay:-5s,-11s; }
-        .left-n4 { left: 76%; top: 47%; animation-delay:-2s,-4s; }
-        .left-n5 { left: 17%; top: 61%; animation-delay:-4s,-13s; }
-        .left-n6 { left: 76%; top: 75%; animation-delay:-6s,-9s; }
-        .left-n7 { left: 20%; top: 91%; animation-delay:-.5s,-5s; }
+        /* OPEN WATER / DARK AREAS AROUND THE MAP — accounting points */
+        .fp8  { left: 89%; top: 11%; animation-delay:-1.5s,-3s; }
+        .fp9  { left: 93%; top: 27%; animation-delay:-3.5s,-11s; }
+        .fp10 { left: 83%; top: 43%; animation-delay:-5.5s,-7s; }
+        .fp11 { left: 92%; top: 56%; animation-delay:-2.5s,-15s; }
+        .fp12 { left: 79%; top: 65%; animation-delay:-4.5s,-5s; }
+        .fp13 { left: 91%; top: 75%; animation-delay:-6.5s,-13s; }
+        .fp14 { left: 78%; top: 84%; animation-delay:-1s,-9s; }
+        .fp15 { left: 91%; top: 92%; animation-delay:-3s,-2s; }
 
-        /* RIGHT — accounting network stays in the outer dark/blue zone.
-           Long curved paths are intentional so labels do not sit on the map. */
-        .right-fr      { left: 78%; top: 7%;  animation-delay:0s,-1s; }
-        .right-pl      { left: 22%; top: 18%; animation-delay:-1s,-8s; }
-        .right-bs      { left: 78%; top: 25%; animation-delay:-2s,-12s; }
-        .right-revenue { left: 18%; top: 34%; animation-delay:-3s,-4s; }
-        .right-expenses{ left: 72%; top: 40%; animation-delay:-4s,-14s; }
-        .right-ar      { left: 18%; top: 49%; animation-delay:-1.5s,-6s; }
-        .right-ap      { left: 78%; top: 55%; animation-delay:-3.5s,-10s; }
-        .right-inventory{left: 18%; top: 63%; animation-delay:-5s,-2s; }
-        .right-costing { left: 76%; top: 69%; animation-delay:-2.2s,-13s; }
-        .right-recon   { left: 18%; top: 76%; animation-delay:-4.7s,-7s; }
-        .right-cash    { left: 75%; top: 82%; animation-delay:-1.2s,-11s; }
-        .right-vat     { left: 20%; top: 89%; animation-delay:-3.2s,-5s; }
-        .right-close   { left: 75%; top: 94%; animation-delay:-5.4s,-15s; }
+        /* Lower open-ocean zones, kept away from the main land silhouettes */
+        .fp16 { left: 38%; top: 91%; animation-delay:-5s,-12s; }
+        .fp17 { left: 58%; top: 91%; animation-delay:-2s,-6s; }
+        .fp18 { left: 69%; top: 92%; animation-delay:-4s,-16s; }
 
         /* Map-fit tuning: adjust only these image values later if needed. */
         @media (max-width: 1023px) {
@@ -583,12 +459,7 @@ export function Hero(_props: HeroProps) {
 
           .country b { font-size: 7px; }
           .country small { font-size: 5px; }
-
-          .network-side { width: 38%; top: 7%; bottom: 7%; }
-          .network-left { left: 1%; }
-          .network-right { right: 1%; }
-          .network-node { min-width: 72px; padding: 5px 7px; font-size: 7px; }
-          .master-node { min-width: 105px; font-size: 8px; }
+          .free-point { min-width: 70px; padding: 5px 7px; font-size: 7px; }
         }
 
         @media (max-width: 640px) {
