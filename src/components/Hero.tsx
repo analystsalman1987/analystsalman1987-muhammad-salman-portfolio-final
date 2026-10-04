@@ -36,7 +36,7 @@ export function Hero(_props: HeroProps) {
     <section
       id="home"
       dir={isRTL ? 'rtl' : 'ltr'}
-      className="hero-final relative min-h-[calc(100svh-5rem)] overflow-hidden bg-[#051D2E] lg:h-[calc(100svh-5rem)] lg:min-h-[650px]"
+      className="hero-final relative min-h-[calc(100svh-5rem)] overflow-hidden lg:h-[calc(100svh-5rem)] lg:min-h-[650px]"
     >
       <div className="hero-bg absolute inset-0" aria-hidden="true" />
 
@@ -44,17 +44,6 @@ export function Hero(_props: HeroProps) {
         {/* FULL-WIDTH PROFESSIONAL FOOTPRINT */}
         <div className="map-wrap absolute z-10" aria-hidden="true">
           <svg className="h-full w-full overflow-visible" viewBox="0 0 1000 560">
-            <defs>
-              <radialGradient id="mapEdgeFade" cx="50%" cy="48%" r="67%">
-                <stop offset="0%" stopColor="white" stopOpacity="1" />
-                <stop offset="68%" stopColor="white" stopOpacity="1" />
-                <stop offset="88%" stopColor="white" stopOpacity=".62" />
-                <stop offset="100%" stopColor="white" stopOpacity="0" />
-              </radialGradient>
-              <mask id="mapFeatherMask">
-                <rect x="0" y="28" width="1000" height="520" fill="url(#mapEdgeFade)" />
-              </mask>
-            </defs>
             {/* LOCKED GOLDEN WORLD MAP IMAGE — map fit controls are x/y/width/height below. */}
             <g className="locked-golden-map">
               <image
@@ -131,16 +120,16 @@ export function Hero(_props: HeroProps) {
 
       <style>{`
         .hero-final {
-          background: #071827;
+          /* Match the Golden World Map image background so the picture and Hero read as one surface. */
+          background: #031b2b;
           isolation: isolate;
         }
 
         .hero-bg {
+          /* Keep the outer canvas almost identical to the map PNG background. */
           background:
-            radial-gradient(circle at 72% 43%, rgba(216,181,106,.095), transparent 25%),
-            radial-gradient(circle at 80% 57%, rgba(111,184,223,.095), transparent 30%),
-            radial-gradient(circle at 48% 20%, rgba(111,184,223,.035), transparent 24%),
-            linear-gradient(135deg,#061522 0%,#081A2B 48%,#0D2538 100%);
+            radial-gradient(circle at 50% 48%, rgba(13,47,69,.34) 0%, rgba(5,31,47,.18) 46%, transparent 76%),
+            #031b2b;
         }
 
         .hero-bg::before,
@@ -193,10 +182,20 @@ export function Hero(_props: HeroProps) {
 
         /* LOCKED FINAL MAP COMPOSITION — LARGE, SEAMLESS, UNDER THE NAME */
         .map-wrap {
-          inset: 0;
-          width: 100%;
-          height: 100%;
+          /* Slight overscan puts the PNG boundary outside the visible Hero. */
+          inset: -3.5% -2.5%;
+          width: auto;
+          height: auto;
           overflow: hidden;
+          /* Four-side feather: image fades into the exact Hero navy on every edge/corner. */
+          -webkit-mask-image:
+            linear-gradient(to right, transparent 0%, #000 5.5%, #000 94.5%, transparent 100%),
+            linear-gradient(to bottom, transparent 0%, #000 6.5%, #000 93.5%, transparent 100%);
+          -webkit-mask-composite: source-in;
+          mask-image:
+            linear-gradient(to right, transparent 0%, #000 5.5%, #000 94.5%, transparent 100%),
+            linear-gradient(to bottom, transparent 0%, #000 6.5%, #000 93.5%, transparent 100%);
+          mask-composite: intersect;
         }
 
         /* LOCKED GOLDEN WORLD MAP IMAGE */
@@ -207,8 +206,8 @@ export function Hero(_props: HeroProps) {
         }
 
         .locked-map-image {
-          opacity: .92;
-          mix-blend-mode: screen;
+          opacity: .96;
+          mix-blend-mode: normal;
           filter:
             saturate(.92)
             brightness(.94)
