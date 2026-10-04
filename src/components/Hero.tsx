@@ -181,22 +181,8 @@ export function Hero({ onOpenCV }: HeroProps) {
             xl:w-[100%]
           "
         >
-          {/* Warm sunset/golden atmosphere BEHIND the skyline */}
+          {/* Base background behind the uploaded skyline image */}
           <div className="absolute inset-0 bg-[#0A1D2E]" />
-          <div
-            className="
-              absolute
-              inset-0
-              bg-[radial-gradient(ellipse_72%_58%_at_28%_44%,rgba(236,193,103,0.18)_0%,rgba(216,181,106,0.10)_24%,rgba(185,132,54,0.05)_48%,transparent_73%)]
-            "
-          />
-          <div
-            className="
-              absolute
-              inset-0
-              bg-[radial-gradient(ellipse_52%_35%_at_39%_62%,rgba(231,183,87,0.24)_0%,rgba(201,164,92,0.11)_43%,transparent_76%)]
-            "
-          />
 
           <img
             src="/images/Golden-Hour Waterfront Skyline.png"
@@ -211,24 +197,6 @@ export function Hero({ onOpenCV }: HeroProps) {
               w-full
               object-cover
               object-left-bottom
-            "
-          />
-
-          {/* Golden light over the sky/buildings, matching locked reference */}
-          <div
-            className="
-              absolute
-              inset-0
-              bg-[linear-gradient(105deg,rgba(255,210,118,0.035)_0%,rgba(232,188,94,0.025)_27%,rgba(216,181,106,0.015)_49%,rgba(201,164,92,0.012)_68%,transparent_82%)]
-              mix-blend-screen
-            "
-          />
-          <div
-            className="
-              absolute
-              inset-0
-              bg-[radial-gradient(ellipse_68%_54%_at_27%_42%,rgba(255,222,145,0.035)_0%,rgba(232,188,94,0.025)_38%,rgba(201,164,92,0.02)_61%,transparent_82%)]
-              mix-blend-screen
             "
           />
 
@@ -907,15 +875,8 @@ export function Hero({ onOpenCV }: HeroProps) {
         }
 
         .hero-locked-skyline-image {
-          /*
-           * Keep the buildings photographic/real while warming the
-           * cool source photo toward the champagne-gold locked look.
-           */
-          filter:
-            saturate(.88)
-            contrast(1.035)
-            brightness(.93)
-            sepia(.03);
+          /* Show the newly uploaded skyline in its original natural colors. */
+          filter: none;
         }
 
         .hero-floating-point {
