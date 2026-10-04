@@ -75,26 +75,26 @@ export function Hero(_props: HeroProps) {
             <path
               className="route route-canada"
               pathLength="1000"
-              d="M169 119 C330 95 505 150 624 257"
+              d="M218 151 C350 118 475 172 558 259"
             />
             <path
               className="route route-pakistan"
               pathLength="1000"
-              d="M721 234 C690 225 657 235 624 257"
+              d="M642 238 C615 232 585 241 558 259"
             />
 
             {/* CANADA */}
-            <circle className="map-node map-node-canada" cx="169" cy="119" r="4.5" />
-            <circle className="map-pulse map-pulse-canada" cx="169" cy="119" r="8" />
+            <circle className="map-node map-node-canada" cx="218" cy="151" r="4.5" />
+            <circle className="map-pulse map-pulse-canada" cx="218" cy="151" r="8" />
 
             {/* PAKISTAN */}
-            <circle className="map-node" cx="721" cy="234" r="4.5" />
-            <circle className="map-pulse" cx="721" cy="234" r="8" />
+            <circle className="map-node" cx="642" cy="238" r="4.5" />
+            <circle className="map-pulse" cx="642" cy="238" r="8" />
 
             {/* SAUDI ARABIA — MAIN DESTINATION */}
-            <circle className="saudi-halo" cx="624" cy="257" r="17" />
-            <circle className="map-node map-node-saudi" cx="624" cy="257" r="6.5" />
-            <circle className="map-pulse map-pulse-saudi" cx="624" cy="257" r="11" />
+            <circle className="saudi-halo" cx="558" cy="259" r="17" />
+            <circle className="map-node map-node-saudi" cx="558" cy="259" r="6.5" />
+            <circle className="map-pulse map-pulse-saudi" cx="558" cy="259" r="11" />
           </svg>
 
           <div className="country country-ca">
@@ -383,22 +383,22 @@ export function Hero(_props: HeroProps) {
 
         /* Positions aligned to the SVG nodes */
         .country-ca {
-          left: 17%;
-          top: 18%;
+          left: 18%;
+          top: 24%;
           border-color: rgba(120,189,227,.38);
         }
 
         .country-ca small { color: #8BC6E6; }
 
         .country-pk {
-          left: 72%;
-          top: 39%;
+          left: 65%;
+          top: 40%;
           animation-delay: -4s;
         }
 
         .country-sa {
-          left: 61%;
-          top: 43%;
+          left: 54%;
+          top: 44%;
           border-color: rgba(216,181,106,.55);
           box-shadow: 0 0 22px rgba(216,181,106,.08), 0 10px 28px rgba(0,0,0,.22);
           animation-delay: -7s;
@@ -456,22 +456,22 @@ export function Hero(_props: HeroProps) {
           50% { transform: translateY(-17px) scale(1.035); opacity:1; }
         }
 
-        /* Balanced around the smaller right-side map */
-        .p1  { left: 38%; top: 1%; }
-        .p2  { left: 12%; top: 7%; }
-        .p3  { left: 2%; top: 40%; }
-        .p4  { right: 3%; top: 34%; }
-        .p5  { left: 34%; top: 25%; }
-        .p6  { left: 7%; top: 64%; }
-        .p7  { left: 24%; bottom: 0%; }
-        .p8  { right: 20%; top: 1%; }
-        .p9  { right: 3%; bottom: 1%; }
-        .p10 { left: 50%; bottom: -7%; }
-        .p11 { right: 29%; bottom: 10%; }
-        .p12 { left: 0%; bottom: 15%; }
-        .p13 { left: 8%; top: 31%; }
-        .p14 { right: 34%; top: 13%; }
-        .p15 { right: 3%; top: 68%; }
+        /* All 17 points locked INSIDE the map/viewport safe area */
+        .p1  { left: 39%; top: 5%; }
+        .p2  { left: 15%; top: 10%; }
+        .p3  { left: 11%; top: 42%; }
+        .p4  { right: 8%; top: 36%; }
+        .p5  { left: 34%; top: 27%; }
+        .p6  { left: 12%; top: 66%; }
+        .p7  { left: 27%; bottom: 8%; }
+        .p8  { right: 18%; top: 8%; }
+        .p9  { right: 8%; bottom: 8%; }
+        .p10 { left: 49%; bottom: 7%; }
+        .p11 { right: 28%; bottom: 12%; }
+        .p12 { left: 10%; bottom: 14%; }
+        .p13 { left: 18%; top: 33%; }
+        .p14 { right: 33%; top: 15%; }
+        .p15 { right: 8%; top: 68%; }
         .p16 { left: 39%; top: 76%; }
         .p17 { right: 17%; top: 61%; }
 
