@@ -55,7 +55,7 @@ export function Hero(_props: HeroProps) {
                 <rect x="0" y="28" width="1000" height="520" fill="url(#mapEdgeFade)" />
               </mask>
             </defs>
-            {/* LOCKED GOLDEN WORLD MAP IMAGE — uploaded at public/images/Golden World Map.png */}
+            {/* LOCKED GOLDEN WORLD MAP IMAGE — map fit controls are x/y/width/height below. */}
             <g className="locked-golden-map">
               <image
                 className="locked-map-image"
@@ -126,48 +126,7 @@ export function Hero(_props: HeroProps) {
           ))}
         </div>
 
-        {/* LOCKED FINAL LOWER FLOWING WAVES */}
-        <div className="lower-waves absolute z-[8]" aria-hidden="true">
-          <svg viewBox="0 0 1900 220" preserveAspectRatio="none">
-            <path className="wave wave-gold wg" d="M-80 110 C170 30 360 175 610 95 S1030 35 1250 120 S1630 175 1980 75" />
-            <path className="wave wave-gold wg wave-soft-1" d="M-80 145 C170 65 350 200 610 125 S1030 70 1250 150 S1630 205 1980 105" />
-            <path className="wave wave-gold wg wave-soft-2" d="M-80 175 C180 100 370 220 630 155 S1030 105 1260 180 S1640 220 1980 135" />
-            <path className="wave wave-blue wb" d="M-100 160 C170 205 380 70 650 160 S1080 230 1320 140 S1670 70 2000 165" />
-            <path className="wave wave-blue wb wave-blue-soft" d="M-100 190 C170 230 390 105 650 190 S1080 255 1320 170 S1680 105 2000 195" />
-            <path className="golden-shine" d="M-80 110 C170 30 360 175 610 95 S1030 35 1250 120 S1630 175 1980 75" />
-          </svg>
-        </div>
-
-        {/* LOCKED-DEMO STYLE LIVE NETWORK ORB */}
-        <div
-          className="network-orb absolute right-[7%] top-[11%] z-20 hidden h-[112px] w-[112px] lg:block"
-          aria-hidden="true"
-        >
-          <svg className="orb-svg h-full w-full" viewBox="0 0 112 112">
-            <circle className="orb-shell" cx="56" cy="56" r="50" />
-            <ellipse className="orb-latitude orb-latitude-a" cx="56" cy="56" rx="43" ry="18" />
-            <ellipse className="orb-latitude orb-latitude-b" cx="56" cy="56" rx="43" ry="31" />
-            <ellipse className="orb-longitude orb-longitude-a" cx="56" cy="56" rx="18" ry="43" />
-            <ellipse className="orb-longitude orb-longitude-b" cx="56" cy="56" rx="31" ry="43" />
-
-            <g className="orb-network">
-              <path d="M25 40 L43 27 L65 31 L83 45 L78 69 L60 84 L37 76 L25 40" />
-              <path d="M43 27 L48 50 L25 40 M48 50 L65 31 M48 50 L78 69 M48 50 L37 76 M65 31 L83 45 L78 69 M37 76 L60 84 L78 69" />
-              <circle cx="25" cy="40" r="2.1" />
-              <circle cx="43" cy="27" r="2.1" />
-              <circle cx="65" cy="31" r="2.1" />
-              <circle cx="83" cy="45" r="2.1" />
-              <circle cx="78" cy="69" r="2.1" />
-              <circle cx="60" cy="84" r="2.1" />
-              <circle cx="37" cy="76" r="2.1" />
-              <circle cx="48" cy="50" r="2.4" />
-            </g>
-
-            <circle className="orb-spark orb-spark-a" cx="29" cy="35" r="1.5" />
-            <circle className="orb-spark orb-spark-b" cx="80" cy="38" r="1.4" />
-            <circle className="orb-spark orb-spark-c" cx="69" cy="82" r="1.5" />
-          </svg>
-        </div>
+        {/* Globe and lower waves intentionally removed while finalizing map fit. */}
       </div>
 
       <style>{`
@@ -460,145 +419,22 @@ export function Hero(_props: HeroProps) {
         .p1  { left: 39%; top: 10%; }
         .p2  { left: 16%; top: 16%; }
         .p3  { left: 12%; top: 43%; }
-        .p4  { right: 10%; top: 38%; }
+        .p4  { right: 16%; top: 38%; }
         .p5  { left: 34%; top: 28%; }
-        .p6  { left: 13%; top: 64%; }
-        .p7  { left: 28%; bottom: 14%; }
-        .p8  { right: 20%; top: 14%; }
-        .p9  { right: 10%; bottom: 14%; }
-        .p10 { left: 48%; bottom: 14%; }
-        .p11 { right: 28%; bottom: 16%; }
-        .p12 { left: 12%; bottom: 18%; }
-        .p13 { left: 19%; top: 34%; }
+        .p6  { left: 16%; top: 62%; }
+        .p7  { left: 29%; bottom: 18%; }
+        .p8  { right: 22%; top: 16%; }
+        .p9  { right: 16%; bottom: 18%; }
+        .p10 { left: 48%; bottom: 18%; }
+        .p11 { right: 29%; bottom: 19%; }
+        .p12 { left: 16%; bottom: 20%; }
+        .p13 { left: 20%; top: 34%; }
         .p14 { right: 34%; top: 18%; }
-        .p15 { right: 10%; top: 66%; }
+        .p15 { right: 16%; top: 64%; }
         .p16 { left: 39%; top: 72%; }
-        .p17 { right: 19%; top: 59%; }
+        .p17 { right: 21%; top: 58%; }
 
-        /* LOCKED FINAL ORGANIC GOLD + BLUE WAVE FIELD */
-        .lower-waves {
-          left: -4%;
-          right: -4%;
-          bottom: -1%;
-          height: 25%;
-          pointer-events: none;
-          opacity: 1;
-        }
-
-        .lower-waves svg { width:100%; height:100%; overflow:visible; }
-        .wave { fill:none; stroke-linecap:round; vector-effect:non-scaling-stroke; }
-        .wg {
-          stroke:#D8B56A;
-          stroke-width:1.5;
-          opacity:.56;
-          filter:drop-shadow(0 0 5px rgba(216,181,106,.16));
-          animation:wg 20s ease-in-out infinite;
-        }
-        .wb {
-          stroke:#69B7E7;
-          stroke-width:1.3;
-          opacity:.42;
-          animation:wb 25s ease-in-out infinite;
-        }
-        .wave-soft-1 { opacity:.35; }
-        .wave-soft-2 { opacity:.22; }
-        .wave-blue-soft { opacity:.50; }
-        .golden-shine {
-          fill:none;
-          stroke:#F7D77D;
-          stroke-width:4;
-          stroke-linecap:round;
-          stroke-dasharray:85 1300;
-          filter:drop-shadow(0 0 8px #D8B56A);
-          animation:shine 8s linear infinite;
-        }
-        @keyframes wg {
-          0%,100% { transform:translateY(0); }
-          50% { transform:translateY(-10px); }
-        }
-        @keyframes wb {
-          0%,100% { transform:translateY(5px); }
-          50% { transform:translateY(-6px); }
-        }
-        @keyframes shine { to { stroke-dashoffset:-1385; } }
-        /* LOCKED-DEMO STYLE LIVE TOP-RIGHT NETWORK ORB */
-        .network-orb {
-          transform-box: border-box;
-          transform-origin: center;
-          filter: drop-shadow(0 0 14px rgba(216,181,106,.10));
-          animation: lockedOrbMotion 12s ease-in-out infinite;
-          will-change: transform;
-        }
-
-        .orb-svg {
-          overflow: visible;
-        }
-
-        .orb-shell {
-          fill: rgba(7,24,39,.16);
-          stroke: rgba(216,181,106,.52);
-          stroke-width: 1.15;
-        }
-
-        .orb-latitude,
-        .orb-longitude {
-          fill: none;
-          stroke: rgba(105,183,231,.42);
-          stroke-width: .85;
-          stroke-dasharray: 3 4;
-          transform-box: fill-box;
-          transform-origin: center;
-        }
-
-        .orb-latitude-a { animation: orbRingSpin 14s linear infinite; }
-        .orb-latitude-b { animation: orbRingSpinReverse 18s linear infinite; opacity:.70; }
-        .orb-longitude-a { animation: orbRingSpinReverse 16s linear infinite; }
-        .orb-longitude-b { animation: orbRingSpin 20s linear infinite; opacity:.68; }
-
-        .orb-network {
-          fill: rgba(216,181,106,.72);
-          stroke: rgba(216,181,106,.44);
-          stroke-width: .72;
-          stroke-linecap: round;
-          stroke-linejoin: round;
-          transform-box: fill-box;
-          transform-origin: center;
-          animation: orbNetworkBreathe 6.5s ease-in-out infinite;
-        }
-
-        .orb-network path { fill:none; }
-
-        .orb-spark {
-          fill:#69B7E7;
-          filter:drop-shadow(0 0 3px rgba(105,183,231,.85));
-          animation:orbSpark 5s ease-in-out infinite;
-        }
-        .orb-spark-b { animation-delay:-1.8s; fill:#D8B56A; }
-        .orb-spark-c { animation-delay:-3.4s; }
-
-        @keyframes lockedOrbMotion {
-          0%,100% { transform:translate(-5px,6px) rotate(0deg); }
-          50% { transform:translate(8px,-8px) rotate(180deg); }
-        }
-
-        @keyframes orbRingSpin {
-          to { transform:rotate(360deg); }
-        }
-
-        @keyframes orbRingSpinReverse {
-          to { transform:rotate(-360deg); }
-        }
-
-        @keyframes orbNetworkBreathe {
-          0%,100% { transform:scale(.96) rotate(-4deg); opacity:.52; }
-          50% { transform:scale(1.04) rotate(5deg); opacity:.92; }
-        }
-
-        @keyframes orbSpark {
-          0%,100% { opacity:.15; transform:scale(.85); }
-          50% { opacity:.9; transform:scale(1.35); }
-        }
-
+        /* Map-fit tuning: adjust only these image values later if needed. */
         @media (max-width: 1023px) {
           .hero-final {
             min-height: 760px;
@@ -612,13 +448,6 @@ export function Hero(_props: HeroProps) {
             opacity: .78;
           }
 
-          .lower-waves {
-            left: -8%;
-            right: -8%;
-            bottom: 0;
-            height: 18%;
-            opacity: .72;
-          }
 
           .country {
             padding: 5px 7px;
@@ -643,10 +472,6 @@ export function Hero(_props: HeroProps) {
             inset: 0;
           }
 
-          .lower-waves {
-            bottom: 0;
-            height: 17%;
-          }
         }
       `}</style>
     </section>
