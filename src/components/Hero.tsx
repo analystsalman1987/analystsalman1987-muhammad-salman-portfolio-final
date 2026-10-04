@@ -88,21 +88,48 @@ export function Hero({ onOpenCV }: HeroProps) {
         {/* RIGHT PROFESSIONAL FOOTPRINT */}
         <div className="map-wrap absolute z-10" aria-hidden="true">
           <svg className="h-full w-full overflow-visible" viewBox="0 0 1000 560">
-            {/* GOLD WORLD MAP */}
-            <path className="world" d="M88 169 L115 137 151 126 183 105 226 104 257 119 286 112 312 132 302 151 278 160 266 181 239 190 220 216 196 221 177 246 153 238 145 215 119 203 99 188Z" />
-            <path className="world" d="M231 246 L257 257 276 282 281 316 300 341 292 375 275 397 269 429 249 462 232 439 226 405 211 377 205 341 214 308 202 278Z" />
-            <path className="world" d="M444 139 L472 116 511 113 536 126 563 118 594 130 619 124 649 140 685 139 716 153 752 148 785 161 817 160 849 181 838 199 803 205 782 224 748 223 724 239 691 233 665 249 638 245 616 263 590 254 564 263 542 249 516 250 494 232 469 228 453 208 430 199 423 176Z" />
-            <path className="world" d="M516 259 L550 258 578 275 589 301 580 330 563 353 555 386 535 416 513 444 493 425 488 392 472 365 466 330 474 300 492 278Z" />
-            <path className="world" d="M744 287 L772 275 797 284 808 306 795 327 769 335 747 321 735 303Z" />
-            <path className="world" d="M818 375 L847 362 879 370 895 392 884 414 852 423 824 410 809 391Z" />
+            {/* REFINED WORLD MAP — recognizable continent silhouettes */}
+            <g className="world-map">
+              {/* North America */}
+              <path className="world" d="M72 150 L91 126 L118 112 L145 90 L181 82 L208 91 L230 84 L253 94 L274 112 L299 119 L314 137 L303 153 L281 158 L270 177 L249 183 L239 202 L219 210 L203 231 L184 237 L167 226 L160 205 L139 198 L123 184 L103 179 L89 165 Z" />
+              <path className="world-detail" d="M93 129 L119 130 L139 114 L158 119 L177 101 L199 106 L216 96 M115 170 L145 158 L174 163 L203 149 L233 153 L260 142 M166 204 L190 193 L216 196 L239 181" />
 
-            <path
-              className="geo-detail"
-              d="M128 154 C166 165 205 163 253 142 M159 202 C193 188 229 178 272 174
-                 M459 163 C511 151 562 151 615 159 M532 201 C582 184 635 181 688 191
-                 M659 215 C708 198 759 194 809 199 M493 294 C524 304 551 322 572 347
-                 M225 291 C245 315 260 346 271 378 M829 390 C849 382 870 385 885 398"
-            />
+              {/* Greenland */}
+              <path className="world" d="M301 74 L326 61 L350 68 L358 88 L344 105 L319 101 L304 88 Z" />
+
+              {/* South America */}
+              <path className="world" d="M229 245 L251 251 L271 267 L283 288 L281 313 L294 337 L289 363 L276 383 L270 408 L258 430 L245 456 L233 442 L226 416 L216 394 L211 366 L202 344 L207 319 L199 296 L210 272 Z" />
+              <path className="world-detail" d="M218 270 L243 281 L260 302 L267 328 M214 332 L236 349 L252 374 L258 402" />
+
+              {/* Europe */}
+              <path className="world" d="M474 135 L490 121 L509 123 L520 113 L539 119 L551 112 L567 121 L584 119 L596 132 L584 143 L566 142 L557 153 L540 149 L528 159 L511 153 L499 161 L484 154 Z" />
+
+              {/* Asia */}
+              <path className="world" d="M579 128 L605 116 L631 120 L650 113 L676 121 L696 117 L716 130 L741 129 L762 141 L786 139 L808 150 L833 151 L852 166 L875 172 L888 188 L878 203 L855 207 L841 221 L819 218 L801 232 L777 228 L760 242 L738 238 L719 250 L697 243 L679 251 L659 243 L640 252 L621 243 L605 250 L592 237 L576 232 L565 216 L548 210 L542 194 L530 184 L540 166 L555 157 L562 142 Z" />
+              <path className="world-detail" d="M588 151 L620 145 L651 151 L681 143 L714 151 L748 149 L781 160 L816 162 M569 184 L605 177 L639 184 L675 174 L712 181 L748 177 L785 188 L829 187 M612 218 L647 207 L681 214 L716 205 L751 214 L789 209" />
+
+              {/* Arabian Peninsula / India emphasis */}
+              <path className="world" d="M594 249 L613 246 L627 257 L622 276 L610 291 L595 283 L586 266 Z" />
+              <path className="world" d="M688 248 L704 253 L716 270 L711 291 L699 309 L690 293 L684 273 Z" />
+
+              {/* Africa */}
+              <path className="world" d="M493 239 L522 231 L552 238 L575 253 L589 276 L583 304 L570 327 L562 354 L547 379 L533 404 L516 430 L501 413 L494 386 L481 366 L476 340 L464 316 L468 290 L459 270 L474 251 Z" />
+              <path className="world-detail" d="M480 263 L509 270 L537 263 L562 279 M474 309 L502 319 L529 313 L557 329 M492 360 L516 370 L541 363" />
+
+              {/* Japan / SE Asia islands */}
+              <path className="island" d="M821 230 l8 6 -5 11 -7 -5 Z M797 255 l7 5 -4 10 -7 -5 Z M767 274 l8 3 -2 9 -8 -2 Z" />
+
+              {/* Australia */}
+              <path className="world" d="M793 360 L818 348 L847 352 L871 365 L887 386 L881 407 L858 419 L831 423 L808 412 L791 394 L783 376 Z" />
+              <path className="world-detail" d="M803 374 L827 365 L851 371 L873 389 M812 403 L838 395 L861 401" />
+            </g>
+
+            {/* subtle global network traces */}
+            <g className="map-network">
+              <path d="M111 151 C245 112 390 118 520 173 S754 218 861 181" />
+              <path d="M160 204 C303 184 423 226 541 252 S748 259 843 219" />
+              <path d="M235 286 C370 249 486 273 605 278 S760 306 829 374" />
+            </g>
 
             {/*
               FLOW DIRECTION IS TOWARD SAUDI ARABIA.
@@ -284,6 +311,29 @@ export function Hero({ onOpenCV }: HeroProps) {
           stroke-width: 1.3;
           vector-effect: non-scaling-stroke;
           filter: drop-shadow(0 0 6px rgba(216,181,106,.18));
+        }
+
+        .world-detail {
+          fill: none;
+          stroke: rgba(216,181,106,.20);
+          stroke-width: .75;
+          stroke-linecap: round;
+          vector-effect: non-scaling-stroke;
+        }
+
+        .island {
+          fill: rgba(216,181,106,.035);
+          stroke: rgba(216,181,106,.58);
+          stroke-width: 1;
+          vector-effect: non-scaling-stroke;
+        }
+
+        .map-network {
+          fill: none;
+          stroke: rgba(105,183,231,.12);
+          stroke-width: .7;
+          stroke-dasharray: 2 7;
+          vector-effect: non-scaling-stroke;
         }
 
         .geo-detail {
