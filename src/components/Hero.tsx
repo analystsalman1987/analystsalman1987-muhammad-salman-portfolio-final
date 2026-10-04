@@ -15,58 +15,147 @@ export function Hero({ onOpenCV }: HeroProps) {
   const linkedInUrl =
     'https://www.linkedin.com/in/muhammad-salman-mba-finance-cpa-finalist-66908767/';
 
+  /*
+   * LOCKED HERO FINANCE PATH
+   *
+   * Main gold wave:
+   * starts near the visual centre and rises smoothly toward the right.
+   *
+   * No permanent dots are placed on this gold line.
+   */
+  const goldWavePath = `
+    M 675 720
+    C 715 708, 742 690, 770 662
+    C 790 642, 805 610, 830 604
+    C 855 598, 868 624, 892 618
+    C 920 610, 936 574, 962 548
+    C 990 520, 1012 502, 1038 510
+    C 1068 520, 1088 552, 1118 548
+    C 1150 544, 1170 498, 1195 458
+    C 1220 418, 1244 390, 1270 394
+    C 1300 398, 1315 426, 1340 412
+    C 1370 395, 1388 342, 1415 294
+    C 1425 276, 1434 262, 1440 254
+  `;
+
+  /*
+   * Thin secondary dotted trend line.
+   * It sits below the main gold wave.
+   */
+  const dottedTrendPath = `
+    M 690 758
+    C 730 748, 760 730, 790 714
+    C 820 698, 850 686, 880 674
+    C 910 662, 940 650, 970 632
+    C 1000 614, 1030 598, 1060 584
+    C 1090 570, 1120 558, 1150 542
+    C 1180 526, 1210 505, 1240 480
+    C 1270 455, 1300 430, 1330 402
+    C 1360 374, 1390 340, 1440 300
+  `;
+
+  const bars = [
+    { x: 715, h: 34, gold: false, dur: 6.2, delay: 0.0 },
+    { x: 744, h: 47, gold: true, dur: 6.7, delay: 0.3 },
+    { x: 773, h: 58, gold: false, dur: 6.0, delay: 0.7 },
+    { x: 802, h: 72, gold: false, dur: 7.0, delay: 1.0 },
+    { x: 831, h: 86, gold: true, dur: 6.4, delay: 0.5 },
+    { x: 860, h: 68, gold: false, dur: 6.8, delay: 1.2 },
+    { x: 889, h: 96, gold: false, dur: 7.2, delay: 0.8 },
+    { x: 918, h: 112, gold: true, dur: 6.5, delay: 1.5 },
+    { x: 947, h: 91, gold: false, dur: 6.9, delay: 0.4 },
+    { x: 976, h: 126, gold: false, dur: 7.4, delay: 1.1 },
+    { x: 1005, h: 148, gold: true, dur: 6.6, delay: 0.9 },
+    { x: 1034, h: 105, gold: false, dur: 7.0, delay: 1.7 },
+    { x: 1063, h: 137, gold: false, dur: 6.3, delay: 0.2 },
+    { x: 1092, h: 161, gold: true, dur: 7.1, delay: 1.3 },
+    { x: 1121, h: 119, gold: false, dur: 6.8, delay: 0.6 },
+    { x: 1150, h: 178, gold: false, dur: 7.5, delay: 1.0 },
+    { x: 1179, h: 203, gold: true, dur: 6.7, delay: 1.5 },
+    { x: 1208, h: 153, gold: false, dur: 7.2, delay: 0.3 },
+    { x: 1237, h: 218, gold: true, dur: 6.5, delay: 1.1 },
+    { x: 1266, h: 181, gold: false, dur: 7.3, delay: 0.8 },
+    { x: 1295, h: 246, gold: true, dur: 6.9, delay: 1.6 },
+    { x: 1324, h: 210, gold: false, dur: 7.4, delay: 0.5 },
+    { x: 1353, h: 274, gold: true, dur: 6.8, delay: 1.2 },
+    { x: 1382, h: 239, gold: false, dur: 7.1, delay: 0.9 },
+  ];
+
+  const dottedBlinkPoints = [
+    [760, 730],
+    [800, 708],
+    [840, 690],
+    [880, 674],
+    [920, 656],
+    [960, 638],
+    [1000, 615],
+    [1040, 594],
+    [1080, 574],
+    [1120, 558],
+    [1160, 536],
+    [1200, 512],
+    [1240, 480],
+    [1280, 447],
+    [1320, 410],
+    [1360, 370],
+    [1400, 332],
+  ];
+
   return (
     <section
       id="home"
       className="
-        relative flex w-full flex-col items-center justify-center
+        relative
+        flex
         min-h-[calc(100svh-5rem)]
-        lg:h-[calc(100svh-5rem)]
-        lg:min-h-[calc(100svh-5rem)]
+        w-full
+        flex-col
+        items-center
+        justify-center
         overflow-hidden
         bg-[#071827]
-        px-4 py-8
-        sm:px-6
-        lg:px-8 lg:py-0
+        px-4
+        py-8
         text-center
+        sm:px-6
+        lg:h-[calc(100svh-5rem)]
+        lg:min-h-[calc(100svh-5rem)]
+        lg:px-8
+        lg:py-0
       "
     >
-      {/* =========================================================
-          BACKGROUND
-      ========================================================== */}
+      {/* ======================================================
+          LOCKED HERO BACKGROUND
+      ======================================================= */}
       <div
         className="pointer-events-none absolute inset-0 z-0 overflow-hidden select-none"
         aria-hidden="true"
       >
-        {/* Base navy */}
+        {/* Navy background */}
         <div className="absolute inset-0 bg-[#071827]" />
 
         <div
           className="
-            absolute -inset-16
-            bg-[radial-gradient(ellipse_95%_85%_at_50%_35%,#132E43_0%,#0D2538_32%,#081A2B_65%,#071827_100%)]
+            absolute
+            -inset-12
+            bg-[radial-gradient(ellipse_100%_90%_at_50%_38%,#132E43_0%,#0D2538_31%,#081A2B_65%,#071827_100%)]
           "
         />
 
-        {/* =====================================================
-            LEFT — REAL BUILDING PHOTO
-            Original colors retained.
-            Only edges fade softly into navy.
-        ====================================================== */}
+        {/* ====================================================
+            LEFT REAL SKYLINE
+            Starts from visual centre and continues to far left.
+            Original building/photo colours retained.
+        ===================================================== */}
         <div
           className="
-            hero-skyline
+            hero-locked-skyline
             absolute
-            bottom-0 left-0
+            bottom-0
+            left-0
             z-[1]
-            h-[58%]
-            w-[48%]
-            sm:h-[61%]
-            sm:w-[47%]
-            lg:h-[64%]
-            lg:w-[46%]
-            xl:h-[66%]
-            xl:w-[45%]
+            h-[72%]
+            w-[52%]
           "
         >
           <img
@@ -76,66 +165,73 @@ export function Hero({ onOpenCV }: HeroProps) {
             loading="eager"
             className="
               absolute
-              bottom-0 left-0
-              h-full w-full
+              inset-0
+              h-full
+              w-full
               object-cover
               object-left-bottom
             "
           />
 
-          {/* very light navy integration — does not recolor buildings */}
+          {/* Only transition into centre — no colour filter */}
           <div
             className="
-              absolute inset-0
+              absolute
+              inset-y-0
+              right-0
+              w-[36%]
               bg-gradient-to-r
               from-transparent
-              via-transparent
+              via-[#071827]/45
               to-[#071827]
             "
           />
 
-          {/* top edge fade */}
+          {/* Gentle top integration */}
           <div
             className="
-              absolute inset-x-0 top-0
-              h-[24%]
+              absolute
+              inset-x-0
+              top-0
+              h-[18%]
               bg-gradient-to-b
-              from-[#071827]
-              via-[#071827]/45
+              from-[#071827]/60
               to-transparent
             "
           />
 
-          {/* bottom edge integration */}
+          {/* Very light bottom integration */}
           <div
             className="
-              absolute inset-x-0 bottom-0
-              h-[9%]
+              absolute
+              inset-x-0
+              bottom-0
+              h-[8%]
               bg-gradient-to-t
-              from-[#071827]/65
+              from-[#071827]/45
               to-transparent
             "
           />
         </div>
 
-        {/* Soft building-side feather */}
+        {/* Centre feather between skyline and finance visual */}
         <div
           className="
             absolute
-            bottom-[3%]
-            left-[37%]
+            bottom-0
+            left-[43%]
             z-[2]
-            h-[55%]
+            h-[72%]
             w-[12%]
             rounded-full
-            bg-[#071827]/75
-            blur-[45px]
+            bg-[#071827]/60
+            blur-[52px]
           "
         />
 
-        {/* =====================================================
-            RIGHT — ACCOUNTING / FINANCE VISUAL
-        ====================================================== */}
+        {/* ====================================================
+            RIGHT FINANCE VISUAL
+        ===================================================== */}
         <svg
           className="absolute inset-0 z-[2] h-full w-full"
           viewBox="0 0 1440 900"
@@ -143,9 +239,8 @@ export function Hero({ onOpenCV }: HeroProps) {
           xmlns="http://www.w3.org/2000/svg"
         >
           <defs>
-            {/* dark gold graph */}
             <linearGradient
-              id="heroDarkGold"
+              id="lockedGoldWave"
               x1="0%"
               y1="100%"
               x2="100%"
@@ -153,65 +248,23 @@ export function Hero({ onOpenCV }: HeroProps) {
             >
               <stop
                 offset="0%"
-                stopColor="#8F7134"
-                stopOpacity="0.58"
+                stopColor="#9A7737"
+                stopOpacity="0.60"
               />
-
               <stop
-                offset="50%"
-                stopColor="#B58E43"
-                stopOpacity="0.82"
+                offset="45%"
+                stopColor="#C9A45C"
+                stopOpacity="0.90"
               />
-
               <stop
                 offset="100%"
-                stopColor="#D8B56A"
-                stopOpacity="0.95"
-              />
-            </linearGradient>
-
-            {/* bright moving streak */}
-            <linearGradient
-              id="heroBrightGold"
-              x1="0%"
-              y1="0%"
-              x2="100%"
-              y2="0%"
-            >
-              <stop
-                offset="0%"
-                stopColor="#D8B56A"
-                stopOpacity="0"
-              />
-
-              <stop
-                offset="25%"
-                stopColor="#D8B56A"
-                stopOpacity="0.35"
-              />
-
-              <stop
-                offset="50%"
-                stopColor="#FFF2C9"
+                stopColor="#E1BF72"
                 stopOpacity="1"
               />
-
-              <stop
-                offset="75%"
-                stopColor="#D8B56A"
-                stopOpacity="0.45"
-              />
-
-              <stop
-                offset="100%"
-                stopColor="#D8B56A"
-                stopOpacity="0"
-              />
             </linearGradient>
 
-            {/* bars */}
             <linearGradient
-              id="heroBarBlue"
+              id="lockedBlueBar"
               x1="0%"
               y1="100%"
               x2="0%"
@@ -220,18 +273,17 @@ export function Hero({ onOpenCV }: HeroProps) {
               <stop
                 offset="0%"
                 stopColor="#183448"
-                stopOpacity="0.55"
+                stopOpacity="0.44"
               />
-
               <stop
                 offset="100%"
-                stopColor="#7890A0"
-                stopOpacity="0.72"
+                stopColor="#71899A"
+                stopOpacity="0.82"
               />
             </linearGradient>
 
             <linearGradient
-              id="heroBarGold"
+              id="lockedGoldBar"
               x1="0%"
               y1="100%"
               x2="0%"
@@ -239,30 +291,27 @@ export function Hero({ onOpenCV }: HeroProps) {
             >
               <stop
                 offset="0%"
-                stopColor="#6D552A"
-                stopOpacity="0.58"
+                stopColor="#70562A"
+                stopOpacity="0.48"
               />
-
               <stop
                 offset="100%"
                 stopColor="#D8B56A"
-                stopOpacity="0.82"
+                stopOpacity="0.90"
               />
             </linearGradient>
 
-            {/* graph glow */}
             <filter
-              id="heroGraphGlow"
-              x="-50%"
-              y="-50%"
-              width="200%"
-              height="200%"
+              id="lockedGoldGlow"
+              x="-60%"
+              y="-60%"
+              width="220%"
+              height="220%"
             >
               <feGaussianBlur
                 stdDeviation="5"
                 result="blur"
               />
-
               <feMerge>
                 <feMergeNode in="blur" />
                 <feMergeNode in="SourceGraphic" />
@@ -270,17 +319,16 @@ export function Hero({ onOpenCV }: HeroProps) {
             </filter>
 
             <filter
-              id="heroSoftGlow"
-              x="-100%"
-              y="-100%"
-              width="300%"
-              height="300%"
+              id="lockedDotGlow"
+              x="-150%"
+              y="-150%"
+              width="400%"
+              height="400%"
             >
               <feGaussianBlur
-                stdDeviation="9"
+                stdDeviation="2.5"
                 result="blur"
               />
-
               <feMerge>
                 <feMergeNode in="blur" />
                 <feMergeNode in="SourceGraphic" />
@@ -288,507 +336,226 @@ export function Hero({ onOpenCV }: HeroProps) {
             </filter>
           </defs>
 
-          {/* =================================================
-              14 MOVING BARS
-              NO BACKGROUND GRID / BOXES
-          ================================================== */}
-          <g opacity="0.82">
-            <rect
-              x="760"
-              y="755"
-              width="15"
-              height="70"
-              rx="2"
-              fill="url(#heroBarBlue)"
-            >
-              <animate
-                attributeName="y"
-                values="770;735;755;770"
-                dur="5.4s"
-                repeatCount="indefinite"
-              />
-              <animate
-                attributeName="height"
-                values="55;90;70;55"
-                dur="5.4s"
-                repeatCount="indefinite"
-              />
-            </rect>
+          {/* ================================================
+              BARS — thin, numerous, professional
+          ================================================= */}
+          <g>
+            {bars.map((bar, index) => {
+              const baseY = 822;
+              const lowHeight = Math.max(28, bar.h - 18);
+              const highHeight = bar.h + 22;
 
-            <rect
-              x="798"
-              y="735"
-              width="15"
-              height="90"
-              rx="2"
-              fill="url(#heroBarGold)"
-            >
-              <animate
-                attributeName="y"
-                values="750;710;735;750"
-                dur="5.9s"
-                begin=".3s"
-                repeatCount="indefinite"
-              />
-              <animate
-                attributeName="height"
-                values="75;115;90;75"
-                dur="5.9s"
-                begin=".3s"
-                repeatCount="indefinite"
-              />
-            </rect>
+              return (
+                <rect
+                  key={index}
+                  x={bar.x}
+                  y={baseY - bar.h}
+                  width="14"
+                  height={bar.h}
+                  rx="2"
+                  fill={
+                    bar.gold
+                      ? 'url(#lockedGoldBar)'
+                      : 'url(#lockedBlueBar)'
+                  }
+                >
+                  <animate
+                    attributeName="y"
+                    values={`${baseY - lowHeight};${baseY - highHeight};${baseY - bar.h};${baseY - lowHeight}`}
+                    dur={`${bar.dur}s`}
+                    begin={`${bar.delay}s`}
+                    repeatCount="indefinite"
+                  />
 
-            <rect
-              x="836"
-              y="715"
-              width="15"
-              height="110"
-              rx="2"
-              fill="url(#heroBarBlue)"
-            >
-              <animate
-                attributeName="y"
-                values="735;690;715;735"
-                dur="6.3s"
-                begin=".6s"
-                repeatCount="indefinite"
-              />
-              <animate
-                attributeName="height"
-                values="90;135;110;90"
-                dur="6.3s"
-                begin=".6s"
-                repeatCount="indefinite"
-              />
-            </rect>
-
-            <rect
-              x="874"
-              y="690"
-              width="15"
-              height="135"
-              rx="2"
-              fill="url(#heroBarGold)"
-            >
-              <animate
-                attributeName="y"
-                values="710;660;690;710"
-                dur="5.6s"
-                begin=".9s"
-                repeatCount="indefinite"
-              />
-              <animate
-                attributeName="height"
-                values="115;165;135;115"
-                dur="5.6s"
-                begin=".9s"
-                repeatCount="indefinite"
-              />
-            </rect>
-
-            <rect
-              x="912"
-              y="725"
-              width="15"
-              height="100"
-              rx="2"
-              fill="url(#heroBarBlue)"
-            >
-              <animate
-                attributeName="y"
-                values="745;700;725;745"
-                dur="6.1s"
-                begin="1.2s"
-                repeatCount="indefinite"
-              />
-              <animate
-                attributeName="height"
-                values="80;125;100;80"
-                dur="6.1s"
-                begin="1.2s"
-                repeatCount="indefinite"
-              />
-            </rect>
-
-            <rect
-              x="950"
-              y="670"
-              width="15"
-              height="155"
-              rx="2"
-              fill="url(#heroBarGold)"
-            >
-              <animate
-                attributeName="y"
-                values="690;635;670;690"
-                dur="6.7s"
-                begin=".2s"
-                repeatCount="indefinite"
-              />
-              <animate
-                attributeName="height"
-                values="135;190;155;135"
-                dur="6.7s"
-                begin=".2s"
-                repeatCount="indefinite"
-              />
-            </rect>
-
-            <rect
-              x="988"
-              y="710"
-              width="15"
-              height="115"
-              rx="2"
-              fill="url(#heroBarBlue)"
-            >
-              <animate
-                attributeName="y"
-                values="730;680;710;730"
-                dur="5.7s"
-                begin=".7s"
-                repeatCount="indefinite"
-              />
-              <animate
-                attributeName="height"
-                values="95;145;115;95"
-                dur="5.7s"
-                begin=".7s"
-                repeatCount="indefinite"
-              />
-            </rect>
-
-            <rect
-              x="1026"
-              y="645"
-              width="15"
-              height="180"
-              rx="2"
-              fill="url(#heroBarGold)"
-            >
-              <animate
-                attributeName="y"
-                values="670;610;645;670"
-                dur="6.8s"
-                begin="1.1s"
-                repeatCount="indefinite"
-              />
-              <animate
-                attributeName="height"
-                values="155;215;180;155"
-                dur="6.8s"
-                begin="1.1s"
-                repeatCount="indefinite"
-              />
-            </rect>
-
-            <rect
-              x="1064"
-              y="695"
-              width="15"
-              height="130"
-              rx="2"
-              fill="url(#heroBarBlue)"
-            >
-              <animate
-                attributeName="y"
-                values="715;665;695;715"
-                dur="5.5s"
-                begin="1.5s"
-                repeatCount="indefinite"
-              />
-              <animate
-                attributeName="height"
-                values="110;160;130;110"
-                dur="5.5s"
-                begin="1.5s"
-                repeatCount="indefinite"
-              />
-            </rect>
-
-            <rect
-              x="1102"
-              y="620"
-              width="15"
-              height="205"
-              rx="2"
-              fill="url(#heroBarGold)"
-            >
-              <animate
-                attributeName="y"
-                values="650;585;620;650"
-                dur="7s"
-                begin=".4s"
-                repeatCount="indefinite"
-              />
-              <animate
-                attributeName="height"
-                values="175;240;205;175"
-                dur="7s"
-                begin=".4s"
-                repeatCount="indefinite"
-              />
-            </rect>
-
-            <rect
-              x="1140"
-              y="680"
-              width="15"
-              height="145"
-              rx="2"
-              fill="url(#heroBarBlue)"
-            >
-              <animate
-                attributeName="y"
-                values="700;650;680;700"
-                dur="6s"
-                begin=".8s"
-                repeatCount="indefinite"
-              />
-              <animate
-                attributeName="height"
-                values="125;175;145;125"
-                dur="6s"
-                begin=".8s"
-                repeatCount="indefinite"
-              />
-            </rect>
-
-            <rect
-              x="1178"
-              y="600"
-              width="15"
-              height="225"
-              rx="2"
-              fill="url(#heroBarGold)"
-            >
-              <animate
-                attributeName="y"
-                values="630;560;600;630"
-                dur="7.2s"
-                begin="1.2s"
-                repeatCount="indefinite"
-              />
-              <animate
-                attributeName="height"
-                values="195;265;225;195"
-                dur="7.2s"
-                begin="1.2s"
-                repeatCount="indefinite"
-              />
-            </rect>
-
-            <rect
-              x="1216"
-              y="655"
-              width="15"
-              height="170"
-              rx="2"
-              fill="url(#heroBarBlue)"
-            >
-              <animate
-                attributeName="y"
-                values="680;625;655;680"
-                dur="5.8s"
-                begin="1.6s"
-                repeatCount="indefinite"
-              />
-              <animate
-                attributeName="height"
-                values="145;200;170;145"
-                dur="5.8s"
-                begin="1.6s"
-                repeatCount="indefinite"
-              />
-            </rect>
-
-            <rect
-              x="1254"
-              y="570"
-              width="15"
-              height="255"
-              rx="2"
-              fill="url(#heroBarGold)"
-            >
-              <animate
-                attributeName="y"
-                values="605;535;570;605"
-                dur="7.4s"
-                begin=".6s"
-                repeatCount="indefinite"
-              />
-              <animate
-                attributeName="height"
-                values="220;290;255;220"
-                dur="7.4s"
-                begin=".6s"
-                repeatCount="indefinite"
-              />
-            </rect>
+                  <animate
+                    attributeName="height"
+                    values={`${lowHeight};${highHeight};${bar.h};${lowHeight}`}
+                    dur={`${bar.dur}s`}
+                    begin={`${bar.delay}s`}
+                    repeatCount="indefinite"
+                  />
+                </rect>
+              );
+            })}
           </g>
 
-          {/* =================================================
-              DARK GOLD ZIGZAG FINANCIAL LINE
-              NO DOTS
-          ================================================== */}
+          {/* ================================================
+              THIN DOTTED TREND LINE
+              Between bars and main gold wave
+          ================================================= */}
 
-          {/* soft glow underneath */}
           <path
-            d="
-              M 730 720
-              L 790 685
-              L 850 625
-              L 900 650
-              L 960 570
-              L 1015 605
-              L 1070 515
-              L 1125 550
-              L 1180 445
-              L 1230 490
-              L 1285 365
-              L 1335 410
-              L 1400 245
-            "
+            d={dottedTrendPath}
             fill="none"
-            stroke="#C9A45C"
-            strokeWidth="10"
+            stroke="#7E93A2"
+            strokeWidth="1.15"
+            strokeDasharray="3 10"
             strokeLinecap="round"
-            strokeLinejoin="round"
-            opacity="0.07"
-            filter="url(#heroSoftGlow)"
+            opacity="0.42"
           />
 
-          {/* permanent dark-gold zigzag */}
+          {/* sequential blinking points ONLY on dotted line */}
+          <g>
+            {dottedBlinkPoints.map(([cx, cy], index) => (
+              <circle
+                key={index}
+                cx={cx}
+                cy={cy}
+                r="2.1"
+                fill="#CBD5E1"
+                opacity="0.12"
+                filter="url(#lockedDotGlow)"
+              >
+                <animate
+                  attributeName="opacity"
+                  values="0.10;0.10;0.95;0.18;0.10"
+                  keyTimes="0;0.35;0.50;0.64;1"
+                  dur="5.8s"
+                  begin={`${index * 0.18}s`}
+                  repeatCount="indefinite"
+                />
+
+                <animate
+                  attributeName="r"
+                  values="1.7;1.7;3.2;2;1.7"
+                  keyTimes="0;0.35;0.50;0.64;1"
+                  dur="5.8s"
+                  begin={`${index * 0.18}s`}
+                  repeatCount="indefinite"
+                />
+              </circle>
+            ))}
+          </g>
+
+          {/* ================================================
+              MAIN GOLD WAVE
+              NO DOTS
+          ================================================= */}
+
+          {/* subtle halo */}
           <path
-            d="
-              M 730 720
-              L 790 685
-              L 850 625
-              L 900 650
-              L 960 570
-              L 1015 605
-              L 1070 515
-              L 1125 550
-              L 1180 445
-              L 1230 490
-              L 1285 365
-              L 1335 410
-              L 1400 245
-            "
+            d={goldWavePath}
             fill="none"
-            stroke="url(#heroDarkGold)"
-            strokeWidth="4"
+            stroke="#D8B56A"
+            strokeWidth="11"
             strokeLinecap="round"
-            strokeLinejoin="round"
+            opacity="0.055"
+            filter="url(#lockedGoldGlow)"
           />
 
-          {/* =================================================
-              ONE CONTINUOUS MOVING GOLD STREAK
-              NO CIRCLES
-              NO DOTS
-              SLOW 10 SECOND MOVEMENT
-          ================================================== */}
+          {/* permanent smooth gold wave */}
           <path
-            d="
-              M 730 720
-              L 790 685
-              L 850 625
-              L 900 650
-              L 960 570
-              L 1015 605
-              L 1070 515
-              L 1125 550
-              L 1180 445
-              L 1230 490
-              L 1285 365
-              L 1335 410
-              L 1400 245
-            "
+            d={goldWavePath}
             fill="none"
-            stroke="url(#heroBrightGold)"
-            strokeWidth="6"
+            stroke="url(#lockedGoldWave)"
+            strokeWidth="3.5"
             strokeLinecap="round"
             strokeLinejoin="round"
+            opacity="0.95"
+          />
+
+          {/* ================================================
+              SMOOTH MOVING LIGHT ON GOLD WAVE
+              Continuous segment — NO DOTS
+          ================================================= */}
+          <path
+            d={goldWavePath}
+            fill="none"
+            stroke="#FFF0BE"
+            strokeWidth="5.2"
+            strokeLinecap="round"
             pathLength="1000"
-            strokeDasharray="145 855"
+            strokeDasharray="118 882"
             strokeDashoffset="1000"
-            filter="url(#heroGraphGlow)"
+            filter="url(#lockedGoldGlow)"
+            opacity="0.95"
           >
             <animate
               attributeName="stroke-dashoffset"
               from="1000"
               to="-1000"
-              dur="10s"
+              dur="11s"
+              repeatCount="indefinite"
+            />
+
+            <animate
+              attributeName="stroke-opacity"
+              values="0;1;1;0"
+              keyTimes="0;0.08;0.92;1"
+              dur="11s"
               repeatCount="indefinite"
             />
           </path>
         </svg>
 
-        {/* =====================================================
-            SUBTLE RIGHT GOLD ATMOSPHERE
-        ====================================================== */}
+        {/* subtle right atmosphere */}
         <div
           className="
             absolute
-            right-[-5%]
-            bottom-[4%]
+            right-[-4%]
+            bottom-[2%]
             z-[1]
-            h-[62%]
-            w-[50%]
+            h-[68%]
+            w-[52%]
             rounded-full
-            bg-[radial-gradient(circle,rgba(216,181,106,0.08)_0%,rgba(201,164,92,0.025)_43%,transparent_72%)]
+            bg-[radial-gradient(circle,rgba(216,181,106,0.065)_0%,rgba(201,164,92,0.022)_45%,transparent_73%)]
             blur-[70px]
           "
         />
 
-        {/* =====================================================
-            CENTER READING AREA
-            Keeps text clean without hiding left/right visuals
-        ====================================================== */}
+        {/* ====================================================
+            CENTER CONTENT PROTECTION
+            Does not redesign left/right.
+        ===================================================== */}
         <div
           className="
-            absolute inset-0 z-[3]
-            bg-[radial-gradient(ellipse_42%_46%_at_50%_43%,rgba(7,24,39,0.80)_0%,rgba(7,24,39,0.52)_50%,rgba(7,24,39,0.12)_76%,transparent_100%)]
+            absolute
+            inset-0
+            z-[3]
+            bg-[radial-gradient(ellipse_39%_43%_at_50%_43%,rgba(7,24,39,0.79)_0%,rgba(7,24,39,0.53)_49%,rgba(7,24,39,0.13)_75%,transparent_100%)]
           "
         />
 
-        {/* outer vignette */}
         <div
           className="
-            absolute inset-0 z-[4]
-            bg-[radial-gradient(ellipse_94%_88%_at_50%_48%,transparent_50%,rgba(7,24,39,0.18)_76%,#071827_100%)]
+            absolute
+            inset-0
+            z-[4]
+            bg-[radial-gradient(ellipse_96%_90%_at_50%_48%,transparent_52%,rgba(7,24,39,0.14)_78%,#071827_100%)]
           "
         />
 
-        {/* bottom fade */}
         <div
           className="
-            absolute inset-x-0 bottom-0 z-[5]
-            h-[10%]
+            absolute
+            inset-x-0
+            bottom-0
+            z-[5]
+            h-[8%]
             bg-gradient-to-t
-            from-[#071827]
-            via-[#071827]/55
+            from-[#071827]/75
             to-transparent
           "
         />
       </div>
 
-      {/* =========================================================
-          CENTER CONTENT
-      ========================================================== */}
+      {/* ======================================================
+          LOCKED CENTER CONTENT
+      ======================================================= */}
       <div
         className="
-          relative z-10
+          relative
+          z-10
           mx-auto
-          flex w-full max-w-5xl
+          flex
+          w-full
+          max-w-5xl
           flex-col
           items-center
           justify-center
           space-y-6
         "
       >
-        {/* Welcome */}
         <div className="inline-flex items-center gap-2">
           <span className="h-px w-6 bg-[#D8B56A]/60 sm:w-10" />
 
@@ -811,7 +578,6 @@ export function Hero({ onOpenCV }: HeroProps) {
           <span className="h-px w-6 bg-[#D8B56A]/60 sm:w-10" />
         </div>
 
-        {/* Name */}
         <h1
           className="
             select-none
@@ -833,7 +599,6 @@ export function Hero({ onOpenCV }: HeroProps) {
           </span>
         </h1>
 
-        {/* Accountant */}
         <p
           className="
             text-base
@@ -851,14 +616,13 @@ export function Hero({ onOpenCV }: HeroProps) {
             : 'ACCOUNTANT'}
         </p>
 
-        {/* Buttons */}
         <div className="flex flex-wrap items-center justify-center gap-4 pt-4 sm:gap-5">
-          {/* Download CV */}
           <button
             type="button"
             onClick={onOpenCV}
             className="
-              group relative
+              group
+              relative
               inline-flex
               cursor-pointer
               touch-manipulation
@@ -867,14 +631,20 @@ export function Hero({ onOpenCV }: HeroProps) {
               gap-2.5
               overflow-hidden
               rounded-xl
-              border border-[#D8B56A]/50
+              border
+              border-[#D8B56A]/50
               bg-[#0D2538]/95
-              px-7 py-3.5
-              text-sm font-bold
+              px-7
+              py-3.5
+              text-sm
+              font-bold
               text-[#F8FAFC]
-              shadow-lg shadow-black/40
+              shadow-lg
+              shadow-black/40
               backdrop-blur-md
-              transition-all duration-300 ease-out
+              transition-all
+              duration-300
+              ease-out
               hover:-translate-y-0.5
               hover:border-[#D8B56A]
               hover:bg-[#132E43]
@@ -886,7 +656,8 @@ export function Hero({ onOpenCV }: HeroProps) {
             <span
               className="
                 pointer-events-none
-                absolute inset-0
+                absolute
+                inset-0
                 -translate-x-full
                 bg-gradient-to-r
                 from-transparent
@@ -907,7 +678,6 @@ export function Hero({ onOpenCV }: HeroProps) {
             </span>
           </button>
 
-          {/* LinkedIn */}
           <a
             href={linkedInUrl}
             target="_blank"
@@ -918,7 +688,8 @@ export function Hero({ onOpenCV }: HeroProps) {
                 : 'Open Muhammad Salman LinkedIn Profile'
             }
             className="
-              group relative
+              group
+              relative
               inline-flex
               cursor-pointer
               touch-manipulation
@@ -927,14 +698,20 @@ export function Hero({ onOpenCV }: HeroProps) {
               gap-2.5
               overflow-hidden
               rounded-xl
-              border border-[#D8B56A]/45
+              border
+              border-[#D8B56A]/45
               bg-[#071827]/78
-              px-6 py-3.5
-              text-sm font-semibold
+              px-6
+              py-3.5
+              text-sm
+              font-semibold
               text-[#CBD5E1]
-              shadow-md shadow-black/30
+              shadow-md
+              shadow-black/30
               backdrop-blur-md
-              transition-all duration-300 ease-out
+              transition-all
+              duration-300
+              ease-out
               hover:-translate-y-0.5
               hover:border-[#D8B56A]
               hover:bg-[#0D2538]/90
@@ -947,7 +724,8 @@ export function Hero({ onOpenCV }: HeroProps) {
             <span
               className="
                 pointer-events-none
-                absolute inset-0
+                absolute
+                inset-0
                 -translate-x-full
                 bg-gradient-to-r
                 from-transparent
@@ -978,59 +756,44 @@ export function Hero({ onOpenCV }: HeroProps) {
         </div>
       </div>
 
-      {/* =========================================================
-          LOCAL HERO CSS
-          No index.css change required
-      ========================================================== */}
+      {/* ======================================================
+          HERO-ONLY CSS
+          index.css remains untouched.
+      ======================================================= */}
       <style>{`
-        .hero-skyline {
+        .hero-locked-skyline {
           /*
-           * Keep the real photograph intact.
-           * Only feather the outer boundaries into the Hero.
+           * Preserve the original photograph.
+           * Only feather the centre-facing edge.
            */
           -webkit-mask-image:
             linear-gradient(
               to right,
-              rgba(0,0,0,1) 0%,
-              rgba(0,0,0,1) 68%,
-              rgba(0,0,0,.88) 78%,
-              rgba(0,0,0,.48) 90%,
-              transparent 100%
-            ),
-            linear-gradient(
-              to top,
-              rgba(0,0,0,1) 0%,
-              rgba(0,0,0,1) 80%,
-              rgba(0,0,0,.55) 93%,
+              #000 0%,
+              #000 72%,
+              rgba(0,0,0,.96) 78%,
+              rgba(0,0,0,.74) 86%,
+              rgba(0,0,0,.28) 95%,
               transparent 100%
             );
 
           mask-image:
             linear-gradient(
               to right,
-              rgba(0,0,0,1) 0%,
-              rgba(0,0,0,1) 68%,
-              rgba(0,0,0,.88) 78%,
-              rgba(0,0,0,.48) 90%,
-              transparent 100%
-            ),
-            linear-gradient(
-              to top,
-              rgba(0,0,0,1) 0%,
-              rgba(0,0,0,1) 80%,
-              rgba(0,0,0,.55) 93%,
+              #000 0%,
+              #000 72%,
+              rgba(0,0,0,.96) 78%,
+              rgba(0,0,0,.74) 86%,
+              rgba(0,0,0,.28) 95%,
               transparent 100%
             );
-
-          -webkit-mask-composite: source-in;
-          mask-composite: intersect;
         }
 
         @media (max-width: 767px) {
-          .hero-skyline {
-            width: 58%;
-            height: 43%;
-            opacity: .72;
+          .hero-locked-skyline {
+            width: 67%;
+            height: 47%;
+            opacity: .70;
           }
         }
 
