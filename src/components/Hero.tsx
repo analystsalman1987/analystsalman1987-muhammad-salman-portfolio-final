@@ -140,7 +140,7 @@ export function Hero(_props: HeroProps) {
 
         {/* LOCKED-DEMO STYLE LIVE NETWORK ORB */}
         <div
-          className="network-orb absolute right-[5%] top-[7%] z-20 hidden h-[112px] w-[112px] lg:block"
+          className="network-orb absolute right-[7%] top-[11%] z-20 hidden h-[112px] w-[112px] lg:block"
           aria-hidden="true"
         >
           <svg className="orb-svg h-full w-full" viewBox="0 0 112 112">
@@ -457,23 +457,23 @@ export function Hero(_props: HeroProps) {
         }
 
         /* All 17 points locked INSIDE the map/viewport safe area */
-        .p1  { left: 39%; top: 5%; }
-        .p2  { left: 15%; top: 10%; }
-        .p3  { left: 11%; top: 42%; }
-        .p4  { right: 8%; top: 36%; }
-        .p5  { left: 34%; top: 27%; }
-        .p6  { left: 12%; top: 66%; }
-        .p7  { left: 27%; bottom: 8%; }
-        .p8  { right: 18%; top: 8%; }
-        .p9  { right: 8%; bottom: 8%; }
-        .p10 { left: 49%; bottom: 7%; }
-        .p11 { right: 28%; bottom: 12%; }
-        .p12 { left: 10%; bottom: 14%; }
-        .p13 { left: 18%; top: 33%; }
-        .p14 { right: 33%; top: 15%; }
-        .p15 { right: 8%; top: 68%; }
-        .p16 { left: 39%; top: 76%; }
-        .p17 { right: 17%; top: 61%; }
+        .p1  { left: 39%; top: 10%; }
+        .p2  { left: 16%; top: 16%; }
+        .p3  { left: 12%; top: 43%; }
+        .p4  { right: 10%; top: 38%; }
+        .p5  { left: 34%; top: 28%; }
+        .p6  { left: 13%; top: 64%; }
+        .p7  { left: 28%; bottom: 14%; }
+        .p8  { right: 20%; top: 14%; }
+        .p9  { right: 10%; bottom: 14%; }
+        .p10 { left: 48%; bottom: 14%; }
+        .p11 { right: 28%; bottom: 16%; }
+        .p12 { left: 12%; bottom: 18%; }
+        .p13 { left: 19%; top: 34%; }
+        .p14 { right: 34%; top: 18%; }
+        .p15 { right: 10%; top: 66%; }
+        .p16 { left: 39%; top: 72%; }
+        .p17 { right: 19%; top: 59%; }
 
         /* LOCKED FINAL ORGANIC GOLD + BLUE WAVE FIELD */
         .lower-waves {
