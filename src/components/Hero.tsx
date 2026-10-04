@@ -610,31 +610,20 @@ export function Hero({ onOpenCV }: HeroProps) {
           </filter>
         </defs>
         <path
+          className="hero-flow-line hero-flow-line-a"
           d="M -30 275 C 180 215, 320 350, 510 290 S 810 205, 1010 265 S 1260 330, 1470 245"
-          fill="none" stroke="#67B7E8" strokeWidth="1.6" opacity=".34"
+          fill="none" stroke="#67B7E8" strokeWidth="1.8" opacity=".42"
         />
         <path
+          className="hero-flow-line hero-flow-line-b"
           d="M -30 615 C 170 530, 320 500, 505 555 S 790 650, 980 585 S 1250 490, 1470 535"
-          fill="none" stroke="#D8B56A" strokeWidth="1.45" opacity=".30"
+          fill="none" stroke="#D8B56A" strokeWidth="1.7" opacity=".38"
         />
-        <path
-          d="M -30 275 C 180 215, 320 350, 510 290 S 810 205, 1010 265 S 1260 330, 1470 245"
-          fill="none" stroke="#A9DCFA" strokeWidth="3.2" pathLength="1000"
-          strokeDasharray="55 945" filter="url(#heroBlueFlowGlow)" opacity=".82"
-        >
-          <animate attributeName="stroke-dashoffset" from="1000" to="-1000" dur="18s" repeatCount="indefinite" />
-        </path>
-        <path
-          d="M -30 615 C 170 530, 320 500, 505 555 S 790 650, 980 585 S 1250 490, 1470 535"
-          fill="none" stroke="#F2D58A" strokeWidth="3" pathLength="1000"
-          strokeDasharray="48 952" filter="url(#heroBlueFlowGlow)" opacity=".72"
-        >
-          <animate attributeName="stroke-dashoffset" from="1000" to="-1000" dur="21s" repeatCount="indefinite" />
-        </path>
+
       </svg>
 
       {/* Morphing / rotating network globe above the right-side graph */}
-      <div className="hero-network-globe pointer-events-none absolute right-[8%] top-[8%] z-[8] hidden h-[190px] w-[190px] lg:block" aria-hidden="true">
+      <div className="hero-network-globe hero-network-globe-motion pointer-events-none absolute right-[8%] top-[8%] z-[8] hidden h-[190px] w-[190px] lg:block" aria-hidden="true">
         <div className="hero-globe-halo" />
         <svg viewBox="0 0 200 200" className="h-full w-full overflow-visible">
           <circle cx="100" cy="100" r="66" fill="rgba(7,24,39,.18)" stroke="rgba(103,183,232,.44)" strokeWidth="1.2" />
@@ -935,8 +924,41 @@ export function Hero({ onOpenCV }: HeroProps) {
         }
 
         .hero-locked-skyline-image {
-          /* Show the newly uploaded skyline in its original natural colors. */
-          filter: none;
+          /* Light/soft skyline so foreground motion, pills and graph read clearly. */
+          filter: brightness(1.24) saturate(.72) contrast(.86);
+          opacity: .72;
+        }
+
+        .hero-flow-line {
+          transform-box: fill-box;
+          transform-origin: center;
+          will-change: transform;
+        }
+        .hero-flow-line-a {
+          animation: heroFlowLineA 8.5s ease-in-out infinite alternate;
+        }
+        .hero-flow-line-b {
+          animation: heroFlowLineB 10.5s ease-in-out infinite alternate;
+        }
+        @keyframes heroFlowLineA {
+          0% { transform: translate3d(0,-18px,0); }
+          50% { transform: translate3d(10px,14px,0); }
+          100% { transform: translate3d(-7px,-5px,0); }
+        }
+        @keyframes heroFlowLineB {
+          0% { transform: translate3d(-8px,16px,0); }
+          50% { transform: translate3d(8px,-16px,0); }
+          100% { transform: translate3d(0,8px,0); }
+        }
+
+        .hero-network-globe-motion {
+          animation: heroGlobeTravel 8s ease-in-out infinite alternate;
+          will-change: transform;
+        }
+        @keyframes heroGlobeTravel {
+          0% { transform: translate3d(-10px,12px,0) scale(.96); }
+          50% { transform: translate3d(8px,-18px,0) scale(1.04); }
+          100% { transform: translate3d(16px,7px,0) scale(.99); }
         }
 
         .hero-floating-point {
@@ -1098,6 +1120,8 @@ export function Hero({ onOpenCV }: HeroProps) {
 
           .hero-floating-point,
           .hero-water-shimmer,
+          .hero-flow-line,
+          .hero-network-globe-motion,
           .hero-globe-spin,
           .hero-globe-orbit,
           .hero-globe-node,
