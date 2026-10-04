@@ -1,4 +1,3 @@
-import { ExternalLink, FileDown } from 'lucide-react';
 import { ProfileInfo } from '../types';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -28,11 +27,10 @@ const points = [
   { label: 'Balance Sheet', cls: 'p17 gold', duration: '17s', delay: '-2s' },
 ];
 
-export function Hero({ onOpenCV }: HeroProps) {
+export function Hero(_props: HeroProps) {
   const { isRTL } = useLanguage();
 
-  const linkedInUrl =
-    'https://www.linkedin.com/in/muhammad-salman-mba-finance-cpa-finalist-66908767/';
+
 
   return (
     <section
@@ -43,49 +41,7 @@ export function Hero({ onOpenCV }: HeroProps) {
       <div className="hero-bg absolute inset-0" aria-hidden="true" />
 
       <div className="relative mx-auto h-full min-h-[calc(100svh-5rem)] max-w-[1920px] lg:min-h-[650px]">
-        {/* LEFT CONTENT — LOCKED */}
-        <div
-          className={`hero-copy absolute z-30 top-[48%] w-[37%] -translate-y-1/2 ${
-            isRTL ? 'right-[6vw] text-right' : 'left-[6vw] text-left'
-          }`}
-        >
-          <div className="mb-[18px] text-[12px] font-semibold tracking-[0.24em] text-[#D8B56A]">
-            {isRTL ? 'مرحباً بكم في ملفي المهني' : 'WELCOME TO MY PORTFOLIO'}
-          </div>
-
-          <h1 className="m-0 text-[clamp(48px,6vw,90px)] font-extrabold leading-[0.86] tracking-[-0.05em] text-[#F8FAFC]">
-            <span className="text-[#F8FAFC]">MUHAMMAD</span>
-            <br />
-            <span className="text-[#F8FAFC]">SALMAN</span>
-          </h1>
-
-          <div className="mt-[22px] text-[18px] font-medium tracking-[0.34em] text-[#CBD5E1]">
-            {isRTL ? 'محاسب' : 'ACCOUNTANT'}
-          </div>
-
-          <div className={`mt-8 flex gap-3 ${isRTL ? 'justify-end' : 'justify-start'}`}>
-            <button
-              type="button"
-              onClick={onOpenCV}
-              className="inline-flex items-center gap-2 rounded-[10px] border border-[#D8B56A] bg-[#D8B56A] px-[18px] py-3 text-[13px] font-extrabold text-[#071827] transition hover:-translate-y-0.5 hover:shadow-[0_10px_30px_rgba(216,181,106,.18)]"
-            >
-              <FileDown size={16} />
-              {isRTL ? 'تحميل السيرة الذاتية' : 'Download CV'}
-            </button>
-
-            <a
-              href={linkedInUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-[10px] border border-[rgba(216,181,106,.45)] bg-[rgba(7,24,39,.35)] px-[18px] py-3 text-[13px] font-medium text-[#F8FAFC] transition hover:border-[#D8B56A] hover:bg-[rgba(216,181,106,.06)]"
-            >
-              <ExternalLink size={15} />
-              LinkedIn Profile
-            </a>
-          </div>
-        </div>
-
-        {/* RIGHT PROFESSIONAL FOOTPRINT */}
+        {/* FULL-WIDTH PROFESSIONAL FOOTPRINT */}
         <div className="map-wrap absolute z-10" aria-hidden="true">
           <svg className="h-full w-full overflow-visible" viewBox="0 0 1000 560">
             <defs>
@@ -104,10 +60,10 @@ export function Hero({ onOpenCV }: HeroProps) {
               <image
                 className="locked-map-image"
                 href="/images/Golden World Map.png"
-                x="18"
-                y="52"
-                width="944"
-                height="472"
+                x="4"
+                y="26"
+                width="992"
+                height="510"
                 preserveAspectRatio="xMidYMid meet"
                 mask="url(#mapFeatherMask)"
               />
@@ -279,14 +235,14 @@ export function Hero({ onOpenCV }: HeroProps) {
 
         /* LOCKED FINAL MAP COMPOSITION — LARGE, SEAMLESS, UNDER THE NAME */
         .map-wrap {
-          left: 26%;
-          right: -3%;
-          top: 7%;
-          bottom: 11%;
+          left: 1.5%;
+          right: 1.5%;
+          top: 2%;
+          bottom: 10%;
           width: auto;
           height: auto;
-          -webkit-mask-image: radial-gradient(ellipse 78% 70% at 58% 48%, #000 55%, rgba(0,0,0,.9) 67%, transparent 92%);
-          mask-image: radial-gradient(ellipse 78% 70% at 58% 48%, #000 55%, rgba(0,0,0,.9) 67%, transparent 92%);
+          -webkit-mask-image: radial-gradient(ellipse 86% 78% at 50% 48%, #000 62%, rgba(0,0,0,.94) 74%, transparent 98%);
+          mask-image: radial-gradient(ellipse 86% 78% at 50% 48%, #000 62%, rgba(0,0,0,.94) 74%, transparent 98%);
         }
 
         /* LOCKED GOLDEN WORLD MAP IMAGE */
@@ -509,7 +465,7 @@ export function Hero({ onOpenCV }: HeroProps) {
         .p1  { left: 38%; top: 1%; }
         .p2  { left: 12%; top: 7%; }
         .p3  { left: 2%; top: 40%; }
-        .p4  { right: 0%; top: 34%; }
+        .p4  { right: 3%; top: 34%; }
         .p5  { left: 34%; top: 25%; }
         .p6  { left: 7%; top: 64%; }
         .p7  { left: 24%; bottom: 0%; }
@@ -520,7 +476,7 @@ export function Hero({ onOpenCV }: HeroProps) {
         .p12 { left: 0%; bottom: 15%; }
         .p13 { left: 8%; top: 31%; }
         .p14 { right: 34%; top: 13%; }
-        .p15 { right: 0%; top: 68%; }
+        .p15 { right: 3%; top: 68%; }
         .p16 { left: 39%; top: 76%; }
         .p17 { right: 17%; top: 61%; }
 
@@ -653,18 +609,11 @@ export function Hero({ onOpenCV }: HeroProps) {
             min-height: 760px;
           }
 
-          .hero-copy {
-            top: 28%;
-            left: 6vw !important;
-            right: auto !important;
-            width: 88%;
-            text-align: left !important;
-          }
 
           .map-wrap {
-            left: -8%;
-            right: -20%;
-            top: 38%;
+            left: -6%;
+            right: -6%;
+            top: 12%;
             bottom: 10%;
             width: auto;
             height: auto;
@@ -697,21 +646,10 @@ export function Hero({ onOpenCV }: HeroProps) {
         }
 
         @media (max-width: 640px) {
-          .hero-copy h1 {
-            font-size: 52px;
-          }
-
-          .hero-copy > div:nth-of-type(2) {
-            font-size: 13px;
-          }
-
-          .hero-copy .flex {
-            flex-wrap: wrap;
-          }
 
           .map-wrap {
-            left: -16%;
-            right: -30%;
+            left: -18%;
+            right: -18%;
           }
 
           .lower-waves {
