@@ -176,13 +176,35 @@ export function Hero({ onOpenCV }: HeroProps) {
           </svg>
         </div>
 
-        {/* CURRENT ROUND ELEMENT — UNCHANGED FOR NOW */}
+        {/* LOCKED-DEMO STYLE LIVE NETWORK ORB */}
         <div
-          className="network-orb absolute right-[5%] top-[7%] z-20 hidden h-[105px] w-[105px] lg:block"
+          className="network-orb absolute right-[5%] top-[7%] z-20 hidden h-[112px] w-[112px] lg:block"
           aria-hidden="true"
         >
-          <span className="orb-line orb-line-a" />
-          <span className="orb-line orb-line-b" />
+          <svg className="orb-svg h-full w-full" viewBox="0 0 112 112">
+            <circle className="orb-shell" cx="56" cy="56" r="50" />
+            <ellipse className="orb-latitude orb-latitude-a" cx="56" cy="56" rx="43" ry="18" />
+            <ellipse className="orb-latitude orb-latitude-b" cx="56" cy="56" rx="43" ry="31" />
+            <ellipse className="orb-longitude orb-longitude-a" cx="56" cy="56" rx="18" ry="43" />
+            <ellipse className="orb-longitude orb-longitude-b" cx="56" cy="56" rx="31" ry="43" />
+
+            <g className="orb-network">
+              <path d="M25 40 L43 27 L65 31 L83 45 L78 69 L60 84 L37 76 L25 40" />
+              <path d="M43 27 L48 50 L25 40 M48 50 L65 31 M48 50 L78 69 M48 50 L37 76 M65 31 L83 45 L78 69 M37 76 L60 84 L78 69" />
+              <circle cx="25" cy="40" r="2.1" />
+              <circle cx="43" cy="27" r="2.1" />
+              <circle cx="65" cy="31" r="2.1" />
+              <circle cx="83" cy="45" r="2.1" />
+              <circle cx="78" cy="69" r="2.1" />
+              <circle cx="60" cy="84" r="2.1" />
+              <circle cx="37" cy="76" r="2.1" />
+              <circle cx="48" cy="50" r="2.4" />
+            </g>
+
+            <circle className="orb-spark orb-spark-a" cx="29" cy="35" r="1.5" />
+            <circle className="orb-spark orb-spark-b" cx="80" cy="38" r="1.4" />
+            <circle className="orb-spark orb-spark-c" cx="69" cy="82" r="1.5" />
+          </svg>
         </div>
       </div>
 
@@ -545,44 +567,82 @@ export function Hero({ onOpenCV }: HeroProps) {
             opacity: .52;
           }
         }
-        /* LIVE TOP-RIGHT NETWORK ORB */
+        /* LOCKED-DEMO STYLE LIVE TOP-RIGHT NETWORK ORB */
         .network-orb {
-          border: 1px solid rgba(216,181,106,.43);
-          border-radius: 50%;
-          box-shadow: 0 0 35px rgba(216,181,106,.07);
-          animation: orbMove 10s ease-in-out infinite;
+          transform-box: border-box;
+          transform-origin: center;
+          filter: drop-shadow(0 0 14px rgba(216,181,106,.10));
+          animation: lockedOrbMotion 12s ease-in-out infinite;
+          will-change: transform;
         }
 
-        .orb-line {
-          position: absolute;
-          border-radius: 45% 55% 50% 50%;
-          animation: orbMorph 7s ease-in-out infinite, orbSpin 18s linear infinite;
+        .orb-svg {
+          overflow: visible;
         }
 
-        .orb-line-a {
-          inset: 13px;
-          border: 1px dashed rgba(111,184,223,.55);
+        .orb-shell {
+          fill: rgba(7,24,39,.16);
+          stroke: rgba(216,181,106,.52);
+          stroke-width: 1.15;
         }
 
-        .orb-line-b {
-          inset: 27px 8px;
-          border: 1px dashed rgba(216,181,106,.55);
-          animation-duration: 9s,14s;
-          animation-direction: alternate,reverse;
+        .orb-latitude,
+        .orb-longitude {
+          fill: none;
+          stroke: rgba(105,183,231,.42);
+          stroke-width: .85;
+          stroke-dasharray: 3 4;
+          transform-box: fill-box;
+          transform-origin: center;
         }
 
-        @keyframes orbMorph {
-          0%,100% { border-radius:45% 55% 48% 52%; }
-          50% { border-radius:60% 40% 58% 42%; }
+        .orb-latitude-a { animation: orbRingSpin 14s linear infinite; }
+        .orb-latitude-b { animation: orbRingSpinReverse 18s linear infinite; opacity:.70; }
+        .orb-longitude-a { animation: orbRingSpinReverse 16s linear infinite; }
+        .orb-longitude-b { animation: orbRingSpin 20s linear infinite; opacity:.68; }
+
+        .orb-network {
+          fill: rgba(216,181,106,.72);
+          stroke: rgba(216,181,106,.44);
+          stroke-width: .72;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+          transform-box: fill-box;
+          transform-origin: center;
+          animation: orbNetworkBreathe 6.5s ease-in-out infinite;
         }
 
-        @keyframes orbSpin {
+        .orb-network path { fill:none; }
+
+        .orb-spark {
+          fill:#69B7E7;
+          filter:drop-shadow(0 0 3px rgba(105,183,231,.85));
+          animation:orbSpark 5s ease-in-out infinite;
+        }
+        .orb-spark-b { animation-delay:-1.8s; fill:#D8B56A; }
+        .orb-spark-c { animation-delay:-3.4s; }
+
+        @keyframes lockedOrbMotion {
+          0%,100% { transform:translate(-5px,6px) rotate(0deg); }
+          50% { transform:translate(8px,-8px) rotate(180deg); }
+        }
+
+        @keyframes orbRingSpin {
           to { transform:rotate(360deg); }
         }
 
-        @keyframes orbMove {
-          0%,100% { transform:translate(-8px,12px) scale(.96); }
-          50% { transform:translate(14px,-17px) scale(1.05); }
+        @keyframes orbRingSpinReverse {
+          to { transform:rotate(-360deg); }
+        }
+
+        @keyframes orbNetworkBreathe {
+          0%,100% { transform:scale(.96) rotate(-4deg); opacity:.52; }
+          50% { transform:scale(1.04) rotate(5deg); opacity:.92; }
+        }
+
+        @keyframes orbSpark {
+          0%,100% { opacity:.15; transform:scale(.85); }
+          50% { opacity:.9; transform:scale(1.35); }
         }
 
         @media (max-width: 1023px) {
