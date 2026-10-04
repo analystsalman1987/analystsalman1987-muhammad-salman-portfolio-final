@@ -15,6 +15,27 @@ export function Hero({ onOpenCV }: HeroProps) {
   const linkedInUrl =
     'https://www.linkedin.com/in/muhammad-salman-mba-finance-cpa-finalist-66908767/';
 
+
+  // Floating profile points inspired by the reference interaction style.
+  // Kept behind the main name/buttons so the locked centre content stays clear.
+  const floatingPoints = [
+    { label: '14+ Years Exp', pos: 'left-[5%] top-[17%]', delay: '0s', dur: '8.6s', tone: 'gold' },
+    { label: 'Financial Reporting', pos: 'left-[23%] top-[13%]', delay: '-2.1s', dur: '10.4s', tone: 'blue' },
+    { label: 'Receivables', pos: 'right-[30%] top-[14%]', delay: '-4.0s', dur: '9.1s', tone: 'gold' },
+    { label: 'VAT Reports & Submission', pos: 'right-[8%] top-[20%]', delay: '-1.4s', dur: '11.2s', tone: 'blue' },
+    { label: 'ERP Software', pos: 'left-[7%] top-[48%]', delay: '-5.2s', dur: '9.7s', tone: 'blue' },
+    { label: 'Reconciliations', pos: 'right-[5%] top-[45%]', delay: '-3.1s', dur: '10.8s', tone: 'gold' },
+    { label: 'Costing', pos: 'left-[18%] bottom-[20%]', delay: '-6.0s', dur: '8.9s', tone: 'gold' },
+    { label: 'MS Office', pos: 'right-[20%] bottom-[18%]', delay: '-2.8s', dur: '10.1s', tone: 'blue' },
+    { label: 'Monthly Closing', pos: 'left-[34%] bottom-[13%]', delay: '-4.7s', dur: '11.0s', tone: 'blue' },
+    { label: 'Cash Handling', pos: 'right-[7%] bottom-[28%]', delay: '-1.0s', dur: '9.4s', tone: 'gold' },
+    { label: 'Petty Cash', pos: 'left-[4%] bottom-[34%]', delay: '-3.8s', dur: '10.6s', tone: 'blue' },
+    { label: 'Payables', pos: 'right-[37%] bottom-[8%]', delay: '-5.5s', dur: '9.8s', tone: 'gold' },
+    { label: 'Oracle', pos: 'left-[31%] top-[25%]', delay: '-2.4s', dur: '8.8s', tone: 'gold' },
+    { label: 'Qoyod', pos: 'right-[16%] top-[33%]', delay: '-6.3s', dur: '10.2s', tone: 'blue' },
+    { label: 'QuickBooks', pos: 'right-[3%] bottom-[10%]', delay: '-4.4s', dur: '9.3s', tone: 'gold' },
+  ];
+
   /*
    * LOCKED HERO FINANCE PATH
    *
@@ -593,6 +614,45 @@ export function Hero({ onOpenCV }: HeroProps) {
       </div>
 
       {/* ======================================================
+          SUBTLE WATER SHIMMER
+          Only animates the lower waterfront area; buildings stay still.
+      ======================================================= */}
+      <div
+        className="hero-water-motion pointer-events-none absolute inset-x-0 bottom-0 z-[6] h-[15%] overflow-hidden"
+        aria-hidden="true"
+      >
+        <div className="hero-water-shimmer hero-water-shimmer-a" />
+        <div className="hero-water-shimmer hero-water-shimmer-b" />
+      </div>
+
+      {/* ======================================================
+          FLOATING PROFILE POINTS
+          Slow independent drift, inspired by the reference website.
+          Main content remains above these pills.
+      ======================================================= */}
+      <div
+        className="pointer-events-none absolute inset-0 z-[7] hidden overflow-hidden md:block"
+        aria-hidden="true"
+      >
+        {floatingPoints.map((point, index) => (
+          <div
+            key={point.label}
+            className={`hero-floating-point absolute ${point.pos} ${
+              point.tone === 'gold'
+                ? 'hero-floating-point-gold'
+                : 'hero-floating-point-blue'
+            } ${index === 0 ? 'hero-floating-point-featured' : ''}`}
+            style={{
+              animationDelay: point.delay,
+              animationDuration: point.dur,
+            }}
+          >
+            {point.label}
+          </div>
+        ))}
+      </div>
+
+      {/* ======================================================
           LOCKED CENTER CONTENT
       ======================================================= */}
       <div
@@ -857,6 +917,101 @@ export function Hero({ onOpenCV }: HeroProps) {
             brightness(.96);
         }
 
+        .hero-floating-point {
+          padding: 7px 13px;
+          border-radius: 9999px;
+          border: 1px solid rgba(148, 163, 184, 0.20);
+          background: rgba(7, 24, 39, 0.64);
+          backdrop-filter: blur(9px);
+          -webkit-backdrop-filter: blur(9px);
+          box-shadow: 0 8px 26px rgba(0, 0, 0, 0.20);
+          font-size: 11px;
+          line-height: 1;
+          font-weight: 700;
+          letter-spacing: .025em;
+          white-space: nowrap;
+          opacity: .78;
+          animation-name: heroPointFloat;
+          animation-timing-function: ease-in-out;
+          animation-iteration-count: infinite;
+          will-change: transform, opacity;
+        }
+
+        .hero-floating-point-gold {
+          color: #E3C477;
+          border-color: rgba(216, 181, 106, 0.30);
+          box-shadow: 0 8px 26px rgba(0, 0, 0, 0.20), 0 0 18px rgba(216, 181, 106, 0.055);
+        }
+
+        .hero-floating-point-blue {
+          color: #B9D5E7;
+          border-color: rgba(112, 159, 190, 0.28);
+          box-shadow: 0 8px 26px rgba(0, 0, 0, 0.20), 0 0 18px rgba(95, 153, 191, 0.05);
+        }
+
+        .hero-floating-point-featured {
+          padding: 8px 15px;
+          color: #F1D58A;
+          border-color: rgba(216, 181, 106, 0.46);
+          background: rgba(9, 31, 49, 0.76);
+          font-size: 12px;
+          opacity: .92;
+        }
+
+        @keyframes heroPointFloat {
+          0%, 100% { transform: translate3d(0, 0, 0); opacity: .68; }
+          25% { transform: translate3d(7px, -7px, 0); opacity: .88; }
+          50% { transform: translate3d(-3px, -12px, 0); opacity: .76; }
+          75% { transform: translate3d(-8px, -4px, 0); opacity: .90; }
+        }
+
+        .hero-water-motion {
+          -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.25) 18%, #000 48%, #000 100%);
+          mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.25) 18%, #000 48%, #000 100%);
+          mix-blend-mode: screen;
+          opacity: .50;
+        }
+
+        .hero-water-shimmer {
+          position: absolute;
+          left: -20%;
+          width: 140%;
+          height: 42%;
+          background: repeating-linear-gradient(
+            90deg,
+            transparent 0 34px,
+            rgba(216, 181, 106, .12) 38px 41px,
+            transparent 45px 82px,
+            rgba(248, 250, 252, .055) 86px 88px,
+            transparent 92px 132px
+          );
+          filter: blur(2.5px);
+          transform: skewX(-12deg);
+          will-change: transform, opacity;
+        }
+
+        .hero-water-shimmer-a {
+          bottom: 8%;
+          animation: heroWaterShimmerA 12s ease-in-out infinite alternate;
+        }
+
+        .hero-water-shimmer-b {
+          bottom: 40%;
+          opacity: .52;
+          transform: skewX(10deg) scaleX(.92);
+          animation: heroWaterShimmerB 16s ease-in-out infinite alternate;
+        }
+
+        @keyframes heroWaterShimmerA {
+          from { transform: translate3d(-3%, 0, 0) skewX(-12deg) scaleX(.98); opacity: .34; }
+          to { transform: translate3d(5%, -2px, 0) skewX(-8deg) scaleX(1.03); opacity: .68; }
+        }
+
+        @keyframes heroWaterShimmerB {
+          from { transform: translate3d(4%, 0, 0) skewX(10deg) scaleX(.92); opacity: .24; }
+          to { transform: translate3d(-5%, 2px, 0) skewX(7deg) scaleX(1.01); opacity: .48; }
+        }
+
         @media (max-width: 767px) {
           .hero-locked-skyline {
             width: 100%;
@@ -872,6 +1027,11 @@ export function Hero({ onOpenCV }: HeroProps) {
           #home svg animate,
           #home svg animateTransform {
             display: none;
+          }
+
+          .hero-floating-point,
+          .hero-water-shimmer {
+            animation: none !important;
           }
         }
       `}</style>
