@@ -171,23 +171,15 @@ export function Hero({ onOpenCV }: HeroProps) {
           ))}
         </div>
 
-        {/* LOWER MOVING WAVES */}
+        {/* LOCKED FINAL LOWER FLOWING WAVES */}
         <div className="lower-waves absolute z-[8]" aria-hidden="true">
-          <svg viewBox="0 0 1200 190" preserveAspectRatio="none">
-            <g className="wave-family wave-family-gold">
-              <path className="wave wave-gold wave-gold-main" d="M-40 92 C120 28 240 146 390 91 C535 38 655 144 805 86 C955 30 1080 126 1240 62" />
-              <path className="wave wave-gold thin g1" d="M-40 101 C120 43 245 154 395 101 C545 49 660 151 810 96 C960 44 1085 135 1240 76" />
-              <path className="wave wave-gold thin g2" d="M-40 110 C125 56 250 162 400 111 C550 61 670 158 820 106 C970 57 1090 143 1240 89" />
-              <path className="wave wave-gold thin g3" d="M-40 119 C130 69 255 169 405 121 C555 74 675 165 825 116 C975 70 1095 151 1240 102" />
-              <path className="wave wave-gold thin g4" d="M-40 128 C135 82 260 176 410 131 C560 87 680 172 830 126 C980 83 1100 159 1240 115" />
-            </g>
-            <g className="wave-family wave-family-blue">
-              <path className="wave wave-blue wave-blue-main" d="M-40 133 C115 94 245 174 400 132 C550 91 675 169 830 126 C980 85 1100 153 1240 116" />
-              <path className="wave wave-blue thin b1" d="M-40 142 C120 106 250 181 405 142 C555 103 680 176 835 136 C985 98 1105 161 1240 128" />
-              <path className="wave wave-blue thin b2" d="M-40 151 C125 118 255 188 410 152 C560 115 685 183 840 146 C990 111 1110 169 1240 140" />
-              <path className="wave wave-blue thin b3" d="M-40 160 C130 130 260 195 415 162 C565 127 690 190 845 156 C995 124 1115 177 1240 152" />
-            </g>
-            <path className="golden-shine" d="M-40 92 C120 28 240 146 390 91 C535 38 655 144 805 86 C955 30 1080 126 1240 62" />
+          <svg viewBox="0 0 1900 220" preserveAspectRatio="none">
+            <path className="wave wave-gold wg" d="M-80 110 C170 30 360 175 610 95 S1030 35 1250 120 S1630 175 1980 75" />
+            <path className="wave wave-gold wg wave-soft-1" d="M-80 145 C170 65 350 200 610 125 S1030 70 1250 150 S1630 205 1980 105" />
+            <path className="wave wave-gold wg wave-soft-2" d="M-80 175 C180 100 370 220 630 155 S1030 105 1260 180 S1640 220 1980 135" />
+            <path className="wave wave-blue wb" d="M-100 160 C170 205 380 70 650 160 S1080 230 1320 140 S1670 70 2000 165" />
+            <path className="wave wave-blue wb wave-blue-soft" d="M-100 190 C170 230 390 105 650 190 S1080 255 1320 170 S1680 105 2000 195" />
+            <path className="golden-shine" d="M-80 110 C170 30 360 175 610 95 S1030 35 1250 120 S1630 175 1980 75" />
           </svg>
         </div>
 
@@ -285,12 +277,16 @@ export function Hero({ onOpenCV }: HeroProps) {
           mask-image: linear-gradient(90deg, transparent 36%, #000 65%, #000 100%);
         }
 
-        /* MAP: SMALLER + RIGHT-SHIFTED SO IT NEVER COVERS THE NAME */
+        /* LOCKED FINAL MAP COMPOSITION — LARGE, SEAMLESS, UNDER THE NAME */
         .map-wrap {
-          right: 1.8vw;
-          top: 8%;
-          width: 54vw;
-          height: 72%;
+          left: 26%;
+          right: -3%;
+          top: 7%;
+          bottom: 11%;
+          width: auto;
+          height: auto;
+          -webkit-mask-image: radial-gradient(ellipse 78% 70% at 58% 48%, #000 55%, rgba(0,0,0,.9) 67%, transparent 92%);
+          mask-image: radial-gradient(ellipse 78% 70% at 58% 48%, #000 55%, rgba(0,0,0,.9) 67%, transparent 92%);
         }
 
         /* LOCKED GOLDEN WORLD MAP IMAGE */
@@ -301,26 +297,27 @@ export function Hero({ onOpenCV }: HeroProps) {
         }
 
         .locked-map-image {
-          opacity: .82;
+          opacity: .92;
+          mix-blend-mode: screen;
           filter:
             saturate(.92)
-            brightness(.90)
-            contrast(1.04)
-            drop-shadow(0 0 7px rgba(216,181,106,.16));
+            brightness(.94)
+            contrast(1.02)
+            drop-shadow(0 0 12px rgba(216,181,106,.12));
           transform-box: fill-box;
           transform-origin: center;
-          animation: lockedMapBreath 8s ease-in-out infinite;
+          animation: lockedMapBreath 14s ease-in-out infinite;
         }
 
 
         @keyframes lockedMapDrift {
-          0%, 100% { transform: translate3d(0, 2px, 0) scale(1); }
-          50% { transform: translate3d(4px, -4px, 0) scale(1.006); }
+          0%,100% { transform: scale(1) translateY(0); }
+          50% { transform: scale(1.015) translateY(-4px); }
         }
 
         @keyframes lockedMapBreath {
-          0%, 100% { opacity: .78; }
-          50% { opacity: .90; }
+          0%,100% { opacity: .88; }
+          50% { opacity: .96; }
         }
 
         /* ROUTES: CANADA/PAKISTAN -> SAUDI ARABIA */
@@ -527,119 +524,52 @@ export function Hero({ onOpenCV }: HeroProps) {
         .p16 { left: 39%; top: 76%; }
         .p17 { right: 17%; top: 61%; }
 
-        /* TWO LOWER MORPHING WAVES */
+        /* LOCKED FINAL ORGANIC GOLD + BLUE WAVE FIELD */
         .lower-waves {
-          left: 30%;
-          right: 0;
+          left: -4%;
+          right: -4%;
           bottom: -1%;
-          height: 190px;
+          height: 25%;
           pointer-events: none;
           opacity: 1;
-          filter: drop-shadow(0 0 7px rgba(216,181,106,.05));
         }
 
-        .lower-waves svg {
-          width: 100%;
-          height: 100%;
-          overflow: visible;
+        .lower-waves svg { width:100%; height:100%; overflow:visible; }
+        .wave { fill:none; stroke-linecap:round; vector-effect:non-scaling-stroke; }
+        .wg {
+          stroke:#D8B56A;
+          stroke-width:1.5;
+          opacity:.56;
+          filter:drop-shadow(0 0 5px rgba(216,181,106,.16));
+          animation:wg 20s ease-in-out infinite;
         }
-
-        .wave {
-          fill: none;
-          stroke-linecap: round;
-          vector-effect: non-scaling-stroke;
-          will-change: d, transform;
+        .wb {
+          stroke:#69B7E7;
+          stroke-width:1.3;
+          opacity:.42;
+          animation:wb 25s ease-in-out infinite;
         }
-
-        .wave-gold {
-          stroke: rgba(216,181,106,.78);
-          stroke-width: 1.6;
-          stroke-dasharray: none;
-          filter: drop-shadow(0 0 5px rgba(216,181,106,.20));
-          transform-origin: center;
-          animation: goldWaveMorph 20s ease-in-out infinite;
-        }
-
-        .wave-blue {
-          stroke: rgba(111,184,223,.46);
-          stroke-width: 1.2;
-          stroke-dasharray: none;
-          transform-origin: center;
-          animation: blueWaveMorph 25s ease-in-out infinite;
-        }
-
-        .wave.thin {
-          stroke-width: .72;
-          opacity: .34;
-          filter: none;
-        }
-
-        .wave-family-gold {
-          animation: ribbonGoldDrift 18s ease-in-out infinite alternate;
-        }
-
-        .wave-family-blue {
-          animation: ribbonBlueDrift 22s ease-in-out infinite alternate;
-        }
-
-        .g1 { opacity: .48; } .g2 { opacity: .38; } .g3 { opacity: .28; } .g4 { opacity: .20; }
-        .b1 { opacity: .36; } .b2 { opacity: .28; } .b3 { opacity: .20; }
-
+        .wave-soft-1 { opacity:.35; }
+        .wave-soft-2 { opacity:.22; }
+        .wave-blue-soft { opacity:.50; }
         .golden-shine {
-          fill: none;
-          stroke: rgba(255,224,150,.96);
-          stroke-width: 2.2;
-          stroke-linecap: round;
-          stroke-dasharray: 90 1110;
-          filter: drop-shadow(0 0 5px rgba(255,210,105,.95)) drop-shadow(0 0 12px rgba(216,181,106,.62));
-          animation: goldenShineTravel 8.5s linear infinite;
+          fill:none;
+          stroke:#F7D77D;
+          stroke-width:4;
+          stroke-linecap:round;
+          stroke-dasharray:85 1300;
+          filter:drop-shadow(0 0 8px #D8B56A);
+          animation:shine 8s linear infinite;
         }
-
-        @keyframes ribbonGoldDrift {
-          0% { transform: translate3d(-8px,3px,0); }
-          100% { transform: translate3d(10px,-5px,0); }
+        @keyframes wg {
+          0%,100% { transform:translateY(0); }
+          50% { transform:translateY(-10px); }
         }
-
-        @keyframes ribbonBlueDrift {
-          0% { transform: translate3d(8px,2px,0); }
-          100% { transform: translate3d(-10px,-4px,0); }
+        @keyframes wb {
+          0%,100% { transform:translateY(5px); }
+          50% { transform:translateY(-6px); }
         }
-
-        @keyframes goldenShineTravel {
-          from { stroke-dashoffset: 0; opacity: .58; }
-          45% { opacity: 1; }
-          to { stroke-dashoffset: -1200; opacity: .58; }
-        }
-
-        @keyframes goldWaveMorph {
-          0%,100% {
-            transform: translate3d(0,4px,0) scaleY(.92);
-            opacity: .72;
-          }
-          35% {
-            transform: translate3d(-14px,-8px,0) scaleY(1.08);
-            opacity: .95;
-          }
-          70% {
-            transform: translate3d(10px,2px,0) scaleY(.98);
-            opacity: .8;
-          }
-        }
-
-        @keyframes blueWaveMorph {
-          0%,100% {
-            transform: translate3d(0,5px,0) scaleY(.95);
-            opacity: .46;
-          }
-          45% {
-            transform: translate3d(16px,-6px,0) scaleY(1.10);
-            opacity: .68;
-          }
-          75% {
-            transform: translate3d(-8px,1px,0) scaleY(1);
-            opacity: .52;
-          }
-        }
+        @keyframes shine { to { stroke-dashoffset:-1385; } }
         /* LOCKED-DEMO STYLE LIVE TOP-RIGHT NETWORK ORB */
         .network-orb {
           transform-box: border-box;
@@ -732,18 +662,21 @@ export function Hero({ onOpenCV }: HeroProps) {
           }
 
           .map-wrap {
-            right: -24vw;
-            top: 40%;
-            width: 104vw;
-            height: 49%;
+            left: -8%;
+            right: -20%;
+            top: 38%;
+            bottom: 10%;
+            width: auto;
+            height: auto;
+            opacity: .72;
           }
 
           .lower-waves {
-            left: 5%;
-            right: 2%;
-            bottom: 1%;
-            height: 105px;
-            opacity: .65;
+            left: -8%;
+            right: -8%;
+            bottom: 0;
+            height: 18%;
+            opacity: .72;
           }
 
           .country {
@@ -777,13 +710,13 @@ export function Hero({ onOpenCV }: HeroProps) {
           }
 
           .map-wrap {
-            right: -36vw;
-            width: 122vw;
+            left: -16%;
+            right: -30%;
           }
 
           .lower-waves {
             bottom: 0;
-            height: 85px;
+            height: 17%;
           }
         }
       `}</style>
