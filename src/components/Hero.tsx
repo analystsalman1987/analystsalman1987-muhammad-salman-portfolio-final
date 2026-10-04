@@ -54,9 +54,9 @@ export function Hero({ onOpenCV }: HeroProps) {
           </div>
 
           <h1 className="m-0 text-[clamp(48px,6vw,90px)] font-extrabold leading-[0.86] tracking-[-0.05em] text-[#F8FAFC]">
-            MUHAMMAD
+            <span className="text-[#F8FAFC]">MUHAMMAD</span>
             <br />
-            <span className="text-[#D8B56A]">SALMAN</span>
+            <span className="text-[#F8FAFC]">SALMAN</span>
           </h1>
 
           <div className="mt-[22px] text-[18px] font-medium tracking-[0.34em] text-[#CBD5E1]">
