@@ -154,10 +154,10 @@ export function Hero({ onOpenCV }: HeroProps) {
             inset-y-0
             left-0
             z-[1]
-            w-[82%]
-            sm:w-[80%]
-            lg:w-[78%]
-            xl:w-[76%]
+            w-[100%]
+            sm:w-[100%]
+            lg:w-[100%]
+            xl:w-[100%]
           "
         >
           {/* Warm sunset/golden atmosphere BEHIND the skyline */}
@@ -178,7 +178,7 @@ export function Hero({ onOpenCV }: HeroProps) {
           />
 
           <img
-            src="/images/hero-distant-buildings.jpg"
+            src="/images/Golden-Hour Waterfront Skyline.png"
             alt=""
             draggable={false}
             loading="eager"
@@ -198,7 +198,7 @@ export function Hero({ onOpenCV }: HeroProps) {
             className="
               absolute
               inset-0
-              bg-[linear-gradient(105deg,rgba(255,210,118,0.30)_0%,rgba(232,188,94,0.22)_27%,rgba(216,181,106,0.13)_49%,rgba(201,164,92,0.045)_68%,transparent_82%)]
+              bg-[linear-gradient(105deg,rgba(255,210,118,0.10)_0%,rgba(232,188,94,0.08)_27%,rgba(216,181,106,0.05)_49%,rgba(201,164,92,0.045)_68%,transparent_82%)]
               mix-blend-screen
             "
           />
@@ -206,7 +206,7 @@ export function Hero({ onOpenCV }: HeroProps) {
             className="
               absolute
               inset-0
-              bg-[radial-gradient(ellipse_68%_54%_at_27%_42%,rgba(255,222,145,0.25)_0%,rgba(232,188,94,0.16)_38%,rgba(201,164,92,0.07)_61%,transparent_82%)]
+              bg-[radial-gradient(ellipse_68%_54%_at_27%_42%,rgba(255,222,145,0.10)_0%,rgba(232,188,94,0.07)_38%,rgba(201,164,92,0.07)_61%,transparent_82%)]
               mix-blend-screen
             "
           />
@@ -217,11 +217,11 @@ export function Hero({ onOpenCV }: HeroProps) {
               absolute
               inset-y-0
               right-0
-              w-[43%]
+              w-[38%]
               bg-gradient-to-r
               from-transparent
-              via-[#071827]/22
-              to-[#071827]/72
+              via-[#071827]/12
+              to-[#071827]/48
             "
           />
 
@@ -490,6 +490,21 @@ export function Hero({ onOpenCV }: HeroProps) {
             strokeLinecap="round"
             strokeLinejoin="round"
             opacity="0.95"
+          />
+
+          {/* Slightly bolder upper/right end of the locked wave */}
+          <path
+            d={goldWavePath}
+            fill="none"
+            stroke="#E6C36F"
+            strokeWidth="5.2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            pathLength="1000"
+            strokeDasharray="245 755"
+            strokeDashoffset="-755"
+            opacity="0.88"
+            filter="url(#lockedGoldGlow)"
           />
 
           {/* ================================================
@@ -837,10 +852,9 @@ export function Hero({ onOpenCV }: HeroProps) {
            * cool source photo toward the champagne-gold locked look.
            */
           filter:
-            saturate(1.08)
-            contrast(1.035)
-            brightness(.92)
-            sepia(.20);
+            saturate(1.02)
+            contrast(1.02)
+            brightness(.96);
         }
 
         @media (max-width: 767px) {
