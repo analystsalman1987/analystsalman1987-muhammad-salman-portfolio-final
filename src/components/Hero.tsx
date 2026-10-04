@@ -19,21 +19,21 @@ export function Hero({ onOpenCV }: HeroProps) {
   // Floating profile points inspired by the reference interaction style.
   // Kept behind the main name/buttons so the locked centre content stays clear.
   const floatingPoints = [
-    { label: '14+ Years Exp', pos: 'left-[5%] top-[17%]', delay: '0s', dur: '8.6s', tone: 'gold' },
-    { label: 'Financial Reporting', pos: 'left-[23%] top-[13%]', delay: '-2.1s', dur: '10.4s', tone: 'blue' },
-    { label: 'Receivables', pos: 'right-[30%] top-[14%]', delay: '-4.0s', dur: '9.1s', tone: 'gold' },
-    { label: 'VAT Reports & Submission', pos: 'right-[8%] top-[20%]', delay: '-1.4s', dur: '11.2s', tone: 'blue' },
-    { label: 'ERP Software', pos: 'left-[7%] top-[48%]', delay: '-5.2s', dur: '9.7s', tone: 'blue' },
-    { label: 'Reconciliations', pos: 'right-[5%] top-[45%]', delay: '-3.1s', dur: '10.8s', tone: 'gold' },
-    { label: 'Costing', pos: 'left-[18%] bottom-[20%]', delay: '-6.0s', dur: '8.9s', tone: 'gold' },
-    { label: 'MS Office', pos: 'right-[20%] bottom-[18%]', delay: '-2.8s', dur: '10.1s', tone: 'blue' },
-    { label: 'Monthly Closing', pos: 'left-[34%] bottom-[13%]', delay: '-4.7s', dur: '11.0s', tone: 'blue' },
-    { label: 'Cash Handling', pos: 'right-[7%] bottom-[28%]', delay: '-1.0s', dur: '9.4s', tone: 'gold' },
-    { label: 'Petty Cash', pos: 'left-[4%] bottom-[34%]', delay: '-3.8s', dur: '10.6s', tone: 'blue' },
-    { label: 'Payables', pos: 'right-[37%] bottom-[8%]', delay: '-5.5s', dur: '9.8s', tone: 'gold' },
-    { label: 'Oracle', pos: 'left-[31%] top-[25%]', delay: '-2.4s', dur: '8.8s', tone: 'gold' },
-    { label: 'Qoyod', pos: 'right-[16%] top-[33%]', delay: '-6.3s', dur: '10.2s', tone: 'blue' },
-    { label: 'QuickBooks', pos: 'right-[3%] bottom-[10%]', delay: '-4.4s', dur: '9.3s', tone: 'gold' },
+    { label: '14+ Years Exp', pos: 'left-[5%] top-[16%]', tone: 'gold', motion: 'pulse', delay: '0s', dur: '7.8s' },
+    { label: 'Financial Reporting', pos: 'left-[22%] top-[12%]', tone: 'blue', motion: 'vertical', delay: '-2s', dur: '9.5s' },
+    { label: 'Receivables', pos: 'left-[45%] top-[18%]', tone: 'gold', motion: 'zoom', delay: '-3.2s', dur: '8.4s' },
+    { label: 'VAT Reports & Submission', pos: 'left-[58%] top-[12%]', tone: 'blue', motion: 'drift', delay: '-1.4s', dur: '10.5s' },
+    { label: 'ERP Software', pos: 'left-[7%] top-[47%]', tone: 'blue', motion: 'zoom', delay: '-4.8s', dur: '9.2s' },
+    { label: 'Reconciliations', pos: 'right-[14%] top-[39%]', tone: 'gold', motion: 'pulse', delay: '-2.7s', dur: '8.8s' },
+    { label: 'Costing', pos: 'left-[17%] bottom-[18%]', tone: 'blue', motion: 'vertical', delay: '-5.1s', dur: '10s' },
+    { label: 'MS Office', pos: 'right-[22%] bottom-[16%]', tone: 'blue', motion: 'drift', delay: '-2.3s', dur: '9.7s' },
+    { label: 'Monthly Closing', pos: 'left-[32%] bottom-[11%]', tone: 'gold', motion: 'pulse', delay: '-4.1s', dur: '9.1s' },
+    { label: 'Cash Handling', pos: 'right-[7%] bottom-[27%]', tone: 'gold', motion: 'vertical', delay: '-1.1s', dur: '10.2s' },
+    { label: 'Petty Cash', pos: 'left-[4%] bottom-[33%]', tone: 'gold', motion: 'drift', delay: '-3.6s', dur: '8.9s' },
+    { label: 'Payables', pos: 'right-[39%] bottom-[7%]', tone: 'blue', motion: 'zoom', delay: '-5.4s', dur: '9.6s' },
+    { label: 'Oracle', pos: 'left-[30%] top-[25%]', tone: 'gold', motion: 'pulse', delay: '-2.2s', dur: '8.2s' },
+    { label: 'Qoyod', pos: 'right-[8%] top-[25%]', tone: 'blue', motion: 'vertical', delay: '-6s', dur: '10.4s' },
+    { label: 'QuickBooks', pos: 'right-[3%] bottom-[9%]', tone: 'gold', motion: 'zoom', delay: '-4.3s', dur: '9s' },
   ];
 
   /*
@@ -594,6 +594,66 @@ export function Hero({ onOpenCV }: HeroProps) {
       </div>
 
       {/* ======================================================
+          TWO SLOW MOVING DATA LINES — Mohsin-style motion concept
+          Kept behind the name and away from the main gold graph.
+      ======================================================= */}
+      <svg
+        className="pointer-events-none absolute inset-0 z-[6] hidden h-full w-full md:block"
+        viewBox="0 0 1440 820"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+      >
+        <defs>
+          <filter id="heroBlueFlowGlow" x="-40%" y="-40%" width="180%" height="180%">
+            <feGaussianBlur stdDeviation="2.2" result="blur" />
+            <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+          </filter>
+        </defs>
+        <path
+          d="M -30 275 C 180 215, 320 350, 510 290 S 810 205, 1010 265 S 1260 330, 1470 245"
+          fill="none" stroke="#67B7E8" strokeWidth="1.6" opacity=".34"
+        />
+        <path
+          d="M -30 615 C 170 530, 320 500, 505 555 S 790 650, 980 585 S 1250 490, 1470 535"
+          fill="none" stroke="#D8B56A" strokeWidth="1.45" opacity=".30"
+        />
+        <path
+          d="M -30 275 C 180 215, 320 350, 510 290 S 810 205, 1010 265 S 1260 330, 1470 245"
+          fill="none" stroke="#A9DCFA" strokeWidth="3.2" pathLength="1000"
+          strokeDasharray="55 945" filter="url(#heroBlueFlowGlow)" opacity=".82"
+        >
+          <animate attributeName="stroke-dashoffset" from="1000" to="-1000" dur="18s" repeatCount="indefinite" />
+        </path>
+        <path
+          d="M -30 615 C 170 530, 320 500, 505 555 S 790 650, 980 585 S 1250 490, 1470 535"
+          fill="none" stroke="#F2D58A" strokeWidth="3" pathLength="1000"
+          strokeDasharray="48 952" filter="url(#heroBlueFlowGlow)" opacity=".72"
+        >
+          <animate attributeName="stroke-dashoffset" from="1000" to="-1000" dur="21s" repeatCount="indefinite" />
+        </path>
+      </svg>
+
+      {/* Morphing / rotating network globe above the right-side graph */}
+      <div className="hero-network-globe pointer-events-none absolute right-[8%] top-[8%] z-[8] hidden h-[190px] w-[190px] lg:block" aria-hidden="true">
+        <div className="hero-globe-halo" />
+        <svg viewBox="0 0 200 200" className="h-full w-full overflow-visible">
+          <circle cx="100" cy="100" r="66" fill="rgba(7,24,39,.18)" stroke="rgba(103,183,232,.44)" strokeWidth="1.2" />
+          <g className="hero-globe-spin">
+            <ellipse cx="100" cy="100" rx="66" ry="27" fill="none" stroke="rgba(103,183,232,.46)" strokeWidth="1" />
+            <ellipse cx="100" cy="100" rx="27" ry="66" fill="none" stroke="rgba(216,181,106,.42)" strokeWidth="1" />
+            <ellipse cx="100" cy="100" rx="58" ry="43" fill="none" stroke="rgba(103,183,232,.25)" strokeWidth=".8" transform="rotate(42 100 100)" />
+            <path d="M42 78 L70 52 L104 63 L139 47 L160 78 L145 111 L166 137 L124 154 L92 137 L56 149 L39 113 Z"
+              fill="none" stroke="rgba(111,195,238,.48)" strokeWidth=".8" className="hero-globe-shape" />
+            {[[42,78],[70,52],[104,63],[139,47],[160,78],[145,111],[166,137],[124,154],[92,137],[56,149],[39,113],[100,100]].map(([cx,cy], i) => (
+              <circle key={i} cx={cx} cy={cy} r={i % 4 === 0 ? 3.2 : 2.1} fill={i % 3 === 0 ? '#D8B56A' : '#7CC7F2'} className="hero-globe-node" style={{ animationDelay: `${-i * .42}s` }} />
+            ))}
+          </g>
+          <ellipse cx="100" cy="100" rx="86" ry="38" fill="none" stroke="rgba(216,181,106,.50)" strokeWidth="1.2" className="hero-globe-orbit" />
+          <circle cx="184" cy="100" r="3.5" fill="#F0D078" className="hero-globe-orbit-dot" />
+        </svg>
+      </div>
+
+      {/* ======================================================
           FLOATING PROFILE POINTS
           Slow independent drift, inspired by the reference website.
           Main content remains above these pills.
@@ -609,7 +669,7 @@ export function Hero({ onOpenCV }: HeroProps) {
               point.tone === 'gold'
                 ? 'hero-floating-point-gold'
                 : 'hero-floating-point-blue'
-            } ${index === 0 ? 'hero-floating-point-featured' : ''}`}
+            } hero-motion-${point.motion} ${index === 0 ? 'hero-floating-point-featured' : ''}`}
             style={{
               animationDelay: point.delay,
               animationDuration: point.dur,
@@ -880,51 +940,96 @@ export function Hero({ onOpenCV }: HeroProps) {
         }
 
         .hero-floating-point {
-          padding: 7px 13px;
+          padding: 9px 16px;
           border-radius: 9999px;
-          border: 1px solid rgba(148, 163, 184, 0.20);
-          background: rgba(7, 24, 39, 0.64);
-          backdrop-filter: blur(9px);
-          -webkit-backdrop-filter: blur(9px);
-          box-shadow: 0 8px 26px rgba(0, 0, 0, 0.20);
-          font-size: 11px;
+          border: 1px solid rgba(148, 163, 184, 0.28);
+          background: rgba(7, 24, 39, 0.76);
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+          box-shadow: 0 8px 28px rgba(0, 0, 0, 0.24);
+          font-size: 13px;
           line-height: 1;
-          font-weight: 700;
-          letter-spacing: .025em;
+          font-weight: 750;
+          letter-spacing: .02em;
           white-space: nowrap;
-          opacity: .78;
-          animation-name: heroPointFloat;
+          opacity: .90;
           animation-timing-function: ease-in-out;
           animation-iteration-count: infinite;
-          will-change: transform, opacity;
+          will-change: transform, opacity, filter;
         }
 
         .hero-floating-point-gold {
-          color: #E3C477;
-          border-color: rgba(216, 181, 106, 0.30);
-          box-shadow: 0 8px 26px rgba(0, 0, 0, 0.20), 0 0 18px rgba(216, 181, 106, 0.055);
+          color: #F0D078;
+          border-color: rgba(216, 181, 106, 0.44);
+          box-shadow: 0 8px 28px rgba(0,0,0,.24), 0 0 15px rgba(216,181,106,.11);
         }
 
         .hero-floating-point-blue {
-          color: #B9D5E7;
-          border-color: rgba(112, 159, 190, 0.28);
-          box-shadow: 0 8px 26px rgba(0, 0, 0, 0.20), 0 0 18px rgba(95, 153, 191, 0.05);
+          color: #C7E5F5;
+          border-color: rgba(103, 183, 232, 0.40);
+          box-shadow: 0 8px 28px rgba(0,0,0,.24), 0 0 15px rgba(103,183,232,.10);
         }
 
         .hero-floating-point-featured {
-          padding: 8px 15px;
-          color: #F1D58A;
-          border-color: rgba(216, 181, 106, 0.46);
-          background: rgba(9, 31, 49, 0.76);
-          font-size: 12px;
-          opacity: .92;
+          padding: 10px 18px;
+          color: #F7DB8E;
+          border-color: rgba(216,181,106,.62);
+          background: rgba(9,31,49,.84);
+          font-size: 14px;
+          opacity: 1;
         }
 
-        @keyframes heroPointFloat {
-          0%, 100% { transform: translate3d(0, 0, 0); opacity: .68; }
-          25% { transform: translate3d(7px, -7px, 0); opacity: .88; }
-          50% { transform: translate3d(-3px, -12px, 0); opacity: .76; }
-          75% { transform: translate3d(-8px, -4px, 0); opacity: .90; }
+        .hero-motion-vertical { animation-name: heroPointVertical; }
+        .hero-motion-zoom { animation-name: heroPointZoom; }
+        .hero-motion-drift { animation-name: heroPointDrift; }
+        .hero-motion-pulse { animation-name: heroPointPulse; }
+
+        @keyframes heroPointVertical {
+          0%,100% { transform: translate3d(0, 0, 0); }
+          50% { transform: translate3d(0, -24px, 0); }
+        }
+        @keyframes heroPointZoom {
+          0%,100% { transform: scale(.96); opacity: .78; }
+          50% { transform: scale(1.12); opacity: 1; }
+        }
+        @keyframes heroPointDrift {
+          0%,100% { transform: translate3d(-12px, 0, 0); }
+          50% { transform: translate3d(16px, -8px, 0); }
+        }
+        @keyframes heroPointPulse {
+          0%,35%,100% { transform: scale(1); filter: brightness(1); font-weight: 750; }
+          50%,68% { transform: scale(1.06); filter: brightness(1.35); font-weight: 900; }
+        }
+
+        .hero-globe-halo {
+          position:absolute; inset:18%;
+          border-radius:9999px;
+          background:radial-gradient(circle, rgba(103,183,232,.14), transparent 68%);
+          filter:blur(15px);
+          animation:heroGlobeHalo 5.5s ease-in-out infinite;
+        }
+        .hero-globe-spin { transform-origin:100px 100px; animation:heroGlobeSpin 20s linear infinite; }
+        .hero-globe-orbit { transform-origin:100px 100px; animation:heroGlobeOrbit 9s ease-in-out infinite alternate; }
+        .hero-globe-node { animation:heroGlobeNode 3.4s ease-in-out infinite; }
+        .hero-globe-shape { transform-origin:100px 100px; animation:heroGlobeMorph 7s ease-in-out infinite; }
+        .hero-globe-orbit-dot { transform-origin:100px 100px; animation:heroGlobeSpin 7s linear infinite; filter:drop-shadow(0 0 6px #D8B56A); }
+
+        @keyframes heroGlobeSpin { to { transform:rotate(360deg); } }
+        @keyframes heroGlobeOrbit {
+          from { transform:rotate(-12deg) scaleX(.92); opacity:.42; }
+          to { transform:rotate(24deg) scaleX(1.08); opacity:.85; }
+        }
+        @keyframes heroGlobeNode {
+          0%,100% { opacity:.42; transform:scale(.72); }
+          50% { opacity:1; transform:scale(1.35); }
+        }
+        @keyframes heroGlobeMorph {
+          0%,100% { transform:scale(.90) rotate(-5deg); }
+          50% { transform:scale(1.08) rotate(7deg); }
+        }
+        @keyframes heroGlobeHalo {
+          0%,100% { transform:scale(.88); opacity:.42; }
+          50% { transform:scale(1.18); opacity:.85; }
         }
 
         .hero-water-motion {
@@ -992,7 +1097,13 @@ export function Hero({ onOpenCV }: HeroProps) {
           }
 
           .hero-floating-point,
-          .hero-water-shimmer {
+          .hero-water-shimmer,
+          .hero-globe-spin,
+          .hero-globe-orbit,
+          .hero-globe-node,
+          .hero-globe-shape,
+          .hero-globe-orbit-dot,
+          .hero-globe-halo {
             animation: none !important;
           }
         }
