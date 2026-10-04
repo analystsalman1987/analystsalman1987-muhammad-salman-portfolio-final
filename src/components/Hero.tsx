@@ -7,30 +7,6 @@ interface HeroProps {
   onSelectExperience?: () => void;
 }
 
-const leftPoints = [
-  '14+ Years Exp',
-  'ERP Software',
-  'Oracle',
-  'Qoyod',
-  'QuickBooks',
-  'MS Office',
-  'Advanced Excel',
-];
-
-const rightPoints = [
-  'Financial Reporting',
-  'Receivables',
-  'VAT Reports & Submission',
-  'Reconciliations',
-  'Costing',
-  'Monthly Closing',
-  'Cash Handling',
-  'Petty Cash',
-  'Payables',
-  'P&L Account',
-  'Balance Sheet',
-];
-
 export function Hero(_props: HeroProps) {
   const { isRTL } = useLanguage();
 
@@ -105,34 +81,83 @@ export function Hero(_props: HeroProps) {
             <small>PROFESSIONAL EXPERIENCE</small>
           </div>
 
-          <div className="skill-column skill-column-left" aria-label="Software and general experience">
-            {leftPoints.map((label, index) => (
-              <div
-                key={label}
-                className="skill-point side-point left-side-point"
-                style={{
-                  top: `${8 + index * 13}%`,
-                  animationDelay: `${index * 2}s`,
-                }}
-              >
-                {label}
-              </div>
-            ))}
+          {/* LEFT — SYSTEMS / EXPERIENCE NETWORK */}
+          <div className="network-side network-left" aria-label="Systems and experience">
+            <svg className="network-lines" viewBox="0 0 360 620" preserveAspectRatio="none">
+              <path className="network-base" d="M78 78 C132 118 178 120 224 162" />
+              <path className="network-flow network-flow-blue" d="M78 78 C132 118 178 120 224 162" />
+              <path className="network-base" d="M224 162 C170 206 126 220 86 264" />
+              <path className="network-flow network-flow-blue delay-1" d="M224 162 C170 206 126 220 86 264" />
+              <path className="network-base" d="M86 264 C145 300 204 292 256 338" />
+              <path className="network-flow network-flow-blue delay-2" d="M86 264 C145 300 204 292 256 338" />
+              <path className="network-base" d="M256 338 C205 380 146 386 98 426" />
+              <path className="network-flow network-flow-blue delay-3" d="M256 338 C205 380 146 386 98 426" />
+              <path className="network-base" d="M98 426 C150 466 206 458 254 500" />
+              <path className="network-flow network-flow-blue delay-4" d="M98 426 C150 466 206 458 254 500" />
+              <path className="network-base" d="M254 500 C205 532 158 548 108 574" />
+              <path className="network-flow network-flow-blue delay-5" d="M254 500 C205 532 158 548 108 574" />
+            </svg>
+
+            <div className="network-node blue-node left-n1">14+ Years Exp</div>
+            <div className="network-node blue-node left-n2">ERP Software</div>
+            <div className="network-node blue-node left-n3">Oracle</div>
+            <div className="network-node blue-node left-n4">Qoyod</div>
+            <div className="network-node blue-node left-n5">QuickBooks</div>
+            <div className="network-node blue-node left-n6">MS Office</div>
+            <div className="network-node blue-node left-n7">Advanced Excel</div>
           </div>
 
-          <div className="skill-column skill-column-right" aria-label="Accounting and finance expertise">
-            {rightPoints.map((label, index) => (
-              <div
-                key={label}
-                className="skill-point side-point right-side-point"
-                style={{
-                  top: `${4 + index * 8.6}%`,
-                  animationDelay: `${index * 2}s`,
-                }}
-              >
-                {label}
-              </div>
-            ))}
+          {/* RIGHT — ACCOUNTING PROCESS → FINANCIAL REPORTING */}
+          <div className="network-side network-right" aria-label="Accounting process to financial reporting">
+            <svg className="network-lines" viewBox="0 0 430 620" preserveAspectRatio="none">
+              {/* P&L and Balance Sheet converge into Financial Reporting */}
+              <path className="network-base" d="M150 196 C205 148 258 112 324 78" />
+              <path className="network-flow" d="M150 196 C205 148 258 112 324 78" />
+              <path className="network-base" d="M324 220 C338 168 338 120 324 78" />
+              <path className="network-flow delay-2" d="M324 220 C338 168 338 120 324 78" />
+
+              {/* Revenue + Expenses → P&L */}
+              <path className="network-base" d="M70 300 C88 255 112 220 150 196" />
+              <path className="network-flow delay-1" d="M70 300 C88 255 112 220 150 196" />
+              <path className="network-base" d="M185 316 C184 260 170 222 150 196" />
+              <path className="network-flow delay-3" d="M185 316 C184 260 170 222 150 196" />
+
+              {/* AR + AP + Inventory → Balance Sheet */}
+              <path className="network-base" d="M286 320 C304 286 316 250 324 220" />
+              <path className="network-flow delay-1" d="M286 320 C304 286 316 250 324 220" />
+              <path className="network-base" d="M386 338 C365 292 345 250 324 220" />
+              <path className="network-flow delay-4" d="M386 338 C365 292 345 250 324 220" />
+              <path className="network-base" d="M330 426 C342 360 338 286 324 220" />
+              <path className="network-flow delay-5" d="M330 426 C342 360 338 286 324 220" />
+
+              {/* Processing layer */}
+              <path className="network-base" d="M150 410 C132 370 104 330 70 300" />
+              <path className="network-flow delay-2" d="M150 410 C132 370 104 330 70 300" />
+              <path className="network-base" d="M72 474 C98 442 124 422 150 410" />
+              <path className="network-flow delay-4" d="M72 474 C98 442 124 422 150 410" />
+              <path className="network-base" d="M214 492 C190 462 168 432 150 410" />
+              <path className="network-flow delay-1" d="M214 492 C190 462 168 432 150 410" />
+              <path className="network-base" d="M340 514 C340 478 336 450 330 426" />
+              <path className="network-flow delay-3" d="M340 514 C340 478 336 450 330 426" />
+
+              {/* Monthly Closing pulls the process upward into statements/reporting */}
+              <path className="network-base" d="M92 566 C110 520 128 458 150 410 C166 350 166 260 150 196" />
+              <path className="network-flow network-flow-slow" d="M92 566 C110 520 128 458 150 410 C166 350 166 260 150 196" />
+            </svg>
+
+            <div className="network-node master-node right-fr">Financial Reporting</div>
+            <div className="network-node gold-node right-pl">P&amp;L Account</div>
+            <div className="network-node gold-node right-bs">Balance Sheet</div>
+            <div className="network-node gold-node right-revenue">Revenue</div>
+            <div className="network-node gold-node right-expenses">Expenses</div>
+            <div className="network-node gold-node right-ar">Receivables</div>
+            <div className="network-node gold-node right-ap">Payables</div>
+            <div className="network-node gold-node right-inventory">Inventory</div>
+            <div className="network-node gold-node right-costing">Costing</div>
+            <div className="network-node gold-node right-recon">Reconciliation</div>
+            <div className="network-node gold-node right-cash">Cash / Petty Cash</div>
+            <div className="network-node gold-node right-vat">VAT Reporting</div>
+            <div className="network-node gold-node right-close">Monthly Closing</div>
           </div>
         </div>
 
@@ -221,9 +246,9 @@ export function Hero(_props: HeroProps) {
 
         /* LOCKED GOLDEN WORLD MAP IMAGE */
         .locked-golden-map {
+          transform: none;
           transform-box: fill-box;
           transform-origin: center;
-          animation: lockedMapDrift 16s ease-in-out infinite;
         }
 
         .locked-map-image {
@@ -236,19 +261,9 @@ export function Hero(_props: HeroProps) {
             drop-shadow(0 0 12px rgba(216,181,106,.12));
           transform-box: fill-box;
           transform-origin: center;
-          animation: lockedMapBreath 14s ease-in-out infinite;
+          animation: none;
         }
 
-
-        @keyframes lockedMapDrift {
-          0%,100% { transform: scale(1) translateY(0); }
-          50% { transform: scale(1.015) translateY(-4px); }
-        }
-
-        @keyframes lockedMapBreath {
-          0%,100% { opacity: .88; }
-          50% { opacity: .96; }
-        }
 
         /* ROUTES: CANADA/PAKISTAN -> SAUDI ARABIA */
         .route {
@@ -388,60 +403,151 @@ export function Hero(_props: HeroProps) {
           50% { transform: translateY(-13px); }
         }
 
-        /* SIDE POINT COLUMNS — map stays clean in the centre. */
-        .skill-column {
+        /* TWO-SIDE CONNECTED NETWORK — CURVED PATHS, NO STRAIGHT-LINE CHART LOOK */
+        .network-side {
           position: absolute;
-          z-index: 22;
-          top: 7%;
-          bottom: 7%;
-          width: 190px;
+          z-index: 24;
+          top: 5.5%;
+          bottom: 5.5%;
+          width: 31%;
           pointer-events: none;
         }
 
-        .skill-column-left { left: 7.5%; }
-        .skill-column-right { right: 7.5%; }
+        .network-left { left: 2.2%; }
+        .network-right { right: 2.2%; }
 
-        .skill-point {
+        .network-lines {
           position: absolute;
-          padding: 7px 11px;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          overflow: visible;
+        }
+
+        .network-base {
+          fill: none;
+          stroke: rgba(87,117,139,.34);
+          stroke-width: 1.15;
+          stroke-linecap: round;
+        }
+
+        .network-flow {
+          fill: none;
+          stroke: #D8B56A;
+          stroke-width: 1.8;
+          stroke-linecap: round;
+          stroke-dasharray: 10 34;
+          animation: networkDash 6.4s linear infinite;
+          filter: drop-shadow(0 0 4px rgba(216,181,106,.38));
+        }
+
+        .network-flow-blue {
+          stroke: #78BDE3;
+          opacity: .72;
+          filter: drop-shadow(0 0 4px rgba(120,189,227,.32));
+        }
+
+        .network-flow-slow { animation-duration: 8.5s; }
+        .delay-1 { animation-delay: -1.2s; }
+        .delay-2 { animation-delay: -2.4s; }
+        .delay-3 { animation-delay: -3.6s; }
+        .delay-4 { animation-delay: -4.8s; }
+        .delay-5 { animation-delay: -6s; }
+
+        @keyframes networkDash {
+          to { stroke-dashoffset: -176; }
+        }
+
+        .network-node {
+          position: absolute;
+          transform: translate(-50%,-50%);
+          min-width: 92px;
+          padding: 7px 10px;
           border-radius: 999px;
-          border: 1px solid rgba(111,184,223,.26);
-          background: rgba(7,24,39,.82);
-          backdrop-filter: blur(8px);
-          box-shadow: 0 8px 24px rgba(0,0,0,.18);
-          color: #DCE7EE;
-          font-size: 10px;
+          background: rgba(7,24,39,.84);
+          backdrop-filter: blur(7px);
+          box-shadow: 0 8px 22px rgba(0,0,0,.18);
+          color: #E5EDF2;
+          font-size: 9px;
           font-weight: 760;
           line-height: 1;
+          text-align: center;
           white-space: nowrap;
-          opacity: 0;
-          will-change: transform, opacity;
+          animation: networkFloat 7s ease-in-out infinite;
+          will-change: transform;
         }
 
-        .left-side-point {
-          left: 0;
-          border-color: rgba(111,184,223,.32);
-          animation: leftPointSequence 14s ease-in-out infinite;
+        .network-node::before {
+          content: "";
+          display: inline-block;
+          width: 5px;
+          height: 5px;
+          margin-right: 6px;
+          border-radius: 50%;
+          vertical-align: 1px;
         }
 
-        .right-side-point {
-          right: 0;
-          border-color: rgba(216,181,106,.38);
+        .blue-node {
+          border: 1px solid rgba(120,189,227,.34);
+        }
+        .blue-node::before {
+          background: #78BDE3;
+          box-shadow: 0 0 7px rgba(120,189,227,.75);
+        }
+
+        .gold-node {
+          border: 1px solid rgba(216,181,106,.38);
           color: #F4E3B7;
-          animation: rightPointSequence 22s ease-in-out infinite;
+        }
+        .gold-node::before,
+        .master-node::before {
+          background: #D8B56A;
+          box-shadow: 0 0 8px rgba(216,181,106,.8);
         }
 
-        @keyframes leftPointSequence {
-          0%, 5% { opacity:0; transform:translateY(10px) scale(.97); }
-          8%, 11% { opacity:1; transform:translateY(0) scale(1); }
-          13.5%, 100% { opacity:0; transform:translateY(-8px) scale(.98); }
+        .master-node {
+          min-width: 142px;
+          padding: 10px 13px;
+          border: 1px solid rgba(216,181,106,.72);
+          color: #FFF4D6;
+          font-size: 10px;
+          box-shadow: 0 0 25px rgba(216,181,106,.14), 0 8px 22px rgba(0,0,0,.18);
+          animation: masterNodePulse 4.2s ease-in-out infinite;
         }
 
-        @keyframes rightPointSequence {
-          0%, 3% { opacity:0; transform:translateY(10px) scale(.97); }
-          5%, 7% { opacity:1; transform:translateY(0) scale(1); }
-          8.7%, 100% { opacity:0; transform:translateY(-8px) scale(.98); }
+        @keyframes networkFloat {
+          0%,100% { transform: translate(-50%,-50%) translate(0,6px); }
+          50% { transform: translate(-50%,-50%) translate(3px,-9px); }
         }
+
+        @keyframes masterNodePulse {
+          0%,100% { transform: translate(-50%,-50%) scale(1); }
+          50% { transform: translate(-50%,-50%) scale(1.035); }
+        }
+
+        /* LEFT positions — systems / experience */
+        .left-n1 { left: 22%; top: 12%; animation-delay:-1s; }
+        .left-n2 { left: 62%; top: 26%; animation-delay:-3s; }
+        .left-n3 { left: 24%; top: 42%; animation-delay:-5s; }
+        .left-n4 { left: 72%; top: 54%; animation-delay:-2s; }
+        .left-n5 { left: 30%; top: 68%; animation-delay:-4s; }
+        .left-n6 { left: 72%; top: 80%; animation-delay:-6s; }
+        .left-n7 { left: 32%; top: 92%; animation-delay:-.5s; }
+
+        /* RIGHT positions — accounting process converging into Financial Reporting */
+        .right-fr { left: 76%; top: 12%; }
+        .right-pl { left: 35%; top: 31%; animation-delay:-1s; }
+        .right-bs { left: 76%; top: 35%; animation-delay:-2s; }
+        .right-revenue { left: 16%; top: 48%; animation-delay:-3s; }
+        .right-expenses { left: 43%; top: 51%; animation-delay:-4s; }
+        .right-ar { left: 67%; top: 52%; animation-delay:-1.5s; }
+        .right-ap { left: 91%; top: 55%; animation-delay:-3.5s; }
+        .right-inventory { left: 77%; top: 69%; animation-delay:-5s; }
+        .right-costing { left: 36%; top: 66%; animation-delay:-2.2s; }
+        .right-recon { left: 16%; top: 76%; animation-delay:-4.7s; }
+        .right-cash { left: 50%; top: 80%; animation-delay:-1.2s; }
+        .right-vat { left: 80%; top: 83%; animation-delay:-3.2s; }
+        .right-close { left: 20%; top: 92%; animation-delay:-5.4s; }
 
         /* Map-fit tuning: adjust only these image values later if needed. */
         @media (max-width: 1023px) {
@@ -465,14 +571,11 @@ export function Hero(_props: HeroProps) {
           .country b { font-size: 7px; }
           .country small { font-size: 5px; }
 
-          .skill-point {
-            padding: 5px 7px;
-            font-size: 7px;
-          }
-
-          .skill-column { width: 125px; top: 8%; bottom: 8%; }
-          .skill-column-left { left: 2.5%; }
-          .skill-column-right { right: 2.5%; }
+          .network-side { width: 38%; top: 7%; bottom: 7%; }
+          .network-left { left: 1%; }
+          .network-right { right: 1%; }
+          .network-node { min-width: 72px; padding: 5px 7px; font-size: 7px; }
+          .master-node { min-width: 105px; font-size: 8px; }
         }
 
         @media (max-width: 640px) {
