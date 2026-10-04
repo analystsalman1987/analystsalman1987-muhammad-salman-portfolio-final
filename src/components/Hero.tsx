@@ -198,7 +198,7 @@ export function Hero({ onOpenCV }: HeroProps) {
             className="
               absolute
               inset-0
-              bg-[linear-gradient(105deg,rgba(232,188,94,0.19)_0%,rgba(216,181,106,0.12)_29%,rgba(201,164,92,0.055)_49%,transparent_69%)]
+              bg-[linear-gradient(105deg,rgba(255,210,118,0.30)_0%,rgba(232,188,94,0.22)_27%,rgba(216,181,106,0.13)_49%,rgba(201,164,92,0.045)_68%,transparent_82%)]
               mix-blend-screen
             "
           />
@@ -206,7 +206,7 @@ export function Hero({ onOpenCV }: HeroProps) {
             className="
               absolute
               inset-0
-              bg-[radial-gradient(ellipse_62%_46%_at_27%_43%,rgba(255,214,126,0.16)_0%,rgba(216,181,106,0.085)_43%,transparent_76%)]
+              bg-[radial-gradient(ellipse_68%_54%_at_27%_42%,rgba(255,222,145,0.25)_0%,rgba(232,188,94,0.16)_38%,rgba(201,164,92,0.07)_61%,transparent_82%)]
               mix-blend-screen
             "
           />
@@ -217,11 +217,11 @@ export function Hero({ onOpenCV }: HeroProps) {
               absolute
               inset-y-0
               right-0
-              w-[48%]
+              w-[43%]
               bg-gradient-to-r
               from-transparent
-              via-[#071827]/48
-              to-[#071827]
+              via-[#071827]/22
+              to-[#071827]/72
             "
           />
 
@@ -550,7 +550,7 @@ export function Hero({ onOpenCV }: HeroProps) {
             absolute
             inset-0
             z-[3]
-            bg-[radial-gradient(ellipse_39%_43%_at_50%_43%,rgba(7,24,39,0.79)_0%,rgba(7,24,39,0.53)_49%,rgba(7,24,39,0.13)_75%,transparent_100%)]
+            bg-[radial-gradient(ellipse_38%_42%_at_50%_43%,rgba(7,24,39,0.62)_0%,rgba(7,24,39,0.36)_48%,rgba(7,24,39,0.07)_74%,transparent_100%)]
           "
         />
 
@@ -559,7 +559,7 @@ export function Hero({ onOpenCV }: HeroProps) {
             absolute
             inset-0
             z-[4]
-            bg-[radial-gradient(ellipse_96%_90%_at_50%_48%,transparent_52%,rgba(7,24,39,0.14)_78%,#071827_100%)]
+            bg-[radial-gradient(ellipse_98%_92%_at_50%_48%,transparent_57%,rgba(7,24,39,0.09)_80%,rgba(7,24,39,0.88)_100%)]
           "
         />
 
@@ -837,10 +837,10 @@ export function Hero({ onOpenCV }: HeroProps) {
            * cool source photo toward the champagne-gold locked look.
            */
           filter:
-            saturate(1.04)
-            contrast(1.03)
-            brightness(.90)
-            sepia(.10);
+            saturate(1.08)
+            contrast(1.035)
+            brightness(.92)
+            sepia(.20);
         }
 
         @media (max-width: 767px) {
