@@ -1,7 +1,6 @@
-import { FileDown, ExternalLink } from 'lucide-react';
+import { ExternalLink, FileDown } from 'lucide-react';
 import { ProfileInfo } from '../types';
 import { useLanguage } from '../context/LanguageContext';
-import { ARABIC_TRANSLATIONS } from '../data/arabicData';
 
 interface HeroProps {
   profile?: ProfileInfo;
@@ -9,1154 +8,432 @@ interface HeroProps {
   onSelectExperience?: () => void;
 }
 
+const points = [
+  { label: '14+ Years Exp', cls: 'p1 gold keep', duration: '15s', delay: '-2s' },
+  { label: 'Financial Reporting', cls: 'p2', duration: '18s', delay: '-8s' },
+  { label: 'Receivables', cls: 'p3', duration: '16s', delay: '-4s' },
+  { label: 'VAT Reports & Submission', cls: 'p4 gold', duration: '19s', delay: '-11s' },
+  { label: 'ERP Software', cls: 'p5 keep', duration: '17s', delay: '-6s' },
+  { label: 'Reconciliations', cls: 'p6', duration: '20s', delay: '-13s' },
+  { label: 'Costing', cls: 'p7', duration: '15.5s', delay: '-9s' },
+  { label: 'MS Office', cls: 'p8', duration: '18.5s', delay: '-3s' },
+  { label: 'Monthly Closing', cls: 'p9', duration: '17.5s', delay: '-12s' },
+  { label: 'Cash Handling', cls: 'p10', duration: '20.5s', delay: '-5s' },
+  { label: 'Petty Cash', cls: 'p11', duration: '16.5s', delay: '-10s' },
+  { label: 'Payables', cls: 'p12', duration: '19.5s', delay: '-7s' },
+  { label: 'Oracle', cls: 'p13', duration: '14.5s', delay: '-1s' },
+  { label: 'Qoyod', cls: 'p14', duration: '18s', delay: '-14s' },
+  { label: 'QuickBooks', cls: 'p15', duration: '16s', delay: '-8s' },
+  { label: 'P&L Account', cls: 'p16 gold keep', duration: '21s', delay: '-15s' },
+  { label: 'Balance Sheet', cls: 'p17 gold', duration: '17s', delay: '-2s' },
+];
+
 export function Hero({ onOpenCV }: HeroProps) {
   const { isRTL } = useLanguage();
 
   const linkedInUrl =
     'https://www.linkedin.com/in/muhammad-salman-mba-finance-cpa-finalist-66908767/';
 
-
-  // Floating profile points inspired by the reference interaction style.
-  // Kept behind the main name/buttons so the locked centre content stays clear.
-  const floatingPoints = [
-    { label: '14+ Years Exp', pos: 'left-[5%] top-[16%]', tone: 'gold', motion: 'pulse', delay: '0s', dur: '12.5s' },
-    { label: 'Financial Reporting', pos: 'left-[22%] top-[12%]', tone: 'blue', motion: 'vertical', delay: '-2s', dur: '15s' },
-    { label: 'Receivables', pos: 'left-[45%] top-[18%]', tone: 'gold', motion: 'zoom', delay: '-3.2s', dur: '13.5s' },
-    { label: 'VAT Reports & Submission', pos: 'left-[58%] top-[12%]', tone: 'blue', motion: 'drift', delay: '-1.4s', dur: '16s' },
-    { label: 'ERP Software', pos: 'left-[7%] top-[47%]', tone: 'blue', motion: 'zoom', delay: '-4.8s', dur: '14.5s' },
-    { label: 'Reconciliations', pos: 'right-[14%] top-[39%]', tone: 'gold', motion: 'pulse', delay: '-2.7s', dur: '13.8s' },
-    { label: 'Costing', pos: 'left-[17%] bottom-[18%]', tone: 'blue', motion: 'vertical', delay: '-5.1s', dur: '15.5s' },
-    { label: 'MS Office', pos: 'right-[22%] bottom-[16%]', tone: 'blue', motion: 'drift', delay: '-2.3s', dur: '15.2s' },
-    { label: 'Monthly Closing', pos: 'left-[32%] bottom-[11%]', tone: 'gold', motion: 'pulse', delay: '-4.1s', dur: '14.2s' },
-    { label: 'Cash Handling', pos: 'right-[7%] bottom-[27%]', tone: 'gold', motion: 'vertical', delay: '-1.1s', dur: '16.2s' },
-    { label: 'Petty Cash', pos: 'left-[4%] bottom-[33%]', tone: 'gold', motion: 'drift', delay: '-3.6s', dur: '14s' },
-    { label: 'Payables', pos: 'right-[39%] bottom-[7%]', tone: 'blue', motion: 'zoom', delay: '-5.4s', dur: '15.3s' },
-    { label: 'Oracle', pos: 'left-[30%] top-[25%]', tone: 'gold', motion: 'pulse', delay: '-2.2s', dur: '13s' },
-    { label: 'Qoyod', pos: 'right-[8%] top-[25%]', tone: 'blue', motion: 'vertical', delay: '-6s', dur: '16.5s' },
-    { label: 'QuickBooks', pos: 'right-[3%] bottom-[9%]', tone: 'gold', motion: 'zoom', delay: '-4.3s', dur: '14.3s' },
-  ];
-
-  /*
-   * LOCKED HERO FINANCE PATH
-   *
-   * Main gold wave:
-   * starts near the visual centre and rises smoothly toward the right.
-   *
-   * No permanent dots are placed on this gold line.
-   */
-  const goldWavePath = `
-    M 675 720
-    C 715 708, 742 690, 770 662
-    C 790 642, 805 610, 830 604
-    C 855 598, 868 624, 892 618
-    C 920 610, 936 574, 962 548
-    C 990 520, 1012 502, 1038 510
-    C 1068 520, 1088 552, 1118 548
-    C 1150 544, 1170 498, 1195 458
-    C 1220 418, 1244 390, 1270 394
-    C 1300 398, 1315 426, 1340 412
-    C 1370 395, 1388 342, 1415 294
-    C 1425 276, 1434 262, 1440 254
-  `;
-
-  /*
-   * Thin secondary dotted trend line.
-   * It sits below the main gold wave.
-   */
-  const dottedTrendPath = `
-    M 690 758
-    C 730 748, 760 730, 790 714
-    C 820 698, 850 686, 880 674
-    C 910 662, 940 650, 970 632
-    C 1000 614, 1030 598, 1060 584
-    C 1090 570, 1120 558, 1150 542
-    C 1180 526, 1210 505, 1240 480
-    C 1270 455, 1300 430, 1330 402
-    C 1360 374, 1390 340, 1440 300
-  `;
-
-  const bars = [
-    { x: 715, h: 34, gold: false, dur: 6.2, delay: 0.0 },
-    { x: 744, h: 47, gold: true, dur: 6.7, delay: 0.3 },
-    { x: 773, h: 58, gold: false, dur: 6.0, delay: 0.7 },
-    { x: 802, h: 72, gold: false, dur: 7.0, delay: 1.0 },
-    { x: 831, h: 86, gold: true, dur: 6.4, delay: 0.5 },
-    { x: 860, h: 68, gold: false, dur: 6.8, delay: 1.2 },
-    { x: 889, h: 96, gold: false, dur: 7.2, delay: 0.8 },
-    { x: 918, h: 112, gold: true, dur: 6.5, delay: 1.5 },
-    { x: 947, h: 91, gold: false, dur: 6.9, delay: 0.4 },
-    { x: 976, h: 126, gold: false, dur: 7.4, delay: 1.1 },
-    { x: 1005, h: 148, gold: true, dur: 6.6, delay: 0.9 },
-    { x: 1034, h: 105, gold: false, dur: 7.0, delay: 1.7 },
-    { x: 1063, h: 137, gold: false, dur: 6.3, delay: 0.2 },
-    { x: 1092, h: 161, gold: true, dur: 7.1, delay: 1.3 },
-    { x: 1121, h: 119, gold: false, dur: 6.8, delay: 0.6 },
-    { x: 1150, h: 178, gold: false, dur: 7.5, delay: 1.0 },
-    { x: 1179, h: 203, gold: true, dur: 6.7, delay: 1.5 },
-    { x: 1208, h: 153, gold: false, dur: 7.2, delay: 0.3 },
-    { x: 1237, h: 218, gold: true, dur: 6.5, delay: 1.1 },
-    { x: 1266, h: 181, gold: false, dur: 7.3, delay: 0.8 },
-    { x: 1295, h: 246, gold: true, dur: 6.9, delay: 1.6 },
-    { x: 1324, h: 210, gold: false, dur: 7.4, delay: 0.5 },
-    { x: 1353, h: 274, gold: true, dur: 6.8, delay: 1.2 },
-    { x: 1382, h: 239, gold: false, dur: 7.1, delay: 0.9 },
-  ];
-
-  const dottedBlinkPoints = [
-    [760, 730],
-    [800, 708],
-    [840, 690],
-    [880, 674],
-    [920, 656],
-    [960, 638],
-    [1000, 615],
-    [1040, 594],
-    [1080, 574],
-    [1120, 558],
-    [1160, 536],
-    [1200, 512],
-    [1240, 480],
-    [1280, 447],
-    [1320, 410],
-    [1360, 370],
-    [1400, 332],
-  ];
-
   return (
     <section
       id="home"
-      className="
-        relative
-        flex
-        min-h-[calc(100svh-5rem)]
-        w-full
-        flex-col
-        items-center
-        justify-center
-        overflow-hidden
-        bg-[#071827]
-        px-4
-        py-8
-        text-center
-        sm:px-6
-        lg:h-[calc(100svh-5rem)]
-        lg:min-h-[calc(100svh-5rem)]
-        lg:px-8
-        lg:py-0
-      "
+      dir={isRTL ? 'rtl' : 'ltr'}
+      className="hero-final relative min-h-[calc(100svh-5rem)] overflow-hidden bg-[#071827] lg:h-[calc(100svh-5rem)] lg:min-h-[650px]"
     >
-      {/* ======================================================
-          LOCKED HERO BACKGROUND
-      ======================================================= */}
-      <div
-        className="pointer-events-none absolute inset-0 z-0 overflow-hidden select-none"
-        aria-hidden="true"
-      >
-        {/* Navy background */}
-        <div className="absolute inset-0 bg-[#071827]" />
+      <div className="hero-bg absolute inset-0" aria-hidden="true" />
 
+      <div className="relative mx-auto h-full min-h-[calc(100svh-5rem)] max-w-[1920px] lg:min-h-[650px]">
+        {/* LEFT CONTENT */}
         <div
-          className="
-            absolute
-            -inset-12
-            bg-[radial-gradient(ellipse_100%_90%_at_50%_38%,#132E43_0%,#0D2538_31%,#081A2B_65%,#071827_100%)]
-          "
-        />
-
-        {/* ====================================================
-            LEFT SKYLINE — FULL HEIGHT / LOCKED GOLDEN TREATMENT
-            The real photo now fills the Hero from top to bottom
-            and extends beneath the finance graph.
-        ===================================================== */}
-        <div
-          className="
-            hero-locked-skyline
-            absolute
-            inset-y-0
-            left-0
-            z-[1]
-            w-[100%]
-            sm:w-[100%]
-            lg:w-[100%]
-            xl:w-[100%]
-          "
+          className={`hero-copy absolute z-30 top-[48%] w-[37%] -translate-y-1/2 ${
+            isRTL ? 'right-[6vw] text-right' : 'left-[6vw] text-left'
+          }`}
         >
-          {/* Base background behind the uploaded skyline image */}
-          <div className="absolute inset-0 bg-[#0A1D2E]" />
-
-          <img
-            src="/images/Golden-Hour Waterfront Skyline.png"
-            alt=""
-            draggable={false}
-            loading="eager"
-            className="
-              hero-locked-skyline-image
-              absolute
-              inset-0
-              h-full
-              w-full
-              object-cover
-              object-left-bottom
-            "
-          />
-
-          {/* Right-side navy blend: no visible rectangular photo edge */}
-          <div
-            className="
-              absolute
-              inset-y-0
-              right-0
-              w-[38%]
-              bg-gradient-to-r
-              from-transparent
-              via-[#071827]/12
-              to-[#071827]/48
-            "
-          />
-
-          {/* Soft top integration, while keeping skyline full-height */}
-          <div
-            className="
-              absolute
-              inset-x-0
-              top-0
-              h-[16%]
-              bg-gradient-to-b
-              from-[#071827]/34
-              to-transparent
-            "
-          />
-
-          {/* Soft bottom integration */}
-          <div
-            className="
-              absolute
-              inset-x-0
-              bottom-0
-              h-[8%]
-              bg-gradient-to-t
-              from-[#071827]/58
-              to-transparent
-            "
-          />
-        </div>
-
-        {/* Golden/navy atmosphere carries behind centre and graph */}
-        <div
-          className="
-            absolute
-            bottom-[7%]
-            left-[20%]
-            z-[1]
-            h-[72%]
-            w-[55%]
-            rounded-full
-            bg-[radial-gradient(ellipse,rgba(216,181,106,0.105)_0%,rgba(201,164,92,0.05)_38%,rgba(13,37,56,0.06)_58%,transparent_76%)]
-            blur-[72px]
-          "
-        />
-
-        {/* ====================================================
-            RIGHT FINANCE VISUAL
-        ===================================================== */}
-        <svg
-          className="absolute inset-0 z-[2] h-full w-full"
-          viewBox="0 0 1440 900"
-          preserveAspectRatio="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <defs>
-            <linearGradient
-              id="lockedGoldWave"
-              x1="0%"
-              y1="100%"
-              x2="100%"
-              y2="0%"
-            >
-              <stop
-                offset="0%"
-                stopColor="#9A7737"
-                stopOpacity="0.60"
-              />
-              <stop
-                offset="45%"
-                stopColor="#C9A45C"
-                stopOpacity="0.90"
-              />
-              <stop
-                offset="100%"
-                stopColor="#E1BF72"
-                stopOpacity="1"
-              />
-            </linearGradient>
-
-            <linearGradient
-              id="lockedBlueBar"
-              x1="0%"
-              y1="100%"
-              x2="0%"
-              y2="0%"
-            >
-              <stop
-                offset="0%"
-                stopColor="#183448"
-                stopOpacity="0.44"
-              />
-              <stop
-                offset="100%"
-                stopColor="#71899A"
-                stopOpacity="0.82"
-              />
-            </linearGradient>
-
-            <linearGradient
-              id="lockedGoldBar"
-              x1="0%"
-              y1="100%"
-              x2="0%"
-              y2="0%"
-            >
-              <stop
-                offset="0%"
-                stopColor="#70562A"
-                stopOpacity="0.48"
-              />
-              <stop
-                offset="100%"
-                stopColor="#D8B56A"
-                stopOpacity="0.90"
-              />
-            </linearGradient>
-
-            <filter
-              id="lockedGoldGlow"
-              x="-60%"
-              y="-60%"
-              width="220%"
-              height="220%"
-            >
-              <feGaussianBlur
-                stdDeviation="5"
-                result="blur"
-              />
-              <feMerge>
-                <feMergeNode in="blur" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-
-            <filter
-              id="lockedDotGlow"
-              x="-150%"
-              y="-150%"
-              width="400%"
-              height="400%"
-            >
-              <feGaussianBlur
-                stdDeviation="2.5"
-                result="blur"
-              />
-              <feMerge>
-                <feMergeNode in="blur" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-          </defs>
-
-          {/* ================================================
-              BARS — thin, numerous, professional
-          ================================================= */}
-          <g>
-            {bars.map((bar, index) => {
-              const baseY = 822;
-              const lowHeight = Math.max(28, bar.h - 18);
-              const highHeight = bar.h + 22;
-
-              return (
-                <rect
-                  key={index}
-                  x={bar.x}
-                  y={baseY - bar.h}
-                  width="14"
-                  height={bar.h}
-                  rx="2"
-                  fill={
-                    bar.gold
-                      ? 'url(#lockedGoldBar)'
-                      : 'url(#lockedBlueBar)'
-                  }
-                >
-                  <animate
-                    attributeName="y"
-                    values={`${baseY - lowHeight};${baseY - highHeight};${baseY - bar.h};${baseY - lowHeight}`}
-                    dur={`${bar.dur}s`}
-                    begin={`${bar.delay}s`}
-                    repeatCount="indefinite"
-                  />
-
-                  <animate
-                    attributeName="height"
-                    values={`${lowHeight};${highHeight};${bar.h};${lowHeight}`}
-                    dur={`${bar.dur}s`}
-                    begin={`${bar.delay}s`}
-                    repeatCount="indefinite"
-                  />
-                </rect>
-              );
-            })}
-          </g>
-
-          {/* ================================================
-              THIN DOTTED TREND LINE
-              Between bars and main gold wave
-          ================================================= */}
-
-          <path
-            d={dottedTrendPath}
-            fill="none"
-            stroke="#7E93A2"
-            strokeWidth="1.15"
-            strokeDasharray="3 10"
-            strokeLinecap="round"
-            opacity="0.42"
-          />
-
-          {/* sequential blinking points ONLY on dotted line */}
-          <g>
-            {dottedBlinkPoints.map(([cx, cy], index) => (
-              <circle
-                key={index}
-                cx={cx}
-                cy={cy}
-                r="2.1"
-                fill="#CBD5E1"
-                opacity="0.12"
-                filter="url(#lockedDotGlow)"
-              >
-                <animate
-                  attributeName="opacity"
-                  values="0.10;0.10;0.95;0.18;0.10"
-                  keyTimes="0;0.35;0.50;0.64;1"
-                  dur="5.8s"
-                  begin={`${index * 0.18}s`}
-                  repeatCount="indefinite"
-                />
-
-                <animate
-                  attributeName="r"
-                  values="1.7;1.7;3.2;2;1.7"
-                  keyTimes="0;0.35;0.50;0.64;1"
-                  dur="5.8s"
-                  begin={`${index * 0.18}s`}
-                  repeatCount="indefinite"
-                />
-              </circle>
-            ))}
-          </g>
-
-          {/* ================================================
-              MAIN GOLD WAVE
-              NO DOTS
-          ================================================= */}
-
-          {/* subtle halo */}
-          <path
-            d={goldWavePath}
-            fill="none"
-            stroke="#D8B56A"
-            strokeWidth="11"
-            strokeLinecap="round"
-            opacity="0.055"
-            filter="url(#lockedGoldGlow)"
-          />
-
-          {/* permanent smooth gold wave */}
-          <path
-            d={goldWavePath}
-            fill="none"
-            stroke="url(#lockedGoldWave)"
-            strokeWidth="3.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            opacity="0.95"
-          />
-
-          {/* Slightly bolder upper/right end of the locked wave */}
-          <path
-            d={goldWavePath}
-            fill="none"
-            stroke="#E6C36F"
-            strokeWidth="5.2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            pathLength="1000"
-            strokeDasharray="245 755"
-            strokeDashoffset="-755"
-            opacity="0.88"
-            filter="url(#lockedGoldGlow)"
-          />
-
-          {/* ================================================
-              SMOOTH MOVING LIGHT ON GOLD WAVE
-              Continuous segment — NO DOTS
-          ================================================= */}
-          <path
-            d={goldWavePath}
-            fill="none"
-            stroke="#FFF0BE"
-            strokeWidth="5.2"
-            strokeLinecap="round"
-            pathLength="1000"
-            strokeDasharray="118 882"
-            strokeDashoffset="1000"
-            filter="url(#lockedGoldGlow)"
-            opacity="0.95"
-          >
-            <animate
-              attributeName="stroke-dashoffset"
-              from="1000"
-              to="-1000"
-              dur="11s"
-              repeatCount="indefinite"
-            />
-
-            <animate
-              attributeName="stroke-opacity"
-              values="0;1;1;0"
-              keyTimes="0;0.08;0.92;1"
-              dur="11s"
-              repeatCount="indefinite"
-            />
-          </path>
-        </svg>
-
-        {/* subtle right atmosphere */}
-        <div
-          className="
-            absolute
-            right-[-4%]
-            bottom-[2%]
-            z-[1]
-            h-[68%]
-            w-[52%]
-            rounded-full
-            bg-[radial-gradient(circle,rgba(216,181,106,0.065)_0%,rgba(201,164,92,0.022)_45%,transparent_73%)]
-            blur-[70px]
-          "
-        />
-
-        {/* ====================================================
-            CENTER CONTENT PROTECTION
-            Does not redesign left/right.
-        ===================================================== */}
-        <div
-          className="
-            absolute
-            inset-0
-            z-[3]
-            bg-[radial-gradient(ellipse_38%_42%_at_50%_43%,rgba(7,24,39,0.62)_0%,rgba(7,24,39,0.36)_48%,rgba(7,24,39,0.07)_74%,transparent_100%)]
-          "
-        />
-
-        <div
-          className="
-            absolute
-            inset-0
-            z-[4]
-            bg-[radial-gradient(ellipse_98%_92%_at_50%_48%,transparent_57%,rgba(7,24,39,0.09)_80%,rgba(7,24,39,0.88)_100%)]
-          "
-        />
-
-        <div
-          className="
-            absolute
-            inset-x-0
-            bottom-0
-            z-[5]
-            h-[8%]
-            bg-gradient-to-t
-            from-[#071827]/75
-            to-transparent
-          "
-        />
-      </div>
-
-      {/* ======================================================
-          SUBTLE WATER SHIMMER
-          Only animates the lower waterfront area; buildings stay still.
-      ======================================================= */}
-      <div
-        className="hero-water-motion pointer-events-none absolute inset-x-0 bottom-0 z-[6] h-[15%] overflow-hidden"
-        aria-hidden="true"
-      >
-        <div className="hero-water-shimmer hero-water-shimmer-a" />
-        <div className="hero-water-shimmer hero-water-shimmer-b" />
-      </div>
-
-      {/* ======================================================
-          TWO SLOW MOVING DATA LINES — Mohsin-style motion concept
-          Kept behind the name and away from the main gold graph.
-      ======================================================= */}
-      <svg
-        className="pointer-events-none absolute inset-0 z-[6] hidden h-full w-full md:block"
-        viewBox="0 0 1440 820"
-        preserveAspectRatio="none"
-        aria-hidden="true"
-      >
-        <defs>
-          <filter id="heroBlueFlowGlow" x="-40%" y="-40%" width="180%" height="180%">
-            <feGaussianBlur stdDeviation="2.2" result="blur" />
-            <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
-          </filter>
-        </defs>
-        <path
-          d="M -30 275 C 180 215, 320 350, 510 290 S 810 205, 1010 265 S 1260 330, 1470 245"
-          fill="none" stroke="#67B7E8" strokeWidth="2" opacity=".55"
-          className="hero-flow-line hero-flow-line-a"
-        >
-          <animate
-            attributeName="d"
-            dur="24s"
-            repeatCount="indefinite"
-            values="
-              M -30 275 C 180 215, 320 350, 510 290 S 810 205, 1010 265 S 1260 330, 1470 245;
-              M -30 245 C 180 285, 320 215, 510 325 S 810 275, 1010 225 S 1260 285, 1470 220;
-              M -30 305 C 180 245, 320 385, 510 260 S 810 165, 1010 305 S 1260 365, 1470 270;
-              M -30 275 C 180 215, 320 350, 510 290 S 810 205, 1010 265 S 1260 330, 1470 245
-            "
-          />
-        </path>
-        <path
-          d="M -30 615 C 170 530, 320 500, 505 555 S 790 650, 980 585 S 1250 490, 1470 535"
-          fill="none" stroke="#D8B56A" strokeWidth="1.9" opacity=".50"
-          className="hero-flow-line hero-flow-line-b"
-        >
-          <animate
-            attributeName="d"
-            dur="28s"
-            repeatCount="indefinite"
-            values="
-              M -30 615 C 170 530, 320 500, 505 555 S 790 650, 980 585 S 1250 490, 1470 535;
-              M -30 575 C 170 625, 320 455, 505 595 S 790 585, 980 630 S 1250 545, 1470 500;
-              M -30 645 C 170 500, 320 570, 505 515 S 790 690, 980 545 S 1250 455, 1470 575;
-              M -30 615 C 170 530, 320 500, 505 555 S 790 650, 980 585 S 1250 490, 1470 535
-            "
-          />
-        </path>
-
-      </svg>
-
-      {/* Morphing / rotating network globe above the right-side graph */}
-      <div className="hero-network-globe hero-network-globe-motion pointer-events-none absolute right-[8%] top-[8%] z-[8] hidden h-[190px] w-[190px] lg:block" aria-hidden="true">
-        <div className="hero-globe-halo" />
-        <svg viewBox="0 0 200 200" className="h-full w-full overflow-visible">
-          <circle cx="100" cy="100" r="66" fill="rgba(7,24,39,.18)" stroke="rgba(103,183,232,.44)" strokeWidth="1.2" />
-          <g className="hero-globe-spin">
-            <ellipse cx="100" cy="100" rx="66" ry="27" fill="none" stroke="rgba(103,183,232,.46)" strokeWidth="1" />
-            <ellipse cx="100" cy="100" rx="27" ry="66" fill="none" stroke="rgba(216,181,106,.42)" strokeWidth="1" />
-            <ellipse cx="100" cy="100" rx="58" ry="43" fill="none" stroke="rgba(103,183,232,.25)" strokeWidth=".8" transform="rotate(42 100 100)" />
-            <path
-              d="M42 78 L70 52 L104 63 L139 47 L160 78 L145 111 L166 137 L124 154 L92 137 L56 149 L39 113 Z"
-              fill="none"
-              stroke="rgba(111,195,238,.48)"
-              strokeWidth=".8"
-              className="hero-globe-shape"
-            >
-              <animate
-                attributeName="d"
-                dur="12s"
-                repeatCount="indefinite"
-                values="
-                  M42 78 L70 52 L104 63 L139 47 L160 78 L145 111 L166 137 L124 154 L92 137 L56 149 L39 113 Z;
-                  M36 88 L65 45 L109 55 L148 54 L169 86 L137 116 L158 146 L117 160 L84 132 L49 143 L34 105 Z;
-                  M47 69 L77 58 L99 48 L132 39 L154 70 L153 105 L171 128 L132 148 L101 149 L62 157 L43 119 Z;
-                  M42 78 L70 52 L104 63 L139 47 L160 78 L145 111 L166 137 L124 154 L92 137 L56 149 L39 113 Z
-                "
-              />
-            </path>
-            {[[42,78],[70,52],[104,63],[139,47],[160,78],[145,111],[166,137],[124,154],[92,137],[56,149],[39,113],[100,100]].map(([cx,cy], i) => (
-              <circle key={i} cx={cx} cy={cy} r={i % 4 === 0 ? 3.2 : 2.1} fill={i % 3 === 0 ? '#D8B56A' : '#7CC7F2'} className="hero-globe-node" style={{ animationDelay: `${-i * .42}s` }} />
-            ))}
-          </g>
-          <ellipse cx="100" cy="100" rx="86" ry="38" fill="none" stroke="rgba(216,181,106,.50)" strokeWidth="1.2" className="hero-globe-orbit" />
-          <circle cx="184" cy="100" r="3.5" fill="#F0D078" className="hero-globe-orbit-dot" />
-        </svg>
-      </div>
-
-      {/* ======================================================
-          FLOATING PROFILE POINTS
-          Slow independent drift, inspired by the reference website.
-          Main content remains above these pills.
-      ======================================================= */}
-      <div
-        className="pointer-events-none absolute inset-0 z-[7] hidden overflow-hidden md:block"
-        aria-hidden="true"
-      >
-        {floatingPoints.map((point, index) => (
-          <div
-            key={point.label}
-            className={`hero-floating-point absolute ${point.pos} ${
-              point.tone === 'gold'
-                ? 'hero-floating-point-gold'
-                : 'hero-floating-point-blue'
-            } hero-motion-${point.motion} ${index === 0 ? 'hero-floating-point-featured' : ''}`}
-            style={{
-              animationDelay: point.delay,
-              animationDuration: point.dur,
-            }}
-          >
-            {point.label}
+          <div className="mb-[18px] text-[12px] font-semibold tracking-[0.24em] text-[#D8B56A]">
+            {isRTL ? 'مرحباً بكم في ملفي المهني' : 'WELCOME TO MY PORTFOLIO'}
           </div>
-        ))}
-      </div>
 
-      {/* ======================================================
-          LOCKED CENTER CONTENT
-      ======================================================= */}
-      <div
-        className="
-          relative
-          z-10
-          mx-auto
-          flex
-          w-full
-          max-w-5xl
-          flex-col
-          items-center
-          justify-center
-          space-y-6
-        "
-      >
-        <div className="inline-flex items-center gap-2">
-          <span className="h-px w-6 bg-[#D8B56A]/60 sm:w-10" />
+          <h1 className="m-0 text-[clamp(48px,6vw,90px)] font-extrabold leading-[0.86] tracking-[-0.05em] text-[#F8FAFC]">
+            MUHAMMAD
+            <br />
+            <span className="text-[#D8B56A]">SALMAN</span>
+          </h1>
 
-          <span
-            className="
-              text-[11px]
-              font-bold
-              tracking-[0.28em]
-              text-[#D8B56A]
-              uppercase
-              sm:text-xs
-              sm:tracking-[0.34em]
-            "
-          >
-            {isRTL
-              ? 'مرحباً بكم في ملفي المهني'
-              : 'WELCOME TO MY PORTFOLIO'}
-          </span>
+          <div className="mt-[22px] text-[18px] font-medium tracking-[0.34em] text-[#CBD5E1]">
+            {isRTL ? 'محاسب' : 'ACCOUNTANT'}
+          </div>
 
-          <span className="h-px w-6 bg-[#D8B56A]/60 sm:w-10" />
-        </div>
-
-        <h1
-          className="
-            select-none
-            text-4xl
-            leading-[1.1]
-            font-extrabold
-            tracking-tight
-            sm:text-6xl
-            md:text-7xl
-            lg:text-[5.25rem]
-          "
-        >
-          <span className="text-[#F8FAFC] drop-shadow-[0_2px_12px_rgba(0,0,0,0.60)]">
-            {isRTL ? 'محمد' : 'MUHAMMAD'}
-          </span>{' '}
-
-          <span className="text-[#D8B56A] drop-shadow-[0_2px_16px_rgba(216,181,106,0.22)]">
-            {isRTL ? 'سلمان' : 'SALMAN'}
-          </span>
-        </h1>
-
-        <p
-          className="
-            text-base
-            font-semibold
-            tracking-[0.25em]
-            text-[#CBD5E1]
-            uppercase
-            sm:text-xl
-            sm:tracking-[0.35em]
-            md:text-2xl
-          "
-        >
-          {isRTL
-            ? ARABIC_TRANSLATIONS.hero.role || 'محاسب'
-            : 'ACCOUNTANT'}
-        </p>
-
-        <div className="flex flex-wrap items-center justify-center gap-4 pt-4 sm:gap-5">
-          <button
-            type="button"
-            onClick={onOpenCV}
-            className="
-              group
-              relative
-              inline-flex
-              cursor-pointer
-              touch-manipulation
-              select-none
-              items-center
-              gap-2.5
-              overflow-hidden
-              rounded-xl
-              border
-              border-[#D8B56A]/50
-              bg-[#0D2538]/95
-              px-7
-              py-3.5
-              text-sm
-              font-bold
-              text-[#F8FAFC]
-              shadow-lg
-              shadow-black/40
-              backdrop-blur-md
-              transition-all
-              duration-300
-              ease-out
-              hover:-translate-y-0.5
-              hover:border-[#D8B56A]
-              hover:bg-[#132E43]
-              focus:outline-none
-              focus-visible:ring-2
-              focus-visible:ring-[#D8B56A]
-            "
-          >
-            <span
-              className="
-                pointer-events-none
-                absolute
-                inset-0
-                -translate-x-full
-                bg-gradient-to-r
-                from-transparent
-                via-white/10
-                to-transparent
-                transition-transform
-                duration-700
-                group-hover:translate-x-full
-              "
-            />
-
-            <FileDown className="relative z-10 h-4 w-4 text-[#D8B56A]" />
-
-            <span className="relative z-10">
-              {isRTL
-                ? ARABIC_TRANSLATIONS.hero.downloadCv
-                : 'Download CV'}
-            </span>
-          </button>
-
-          <a
-            href={linkedInUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={
-              isRTL
-                ? 'فتح الملف الشخصي على LinkedIn'
-                : 'Open Muhammad Salman LinkedIn Profile'
-            }
-            className="
-              group
-              relative
-              inline-flex
-              cursor-pointer
-              touch-manipulation
-              select-none
-              items-center
-              gap-2.5
-              overflow-hidden
-              rounded-xl
-              border
-              border-[#D8B56A]/45
-              bg-[#071827]/78
-              px-6
-              py-3.5
-              text-sm
-              font-semibold
-              text-[#CBD5E1]
-              shadow-md
-              shadow-black/30
-              backdrop-blur-md
-              transition-all
-              duration-300
-              ease-out
-              hover:-translate-y-0.5
-              hover:border-[#D8B56A]
-              hover:bg-[#0D2538]/90
-              hover:text-[#F8FAFC]
-              focus:outline-none
-              focus-visible:ring-2
-              focus-visible:ring-[#D8B56A]
-            "
-          >
-            <span
-              className="
-                pointer-events-none
-                absolute
-                inset-0
-                -translate-x-full
-                bg-gradient-to-r
-                from-transparent
-                via-[#D8B56A]/10
-                to-transparent
-                transition-transform
-                duration-700
-                group-hover:translate-x-full
-              "
-            />
-
-            <svg
-              className="relative z-10 h-4 w-4 fill-current text-[#D8B56A]"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
+          <div className={`mt-8 flex gap-3 ${isRTL ? 'justify-end' : 'justify-start'}`}>
+            <button
+              type="button"
+              onClick={onOpenCV}
+              className="inline-flex items-center gap-2 rounded-[10px] border border-[#D8B56A] bg-[#D8B56A] px-[18px] py-3 text-[13px] font-extrabold text-[#071827] transition hover:-translate-y-0.5 hover:shadow-[0_10px_30px_rgba(216,181,106,.18)]"
             >
-              <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.64 1.64 0 1 0 0-3.28 1.64 1.64 0 0 0 0 3.28m1.39 9.74v-8.37H5.07v8.37z" />
-            </svg>
+              <FileDown size={16} />
+              {isRTL ? 'تحميل السيرة الذاتية' : 'Download CV'}
+            </button>
 
-            <span className="relative z-10">
-              {isRTL
-                ? 'الملف الشخصي على LinkedIn'
-                : 'LinkedIn Profile'}
-            </span>
+            <a
+              href={linkedInUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-[10px] border border-[rgba(216,181,106,.45)] bg-[rgba(7,24,39,.35)] px-[18px] py-3 text-[13px] font-medium text-[#F8FAFC] transition hover:border-[#D8B56A] hover:bg-[rgba(216,181,106,.06)]"
+            >
+              <ExternalLink size={15} />
+              LinkedIn Profile
+            </a>
+          </div>
+        </div>
 
-            <ExternalLink className="relative z-10 h-3.5 w-3.5 opacity-60" />
-          </a>
+        {/* RIGHT MAP / PROFESSIONAL FOOTPRINT */}
+        <div className="map-wrap absolute right-[1vw] top-[4%] z-10 h-[88%] w-[62vw]" aria-hidden="true">
+          <svg className="h-full w-full overflow-visible" viewBox="0 0 1000 560">
+            <path className="map-grid" d="M90 180H930M70 280H950M90 380H930M250 80V485M500 60V500M750 80V485" />
+
+            {/* Visible inline world map: no external image dependency */}
+            <path className="world" d="M88 169 L115 137 151 126 183 105 226 104 257 119 286 112 312 132 302 151 278 160 266 181 239 190 220 216 196 221 177 246 153 238 145 215 119 203 99 188Z" />
+            <path className="world" d="M231 246 L257 257 276 282 281 316 300 341 292 375 275 397 269 429 249 462 232 439 226 405 211 377 205 341 214 308 202 278Z" />
+            <path className="world" d="M444 139 L472 116 511 113 536 126 563 118 594 130 619 124 649 140 685 139 716 153 752 148 785 161 817 160 849 181 838 199 803 205 782 224 748 223 724 239 691 233 665 249 638 245 616 263 590 254 564 263 542 249 516 250 494 232 469 228 453 208 430 199 423 176Z" />
+            <path className="world" d="M516 259 L550 258 578 275 589 301 580 330 563 353 555 386 535 416 513 444 493 425 488 392 472 365 466 330 474 300 492 278Z" />
+            <path className="world" d="M744 287 L772 275 797 284 808 306 795 327 769 335 747 321 735 303Z" />
+            <path className="world" d="M818 375 L847 362 879 370 895 392 884 414 852 423 824 410 809 391Z" />
+
+            <path className="geo-detail" d="M128 154 C166 165 205 163 253 142 M159 202 C193 188 229 178 272 174 M459 163 C511 151 562 151 615 159 M532 201 C582 184 635 181 688 191 M659 215 C708 198 759 194 809 199 M493 294 C524 304 551 322 572 347 M225 291 C245 315 260 346 271 378 M829 390 C849 382 870 385 885 398" />
+
+            {/* Saudi Arabia ↔ Pakistan ↔ Canada */}
+            <path className="route route-gold" d="M605 278 C646 245 681 246 720 264" />
+            <path className="route route-gold" d="M605 278 C500 176 352 120 218 151" />
+            <path className="route route-blue" d="M720 264 C605 151 401 104 218 151" />
+
+            <circle className="map-node" cx="605" cy="278" r="5" />
+            <circle className="map-pulse" cx="605" cy="278" r="9" />
+            <circle className="map-node" cx="720" cy="264" r="5" />
+            <circle className="map-pulse" cx="720" cy="264" r="9" />
+            <circle className="map-node map-node-blue" cx="218" cy="151" r="5" />
+            <circle className="map-pulse map-pulse-blue" cx="218" cy="151" r="9" />
+          </svg>
+
+          <div className="country country-sa">
+            <b>SAUDI ARABIA</b>
+            <small>PROFESSIONAL EXPERIENCE</small>
+          </div>
+          <div className="country country-pk">
+            <b>PAKISTAN</b>
+            <small>PROFESSIONAL EXPERIENCE</small>
+          </div>
+          <div className="country country-ca">
+            <b>CANADA</b>
+            <small>REMOTE EXPERIENCE</small>
+          </div>
+
+          {points.map((point) => (
+            <div
+              key={point.label}
+              className={`skill-point ${point.cls}`}
+              style={{
+                animationDuration: point.duration,
+                animationDelay: point.delay,
+              }}
+            >
+              {point.label}
+            </div>
+          ))}
+        </div>
+
+        {/* LOCKED MOVING ROUND ELEMENT — retained until exact reference animation is supplied */}
+        <div className="network-orb absolute right-[5%] top-[7%] z-20 hidden h-[105px] w-[105px] lg:block" aria-hidden="true">
+          <span className="orb-line orb-line-a" />
+          <span className="orb-line orb-line-b" />
         </div>
       </div>
 
-      {/* ======================================================
-          HERO-ONLY CSS
-          index.css remains untouched.
-      ======================================================= */}
       <style>{`
-        .hero-locked-skyline {
-          /*
-           * Full-height skyline with a soft centre-facing feather.
-           * The outer left edge stays solid so the image can fill
-           * the Hero; the right edge dissolves into navy.
-           */
-          -webkit-mask-image:
-            linear-gradient(
-              to right,
-              #000 0%,
-              #000 55%,
-              rgba(0,0,0,.98) 63%,
-              rgba(0,0,0,.90) 70%,
-              rgba(0,0,0,.68) 78%,
-              rgba(0,0,0,.38) 87%,
-              rgba(0,0,0,.12) 95%,
-              transparent 100%
-            );
-          mask-image:
-            linear-gradient(
-              to right,
-              #000 0%,
-              #000 55%,
-              rgba(0,0,0,.98) 63%,
-              rgba(0,0,0,.90) 70%,
-              rgba(0,0,0,.68) 78%,
-              rgba(0,0,0,.38) 87%,
-              rgba(0,0,0,.12) 95%,
-              transparent 100%
-            );
+        .hero-final {
+          background: #071827;
+          isolation: isolate;
         }
 
-        .hero-locked-skyline-image {
-          /* Light/soft skyline so foreground motion, pills and graph read clearly. */
-          filter: brightness(.72) saturate(.68) contrast(.90);
-          opacity: .58;
+        .hero-bg {
+          background:
+            radial-gradient(circle at 72% 44%, rgba(111,184,223,.09), transparent 28%),
+            radial-gradient(circle at 67% 55%, rgba(216,181,106,.065), transparent 34%),
+            linear-gradient(135deg,#071827 0%,#081A2B 52%,#0D2538 100%);
         }
 
-        .hero-flow-line {
+        .hero-final::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          z-index: 1;
+          pointer-events: none;
+          opacity: .18;
+          background-image: radial-gradient(rgba(216,181,106,.13) .65px, transparent .65px);
+          background-size: 29px 29px;
+          -webkit-mask-image: linear-gradient(90deg, transparent 28%, #000 60%, #000 100%);
+          mask-image: linear-gradient(90deg, transparent 28%, #000 60%, #000 100%);
+        }
+
+        .world {
+          fill: rgba(111,184,223,.035);
+          stroke: rgba(139,198,230,.52);
+          stroke-width: 1.35;
+          vector-effect: non-scaling-stroke;
+          filter: drop-shadow(0 0 7px rgba(111,184,223,.08));
+        }
+
+        .map-grid {
+          fill: none;
+          stroke: rgba(111,184,223,.045);
+          stroke-width: 1;
+        }
+
+        .geo-detail {
+          fill: none;
+          stroke: rgba(139,198,230,.16);
+          stroke-width: .8;
+          stroke-dasharray: 2 5;
+        }
+
+        .route {
+          fill: none;
+          stroke-linecap: round;
+          stroke-width: 1.6;
+          stroke-dasharray: 5 11;
+          animation: routeFlow 13s linear infinite;
+        }
+
+        .route-gold { stroke: #D8B56A; }
+        .route-blue {
+          stroke: #6FB8DF;
+          animation-duration: 16s;
+        }
+
+        @keyframes routeFlow {
+          to { stroke-dashoffset: -320; }
+        }
+
+        .map-node {
+          fill: #D8B56A;
+          filter: drop-shadow(0 0 7px rgba(216,181,106,.9));
+        }
+
+        .map-node-blue { fill: #6FB8DF; }
+
+        .map-pulse {
+          fill: none;
+          stroke: #D8B56A;
+          stroke-width: 1.2;
           transform-box: fill-box;
           transform-origin: center;
-          will-change: transform;
-        }
-        .hero-flow-line-a {
-          animation: heroFlowLineA 24s ease-in-out infinite alternate;
-        }
-        .hero-flow-line-b {
-          animation: heroFlowLineB 28s ease-in-out infinite alternate;
-        }
-        @keyframes heroFlowLineA {
-          0% { transform: translate3d(0,-18px,0); }
-          50% { transform: translate3d(10px,14px,0); }
-          100% { transform: translate3d(-7px,-5px,0); }
-        }
-        @keyframes heroFlowLineB {
-          0% { transform: translate3d(-8px,16px,0); }
-          50% { transform: translate3d(8px,-16px,0); }
-          100% { transform: translate3d(0,8px,0); }
+          animation: mapPulse 3.4s ease-out infinite;
         }
 
-        .hero-network-globe-motion {
-          animation: heroGlobeTravel 11s ease-in-out infinite alternate;
-          will-change: transform;
-        }
-        @keyframes heroGlobeTravel {
-          0% { transform: translate3d(-28px,24px,0) scale(.92) rotate(-4deg); }
-          50% { transform: translate3d(18px,-34px,0) scale(1.08) rotate(5deg); }
-          100% { transform: translate3d(32px,14px,0) scale(.97) rotate(-2deg); }
+        .map-pulse-blue {
+          stroke: #6FB8DF;
+          animation-delay: -1.3s;
         }
 
-        .hero-floating-point {
-          padding: 9px 16px;
-          border-radius: 9999px;
-          border: 1px solid rgba(148, 163, 184, 0.28);
-          background: rgba(7, 24, 39, 0.76);
-          backdrop-filter: blur(10px);
-          -webkit-backdrop-filter: blur(10px);
-          box-shadow: 0 8px 28px rgba(0, 0, 0, 0.24);
-          font-size: 13px;
-          line-height: 1;
-          font-weight: 800;
-          letter-spacing: .02em;
+        @keyframes mapPulse {
+          0% { transform: scale(.55); opacity: .9; }
+          100% { transform: scale(3.2); opacity: 0; }
+        }
+
+        .country {
+          position: absolute;
+          z-index: 25;
+          padding: 8px 11px;
+          border-radius: 10px;
+          background: rgba(7,24,39,.87);
+          border: 1px solid rgba(216,181,106,.34);
+          backdrop-filter: blur(9px);
+          box-shadow: 0 10px 28px rgba(0,0,0,.22);
+          animation: countryFloat 11s ease-in-out infinite;
+        }
+
+        .country b {
+          display: block;
+          color: #F8FAFC;
+          font-size: 10px;
+          line-height: 1.1;
+        }
+
+        .country small {
+          display: block;
+          margin-top: 5px;
+          color: #D8B56A;
+          font-size: 7px;
+          letter-spacing: .08em;
           white-space: nowrap;
-          opacity: .94;
+        }
+
+        .country-sa { left: 59%; top: 47%; }
+        .country-pk { left: 69%; top: 39%; animation-delay: -4s; }
+        .country-ca {
+          left: 20%;
+          top: 19%;
+          border-color: rgba(111,184,223,.36);
+          animation-delay: -7s;
+        }
+
+        .country-ca small { color: #8BC6E6; }
+
+        @keyframes countryFloat {
+          0%,100% { transform: translateY(6px); }
+          50% { transform: translateY(-13px); }
+        }
+
+        .skill-point {
+          position: absolute;
+          z-index: 22;
+          padding: 7px 10px;
+          border-radius: 999px;
+          border: 1px solid rgba(111,184,223,.24);
+          background: rgba(7,24,39,.78);
+          backdrop-filter: blur(8px);
+          box-shadow: 0 8px 24px rgba(0,0,0,.18);
+          color: #DCE7EE;
+          font-size: 10px;
+          font-weight: 760;
+          line-height: 1;
+          white-space: nowrap;
+          animation-name: pointFloatFade;
           animation-timing-function: ease-in-out;
           animation-iteration-count: infinite;
-          will-change: transform, opacity, filter;
-        }
-
-        .hero-floating-point-gold {
-          color: #F0D078;
-          border-color: rgba(216, 181, 106, 0.44);
-          box-shadow: 0 8px 28px rgba(0,0,0,.24), 0 0 15px rgba(216,181,106,.11);
-        }
-
-        .hero-floating-point-blue {
-          color: #C7E5F5;
-          border-color: rgba(103, 183, 232, 0.40);
-          box-shadow: 0 8px 28px rgba(0,0,0,.24), 0 0 15px rgba(103,183,232,.10);
-        }
-
-        .hero-floating-point-featured {
-          padding: 10px 18px;
-          color: #F7DB8E;
-          border-color: rgba(216,181,106,.62);
-          background: rgba(9,31,49,.84);
-          font-size: 14px;
-          opacity: 1;
-        }
-
-        .hero-motion-vertical { animation-name: heroPointVertical; }
-        .hero-motion-zoom { animation-name: heroPointZoom; }
-        .hero-motion-drift { animation-name: heroPointDrift; }
-        .hero-motion-pulse { animation-name: heroPointPulse; }
-
-        @keyframes heroPointVertical {
-          0%,100% { transform: translate3d(0, 34px, 0); opacity:.86; }
-          50% { transform: translate3d(0, -42px, 0); opacity:1; }
-        }
-        @keyframes heroPointZoom {
-          0%,100% { transform: translate3d(0, 30px, 0) scale(.96); opacity:.86; }
-          50% { transform: translate3d(0, -40px, 0) scale(1.10); opacity:1; }
-        }
-        @keyframes heroPointDrift {
-          0%,100% { transform: translate3d(-8px, 32px, 0); opacity:.87; }
-          50% { transform: translate3d(10px, -40px, 0); opacity:1; }
-        }
-        @keyframes heroPointPulse {
-          0%,100% { transform: translate3d(0, 30px, 0) scale(.98); filter:brightness(1); opacity:.88; }
-          42% { transform: translate3d(0, -18px, 0) scale(1.02); filter:brightness(1.12); opacity:.96; }
-          58% { transform: translate3d(0, -42px, 0) scale(1.08); filter:brightness(1.48) drop-shadow(0 0 8px rgba(216,181,106,.42)); opacity:1; }
-          72% { transform: translate3d(0, -20px, 0) scale(1.03); filter:brightness(1.16); opacity:.97; }
-        }
-
-        .hero-globe-halo {
-          position:absolute; inset:18%;
-          border-radius:9999px;
-          background:radial-gradient(circle, rgba(103,183,232,.14), transparent 68%);
-          filter:blur(15px);
-          animation:heroGlobeHalo 5.5s ease-in-out infinite;
-        }
-        .hero-globe-spin { transform-origin:100px 100px; animation:heroGlobeSpin 24s linear infinite; }
-        .hero-globe-orbit { transform-origin:100px 100px; animation:heroGlobeOrbit 9s ease-in-out infinite alternate; }
-        .hero-globe-node { animation:heroGlobeNode 3.4s ease-in-out infinite; }
-        .hero-globe-shape { transform-origin:100px 100px; animation:heroGlobeMorph 7s ease-in-out infinite; }
-        .hero-globe-orbit-dot { transform-origin:100px 100px; animation:heroGlobeSpin 7s linear infinite; filter:drop-shadow(0 0 6px #D8B56A); }
-
-        @keyframes heroGlobeSpin { to { transform:rotate(360deg); } }
-        @keyframes heroGlobeOrbit {
-          from { transform:rotate(-12deg) scaleX(.92); opacity:.42; }
-          to { transform:rotate(24deg) scaleX(1.08); opacity:.85; }
-        }
-        @keyframes heroGlobeNode {
-          0%,100% { opacity:.42; transform:scale(.72); }
-          50% { opacity:1; transform:scale(1.35); }
-        }
-        @keyframes heroGlobeMorph {
-          0%,100% { transform:scale(.90) rotate(-5deg); }
-          50% { transform:scale(1.08) rotate(7deg); }
-        }
-        @keyframes heroGlobeHalo {
-          0%,100% { transform:scale(.88); opacity:.42; }
-          50% { transform:scale(1.18); opacity:.85; }
-        }
-
-        .hero-water-motion {
-          -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.25) 18%, #000 48%, #000 100%);
-          mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.25) 18%, #000 48%, #000 100%);
-          mix-blend-mode: screen;
-          opacity: .50;
-        }
-
-        .hero-water-shimmer {
-          position: absolute;
-          left: -20%;
-          width: 140%;
-          height: 42%;
-          background: repeating-linear-gradient(
-            90deg,
-            transparent 0 34px,
-            rgba(216, 181, 106, .12) 38px 41px,
-            transparent 45px 82px,
-            rgba(248, 250, 252, .055) 86px 88px,
-            transparent 92px 132px
-          );
-          filter: blur(2.5px);
-          transform: skewX(-12deg);
           will-change: transform, opacity;
         }
 
-        .hero-water-shimmer-a {
-          bottom: 8%;
-          animation: heroWaterShimmerA 12s ease-in-out infinite alternate;
+        .skill-point.gold {
+          border-color: rgba(216,181,106,.35);
+          color: #F4E3B7;
         }
 
-        .hero-water-shimmer-b {
-          bottom: 40%;
-          opacity: .52;
-          transform: skewX(10deg) scaleX(.92);
-          animation: heroWaterShimmerB 16s ease-in-out infinite alternate;
+        .skill-point.keep {
+          animation-name: pointFloatOnly;
         }
 
-        @keyframes heroWaterShimmerA {
-          from { transform: translate3d(-3%, 0, 0) skewX(-12deg) scaleX(.98); opacity: .34; }
-          to { transform: translate3d(5%, -2px, 0) skewX(-8deg) scaleX(1.03); opacity: .68; }
+        @keyframes pointFloatFade {
+          0%   { transform: translate(0,9px) scale(.98); opacity:.92; }
+          18%  { transform: translate(3px,-10px) scale(1.02); opacity:1; }
+          38%  { transform: translate(-2px,-18px) scale(1); opacity:.9; }
+          51%  { transform: translate(2px,-9px) scale(.98); opacity:.14; }
+          59%  { transform: translate(0,-5px) scale(.97); opacity:0; }
+          68%  { transform: translate(-2px,1px) scale(.98); opacity:.2; }
+          79%  { transform: translate(2px,10px) scale(1.02); opacity:1; }
+          100% { transform: translate(0,9px) scale(.98); opacity:.92; }
         }
 
-        @keyframes heroWaterShimmerB {
-          from { transform: translate3d(4%, 0, 0) skewX(10deg) scaleX(.92); opacity: .24; }
-          to { transform: translate3d(-5%, 2px, 0) skewX(7deg) scaleX(1.01); opacity: .48; }
+        @keyframes pointFloatOnly {
+          0%,100% { transform: translateY(10px); opacity:.9; }
+          50% { transform: translateY(-17px) scale(1.035); opacity:1; }
         }
 
-        @media (max-width: 767px) {
-          .hero-locked-skyline {
-            width: 100%;
-            opacity: .67;
+        .p1{left:40%;top:3%}
+        .p2{left:23%;top:8%}
+        .p3{left:4%;top:39%}
+        .p4{right:1%;top:37%}
+        .p5{left:34%;top:24%}
+        .p6{left:10%;top:60%}
+        .p7{left:28%;bottom:7%}
+        .p8{right:19%;top:4%}
+        .p9{right:5%;bottom:9%}
+        .p10{left:48%;bottom:2%}
+        .p11{right:29%;bottom:15%}
+        .p12{left:2%;bottom:22%}
+        .p13{left:17%;top:29%}
+        .p14{right:34%;top:14%}
+        .p15{right:1%;top:67%}
+        .p16{left:43%;top:71%}
+        .p17{right:17%;top:61%}
+
+        .network-orb {
+          border: 1px solid rgba(216,181,106,.43);
+          border-radius: 50%;
+          box-shadow: 0 0 35px rgba(216,181,106,.07);
+          animation: orbMove 10s ease-in-out infinite;
+        }
+
+        .orb-line {
+          position: absolute;
+          border-radius: 45% 55% 50% 50%;
+          animation: orbMorph 7s ease-in-out infinite, orbSpin 18s linear infinite;
+        }
+
+        .orb-line-a {
+          inset: 13px;
+          border: 1px dashed rgba(111,184,223,.55);
+        }
+
+        .orb-line-b {
+          inset: 27px 8px;
+          border: 1px dashed rgba(216,181,106,.55);
+          animation-duration: 9s,14s;
+          animation-direction: alternate,reverse;
+        }
+
+        @keyframes orbMorph {
+          0%,100% { border-radius:45% 55% 48% 52%; }
+          50% { border-radius:60% 40% 58% 42%; }
+        }
+
+        @keyframes orbSpin {
+          to { transform:rotate(360deg); }
+        }
+
+        @keyframes orbMove {
+          0%,100% { transform:translate(-8px,12px) scale(.96); }
+          50% { transform:translate(14px,-17px) scale(1.05); }
+        }
+
+        @media (max-width: 1023px) {
+          .hero-final {
+            min-height: 760px;
           }
 
-          .hero-locked-skyline-image {
-            object-position: 20% bottom;
+          .hero-copy {
+            top: 29%;
+            left: 6vw !important;
+            right: auto !important;
+            width: 88%;
+            text-align: left !important;
+          }
+
+          .map-wrap {
+            top: 42%;
+            right: -34vw;
+            width: 115vw;
+            height: 54%;
+          }
+
+          .country {
+            padding: 5px 7px;
+          }
+
+          .country b { font-size: 7px; }
+          .country small { font-size: 5px; }
+
+          .skill-point {
+            padding: 5px 7px;
+            font-size: 7px;
+          }
+
+          .p2,.p6,.p8,.p10,.p11,.p14,.p17 {
+            display:none;
           }
         }
 
-        /* Keep the requested Hero motion active.  Do not disable the floating
-           points, centre lines or globe through OS reduced-motion settings. */
+        @media (max-width: 640px) {
+          .hero-copy h1 {
+            font-size: 52px;
+          }
+
+          .hero-copy > div:nth-of-type(2) {
+            font-size: 13px;
+          }
+
+          .hero-copy .flex {
+            flex-wrap: wrap;
+          }
+        }
       `}</style>
     </section>
   );
