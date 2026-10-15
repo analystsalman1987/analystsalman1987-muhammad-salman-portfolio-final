@@ -1,928 +1,118 @@
-/* =====================================================
-   HERO CONTAINER & 3D DEPTH BACKGROUND
-   ===================================================== */
-.hero-container {
-  background-color: #031525;
-  background-image:
-    radial-gradient(ellipse 90% 75% at 50% 50%, #062238 0%, #031525 60%, #010C16 100%);
-  isolation: isolate;
-}
+            p.ax = p.side === 0 ? w + margin : p.side === 1 ? -margin : p.bx;
+            p.ay = p.side === 2 ? h + margin : p.side === 3 ? -margin : p.by;
+            const dest = safePosition(p.i, p.leg + 5);
+            p.bx = dest[0]; p.by = dest[1];
+            p.wrap = false;
+            p.dur = 10500 + (p.i % 5) * 1600;
+          } else if (p.leg % 3 === 0) {
+            p.ax = p.bx; p.ay = p.by;
+            p.side = (p.i + p.leg / 3) % 4;
+            const margin = 155;
+            p.bx = p.side === 0 ? -margin : p.side === 1 ? w + margin : p.ax;
+            p.by = p.side === 2 ? -margin : p.side === 3 ? h + margin : p.ay;
+            p.wrap = true;
+            p.dur = 10500 + (p.i % 4) * 1800;
+          } else {
+            p.ax = p.bx; p.ay = p.by;
+            const b = safePosition(p.i, p.leg + 2);
+            p.bx = b[0]; p.by = b[1];
+            p.dur = 8500 + (p.i % 5) * 1400;
+          }
+          p.start = now;
+          t = 0;
+        }
+        const v = smooth(Math.max(0, Math.min(1, t)));
+        p.x = p.ax + (p.bx - p.ax) * v;
+        p.y = p.ay + (p.by - p.ay) * v;
+        const fade = (now / 1000 + p.fadeShift) % 17;
+        p.opacity = fade < 10 ? 1 : fade < 11.5 ? 1 - (fade - 10) / 1.5 : fade < 13.5 ? 0 : fade < 15 ? (fade - 13.5) / 1.5 : 1;
+        const edgeFade = Math.min(
+          1, Math.max(0, p.x + 90) / 120,
+          Math.max(0, w + 90 - p.x) / 120,
+          Math.max(0, p.y + 65) / 100,
+          Math.max(0, h + 65 - p.y) / 100,
+        );
+        const el = pointRefs.current[p.i];
+        if (el) {
+          el.style.transform = `translate3d(${p.x}px, ${p.y}px, 0) translate(-50%, -50%) scale(${0.96 + 0.045 * Math.sin(now / 2400 + p.i)})`;
+          el.style.opacity = String(reduceMotion.matches ? 1 : p.opacity * edgeFade);
+        }
+      }
 
-.ambient-orb {
-  border-radius: 50%;
-  pointer-events: none;
-  filter: blur(80px);
-  opacity: 0.55;
-  animation: ambientFloat 14s ease-in-out infinite alternate;
-}
+      edges.forEach((e, j) => {
+        const cycle = 6500 + j * 800;
+        const tick = Math.floor((now - started) / cycle);
+        const a = points[(tick * 3 + j * 5) % 18];
+        const b = points[(tick * 3 + j * 5 + 5 + j) % 18];
+        const mx = (a.x + b.x) / 2;
+        const my = (a.y + b.y) / 2 - 35;
+        e.path.setAttribute('d', `M${a.x},${a.y} Q${mx},${my} ${b.x},${b.y}`);
+        const phase = ((now - started) / cycle) % 1;
+        const vis = Math.min(1, phase * 5, (1 - phase) * 5) * Math.min(a.opacity, b.opacity);
+        e.path.setAttribute('opacity', String(reduceMotion.matches ? 0 : 0.3 * vis));
+        e.light.setAttribute('opacity', String(reduceMotion.matches ? 0 : vis));
+        const u = 1 - phase;
+        e.light.setAttribute('cx', String(u * u * a.x + 2 * u * phase * mx + phase * phase * b.x));
+        e.light.setAttribute('cy', String(u * u * a.y + 2 * u * phase * my + phase * phase * b.y));
+      });
+      if (!reduceMotion.matches) raf = requestAnimationFrame(frame);
+    };
+    raf = requestAnimationFrame(frame);
+    return () => {
+      cancelAnimationFrame(raf);
+      observer.disconnect();
+      edges.forEach(({ path, light }) => { path.remove(); light.remove(); });
+    };
+  }, []);
 
-.ambient-orb-gold {
-  width: 520px;
-  height: 480px;
-  right: 12%;
-  top: 15%;
-  background: radial-gradient(circle, rgba(216, 181, 106, 0.16) 0%, rgba(216, 181, 106, 0.04) 50%, transparent 75%);
-}
+  const handleCenterClick = () => {
+    if (buttonStage === 'portfolio') {
+      setButtonStage('accountant');
+      return;
+    }
+    const about = document.getElementById('about');
+    if (about) {
+      about.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      window.location.hash = 'about';
+    }
+  };
 
-.ambient-orb-blue {
-  width: 560px;
-  height: 520px;
-  left: 10%;
-  bottom: 12%;
-  background: radial-gradient(circle, rgba(56, 189, 248, 0.14) 0%, rgba(56, 189, 248, 0.03) 50%, transparent 75%);
-  animation-delay: -7s;
-}
-
-@keyframes ambientFloat {
-  0% { transform: translate3d(0, 0, 0) scale(0.92); opacity: 0.45; }
-  50% { transform: translate3d(24px, -18px, 0) scale(1.08); opacity: 0.65; }
-  100% { transform: translate3d(-18px, 14px, 0) scale(0.96); opacity: 0.50; }
-}
-
-/* Subtle Technical 3D Spatial Grid & Depth Vignette */
-.ambient-grid {
-  background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  background-size: 54px 54px;
-  mask-image: radial-gradient(circle at 50% 50%, #000 30%, transparent 75%);
-  -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 30%, transparent 75%);
-  opacity: 0.65;
-  pointer-events: none;
-}
-
-.ambient-vignette {
-  background: radial-gradient(circle at 50% 50%, transparent 35%, rgba(1, 12, 22, 0.72) 100%);
-  pointer-events: none;
-}
-
-/* =====================================================
-   CENTER 3D COMMAND BUTTON
-   ===================================================== */
-.center-command-anchor {
-  perspective: 1000px;
-}
-
-.center-btn-halo {
-  position: absolute;
-  inset: -32px;
-  border-radius: 9999px;
-  background: radial-gradient(
-    circle at 50% 50%,
-    rgba(216, 181, 106, 0.18) 0%,
-    rgba(56, 189, 248, 0.14) 40%,
-    transparent 72%
+  return (
+    <section id="home" ref={stageRef} className="salman-hero" aria-label="Portfolio home">
+      <style>{`
+        .salman-hero{position:relative;width:100%;height:calc(100svh - 76px);min-height:540px;overflow:hidden;isolation:isolate;background:radial-gradient(ellipse at 35% 35%,#12344a 0%,#071b2d 52%,#051321 100%);color:#eef6ff}
+        .salman-hero:after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at center,transparent 40%,rgba(0,0,0,.18));z-index:2}
+        .salman-hero-links{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
+        .salman-hero-point{position:absolute;left:0;top:0;z-index:3;white-space:nowrap;will-change:transform,opacity;pointer-events:none}
+        .salman-hero-pill{position:relative;display:block;overflow:hidden;border-radius:99px;padding:10px 15px 10px 13px;font-weight:750;font-size:12px;letter-spacing:.12px;background:rgba(5,20,33,.94);border:1.4px solid var(--c);color:#f7f9fb;box-shadow:0 0 15px var(--glow),inset 0 0 8px rgba(255,255,255,.025)}
+        .salman-hero-pill:before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--c);box-shadow:0 0 8px var(--c);margin-right:8px;vertical-align:1px}
+        .salman-hero-pill:after{content:"";position:absolute;top:-25%;left:-65%;height:150%;width:22%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.42),transparent);transform:skewX(-24deg);animation:salmanShine 14s ease-in-out infinite;animation-delay:var(--delay)}
+        @keyframes salmanShine{0%,22%,100%{left:-65%}34%{left:145%}}
+        .salman-hero-center{position:absolute;z-index:8;left:50%;top:50%;transform:translate(-50%,-50%);width:230px;height:83px;border:1.5px solid #d8b56a;border-radius:24px;background:linear-gradient(145deg,#14364c,#071929);color:#f9df9d;box-shadow:0 12px 34px #0008,0 0 18px #d8b56a20;font-size:23px;letter-spacing:3px;font-weight:850;cursor:pointer;transition:transform .3s}
+        .salman-hero-center:hover{transform:translate(-50%,-50%) scale(1.045)}
+        #about{scroll-margin-top:90px}
+        @media(max-width:650px){.salman-hero-pill{font-size:9px;padding:7px 9px}.salman-hero-center{width:190px;height:68px;font-size:18px}}
+        @media(prefers-reduced-motion:reduce){.salman-hero-pill:after{animation:none}.salman-hero-center{transition:none}}
+      `}</style>
+      <svg ref={svgRef} className="salman-hero-links" aria-hidden="true" />
+      {LABELS.map((label, i) => (
+        <div
+          key={label}
+          ref={(el) => { pointRefs.current[i] = el; }}
+          className="salman-hero-point"
+          style={{
+            ['--c' as string]: i % 2 ? BLUE : GOLD,
+            ['--glow' as string]: i % 2 ? '#45b9ed40' : '#e7b65d40',
+            ['--delay' as string]: `${-((i * 2.3) % 14)}s`,
+          }}
+        >
+          <span className="salman-hero-pill">{label}</span>
+        </div>
+      ))}
+      <button type="button" className="salman-hero-center" onClick={handleCenterClick} aria-label={buttonStage === 'portfolio' ? 'Show Accountant' : 'Go to About section'}>
+        {buttonStage === 'portfolio' ? 'PORTFOLIO' : 'ACCOUNTANT'}
+      </button>
+    </section>
   );
-  filter: blur(20px);
-  pointer-events: none;
-  animation: haloBreath 6s ease-in-out infinite;
-}
-
-@keyframes haloBreath {
-  0%, 100% { transform: scale(0.95); opacity: 0.65; }
-  50% { transform: scale(1.12); opacity: 0.95; }
-}
-
-.center-3d-button {
-  min-width: 280px;
-  height: 78px;
-  padding: 3px;
-  border-radius: 9999px;
-  background: transparent;
-  transform-style: preserve-3d;
-  transition: transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.22s ease;
-  box-shadow:
-    0 16px 36px -8px rgba(0, 0, 0, 0.75),
-    0 24px 60px -15px rgba(2, 12, 22, 0.9),
-    0 0 28px rgba(216, 181, 106, 0.22);
-}
-
-.center-3d-button:hover {
-  transform: translateY(-3px) scale(1.025);
-  box-shadow:
-    0 22px 48px -8px rgba(0, 0, 0, 0.82),
-    0 32px 75px -15px rgba(2, 12, 22, 0.95),
-    0 0 38px rgba(216, 181, 106, 0.40);
-}
-
-.center-3d-button:active {
-  transform: translateY(2px) scale(0.985);
-  box-shadow:
-    0 10px 24px -6px rgba(0, 0, 0, 0.7),
-    0 0 20px rgba(216, 181, 106, 0.25);
-}
-
-.center-3d-button:focus-visible {
-  box-shadow:
-    0 0 0 3px #031525,
-    0 0 0 6px #D8B56A,
-    0 16px 36px -8px rgba(0, 0, 0, 0.75);
-}
-
-/* 3D Double Rim Border */
-.button-border-frame {
-  position: absolute;
-  inset: 0;
-  border-radius: 9999px;
-  padding: 1.75px;
-  background: linear-gradient(
-    135deg,
-    #F5E0A3 0%,
-    #D8B56A 35%,
-    #2C5364 55%,
-    #38BDF8 85%,
-    #E2C785 100%
-  );
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-}
-
-/* Tactile Dark Glass Core */
-.button-tactile-core {
-  width: 100%;
-  height: 100%;
-  border-radius: 9999px;
-  background: linear-gradient(
-    180deg,
-    rgba(11, 38, 62, 0.96) 0%,
-    rgba(5, 23, 38, 0.98) 60%,
-    rgba(2, 14, 24, 0.99) 100%
-  );
-  backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow:
-    inset 0 1.5px 2px rgba(255, 255, 255, 0.25),
-    inset 0 -3px 6px rgba(0, 0, 0, 0.65);
-  position: relative;
-  overflow: hidden;
-}
-
-.label-viewport {
-  height: 32px;
-}
-
-.main-label {
-  font-size: 21px;
-  line-height: 1;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
-}
-
-.text-portfolio {
-  background: linear-gradient(180deg, #FFFFFF 0%, #F5E8C7 50%, #D8B56A 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  letter-spacing: 0.24em;
-}
-
-.text-accountant {
-  background: linear-gradient(180deg, #FFFFFF 0%, #D6F1FD 45%, #60A5FA 80%, #38BDF8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  letter-spacing: 0.20em;
-}
-
-/* Smooth Flip / Slide Transition between States */
-.button-is-flipping .main-label {
-  transform: scale(0.85) rotateX(85deg);
-  opacity: 0;
-}
-
-/* Specular Sweep passing over button */
-.button-specular-sweep {
-  position: absolute;
-  top: 0;
-  left: -120%;
-  width: 60%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.24) 45%,
-    rgba(255, 255, 255, 0.38) 50%,
-    rgba(255, 255, 255, 0.24) 55%,
-    transparent 100%
-  );
-  transform: skewX(-25deg);
-  pointer-events: none;
-  animation: buttonSweep 7.5s ease-in-out infinite;
-}
-
-@keyframes buttonSweep {
-  0%, 65% { left: -120%; opacity: 0; }
-  72% { opacity: 1; }
-  86% { left: 160%; opacity: 1; }
-  87%, 100% { left: 160%; opacity: 0; }
-}
-
-/* =====================================================
-   NESTED WRAPPER ARCHITECTURE FOR FLOATING POINTS
-   1. .point-anchor: Handles absolute positioning & centering translate(-50%, -50%)
-   2. .point-motion: Dedicated continuous floating motion (12px - 22px travel)
-   3. .point-fade: Independent staggered opacity fade
-   4. .hero-pill: Aesthetic 3D pill, borders, glow, hover scale
-   ===================================================== */
-.point-anchor {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  z-index: 10;
-}
-
-.point-anchor-p3 {
-  /* Flagship point: Financial Reporting */
-  z-index: 20;
-}
-
-.point-motion {
-  display: block;
-  will-change: transform;
-  transform-origin: center center;
-}
-
-.point-fade {
-  display: block;
-  will-change: opacity;
-}
-
-/* =====================================================
-   PILL STYLING, HIERARCHY & SHINE
-   ===================================================== */
-.hero-pill {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  border-radius: 9999px;
-  white-space: nowrap;
-  pointer-events: auto;
-  cursor: default;
-  overflow: hidden;
-  backdrop-filter: blur(12px);
-  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s ease;
-}
-
-.hero-pill:hover {
-  transform: scale(1.08) !important;
-  z-index: 35;
-}
-
-/* Dot inside pill */
-.pill-dot {
-  display: inline-block;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-/* Pill Text */
-.pill-text {
-  line-height: 1;
-}
-
-/* --- TIER 1: SUPPORTING POINTS --- */
-.pill-supporting {
-  padding: 8px 14px;
-  font-size: 11px;
-  font-weight: 650;
-  letter-spacing: 0.02em;
-}
-
-.pill-supporting .pill-dot {
-  width: 5.5px;
-  height: 5.5px;
-}
-
-/* --- TIER 2: PRIMARY POINTS (15-20% MORE PROMINENT) --- */
-.pill-primary {
-  padding: 10.5px 18px;
-  font-size: 12.8px;
-  font-weight: 750;
-  letter-spacing: 0.03em;
-}
-
-.pill-primary .pill-dot {
-  width: 7px;
-  height: 7px;
-}
-
-/* --- FLAGSHIP NODE: FINANCIAL REPORTING --- */
-.pill-flagship {
-  padding: 12px 22px;
-  font-size: 14px;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-  border-width: 1.5px !important;
-}
-
-.pill-flagship .pill-dot {
-  width: 8px;
-  height: 8px;
-}
-
-/* --- COLOR SCHEME: GOLD --- */
-.pill-gold {
-  background: linear-gradient(160deg, rgba(14, 38, 58, 0.94) 0%, rgba(5, 20, 32, 0.96) 100%);
-  border: 1.25px solid rgba(226, 192, 118, 0.70);
-  color: #FFFDF7;
-  box-shadow:
-    0 8px 24px rgba(0, 0, 0, 0.5),
-    0 0 16px rgba(216, 181, 106, 0.24),
-    inset 0 1px 1.5px rgba(255, 255, 255, 0.22);
-}
-
-.pill-gold .pill-dot {
-  background: #ECCB7B;
-  box-shadow: 0 0 9px #ECCB7B;
-}
-
-.pill-gold.pill-primary {
-  border-color: rgba(238, 206, 134, 0.85);
-  box-shadow:
-    0 10px 28px rgba(0, 0, 0, 0.58),
-    0 0 20px rgba(216, 181, 106, 0.32),
-    inset 0 1px 2px rgba(255, 255, 255, 0.28);
-}
-
-.pill-gold.pill-flagship {
-  border-color: rgba(246, 218, 148, 0.95);
-  box-shadow:
-    0 12px 34px rgba(0, 0, 0, 0.65),
-    0 0 28px rgba(216, 181, 106, 0.44),
-    inset 0 1.5px 2px rgba(255, 255, 255, 0.35);
-}
-
-/* --- COLOR SCHEME: BLUE --- */
-.pill-blue {
-  background: linear-gradient(160deg, rgba(8, 36, 58, 0.94) 0%, rgba(3, 19, 34, 0.96) 100%);
-  border: 1.25px solid rgba(125, 211, 252, 0.65);
-  color: #FFFFFF;
-  box-shadow:
-    0 8px 24px rgba(0, 0, 0, 0.5),
-    0 0 16px rgba(56, 189, 248, 0.24),
-    inset 0 1px 1.5px rgba(255, 255, 255, 0.22);
-}
-
-.pill-blue .pill-dot {
-  background: #60A5FA;
-  box-shadow: 0 0 9px #38BDF8;
-}
-
-.pill-blue.pill-primary {
-  border-color: rgba(147, 222, 255, 0.82);
-  box-shadow:
-    0 10px 28px rgba(0, 0, 0, 0.58),
-    0 0 20px rgba(56, 189, 248, 0.32),
-    inset 0 1px 2px rgba(255, 255, 255, 0.28);
-}
-
-/* --- PREMIUM CONTROLLED SHINE SWEEP ON ALL PILLS --- */
-.hero-pill::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -130%;
-  width: 60%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.24) 50%,
-    transparent 100%
-  );
-  transform: skewX(-24deg);
-  pointer-events: none;
-  animation: pillShine 8.4s ease-in-out infinite;
-  animation-delay: var(--shine-delay, 0s);
-}
-
-@keyframes pillShine {
-  0%, 68% { left: -130%; opacity: 0; }
-  73% { opacity: 1; }
-  86% { left: 160%; opacity: 1; }
-  87%, 100% { left: 160%; opacity: 0; }
-}
-
-/* =====================================================
-   VISIBLY NOTICEABLE, SMOOTH CONTINUOUS MOTION KEYFRAMES
-   Displacements of 14px to 22px across multiple vectors:
-   - Vertical Float
-   - Horizontal Drift
-   - Diagonal Up-Right / Down-Left
-   - Diagonal Up-Left / Down-Right
-   - Curved / Elliptical Orbit
-   - 3D Depth Float
-   ===================================================== */
-/* Pattern 1: Vertical Float A */
-@keyframes mvVert1 {
-  0%, 100% { transform: translate3d(0, -14px, 0); }
-  50% { transform: translate3d(0, 16px, 0); }
-}
-
-/* Pattern 2: Vertical Float B */
-@keyframes mvVert2 {
-  0%, 100% { transform: translate3d(0, 15px, 0); }
-  50% { transform: translate3d(0, -15px, 0); }
-}
-
-/* Pattern 3: Horizontal Drift A */
-@keyframes mvHoriz1 {
-  0%, 100% { transform: translate3d(-16px, 0, 0); }
-  50% { transform: translate3d(16px, 0, 0); }
-}
-
-/* Pattern 4: Horizontal Drift B */
-@keyframes mvHoriz2 {
-  0%, 100% { transform: translate3d(15px, 0, 0); }
-  50% { transform: translate3d(-15px, 0, 0); }
-}
-
-/* Pattern 5: Diagonal Up-Right / Down-Left A */
-@keyframes mvDiagUR1 {
-  0%, 100% { transform: translate3d(-13px, 12px, 0); }
-  50% { transform: translate3d(14px, -13px, 0); }
-}
-
-/* Pattern 6: Diagonal Up-Right / Down-Left B */
-@keyframes mvDiagUR2 {
-  0%, 100% { transform: translate3d(13px, -12px, 0); }
-  50% { transform: translate3d(-14px, 13px, 0); }
-}
-
-/* Pattern 7: Diagonal Up-Left / Down-Right A */
-@keyframes mvDiagUL1 {
-  0%, 100% { transform: translate3d(13px, 12px, 0); }
-  50% { transform: translate3d(-14px, -13px, 0); }
-}
-
-/* Pattern 8: Diagonal Up-Left / Down-Right B */
-@keyframes mvDiagUL2 {
-  0%, 100% { transform: translate3d(-13px, -12px, 0); }
-  50% { transform: translate3d(14px, 13px, 0); }
-}
-
-/* Pattern 9: Curved Orbital Drift A */
-@keyframes mvCurved1 {
-  0% { transform: translate3d(0, -15px, 0); }
-  25% { transform: translate3d(14px, -3px, 0); }
-  50% { transform: translate3d(0, 15px, 0); }
-  75% { transform: translate3d(-14px, 3px, 0); }
-  100% { transform: translate3d(0, -15px, 0); }
-}
-
-/* Pattern 10: Curved Orbital Drift B */
-@keyframes mvCurved2 {
-  0% { transform: translate3d(-14px, 0, 0); }
-  25% { transform: translate3d(-3px, 14px, 0); }
-  50% { transform: translate3d(14px, 0, 0); }
-  75% { transform: translate3d(3px, -14px, 0); }
-  100% { transform: translate3d(-14px, 0, 0); }
-}
-
-/* Pattern 11: 3D Depth Movement A */
-@keyframes mvDepth1 {
-  0%, 100% { transform: translate3d(-12px, -10px, 0) scale(0.96); }
-  50% { transform: translate3d(13px, 11px, 0) scale(1.04); }
-}
-
-/* Pattern 12: 3D Depth Movement B */
-@keyframes mvDepth2 {
-  0%, 100% { transform: translate3d(12px, 11px, 0) scale(1.04); }
-  50% { transform: translate3d(-13px, -10px, 0) scale(0.96); }
-}
-
-/* =====================================================
-   INDEPENDENT STAGGERED APPEAR / DISAPPEAR FADE KEYFRAMES
-   Smooth transitions: fully visible (opacity 1) -> gradual fade -> 
-   invisible (opacity 0) -> hidden briefly -> gradual reappearance -> fully visible (1)
-   Rotates continuously so ~9-14 points remain visible at all times.
-   Never hides all points together.
-   ===================================================== */
-@keyframes pointFadeA {
-  0%, 60% { opacity: 1; }
-  72% { opacity: 0; }
-  82% { opacity: 0; }
-  94% { opacity: 1; }
-  100% { opacity: 1; }
-}
-
-@keyframes pointFadeB {
-  0%, 65% { opacity: 1; }
-  76% { opacity: 0; }
-  85% { opacity: 0; }
-  96% { opacity: 1; }
-  100% { opacity: 1; }
-}
-
-@keyframes pointFadeC {
-  0%, 58% { opacity: 1; }
-  70% { opacity: 0; }
-  80% { opacity: 0; }
-  92% { opacity: 1; }
-  100% { opacity: 1; }
-}
-
-@keyframes pointFadeD {
-  /* Primary & Flagship points - extended visible window */
-  0%, 70% { opacity: 1; }
-  80% { opacity: 0; }
-  88% { opacity: 0; }
-  97% { opacity: 1; }
-  100% { opacity: 1; }
-}
-
-/* =====================================================
-   INDIVIDUAL POINT MOTION ASSIGNMENTS (5s - 11s)
-   Every point has a distinct path, duration, and delay.
-   Using explicit properties for rock-solid cross-browser parsing.
-   ===================================================== */
-/* 1. 14+ Years Exp (Vertical Float) */
-.motion-p1 {
-  animation-name: mvVert1;
-  animation-duration: 7.2s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-delay: -1.5s;
-}
-.fade-p1 {
-  animation-name: pointFadeA;
-  animation-duration: 15s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-delay: -1.0s;
-}
-
-/* 2. Advanced Excel (Diagonal Up-Right) */
-.motion-p2 {
-  animation-name: mvDiagUR1;
-  animation-duration: 8.6s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-delay: -3.8s;
-}
-.fade-p2 {
-  animation-name: pointFadeB;
-  animation-duration: 17s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-delay: -9.5s;
-}
-
-/* 3. Financial Reporting (Flagship Primary - Vertical Float B) */
-.motion-p3 {
-  animation-name: mvVert2;
-  animation-duration: 7.6s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-delay: -2.2s;
-}
-.fade-p3 {
-  animation-name: pointFadeD;
-  animation-duration: 18s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-delay: -5.0s;
-}
-
-/* 4. ERP Software (Diagonal Up-Left) */
-.motion-p4 {
-  animation-name: mvDiagUL1;
-  animation-duration: 9.2s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-delay: -4.6s;
-}
-.fade-p4 {
-  animation-name: pointFadeC;
-  animation-duration: 16s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-delay: -12.0s;
-}
-
-/* 5. MS Office (Horizontal Drift A) */
-.motion-p5 {
-  animation-name: mvHoriz1;
-  animation-duration: 6.8s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-delay: -0.9s;
-}
-.fade-p5 {
-  animation-name: pointFadeA;
-  animation-duration: 14s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-delay: -3.5s;
-}
-
-/* 6. QuickBooks (Curved Orbital A) */
-.motion-p6 {
-  animation-name: mvCurved1;
-  animation-duration: 8.0s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-delay: -5.2s;
-}
-.fade-p6 {
-  animation-name: pointFadeB;
-  animation-duration: 16s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-delay: -7.2s;
-}
-
-/* 7. Cash Handling (3D Depth Float A) */
-.motion-p7 {
-  animation-name: mvDepth1;
-  animation-duration: 8.7s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-delay: -2.9s;
-}
-.fade-p7 {
-  animation-name: pointFadeC;
-  animation-duration: 15s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-delay: -13.8s;
-}
-
-/* 8. VAT Reports & Submission (Primary - Diagonal Up-Right B) */
-.motion-p8 {
-  animation-name: mvDiagUR2;
-  animation-duration: 6.6s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-delay: -4.1s;
-}
-.fade-p8 {
-  animation-name: pointFadeD;
-  animation-duration: 17s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-delay: -2.8s;
-}
-
-/* 9. Monthly Closing (Primary - Diagonal Up-Left B) */
-.motion-p9 {
-  animation-name: mvDiagUL2;
-  animation-duration: 9.5s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-delay: -1.7s;
-}
-.fade-p9 {
-  animation-name: pointFadeA;
-  animation-duration: 18s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-delay: -10.5s;
-}
-
-/* 10. Oracle (Horizontal Drift B) */
-.motion-p10 {
-  animation-name: mvHoriz2;
-  animation-duration: 7.4s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-delay: -3.4s;
-}
-.fade-p10 {
-  animation-name: pointFadeB;
-  animation-duration: 14s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-delay: -6.0s;
-}
-
-/* 11. Qoyod (Curved Orbital B) */
-.motion-p11 {
-  animation-name: mvCurved2;
-  animation-duration: 8.2s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-delay: -6.0s;
-}
-.fade-p11 {
-  animation-name: pointFadeC;
-  animation-duration: 16s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-delay: -14.5s;
-}
-
-/* 12. Receivables (Primary - Vertical Float A) */
-.motion-p12 {
-  animation-name: mvVert1;
-  animation-duration: 8.9s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-delay: -2.6s;
-}
-.fade-p12 {
-  animation-name: pointFadeD;
-  animation-duration: 17s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-delay: -8.0s;
-}
-
-/* 13. Costing (3D Depth Float B) */
-.motion-p13 {
-  animation-name: mvDepth2;
-  animation-duration: 7.7s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-delay: -4.8s;
-}
-.fade-p13 {
-  animation-name: pointFadeA;
-  animation-duration: 15s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-delay: -4.5s;
-}
-
-/* 14. Payables (Primary - Horizontal Drift A) */
-.motion-p14 {
-  animation-name: mvHoriz1;
-  animation-duration: 8.5s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-delay: -1.2s;
-}
-.fade-p14 {
-  animation-name: pointFadeB;
-  animation-duration: 18s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-delay: -13.0s;
-}
-
-/* 15. Reconciliations (Primary - Diagonal Up-Left A) */
-.motion-p15 {
-  animation-name: mvDiagUL1;
-  animation-duration: 9.0s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-delay: -4.4s;
-}
-.fade-p15 {
-  animation-name: pointFadeD;
-  animation-duration: 16s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-delay: -1.5s;
-}
-
-/* 16. Petty Cash (Vertical Float B) */
-.motion-p16 {
-  animation-name: mvVert2;
-  animation-duration: 6.4s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-delay: -3.0s;
-}
-.fade-p16 {
-  animation-name: pointFadeC;
-  animation-duration: 15s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-delay: -8.8s;
-}
-
-/* 17. P&L Account (Primary - Diagonal Up-Right A) */
-.motion-p17 {
-  animation-name: mvDiagUR1;
-  animation-duration: 8.3s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-delay: -2.1s;
-}
-.fade-p17 {
-  animation-name: pointFadeA;
-  animation-duration: 17s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-delay: -15.5s;
-}
-
-/* 18. Balance Sheet (Primary - Curved Orbital A) */
-.motion-p18 {
-  animation-name: mvCurved1;
-  animation-duration: 9.4s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-delay: -5.7s;
-}
-.fade-p18 {
-  animation-name: pointFadeD;
-  animation-duration: 18s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  animation-delay: -11.5s;
-}
-
-/* =====================================================
-   RESPONSIVE ADJUSTMENTS
-   ===================================================== */
-@media (max-width: 1024px) {
-  .center-3d-button {
-    min-width: 250px;
-    height: 72px;
-  }
-
-  .main-label {
-    font-size: 19px;
-  }
-
-  .pill-supporting {
-    padding: 6.5px 11px;
-    font-size: 9.5px;
-  }
-
-  .pill-primary {
-    padding: 8.5px 14px;
-    font-size: 11px;
-  }
-
-  .pill-flagship {
-    padding: 9.5px 17px;
-    font-size: 12px;
-  }
-}
-
-@media (max-width: 768px) {
-  .hero-container {
-    min-height: calc(100svh - 4.5rem);
-  }
-
-  .center-3d-button {
-    min-width: 220px;
-    height: 66px;
-  }
-
-  .main-label {
-    font-size: 17px;
-  }
-
-  .pill-supporting {
-    padding: 5px 9px;
-    font-size: 8.5px;
-  }
-
-  .pill-primary {
-    padding: 6.5px 11px;
-    font-size: 9.5px;
-  }
-
-  .pill-flagship {
-    padding: 7.5px 13px;
-    font-size: 10.5px;
-  }
-}
-
-@media (max-width: 480px) {
-  .center-3d-button {
-    min-width: 195px;
-    height: 60px;
-  }
-
-  .main-label {
-    font-size: 15px;
-    letter-spacing: 0.16em !important;
-  }
-
-  .sub-prompt span {
-    font-size: 8px;
-  }
-
-  .hero-pill {
-    gap: 4px;
-  }
-}
-
-/* =====================================================
-   ACCESSIBILITY & REDUCED MOTION PREFERENCES
-   CRITICAL FIX: Do NOT stop the floating points!
-   Keep .point-motion active so the points ALWAYS move continuously.
-   ===================================================== */
-@media (prefers-reduced-motion: reduce) {
-  /* Gentle, smooth floating pace without freezing points */
-  .point-motion {
-    animation-duration: 14s !important;
-  }
-
-  .point-fade {
-    opacity: 0.96 !important;
-    animation: none !important;
-  }
-
-  .ambient-orb,
-  .button-specular-sweep,
-  .hero-pill::after,
-  .center-btn-halo {
-    animation-duration: 20s !important;
-  }
 }
