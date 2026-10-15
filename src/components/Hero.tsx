@@ -51,7 +51,7 @@ export function Hero(_props: HeroProps) {
     const stage = stageRef.current;
     const svg = svgRef.current;
     if (!stage || !svg) return;
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+    // Keep the approved motion active; user explicitly opted into animated Hero.
     let w = stage.clientWidth, h = stage.clientHeight;
     let raf = 0;
     const start = performance.now();
@@ -59,7 +59,7 @@ export function Hero(_props: HeroProps) {
       const [x, y] = destination(i, 0, w, h);
       const [toX, toY] = destination(i, 1, w, h);
       return { x, y, fromX: x, fromY: y, toX, toY,
-        start: start - (i % 4) * 650, duration: 9000 + (i % 6) * 1250,
+        start: start - (i % 4) * 650, duration: 5800 + (i % 6) * 780,
         opacity: 1, leg: 1, mode: 0 };
     });
     const resize = () => {
@@ -82,9 +82,7 @@ export function Hero(_props: HeroProps) {
     });
     const frame = (now: number) => {
       data.forEach((p, i) => {
-        if (reduce.matches) {
-          p.opacity = 1;
-        } else {
+        {
           let progress = (now - p.start) / p.duration;
           if (progress >= 1) {
             p.leg++;
@@ -112,9 +110,9 @@ export function Hero(_props: HeroProps) {
           const t = smooth(clamp(progress, 0, 1));
           p.x = p.fromX + (p.toX - p.fromX) * t;
           p.y = p.fromY + (p.toY - p.fromY) * t;
-          const phase = ((now / 1000 + i * 1.43) % 17);
-          const fade = phase < 10 ? 1 : phase < 11.5 ? 1 - (phase - 10) / 1.5
-            : phase < 13.5 ? 0 : phase < 15 ? (phase - 13.5) / 1.5 : 1;
+          const phase = ((now / 1000 + i * 1.43) % 14);
+          const fade = phase < 7.5 ? 1 : phase < 9 ? 1 - (phase - 7.5) / 1.5
+            : phase < 11 ? 0 : phase < 12.5 ? (phase - 11) / 1.5 : 1;
           // Fade also masks jumps from an off-screen exit to opposite-side re-entry.
           const edgeFade = p.mode === 1 && progress > 0.83 ? clamp((1 - progress) / 0.17, 0, 1)
             : p.mode === 0 && progress < 0.16 ? clamp(progress / 0.16, 0, 1) : 1;
@@ -122,19 +120,19 @@ export function Hero(_props: HeroProps) {
         }
         const el = pointsRef.current[i];
         if (el) {
-          el.style.transform = `translate3d(${p.x}px,${p.y}px,0) translate(-50%,-50%) scale(${reduce.matches ? 1 : 0.97 + 0.04 * Math.sin(now / 2300 + i)})`;
+          el.style.transform = `translate3d(${p.x}px,${p.y}px,0) translate(-50%,-50%) scale(${0.97 + 0.04 * Math.sin(now / 2300 + i)})`;
           el.style.opacity = String(p.opacity);
         }
       });
       lines.forEach(({ path, dot }, j) => {
-        const cycle = 7000 + j * 900;
+        const cycle = 6000 + j * 800;
         const n = Math.floor((now - start) / cycle);
         const a = data[(n * 3 + j * 5) % data.length];
         const b = data[(n * 3 + j * 5 + 6 + j) % data.length];
         const cx = (a.x + b.x) / 2, cy = (a.y + b.y) / 2 - 40;
         path.setAttribute('d', `M ${a.x} ${a.y} Q ${cx} ${cy} ${b.x} ${b.y}`);
         const t = ((now - start) % cycle) / cycle;
-        const visibility = reduce.matches ? 0 : Math.max(0, Math.min(1, t * 5, (1 - t) * 5)) * a.opacity * b.opacity;
+        const visibility = Math.max(0, Math.min(1, t * 5, (1 - t) * 5)) * a.opacity * b.opacity;
         path.setAttribute('opacity', String(visibility * 0.33));
         dot.setAttribute('opacity', String(visibility));
         const u = 1 - t;
