@@ -38,6 +38,98 @@ function destination(i: number, leg: number, w: number, h: number): [number, num
   return [x, y];
 }
 
+
+// Light champagne-gold outline globe. Coastlines follow the approved outline demo.
+const COASTLINES: number[][][] = [
+[[-168,71],[-153,69],[-140,61],[-131,56],[-124,49],[-123,41],[-117,33],[-110,31],[-106,24],[-97,16],[-90,16],[-86,21],[-82,25],[-81,30],[-74,37],[-67,45],[-61,51],[-53,55],[-58,62],[-77,64],[-92,72],[-114,73],[-135,69],[-151,72]],
+[[-82,12],[-74,10],[-67,11],[-61,7],[-51,4],[-48,-1],[-43,-10],[-39,-16],[-43,-23],[-49,-29],[-53,-34],[-58,-39],[-65,-55],[-72,-50],[-74,-39],[-70,-29],[-72,-19],[-78,-5]],
+[[-12,36],[-5,43],[6,45],[15,48],[28,47],[36,42],[46,40],[50,34],[44,29],[35,29],[32,22],[34,12],[42,11],[49,2],[45,-12],[39,-21],[32,-29],[20,-35],[13,-32],[10,-24],[12,-15],[8,-4],[0,5],[-9,14],[-17,22]],
+[[-11,36],[-10,44],[-5,51],[4,55],[13,55],[19,60],[29,70],[42,69],[52,60],[67,57],[74,61],[85,59],[95,54],[105,56],[115,53],[126,49],[134,43],[141,45],[149,59],[161,61],[178,66],[179,54],[161,49],[148,41],[141,34],[133,33],[128,37],[122,33],[120,24],[111,18],[107,10],[102,3],[104,-6],[113,-8],[117,-4],[120,5],[124,12],[129,19],[136,25],[139,34],[126,39],[117,35],[112,23],[106,18],[99,16],[96,8],[92,15],[84,21],[78,10],[73,8],[70,22],[62,25],[55,23],[50,30],[44,37],[36,42],[29,41],[24,36],[16,39],[9,44],[1,43]],
+[[113,-11],[121,-15],[130,-12],[138,-15],[144,-12],[153,-25],[151,-33],[144,-39],[135,-35],[128,-32],[120,-29],[114,-22]],
+[[-53,60],[-45,60],[-40,68],[-41,78],[-48,83],[-59,81],[-61,74]],
+[[47,-13],[50,-17],[49,-24],[45,-26],[43,-18]],
+[[130,31],[134,34],[137,37],[140,41],[145,44],[146,35],[141,32]],
+[[-9,51],[-5,55],[-6,59],[-11,55]],
+[[95,20],[103,18],[108,12],[110,4],[117,-1],[118,-7],[110,-8],[106,-3],[104,6],[99,11]]
+];
+function OutlineGlobe() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const ctx = canvas?.getContext('2d');
+    if (!canvas || !ctx) return;
+    let raf = 0;
+    const deg = Math.PI / 180;
+    const project = (lon: number, lat: number, angle: number, r: number, cx: number, cy: number) => {
+      const a = lon * deg + angle, b = lat * deg;
+      return [cx + r * Math.cos(b) * Math.sin(a), cy - r * Math.sin(b), Math.cos(b) * Math.cos(a)];
+    };
+    const line = (coords: number[][], angle: number, r: number, cx: number, cy: number, color: string, width: number) => {
+      ctx.beginPath(); let active = false;
+      for (const [lon, lat] of coords) {
+        const [x, y, z] = project(lon, lat, angle, r, cx, cy);
+        if (z > 0.02) { if (!active) ctx.moveTo(x, y); else ctx.lineTo(x, y); active = true; }
+        else active = false;
+      }
+      ctx.strokeStyle = color; ctx.lineWidth = width; ctx.stroke();
+    };
+    const draw = (now: number) => {
+      const rect = canvas.getBoundingClientRect();
+      const w = rect.width, h = rect.height;
+      if (!w || !h) { raf = requestAnimationFrame(draw); return; }
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      if (canvas.width !== Math.round(w * dpr) || canvas.height !== Math.round(h * dpr)) {
+        canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr);
+      }
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, w, h);
+      const cx = w / 2, cy = h / 2;
+      const r = Math.min(w * 0.405, h * 0.405);
+      const angle = now * 0.00017 - 0.4;
+      const halo = ctx.createRadialGradient(cx, cy, r * 0.4, cx, cy, r * 1.24);
+      halo.addColorStop(0, 'rgba(236,207,149,0.035)');
+      halo.addColorStop(0.85, 'rgba(241,210,153,0.055)');
+      halo.addColorStop(1, 'rgba(241,210,153,0)');
+      ctx.fillStyle = halo; ctx.beginPath(); ctx.arc(cx, cy, r * 1.24, 0, Math.PI * 2); ctx.fill();
+      const ocean = ctx.createRadialGradient(cx - r * .35, cy - r * .35, r * .06, cx, cy, r);
+      ocean.addColorStop(0, '#15384a'); ocean.addColorStop(.7, '#092437'); ocean.addColorStop(1, '#061625');
+      ctx.fillStyle = ocean; ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.fill();
+      ctx.strokeStyle = 'rgba(244,215,164,.38)'; ctx.lineWidth = 1.15; ctx.stroke();
+      ctx.save(); ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.clip();
+      for (let lat = -75; lat <= 75; lat += 15) {
+        const coords: number[][] = []; for (let lon = -180; lon <= 180; lon += 3) coords.push([lon, lat]);
+        line(coords, angle, r, cx, cy, 'rgba(239,215,171,.12)', .7);
+      }
+      for (let lon = -180; lon <= 180; lon += 20) {
+        const coords: number[][] = []; for (let lat = -89; lat <= 89; lat += 3) coords.push([lon, lat]);
+        line(coords, angle, r, cx, cy, 'rgba(239,215,171,.12)', .7);
+      }
+      ctx.shadowColor = '#f1d7a6'; ctx.shadowBlur = 7;
+      for (const coast of COASTLINES) line([...coast, coast[0]], angle, r, cx, cy, '#f2d8a8', 1.45);
+      ctx.shadowBlur = 0;
+      for (let j = 0; j < 2; j++) {
+        const lon = (now * .023 * (j ? -.8 : 1) + j * 150) % 360 - 180;
+        const lat = 22 * Math.sin(now * .0006 + j * 2);
+        const [x, y, z] = project(lon, lat, angle, r, cx, cy);
+        if (z > 0) {
+          ctx.fillStyle = j ? '#a3dbef' : '#ffe6b8'; ctx.shadowColor = ctx.fillStyle; ctx.shadowBlur = 13;
+          ctx.beginPath(); ctx.arc(x, y, 2.8, 0, Math.PI * 2); ctx.fill(); ctx.shadowBlur = 0;
+        }
+      }
+      ctx.restore();
+      ctx.strokeStyle = 'rgba(241,210,153,.3)'; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.ellipse(cx, cy, r * 1.08, r * .24, -.22, 0, Math.PI * 2); ctx.stroke();
+      const orb = now * .0005;
+      ctx.fillStyle = '#f8dfa9'; ctx.shadowColor = '#f3d69e'; ctx.shadowBlur = 10;
+      ctx.beginPath(); ctx.arc(cx + r * 1.08 * Math.cos(orb), cy + r * .24 * Math.sin(orb) - r * .1 * Math.cos(orb), 2.8, 0, Math.PI * 2); ctx.fill(); ctx.shadowBlur = 0;
+      raf = requestAnimationFrame(draw);
+    };
+    raf = requestAnimationFrame(draw);
+    return () => cancelAnimationFrame(raf);
+  }, []);
+  return <canvas ref={canvasRef} className="hero-outline-globe" aria-hidden="true" />;
+}
+
 export function Hero(_props: HeroProps) {
   const { isRTL } = useLanguage();
   const [buttonState, setButtonState] = useState<'portfolio' | 'accountant'>('portfolio');
@@ -169,6 +261,8 @@ export function Hero(_props: HeroProps) {
       <style>{`
         .hero-free-roam{position:relative;height:calc(100svh - 5rem);min-height:540px;overflow:hidden;isolation:isolate;background:radial-gradient(ellipse at 35% 36%,#13374b 0%,#081e30 55%,#061522 100%);color:#f8fafc}
         .hero-free-roam:after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at center,transparent 40%,rgba(0,0,0,.2));z-index:0}
+        .hero-outline-globe{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(66vw,660px);height:min(72vh,660px);z-index:1;pointer-events:none;opacity:.87}
+        @media(max-width:700px){.hero-outline-globe{width:92vw;height:92vw;opacity:.75}}
         .hero-roam-stage{position:absolute;inset:0;overflow:hidden}
         .hero-roam-lines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
         .hero-roam-point{position:absolute;left:0;top:0;z-index:2;white-space:nowrap;pointer-events:none;will-change:transform,opacity}
@@ -187,6 +281,7 @@ export function Hero(_props: HeroProps) {
         @media(prefers-reduced-motion:reduce){.hero-roam-pill:after{animation:none}}
       `}</style>
       <div className="hero-roam-stage" ref={stageRef}>
+        <OutlineGlobe />
         <svg className="hero-roam-lines" ref={svgRef} aria-hidden="true" />
         {LABELS.map((label, i) => {
           const color = i % 2 === 0 ? GOLD : BLUE;
