@@ -40,7 +40,7 @@ export function ParticleNetwork3D() {
     };
     updateSize();
 
-    // Check prefers-reduced-motion
+    // Check prefers-reduced-motion for smooth accessibility scaling
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     let reducedMotion = mediaQuery.matches;
     const onMotionChange = (e: MediaQueryListEvent) => {
@@ -50,36 +50,41 @@ export function ParticleNetwork3D() {
 
     // Particle parameters based on screen size
     const isMobile = width < 768;
-    const particleCount = isMobile ? 48 : 88;
-    const maxDist3D = isMobile ? 125 : 155;
-    const fov = 480;
-    const depth = 380;
+    const particleCount = isMobile ? 52 : 92;
+    const maxDist3D = isMobile ? 130 : 160;
+    const fov = 460;
+    const depth = 340;
 
     const COLORS = [
-      { core: '#38bdf8', glow: 'rgba(56, 189, 248, 0.35)' }, // Sky cyan
-      { core: '#0ea5e9', glow: 'rgba(14, 165, 233, 0.35)' }, // Vivid cyan
-      { core: '#22d3ee', glow: 'rgba(34, 211, 238, 0.35)' }, // Bright cyan
-      { core: '#67e8f9', glow: 'rgba(103, 232, 249, 0.35)' }, // Electric ice cyan
-      { core: '#60a5fa', glow: 'rgba(96, 165, 250, 0.30)' }, // Soft sapphire blue
-      { core: '#d8b56a', glow: 'rgba(216, 181, 106, 0.25)' }, // Delicate champagne gold accent
+      { core: '#38bdf8', glow: 'rgba(56, 189, 248, 0.40)' }, // Sky cyan
+      { core: '#0ea5e9', glow: 'rgba(14, 165, 233, 0.40)' }, // Vivid cyan
+      { core: '#22d3ee', glow: 'rgba(34, 211, 238, 0.40)' }, // Bright cyan
+      { core: '#67e8f9', glow: 'rgba(103, 232, 249, 0.40)' }, // Electric ice cyan
+      { core: '#60a5fa', glow: 'rgba(96, 165, 250, 0.35)' }, // Soft sapphire blue
+      { core: '#d8b56a', glow: 'rgba(216, 181, 106, 0.30)' }, // Delicate champagne gold accent
     ];
 
     const particles: Particle3D[] = [];
-    const halfW = width * 0.65;
-    const halfH = height * 0.65;
+    const spanX = width * 0.55;
+    const spanY = height * 0.55;
 
     for (let i = 0; i < particleCount; i++) {
-      // 90% cyan/blue, 10% delicate gold accent
+      // 90% cyan/blue spectrum, 10% delicate corporate gold
       const colorScheme = i % 10 === 0 ? COLORS[5] : COLORS[i % 5];
-      const speedMult = isMobile ? 0.22 : 0.35;
+      
+      // Compute non-zero velocity vector in 3D
+      const theta = Math.random() * Math.PI * 2;
+      const phi = (Math.random() - 0.5) * Math.PI;
+      const speed = (isMobile ? 0.45 : 0.75) + Math.random() * (isMobile ? 0.35 : 0.55);
+
       particles.push({
-        x: (Math.random() * 2 - 1) * halfW,
-        y: (Math.random() * 2 - 1) * halfH,
+        x: (Math.random() * 2 - 1) * spanX,
+        y: (Math.random() * 2 - 1) * spanY,
         z: (Math.random() * 2 - 1) * depth,
-        vx: (Math.random() * 2 - 1) * speedMult,
-        vy: (Math.random() * 2 - 1) * speedMult,
-        vz: (Math.random() * 2 - 1) * (speedMult * 0.8),
-        baseRadius: 1.3 + Math.random() * 1.5,
+        vx: Math.cos(theta) * Math.cos(phi) * speed,
+        vy: Math.sin(phi) * speed,
+        vz: Math.sin(theta) * Math.cos(phi) * (speed * 0.8),
+        baseRadius: 1.4 + Math.random() * 1.5,
         color: colorScheme.core,
         glowColor: colorScheme.glow,
         projX: 0,
@@ -89,7 +94,7 @@ export function ParticleNetwork3D() {
       });
     }
 
-    // Interactive mouse tracking
+    // Mouse tracking for subtle responsive 3D tilt & interaction
     let mouseX = width / 2;
     let mouseY = height / 2;
     let mouseActive = false;
@@ -97,7 +102,6 @@ export function ParticleNetwork3D() {
     let targetRotY = 0;
     let currentRotX = 0;
     let currentRotY = 0;
-    let ambientAngleX = 0;
     let ambientAngleY = 0;
 
     const handlePointerMove = (e: MouseEvent | TouchEvent) => {
@@ -117,8 +121,8 @@ export function ParticleNetwork3D() {
       // Subtle mouse-responsive 3D rotation angle
       const normX = (clientX - width / 2) / (width / 2);
       const normY = (clientY - height / 2) / (height / 2);
-      targetRotY = normX * 0.38; // Max ~22deg yaw
-      targetRotX = -normY * 0.26; // Max ~15deg pitch
+      targetRotY = normX * 0.35; // Gentle yaw
+      targetRotX = -normY * 0.24; // Gentle pitch
     };
 
     const handlePointerLeave = () => {
@@ -137,39 +141,33 @@ export function ParticleNetwork3D() {
     };
     window.addEventListener('resize', handleResize);
 
-    // Animation loop with tab visibility optimization
+    // Continuous animation loop using requestAnimationFrame
     let animationFrameId = 0;
     let lastTime = performance.now();
-    let isTabVisible = !document.hidden;
-
-    const handleVisibilityChange = () => {
-      isTabVisible = !document.hidden;
-      if (isTabVisible) {
-        lastTime = performance.now();
-      }
-    };
-    document.addEventListener('visibilitychange', handleVisibilityChange);
 
     const render = (now: number) => {
+      // Loop request at start ensures continuous execution
       animationFrameId = requestAnimationFrame(render);
-      if (!isTabVisible) return;
 
-      const dt = Math.min((now - lastTime) / 1000, 0.1);
+      // Delta time calculation clamped between 1ms and 100ms
+      const deltaMs = Math.max(1, Math.min(now - lastTime, 100));
+      const dt = deltaMs / 1000;
       lastTime = now;
+
+      // Speed factor normalized to 60fps
+      const speedFactor = reducedMotion ? 0.35 : 1.0;
+      const step = (dt * 60) * speedFactor;
 
       // Clear previous frame
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, width, height);
 
       // Continuous ambient rotation & smooth mouse damping
-      if (!reducedMotion) {
-        ambientAngleY += dt * 0.045; // Gentle continuous orbit
-        ambientAngleX += dt * 0.02;
-        currentRotX += (targetRotX - currentRotX) * 0.06;
-        currentRotY += (targetRotY - currentRotY) * 0.06;
-      }
+      ambientAngleY += dt * 0.09; // Smooth continuous 3D orbit (~5 deg/s)
+      currentRotX += (targetRotX - currentRotX) * 0.05;
+      currentRotY += (targetRotY - currentRotY) * 0.05;
 
-      const totalRotX = currentRotX + ambientAngleX;
+      const totalRotX = currentRotX + Math.sin(ambientAngleY * 0.6) * 0.14;
       const totalRotY = currentRotY + ambientAngleY;
 
       const cosY = Math.cos(totalRotY);
@@ -179,39 +177,37 @@ export function ParticleNetwork3D() {
 
       const centerX = width / 2;
       const centerY = height / 2;
-      const curHalfW = width * 0.65;
-      const curHalfH = height * 0.65;
+      const curHalfW = (width / 2) + 100;
+      const curHalfH = (height / 2) + 100;
 
-      // Update positions & project into 3D camera view
+      // 1. Update 3D positions & project to 2D screen space
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
 
-        if (!reducedMotion) {
-          p.x += p.vx;
-          p.y += p.vy;
-          p.z += p.vz;
+        p.x += p.vx * step;
+        p.y += p.vy * step;
+        p.z += p.vz * step;
 
-          // Boundary wrapping in 3D
-          if (p.x < -curHalfW) p.x = curHalfW;
-          else if (p.x > curHalfW) p.x = -curHalfW;
-          if (p.y < -curHalfH) p.y = curHalfH;
-          else if (p.y > curHalfH) p.y = -curHalfH;
-          if (p.z < -depth) p.z = depth;
-          else if (p.z > depth) p.z = -depth;
-        }
+        // Smooth 3D boundary wrapping
+        if (p.x < -curHalfW) p.x = curHalfW;
+        else if (p.x > curHalfW) p.x = -curHalfW;
+        if (p.y < -curHalfH) p.y = curHalfH;
+        else if (p.y > curHalfH) p.y = -curHalfH;
+        if (p.z < -depth) p.z = depth;
+        else if (p.z > depth) p.z = -depth;
 
-        // 3D Rotation
-        // 1. Yaw around Y axis
+        // 3D Rotation transform:
+        // Yaw around Y axis
         const x1 = p.x * cosY + p.z * sinY;
         const z1 = -p.x * sinY + p.z * cosY;
 
-        // 2. Pitch around X axis
+        // Pitch around X axis
         const y2 = p.y * cosX - z1 * sinX;
         const z2 = p.y * sinX + z1 * cosX;
 
-        // Perspective projection
+        // Perspective depth projection
         const depthDist = fov + z2;
-        if (depthDist <= 10) {
+        if (depthDist <= 20) {
           p.scale = 0;
           p.alpha = 0;
           continue;
@@ -222,13 +218,13 @@ export function ParticleNetwork3D() {
         p.projX = centerX + x1 * scale;
         p.projY = centerY + y2 * scale;
 
-        // Alpha based on depth perspective
-        const rawAlpha = (scale - 0.45) * 1.35;
-        p.alpha = Math.max(0.12, Math.min(0.85, rawAlpha));
+        // Depth perspective alpha: closer particles are brighter, distant ones softer
+        const depthFactor = (scale - 0.45) * 1.4;
+        p.alpha = Math.max(0.15, Math.min(0.85, depthFactor));
       }
 
-      // Draw connecting lines between close particles in 3D
-      ctx.lineWidth = 0.75;
+      // 2. Draw dynamic connecting lines between nearby moving 3D particles
+      ctx.lineWidth = 0.8;
       for (let i = 0; i < particles.length; i++) {
         const a = particles[i];
         if (a.alpha <= 0.05) continue;
@@ -244,8 +240,8 @@ export function ParticleNetwork3D() {
 
           if (distSq < maxDist3D * maxDist3D) {
             const dist = Math.sqrt(distSq);
-            const lineFactor = (1 - dist / maxDist3D);
-            const lineAlpha = lineFactor * 0.24 * Math.min(a.alpha, b.alpha);
+            const lineFactor = 1 - dist / maxDist3D;
+            const lineAlpha = lineFactor * 0.28 * Math.min(a.alpha, b.alpha);
 
             if (lineAlpha > 0.015) {
               ctx.beginPath();
@@ -257,13 +253,13 @@ export function ParticleNetwork3D() {
           }
         }
 
-        // Mouse interactive proximity connection
+        // Mouse proximity connection line
         if (mouseActive) {
           const mdx = a.projX - mouseX;
           const mdy = a.projY - mouseY;
           const mDist = Math.hypot(mdx, mdy);
-          if (mDist < 135) {
-            const mAlpha = (1 - mDist / 135) * 0.32 * a.alpha;
+          if (mDist < 140) {
+            const mAlpha = (1 - mDist / 140) * 0.35 * a.alpha;
             if (mAlpha > 0.02) {
               ctx.beginPath();
               ctx.moveTo(a.projX, a.projY);
@@ -275,19 +271,19 @@ export function ParticleNetwork3D() {
         }
       }
 
-      // Draw glowing 3D dots
+      // 3. Draw glowing 3D dots with depth perspective
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
         if (p.alpha <= 0.05) continue;
 
-        const radius = Math.max(0.8, p.baseRadius * p.scale);
+        const radius = Math.max(0.9, p.baseRadius * p.scale);
 
-        // Soft outer glow halo for particles in foreground/midground
-        if (p.scale > 0.8) {
+        // Soft outer glow halo for particles in midground/foreground
+        if (p.scale > 0.75) {
           ctx.beginPath();
-          ctx.arc(p.projX, p.projY, radius * 2.8, 0, Math.PI * 2);
+          ctx.arc(p.projX, p.projY, radius * 2.6, 0, Math.PI * 2);
           ctx.fillStyle = p.glowColor;
-          ctx.globalAlpha = p.alpha * 0.45;
+          ctx.globalAlpha = p.alpha * 0.5;
           ctx.fill();
         }
 
@@ -302,6 +298,7 @@ export function ParticleNetwork3D() {
       ctx.globalAlpha = 1.0;
     };
 
+    // Start animation loop immediately
     animationFrameId = requestAnimationFrame(render);
 
     return () => {
@@ -311,7 +308,6 @@ export function ParticleNetwork3D() {
       window.removeEventListener('touchmove', handlePointerMove);
       window.removeEventListener('mouseleave', handlePointerLeave);
       window.removeEventListener('resize', handleResize);
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
       mediaQuery.removeEventListener('change', onMotionChange);
     };
   }, []);
