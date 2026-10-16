@@ -81,6 +81,17 @@ const getCompanyLogoInfo = (job: WorkExperienceItem) => {
   const comp = (job.company || '').toLowerCase();
   const id = (job.id || '').toLowerCase();
 
+  // Prefer the company's original logo already saved in experience data.
+  // Keep the existing asset mappings below as fallbacks; never generate a substitute logo.
+  const storedJob = job as WorkExperienceItem & {
+    logo?: string;
+    logoUrl?: string;
+    companyLogo?: string;
+  };
+  const savedLogo = [storedJob.logo, storedJob.logoUrl, storedJob.companyLogo]
+    .find((value): value is string => typeof value === 'string' && value.trim().length > 0);
+  if (savedLogo) return { logo: savedLogo, alt: job.company };
+
   if (id === 'job-1' || comp.includes('alyami')) {
     return { logo: alyamiLogo, alt: 'Ahmed Yahya Alyami Contracting Co.' };
   }
@@ -406,7 +417,8 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
                       src={logoInfo.logo}
                       alt={logoInfo.alt}
                       referrerPolicy="no-referrer"
-                      className="w-full h-full object-contain filter contrast-105 drop-shadow-xs transition-transform duration-300 group-hover:scale-[1.02]"
+                      onError={(event) => { event.currentTarget.style.visibility = 'hidden'; }}
+                      className="relative z-10 w-full h-full object-contain drop-shadow-xs transition-transform duration-300 group-hover:scale-[1.02]"
                       style={{ maxHeight: '66px' }}
                     />
                   ) : (
