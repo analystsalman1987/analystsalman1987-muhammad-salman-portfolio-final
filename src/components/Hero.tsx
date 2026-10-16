@@ -8,12 +8,14 @@ interface HeroProps {
   onOpenCV?: () => void;
   onSelectExperience?: () => void;
 }
+
 type Point = {
   x: number; y: number; fromX: number; fromY: number;
   toX: number; toY: number; start: number; duration: number;
-  opacity: number; leg: number; mode: number;
+  opacity: number; leg: number;
   renderX?: number; renderY?: number;
 };
+
 const LABELS = [
   '14+ Years Exp','ERP Software','Oracle','Qoyod','QuickBooks',
   'MS Office','Advanced Excel','Financial Reporting','Receivables',
@@ -21,125 +23,54 @@ const LABELS = [
   'Monthly Closing','Cash Handling','Petty Cash','Payables',
   'P&L Account','Balance Sheet',
 ];
+
 const GOLD = '#D8B56A';
 const BLUE = '#69B7E7';
 const smooth = (t: number) => t * t * (3 - 2 * t);
 const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v));
 
 function destination(i: number, leg: number, w: number, h: number): [number, number] {
-  // Deterministic destinations; some legs cross an edge and re-enter opposite.
-  const padX = Math.min(130, Math.max(62, w * 0.09));
-  const padY = Math.min(100, Math.max(52, h * 0.13));
+  const safeW = Math.max(360, w || 1000);
+  const safeH = Math.max(480, h || 600);
+  const padX = Math.min(130, Math.max(62, safeW * 0.09));
+  const padY = Math.min(100, Math.max(52, safeH * 0.13));
   const k = (i * 29 + leg * 37) % 101;
-  let x = padX + ((k * 31) % 97) / 97 * Math.max(1, w - padX * 2);
-  let y = padY + ((k * 47 + i * 9) % 89) / 89 * Math.max(1, h - padY * 2);
-  if (Math.abs(x - w / 2) < 170 && Math.abs(y - h / 2) < 95) {
-    x = x < w / 2 ? w * 0.23 : w * 0.77;
+  let x = padX + ((k * 31) % 97) / 97 * Math.max(1, safeW - padX * 2);
+  let y = padY + ((k * 47 + i * 9) % 89) / 89 * Math.max(1, safeH - padY * 2);
+  if (Math.abs(x - safeW / 2) < 170 && Math.abs(y - safeH / 2) < 95) {
+    x = x < safeW / 2 ? safeW * 0.23 : safeW * 0.77;
   }
   return [x, y];
 }
 
-function FlowingWaveLines() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    let raf = 0;
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    const render = (timeMs: number) => {
-      const parent = canvas.parentElement;
-      const w = parent ? parent.clientWidth : window.innerWidth;
-      const h = parent ? parent.clientHeight : window.innerHeight;
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-
-      const pxW = Math.round(w * dpr);
-      const pxH = Math.round(h * dpr);
-      if (canvas.width !== pxW || canvas.height !== pxH) {
-        canvas.width = pxW;
-        canvas.height = pxH;
-      }
-
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      ctx.clearRect(0, 0, w, h);
-
-      const t = prefersReducedMotion ? 10 : timeMs * 0.001;
-
-      // Wave 1 - Main flowing cyan/blue wave across middle background
-      ctx.save();
-      ctx.beginPath();
-      const midY1 = h * 0.49;
-      const amp1_a = Math.min(h * 0.065, 34);
-      const amp1_b = Math.min(h * 0.035, 18);
-      const k1_a = (Math.PI * 2) / (w * 0.85);
-      const k1_b = (Math.PI * 2) / (w * 0.42);
-
-      for (let x = 0; x <= w; x += 4) {
-        const y = midY1 +
-          Math.sin(x * k1_a + t * 0.75) * amp1_a +
-          Math.sin(x * k1_b - t * 0.5) * amp1_b;
-        if (x === 0) ctx.moveTo(x, y);
-        else ctx.lineTo(x, y);
-      }
-
-      const grad1 = ctx.createLinearGradient(0, 0, w, 0);
-      grad1.addColorStop(0, 'rgba(56, 189, 248, 0)');
-      grad1.addColorStop(0.12, 'rgba(56, 189, 248, 0.45)');
-      grad1.addColorStop(0.5, 'rgba(100, 220, 255, 0.75)');
-      grad1.addColorStop(0.88, 'rgba(56, 189, 248, 0.45)');
-      grad1.addColorStop(1, 'rgba(56, 189, 248, 0)');
-
-      ctx.strokeStyle = grad1;
-      ctx.lineWidth = 1.6;
-      ctx.shadowColor = 'rgba(56, 189, 248, 0.6)';
-      ctx.shadowBlur = 10;
-      ctx.stroke();
-      ctx.restore();
-
-      // Wave 2 - Secondary flowing wave with different phase, frequency and offset
-      ctx.save();
-      ctx.beginPath();
-      const midY2 = h * 0.52;
-      const amp2_a = Math.min(h * 0.055, 28);
-      const amp2_b = Math.min(h * 0.028, 14);
-      const k2_a = (Math.PI * 2) / (w * 0.72);
-      const k2_b = (Math.PI * 2) / (w * 0.38);
-
-      for (let x = 0; x <= w; x += 4) {
-        // Offset phase by 2.4 rad (~137 deg) so waves interweave gracefully
-        const y = midY2 +
-          Math.sin(x * k2_a + t * 0.6 + 2.4) * amp2_a +
-          Math.sin(x * k2_b - t * 0.7 + 1.2) * amp2_b;
-        if (x === 0) ctx.moveTo(x, y);
-        else ctx.lineTo(x, y);
-      }
-
-      const grad2 = ctx.createLinearGradient(0, 0, w, 0);
-      grad2.addColorStop(0, 'rgba(96, 165, 250, 0)');
-      grad2.addColorStop(0.15, 'rgba(96, 165, 250, 0.4)');
-      grad2.addColorStop(0.5, 'rgba(56, 189, 248, 0.65)');
-      grad2.addColorStop(0.85, 'rgba(96, 165, 250, 0.4)');
-      grad2.addColorStop(1, 'rgba(96, 165, 250, 0)');
-
-      ctx.strokeStyle = grad2;
-      ctx.lineWidth = 1.3;
-      ctx.shadowColor = 'rgba(96, 165, 250, 0.55)';
-      ctx.shadowBlur = 8;
-      ctx.stroke();
-      ctx.restore();
-
-      raf = requestAnimationFrame(render);
-    };
-
-    raf = requestAnimationFrame(render);
-    return () => cancelAnimationFrame(raf);
-  }, []);
-
-  return <canvas ref={canvasRef} className="hero-flowing-waves" aria-hidden="true" />;
+function buildSmoothWavePath(
+  t: number,
+  midY: number,
+  ampA: number,
+  ampB: number,
+  freqA: number,
+  freqB: number,
+  phaseA: number,
+  phaseB: number,
+  speedA: number,
+  speedB: number
+): string {
+  const W = 1440;
+  const step = 24;
+  const points: [number, number][] = [];
+  for (let x = -step; x <= W + step; x += step) {
+    const y = midY +
+      Math.sin(x * freqA + t * speedA + phaseA) * ampA +
+      Math.sin(x * freqB - t * speedB + phaseB) * ampB;
+    points.push([x, y]);
+  }
+  let d = `M ${points[0][0].toFixed(1)} ${points[0][1].toFixed(1)}`;
+  for (let i = 1; i < points.length - 1; i++) {
+    const xc = (points[i][0] + points[i + 1][0]) / 2;
+    const yc = (points[i][1] + points[i + 1][1]) / 2;
+    d += ` Q ${points[i][0].toFixed(1)} ${points[i][1].toFixed(1)}, ${xc.toFixed(1)} ${yc.toFixed(1)}`;
+  }
+  return d;
 }
 
 function MeshGlobe() {
@@ -175,7 +106,6 @@ function MeshGlobe() {
       const t = ms / 1000, c = size / 2, radius = size * .415;
       const yaw = t * .23, pitch = Math.sin(t * .19) * .17;
       const projected = nodes.map((p, i) => {
-        // Keep the outside silhouette spherical; gently animate inner geometry.
         const deformation = 1 + .012 * Math.sin(t * 1.1 + i * .35);
         const x = p.x * deformation, y = p.y * deformation, z = p.z * deformation;
         const rx = x*Math.cos(yaw)+z*Math.sin(yaw);
@@ -229,29 +159,41 @@ export function Hero(_props: HeroProps) {
   const stageRef = useRef<HTMLDivElement>(null);
   const pointsRef = useRef<(HTMLDivElement | null)[]>([]);
   const svgRef = useRef<SVGSVGElement>(null);
+  const wavePath1Ref = useRef<SVGPathElement>(null);
+  const wavePath2Ref = useRef<SVGPathElement>(null);
 
   useEffect(() => {
     const stage = stageRef.current;
     const svg = svgRef.current;
     if (!stage || !svg) return;
-    // Keep the approved motion active; user explicitly opted into animated Hero.
-    let w = stage.clientWidth, h = stage.clientHeight;
+
+    let stageW = stage.clientWidth || window.innerWidth;
+    let stageH = stage.clientHeight || 600;
     let raf = 0;
+    let isUnmounted = false;
     const start = performance.now();
+
+    // Slower movement by ~35-40%: journey duration lengthened from 5.8s-9.7s to 9.5s-15.7s
     const data: Point[] = LABELS.map((_, i) => {
-      const [x, y] = destination(i, 0, w, h);
-      const [toX, toY] = destination(i, 1, w, h);
-      return { x, y, fromX: x, fromY: y, toX, toY,
-        start: start - (i % 4) * 650, duration: 5800 + (i % 6) * 780,
-        opacity: 1, leg: 1, mode: 0 };
+      const [x, y] = destination(i, 0, stageW, stageH);
+      const [toX, toY] = destination(i, 1, stageW, stageH);
+      return {
+        x, y, fromX: x, fromY: y, toX, toY,
+        start: start - (i % 5) * 1800,
+        duration: 9500 + (i % 6) * 1250,
+        opacity: 1, leg: 1,
+      };
     });
+
     const resize = () => {
-      w = stage.clientWidth; h = stage.clientHeight;
-      svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+      stageW = stage.clientWidth || window.innerWidth;
+      stageH = stage.clientHeight || 600;
+      svg.setAttribute('viewBox', `0 0 ${stageW} ${stageH}`);
     };
     resize();
     const observer = new ResizeObserver(resize);
     observer.observe(stage);
+
     const lines = Array.from({ length: 3 }, (_, j) => {
       const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
       const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
@@ -263,89 +205,112 @@ export function Hero(_props: HeroProps) {
       svg.append(path, dot);
       return { path, dot };
     });
+
     const frame = (now: number) => {
-      data.forEach((p, i) => {
-        {
+      if (isUnmounted) return;
+      raf = requestAnimationFrame(frame);
+
+      try {
+        const tSec = now * 0.001;
+
+        // 1. Update the Two Blue/Cyan Wave Lines (Geometry updated smoothly on SVG path)
+        if (wavePath1Ref.current) {
+          const d1 = buildSmoothWavePath(tSec, 295, 26, 14, 0.0055, 0.011, 0, 1.0, 1.25, 0.95);
+          wavePath1Ref.current.setAttribute('d', d1);
+        }
+        if (wavePath2Ref.current) {
+          const d2 = buildSmoothWavePath(tSec, 312, 22, 12, 0.0068, 0.013, 2.4, 0.5, 1.05, 1.35);
+          wavePath2Ref.current.setAttribute('d', d2);
+        }
+
+        // 2. Update Accounting Points (Continuous gentle roam, 35-40% slower, unfreezable)
+        data.forEach((p, i) => {
           let progress = (now - p.start) / p.duration;
           if (progress >= 1) {
             p.leg++;
-            // Every third journey exits the viewport; next leg re-enters opposite edge.
-            if (p.mode === 1) {
-              const [tx, ty] = destination(i, p.leg, w, h);
-              p.fromX = p.toX < 0 ? w + 95 : p.toX > w ? -95 : tx;
-              p.fromY = p.toY < 0 ? h + 50 : p.toY > h ? -50 : ty;
-              p.toX = tx; p.toY = ty;
-              p.mode = 0;
-            } else {
-              p.fromX = p.toX; p.fromY = p.toY;
-              if (p.leg % 3 === 0) {
-                const side = (i + p.leg) % 4;
-                p.toX = side === 0 ? -165 : side === 1 ? w + 165 : destination(i, p.leg, w, h)[0];
-                p.toY = side === 2 ? -65 : side === 3 ? h + 65 : destination(i, p.leg, w, h)[1];
-                p.mode = 1;
-              } else {
-                [p.toX, p.toY] = destination(i, p.leg + 1, w, h);
-              }
-            }
+            p.fromX = p.toX;
+            p.fromY = p.toY;
+            const [nextX, nextY] = destination(i, p.leg, stageW, stageH);
+            p.toX = nextX;
+            p.toY = nextY;
             p.start = now;
+            p.duration = 9500 + ((i + p.leg) % 6) * 1250;
             progress = 0;
           }
+
           const t = smooth(clamp(progress, 0, 1));
           p.x = p.fromX + (p.toX - p.fromX) * t;
           p.y = p.fromY + (p.toY - p.fromY) * t;
-          const phase = ((now / 1000 + i * 1.43) % 14);
-          const fade = phase < 7.5 ? 1 : phase < 9 ? 1 - (phase - 7.5) / 1.5
-            : phase < 11 ? 0 : phase < 12.5 ? (phase - 11) / 1.5 : 1;
-          // Fade also masks jumps from an off-screen exit to opposite-side re-entry.
-          const edgeFade = p.mode === 1 && progress > 0.83 ? clamp((1 - progress) / 0.17, 0, 1)
-            : p.mode === 0 && progress < 0.16 ? clamp(progress / 0.16, 0, 1) : 1;
-          p.opacity = fade * edgeFade;
 
-          // Subtle floating motion enhancement:
-          // Vertical movement ~5-10px, Horizontal movement ~3-6px, distinct phases, staying within bounds
+          // Opacity fade cycle: ~11-14 points remain visible, rotating continuously
+          const phase = ((now / 1000 + i * 1.55) % 18);
+          const fade = phase < 11.5 ? 1
+            : phase < 13.5 ? 1 - (phase - 11.5) / 2
+            : phase < 15.5 ? 0
+            : phase < 17.5 ? (phase - 15.5) / 2
+            : 1;
+          p.opacity = clamp(fade, 0, 1);
+
+          // Subtle floating motion enhancement (35-40% slower, gentle 5-10px V / 3-6px H)
           const phaseShiftX = i * 1.73 + (i % 5) * 0.8;
           const phaseShiftY = i * 2.39 + (i % 4) * 1.1;
-          const speedX = 2200 + (i % 6) * 190;
-          const speedY = 2800 + (i % 5) * 210;
-          const floatX = Math.sin(now / speedX + phaseShiftX) * (3.6 + (i % 3) * 0.7);
-          const floatY = Math.cos(now / speedY + phaseShiftY) * (6.0 + (i % 4) * 0.9);
-          const curX = p.mode === 1 ? p.x + floatX : clamp(p.x + floatX, 20, Math.max(20, w - 20));
-          const curY = p.mode === 1 ? p.y + floatY : clamp(p.y + floatY, 20, Math.max(20, h - 20));
+          const speedX = 3500 + (i % 6) * 320;
+          const speedY = 4400 + (i % 5) * 350;
+          const floatX = Math.sin(now / speedX + phaseShiftX) * (3.5 + (i % 3) * 0.6);
+          const floatY = Math.cos(now / speedY + phaseShiftY) * (6.0 + (i % 4) * 0.8);
+          const curX = clamp(p.x + floatX, 20, Math.max(20, stageW - 20));
+          const curY = clamp(p.y + floatY, 20, Math.max(20, stageH - 20));
           p.renderX = curX;
           p.renderY = curY;
-        }
-        const el = pointsRef.current[i];
-        if (el) {
-          const posX = p.renderX ?? p.x;
-          const posY = p.renderY ?? p.y;
-          el.style.transform = `translate3d(${posX}px,${posY}px,0) translate(-50%,-50%) scale(${0.97 + 0.04 * Math.sin(now / 2300 + i)})`;
-          el.style.opacity = String(p.opacity);
-        }
-      });
-      lines.forEach(({ path, dot }, j) => {
-        const cycle = 6000 + j * 800;
-        const n = Math.floor((now - start) / cycle);
-        const a = data[(n * 3 + j * 5) % data.length];
-        const b = data[(n * 3 + j * 5 + 6 + j) % data.length];
-        const ax = a.renderX ?? a.x;
-        const ay = a.renderY ?? a.y;
-        const bx = b.renderX ?? b.x;
-        const by = b.renderY ?? b.y;
-        const cx = (ax + bx) / 2, cy = (ay + by) / 2 - 40;
-        path.setAttribute('d', `M ${ax} ${ay} Q ${cx} ${cy} ${bx} ${by}`);
-        const t = ((now - start) % cycle) / cycle;
-        const visibility = Math.max(0, Math.min(1, t * 5, (1 - t) * 5)) * a.opacity * b.opacity;
-        path.setAttribute('opacity', String(visibility * 0.33));
-        dot.setAttribute('opacity', String(visibility));
-        const u = 1 - t;
-        dot.setAttribute('cx', String(u * u * ax + 2 * u * t * cx + t * t * bx));
-        dot.setAttribute('cy', String(u * u * ay + 2 * u * t * cy + t * t * by));
-      });
-      raf = requestAnimationFrame(frame);
+
+          const el = pointsRef.current[i];
+          if (el) {
+            el.style.transform = `translate3d(${curX.toFixed(1)}px,${curY.toFixed(1)}px,0) translate(-50%,-50%) scale(${(0.97 + 0.04 * Math.sin(now / 3200 + i)).toFixed(3)})`;
+            el.style.opacity = p.opacity.toFixed(3);
+          }
+        });
+
+        // 3. Update Connecting SVG Lines
+        lines.forEach(({ path, dot }, j) => {
+          const cycle = 8500 + j * 1200;
+          const n = Math.floor((now - start) / cycle);
+          const a = data[(n * 3 + j * 5) % data.length];
+          const b = data[(n * 3 + j * 5 + 6 + j) % data.length];
+          const ax = a.renderX ?? a.x;
+          const ay = a.renderY ?? a.y;
+          const bx = b.renderX ?? b.x;
+          const by = b.renderY ?? b.y;
+          const cx = (ax + bx) / 2, cy = (ay + by) / 2 - 40;
+          path.setAttribute('d', `M ${ax.toFixed(1)} ${ay.toFixed(1)} Q ${cx.toFixed(1)} ${cy.toFixed(1)} ${bx.toFixed(1)} ${by.toFixed(1)}`);
+          const t = ((now - start) % cycle) / cycle;
+          const visibility = Math.max(0, Math.min(1, t * 5, (1 - t) * 5)) * a.opacity * b.opacity;
+          path.setAttribute('opacity', String((visibility * 0.33).toFixed(3)));
+          dot.setAttribute('opacity', String(visibility.toFixed(3)));
+          const u = 1 - t;
+          dot.setAttribute('cx', String((u * u * ax + 2 * u * t * cx + t * t * bx).toFixed(1)));
+          dot.setAttribute('cy', String((u * u * ay + 2 * u * t * cy + t * t * by).toFixed(1)));
+        });
+      } catch (err) {
+        // Guard against any transient error breaking the animation loop
+      }
     };
+
     raf = requestAnimationFrame(frame);
+
+    const handleVisibility = () => {
+      if (!document.hidden && !isUnmounted) {
+        cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(frame);
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibility);
+    window.addEventListener('focus', handleVisibility);
+
     return () => {
+      isUnmounted = true;
       cancelAnimationFrame(raf);
+      document.removeEventListener('visibilitychange', handleVisibility);
+      window.removeEventListener('focus', handleVisibility);
       observer.disconnect();
       lines.forEach(({ path, dot }) => { path.remove(); dot.remove(); });
     };
@@ -372,6 +337,7 @@ export function Hero(_props: HeroProps) {
         .hero-free-roam{position:relative;height:calc(100svh - 5rem);min-height:540px;overflow:hidden;isolation:isolate;background:radial-gradient(ellipse at 35% 36%,#13374b 0%,#081e30 55%,#061522 100%);color:#f8fafc}
         .hero-free-roam:after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at center,transparent 40%,rgba(0,0,0,.2));z-index:0}
         .hero-mesh-globe{position:absolute;top:3%;left:3%;width:clamp(175px,24vw,330px);height:auto;aspect-ratio:1;z-index:1;pointer-events:none;filter:drop-shadow(0 0 12px rgba(30,160,245,.22))}
+        .hero-flowing-waves{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
         .hero-roam-stage{position:absolute;inset:0;overflow:hidden}
         .hero-roam-lines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
         .hero-roam-point{position:absolute;left:0;top:0;z-index:2;white-space:nowrap;pointer-events:none;will-change:transform,opacity}
@@ -386,12 +352,50 @@ export function Hero(_props: HeroProps) {
         .hero-roam-center strong{display:block;font-size:23px;letter-spacing:.19em}
         .hero-roam-center small{display:block;margin-top:7px;font-size:10px;color:#cbd5e1;letter-spacing:.07em}
         .hero-roam-center.flipping strong{opacity:.3}
-        .hero-flowing-waves{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
         @media(max-width:700px){.hero-free-roam{min-height:480px}.hero-roam-pill{font-size:9px;padding:7px 9px}.hero-roam-pill.primary,.hero-roam-pill.flagship{font-size:10px;padding:8px 10px}.hero-roam-center{width:194px;min-height:74px}.hero-roam-center strong{font-size:17px}}
         @media(prefers-reduced-motion:reduce){.hero-roam-pill:after{animation:none}}
       `}</style>
+
+      {/* 3D Wireframe Globe */}
       <MeshGlobe />
-      <FlowingWaveLines />
+
+      {/* Two flowing blue/cyan wave lines with smooth SVG path geometry propagation */}
+      <svg className="hero-flowing-waves" viewBox="0 0 1440 600" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <linearGradient id="heroWaveGrad1" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#38bdf8" stopOpacity="0" />
+            <stop offset="12%" stopColor="#38bdf8" stopOpacity="0.45" />
+            <stop offset="50%" stopColor="#67e8f9" stopOpacity="0.8" />
+            <stop offset="88%" stopColor="#38bdf8" stopOpacity="0.45" />
+            <stop offset="100%" stopColor="#38bdf8" stopOpacity="0" />
+          </linearGradient>
+          <linearGradient id="heroWaveGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#60a5fa" stopOpacity="0" />
+            <stop offset="15%" stopColor="#60a5fa" stopOpacity="0.4" />
+            <stop offset="50%" stopColor="#38bdf8" stopOpacity="0.7" />
+            <stop offset="85%" stopColor="#60a5fa" stopOpacity="0.4" />
+            <stop offset="100%" stopColor="#60a5fa" stopOpacity="0" />
+          </linearGradient>
+          <filter id="heroWaveGlow1" x="-10%" y="-30%" width="120%" height="160%">
+            <feGaussianBlur stdDeviation="3" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+          <filter id="heroWaveGlow2" x="-10%" y="-30%" width="120%" height="160%">
+            <feGaussianBlur stdDeviation="2.5" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+        <path ref={wavePath1Ref} fill="none" stroke="url(#heroWaveGrad1)" strokeWidth="1.6" filter="url(#heroWaveGlow1)" />
+        <path ref={wavePath2Ref} fill="none" stroke="url(#heroWaveGrad2)" strokeWidth="1.3" filter="url(#heroWaveGlow2)" />
+      </svg>
+
+      {/* Floating Accounting Points & Connecting lines stage */}
       <div className="hero-roam-stage" ref={stageRef}>
         <svg className="hero-roam-lines" ref={svgRef} aria-hidden="true" />
         {LABELS.map((label, i) => {
@@ -410,6 +414,8 @@ export function Hero(_props: HeroProps) {
           );
         })}
       </div>
+
+      {/* Center PORTFOLIO / ACCOUNTANT reveal button */}
       <button type="button" className={`hero-roam-center ${flipping ? 'flipping' : ''}`}
         onClick={handleClick} aria-label={buttonState === 'portfolio' ? 'Reveal Accountant' : 'View About'}>
         <strong>{buttonState === 'portfolio' ? 'PORTFOLIO' : 'ACCOUNTANT'}</strong>
