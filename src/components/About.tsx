@@ -376,7 +376,7 @@ export function About({ profile: _profile }: AboutProps) {
                     NO BODY EDIT
                     ================================================== */}
                 <img
-                  src="/images/0D0A2507.JPG"
+                  src="/images/Muhammad_Salman_HD_1200.webp"
                   alt={
                     isRTL
                       ? 'محمد سلمان - محاسب'
