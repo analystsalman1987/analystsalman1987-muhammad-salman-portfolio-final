@@ -563,19 +563,8 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
       id="experience" 
       className="relative py-20 scroll-mt-20 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 transition-colors overflow-hidden"
     >
-      {/* Subtle Professional Background Image for Experience */}
-      <div 
-        className="absolute inset-0 pointer-events-none z-0"
-        aria-hidden="true"
-      >
-        <img 
-          src="/images/experience_background.jpg" 
-          alt="" 
-          className="w-full h-full object-cover object-center opacity-[0.16] dark:opacity-[0.12] filter contrast-105 select-none"
-          loading="lazy"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-white/75 to-white/92 dark:from-slate-900/90 dark:via-slate-900/75 dark:to-slate-900/92" />
-      </div>
+      {/* Subtle background gradient (no background image) */}
+      <div className="absolute inset-0 pointer-events-none z-0 bg-gradient-to-b from-white/90 via-white/75 to-white/92 dark:from-slate-900/90 dark:via-slate-900/75 dark:to-slate-900/92" aria-hidden="true" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
