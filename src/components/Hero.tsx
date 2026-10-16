@@ -222,14 +222,13 @@ function MeshGlobe() {
     };
     const sphere = (lat: number, lon: number, r = 1) => [r * Math.cos(lat) * Math.cos(lon), r * Math.sin(lat), r * Math.cos(lat) * Math.sin(lon)];
     const orbit = (tilt: number, angle: number, r: number) => [r * Math.cos(angle), r * Math.sin(angle) * Math.cos(tilt), r * Math.sin(angle) * Math.sin(tilt)];
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const render = (ms: number) => {
       const dt = lastFrame ? Math.min((ms - lastFrame) / 1000, .05) : 0;
       lastFrame = ms;
-      if (!reducedMotion) {
-        time += dt;
-        if (!dragging) yaw += dt * .105;
-      }
+      // Continuous visible auto-rotation, pausing only while the user drags.
+      // This must not depend on OS reduced-motion settings for this requested animation.
+      time += dt;
+      if (!dragging) yaw += dt * .24;
       size = canvas.clientWidth;
       if (!size) { raf = requestAnimationFrame(render); return; }
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
