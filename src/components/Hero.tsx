@@ -135,33 +135,32 @@ interface WaveConfig {
   opacity: number;
 }
 
-// Exactly 20 flowing wave lines: 15 blue/cyan + 5 consecutive metallic gold lines in the middle
+// Exactly 20 flowing wave lines: 10 Sky Blue (#38BDF8), 5 Ice Cyan (#67E8F9), 3 Silver Blue (#8FAFC1), 2 Soft Champagne (#C4B6A0) near the middle
 const WAVE_CONFIGS: WaveConfig[] = [
-  // 1-8: Upper Blue / Cyan lines (8 lines)
-  { midY: 504, ampA: 15, ampB: 8, freqA: 0.0051, freqB: 0.0102, phaseA: 0.0, phaseB: 1.1, speedA: 1.12, speedB: 0.88, gradId: 'waveGrad1', glowFilter: 'heroWaveGlow', strokeWidth: 1.1, opacity: 0.45 },
-  { midY: 508, ampA: 17, ampB: 9, freqA: 0.0057, freqB: 0.0116, phaseA: 0.8, phaseB: 2.2, speedA: 1.25, speedB: 1.02, gradId: 'waveGrad2', glowFilter: 'heroWaveGlow', strokeWidth: 0.9, opacity: 0.40 },
-  { midY: 512, ampA: 14, ampB: 7, freqA: 0.0063, freqB: 0.0124, phaseA: 1.6, phaseB: 0.6, speedA: 1.02, speedB: 1.20, gradId: 'waveGrad3', glowFilter: 'heroWaveGlow', strokeWidth: 1.2, opacity: 0.50 },
-  { midY: 516, ampA: 18, ampB: 10, freqA: 0.0049, freqB: 0.0097, phaseA: 2.4, phaseB: 1.7, speedA: 1.18, speedB: 0.82, gradId: 'waveGrad1', glowFilter: 'heroWaveGlow', strokeWidth: 1.0, opacity: 0.45 },
-  { midY: 520, ampA: 16, ampB: 8, freqA: 0.0055, freqB: 0.0111, phaseA: 3.2, phaseB: 2.8, speedA: 0.92, speedB: 1.12, gradId: 'waveGrad4', glowFilter: 'heroWaveGlow', strokeWidth: 1.3, opacity: 0.55 },
-  { midY: 523, ampA: 19, ampB: 11, freqA: 0.0060, freqB: 0.0119, phaseA: 4.0, phaseB: 0.9, speedA: 1.22, speedB: 0.96, gradId: 'waveGrad2', glowFilter: 'heroWaveGlow', strokeWidth: 1.0, opacity: 0.45 },
-  { midY: 527, ampA: 15, ampB: 7, freqA: 0.0052, freqB: 0.0107, phaseA: 4.8, phaseB: 2.0, speedA: 1.08, speedB: 1.26, gradId: 'waveGrad3', glowFilter: 'heroWaveGlow', strokeWidth: 1.2, opacity: 0.55 },
-  { midY: 531, ampA: 17, ampB: 9, freqA: 0.0065, freqB: 0.0129, phaseA: 5.6, phaseB: 3.1, speedA: 1.32, speedB: 0.92, gradId: 'waveGrad1', glowFilter: 'heroWaveGlow', strokeWidth: 0.9, opacity: 0.45 },
+  { midY: 492, ampA: 15, ampB: 8, freqA: 0.0051, freqB: 0.0102, phaseA: 0.0, phaseB: 1.1, speedA: 1.12, speedB: 0.88, gradId: 'waveGradSky', glowFilter: 'heroWaveSoftGlow', strokeWidth: 0.95, opacity: 0.34 },
+  { midY: 497, ampA: 17, ampB: 9, freqA: 0.0057, freqB: 0.0116, phaseA: 0.8, phaseB: 2.2, speedA: 1.25, speedB: 1.02, gradId: 'waveGradCyan', glowFilter: 'heroWaveSoftGlow', strokeWidth: 0.85, opacity: 0.36 },
+  { midY: 501, ampA: 14, ampB: 7, freqA: 0.0063, freqB: 0.0124, phaseA: 1.6, phaseB: 0.6, speedA: 1.02, speedB: 1.20, gradId: 'waveGradSky', glowFilter: 'heroWaveSoftGlow', strokeWidth: 1.00, opacity: 0.32 },
+  { midY: 506, ampA: 18, ampB: 10, freqA: 0.0049, freqB: 0.0097, phaseA: 2.4, phaseB: 1.7, speedA: 1.18, speedB: 0.82, gradId: 'waveGradSilver', glowFilter: 'heroWaveSoftGlow', strokeWidth: 0.85, opacity: 0.30 },
+  { midY: 510, ampA: 16, ampB: 8, freqA: 0.0055, freqB: 0.0111, phaseA: 3.2, phaseB: 2.8, speedA: 0.92, speedB: 1.12, gradId: 'waveGradSky', glowFilter: 'heroWaveSoftGlow', strokeWidth: 0.95, opacity: 0.35 },
+  { midY: 515, ampA: 19, ampB: 11, freqA: 0.0060, freqB: 0.0119, phaseA: 4.0, phaseB: 0.9, speedA: 1.22, speedB: 0.96, gradId: 'waveGradCyan', glowFilter: 'heroWaveSoftGlow', strokeWidth: 0.90, opacity: 0.38 },
+  { midY: 519, ampA: 15, ampB: 7, freqA: 0.0052, freqB: 0.0107, phaseA: 4.8, phaseB: 2.0, speedA: 1.08, speedB: 1.26, gradId: 'waveGradSky', glowFilter: 'heroWaveSoftGlow', strokeWidth: 1.00, opacity: 0.34 },
+  { midY: 524, ampA: 17, ampB: 9, freqA: 0.0065, freqB: 0.0129, phaseA: 5.6, phaseB: 3.1, speedA: 1.32, speedB: 0.92, gradId: 'waveGradCyan', glowFilter: 'heroWaveSoftGlow', strokeWidth: 0.85, opacity: 0.36 },
 
-  // 9-13: Middle Metallic Golden lines (#D4AF37) with soft golden glow (5 consecutive lines)
-  { midY: 535, ampA: 18, ampB: 10, freqA: 0.0054, freqB: 0.0114, phaseA: 0.5, phaseB: 1.5, speedA: 1.05, speedB: 1.18, gradId: 'waveGradGold2', glowFilter: 'heroWaveGlowGold', strokeWidth: 1.3, opacity: 0.70 },
-  { midY: 539, ampA: 20, ampB: 11, freqA: 0.0059, freqB: 0.0121, phaseA: 1.4, phaseB: 2.6, speedA: 1.20, speedB: 1.00, gradId: 'waveGradGold1', glowFilter: 'heroWaveGlowGold', strokeWidth: 1.5, opacity: 0.85 },
-  { midY: 543, ampA: 19, ampB: 10, freqA: 0.0051, freqB: 0.0109, phaseA: 2.3, phaseB: 0.7, speedA: 1.12, speedB: 1.24, gradId: 'waveGradGold1', glowFilter: 'heroWaveGlowGold', strokeWidth: 1.6, opacity: 0.90 },
-  { midY: 547, ampA: 21, ampB: 12, freqA: 0.0062, freqB: 0.0126, phaseA: 3.1, phaseB: 1.9, speedA: 1.28, speedB: 0.95, gradId: 'waveGradGold1', glowFilter: 'heroWaveGlowGold', strokeWidth: 1.5, opacity: 0.85 },
-  { midY: 551, ampA: 17, ampB: 9, freqA: 0.0056, freqB: 0.0117, phaseA: 4.0, phaseB: 3.0, speedA: 0.98, speedB: 1.15, gradId: 'waveGradGold2', glowFilter: 'heroWaveGlowGold', strokeWidth: 1.3, opacity: 0.70 },
+  // Middle accents: Silver Blue framing 2 Soft Champagne lines (#C4B6A0)
+  { midY: 528, ampA: 18, ampB: 10, freqA: 0.0054, freqB: 0.0114, phaseA: 0.5, phaseB: 1.5, speedA: 1.05, speedB: 1.18, gradId: 'waveGradSilver', glowFilter: 'heroWaveSoftGlow', strokeWidth: 0.90, opacity: 0.32 },
+  { midY: 533, ampA: 20, ampB: 11, freqA: 0.0059, freqB: 0.0121, phaseA: 1.4, phaseB: 2.6, speedA: 1.20, speedB: 1.00, gradId: 'waveGradChampagne', glowFilter: 'heroWaveSoftGlow', strokeWidth: 0.95, opacity: 0.35 },
+  { midY: 537, ampA: 19, ampB: 10, freqA: 0.0051, freqB: 0.0109, phaseA: 2.3, phaseB: 0.7, speedA: 1.12, speedB: 1.24, gradId: 'waveGradChampagne', glowFilter: 'heroWaveSoftGlow', strokeWidth: 0.95, opacity: 0.36 },
+  { midY: 542, ampA: 21, ampB: 12, freqA: 0.0062, freqB: 0.0126, phaseA: 3.1, phaseB: 1.9, speedA: 1.28, speedB: 0.95, gradId: 'waveGradSky', glowFilter: 'heroWaveSoftGlow', strokeWidth: 1.00, opacity: 0.36 },
+  { midY: 546, ampA: 17, ampB: 9, freqA: 0.0056, freqB: 0.0117, phaseA: 4.0, phaseB: 3.0, speedA: 0.98, speedB: 1.15, gradId: 'waveGradCyan', glowFilter: 'heroWaveSoftGlow', strokeWidth: 0.90, opacity: 0.35 },
 
-  // 14-20: Lower Blue / Cyan lines (7 lines)
-  { midY: 555, ampA: 18, ampB: 10, freqA: 0.0050, freqB: 0.0106, phaseA: 4.9, phaseB: 1.2, speedA: 1.15, speedB: 1.28, gradId: 'waveGrad1', glowFilter: 'heroWaveGlow', strokeWidth: 1.2, opacity: 0.55 },
-  { midY: 559, ampA: 16, ampB: 8, freqA: 0.0064, freqB: 0.0128, phaseA: 5.7, phaseB: 2.4, speedA: 1.30, speedB: 0.94, gradId: 'waveGrad3', glowFilter: 'heroWaveGlow', strokeWidth: 1.0, opacity: 0.45 },
-  { midY: 562, ampA: 17, ampB: 9, freqA: 0.0053, freqB: 0.0113, phaseA: 0.6, phaseB: 0.8, speedA: 1.04, speedB: 1.16, gradId: 'waveGrad2', glowFilter: 'heroWaveGlow', strokeWidth: 1.3, opacity: 0.60 },
-  { midY: 566, ampA: 15, ampB: 8, freqA: 0.0058, freqB: 0.0120, phaseA: 1.5, phaseB: 1.9, speedA: 1.22, speedB: 1.05, gradId: 'waveGrad4', glowFilter: 'heroWaveGlow', strokeWidth: 1.1, opacity: 0.50 },
-  { midY: 570, ampA: 18, ampB: 10, freqA: 0.0048, freqB: 0.0101, phaseA: 2.4, phaseB: 3.1, speedA: 1.10, speedB: 1.32, gradId: 'waveGrad1', glowFilter: 'heroWaveGlow', strokeWidth: 1.2, opacity: 0.55 },
-  { midY: 573, ampA: 14, ampB: 7, freqA: 0.0066, freqB: 0.0131, phaseA: 3.3, phaseB: 1.4, speedA: 1.36, speedB: 0.90, gradId: 'waveGrad3', glowFilter: 'heroWaveGlow', strokeWidth: 0.9, opacity: 0.45 },
-  { midY: 577, ampA: 16, ampB: 9, freqA: 0.0055, freqB: 0.0115, phaseA: 4.2, phaseB: 2.5, speedA: 1.02, speedB: 1.22, gradId: 'waveGrad2', glowFilter: 'heroWaveGlow', strokeWidth: 1.3, opacity: 0.55 },
+  // Lower group
+  { midY: 551, ampA: 18, ampB: 10, freqA: 0.0050, freqB: 0.0106, phaseA: 4.9, phaseB: 1.2, speedA: 1.15, speedB: 1.28, gradId: 'waveGradSky', glowFilter: 'heroWaveSoftGlow', strokeWidth: 1.00, opacity: 0.35 },
+  { midY: 555, ampA: 16, ampB: 8, freqA: 0.0064, freqB: 0.0128, phaseA: 5.7, phaseB: 2.4, speedA: 1.30, speedB: 0.94, gradId: 'waveGradSky', glowFilter: 'heroWaveSoftGlow', strokeWidth: 0.85, opacity: 0.32 },
+  { midY: 560, ampA: 17, ampB: 9, freqA: 0.0053, freqB: 0.0113, phaseA: 0.6, phaseB: 0.8, speedA: 1.04, speedB: 1.16, gradId: 'waveGradSilver', glowFilter: 'heroWaveSoftGlow', strokeWidth: 0.90, opacity: 0.30 },
+  { midY: 564, ampA: 15, ampB: 8, freqA: 0.0058, freqB: 0.0120, phaseA: 1.5, phaseB: 1.9, speedA: 1.22, speedB: 1.05, gradId: 'waveGradCyan', glowFilter: 'heroWaveSoftGlow', strokeWidth: 0.90, opacity: 0.34 },
+  { midY: 569, ampA: 18, ampB: 10, freqA: 0.0048, freqB: 0.0101, phaseA: 2.4, phaseB: 3.1, speedA: 1.10, speedB: 1.32, gradId: 'waveGradSky', glowFilter: 'heroWaveSoftGlow', strokeWidth: 1.00, opacity: 0.35 },
+  { midY: 573, ampA: 14, ampB: 7, freqA: 0.0066, freqB: 0.0131, phaseA: 3.3, phaseB: 1.4, speedA: 1.36, speedB: 0.90, gradId: 'waveGradSky', glowFilter: 'heroWaveSoftGlow', strokeWidth: 0.85, opacity: 0.30 },
+  { midY: 578, ampA: 16, ampB: 9, freqA: 0.0055, freqB: 0.0115, phaseA: 4.2, phaseB: 2.5, speedA: 1.02, speedB: 1.22, gradId: 'waveGradSky', glowFilter: 'heroWaveSoftGlow', strokeWidth: 0.95, opacity: 0.32 },
 ];
 
 function MeshGlobe() {
@@ -318,12 +317,13 @@ export function Hero(_props: HeroProps) {
         mouseX += (targetMouseX - mouseX) * 0.05;
         mouseY += (targetMouseY - mouseY) * 0.05;
 
-        // 1. Update the 10 Blue/Cyan Wave Lines in the bottom area of Home
+        // 1. Update the 20 Wave Lines in the bottom area of Home (movement speed reduced by 25%)
+        const tWave = tSec * 0.75;
         WAVE_CONFIGS.forEach((cfg, idx) => {
           const pathEl = wavePathsRef.current[idx];
           if (pathEl) {
             const d = buildSmoothWavePath(
-              tSec,
+              tWave,
               cfg.midY,
               cfg.ampA,
               cfg.ampB,
@@ -477,65 +477,48 @@ export function Hero(_props: HeroProps) {
       {/* 3D Wireframe Globe */}
       <MeshGlobe />
 
-      {/* 10 Flowing blue/cyan wave lines in the bottom area of Home */}
+      {/* 20 Flowing wave lines in the bottom area of Home */}
       <svg className="hero-flowing-waves" viewBox="0 0 1440 600" preserveAspectRatio="none" aria-hidden="true">
         <defs>
-          <linearGradient id="waveGrad1" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#38bdf8" stopOpacity="0" />
-            <stop offset="12%" stopColor="#38bdf8" stopOpacity="0.45" />
-            <stop offset="50%" stopColor="#67e8f9" stopOpacity="0.8" />
-            <stop offset="88%" stopColor="#38bdf8" stopOpacity="0.45" />
-            <stop offset="100%" stopColor="#38bdf8" stopOpacity="0" />
-          </linearGradient>
-          <linearGradient id="waveGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#60a5fa" stopOpacity="0" />
-            <stop offset="15%" stopColor="#60a5fa" stopOpacity="0.4" />
-            <stop offset="50%" stopColor="#38bdf8" stopOpacity="0.75" />
-            <stop offset="85%" stopColor="#60a5fa" stopOpacity="0.4" />
-            <stop offset="100%" stopColor="#60a5fa" stopOpacity="0" />
-          </linearGradient>
-          <linearGradient id="waveGrad3" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#2dd4bf" stopOpacity="0" />
-            <stop offset="15%" stopColor="#2dd4bf" stopOpacity="0.35" />
-            <stop offset="50%" stopColor="#38bdf8" stopOpacity="0.7" />
-            <stop offset="85%" stopColor="#2dd4bf" stopOpacity="0.35" />
-            <stop offset="100%" stopColor="#2dd4bf" stopOpacity="0" />
-          </linearGradient>
-          <linearGradient id="waveGrad4" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#818cf8" stopOpacity="0" />
-            <stop offset="15%" stopColor="#818cf8" stopOpacity="0.3" />
-            <stop offset="50%" stopColor="#60a5fa" stopOpacity="0.65" />
-            <stop offset="85%" stopColor="#818cf8" stopOpacity="0.3" />
-            <stop offset="100%" stopColor="#818cf8" stopOpacity="0" />
+          {/* Sky Blue (#38BDF8) - 10 lines */}
+          <linearGradient id="waveGradSky" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#38BDF8" stopOpacity="0" />
+            <stop offset="12%" stopColor="#38BDF8" stopOpacity="0.18" />
+            <stop offset="50%" stopColor="#38BDF8" stopOpacity="0.50" />
+            <stop offset="88%" stopColor="#38BDF8" stopOpacity="0.18" />
+            <stop offset="100%" stopColor="#38BDF8" stopOpacity="0" />
           </linearGradient>
 
-          {/* Subtle Metallic Golden Gradients (#D4AF37) for middle 5 lines */}
-          <linearGradient id="waveGradGold1" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#D4AF37" stopOpacity="0" />
-            <stop offset="12%" stopColor="#D4AF37" stopOpacity="0.55" />
-            <stop offset="50%" stopColor="#FDE68A" stopOpacity="0.95" />
-            <stop offset="88%" stopColor="#D4AF37" stopOpacity="0.55" />
-            <stop offset="100%" stopColor="#D4AF37" stopOpacity="0" />
-          </linearGradient>
-          <linearGradient id="waveGradGold2" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#C5A028" stopOpacity="0" />
-            <stop offset="15%" stopColor="#D4AF37" stopOpacity="0.50" />
-            <stop offset="50%" stopColor="#F5D77F" stopOpacity="0.85" />
-            <stop offset="85%" stopColor="#D4AF37" stopOpacity="0.50" />
-            <stop offset="100%" stopColor="#C5A028" stopOpacity="0" />
+          {/* Ice Cyan (#67E8F9) - 5 lines */}
+          <linearGradient id="waveGradCyan" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#67E8F9" stopOpacity="0" />
+            <stop offset="12%" stopColor="#67E8F9" stopOpacity="0.20" />
+            <stop offset="50%" stopColor="#67E8F9" stopOpacity="0.52" />
+            <stop offset="88%" stopColor="#67E8F9" stopOpacity="0.20" />
+            <stop offset="100%" stopColor="#67E8F9" stopOpacity="0" />
           </linearGradient>
 
-          <filter id="heroWaveGlow" x="-10%" y="-30%" width="120%" height="160%">
-            <feGaussianBlur stdDeviation="2.5" result="blur" />
-            <feMerge>
-              <feMergeNode in="blur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
+          {/* Silver Blue (#8FAFC1) - 3 lines */}
+          <linearGradient id="waveGradSilver" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#8FAFC1" stopOpacity="0" />
+            <stop offset="12%" stopColor="#8FAFC1" stopOpacity="0.16" />
+            <stop offset="50%" stopColor="#8FAFC1" stopOpacity="0.44" />
+            <stop offset="88%" stopColor="#8FAFC1" stopOpacity="0.16" />
+            <stop offset="100%" stopColor="#8FAFC1" stopOpacity="0" />
+          </linearGradient>
 
-          {/* Soft Golden Glow Filter */}
-          <filter id="heroWaveGlowGold" x="-10%" y="-30%" width="120%" height="160%">
-            <feGaussianBlur stdDeviation="3.0" result="blur" />
+          {/* Soft Champagne (#C4B6A0) - 2 middle accent lines */}
+          <linearGradient id="waveGradChampagne" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#C4B6A0" stopOpacity="0" />
+            <stop offset="12%" stopColor="#C4B6A0" stopOpacity="0.16" />
+            <stop offset="50%" stopColor="#C4B6A0" stopOpacity="0.44" />
+            <stop offset="88%" stopColor="#C4B6A0" stopOpacity="0.16" />
+            <stop offset="100%" stopColor="#C4B6A0" stopOpacity="0" />
+          </linearGradient>
+
+          {/* Unified subtle soft glow filter */}
+          <filter id="heroWaveSoftGlow" x="-10%" y="-30%" width="120%" height="160%">
+            <feGaussianBlur stdDeviation="1.6" result="blur" />
             <feMerge>
               <feMergeNode in="blur" />
               <feMergeNode in="SourceGraphic" />
