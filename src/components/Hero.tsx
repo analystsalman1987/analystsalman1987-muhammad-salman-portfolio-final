@@ -496,6 +496,54 @@ export function Hero(_props: HeroProps) {
       return { path, dot };
     });
 
+    // Random positions are assigned only while labels are completely invisible.
+    const roamingPositions = ANCHORS.map(a => ({ ...a }));
+    const previousPhases = LABELS.map((_, i) => ((FADE_OFFSETS[i] ?? i * 0.9) % 16));
+    const pointSizes = () => LABELS.map((_, i) => {
+      const el = pointsRef.current[i];
+      return { w: (el?.offsetWidth || 145) + 22, h: (el?.offsetHeight || 42) + 16 };
+    });
+    const chooseNewPosition = (index: number) => {
+      const sizes = pointSizes();
+      const own = sizes[index];
+      const last = roamingPositions[index];
+      const marginX = own.w / 2 + 8;
+      const marginY = own.h / 2 + 8;
+      const maxX = Math.max(marginX, stageW - marginX);
+      const maxY = Math.max(marginY, stageH - marginY);
+      const collides = (x: number, y: number) => {
+        // Reserve the main center heading/button and top-left globe/orbits.
+        const center = stage.querySelector('.hero-roam-center') || document.querySelector('.hero-roam-center');
+        const centerW = Math.min(stageW * 0.48, 510);
+        const centerH = center ? Math.max(180, center.getBoundingClientRect().height + 40) : 210;
+        if (Math.abs(x - stageW / 2) < (centerW + own.w) / 2 &&
+            Math.abs(y - stageH / 2) < (centerH + own.h) / 2) return true;
+        const globeSize = Math.min(330, Math.max(175, window.innerWidth * 0.24));
+        if (x < globeSize + own.w / 2 + 20 && y < globeSize + own.h / 2 + 30) return true;
+        return roamingPositions.some((other, j) => {
+          if (j === index) return false;
+          const phase = ((performance.now() * .001 + (FADE_OFFSETS[j] ?? j * .9)) % 16 + 16) % 16;
+          if (phase >= 8 && phase < 14) return false;
+          return Math.abs(x - other.x * stageW) < (own.w + sizes[j].w) / 2 &&
+                 Math.abs(y - other.y * stageH) < (own.h + sizes[j].h) / 2;
+        });
+      };
+      // Start with familiar layout zones, but choose a different zone every cycle.
+      const candidates = [...ANCHORS].sort(() => Math.random() - .5);
+      for (const anchor of candidates) {
+        for (let attempt = 0; attempt < 5; attempt++) {
+          const x = clamp(anchor.x * stageW + (Math.random() - .5) * 55, marginX, maxX);
+          const y = clamp(anchor.y * stageH + (Math.random() - .5) * 45, marginY, maxY);
+          if (Math.hypot(x - last.x * stageW, y - last.y * stageH) < Math.min(130, stageW * .2)) continue;
+          if (!collides(x, y)) {
+            roamingPositions[index] = { x: x / stageW, y: y / stageH };
+            return;
+          }
+        }
+      }
+      // Keep the previous safe location if the viewport is too crowded.
+    };
+
     // Store calculated positions for connecting lines
     const currentPositions: { x: number; y: number; opacity: number }[] = Array.from({ length: LABELS.length }, () => ({ x: 0, y: 0, opacity: 0 }));
 
@@ -535,7 +583,19 @@ export function Hero(_props: HeroProps) {
 
         // 2. Update Accounting Labels (Gentle independent floating around anchor positions, Mohsin Bilal style)
         LABELS.forEach((_, i) => {
-          const anchor = ANCHORS[i] || { x: 0.5, y: 0.5 };
+          const phase = ((tSec + (FADE_OFFSETS[i] ?? i * 0.9)) % 16 + 16) % 16;
+          // Entering the 14–16 second fade-in interval after being hidden.
+          if (previousPhases[i] < 14 && phase >= 14) {
+            chooseNewPosition(i);
+            const pill = pointsRef.current[i]?.querySelector<HTMLElement>('.hero-roam-pill');
+            if (pill) {
+              pill.classList.remove('hero-roam-shimmer-once');
+              void pill.offsetWidth; // Restart the one-time shimmer for this appearance.
+              pill.classList.add('hero-roam-shimmer-once');
+            }
+          }
+          previousPhases[i] = phase;
+          const anchor = roamingPositions[i] || { x: 0.5, y: 0.5 };
           const baseX = stageW * anchor.x;
           const baseY = stageH * anchor.y;
 
@@ -647,16 +707,17 @@ export function Hero(_props: HeroProps) {
         .hero-roam-point{position:absolute;left:0;top:0;z-index:2;white-space:nowrap;pointer-events:none;will-change:transform,opacity}
         .hero-roam-pill{position:relative;display:block;overflow:hidden;border:1.5px solid var(--point-color);border-radius:99px;padding:9px 14px;background:rgba(5,20,33,.93);font-size:12px;font-weight:750;color:#f7f9fb;box-shadow:0 0 15px var(--point-glow),inset 0 0 8px rgba(255,255,255,.03)}
         .hero-roam-pill:before{content:"";display:inline-block;width:7px;height:7px;margin-right:8px;border-radius:50%;vertical-align:1px;background:var(--point-color);box-shadow:0 0 8px var(--point-color)}
-        .hero-roam-pill:after{content:"";position:absolute;top:-25%;left:-65%;width:22%;height:150%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.42),transparent);transform:skewX(-24deg);animation:heroRoamShine 14s ease-in-out infinite;animation-delay:var(--shine-delay)}
+        .hero-roam-pill:after{content:"";position:absolute;top:-25%;left:-65%;width:22%;height:150%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.42),transparent);transform:skewX(-24deg);opacity:0}
         .hero-roam-pill.primary{font-size:13px;padding:10px 16px;font-weight:800}
         .hero-roam-pill.flagship{font-size:14px;padding:11px 19px;font-weight:850}
-        @keyframes heroRoamShine{0%,22%,100%{left:-65%}34%{left:145%}}
+         .hero-roam-pill.hero-roam-shimmer-once:after{animation:heroRoamShineOnce 1.8s ease-in-out 1 both}
+        @keyframes heroRoamShineOnce{0%{left:-65%;opacity:0}12%{opacity:.75}82%{opacity:.75}100%{left:145%;opacity:0}}
         .hero-roam-center{position:absolute;z-index:8;left:50%;top:50%;transform:translate(-50%,-50%);width:clamp(380px,46vw,490px);min-height:164px;padding:26px 36px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:1.5px solid rgba(216,181,106,.45);border-radius:38px;background:rgba(7,24,38,.32);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);color:#f8e4b2;box-shadow:0 20px 50px rgba(0,0,0,.45),0 0 26px rgba(216,181,106,.22),inset 0 0 22px rgba(216,181,106,.06);cursor:pointer;transition:border-color .3s ease,box-shadow .3s ease,background .3s ease}
         .hero-roam-center:hover{border-color:rgba(235,205,135,.75);box-shadow:0 24px 60px rgba(0,0,0,.52),0 0 38px rgba(216,181,106,.36),inset 0 0 28px rgba(216,181,106,.10);background:rgba(9,28,45,.42)}
         .hero-roam-center strong{display:block;font-size:clamp(26px,3.2vw,36px);font-weight:750;letter-spacing:.06em;color:#f8e4b2;text-shadow:0 2px 14px rgba(216,181,106,.32);line-height:1.2}
         .hero-roam-center small{display:block;margin-top:10px;font-size:11px;font-weight:600;color:#cbd5e1;letter-spacing:.16em;opacity:.85}
         @media(max-width:700px){.hero-free-roam{min-height:480px}.hero-roam-pill{font-size:9px;padding:7px 9px}.hero-roam-pill.primary,.hero-roam-pill.flagship{font-size:10px;padding:8px 10px}.hero-roam-center{width:min(90vw,340px);min-height:118px;border-radius:28px;padding:16px 18px}.hero-roam-center strong{font-size:21px;letter-spacing:.04em}.hero-roam-center small{font-size:9.5px;margin-top:7px}}
-        @media(prefers-reduced-motion:reduce){.hero-roam-pill:after{animation:none}}
+        @media(prefers-reduced-motion:reduce){.hero-roam-pill.hero-roam-shimmer-once:after{animation:none}}
       `}</style>
 
       {/* 3D Wireframe Globe */}
