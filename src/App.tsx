@@ -18,6 +18,7 @@ import { AdminDashboard } from './components/admin/AdminDashboard';
 import { DEFAULT_APP_DATA } from './data/defaultData';
 import { Loader2 } from 'lucide-react';
 import { Analytics } from '@vercel/analytics/react';
+import { ParticleNetwork3D } from './components/ParticleNetwork3D';
 
 export default function App() {
   const { 
@@ -218,8 +219,11 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#071827] text-[#F8FAFC] transition-colors duration-200">
+    <div className="min-h-screen flex flex-col bg-[#071827] text-[#F8FAFC] transition-colors duration-200 relative">
       
+      {/* Interactive 3D Animated Dots and Connecting Lines Background */}
+      <ParticleNetwork3D />
+
       {/* Top Navigation */}
       <Navbar
         currentTheme={theme}
