@@ -9,13 +9,6 @@ interface HeroProps {
   onSelectExperience?: () => void;
 }
 
-type Point = {
-  x: number; y: number; fromX: number; fromY: number;
-  toX: number; toY: number; start: number; duration: number;
-  opacity: number; leg: number;
-  renderX?: number; renderY?: number;
-};
-
 const LABELS = [
   '14+ Years Exp','ERP Software','Oracle','Qoyod','QuickBooks',
   'MS Office','Advanced Excel','Financial Reporting','Receivables',
@@ -24,24 +17,77 @@ const LABELS = [
   'P&L Account','Balance Sheet',
 ];
 
+// 18 balanced anchor positions distributed gracefully around the center button & 3D globe
+const ANCHORS: { x: number; y: number }[] = [
+  { x: 0.28, y: 0.14 }, // 0: '14+ Years Exp' (upper left, framing the 3D globe)
+  { x: 0.10, y: 0.40 }, // 1: 'ERP Software' (mid-left upper)
+  { x: 0.23, y: 0.35 }, // 2: 'Oracle' (mid-left inner)
+  { x: 0.11, y: 0.63 }, // 3: 'Qoyod' (lower-left upper)
+  { x: 0.24, y: 0.72 }, // 4: 'QuickBooks' (lower-left inner)
+  { x: 0.09, y: 0.86 }, // 5: 'MS Office' (bottom-left)
+  { x: 0.42, y: 0.13 }, // 6: 'Advanced Excel' (top left-center)
+  { x: 0.60, y: 0.14 }, // 7: 'Financial Reporting' (top right-center)
+  { x: 0.77, y: 0.12 }, // 8: 'Receivables' (top right inner)
+  { x: 0.90, y: 0.22 }, // 9: 'VAT Reports & Submission' (top right outer)
+  { x: 0.76, y: 0.34 }, // 10: 'Reconciliations' (mid-right inner)
+  { x: 0.90, y: 0.46 }, // 11: 'Costing' (mid-right outer)
+  { x: 0.75, y: 0.58 }, // 12: 'Monthly Closing' (mid-right lower)
+  { x: 0.89, y: 0.70 }, // 13: 'Cash Handling' (lower-right outer)
+  { x: 0.75, y: 0.82 }, // 14: 'Petty Cash' (bottom-right inner)
+  { x: 0.90, y: 0.89 }, // 15: 'Payables' (far bottom-right)
+  { x: 0.38, y: 0.88 }, // 16: 'P&L Account' (bottom left-center)
+  { x: 0.56, y: 0.86 }, // 17: 'Balance Sheet' (bottom right-center)
+];
+
+// Connecting aesthetic lines between natural neighbor pairs
+const CONNECT_PAIRS = [
+  [6, 7],   // Advanced Excel <-> Financial Reporting
+  [1, 2],   // ERP Software <-> Oracle
+  [10, 12], // Reconciliations <-> Monthly Closing
+];
+
+// Staggered timing offsets (seconds) across a 16s cycle for balanced 50% visibility across all quadrants
+const FADE_OFFSETS: number[] = [
+  0.0,   // 0: '14+ Years Exp' (Left)
+  8.0,   // 1: 'ERP Software' (Left)
+  2.7,   // 2: 'Oracle' (Left)
+  10.7,  // 3: 'Qoyod' (Left)
+  5.3,   // 4: 'QuickBooks' (Left)
+  13.3,  // 5: 'MS Office' (Left)
+  0.0,   // 6: 'Advanced Excel' (Top)
+  8.0,   // 7: 'Financial Reporting' (Top)
+  1.0,   // 8: 'Receivables' (Right)
+  9.0,   // 9: 'VAT Reports & Submission' (Right)
+  5.0,   // 10: 'Reconciliations' (Right)
+  13.0,  // 11: 'Costing' (Right)
+  3.0,   // 12: 'Monthly Closing' (Right)
+  11.0,  // 13: 'Cash Handling' (Right)
+  7.0,   // 14: 'Petty Cash' (Right)
+  15.0,  // 15: 'Payables' (Right)
+  2.0,   // 16: 'P&L Account' (Bottom)
+  10.0,  // 17: 'Balance Sheet' (Bottom)
+];
+
+function getPointOpacity(tSec: number, offsetSec: number): number {
+  const cycle = 16.0;
+  const phase = ((tSec + offsetSec) % cycle + cycle) % cycle;
+  // 0 to 6.0s: fully visible
+  if (phase < 6.0) return 1.0;
+  // 6.0 to 8.0s: smooth ease-in-out cosine fade out
+  if (phase < 8.0) {
+    const p = (phase - 6.0) / 2.0;
+    return 0.5 * (1 + Math.cos(Math.PI * p));
+  }
+  // 8.0 to 14.0s: hidden
+  if (phase < 14.0) return 0.0;
+  // 14.0 to 16.0s: smooth ease-in-out cosine fade in
+  const p = (phase - 14.0) / 2.0;
+  return 0.5 * (1 - Math.cos(Math.PI * p));
+}
+
 const GOLD = '#D8B56A';
 const BLUE = '#69B7E7';
-const smooth = (t: number) => t * t * (3 - 2 * t);
 const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v));
-
-function destination(i: number, leg: number, w: number, h: number): [number, number] {
-  const safeW = Math.max(360, w || 1000);
-  const safeH = Math.max(480, h || 600);
-  const padX = Math.min(130, Math.max(62, safeW * 0.09));
-  const padY = Math.min(100, Math.max(52, safeH * 0.13));
-  const k = (i * 29 + leg * 37) % 101;
-  let x = padX + ((k * 31) % 97) / 97 * Math.max(1, safeW - padX * 2);
-  let y = padY + ((k * 47 + i * 9) % 89) / 89 * Math.max(1, safeH - padY * 2);
-  if (Math.abs(x - safeW / 2) < 170 && Math.abs(y - safeH / 2) < 95) {
-    x = x < safeW / 2 ? safeW * 0.23 : safeW * 0.77;
-  }
-  return [x, y];
-}
 
 function buildSmoothWavePath(
   t: number,
@@ -72,6 +118,51 @@ function buildSmoothWavePath(
   }
   return d;
 }
+
+interface WaveConfig {
+  midY: number;
+  ampA: number;
+  ampB: number;
+  freqA: number;
+  freqB: number;
+  phaseA: number;
+  phaseB: number;
+  speedA: number;
+  speedB: number;
+  gradId: string;
+  glowFilter: string;
+  strokeWidth: number;
+  opacity: number;
+}
+
+// Exactly 20 flowing wave lines: 15 blue/cyan + 5 consecutive metallic gold lines in the middle
+const WAVE_CONFIGS: WaveConfig[] = [
+  // 1-8: Upper Blue / Cyan lines (8 lines)
+  { midY: 504, ampA: 15, ampB: 8, freqA: 0.0051, freqB: 0.0102, phaseA: 0.0, phaseB: 1.1, speedA: 1.12, speedB: 0.88, gradId: 'waveGrad1', glowFilter: 'heroWaveGlow', strokeWidth: 1.1, opacity: 0.45 },
+  { midY: 508, ampA: 17, ampB: 9, freqA: 0.0057, freqB: 0.0116, phaseA: 0.8, phaseB: 2.2, speedA: 1.25, speedB: 1.02, gradId: 'waveGrad2', glowFilter: 'heroWaveGlow', strokeWidth: 0.9, opacity: 0.40 },
+  { midY: 512, ampA: 14, ampB: 7, freqA: 0.0063, freqB: 0.0124, phaseA: 1.6, phaseB: 0.6, speedA: 1.02, speedB: 1.20, gradId: 'waveGrad3', glowFilter: 'heroWaveGlow', strokeWidth: 1.2, opacity: 0.50 },
+  { midY: 516, ampA: 18, ampB: 10, freqA: 0.0049, freqB: 0.0097, phaseA: 2.4, phaseB: 1.7, speedA: 1.18, speedB: 0.82, gradId: 'waveGrad1', glowFilter: 'heroWaveGlow', strokeWidth: 1.0, opacity: 0.45 },
+  { midY: 520, ampA: 16, ampB: 8, freqA: 0.0055, freqB: 0.0111, phaseA: 3.2, phaseB: 2.8, speedA: 0.92, speedB: 1.12, gradId: 'waveGrad4', glowFilter: 'heroWaveGlow', strokeWidth: 1.3, opacity: 0.55 },
+  { midY: 523, ampA: 19, ampB: 11, freqA: 0.0060, freqB: 0.0119, phaseA: 4.0, phaseB: 0.9, speedA: 1.22, speedB: 0.96, gradId: 'waveGrad2', glowFilter: 'heroWaveGlow', strokeWidth: 1.0, opacity: 0.45 },
+  { midY: 527, ampA: 15, ampB: 7, freqA: 0.0052, freqB: 0.0107, phaseA: 4.8, phaseB: 2.0, speedA: 1.08, speedB: 1.26, gradId: 'waveGrad3', glowFilter: 'heroWaveGlow', strokeWidth: 1.2, opacity: 0.55 },
+  { midY: 531, ampA: 17, ampB: 9, freqA: 0.0065, freqB: 0.0129, phaseA: 5.6, phaseB: 3.1, speedA: 1.32, speedB: 0.92, gradId: 'waveGrad1', glowFilter: 'heroWaveGlow', strokeWidth: 0.9, opacity: 0.45 },
+
+  // 9-13: Middle Metallic Golden lines (#D4AF37) with soft golden glow (5 consecutive lines)
+  { midY: 535, ampA: 18, ampB: 10, freqA: 0.0054, freqB: 0.0114, phaseA: 0.5, phaseB: 1.5, speedA: 1.05, speedB: 1.18, gradId: 'waveGradGold2', glowFilter: 'heroWaveGlowGold', strokeWidth: 1.3, opacity: 0.70 },
+  { midY: 539, ampA: 20, ampB: 11, freqA: 0.0059, freqB: 0.0121, phaseA: 1.4, phaseB: 2.6, speedA: 1.20, speedB: 1.00, gradId: 'waveGradGold1', glowFilter: 'heroWaveGlowGold', strokeWidth: 1.5, opacity: 0.85 },
+  { midY: 543, ampA: 19, ampB: 10, freqA: 0.0051, freqB: 0.0109, phaseA: 2.3, phaseB: 0.7, speedA: 1.12, speedB: 1.24, gradId: 'waveGradGold1', glowFilter: 'heroWaveGlowGold', strokeWidth: 1.6, opacity: 0.90 },
+  { midY: 547, ampA: 21, ampB: 12, freqA: 0.0062, freqB: 0.0126, phaseA: 3.1, phaseB: 1.9, speedA: 1.28, speedB: 0.95, gradId: 'waveGradGold1', glowFilter: 'heroWaveGlowGold', strokeWidth: 1.5, opacity: 0.85 },
+  { midY: 551, ampA: 17, ampB: 9, freqA: 0.0056, freqB: 0.0117, phaseA: 4.0, phaseB: 3.0, speedA: 0.98, speedB: 1.15, gradId: 'waveGradGold2', glowFilter: 'heroWaveGlowGold', strokeWidth: 1.3, opacity: 0.70 },
+
+  // 14-20: Lower Blue / Cyan lines (7 lines)
+  { midY: 555, ampA: 18, ampB: 10, freqA: 0.0050, freqB: 0.0106, phaseA: 4.9, phaseB: 1.2, speedA: 1.15, speedB: 1.28, gradId: 'waveGrad1', glowFilter: 'heroWaveGlow', strokeWidth: 1.2, opacity: 0.55 },
+  { midY: 559, ampA: 16, ampB: 8, freqA: 0.0064, freqB: 0.0128, phaseA: 5.7, phaseB: 2.4, speedA: 1.30, speedB: 0.94, gradId: 'waveGrad3', glowFilter: 'heroWaveGlow', strokeWidth: 1.0, opacity: 0.45 },
+  { midY: 562, ampA: 17, ampB: 9, freqA: 0.0053, freqB: 0.0113, phaseA: 0.6, phaseB: 0.8, speedA: 1.04, speedB: 1.16, gradId: 'waveGrad2', glowFilter: 'heroWaveGlow', strokeWidth: 1.3, opacity: 0.60 },
+  { midY: 566, ampA: 15, ampB: 8, freqA: 0.0058, freqB: 0.0120, phaseA: 1.5, phaseB: 1.9, speedA: 1.22, speedB: 1.05, gradId: 'waveGrad4', glowFilter: 'heroWaveGlow', strokeWidth: 1.1, opacity: 0.50 },
+  { midY: 570, ampA: 18, ampB: 10, freqA: 0.0048, freqB: 0.0101, phaseA: 2.4, phaseB: 3.1, speedA: 1.10, speedB: 1.32, gradId: 'waveGrad1', glowFilter: 'heroWaveGlow', strokeWidth: 1.2, opacity: 0.55 },
+  { midY: 573, ampA: 14, ampB: 7, freqA: 0.0066, freqB: 0.0131, phaseA: 3.3, phaseB: 1.4, speedA: 1.36, speedB: 0.90, gradId: 'waveGrad3', glowFilter: 'heroWaveGlow', strokeWidth: 0.9, opacity: 0.45 },
+  { midY: 577, ampA: 16, ampB: 9, freqA: 0.0055, freqB: 0.0115, phaseA: 4.2, phaseB: 2.5, speedA: 1.02, speedB: 1.22, gradId: 'waveGrad2', glowFilter: 'heroWaveGlow', strokeWidth: 1.3, opacity: 0.55 },
+];
 
 function MeshGlobe() {
   const ref = useRef<HTMLCanvasElement>(null);
@@ -159,8 +250,7 @@ export function Hero(_props: HeroProps) {
   const stageRef = useRef<HTMLDivElement>(null);
   const pointsRef = useRef<(HTMLDivElement | null)[]>([]);
   const svgRef = useRef<SVGSVGElement>(null);
-  const wavePath1Ref = useRef<SVGPathElement>(null);
-  const wavePath2Ref = useRef<SVGPathElement>(null);
+  const wavePathsRef = useRef<(SVGPathElement | null)[]>([]);
 
   useEffect(() => {
     const stage = stageRef.current;
@@ -173,17 +263,25 @@ export function Hero(_props: HeroProps) {
     let isUnmounted = false;
     const start = performance.now();
 
-    // Slower movement by ~35-40%: journey duration lengthened from 5.8s-9.7s to 9.5s-15.7s
-    const data: Point[] = LABELS.map((_, i) => {
-      const [x, y] = destination(i, 0, stageW, stageH);
-      const [toX, toY] = destination(i, 1, stageW, stageH);
-      return {
-        x, y, fromX: x, fromY: y, toX, toY,
-        start: start - (i % 5) * 1800,
-        duration: 9500 + (i % 6) * 1250,
-        opacity: 1, leg: 1,
-      };
-    });
+    // Mouse parallax tracking
+    let mouseX = 0;
+    let mouseY = 0;
+    let targetMouseX = 0;
+    let targetMouseY = 0;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const rect = stage.getBoundingClientRect();
+      if (rect.width > 0 && rect.height > 0) {
+        targetMouseX = clamp(((e.clientX - rect.left) / rect.width - 0.5) * 2, -1, 1);
+        targetMouseY = clamp(((e.clientY - rect.top) / rect.height - 0.5) * 2, -1, 1);
+      }
+    };
+    const handleMouseLeave = () => {
+      targetMouseX = 0;
+      targetMouseY = 0;
+    };
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    document.addEventListener('mouseleave', handleMouseLeave);
 
     const resize = () => {
       stageW = stage.clientWidth || window.innerWidth;
@@ -206,6 +304,9 @@ export function Hero(_props: HeroProps) {
       return { path, dot };
     });
 
+    // Store calculated positions for connecting lines
+    const currentPositions: { x: number; y: number; opacity: number }[] = Array.from({ length: LABELS.length }, () => ({ x: 0, y: 0, opacity: 0 }));
+
     const frame = (now: number) => {
       if (isUnmounted) return;
       raf = requestAnimationFrame(frame);
@@ -213,82 +314,97 @@ export function Hero(_props: HeroProps) {
       try {
         const tSec = now * 0.001;
 
-        // 1. Update the Two Blue/Cyan Wave Lines (Geometry updated smoothly on SVG path)
-        if (wavePath1Ref.current) {
-          const d1 = buildSmoothWavePath(tSec, 295, 26, 14, 0.0055, 0.011, 0, 1.0, 1.25, 0.95);
-          wavePath1Ref.current.setAttribute('d', d1);
-        }
-        if (wavePath2Ref.current) {
-          const d2 = buildSmoothWavePath(tSec, 312, 22, 12, 0.0068, 0.013, 2.4, 0.5, 1.05, 1.35);
-          wavePath2Ref.current.setAttribute('d', d2);
-        }
+        // Smooth mouse parallax damping
+        mouseX += (targetMouseX - mouseX) * 0.05;
+        mouseY += (targetMouseY - mouseY) * 0.05;
 
-        // 2. Update Accounting Points (Continuous gentle roam, 35-40% slower, unfreezable)
-        data.forEach((p, i) => {
-          let progress = (now - p.start) / p.duration;
-          if (progress >= 1) {
-            p.leg++;
-            p.fromX = p.toX;
-            p.fromY = p.toY;
-            const [nextX, nextY] = destination(i, p.leg, stageW, stageH);
-            p.toX = nextX;
-            p.toY = nextY;
-            p.start = now;
-            p.duration = 9500 + ((i + p.leg) % 6) * 1250;
-            progress = 0;
-          }
-
-          const t = smooth(clamp(progress, 0, 1));
-          p.x = p.fromX + (p.toX - p.fromX) * t;
-          p.y = p.fromY + (p.toY - p.fromY) * t;
-
-          // Opacity fade cycle: ~11-14 points remain visible, rotating continuously
-          const phase = ((now / 1000 + i * 1.55) % 18);
-          const fade = phase < 11.5 ? 1
-            : phase < 13.5 ? 1 - (phase - 11.5) / 2
-            : phase < 15.5 ? 0
-            : phase < 17.5 ? (phase - 15.5) / 2
-            : 1;
-          p.opacity = clamp(fade, 0, 1);
-
-          // Subtle floating motion enhancement (35-40% slower, gentle 5-10px V / 3-6px H)
-          const phaseShiftX = i * 1.73 + (i % 5) * 0.8;
-          const phaseShiftY = i * 2.39 + (i % 4) * 1.1;
-          const speedX = 3500 + (i % 6) * 320;
-          const speedY = 4400 + (i % 5) * 350;
-          const floatX = Math.sin(now / speedX + phaseShiftX) * (3.5 + (i % 3) * 0.6);
-          const floatY = Math.cos(now / speedY + phaseShiftY) * (6.0 + (i % 4) * 0.8);
-          const curX = clamp(p.x + floatX, 20, Math.max(20, stageW - 20));
-          const curY = clamp(p.y + floatY, 20, Math.max(20, stageH - 20));
-          p.renderX = curX;
-          p.renderY = curY;
-
-          const el = pointsRef.current[i];
-          if (el) {
-            el.style.transform = `translate3d(${curX.toFixed(1)}px,${curY.toFixed(1)}px,0) translate(-50%,-50%) scale(${(0.97 + 0.04 * Math.sin(now / 3200 + i)).toFixed(3)})`;
-            el.style.opacity = p.opacity.toFixed(3);
+        // 1. Update the 10 Blue/Cyan Wave Lines in the bottom area of Home
+        WAVE_CONFIGS.forEach((cfg, idx) => {
+          const pathEl = wavePathsRef.current[idx];
+          if (pathEl) {
+            const d = buildSmoothWavePath(
+              tSec,
+              cfg.midY,
+              cfg.ampA,
+              cfg.ampB,
+              cfg.freqA,
+              cfg.freqB,
+              cfg.phaseA,
+              cfg.phaseB,
+              cfg.speedA,
+              cfg.speedB
+            );
+            pathEl.setAttribute('d', d);
           }
         });
 
-        // 3. Update Connecting SVG Lines
+        const ampScale = Math.min(1, Math.max(0.65, stageW / 1200));
+
+        // 2. Update Accounting Labels (Gentle independent floating around anchor positions, Mohsin Bilal style)
+        LABELS.forEach((_, i) => {
+          const anchor = ANCHORS[i] || { x: 0.5, y: 0.5 };
+          const baseX = stageW * anchor.x;
+          const baseY = stageH * anchor.y;
+
+          // Multi-frequency Lissajous harmonic drift for smooth, organic ease-in-out movement
+          const sX1 = 3400 + (i % 7) * 360;
+          const sX2 = 4800 + (i % 5) * 410;
+          const sY1 = 3800 + (i % 6) * 380;
+          const sY2 = 5300 + (i % 4) * 450;
+
+          const pX1 = i * 1.732;
+          const pX2 = i * 2.618 + 0.9;
+          const pY1 = i * 2.236 + 1.4;
+          const pY2 = i * 1.414 + 2.3;
+
+          const ampX = (13 + (i % 5) * 2.5) * ampScale; // ~13px to 23px
+          const ampY = (15 + (i % 4) * 3.0) * ampScale; // ~15px to 24px
+
+          const driftX = Math.sin(now / sX1 + pX1) * (ampX * 0.65) + Math.cos(now / sX2 + pX2) * (ampX * 0.35);
+          const driftY = Math.sin(now / sY1 + pY1) * (ampY * 0.65) + Math.cos(now / sY2 + pY2) * (ampY * 0.35);
+
+          // Subtle depth / parallax breathing
+          const depthSine = Math.sin(now / 3900 + i * 1.3);
+          const scale = 0.985 + 0.025 * depthSine;
+
+          const depthFactor = 0.6 + (i % 5) * 0.2;
+          const parallaxX = mouseX * 14 * depthFactor * ampScale;
+          const parallaxY = mouseY * 12 * depthFactor * ampScale;
+
+          const curX = clamp(baseX + driftX + parallaxX, 45, Math.max(45, stageW - 45));
+          const curY = clamp(baseY + driftY + parallaxY, 25, Math.max(25, stageH - 25));
+
+          // Staggered 50% visibility fade (smooth ease-in-out cosine transitions, 16s cycle)
+          const op = getPointOpacity(tSec, FADE_OFFSETS[i] ?? (i * 0.9));
+          currentPositions[i] = { x: curX, y: curY, opacity: op };
+
+          const el = pointsRef.current[i];
+          if (el) {
+            el.style.transform = `translate3d(${curX.toFixed(1)}px,${curY.toFixed(1)}px,0) translate(-50%,-50%) scale(${scale.toFixed(3)})`;
+            el.style.opacity = op.toFixed(3);
+          }
+        });
+
+        // 3. Update Connecting SVG Lines between natural neighbor pairs
         lines.forEach(({ path, dot }, j) => {
-          const cycle = 8500 + j * 1200;
-          const n = Math.floor((now - start) / cycle);
-          const a = data[(n * 3 + j * 5) % data.length];
-          const b = data[(n * 3 + j * 5 + 6 + j) % data.length];
-          const ax = a.renderX ?? a.x;
-          const ay = a.renderY ?? a.y;
-          const bx = b.renderX ?? b.x;
-          const by = b.renderY ?? b.y;
-          const cx = (ax + bx) / 2, cy = (ay + by) / 2 - 40;
-          path.setAttribute('d', `M ${ax.toFixed(1)} ${ay.toFixed(1)} Q ${cx.toFixed(1)} ${cy.toFixed(1)} ${bx.toFixed(1)} ${by.toFixed(1)}`);
+          const [idxA, idxB] = CONNECT_PAIRS[j] || [0, 1];
+          const a = currentPositions[idxA];
+          const b = currentPositions[idxB];
+          if (!a || !b || a.x === 0 || b.x === 0) return;
+
+          const cx = (a.x + b.x) / 2;
+          const cy = (a.y + b.y) / 2 - 35;
+          path.setAttribute('d', `M ${a.x.toFixed(1)} ${a.y.toFixed(1)} Q ${cx.toFixed(1)} ${cy.toFixed(1)} ${b.x.toFixed(1)} ${b.y.toFixed(1)}`);
+
+          const cycle = 7000 + j * 1500;
           const t = ((now - start) % cycle) / cycle;
-          const visibility = Math.max(0, Math.min(1, t * 5, (1 - t) * 5)) * a.opacity * b.opacity;
-          path.setAttribute('opacity', String((visibility * 0.33).toFixed(3)));
+          const visibility = Math.max(0, Math.min(1, t * 4, (1 - t) * 4)) * Math.min(a.opacity, b.opacity);
+          path.setAttribute('opacity', String((visibility * 0.35).toFixed(3)));
           dot.setAttribute('opacity', String(visibility.toFixed(3)));
+
           const u = 1 - t;
-          dot.setAttribute('cx', String((u * u * ax + 2 * u * t * cx + t * t * bx).toFixed(1)));
-          dot.setAttribute('cy', String((u * u * ay + 2 * u * t * cy + t * t * by).toFixed(1)));
+          dot.setAttribute('cx', String((u * u * a.x + 2 * u * t * cx + t * t * b.x).toFixed(1)));
+          dot.setAttribute('cy', String((u * u * a.y + 2 * u * t * cy + t * t * b.y).toFixed(1)));
         });
       } catch (err) {
         // Guard against any transient error breaking the animation loop
@@ -309,6 +425,8 @@ export function Hero(_props: HeroProps) {
     return () => {
       isUnmounted = true;
       cancelAnimationFrame(raf);
+      window.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseleave', handleMouseLeave);
       document.removeEventListener('visibilitychange', handleVisibility);
       window.removeEventListener('focus', handleVisibility);
       observer.disconnect();
@@ -359,40 +477,82 @@ export function Hero(_props: HeroProps) {
       {/* 3D Wireframe Globe */}
       <MeshGlobe />
 
-      {/* Two flowing blue/cyan wave lines with smooth SVG path geometry propagation */}
+      {/* 10 Flowing blue/cyan wave lines in the bottom area of Home */}
       <svg className="hero-flowing-waves" viewBox="0 0 1440 600" preserveAspectRatio="none" aria-hidden="true">
         <defs>
-          <linearGradient id="heroWaveGrad1" x1="0%" y1="0%" x2="100%" y2="0%">
+          <linearGradient id="waveGrad1" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="#38bdf8" stopOpacity="0" />
             <stop offset="12%" stopColor="#38bdf8" stopOpacity="0.45" />
             <stop offset="50%" stopColor="#67e8f9" stopOpacity="0.8" />
             <stop offset="88%" stopColor="#38bdf8" stopOpacity="0.45" />
             <stop offset="100%" stopColor="#38bdf8" stopOpacity="0" />
           </linearGradient>
-          <linearGradient id="heroWaveGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
+          <linearGradient id="waveGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="#60a5fa" stopOpacity="0" />
             <stop offset="15%" stopColor="#60a5fa" stopOpacity="0.4" />
-            <stop offset="50%" stopColor="#38bdf8" stopOpacity="0.7" />
+            <stop offset="50%" stopColor="#38bdf8" stopOpacity="0.75" />
             <stop offset="85%" stopColor="#60a5fa" stopOpacity="0.4" />
             <stop offset="100%" stopColor="#60a5fa" stopOpacity="0" />
           </linearGradient>
-          <filter id="heroWaveGlow1" x="-10%" y="-30%" width="120%" height="160%">
-            <feGaussianBlur stdDeviation="3" result="blur" />
-            <feMerge>
-              <feMergeNode in="blur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-          <filter id="heroWaveGlow2" x="-10%" y="-30%" width="120%" height="160%">
+          <linearGradient id="waveGrad3" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#2dd4bf" stopOpacity="0" />
+            <stop offset="15%" stopColor="#2dd4bf" stopOpacity="0.35" />
+            <stop offset="50%" stopColor="#38bdf8" stopOpacity="0.7" />
+            <stop offset="85%" stopColor="#2dd4bf" stopOpacity="0.35" />
+            <stop offset="100%" stopColor="#2dd4bf" stopOpacity="0" />
+          </linearGradient>
+          <linearGradient id="waveGrad4" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#818cf8" stopOpacity="0" />
+            <stop offset="15%" stopColor="#818cf8" stopOpacity="0.3" />
+            <stop offset="50%" stopColor="#60a5fa" stopOpacity="0.65" />
+            <stop offset="85%" stopColor="#818cf8" stopOpacity="0.3" />
+            <stop offset="100%" stopColor="#818cf8" stopOpacity="0" />
+          </linearGradient>
+
+          {/* Subtle Metallic Golden Gradients (#D4AF37) for middle 5 lines */}
+          <linearGradient id="waveGradGold1" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#D4AF37" stopOpacity="0" />
+            <stop offset="12%" stopColor="#D4AF37" stopOpacity="0.55" />
+            <stop offset="50%" stopColor="#FDE68A" stopOpacity="0.95" />
+            <stop offset="88%" stopColor="#D4AF37" stopOpacity="0.55" />
+            <stop offset="100%" stopColor="#D4AF37" stopOpacity="0" />
+          </linearGradient>
+          <linearGradient id="waveGradGold2" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#C5A028" stopOpacity="0" />
+            <stop offset="15%" stopColor="#D4AF37" stopOpacity="0.50" />
+            <stop offset="50%" stopColor="#F5D77F" stopOpacity="0.85" />
+            <stop offset="85%" stopColor="#D4AF37" stopOpacity="0.50" />
+            <stop offset="100%" stopColor="#C5A028" stopOpacity="0" />
+          </linearGradient>
+
+          <filter id="heroWaveGlow" x="-10%" y="-30%" width="120%" height="160%">
             <feGaussianBlur stdDeviation="2.5" result="blur" />
             <feMerge>
               <feMergeNode in="blur" />
               <feMergeNode in="SourceGraphic" />
             </feMerge>
           </filter>
+
+          {/* Soft Golden Glow Filter */}
+          <filter id="heroWaveGlowGold" x="-10%" y="-30%" width="120%" height="160%">
+            <feGaussianBlur stdDeviation="3.0" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
         </defs>
-        <path ref={wavePath1Ref} fill="none" stroke="url(#heroWaveGrad1)" strokeWidth="1.6" filter="url(#heroWaveGlow1)" />
-        <path ref={wavePath2Ref} fill="none" stroke="url(#heroWaveGrad2)" strokeWidth="1.3" filter="url(#heroWaveGlow2)" />
+        {WAVE_CONFIGS.map((cfg, idx) => (
+          <path
+            key={idx}
+            ref={el => { wavePathsRef.current[idx] = el; }}
+            fill="none"
+            stroke={`url(#${cfg.gradId})`}
+            strokeWidth={cfg.strokeWidth}
+            opacity={cfg.opacity}
+            filter={`url(#${cfg.glowFilter})`}
+          />
+        ))}
       </svg>
 
       {/* Floating Accounting Points & Connecting lines stage */}
