@@ -237,7 +237,7 @@ function MeshGlobe() {
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, size, size);
       // Slightly smaller than the original globe; extra margin protects the outer orbits.
-      radius = size * .285;
+      radius = size * .315;
       const c = size / 2;
       const halo = ctx.createRadialGradient(c, c, radius * .15, c, c, radius * 1.55);
       halo.addColorStop(0, 'rgba(22,170,207,.13)');
@@ -246,14 +246,14 @@ function MeshGlobe() {
       ctx.fillStyle = halo; ctx.beginPath(); ctx.arc(c, c, radius * 1.55, 0, TAU); ctx.fill();
       for (let lat = -75; lat <= 75; lat += 15) {
         const phi = lat * Math.PI / 180;
-        for (let j = 0; j < 64; j++) line(sphere(phi, j * TAU / 64), sphere(phi, (j + 1) * TAU / 64), cyan, .24, .65);
+        for (let j = 0; j < 64; j++) line(sphere(phi, j * TAU / 64), sphere(phi, (j + 1) * TAU / 64), cyan, .34, .72);
       }
       for (let j = 0; j < 16; j++) {
         const lon = j * TAU / 16;
-        for (let k = 0; k < 48; k++) line(sphere(-Math.PI / 2 + k * Math.PI / 48, lon), sphere(-Math.PI / 2 + (k + 1) * Math.PI / 48, lon), cyan, .17, .6);
+        for (let k = 0; k < 48; k++) line(sphere(-Math.PI / 2 + k * Math.PI / 48, lon), sphere(-Math.PI / 2 + (k + 1) * Math.PI / 48, lon), cyan, .25, .68);
       }
-      edges.forEach(([i, j]) => line(nodes[i].map(x => x * 1.008), nodes[j].map(x => x * 1.008), gold, .21, .65));
-      nodes.forEach((p, i) => dot(p.map(x => x * 1.012), i % 5 === 0 ? gold : cyan, i % 5 === 0 ? 2 : 1.45, .7));
+      edges.forEach(([i, j]) => line(nodes[i].map(x => x * 1.008), nodes[j].map(x => x * 1.008), gold, .24, .65));
+      nodes.forEach((p, i) => dot(p.map(x => x * 1.012), i % 5 === 0 ? gold : cyan, i % 5 === 0 ? 2 : 1.6, .79));
       for (let j = 0; j < 5; j++) dot(sphere((j - 2) * .42, time * (.18 + j * .04) + j * 1.7, 1.018), gold, 2.4, .88);
       for (let o = 0; o < 2; o++) {
         const tilt = o === 0 ? .28 : -.45;
