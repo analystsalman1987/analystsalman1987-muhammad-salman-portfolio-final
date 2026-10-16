@@ -498,16 +498,20 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
                           <div className="mt-0.5 shrink-0 flex items-center justify-center w-4 h-4 rounded-full bg-teal-500/20 text-teal-300 border border-teal-500/30">
                             <span className="w-1.5 h-1.5 rounded-full bg-[#D8B56A]" />
                           </div>
-                          <span className="leading-relaxed">
+                          <span className="min-w-0 flex-1 leading-relaxed">
                             {hasHeading ? (
-                              <>
-                                <strong className="font-bold text-white text-[12.5px] sm:text-[13.5px]">
+                              <span className="flex flex-col gap-1">
+                                <strong className="block font-extrabold text-[#F1D38A] text-[13.5px] sm:text-[14.5px] leading-snug tracking-[0.01em]">
                                   {heading}:
-                                </strong>{' '}
-                                {detail}
-                              </>
+                                </strong>
+                                <span className="block text-slate-200/90 font-normal text-xs sm:text-[13px] leading-relaxed">
+                                  {detail}
+                                </span>
+                              </span>
                             ) : (
-                              resp
+                              <span className="block text-slate-200/90 font-normal text-xs sm:text-[13px] leading-relaxed">
+                                {resp}
+                              </span>
                             )}
                           </span>
                         </li>
