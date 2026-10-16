@@ -167,274 +167,130 @@ function MeshGlobe() {
   const ref = useRef<HTMLCanvasElement>(null);
   useEffect(() => {
     const canvas = ref.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-    const count = 108;
-    const nodes = Array.from({ length: count }, (_, i) => {
-      const y = 1 - 2 * (i + .5) / count;
+    const ctx = canvas?.getContext('2d');
+    if (!canvas || !ctx) return;
+    const TAU = Math.PI * 2;
+    const cyan: [number, number, number] = [48, 222, 250];
+    const gold: [number, number, number] = [244, 198, 116];
+    const rgba = (rgb: number[], a: number) => `rgba(${rgb[0]},${rgb[1]},${rgb[2]},${a})`;
+    let raf = 0;
+    let yaw = .35, pitch = -.22, time = 0;
+    let dragging = false, lastX = 0, lastY = 0;
+    let lastFrame = 0;
+    let size = 0, radius = 0;
+    const nodes = Array.from({ length: 48 }, (_, i) => {
+      const y = 1 - 2 * (i + .5) / 48;
+      const angle = i * Math.PI * (3 - Math.sqrt(5));
       const r = Math.sqrt(1 - y * y);
-      const a = i * Math.PI * (3 - Math.sqrt(5));
-      return { x: Math.cos(a) * r, y, z: Math.sin(a) * r };
+      return [r * Math.cos(angle), y, r * Math.sin(angle)];
     });
     const edges: [number, number][] = [];
-    nodes.forEach((a, i) => {
-      nodes.map((b, j) => ({ j, d: (a.x-b.x)**2+(a.y-b.y)**2+(a.z-b.z)**2 }))
-        .filter(v => v.j !== i).sort((a,b) => a.d-b.d).slice(0, 5)
-        .forEach(v => { if (i < v.j) edges.push([i, v.j]); });
+    nodes.forEach((p, i) => {
+      const nearest = nodes.map((q, j) => ({ j, d: (p[0]-q[0])**2 + (p[1]-q[1])**2 + (p[2]-q[2])**2 }))
+        .filter(v => v.j !== i).sort((a, b) => a.d - b.d).slice(0, 3);
+      nearest.forEach(v => { if (i < v.j) edges.push([i, v.j]); });
     });
-
-    // Helper to calculate 3D orbit point with pitch, roll, and continuous yaw rotation
-    const getOrbitPoint = (
-      lambda: number,
-      r: number,
-      pitch: number,
-      roll: number,
-      yaw: number
-    ) => {
-      const x0 = r * Math.cos(lambda);
-      const y0 = 0;
-      const z0 = r * Math.sin(lambda);
-
-      // Pitch around X
-      const cosP = Math.cos(pitch), sinP = Math.sin(pitch);
-      const x1 = x0;
-      const y1 = -z0 * sinP;
-      const z1 = z0 * cosP;
-
-      // Roll around Z
-      const cosR = Math.cos(roll), sinR = Math.sin(roll);
-      const x2 = x1 * cosR - y1 * sinR;
-      const y2 = x1 * sinR + y1 * cosR;
-      const z2 = z1;
-
-      // Yaw around Y
-      const cosY = Math.cos(yaw), sinY = Math.sin(yaw);
-      const x3 = x2 * cosY + z2 * sinY;
-      const y3 = y2;
-      const z3 = -x2 * sinY + z2 * cosY;
-
-      return { x: x3, y: y3, z: z3 };
+    const rotate = (p: number[]) => {
+      const cy = Math.cos(yaw), sy = Math.sin(yaw);
+      const x = p[0] * cy + p[2] * sy;
+      const z = -p[0] * sy + p[2] * cy;
+      const cp = Math.cos(pitch), sp = Math.sin(pitch);
+      return [x, p[1] * cp - z * sp, p[1] * sp + z * cp];
     };
-
-    let raf = 0;
+    const project = (p: number[]) => {
+      const v = rotate(p);
+      const perspective = 3.7 / (3.7 - v[2] * .3);
+      return [size / 2 + v[0] * radius * perspective, size / 2 + v[1] * radius * perspective, v[2], perspective];
+    };
+    const line = (a: number[], b: number[], color: number[], alpha: number, width: number) => {
+      const p = project(a), q = project(b);
+      const depth = Math.max(-1, Math.min(1, (p[2] + q[2]) / 2));
+      ctx.strokeStyle = rgba(color, alpha * (.32 + .68 * (depth + 1) / 2));
+      ctx.lineWidth = width;
+      ctx.beginPath(); ctx.moveTo(p[0], p[1]); ctx.lineTo(q[0], q[1]); ctx.stroke();
+    };
+    const dot = (p: number[], color: number[], r: number, alpha: number) => {
+      const v = project(p);
+      const a = alpha * (.38 + .62 * (Math.max(-1, Math.min(1, v[2])) + 1) / 2);
+      const glow = ctx.createRadialGradient(v[0], v[1], 0, v[0], v[1], r * 4);
+      glow.addColorStop(0, rgba(color, a));
+      glow.addColorStop(.25, rgba(color, a * .42));
+      glow.addColorStop(1, rgba(color, 0));
+      ctx.fillStyle = glow; ctx.beginPath(); ctx.arc(v[0], v[1], r * 4, 0, TAU); ctx.fill();
+      ctx.fillStyle = rgba(color, Math.min(1, a + .15));
+      ctx.beginPath(); ctx.arc(v[0], v[1], r * .65, 0, TAU); ctx.fill();
+    };
+    const sphere = (lat: number, lon: number, r = 1) => [r * Math.cos(lat) * Math.cos(lon), r * Math.sin(lat), r * Math.cos(lat) * Math.sin(lon)];
+    const orbit = (tilt: number, angle: number, r: number) => [r * Math.cos(angle), r * Math.sin(angle) * Math.cos(tilt), r * Math.sin(angle) * Math.sin(tilt)];
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const render = (ms: number) => {
-      const size = canvas.clientWidth;
+      const dt = lastFrame ? Math.min((ms - lastFrame) / 1000, .05) : 0;
+      lastFrame = ms;
+      if (!reducedMotion) {
+        time += dt;
+        if (!dragging) yaw += dt * .105;
+      }
+      size = canvas.clientWidth;
+      if (!size) { raf = requestAnimationFrame(render); return; }
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       const px = Math.round(size * dpr);
-      if (canvas.width !== px || canvas.height !== px) {
-        canvas.width = px; canvas.height = px;
-      }
+      if (canvas.width !== px || canvas.height !== px) { canvas.width = px; canvas.height = px; }
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, size, size);
-
-      // Diameter reduced by 15% (scale 0.85 of original 0.415: 0.415 * 0.85 = 0.35275)
-      const t = ms / 1000, c = size / 2, radius = size * 0.352;
-      const yaw = t * .23, pitch = Math.sin(t * .19) * .17;
-      const projected = nodes.map((p, i) => {
-        const deformation = 1 + .012 * Math.sin(t * 1.1 + i * .35);
-        const x = p.x * deformation, y = p.y * deformation, z = p.z * deformation;
-        const rx = x*Math.cos(yaw)+z*Math.sin(yaw);
-        const rz = -x*Math.sin(yaw)+z*Math.cos(yaw);
-        const ry = y*Math.cos(pitch)-rz*Math.sin(pitch);
-        const depth = y*Math.sin(pitch)+rz*Math.cos(pitch);
-        const perspective = 2.9/(2.9-depth*.2);
-        return { x:c+rx*radius*perspective, y:c+ry*radius*perspective, z:depth };
-      });
-
-      // Background atmospheric halo
-      const halo = ctx.createRadialGradient(c,c,radius*.15,c,c,radius*1.2);
-      halo.addColorStop(0,'rgba(0,124,245,.10)');
-      halo.addColorStop(.7,'rgba(10,148,244,.09)');
-      halo.addColorStop(1,'rgba(0,90,200,0)');
-      ctx.fillStyle=halo;ctx.fillRect(0,0,size,size);
-
-      // --- Style 2: Two 3D Orbital Rings (Cyan Blue #4ACAFF & Muted Champagne #C4B6A0) ---
-      const STEPS = 80;
-      const dLambda = (Math.PI * 2) / STEPS;
-
-      // Orbit 1: Cyan Blue (#4ACAFF)
-      const r1 = radius * 1.34;
-      const pitch1 = 1.05;
-      const roll1 = 0.42;
-      const yaw1 = t * 0.22;
-
-      // Orbit 2: Muted Champagne (#C4B6A0) - 40-50% less prominent
-      const r2 = radius * 1.25;
-      const pitch2 = -0.85;
-      const roll2 = -0.62;
-      const yaw2 = -t * 0.16;
-
-      interface OrbitSeg { x1: number; y1: number; x2: number; y2: number; isFront: boolean; }
-      const segs1: OrbitSeg[] = [];
-      const segs2: OrbitSeg[] = [];
-
-      for (let k = 0; k < STEPS; k++) {
-        const l1 = k * dLambda;
-        const l2 = (k + 1) * dLambda;
-
-        // Orbit 1
-        const pt1A = getOrbitPoint(l1, r1, pitch1, roll1, yaw1);
-        const pt1B = getOrbitPoint(l2, r1, pitch1, roll1, yaw1);
-        const persp1A = 2.9 / (2.9 - (pt1A.z / radius) * 0.2);
-        const persp1B = 2.9 / (2.9 - (pt1B.z / radius) * 0.2);
-        const zMid1 = (pt1A.z + pt1B.z) / 2;
-        segs1.push({
-          x1: c + pt1A.x * persp1A,
-          y1: c + pt1A.y * persp1A,
-          x2: c + pt1B.x * persp1B,
-          y2: c + pt1B.y * persp1B,
-          isFront: zMid1 >= 0,
-        });
-
-        // Orbit 2
-        const pt2A = getOrbitPoint(l1, r2, pitch2, roll2, yaw2);
-        const pt2B = getOrbitPoint(l2, r2, pitch2, roll2, yaw2);
-        const persp2A = 2.9 / (2.9 - (pt2A.z / radius) * 0.2);
-        const persp2B = 2.9 / (2.9 - (pt2B.z / radius) * 0.2);
-        const zMid2 = (pt2A.z + pt2B.z) / 2;
-        segs2.push({
-          x1: c + pt2A.x * persp2A,
-          y1: c + pt2A.y * persp2A,
-          x2: c + pt2B.x * persp2B,
-          y2: c + pt2B.y * persp2B,
-          isFront: zMid2 >= 0,
-        });
+      // Slightly smaller than the original globe; extra margin protects the outer orbits.
+      radius = size * .285;
+      const c = size / 2;
+      const halo = ctx.createRadialGradient(c, c, radius * .15, c, c, radius * 1.55);
+      halo.addColorStop(0, 'rgba(22,170,207,.13)');
+      halo.addColorStop(.55, 'rgba(16,110,155,.07)');
+      halo.addColorStop(1, 'rgba(10,60,100,0)');
+      ctx.fillStyle = halo; ctx.beginPath(); ctx.arc(c, c, radius * 1.55, 0, TAU); ctx.fill();
+      for (let lat = -75; lat <= 75; lat += 15) {
+        const phi = lat * Math.PI / 180;
+        for (let j = 0; j < 64; j++) line(sphere(phi, j * TAU / 64), sphere(phi, (j + 1) * TAU / 64), cyan, .24, .65);
       }
-
-      // Orbital Particles
-      const particles1 = [0, 2.09, 4.19].map(offset => {
-        const angle = t * 0.52 + offset;
-        const pt = getOrbitPoint(angle, r1, pitch1, roll1, yaw1);
-        const persp = 2.9 / (2.9 - (pt.z / radius) * 0.2);
-        return { x: c + pt.x * persp, y: c + pt.y * persp, isFront: pt.z >= 0 };
-      });
-
-      const particles2 = [0.8, 3.9].map(offset => {
-        const angle = -t * 0.38 + offset;
-        const pt = getOrbitPoint(angle, r2, pitch2, roll2, yaw2);
-        const persp = 2.9 / (2.9 - (pt.z / radius) * 0.2);
-        return { x: c + pt.x * persp, y: c + pt.y * persp, isFront: pt.z >= 0 };
-      });
-
-      const renderSegments = (segs: OrbitSeg[], frontOnly: boolean, strokeStyle: string, lineWidth: number, shadowColor?: string, shadowBlur?: number) => {
-        ctx.save();
-        ctx.strokeStyle = strokeStyle;
-        ctx.lineWidth = lineWidth;
-        ctx.lineCap = 'round';
-        ctx.lineJoin = 'round';
-        if (shadowColor && shadowBlur) {
-          ctx.shadowColor = shadowColor;
-          ctx.shadowBlur = shadowBlur;
-        }
-        ctx.beginPath();
-        for (let i = 0; i < segs.length; i++) {
-          if (segs[i].isFront === frontOnly) {
-            ctx.moveTo(segs[i].x1, segs[i].y1);
-            ctx.lineTo(segs[i].x2, segs[i].y2);
-          }
-        }
-        ctx.stroke();
-        ctx.restore();
-      };
-
-      // 1. BACK LAYERS: Render orbit segments and particles passing behind the sphere (z < 0)
-      renderSegments(segs1, false, 'rgba(74,202,255,0.25)', 0.7);
-      renderSegments(segs2, false, 'rgba(196,182,160,0.14)', 0.55);
-
-      // Back particles
-      particles1.filter(p => !p.isFront).forEach(p => {
-        ctx.save();
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, 1.2, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(74,202,255,0.6)';
-        ctx.shadowColor = '#4acaff';
-        ctx.shadowBlur = 3;
-        ctx.fill();
-        ctx.restore();
-      });
-      particles2.filter(p => !p.isFront).forEach(p => {
-        ctx.save();
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, 1.0, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(196,182,160,0.45)';
-        ctx.fill();
-        ctx.restore();
-      });
-
-      // 2. MIDDLE LAYER: The 3D Wireframe Ball
-      ctx.save();
-      ctx.beginPath();ctx.arc(c,c,radius*1.025,0,Math.PI*2);ctx.clip();
-      edges.forEach(([i,j]) => {
-        const a=projected[i],b=projected[j];
-        const front=Math.max(0,Math.min(1,((a.z+b.z)/2+1)/2));
-        ctx.strokeStyle=`rgba(47,177,252,${.12+front*.5})`;
-        ctx.lineWidth=.65+front*.7;
-        ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();
-      });
-      projected.forEach((p,i) => {
-        const front=Math.max(0,(p.z+1)/2);
-        ctx.beginPath();ctx.arc(p.x,p.y,1+front*1.5,0,Math.PI*2);
-        ctx.fillStyle=`rgba(91,204,255,${.2+front*.8})`;
-        ctx.shadowColor='#24b7ff';ctx.shadowBlur=front*7;
-        ctx.fill();
-        if(i%9===0 && front>.45){
-          ctx.beginPath();ctx.arc(p.x,p.y,4+2*Math.sin(t*1.5+i),0,Math.PI*2);
-          ctx.fillStyle='rgba(25,165,255,.10)';ctx.fill();
-        }
-      });
-      ctx.shadowBlur=0;ctx.restore();
-      ctx.beginPath();ctx.arc(c,c,radius,0,Math.PI*2);
-      ctx.strokeStyle='rgba(40,177,249,.30)';ctx.lineWidth=1;ctx.stroke();
-
-      // 3. FRONT LAYERS: Render orbit segments and particles passing in front of the sphere (z >= 0)
-      // Muted Champagne orbit front (40-50% less prominent than cyan)
-      renderSegments(segs2, true, 'rgba(196,182,160,0.38)', 0.75, 'rgba(196,182,160,0.5)', 2.5);
-      // Cyan Blue orbit front
-      renderSegments(segs1, true, 'rgba(74,202,255,0.78)', 1.05, '#4acaff', 5.5);
-
-      // Front particles - Cyan Orbit
-      particles1.filter(p => p.isFront).forEach(p => {
-        ctx.save();
-        // Soft outer glow halo
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, 3.2, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(74,202,255,0.22)';
-        ctx.fill();
-        // Bright core
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, 1.8, 0, Math.PI * 2);
-        ctx.fillStyle = '#ffffff';
-        ctx.shadowColor = '#4acaff';
-        ctx.shadowBlur = 7;
-        ctx.fill();
-        ctx.restore();
-      });
-
-      // Front particles - Champagne Orbit
-      particles2.filter(p => p.isFront).forEach(p => {
-        ctx.save();
-        // Gentle soft halo
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, 2.5, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(196,182,160,0.18)';
-        ctx.fill();
-        // Muted champagne core
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, 1.4, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(245,240,232,0.95)';
-        ctx.shadowColor = 'rgba(196,182,160,0.6)';
-        ctx.shadowBlur = 4;
-        ctx.fill();
-        ctx.restore();
-      });
-
-      raf=requestAnimationFrame(render);
+      for (let j = 0; j < 16; j++) {
+        const lon = j * TAU / 16;
+        for (let k = 0; k < 48; k++) line(sphere(-Math.PI / 2 + k * Math.PI / 48, lon), sphere(-Math.PI / 2 + (k + 1) * Math.PI / 48, lon), cyan, .17, .6);
+      }
+      edges.forEach(([i, j]) => line(nodes[i].map(x => x * 1.008), nodes[j].map(x => x * 1.008), gold, .21, .65));
+      nodes.forEach((p, i) => dot(p.map(x => x * 1.012), i % 5 === 0 ? gold : cyan, i % 5 === 0 ? 2 : 1.45, .7));
+      for (let j = 0; j < 5; j++) dot(sphere((j - 2) * .42, time * (.18 + j * .04) + j * 1.7, 1.018), gold, 2.4, .88);
+      for (let o = 0; o < 2; o++) {
+        const tilt = o === 0 ? .28 : -.45;
+        const r = o === 0 ? 1.26 : 1.41;
+        for (let k = 0; k < 120; k++) line(orbit(tilt, k * TAU / 120 + o * .9, r), orbit(tilt, (k + 1) * TAU / 120 + o * .9, r), gold, o === 0 ? .32 : .17, o === 0 ? .9 : .7);
+        for (let j = 0; j < 3; j++) dot(orbit(tilt, time * (o === 0 ? .28 : -.18) + j * TAU / 3 + o * .9, r), gold, j === 0 ? 2.7 : 1.9, .84);
+      }
+      raf = requestAnimationFrame(render);
     };
-    raf=requestAnimationFrame(render);
-    return () => cancelAnimationFrame(raf);
+    // Natural/direct drag: mouse right => globe right; mouse down => globe down.
+    const down = (e: PointerEvent) => {
+      dragging = true; lastX = e.clientX; lastY = e.clientY;
+      canvas.setPointerCapture(e.pointerId);
+    };
+    const move = (e: PointerEvent) => {
+      if (!dragging) return;
+      yaw += (e.clientX - lastX) * .006;
+      pitch += (e.clientY - lastY) * .006;
+      pitch = Math.max(-1.35, Math.min(1.35, pitch));
+      lastX = e.clientX; lastY = e.clientY;
+    };
+    const up = () => { dragging = false; };
+    canvas.addEventListener('pointerdown', down);
+    canvas.addEventListener('pointermove', move);
+    canvas.addEventListener('pointerup', up);
+    canvas.addEventListener('pointercancel', up);
+    raf = requestAnimationFrame(render);
+    return () => {
+      cancelAnimationFrame(raf);
+      canvas.removeEventListener('pointerdown', down);
+      canvas.removeEventListener('pointermove', move);
+      canvas.removeEventListener('pointerup', up);
+      canvas.removeEventListener('pointercancel', up);
+    };
   }, []);
-  return <canvas ref={ref} className="hero-mesh-globe" aria-hidden="true" />;
+  return <canvas ref={ref} className="hero-mesh-globe" aria-label="Interactive rotating financial data globe" />;
 }
 
 export function Hero(_props: HeroProps) {
@@ -518,7 +374,7 @@ export function Hero(_props: HeroProps) {
         const centerH = center ? Math.max(180, center.getBoundingClientRect().height + 40) : 210;
         if (Math.abs(x - stageW / 2) < (centerW + own.w) / 2 &&
             Math.abs(y - stageH / 2) < (centerH + own.h) / 2) return true;
-        const globeSize = Math.min(330, Math.max(175, window.innerWidth * 0.24));
+        const globeSize = Math.min(285, Math.max(155, window.innerWidth * 0.21));
         if (x < globeSize + own.w / 2 + 20 && y < globeSize + own.h / 2 + 30) return true;
         return roamingPositions.some((other, j) => {
           if (j === index) return false;
@@ -700,7 +556,7 @@ export function Hero(_props: HeroProps) {
       <style>{`
         .hero-free-roam{position:relative;height:calc(100svh - 5rem);min-height:540px;overflow:hidden;isolation:isolate;background:radial-gradient(ellipse at 35% 36%,#13374b 0%,#081e30 55%,#061522 100%);color:#f8fafc}
         .hero-free-roam:after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at center,transparent 40%,rgba(0,0,0,.2));z-index:0}
-        .hero-mesh-globe{position:absolute;top:3%;left:3%;width:clamp(175px,24vw,330px);height:auto;aspect-ratio:1;z-index:1;pointer-events:none;filter:drop-shadow(0 0 12px rgba(30,160,245,.22))}
+        .hero-mesh-globe{position:absolute;top:3%;left:3%;width:clamp(155px,21vw,285px);height:auto;aspect-ratio:1;z-index:1;pointer-events:auto;touch-action:none;cursor:grab;filter:drop-shadow(0 0 12px rgba(30,160,245,.22))}
         .hero-flowing-waves{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
         .hero-roam-stage{position:absolute;inset:0;overflow:hidden}
         .hero-roam-lines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
