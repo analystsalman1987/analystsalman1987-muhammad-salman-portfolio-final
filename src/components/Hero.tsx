@@ -712,11 +712,11 @@ export function Hero(_props: HeroProps) {
         .hero-roam-pill.flagship{font-size:14px;padding:11px 19px;font-weight:850}
          .hero-roam-pill.hero-roam-shimmer-once:after{animation:heroRoamShineOnce 1.8s ease-in-out 1 both}
         @keyframes heroRoamShineOnce{0%{left:-65%;opacity:0}12%{opacity:.75}82%{opacity:.75}100%{left:145%;opacity:0}}
-        .hero-roam-center{position:absolute;z-index:8;left:50%;top:50%;transform:translate(-50%,-50%);width:clamp(380px,46vw,490px);min-height:164px;padding:26px 36px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:1.5px solid rgba(216,181,106,.45);border-radius:38px;background:rgba(7,24,38,.32);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);color:#f8e4b2;box-shadow:0 20px 50px rgba(0,0,0,.45),0 0 26px rgba(216,181,106,.22),inset 0 0 22px rgba(216,181,106,.06);cursor:pointer;transition:border-color .3s ease,box-shadow .3s ease,background .3s ease}
-        .hero-roam-center:hover{border-color:rgba(235,205,135,.75);box-shadow:0 24px 60px rgba(0,0,0,.52),0 0 38px rgba(216,181,106,.36),inset 0 0 28px rgba(216,181,106,.10);background:rgba(9,28,45,.42)}
-        .hero-roam-center strong{display:block;font-size:clamp(26px,3.2vw,36px);font-weight:750;letter-spacing:.06em;color:#f8e4b2;text-shadow:0 2px 14px rgba(216,181,106,.32);line-height:1.2}
-        .hero-roam-center small{display:block;margin-top:10px;font-size:11px;font-weight:600;color:#cbd5e1;letter-spacing:.16em;opacity:.85}
-        @media(max-width:700px){.hero-free-roam{min-height:480px}.hero-roam-pill{font-size:9px;padding:7px 9px}.hero-roam-pill.primary,.hero-roam-pill.flagship{font-size:10px;padding:8px 10px}.hero-roam-center{width:min(90vw,340px);min-height:118px;border-radius:28px;padding:16px 18px}.hero-roam-center strong{font-size:21px;letter-spacing:.04em}.hero-roam-center small{font-size:9.5px;margin-top:7px}}
+        .hero-roam-center{position:absolute;z-index:8;left:50%;top:50%;transform:translate(-50%,-50%);width:auto;min-height:0;padding:12px 20px;display:flex;align-items:center;justify-content:center;text-align:center;border:0;border-radius:0;background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:none;appearance:none;cursor:pointer;color:#f8e4b2;transition:transform .35s ease,filter .35s ease}
+        .hero-roam-center:hover,.hero-roam-center:focus-visible{transform:translate(-50%,-50%) translateY(-3px) scale(1.055);filter:drop-shadow(0 7px 2px rgba(0,0,0,.75)) drop-shadow(0 -2px 2px rgba(255,239,189,.5));outline:none}
+        .hero-roam-center strong{display:block;font-size:clamp(26px,3.2vw,36px);font-weight:750;letter-spacing:.06em;color:#f8e4b2;text-shadow:0 2px 14px rgba(216,181,106,.32);line-height:1.2;transition:text-shadow .35s ease}
+        .hero-roam-center:hover strong,.hero-roam-center:focus-visible strong{text-shadow:1px 1px 0 #fff1c8,2px 2px 0 #c9a15d,3px 3px 0 #89662d,5px 6px 5px rgba(0,0,0,.75),0 0 18px rgba(216,181,106,.45)}
+        @media(max-width:700px){.hero-free-roam{min-height:480px}.hero-roam-pill{font-size:9px;padding:7px 9px}.hero-roam-pill.primary,.hero-roam-pill.flagship{font-size:10px;padding:8px 10px}.hero-roam-center{width:auto;min-height:0;border-radius:0;padding:10px 12px}.hero-roam-center strong{font-size:21px;letter-spacing:.04em}}
         @media(prefers-reduced-motion:reduce){.hero-roam-pill.hero-roam-shimmer-once:after{animation:none}}
       `}</style>
 
@@ -812,7 +812,6 @@ export function Hero(_props: HeroProps) {
         aria-label={isRTL ? 'محمد سلمان - عرض النبذة المهنية' : 'Muhammad Salman - View About Profile'}
       >
         <strong>{isRTL ? 'محمد سلمان' : 'Muhammad Salman'}</strong>
-        <small>{isRTL ? 'عرض النبذة المهنية ↓' : 'VIEW ABOUT PROFILE ↓'}</small>
       </button>
     </section>
   );
