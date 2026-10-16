@@ -183,6 +183,40 @@ function MeshGlobe() {
         .filter(v => v.j !== i).sort((a,b) => a.d-b.d).slice(0, 5)
         .forEach(v => { if (i < v.j) edges.push([i, v.j]); });
     });
+
+    // Helper to calculate 3D orbit point with pitch, roll, and continuous yaw rotation
+    const getOrbitPoint = (
+      lambda: number,
+      r: number,
+      pitch: number,
+      roll: number,
+      yaw: number
+    ) => {
+      const x0 = r * Math.cos(lambda);
+      const y0 = 0;
+      const z0 = r * Math.sin(lambda);
+
+      // Pitch around X
+      const cosP = Math.cos(pitch), sinP = Math.sin(pitch);
+      const x1 = x0;
+      const y1 = -z0 * sinP;
+      const z1 = z0 * cosP;
+
+      // Roll around Z
+      const cosR = Math.cos(roll), sinR = Math.sin(roll);
+      const x2 = x1 * cosR - y1 * sinR;
+      const y2 = x1 * sinR + y1 * cosR;
+      const z2 = z1;
+
+      // Yaw around Y
+      const cosY = Math.cos(yaw), sinY = Math.sin(yaw);
+      const x3 = x2 * cosY + z2 * sinY;
+      const y3 = y2;
+      const z3 = -x2 * sinY + z2 * cosY;
+
+      return { x: x3, y: y3, z: z3 };
+    };
+
     let raf = 0;
     const render = (ms: number) => {
       const size = canvas.clientWidth;
@@ -193,7 +227,9 @@ function MeshGlobe() {
       }
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, size, size);
-      const t = ms / 1000, c = size / 2, radius = size * .415;
+
+      // Diameter reduced by 15% (scale 0.85 of original 0.415: 0.415 * 0.85 = 0.35275)
+      const t = ms / 1000, c = size / 2, radius = size * 0.352;
       const yaw = t * .23, pitch = Math.sin(t * .19) * .17;
       const projected = nodes.map((p, i) => {
         const deformation = 1 + .012 * Math.sin(t * 1.1 + i * .35);
@@ -205,11 +241,128 @@ function MeshGlobe() {
         const perspective = 2.9/(2.9-depth*.2);
         return { x:c+rx*radius*perspective, y:c+ry*radius*perspective, z:depth };
       });
+
+      // Background atmospheric halo
       const halo = ctx.createRadialGradient(c,c,radius*.15,c,c,radius*1.2);
       halo.addColorStop(0,'rgba(0,124,245,.10)');
       halo.addColorStop(.7,'rgba(10,148,244,.09)');
       halo.addColorStop(1,'rgba(0,90,200,0)');
       ctx.fillStyle=halo;ctx.fillRect(0,0,size,size);
+
+      // --- Style 2: Two 3D Orbital Rings (Cyan Blue #4ACAFF & Muted Champagne #C4B6A0) ---
+      const STEPS = 80;
+      const dLambda = (Math.PI * 2) / STEPS;
+
+      // Orbit 1: Cyan Blue (#4ACAFF)
+      const r1 = radius * 1.34;
+      const pitch1 = 1.05;
+      const roll1 = 0.42;
+      const yaw1 = t * 0.22;
+
+      // Orbit 2: Muted Champagne (#C4B6A0) - 40-50% less prominent
+      const r2 = radius * 1.25;
+      const pitch2 = -0.85;
+      const roll2 = -0.62;
+      const yaw2 = -t * 0.16;
+
+      interface OrbitSeg { x1: number; y1: number; x2: number; y2: number; isFront: boolean; }
+      const segs1: OrbitSeg[] = [];
+      const segs2: OrbitSeg[] = [];
+
+      for (let k = 0; k < STEPS; k++) {
+        const l1 = k * dLambda;
+        const l2 = (k + 1) * dLambda;
+
+        // Orbit 1
+        const pt1A = getOrbitPoint(l1, r1, pitch1, roll1, yaw1);
+        const pt1B = getOrbitPoint(l2, r1, pitch1, roll1, yaw1);
+        const persp1A = 2.9 / (2.9 - (pt1A.z / radius) * 0.2);
+        const persp1B = 2.9 / (2.9 - (pt1B.z / radius) * 0.2);
+        const zMid1 = (pt1A.z + pt1B.z) / 2;
+        segs1.push({
+          x1: c + pt1A.x * persp1A,
+          y1: c + pt1A.y * persp1A,
+          x2: c + pt1B.x * persp1B,
+          y2: c + pt1B.y * persp1B,
+          isFront: zMid1 >= 0,
+        });
+
+        // Orbit 2
+        const pt2A = getOrbitPoint(l1, r2, pitch2, roll2, yaw2);
+        const pt2B = getOrbitPoint(l2, r2, pitch2, roll2, yaw2);
+        const persp2A = 2.9 / (2.9 - (pt2A.z / radius) * 0.2);
+        const persp2B = 2.9 / (2.9 - (pt2B.z / radius) * 0.2);
+        const zMid2 = (pt2A.z + pt2B.z) / 2;
+        segs2.push({
+          x1: c + pt2A.x * persp2A,
+          y1: c + pt2A.y * persp2A,
+          x2: c + pt2B.x * persp2B,
+          y2: c + pt2B.y * persp2B,
+          isFront: zMid2 >= 0,
+        });
+      }
+
+      // Orbital Particles
+      const particles1 = [0, 2.09, 4.19].map(offset => {
+        const angle = t * 0.52 + offset;
+        const pt = getOrbitPoint(angle, r1, pitch1, roll1, yaw1);
+        const persp = 2.9 / (2.9 - (pt.z / radius) * 0.2);
+        return { x: c + pt.x * persp, y: c + pt.y * persp, isFront: pt.z >= 0 };
+      });
+
+      const particles2 = [0.8, 3.9].map(offset => {
+        const angle = -t * 0.38 + offset;
+        const pt = getOrbitPoint(angle, r2, pitch2, roll2, yaw2);
+        const persp = 2.9 / (2.9 - (pt.z / radius) * 0.2);
+        return { x: c + pt.x * persp, y: c + pt.y * persp, isFront: pt.z >= 0 };
+      });
+
+      const renderSegments = (segs: OrbitSeg[], frontOnly: boolean, strokeStyle: string, lineWidth: number, shadowColor?: string, shadowBlur?: number) => {
+        ctx.save();
+        ctx.strokeStyle = strokeStyle;
+        ctx.lineWidth = lineWidth;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        if (shadowColor && shadowBlur) {
+          ctx.shadowColor = shadowColor;
+          ctx.shadowBlur = shadowBlur;
+        }
+        ctx.beginPath();
+        for (let i = 0; i < segs.length; i++) {
+          if (segs[i].isFront === frontOnly) {
+            ctx.moveTo(segs[i].x1, segs[i].y1);
+            ctx.lineTo(segs[i].x2, segs[i].y2);
+          }
+        }
+        ctx.stroke();
+        ctx.restore();
+      };
+
+      // 1. BACK LAYERS: Render orbit segments and particles passing behind the sphere (z < 0)
+      renderSegments(segs1, false, 'rgba(74,202,255,0.25)', 0.7);
+      renderSegments(segs2, false, 'rgba(196,182,160,0.14)', 0.55);
+
+      // Back particles
+      particles1.filter(p => !p.isFront).forEach(p => {
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 1.2, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(74,202,255,0.6)';
+        ctx.shadowColor = '#4acaff';
+        ctx.shadowBlur = 3;
+        ctx.fill();
+        ctx.restore();
+      });
+      particles2.filter(p => !p.isFront).forEach(p => {
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 1.0, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(196,182,160,0.45)';
+        ctx.fill();
+        ctx.restore();
+      });
+
+      // 2. MIDDLE LAYER: The 3D Wireframe Ball
       ctx.save();
       ctx.beginPath();ctx.arc(c,c,radius*1.025,0,Math.PI*2);ctx.clip();
       edges.forEach(([i,j]) => {
@@ -233,6 +386,49 @@ function MeshGlobe() {
       ctx.shadowBlur=0;ctx.restore();
       ctx.beginPath();ctx.arc(c,c,radius,0,Math.PI*2);
       ctx.strokeStyle='rgba(40,177,249,.30)';ctx.lineWidth=1;ctx.stroke();
+
+      // 3. FRONT LAYERS: Render orbit segments and particles passing in front of the sphere (z >= 0)
+      // Muted Champagne orbit front (40-50% less prominent than cyan)
+      renderSegments(segs2, true, 'rgba(196,182,160,0.38)', 0.75, 'rgba(196,182,160,0.5)', 2.5);
+      // Cyan Blue orbit front
+      renderSegments(segs1, true, 'rgba(74,202,255,0.78)', 1.05, '#4acaff', 5.5);
+
+      // Front particles - Cyan Orbit
+      particles1.filter(p => p.isFront).forEach(p => {
+        ctx.save();
+        // Soft outer glow halo
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 3.2, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(74,202,255,0.22)';
+        ctx.fill();
+        // Bright core
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 1.8, 0, Math.PI * 2);
+        ctx.fillStyle = '#ffffff';
+        ctx.shadowColor = '#4acaff';
+        ctx.shadowBlur = 7;
+        ctx.fill();
+        ctx.restore();
+      });
+
+      // Front particles - Champagne Orbit
+      particles2.filter(p => p.isFront).forEach(p => {
+        ctx.save();
+        // Gentle soft halo
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 2.5, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(196,182,160,0.18)';
+        ctx.fill();
+        // Muted champagne core
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 1.4, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(245,240,232,0.95)';
+        ctx.shadowColor = 'rgba(196,182,160,0.6)';
+        ctx.shadowBlur = 4;
+        ctx.fill();
+        ctx.restore();
+      });
+
       raf=requestAnimationFrame(render);
     };
     raf=requestAnimationFrame(render);
@@ -243,9 +439,6 @@ function MeshGlobe() {
 
 export function Hero(_props: HeroProps) {
   const { isRTL } = useLanguage();
-  const [buttonState, setButtonState] = useState<'portfolio' | 'accountant'>('portfolio');
-  const [flipping, setFlipping] = useState(false);
-  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const pointsRef = useRef<(HTMLDivElement | null)[]>([]);
   const svgRef = useRef<SVGSVGElement>(null);
@@ -434,18 +627,11 @@ export function Hero(_props: HeroProps) {
     };
   }, []);
 
-  useEffect(() => () => { if (timer.current) clearTimeout(timer.current); }, []);
-
-  const handleClick = () => {
-    if (buttonState === 'portfolio') {
-      setFlipping(true);
-      timer.current = setTimeout(() => { setButtonState('accountant'); setFlipping(false); }, 260);
-    } else {
-      const about = document.getElementById('about');
-      if (about) {
-        window.scrollTo({ top: about.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
-        window.history.replaceState(null, '', '#about');
-      }
+  const handleButtonClick = () => {
+    const about = document.getElementById('about');
+    if (about) {
+      window.scrollTo({ top: about.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
+      window.history.replaceState(null, '', '#about');
     }
   };
 
@@ -465,12 +651,11 @@ export function Hero(_props: HeroProps) {
         .hero-roam-pill.primary{font-size:13px;padding:10px 16px;font-weight:800}
         .hero-roam-pill.flagship{font-size:14px;padding:11px 19px;font-weight:850}
         @keyframes heroRoamShine{0%,22%,100%{left:-65%}34%{left:145%}}
-        .hero-roam-center{position:absolute;z-index:8;left:50%;top:50%;transform:translate(-50%,-50%);width:245px;min-height:86px;border:1.5px solid #d8b56a;border-radius:28px;background:linear-gradient(145deg,#15374b,#071827);color:#f8e0a4;box-shadow:0 14px 35px rgba(0,0,0,.5),0 0 22px rgba(216,181,106,.17);cursor:pointer;transition:filter .3s,box-shadow .3s}
-        .hero-roam-center:hover{filter:brightness(1.15);box-shadow:0 16px 40px rgba(0,0,0,.5),0 0 25px rgba(216,181,106,.28)}
-        .hero-roam-center strong{display:block;font-size:23px;letter-spacing:.19em}
-        .hero-roam-center small{display:block;margin-top:7px;font-size:10px;color:#cbd5e1;letter-spacing:.07em}
-        .hero-roam-center.flipping strong{opacity:.3}
-        @media(max-width:700px){.hero-free-roam{min-height:480px}.hero-roam-pill{font-size:9px;padding:7px 9px}.hero-roam-pill.primary,.hero-roam-pill.flagship{font-size:10px;padding:8px 10px}.hero-roam-center{width:194px;min-height:74px}.hero-roam-center strong{font-size:17px}}
+        .hero-roam-center{position:absolute;z-index:8;left:50%;top:50%;transform:translate(-50%,-50%);width:clamp(380px,46vw,490px);min-height:164px;padding:26px 36px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:1.5px solid rgba(216,181,106,.45);border-radius:38px;background:rgba(7,24,38,.32);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);color:#f8e4b2;box-shadow:0 20px 50px rgba(0,0,0,.45),0 0 26px rgba(216,181,106,.22),inset 0 0 22px rgba(216,181,106,.06);cursor:pointer;transition:border-color .3s ease,box-shadow .3s ease,background .3s ease}
+        .hero-roam-center:hover{border-color:rgba(235,205,135,.75);box-shadow:0 24px 60px rgba(0,0,0,.52),0 0 38px rgba(216,181,106,.36),inset 0 0 28px rgba(216,181,106,.10);background:rgba(9,28,45,.42)}
+        .hero-roam-center strong{display:block;font-size:clamp(26px,3.2vw,36px);font-weight:750;letter-spacing:.06em;color:#f8e4b2;text-shadow:0 2px 14px rgba(216,181,106,.32);line-height:1.2}
+        .hero-roam-center small{display:block;margin-top:10px;font-size:11px;font-weight:600;color:#cbd5e1;letter-spacing:.16em;opacity:.85}
+        @media(max-width:700px){.hero-free-roam{min-height:480px}.hero-roam-pill{font-size:9px;padding:7px 9px}.hero-roam-pill.primary,.hero-roam-pill.flagship{font-size:10px;padding:8px 10px}.hero-roam-center{width:min(90vw,340px);min-height:118px;border-radius:28px;padding:16px 18px}.hero-roam-center strong{font-size:21px;letter-spacing:.04em}.hero-roam-center small{font-size:9.5px;margin-top:7px}}
         @media(prefers-reduced-motion:reduce){.hero-roam-pill:after{animation:none}}
       `}</style>
 
@@ -558,11 +743,15 @@ export function Hero(_props: HeroProps) {
         })}
       </div>
 
-      {/* Center PORTFOLIO / ACCOUNTANT reveal button */}
-      <button type="button" className={`hero-roam-center ${flipping ? 'flipping' : ''}`}
-        onClick={handleClick} aria-label={buttonState === 'portfolio' ? 'Reveal Accountant' : 'View About'}>
-        <strong>{buttonState === 'portfolio' ? 'PORTFOLIO' : 'ACCOUNTANT'}</strong>
-        <small>{buttonState === 'portfolio' ? (isRTL ? 'انقر للاستكشاف' : 'CLICK TO REVEAL') : (isRTL ? 'عرض النبذة المهنية' : 'VIEW ABOUT PROFILE ↓')}</small>
+      {/* Center "Muhammad Salman" button */}
+      <button
+        type="button"
+        className="hero-roam-center"
+        onClick={handleButtonClick}
+        aria-label={isRTL ? 'محمد سلمان - عرض النبذة المهنية' : 'Muhammad Salman - View About Profile'}
+      >
+        <strong>{isRTL ? 'محمد سلمان' : 'Muhammad Salman'}</strong>
+        <small>{isRTL ? 'عرض النبذة المهنية ↓' : 'VIEW ABOUT PROFILE ↓'}</small>
       </button>
     </section>
   );
