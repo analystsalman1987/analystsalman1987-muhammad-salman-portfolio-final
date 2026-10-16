@@ -47,7 +47,7 @@ export function Highlights({ highlights }: HighlightsProps) {
         aria-hidden="true"
       >
         <img 
-          src="/images/accounting_workplace.jpg" 
+          src="/images/accounting_workplace_optimized.webp"
           alt="" 
           className="w-full h-full object-cover object-center opacity-[0.25] dark:opacity-[0.18] filter contrast-105 select-none"
           loading="lazy"
