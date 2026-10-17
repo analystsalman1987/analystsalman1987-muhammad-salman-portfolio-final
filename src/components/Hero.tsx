@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { CSSProperties } from 'react';
 import type { ProfileInfo } from '../types';
 import { useLanguage } from '../context/LanguageContext';
@@ -177,7 +177,6 @@ function MeshGlobe() {
     let yaw = .35, pitch = -.22, time = 0;
     let dragging = false, lastX = 0, lastY = 0;
     let lastFrame = 0;
-    let lastDraw = 0;
     let size = 0, radius = 0;
     const nodes = Array.from({ length: 48 }, (_, i) => {
       const y = 1 - 2 * (i + .5) / 48;
@@ -224,9 +223,6 @@ function MeshGlobe() {
     const sphere = (lat: number, lon: number, r = 1) => [r * Math.cos(lat) * Math.cos(lon), r * Math.sin(lat), r * Math.cos(lat) * Math.sin(lon)];
     const orbit = (tilt: number, angle: number, r: number) => [r * Math.cos(angle), r * Math.sin(angle) * Math.cos(tilt), r * Math.sin(angle) * Math.sin(tilt)];
     const render = (ms: number) => {
-      raf = requestAnimationFrame(render);
-      if (document.hidden || ms - lastDraw < 33) return;
-      lastDraw = ms;
       const dt = lastFrame ? Math.min((ms - lastFrame) / 1000, .05) : 0;
       lastFrame = ms;
       // Continuous visible auto-rotation, pausing only while the user drags.
@@ -234,7 +230,7 @@ function MeshGlobe() {
       time += dt;
       if (!dragging) yaw += dt * .24;
       size = canvas.clientWidth;
-      if (!size) return;
+      if (!size) { raf = requestAnimationFrame(render); return; }
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       const px = Math.round(size * dpr);
       if (canvas.width !== px || canvas.height !== px) { canvas.width = px; canvas.height = px; }
@@ -265,6 +261,7 @@ function MeshGlobe() {
         for (let k = 0; k < 120; k++) line(orbit(tilt, k * TAU / 120 + o * .9, r), orbit(tilt, (k + 1) * TAU / 120 + o * .9, r), gold, o === 0 ? .32 : .17, o === 0 ? .9 : .7);
         for (let j = 0; j < 3; j++) dot(orbit(tilt, time * (o === 0 ? .28 : -.18) + j * TAU / 3 + o * .9, r), gold, j === 0 ? 2.7 : 1.9, .84);
       }
+      raf = requestAnimationFrame(render);
     };
     // Natural/direct drag: mouse right => globe right; mouse down => globe down.
     const down = (e: PointerEvent) => {
@@ -404,13 +401,10 @@ export function Hero(_props: HeroProps) {
 
     // Store calculated positions for connecting lines
     const currentPositions: { x: number; y: number; opacity: number }[] = Array.from({ length: LABELS.length }, () => ({ x: 0, y: 0, opacity: 0 }));
-    let lastDraw = 0;
 
     const frame = (now: number) => {
       if (isUnmounted) return;
       raf = requestAnimationFrame(frame);
-      if (document.hidden || now - lastDraw < 33) return;
-      lastDraw = now;
 
       try {
         const tSec = now * 0.001;
@@ -451,7 +445,8 @@ export function Hero(_props: HeroProps) {
             const pill = pointsRef.current[i]?.querySelector<HTMLElement>('.hero-roam-pill');
             if (pill) {
               pill.classList.remove('hero-roam-shimmer-once');
-              requestAnimationFrame(() => pill.classList.add('hero-roam-shimmer-once'));
+              void pill.offsetWidth; // Restart the one-time shimmer for this appearance.
+              pill.classList.add('hero-roam-shimmer-once');
             }
           }
           previousPhases[i] = phase;
@@ -527,7 +522,10 @@ export function Hero(_props: HeroProps) {
     raf = requestAnimationFrame(frame);
 
     const handleVisibility = () => {
-      if (!document.hidden && !isUnmounted) lastDraw = 0;
+      if (!document.hidden && !isUnmounted) {
+        cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(frame);
+      }
     };
     document.addEventListener('visibilitychange', handleVisibility);
     window.addEventListener('focus', handleVisibility);
