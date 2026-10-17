@@ -17,8 +17,8 @@ export default function SlowParticleNetwork() {
     const particles = Array.from({ length: 24 }, (_, i) => ({
       x: (i * 0.61803398875 + 0.13) % 1,
       y: (i * 0.41421356237 + 0.19) % 1,
-      vx: (((i * 17) % 13) - 6) * 0.0000017,
-      vy: (((i * 23) % 11) - 5) * 0.0000019,
+      vx: (((i * 17) % 13) - 6) * 0.0000050,
+      vy: (((i * 23) % 11) - 5) * 0.0000054,
       depth: 0.4 + (((i * 7) % 10) / 12),
       color: colors[i % colors.length],
     }));
