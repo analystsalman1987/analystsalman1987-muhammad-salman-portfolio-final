@@ -11,62 +11,60 @@ interface HeroProps {
 }
 
 const LABELS = [
-  '14+ Years Exp','ERP Software','Oracle','Qoyod','QuickBooks',
-  'MS Office','Advanced Excel','Financial Reporting','Receivables',
-  'VAT Reports & Submission','Reconciliations','Costing',
-  'Monthly Closing','Cash Handling','Petty Cash','Payables',
-  'P&L Account','Balance Sheet',
+  '14+ Years Exp',
+  'ERP Software',
+  'Financial Reporting',
+  'Receivables',
+  'VAT Reports & Submission',
+  'Reconciliations',
+  'Costing',
+  'Monthly Closing',
+  'Payables',
+  'P&L Account',
+  'Balance Sheet',
+  'Aging Report',
+  'Accrual Accounting',
 ];
 
-// 18 balanced anchor positions distributed gracefully around the center button & 3D globe
+// 13 balanced anchor positions distributed naturally across left, center, and right ONLY BELOW the central title
 const ANCHORS: { x: number; y: number }[] = [
-  { x: 0.28, y: 0.14 }, // 0: '14+ Years Exp' (upper left, framing the 3D globe)
-  { x: 0.10, y: 0.40 }, // 1: 'ERP Software' (mid-left upper)
-  { x: 0.23, y: 0.35 }, // 2: 'Oracle' (mid-left inner)
-  { x: 0.11, y: 0.63 }, // 3: 'Qoyod' (lower-left upper)
-  { x: 0.24, y: 0.72 }, // 4: 'QuickBooks' (lower-left inner)
-  { x: 0.09, y: 0.86 }, // 5: 'MS Office' (bottom-left)
-  { x: 0.42, y: 0.13 }, // 6: 'Advanced Excel' (top left-center)
-  { x: 0.60, y: 0.14 }, // 7: 'Financial Reporting' (top right-center)
-  { x: 0.77, y: 0.12 }, // 8: 'Receivables' (top right inner)
-  { x: 0.90, y: 0.22 }, // 9: 'VAT Reports & Submission' (top right outer)
-  { x: 0.76, y: 0.34 }, // 10: 'Reconciliations' (mid-right inner)
-  { x: 0.90, y: 0.46 }, // 11: 'Costing' (mid-right outer)
-  { x: 0.75, y: 0.58 }, // 12: 'Monthly Closing' (mid-right lower)
-  { x: 0.89, y: 0.70 }, // 13: 'Cash Handling' (lower-right outer)
-  { x: 0.75, y: 0.82 }, // 14: 'Petty Cash' (bottom-right inner)
-  { x: 0.90, y: 0.89 }, // 15: 'Payables' (far bottom-right)
-  { x: 0.38, y: 0.88 }, // 16: 'P&L Account' (bottom left-center)
-  { x: 0.56, y: 0.86 }, // 17: 'Balance Sheet' (bottom right-center)
+  { x: 0.14, y: 0.65 }, // 0: '14+ Years Exp' (Left Upper Tier below title)
+  { x: 0.29, y: 0.74 }, // 1: 'ERP Software' (Mid-Left Middle Tier)
+  { x: 0.50, y: 0.76 }, // 2: 'Financial Reporting' (Center Middle Tier)
+  { x: 0.86, y: 0.65 }, // 3: 'Receivables' (Right Upper Tier below title)
+  { x: 0.10, y: 0.78 }, // 4: 'VAT Reports & Submission' (Far-Left Middle Tier)
+  { x: 0.71, y: 0.66 }, // 5: 'Reconciliations' (Mid-Right Upper Tier)
+  { x: 0.22, y: 0.87 }, // 6: 'Costing' (Left Bottom Tier)
+  { x: 0.62, y: 0.86 }, // 7: 'Monthly Closing' (Center-Right Bottom Tier)
+  { x: 0.90, y: 0.78 }, // 8: 'Payables' (Far-Right Middle Tier)
+  { x: 0.38, y: 0.64 }, // 9: 'P&L Account' (Center-Left Upper Tier)
+  { x: 0.62, y: 0.64 }, // 10: 'Balance Sheet' (Center-Right Upper Tier)
+  { x: 0.42, y: 0.87 }, // 11: 'Aging Report' (Center-Left Bottom Tier)
+  { x: 0.80, y: 0.87 }, // 12: 'Accrual Accounting' (Right Bottom Tier)
 ];
 
-// Connecting aesthetic lines between natural neighbor pairs
+// Connecting aesthetic lines between natural neighbor accounting pairs
 const CONNECT_PAIRS = [
-  [6, 7],   // Advanced Excel <-> Financial Reporting
-  [1, 2],   // ERP Software <-> Oracle
-  [10, 12], // Reconciliations <-> Monthly Closing
+  [9, 10], // P&L Account <-> Balance Sheet
+  [3, 8],  // Receivables <-> Payables
+  [5, 7],  // Reconciliations <-> Monthly Closing
 ];
 
-// Staggered timing offsets (seconds) across a 16s cycle for balanced 50% visibility across all quadrants
+// Staggered timing offsets (seconds) across a 16s cycle for balanced ~50% visibility across the lower area
 const FADE_OFFSETS: number[] = [
   0.0,   // 0: '14+ Years Exp' (Left)
-  8.0,   // 1: 'ERP Software' (Left)
-  2.7,   // 2: 'Oracle' (Left)
-  10.7,  // 3: 'Qoyod' (Left)
-  5.3,   // 4: 'QuickBooks' (Left)
-  13.3,  // 5: 'MS Office' (Left)
-  0.0,   // 6: 'Advanced Excel' (Top)
-  8.0,   // 7: 'Financial Reporting' (Top)
-  1.0,   // 8: 'Receivables' (Right)
-  9.0,   // 9: 'VAT Reports & Submission' (Right)
-  5.0,   // 10: 'Reconciliations' (Right)
-  13.0,  // 11: 'Costing' (Right)
-  3.0,   // 12: 'Monthly Closing' (Right)
-  11.0,  // 13: 'Cash Handling' (Right)
-  7.0,   // 14: 'Petty Cash' (Right)
-  15.0,  // 15: 'Payables' (Right)
-  2.0,   // 16: 'P&L Account' (Bottom)
-  10.0,  // 17: 'Balance Sheet' (Bottom)
+  7.4,   // 1: 'ERP Software' (Mid-Left)
+  2.5,   // 2: 'Financial Reporting' (Center)
+  9.8,   // 3: 'Receivables' (Right)
+  4.9,   // 4: 'VAT Reports & Submission' (Far-Left)
+  12.3,  // 5: 'Reconciliations' (Mid-Right)
+  1.2,   // 6: 'Costing' (Bottom-Left)
+  8.6,   // 7: 'Monthly Closing' (Bottom-Center-Right)
+  3.7,   // 8: 'Payables' (Far-Right)
+  11.1,  // 9: 'P&L Account' (Center-Left)
+  6.2,   // 10: 'Balance Sheet' (Center-Right)
+  13.5,  // 11: 'Aging Report' (Bottom-Center-Left)
+  14.8,  // 12: 'Accrual Accounting' (Right)
 ];
 
 function getPointOpacity(tSec: number, offsetSec: number): number {
@@ -355,49 +353,65 @@ export function Hero(_props: HeroProps) {
     // Random positions are assigned only while labels are completely invisible.
     const roamingPositions = ANCHORS.map(a => ({ ...a }));
     const previousPhases = LABELS.map((_, i) => ((FADE_OFFSETS[i] ?? i * 0.9) % 16));
-    const pointSizes = () => LABELS.map((_, i) => {
+    const avoidVectors = LABELS.map(() => ({ x: 0, y: 0 }));
+
+    // Measure actual rendered text width and height of each heading
+    const getRenderedSizes = () => LABELS.map((_, i) => {
       const el = pointsRef.current[i];
-      return { w: (el?.offsetWidth || 145) + 22, h: (el?.offsetHeight || 42) + 16 };
+      const heading = el?.querySelector<HTMLElement>('.hero-roam-heading') || el?.firstElementChild as HTMLElement | null;
+      return {
+        w: heading && heading.offsetWidth > 0 ? heading.offsetWidth : 120,
+        h: heading && heading.offsetHeight > 0 ? heading.offsetHeight : 22,
+      };
     });
+
+    // Dynamic central title bottom clearance
+    const getLowerMinY = () => {
+      const center = stage.querySelector('.hero-roam-center') as HTMLElement | null;
+      if (!center) return stageH * 0.56;
+      const cRect = center.getBoundingClientRect();
+      const sRect = stage.getBoundingClientRect();
+      return Math.max((cRect.bottom - sRect.top) + 20, stageH * 0.56);
+    };
+
     const chooseNewPosition = (index: number) => {
-      const sizes = pointSizes();
+      const sizes = getRenderedSizes();
       const own = sizes[index];
       const last = roamingPositions[index];
-      const marginX = own.w / 2 + 8;
-      const marginY = own.h / 2 + 8;
+      const marginX = own.w / 2 + 16;
+      const marginY = own.h / 2 + 12;
       const maxX = Math.max(marginX, stageW - marginX);
-      const maxY = Math.max(marginY, stageH - marginY);
+      const lowerMinY = getLowerMinY();
+      const minY = lowerMinY + marginY;
+      const maxY = Math.max(minY, stageH - marginY);
+
       const collides = (x: number, y: number) => {
-        // Reserve the main center heading/button and top-left globe/orbits.
-        const center = stage.querySelector('.hero-roam-center') || document.querySelector('.hero-roam-center');
-        const centerW = Math.min(stageW * 0.48, 510);
-        const centerH = center ? Math.max(180, center.getBoundingClientRect().height + 40) : 210;
-        if (Math.abs(x - stageW / 2) < (centerW + own.w) / 2 &&
-            Math.abs(y - stageH / 2) < (centerH + own.h) / 2) return true;
-        const globeSize = Math.min(285, Math.max(155, window.innerWidth * 0.21));
-        if (x < globeSize + own.w / 2 + 20 && y < globeSize + own.h / 2 + 30) return true;
+        if (y < lowerMinY + own.h / 2) return true;
         return roamingPositions.some((other, j) => {
           if (j === index) return false;
-          const phase = ((performance.now() * .001 + (FADE_OFFSETS[j] ?? j * .9)) % 16 + 16) % 16;
+          const phase = ((performance.now() * 0.001 + (FADE_OFFSETS[j] ?? j * 0.9)) % 16 + 16) % 16;
+          // Ignore items that are completely invisible
           if (phase >= 8 && phase < 14) return false;
-          return Math.abs(x - other.x * stageW) < (own.w + sizes[j].w) / 2 &&
-                 Math.abs(y - other.y * stageH) < (own.h + sizes[j].h) / 2;
+          // Maintain at least 20px spacing
+          const reqX = (own.w + sizes[j].w) / 2 + 20;
+          const reqY = (own.h + sizes[j].h) / 2 + 20;
+          return Math.abs(x - other.x * stageW) < reqX && Math.abs(y - other.y * stageH) < reqY;
         });
       };
-      // Start with familiar layout zones, but choose a different zone every cycle.
-      const candidates = [...ANCHORS].sort(() => Math.random() - .5);
+
+      // Candidates across lower zone
+      const candidates = [...ANCHORS].sort(() => Math.random() - 0.5);
       for (const anchor of candidates) {
-        for (let attempt = 0; attempt < 5; attempt++) {
-          const x = clamp(anchor.x * stageW + (Math.random() - .5) * 55, marginX, maxX);
-          const y = clamp(anchor.y * stageH + (Math.random() - .5) * 45, marginY, maxY);
-          if (Math.hypot(x - last.x * stageW, y - last.y * stageH) < Math.min(130, stageW * .2)) continue;
+        for (let attempt = 0; attempt < 8; attempt++) {
+          const x = clamp(anchor.x * stageW + (Math.random() - 0.5) * 45, marginX, maxX);
+          const y = clamp(anchor.y * stageH + (Math.random() - 0.5) * 35, minY, maxY);
+          if (Math.hypot(x - last.x * stageW, y - last.y * stageH) < Math.min(80, stageW * 0.12)) continue;
           if (!collides(x, y)) {
             roamingPositions[index] = { x: x / stageW, y: y / stageH };
             return;
           }
         }
       }
-      // Keep the previous safe location if the viewport is too crowded.
     };
 
     // Store calculated positions for connecting lines
@@ -409,12 +423,15 @@ export function Hero(_props: HeroProps) {
 
       try {
         const tSec = now * 0.001;
+        const isMobile = stageW < 680;
+        const lowerMinY = getLowerMinY();
+        const sizes = getRenderedSizes();
 
         // Smooth mouse parallax damping
         mouseX += (targetMouseX - mouseX) * 0.05;
         mouseY += (targetMouseY - mouseY) * 0.05;
 
-        // 1. Update the 20 Wave Lines in the bottom area of Home (movement speed reduced by 25%)
+        // 1. Update the 20 Wave Lines in the bottom area of Home
         const tWave = tSec * 0.75;
         WAVE_CONFIGS.forEach((cfg, idx) => {
           const pathEl = wavePathsRef.current[idx];
@@ -437,25 +454,32 @@ export function Hero(_props: HeroProps) {
 
         const ampScale = Math.min(1, Math.max(0.65, stageW / 1200));
 
-        // 2. Update Accounting Labels (Gentle independent floating around anchor positions, Mohsin Bilal style)
+        // 2. Base Coordinates & Opacity Computation
+        const baseCoords: { x: number; y: number; scale: number }[] = [];
+        const rawOpacities: number[] = [];
+
         LABELS.forEach((_, i) => {
           const phase = ((tSec + (FADE_OFFSETS[i] ?? i * 0.9)) % 16 + 16) % 16;
-          // Entering the 14–16 second fade-in interval after being hidden.
+          // Reposition while invisible (phase >= 14, opacity 0)
           if (previousPhases[i] < 14 && phase >= 14) {
             chooseNewPosition(i);
-            const pill = pointsRef.current[i]?.querySelector<HTMLElement>('.hero-roam-pill');
-            if (pill) {
-              pill.classList.remove('hero-roam-shimmer-once');
-              void pill.offsetWidth; // Restart the one-time shimmer for this appearance.
-              pill.classList.add('hero-roam-shimmer-once');
+          }
+          // When heading appears (phase >= 14.8, fading into clear visibility), trigger smooth text shine sweep inside letters
+          if (previousPhases[i] < 14.8 && phase >= 14.8) {
+            const heading = pointsRef.current[i]?.querySelector<HTMLElement>('.hero-roam-heading');
+            if (heading) {
+              heading.classList.remove('hero-roam-shimmer-once');
+              void heading.offsetWidth; // Restart one-time text shine for this appearance
+              heading.classList.add('hero-roam-shimmer-once');
             }
           }
           previousPhases[i] = phase;
-          const anchor = roamingPositions[i] || { x: 0.5, y: 0.5 };
+
+          const anchor = roamingPositions[i] || { x: 0.5, y: 0.75 };
           const baseX = stageW * anchor.x;
           const baseY = stageH * anchor.y;
 
-          // Multi-frequency Lissajous harmonic drift for smooth, organic ease-in-out movement
+          // Multi-frequency Lissajous harmonic drift for smooth, organic floating
           const sX1 = 3400 + (i % 7) * 360;
           const sX2 = 4800 + (i % 5) * 410;
           const sY1 = 3800 + (i % 6) * 380;
@@ -466,8 +490,8 @@ export function Hero(_props: HeroProps) {
           const pY1 = i * 2.236 + 1.4;
           const pY2 = i * 1.414 + 2.3;
 
-          const ampX = (13 + (i % 5) * 2.5) * ampScale; // ~13px to 23px
-          const ampY = (15 + (i % 4) * 3.0) * ampScale; // ~15px to 24px
+          const ampX = (11 + (i % 5) * 2.0) * ampScale;
+          const ampY = (12 + (i % 4) * 2.5) * ampScale;
 
           const driftX = Math.sin(now / sX1 + pX1) * (ampX * 0.65) + Math.cos(now / sX2 + pX2) * (ampX * 0.35);
           const driftY = Math.sin(now / sY1 + pY1) * (ampY * 0.65) + Math.cos(now / sY2 + pY2) * (ampY * 0.35);
@@ -477,24 +501,118 @@ export function Hero(_props: HeroProps) {
           const scale = 0.985 + 0.025 * depthSine;
 
           const depthFactor = 0.6 + (i % 5) * 0.2;
-          const parallaxX = mouseX * 14 * depthFactor * ampScale;
-          const parallaxY = mouseY * 12 * depthFactor * ampScale;
+          const parallaxX = mouseX * 12 * depthFactor * ampScale;
+          const parallaxY = mouseY * 10 * depthFactor * ampScale;
 
-          const curX = clamp(baseX + driftX + parallaxX, 45, Math.max(45, stageW - 45));
-          const curY = clamp(baseY + driftY + parallaxY, 25, Math.max(25, stageH - 25));
+          baseCoords.push({
+            x: baseX + driftX + parallaxX,
+            y: baseY + driftY + parallaxY,
+            scale,
+          });
 
-          // Staggered 50% visibility fade (smooth ease-in-out cosine transitions, 16s cycle)
-          const op = getPointOpacity(tSec, FADE_OFFSETS[i] ?? (i * 0.9));
-          currentPositions[i] = { x: curX, y: curY, opacity: op };
+          rawOpacities.push(getPointOpacity(tSec, FADE_OFFSETS[i] ?? (i * 0.9)));
+        });
+
+        // Mobile Screen Overlap Prevention: Delay appearance of headings if lower area space is crowded
+        const effectiveOpacities = [...rawOpacities];
+        if (isMobile) {
+          let visibleCount = 0;
+          LABELS.forEach((_, i) => {
+            if (rawOpacities[i] > 0.05) {
+              // On mobile, keep max 3 visible simultaneously and verify collision clearance
+              if (visibleCount >= 3) {
+                effectiveOpacities[i] = 0;
+                return;
+              }
+              // Check collision with already visible items
+              const collidesWithVisible = LABELS.some((_, j) => {
+                if (j === i || effectiveOpacities[j] <= 0.05) return false;
+                const reqX = (sizes[i].w + sizes[j].w) / 2 + 20;
+                const reqY = (sizes[i].h + sizes[j].h) / 2 + 20;
+                return Math.abs(baseCoords[i].x - baseCoords[j].x) < reqX &&
+                       Math.abs(baseCoords[i].y - baseCoords[j].y) < reqY;
+              });
+
+              if (collidesWithVisible) {
+                effectiveOpacities[i] = 0;
+              } else {
+                visibleCount++;
+              }
+            }
+          });
+        }
+
+        // 3. Collision Avoidance Physics with 20px Min Spacing (no jumps, smooth relaxation)
+        const targetPushX = new Float32Array(LABELS.length);
+        const targetPushY = new Float32Array(LABELS.length);
+
+        // Run 3 iterative relaxation passes between all visible headings
+        for (let iter = 0; iter < 3; iter++) {
+          for (let i = 0; i < LABELS.length; i++) {
+            if (effectiveOpacities[i] <= 0.02) continue;
+            for (let j = i + 1; j < LABELS.length; j++) {
+              if (effectiveOpacities[j] <= 0.02) continue;
+
+              const xi = baseCoords[i].x + targetPushX[i];
+              const yi = baseCoords[i].y + targetPushY[i];
+              const xj = baseCoords[j].x + targetPushX[j];
+              const yj = baseCoords[j].y + targetPushY[j];
+
+              // Required center-to-center distance with at least 20px spacing
+              const reqW = (sizes[i].w + sizes[j].w) / 2 + 20;
+              const reqH = (sizes[i].h + sizes[j].h) / 2 + 20;
+
+              const dx = xi - xj;
+              const dy = yi - yj;
+              const absDx = Math.abs(dx);
+              const absDy = Math.abs(dy);
+
+              if (absDx < reqW && absDy < reqH) {
+                const ovX = reqW - absDx;
+                const ovY = reqH - absDy;
+
+                // Push apart along the axis of least penetration
+                if (ovX / reqW < ovY / reqH) {
+                  const push = (ovX + 1) * 0.5;
+                  const s = dx >= 0 ? 1 : -1;
+                  targetPushX[i] += s * push;
+                  targetPushX[j] -= s * push;
+                } else {
+                  const push = (ovY + 1) * 0.5;
+                  const s = dy >= 0 ? 1 : -1;
+                  targetPushY[i] += s * push;
+                  targetPushY[j] -= s * push;
+                }
+              }
+            }
+          }
+        }
+
+        // Apply smooth exponential damping to avoid sudden jumps, shaking, or flickering
+        LABELS.forEach((_, i) => {
+          avoidVectors[i].x += (targetPushX[i] - avoidVectors[i].x) * 0.16;
+          avoidVectors[i].y += (targetPushY[i] - avoidVectors[i].y) * 0.16;
+
+          const ownW = sizes[i].w;
+          const ownH = sizes[i].h;
+          const minX = ownW / 2 + 16;
+          const maxX = Math.max(minX, stageW - ownW / 2 - 16);
+          const minY = lowerMinY + ownH / 2;
+          const maxY = Math.max(minY, stageH - ownH / 2 - 16);
+
+          const finalX = clamp(baseCoords[i].x + avoidVectors[i].x, minX, maxX);
+          const finalY = clamp(baseCoords[i].y + avoidVectors[i].y, minY, maxY);
+
+          currentPositions[i] = { x: finalX, y: finalY, opacity: effectiveOpacities[i] };
 
           const el = pointsRef.current[i];
           if (el) {
-            el.style.transform = `translate3d(${curX.toFixed(1)}px,${curY.toFixed(1)}px,0) translate(-50%,-50%) scale(${scale.toFixed(3)})`;
-            el.style.opacity = op.toFixed(3);
+            el.style.transform = `translate3d(${finalX.toFixed(1)}px,${finalY.toFixed(1)}px,0) translate(-50%,-50%) scale(${baseCoords[i].scale.toFixed(3)})`;
+            el.style.opacity = effectiveOpacities[i].toFixed(3);
           }
         });
 
-        // 3. Update Connecting SVG Lines between natural neighbor pairs
+        // 4. Update Connecting SVG Lines between natural neighbor pairs
         lines.forEach(({ path, dot }, j) => {
           const [idxA, idxB] = CONNECT_PAIRS[j] || [0, 1];
           const a = currentPositions[idxA];
@@ -516,9 +634,27 @@ export function Hero(_props: HeroProps) {
           dot.setAttribute('cy', String((u * u * a.y + 2 * u * t * cy + t * t * b.y).toFixed(1)));
         });
       } catch (err) {
-        // Guard against any transient error breaking the animation loop
+        // Guard against transient error breaking animation loop
       }
     };
+
+    // Initial entrance text shine for headings visible on page load
+    const initialTimers: number[] = [];
+    LABELS.forEach((_, i) => {
+      const initialPhase = ((FADE_OFFSETS[i] ?? i * 0.9) % 16 + 16) % 16;
+      if (initialPhase < 6.0) {
+        const tid = window.setTimeout(() => {
+          if (isUnmounted) return;
+          const heading = pointsRef.current[i]?.querySelector<HTMLElement>('.hero-roam-heading');
+          if (heading) {
+            heading.classList.remove('hero-roam-shimmer-once');
+            void heading.offsetWidth;
+            heading.classList.add('hero-roam-shimmer-once');
+          }
+        }, 320 + (i % 6) * 200);
+        initialTimers.push(tid);
+      }
+    });
 
     raf = requestAnimationFrame(frame);
 
@@ -534,6 +670,7 @@ export function Hero(_props: HeroProps) {
     return () => {
       isUnmounted = true;
       cancelAnimationFrame(raf);
+      initialTimers.forEach(id => clearTimeout(id));
       window.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseleave', handleMouseLeave);
       document.removeEventListener('visibilitychange', handleVisibility);
@@ -561,21 +698,28 @@ export function Hero(_props: HeroProps) {
         .hero-roam-stage{position:absolute;inset:0;overflow:hidden}
         .hero-roam-lines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
         .hero-roam-point{position:absolute;left:0;top:0;z-index:2;white-space:nowrap;pointer-events:none;will-change:transform,opacity}
-        .hero-roam-pill{position:relative;display:block;overflow:hidden;border:1.5px solid var(--point-color);border-radius:99px;padding:9px 14px;background:rgba(5,20,33,.93);font-size:12px;font-weight:750;color:#f7f9fb;box-shadow:0 0 15px var(--point-glow),inset 0 0 8px rgba(255,255,255,.03)}
-        .hero-roam-pill:before{content:"";display:inline-block;width:7px;height:7px;margin-right:8px;border-radius:50%;vertical-align:1px;background:var(--point-color);box-shadow:0 0 8px var(--point-color)}
-        .hero-roam-pill:after{content:"";position:absolute;top:-25%;left:-65%;width:22%;height:150%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.42),transparent);transform:skewX(-24deg);opacity:0}
-        .hero-roam-pill.primary{font-size:13px;padding:10px 16px;font-weight:800}
-        .hero-roam-pill.flagship{font-size:14px;padding:11px 19px;font-weight:850}
-         .hero-roam-pill.hero-roam-shimmer-once:after{animation:heroRoamShineOnce 1.8s ease-in-out 1 both}
-        @keyframes heroRoamShineOnce{0%{left:-65%;opacity:0}12%{opacity:.75}82%{opacity:.75}100%{left:145%;opacity:0}}
+
+        /* Clean floating headings: completely pill-free, border-free, background-free, and dot-free */
+        .hero-roam-heading{position:relative;display:inline-block;background:transparent;border:none;border-radius:0;padding:0;margin:0;box-shadow:none;outline:none;font-size:13px;font-weight:750;letter-spacing:.025em;line-height:1.2;white-space:nowrap;pointer-events:none;user-select:none;filter:drop-shadow(0 0 8px var(--point-glow)) drop-shadow(0 2px 4px rgba(4,16,32,.9));text-shadow:0 0 10px var(--point-glow)}
+        .hero-roam-heading:before{content:none;display:none}
+        .hero-roam-heading.primary{font-size:14px;font-weight:800;letter-spacing:.03em}
+        .hero-roam-heading.flagship{font-size:15px;font-weight:850;letter-spacing:.04em}
+
+        /* Clean text with alternating gold/blue and luminous light sweep strictly INSIDE letters */
+        .hero-roam-text{position:relative;display:inline-block;color:var(--point-color);background-image:linear-gradient(110deg,var(--point-color) 0%,var(--point-color) 35%,#ffffff 48%,#ffffff 52%,var(--point-color) 65%,var(--point-color) 100%);background-size:250% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;will-change:background-position}
+        .hero-roam-heading.hero-roam-shimmer-once .hero-roam-text{animation:heroTextShineInside 1.9s cubic-bezier(0.22,1,0.36,1) 1 forwards}
+        @keyframes heroTextShineInside{0%{background-position:100% 0}100%{background-position:-25% 0}}
+        @supports not (-webkit-background-clip:text){.hero-roam-text{background-image:none;-webkit-text-fill-color:var(--point-color);color:var(--point-color)}}
+
+        /* Center "Muhammad Salman" heading preserved */
         .hero-roam-center{position:absolute;z-index:8;left:50%;top:50%;transform:translate(-50%,-50%);width:max-content;max-width:calc(100% - 24px);min-height:0;padding:12px 20px;display:flex;flex-direction:column;gap:7px;align-items:center;justify-content:center;text-align:center;border:0;border-radius:0;background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:none;appearance:none;cursor:pointer;color:#f8e4b2;transition:transform .35s ease,filter .35s ease}
         .hero-roam-center:hover,.hero-roam-center:focus-visible{transform:translate(-50%,-50%) translateY(-3px) scale(1.055);filter:drop-shadow(0 7px 2px rgba(0,0,0,.75)) drop-shadow(0 -2px 2px rgba(255,239,189,.5));outline:none}
         .hero-roam-center strong{display:block;white-space:nowrap;font-size:clamp(21px,4.1vw,65px);font-weight:800;letter-spacing:.075em;color:#f8f1de;text-shadow:0 2px 3px rgba(4,16,32,.85),0 0 22px rgba(216,181,106,.28);line-height:1.2;transition:text-shadow .35s ease}
         .hero-roam-center .hero-roam-subtitle{display:block;font-size:clamp(12px,1.35vw,19px);font-weight:700;letter-spacing:.36em;color:#d8b56a;text-shadow:0 2px 6px rgba(0,0,0,.7);transition:letter-spacing .35s ease,text-shadow .35s ease}
         .hero-roam-center:hover .hero-roam-subtitle,.hero-roam-center:focus-visible .hero-roam-subtitle{letter-spacing:.42em;text-shadow:0 2px 10px rgba(216,181,106,.55)}
         .hero-roam-center:hover strong,.hero-roam-center:focus-visible strong{text-shadow:1px 1px 0 #fffdf4,2px 2px 0 #e4c88c,3px 3px 0 #aa8648,5px 6px 5px rgba(0,0,0,.7),0 0 20px rgba(232,199,134,.4)}
-        @media(max-width:700px){.hero-free-roam{min-height:480px}.hero-roam-pill{font-size:9px;padding:7px 9px}.hero-roam-pill.primary,.hero-roam-pill.flagship{font-size:10px;padding:8px 10px}.hero-roam-center{width:auto;min-height:0;border-radius:0;padding:10px 12px}.hero-roam-center strong{font-size:clamp(18px,5.5vw,38px);letter-spacing:.025em}.hero-roam-center .hero-roam-subtitle{font-size:12px;letter-spacing:.25em}}
-        @media(prefers-reduced-motion:reduce){.hero-roam-pill.hero-roam-shimmer-once:after{animation:none}}
+        @media(max-width:700px){.hero-free-roam{min-height:480px}.hero-roam-heading{font-size:10px}.hero-roam-heading.primary,.hero-roam-heading.flagship{font-size:11px}.hero-roam-center{width:auto;min-height:0;border-radius:0;padding:10px 12px}.hero-roam-center strong{font-size:clamp(18px,5.5vw,38px);letter-spacing:.025em}.hero-roam-center .hero-roam-subtitle{font-size:12px;letter-spacing:.25em}}
+        @media(prefers-reduced-motion:reduce){.hero-roam-heading.hero-roam-shimmer-once .hero-roam-text{animation:none;background-position:100% 0}}
       `}</style>
 
       {/* Slow square particles and connecting lines — decorative overlay only */}
@@ -645,7 +789,7 @@ export function Hero(_props: HeroProps) {
         ))}
       </svg>
 
-      {/* Floating Accounting Points & Connecting lines stage */}
+      {/* Floating Accounting Headings & Connecting lines stage */}
       <div className="hero-roam-stage" ref={stageRef}>
         <svg className="hero-roam-lines" ref={svgRef} aria-hidden="true" />
         {LABELS.map((label, i) => {
@@ -653,12 +797,20 @@ export function Hero(_props: HeroProps) {
           const tier = label === 'Financial Reporting' ? 'flagship' :
             ['Receivables','VAT Reports & Submission','Reconciliations','Monthly Closing','Payables','P&L Account','Balance Sheet'].includes(label) ? 'primary' : '';
           return (
-            <div key={label} className="hero-roam-point"
+            <div
+              key={label}
+              className="hero-roam-point"
               ref={el => { pointsRef.current[i] = el; }}
-              style={{ opacity: 0, transform: 'translate3d(-300px,-300px,0)' }}>
-              <span className={`hero-roam-pill ${tier}`}
-                style={{ '--point-color': color, '--point-glow': i % 2 === 0 ? '#d8b56a55' : '#69b7e755', '--shine-delay': `${-(i * 2.3) % 14}s` } as CSSProperties}>
-                {label}
+              style={{ opacity: 0, transform: 'translate3d(-300px,-300px,0)' }}
+            >
+              <span
+                className={`hero-roam-heading ${tier}`}
+                style={{
+                  '--point-color': color,
+                  '--point-glow': i % 2 === 0 ? 'rgba(216,181,106,0.5)' : 'rgba(105,183,231,0.5)',
+                } as CSSProperties}
+              >
+                <span className="hero-roam-text">{label}</span>
               </span>
             </div>
           );
