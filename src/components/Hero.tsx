@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import type { CSSProperties } from 'react';
 import type { ProfileInfo } from '../types';
 import { useLanguage } from '../context/LanguageContext';
+import SlowParticleNetwork from './SlowParticleNetwork';
 
 interface HeroProps {
   profile?: ProfileInfo;
@@ -576,6 +577,9 @@ export function Hero(_props: HeroProps) {
         @media(max-width:700px){.hero-free-roam{min-height:480px}.hero-roam-pill{font-size:9px;padding:7px 9px}.hero-roam-pill.primary,.hero-roam-pill.flagship{font-size:10px;padding:8px 10px}.hero-roam-center{width:auto;min-height:0;border-radius:0;padding:10px 12px}.hero-roam-center strong{font-size:clamp(18px,5.5vw,38px);letter-spacing:.025em}.hero-roam-center .hero-roam-subtitle{font-size:12px;letter-spacing:.25em}}
         @media(prefers-reduced-motion:reduce){.hero-roam-pill.hero-roam-shimmer-once:after{animation:none}}
       `}</style>
+
+      {/* Slow square particles and connecting lines — decorative overlay only */}
+      <SlowParticleNetwork />
 
       {/* 3D Wireframe Globe */}
       <MeshGlobe />
