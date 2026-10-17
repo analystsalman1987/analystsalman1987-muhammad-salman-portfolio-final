@@ -4,7 +4,9 @@ import {
   FileText,
   CheckCircle2,
   Car,
-  Briefcase
+  Briefcase,
+  Download,
+  Linkedin,
 } from 'lucide-react';
 import { ProfileInfo } from '../types';
 import { useLanguage } from '../context/LanguageContext';
@@ -12,9 +14,10 @@ import { ARABIC_TRANSLATIONS } from '../data/arabicData';
 
 interface AboutProps {
   profile?: ProfileInfo;
+  onOpenCV?: () => void;
 }
 
-export function About({ profile: _profile }: AboutProps) {
+export function About({ profile: _profile, onOpenCV }: AboutProps) {
   const { isRTL } = useLanguage();
   const t = ARABIC_TRANSLATIONS.about;
 
@@ -124,6 +127,85 @@ export function About({ profile: _profile }: AboutProps) {
                   ? t.summaryP2
                   : 'My professional experience includes ZATCA VAT compliance, inventory and costing, cash and petty cash management, customer and supplier account reconciliation, collections, and ERP-based accounting processes. I focus on maintaining accurate financial records, effective internal controls, and timely financial information to support business operations.'}
               </p>
+            </div>
+
+            {/* ACTION BUTTONS: Download CV & LinkedIn */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-1">
+              <button
+                type="button"
+                onClick={onOpenCV}
+                className="
+                  inline-flex
+                  items-center
+                  justify-center
+                  gap-2.5
+                  rounded-xl
+                  border
+                  border-[#F5E6BE]/60
+                  bg-gradient-to-r
+                  from-[#D8B56A]
+                  to-[#C99D46]
+                  px-6
+                  py-3
+                  text-sm
+                  sm:text-base
+                  font-bold
+                  text-[#071827]
+                  shadow-lg
+                  shadow-[#D8B56A]/20
+                  transition-all
+                  duration-200
+                  hover:-translate-y-0.5
+                  hover:from-[#E2C785]
+                  hover:to-[#D8B56A]
+                  hover:shadow-[#D8B56A]/35
+                  cursor-pointer
+                  select-none
+                  touch-manipulation
+                "
+              >
+                <Download className="h-4 w-4 text-[#071827]" />
+                <span>{isRTL ? (t.downloadCv || 'تحميل السيرة الذاتية') : 'Download CV'}</span>
+              </button>
+
+              <a
+                href="https://www.linkedin.com/in/muhammad-salman-mba-finance-cpa-finalist-66908767/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="
+                  inline-flex
+                  items-center
+                  justify-center
+                  gap-2.5
+                  rounded-xl
+                  border
+                  border-[#38BDF8]/30
+                  bg-[#0D2538]/90
+                  px-6
+                  py-3
+                  text-sm
+                  sm:text-base
+                  font-bold
+                  text-[#F8FAFC]
+                  shadow-md
+                  shadow-[#04111D]/40
+                  backdrop-blur-sm
+                  transition-all
+                  duration-200
+                  hover:-translate-y-0.5
+                  hover:border-[#38BDF8]/60
+                  hover:bg-[#132E43]
+                  hover:text-[#38BDF8]
+                  hover:shadow-lg
+                  hover:shadow-[#38BDF8]/20
+                  cursor-pointer
+                  select-none
+                  touch-manipulation
+                "
+              >
+                <Linkedin className="h-4 w-4 text-[#38BDF8]" />
+                <span>{isRTL ? (t.linkedin || 'لينكد إن') : 'LinkedIn'}</span>
+              </a>
             </div>
 
             {/* ======================================================

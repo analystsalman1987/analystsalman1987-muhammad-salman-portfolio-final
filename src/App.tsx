@@ -246,7 +246,10 @@ export default function App() {
 
         {/* About Section */}
         {visibility.about && (
-          <About profile={profile} />
+          <About 
+            profile={profile} 
+            onOpenCV={() => setIsCVOpen(true)} 
+          />
         )}
 
         {/* Professional Highlights Section */}
