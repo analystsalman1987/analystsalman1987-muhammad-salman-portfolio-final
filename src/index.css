@@ -555,3 +555,56 @@
     animation: none !important;
   }
 }
+
+/* Consistent muted-gold public interface accents. Home and original brand assets are excluded. */
+@media screen {
+:where(main section:not(#home), footer) [class~="text-[#0F766E]"],
+:where(main section:not(#home), footer) [class~="text-[#0f766e]"],
+:where(main section:not(#home), footer) [class~="text-teal-primary"],
+:where(main section:not(#home), footer) [class~="text-teal-300"],
+:where(main section:not(#home), footer) [class~="text-teal-400"],
+:where(main section:not(#home), footer) [class~="dark:text-teal-200"],
+:where(main section:not(#home), footer) [class~="dark:text-teal-300"],
+:where(main section:not(#home), footer) [class~="dark:text-teal-400"],
+:where(main section:not(#home), footer) [class~="dark:text-teal-500"],
+:where(main section:not(#home), footer) [class~="text-cyan-400"],
+:where(main section:not(#home), footer) [class~="dark:text-cyan-400"] { color:#D8B56A !important; }
+:where(main section:not(#home), footer) [class~="bg-[#E6F4F1]"],
+:where(main section:not(#home), footer) [class~="bg-teal-light"],
+:where(main section:not(#home), footer) [class~="dark:bg-teal-950/70"],
+:where(main section:not(#home), footer) [class~="dark:bg-teal-950/60"],
+:where(main section:not(#home), footer) [class~="dark:bg-teal-950/40"],
+:where(main section:not(#home), footer) [class~="dark:bg-teal-900/60"],
+:where(main section:not(#home), footer) [class~="bg-teal-950/50"] { background-color:rgba(216,181,106,.09) !important; }
+:where(main section:not(#home), footer) :is(h2,h3,h4) { color:#D8B56A; }
+:where(main section:not(#home), footer) .lucide { color:#D8B56A; }
+:where(main section:not(#home), footer) [class~="border-[#0F766E]/20"] { border-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="border-[#0F766E]/30"] { border-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="border-[#0F766E]/40"] { border-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="border-[#0F766E]/50"] { border-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="border-teal-500/20"] { border-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="border-teal-500/25"] { border-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="border-teal-500/30"] { border-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="border-teal-500/40"] { border-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="border-teal-500/50"] { border-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="dark:border-teal-500/35"] { border-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="dark:border-teal-500/40"] { border-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="dark:border-teal-500/50"] { border-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="dark:border-teal-700/60"] { border-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="dark:border-teal-800"] { border-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="dark:border-teal-950"] { border-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="dark:hover:border-teal-400/60"]:hover { border-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="dark:hover:border-teal-600/40"]:hover { border-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="dark:ring-teal-300/10"] { --tw-ring-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="focus-visible:ring-[#0F766E]"] { --tw-ring-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="focus:ring-[#0F766E]"] { --tw-ring-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="group-hover:border-[#0F766E]"]:hover { border-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="group-hover:border-[#0F766E]/40"]:hover { border-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="hover:border-[#087d69]/50"]:hover { border-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="hover:border-[#0F766E]/40"]:hover { border-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="hover:border-[#0F766E]/50"]:hover { border-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="hover:border-teal-400/30"]:hover { border-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="ring-[#0F766E]"] { --tw-ring-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="ring-[#0F766E]/20"] { --tw-ring-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="ring-[#0F766E]/25"] { --tw-ring-color:rgba(216,181,106,.35) !important; }
+}
