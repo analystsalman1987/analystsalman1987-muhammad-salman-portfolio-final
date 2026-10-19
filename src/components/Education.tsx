@@ -59,7 +59,7 @@ export function EducationLanguages({ education, languages }: EducationLanguagesP
           {/* Education Section (Col-Span-7) - Clean Expandable Degree Cards */}
           <div className="lg:col-span-7 flex flex-col justify-between gap-6 h-full">
             <div className="lg:min-h-[104px] flex flex-col items-start justify-start gap-1.5">
-              <span className="block text-xs font-bold tracking-widest text-[#0F766E] dark:text-teal-400 uppercase">
+              <span className="block text-xs font-bold tracking-widest text-[#D8B56A] dark:text-[#D8B56A] uppercase">
                 {isRTL ? t.tag : 'Academic Background'}
               </span>
               <div>
@@ -92,8 +92,8 @@ export function EducationLanguages({ education, languages }: EducationLanguagesP
                       key={item.id}
                       className={`rounded-2xl border transition-all duration-200 shadow-xs overflow-hidden ${
                         isExpanded
-                          ? 'bg-white dark:bg-slate-900 border-[#0F766E]/50 dark:border-teal-500/50 ring-1 ring-[#0F766E]/20 shadow-sm'
-                          : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 hover:border-[#0F766E]/40 dark:hover:border-teal-600/40'
+                          ? 'bg-white dark:bg-slate-900 border-[#D8B56A]/50 dark:border-[#C9A45C]/50 ring-1 ring-[#D8B56A]/20 shadow-sm'
+                          : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 hover:border-[#D8B56A]/40 dark:hover:border-[#B58C41]/40'
                       }`}
                     >
                       {/* Clickable Card Header */}
@@ -102,17 +102,17 @@ export function EducationLanguages({ education, languages }: EducationLanguagesP
                         onClick={() => toggleEdu(item.id)}
                         aria-expanded={isExpanded}
                         aria-label={`View ${degree} details`}
-                        className="w-full text-left rtl:text-right p-5 sm:p-6 cursor-pointer select-none focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#0F766E] touch-manipulation group block"
+                        className="w-full text-left rtl:text-right p-5 sm:p-6 cursor-pointer select-none focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#D8B56A] touch-manipulation group block"
                       >
                         <div className="flex items-start gap-4">
-                          <div className="w-12 h-12 rounded-xl bg-[#E6F4F1] dark:bg-teal-950/70 text-[#0F766E] dark:text-teal-400 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                          <div className="w-12 h-12 rounded-xl bg-[#F4E7C5] dark:bg-[#211D14]/70 text-[#D8B56A] dark:text-[#D8B56A] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
                             <GraduationCap className="w-6 h-6" />
                           </div>
 
                           <div className="flex-1 min-w-0">
                             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                               <div>
-                                <h3 className="text-base sm:text-lg font-bold text-[#0F2747] dark:text-white group-hover:text-[#0F766E] dark:group-hover:text-teal-400 transition-colors flex items-center gap-2 flex-wrap">
+                                <h3 className="text-base sm:text-lg font-bold text-[#0F2747] dark:text-white group-hover:text-[#D8B56A] dark:group-hover:text-[#D8B56A] transition-colors flex items-center gap-2 flex-wrap">
                                   <span>{degree} — {specialization}</span>
                                 </h3>
                                 {institution && (
@@ -124,7 +124,7 @@ export function EducationLanguages({ education, languages }: EducationLanguagesP
 
                               <div className="flex items-center gap-2 sm:gap-2.5 shrink-0 flex-wrap">
                                 <span className="inline-flex items-center gap-1 text-xs font-semibold text-[#1F2937] dark:text-slate-300 bg-[#F4F6F8] dark:bg-slate-800 px-2.5 py-1 rounded-md">
-                                  <Calendar className="w-3 h-3 text-[#0F766E] dark:text-teal-400" />
+                                  <Calendar className="w-3 h-3 text-[#D8B56A] dark:text-[#D8B56A]" />
                                   {period}
                                 </span>
 
@@ -132,7 +132,7 @@ export function EducationLanguages({ education, languages }: EducationLanguagesP
                                 <span
                                   className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-semibold transition-all ${
                                     isExpanded
-                                      ? 'bg-[#0F766E] text-white'
+                                      ? 'bg-[#D8B56A] text-white'
                                       : 'bg-[#F4F6F8] text-[#475569] hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700'
                                   }`}
                                   title={isRTL ? t.overviewTitle : 'Toggle academic overview'}
@@ -161,7 +161,7 @@ export function EducationLanguages({ education, languages }: EducationLanguagesP
                         <div className="overflow-hidden">
                           <div className="p-5 sm:p-6 pt-4 space-y-3 text-xs text-[#1F2937] dark:text-slate-300">
                             <div className="flex items-center gap-2 font-medium">
-                              <BookOpen className="w-4 h-4 text-[#0F766E] dark:text-teal-400 shrink-0" />
+                              <BookOpen className="w-4 h-4 text-[#D8B56A] dark:text-[#D8B56A] shrink-0" />
                               <span>{isRTL ? t.specializationLabel : 'Specialization:'} <strong className="text-[#0F2747] dark:text-white">{specialization}</strong></span>
                             </div>
                             <p className="leading-relaxed text-[#64748B] dark:text-slate-400">
@@ -184,11 +184,11 @@ export function EducationLanguages({ education, languages }: EducationLanguagesP
 
             {/* Academic Foundation Callout Box */}
             <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs flex items-start gap-4">
-              <div className="w-10 h-10 rounded-xl bg-[#E6F4F1] dark:bg-teal-950/70 text-[#0F766E] dark:text-teal-400 flex items-center justify-center shrink-0 mt-0.5">
+              <div className="w-10 h-10 rounded-xl bg-[#F4E7C5] dark:bg-[#211D14]/70 text-[#D8B56A] dark:text-[#D8B56A] flex items-center justify-center shrink-0 mt-0.5">
                 <GraduationCap className="w-5 h-5" />
               </div>
               <div className="space-y-1">
-                <h4 className="text-xs font-bold uppercase tracking-wider text-[#0F766E] dark:text-teal-400">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-[#D8B56A] dark:text-[#D8B56A]">
                   {isRTL ? t.foundationTitle : 'Higher Education Foundation'}
                 </h4>
                 <p className="text-xs text-[#64748B] dark:text-slate-400 leading-relaxed">
@@ -201,7 +201,7 @@ export function EducationLanguages({ education, languages }: EducationLanguagesP
           {/* Languages Section (Col-Span-5) */}
           <div className="lg:col-span-5 flex flex-col justify-between gap-6 h-full">
             <div className="lg:min-h-[104px] flex flex-col items-start justify-start gap-1.5">
-              <span className="block text-xs font-bold tracking-widest text-[#0F766E] dark:text-teal-400 uppercase">
+              <span className="block text-xs font-bold tracking-widest text-[#D8B56A] dark:text-[#D8B56A] uppercase">
                 {isRTL ? t.languagesTag : 'Communication'}
               </span>
               <div>
@@ -232,7 +232,7 @@ export function EducationLanguages({ education, languages }: EducationLanguagesP
                         className="p-4 rounded-xl bg-[#F4F6F8] dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/80 flex items-center justify-between"
                       >
                         <div className="flex items-center gap-3">
-                          <div className="w-9 h-9 rounded-lg bg-[#E6F4F1] dark:bg-teal-950/60 text-[#0F766E] dark:text-teal-300 flex items-center justify-center font-bold text-sm">
+                          <div className="w-9 h-9 rounded-lg bg-[#F4E7C5] dark:bg-[#211D14]/60 text-[#D8B56A] dark:text-[#E2C47E] flex items-center justify-center font-bold text-sm">
                             <Globe className="w-4 h-4" />
                           </div>
                           <div>
@@ -247,7 +247,7 @@ export function EducationLanguages({ education, languages }: EducationLanguagesP
                           </div>
                         </div>
 
-                        <span className="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-[#E6F4F1] dark:bg-teal-950/60 text-[#0F766E] dark:text-teal-300 border border-[#0F766E]/20">
+                        <span className="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-[#F4E7C5] dark:bg-[#211D14]/60 text-[#D8B56A] dark:text-[#E2C47E] border border-[#D8B56A]/20">
                           {isRTL ? t.fluentBadge : 'Fluent / Working'}
                         </span>
                       </div>
