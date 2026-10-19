@@ -105,7 +105,7 @@ const expertiseImages: Record<string, string> = {
 };
 
 export function Expertise({ expertise }: ExpertiseProps) {
-  // All categories collapsed initially; only one open at a time
+  // Desktop hover opens one directional panel; touch/keyboard retain button access.
   const [expandedId, setExpandedId] = useState<string | null>(null);
 
   const { isRTL } = useLanguage();
@@ -115,6 +115,9 @@ export function Expertise({ expertise }: ExpertiseProps) {
     expertise && expertise.length > 0
       ? expertise
       : DEFAULT_APP_DATA.expertise;
+
+  const supportsDesktopHover = () =>
+    window.matchMedia('(min-width: 1024px) and (hover: hover) and (pointer: fine)').matches;
 
   const toggleExpand = (id: string) => {
     setExpandedId((current) => (current === id ? null : id));
@@ -252,6 +255,16 @@ export function Expertise({ expertise }: ExpertiseProps) {
                     return (
                       <div
                         key={item.id}
+                        onPointerEnter={(event) => {
+                          if (event.pointerType === 'mouse' && supportsDesktopHover()) {
+                            setExpandedId(item.id);
+                          }
+                        }}
+                        onPointerLeave={(event) => {
+                          if (event.pointerType === 'mouse' && supportsDesktopHover()) {
+                            setExpandedId((current) => current === item.id ? null : current);
+                          }
+                        }}
                         className={`relative ${isExpanded ? 'z-[100]' : 'z-10'}`}
                       >
                         {/* MAIN CARD */}
@@ -318,7 +331,16 @@ export function Expertise({ expertise }: ExpertiseProps) {
                             type="button"
                             aria-expanded={isExpanded}
                             aria-controls={`expertise-panel-${item.id}`}
-                            onClick={() => toggleExpand(item.id)}
+                            onClick={(event) => {
+                              if (event.detail > 0 && supportsDesktopHover()) {
+                                setExpandedId(item.id);
+                              } else {
+                                toggleExpand(item.id);
+                              }
+                            }}
+                            onKeyDown={(event) => {
+                              if (event.key === 'Escape') setExpandedId(null);
+                            }}
                             className={`
                               w-full
                               text-left
