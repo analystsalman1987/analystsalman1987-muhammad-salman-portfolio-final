@@ -358,6 +358,11 @@ export function Hero(_props: HeroProps) {
     const previousPhases = LABELS.map((_, i) => ((FADE_OFFSETS[i] ?? i * 0.9) % 16));
     const avoidVectors = LABELS.map(() => ({ x: 0, y: 0 }));
 
+    // Drive only the underline from each point's actual visibility lifecycle.
+    const trailStarts: (number | null)[] = LABELS.map(() => null);
+    const trailElements = pointsRef.current.map(el => el?.querySelector<HTMLElement>('.hero-roam-line'));
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
     // Measure actual rendered text width and height of each heading
     const getRenderedSizes = () => LABELS.map((_, i) => {
       const el = pointsRef.current[i];
@@ -589,10 +594,10 @@ export function Hero(_props: HeroProps) {
 
           const ownW = sizes[i].w;
           const ownH = sizes[i].h;
-          const minX = ownW / 2 + 16;
-          const maxX = Math.max(minX, stageW - ownW / 2 - 16);
+          const minX = ownW * 0.625 + 16;
+          const maxX = Math.max(minX, stageW - ownW * 0.625 - 16);
           const minY = lowerMinY + ownH / 2;
-          const maxY = Math.max(minY, stageH - ownH / 2 - 16);
+          const maxY = Math.max(minY, stageH - ownH / 2 - 26);
 
           const finalX = clamp(baseCoords[i].x + avoidVectors[i].x, minX, maxX);
           const finalY = clamp(baseCoords[i].y + avoidVectors[i].y, minY, maxY);
@@ -603,6 +608,25 @@ export function Hero(_props: HeroProps) {
           if (el) {
             el.style.transform = `translate3d(${finalX.toFixed(1)}px,${finalY.toFixed(1)}px,0) translate(-50%,-50%) scale(${baseCoords[i].scale.toFixed(3)})`;
             el.style.opacity = effectiveOpacities[i].toFixed(3);
+            const trail = trailElements[i];
+            if (trail) {
+              const opacity = effectiveOpacities[i];
+              if (opacity <= 0.02) trailStarts[i] = null;
+              if (opacity >= 0.25 && trailStarts[i] === null) trailStarts[i] = now;
+
+              let expansion = 0;
+              let visibility = 0;
+              if (trailStarts[i] !== null) {
+                const phase = ((now - trailStarts[i]!) % 6000) / 6000;
+                const ease = (value: number) => 0.5 - 0.5 * Math.cos(Math.PI * clamp(value, 0, 1));
+                expansion = ease(phase / 0.38);
+                visibility = phase < 0.08 ? 0.8 * ease(phase / 0.08)
+                  : phase <= 0.65 ? 0.8
+                  : 0.8 * (1 - ease((phase - 0.65) / 0.25));
+              }
+              trail.style.transform = `scaleX(${reducedMotion.matches ? 1 : expansion.toFixed(4)})`;
+              trail.style.opacity = reducedMotion.matches ? '0.6' : visibility.toFixed(3);
+            }
           }
         });
 
@@ -683,9 +707,8 @@ export function Hero(_props: HeroProps) {
         @keyframes heroTextSweep{0%{background-position:140% 0}26%{background-position:-40% 0}100%{background-position:-40% 0}}
         @supports not (-webkit-background-clip:text){.hero-roam-text{background-image:none;-webkit-text-fill-color:var(--point-color);color:var(--point-color)}}
 
-        /* Thin, elegant horizontal light trail beneath moving expertise text */
-        .hero-roam-line{position:relative;display:block;width:100%;max-width:100%;height:1px;margin-top:4px;border-radius:999px;background-color:transparent;background-image:linear-gradient(90deg,transparent 0%,transparent 43%,var(--line-highlight) 50%,transparent 57%,transparent 100%),var(--line-track);background-size:260% 100%,100% 100%;background-position:140% 0,0 0;background-repeat:no-repeat;animation:heroLineSweep 12s cubic-bezier(0.25,1,0.5,1) infinite;animation-delay:var(--heading-delay,0s);filter:drop-shadow(0 0 3px var(--line-glow));pointer-events:none}
-        @keyframes heroLineSweep{0%{background-position:140% 0,0 0}26%{background-position:-40% 0,0 0}100%{background-position:-40% 0,0 0}}
+        /* Center-out underline: its local transform never replaces the roaming wrapper transform. */
+        .hero-roam-line{position:absolute;display:block;left:-12.5%;top:calc(100% + 8px);width:125%;height:2px;border-radius:999px;background:linear-gradient(90deg,transparent 0%,var(--point-color) 35%,var(--line-highlight) 50%,var(--point-color) 65%,transparent 100%);transform:scaleX(0);transform-origin:50% 50%;opacity:0;filter:drop-shadow(0 0 3px var(--line-glow));pointer-events:none;will-change:transform,opacity}
 
         /* Center "Muhammad Salman" heading: shifted upward by its rendered text height, so bottom edge sits where top was */
         .hero-roam-center{position:absolute;z-index:8;left:50%;top:calc(50% - clamp(65px, 6.5vw + 25px, 115px));transform:translate(-50%,-50%);width:max-content;max-width:calc(100% - 24px);min-height:0;padding:12px 20px;display:flex;flex-direction:column;gap:7px;align-items:center;justify-content:center;text-align:center;border:0;border-radius:0;background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:none;appearance:none;cursor:pointer;color:#f8e4b2;transition:transform .35s ease,filter .35s ease}
@@ -695,7 +718,7 @@ export function Hero(_props: HeroProps) {
         .hero-roam-center:hover .hero-roam-subtitle,.hero-roam-center:focus-visible .hero-roam-subtitle{letter-spacing:.42em;text-shadow:0 2px 10px rgba(216,181,106,.55)}
         .hero-roam-center:hover strong,.hero-roam-center:focus-visible strong{text-shadow:1px 1px 0 #fffdf4,2px 2px 0 #e4c88c,3px 3px 0 #aa8648,5px 6px 5px rgba(0,0,0,.7),0 0 20px rgba(232,199,134,.4)}
         @media(max-width:700px){.hero-free-roam{min-height:480px}.hero-roam-heading{font-size:12px;font-weight:700}.hero-roam-center{width:auto;min-height:0;border-radius:0;padding:10px 12px}.hero-roam-center strong{font-size:clamp(20px,6.16vw,42.5px);letter-spacing:.025em}.hero-roam-center .hero-roam-subtitle{font-size:12px;letter-spacing:.25em}}
-        @media(prefers-reduced-motion:reduce){.hero-roam-text,.hero-roam-line{animation:none;background-position:140% 0}}
+        @media(prefers-reduced-motion:reduce){.hero-roam-text{animation:none;background-position:140% 0}.hero-roam-line{will-change:auto}}
       `}</style>
 
       {/* Slow square particles and connecting lines — decorative overlay only */}
