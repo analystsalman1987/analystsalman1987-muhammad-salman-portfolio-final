@@ -361,7 +361,6 @@ export function Hero(_props: HeroProps) {
     // Drive only the underline from each point's actual visibility lifecycle.
     const trailStarts: (number | null)[] = LABELS.map(() => null);
     const trailElements = pointsRef.current.map(el => el?.querySelector<HTMLElement>('.hero-roam-line'));
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
     // Measure actual rendered text width and height of each heading
     const getRenderedSizes = () => LABELS.map((_, i) => {
@@ -612,20 +611,19 @@ export function Hero(_props: HeroProps) {
             if (trail) {
               const opacity = effectiveOpacities[i];
               if (opacity <= 0.02) trailStarts[i] = null;
-              if (opacity >= 0.25 && trailStarts[i] === null) trailStarts[i] = now;
+              if (opacity >= 0.85 && trailStarts[i] === null) trailStarts[i] = now;
 
               let expansion = 0;
               let visibility = 0;
               if (trailStarts[i] !== null) {
                 const phase = ((now - trailStarts[i]!) % 6000) / 6000;
                 const ease = (value: number) => 0.5 - 0.5 * Math.cos(Math.PI * clamp(value, 0, 1));
-                expansion = ease(phase / 0.38);
-                visibility = phase < 0.08 ? 0.8 * ease(phase / 0.08)
-                  : phase <= 0.65 ? 0.8
+                expansion = ease(phase / 0.60);
+                visibility = phase <= 0.65 ? 0.8
                   : 0.8 * (1 - ease((phase - 0.65) / 0.25));
               }
-              trail.style.transform = `scaleX(${reducedMotion.matches ? 1 : expansion.toFixed(4)})`;
-              trail.style.opacity = reducedMotion.matches ? '0.6' : visibility.toFixed(3);
+              trail.style.width = `${(125 * expansion).toFixed(3)}%`;
+              trail.style.opacity = visibility.toFixed(3);
             }
           }
         });
@@ -708,7 +706,10 @@ export function Hero(_props: HeroProps) {
         @supports not (-webkit-background-clip:text){.hero-roam-text{background-image:none;-webkit-text-fill-color:var(--point-color);color:var(--point-color)}}
 
         /* Center-out underline: its local transform never replaces the roaming wrapper transform. */
-        .hero-roam-line{position:absolute;display:block;left:-12.5%;top:calc(100% + 8px);width:125%;height:2px;border-radius:999px;background:linear-gradient(90deg,transparent 0%,var(--point-color) 35%,var(--line-highlight) 50%,var(--point-color) 65%,transparent 100%);transform:scaleX(0);transform-origin:50% 50%;opacity:0;filter:drop-shadow(0 0 3px var(--line-glow));pointer-events:none;will-change:transform,opacity}
+        .hero-roam-line{position:absolute;display:block;left:50%;top:calc(100% + 8px);width:0;height:2px;border-radius:999px;background:linear-gradient(90deg,var(--line-highlight) 0%,var(--point-color) 12%,var(--point-color) 88%,var(--line-highlight) 100%);transform:translateX(-50%);opacity:0;filter:drop-shadow(0 0 2px var(--line-glow));pointer-events:none;will-change:width,opacity}
+        .hero-roam-line:before,.hero-roam-line:after{content:"";position:absolute;top:-1px;width:4px;height:4px;border-radius:50%;background:var(--line-highlight);box-shadow:0 0 5px var(--line-glow)}
+        .hero-roam-line:before{left:0;transform:translateX(-50%)}
+        .hero-roam-line:after{right:0;transform:translateX(50%)}
 
         /* Center "Muhammad Salman" heading: shifted upward by its rendered text height, so bottom edge sits where top was */
         .hero-roam-center{position:absolute;z-index:8;left:50%;top:calc(50% - clamp(65px, 6.5vw + 25px, 115px));transform:translate(-50%,-50%);width:max-content;max-width:calc(100% - 24px);min-height:0;padding:12px 20px;display:flex;flex-direction:column;gap:7px;align-items:center;justify-content:center;text-align:center;border:0;border-radius:0;background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:none;appearance:none;cursor:pointer;color:#f8e4b2;transition:transform .35s ease,filter .35s ease}
