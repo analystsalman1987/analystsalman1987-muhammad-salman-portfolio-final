@@ -104,8 +104,8 @@ export function About({ profile: _profile, onOpenCV }: AboutProps) {
             `}
           >
             {/* HEADING */}
-            <div className="space-y-2">
-              <span className="inline-block text-xs font-bold tracking-[0.25em] text-[#D8B56A] uppercase">
+            <div className="flex flex-col items-start rtl:items-start text-left rtl:text-right">
+              <span className="block text-xs font-bold tracking-[0.25em] text-[#D8B56A] uppercase mb-2.5 sm:mb-3">
                 {isRTL ? t.tag : 'ABOUT ME'}
               </span>
 

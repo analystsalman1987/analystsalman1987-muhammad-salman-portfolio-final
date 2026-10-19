@@ -59,7 +59,7 @@ export function Highlights({ highlights }: HighlightsProps) {
         
         {/* Section Header: Vertical Stack (Label above Heading) */}
         <div className="flex flex-col items-center text-center max-w-2xl mx-auto mb-10 gap-1.5">
-          <span className="block text-xs font-bold tracking-widest text-[#0F766E] dark:text-teal-400 uppercase">
+          <span className="block text-xs font-bold tracking-widest text-[#D8B56A] uppercase">
             {isRTL ? t.tag : 'Executive Overview'}
           </span>
           <div>
@@ -83,14 +83,14 @@ export function Highlights({ highlights }: HighlightsProps) {
             return (
               <div
                 key={item.id || idx}
-                className="group rounded-xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 p-5 shadow-xs hover:border-[#0F766E]/50 dark:hover:border-teal-500/50 hover:shadow-sm transition-all duration-200 flex flex-col justify-between"
+                className="group rounded-xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 p-5 shadow-xs hover:border-[#D8B56A]/50 dark:hover:border-[#D8B56A]/50 hover:shadow-sm transition-all duration-200 flex flex-col justify-between"
               >
                 <div>
-                  <div className="w-10 h-10 rounded-lg bg-[#E6F4F1] dark:bg-teal-950/60 text-[#0F766E] dark:text-teal-300 flex items-center justify-center shrink-0 mb-3.5 group-hover:scale-105 transition-transform">
+                  <div className="w-10 h-10 rounded-lg bg-[#D8B56A]/10 text-[#D8B56A] border border-[#D8B56A]/20 flex items-center justify-center shrink-0 mb-3.5 group-hover:scale-105 group-hover:bg-[#D8B56A]/15 transition-all">
                     <Icon className="w-5 h-5" />
                   </div>
 
-                  <h3 className="text-sm font-bold text-[#0F2747] dark:text-slate-100 group-hover:text-[#0F766E] dark:group-hover:text-teal-400 transition-colors leading-snug">
+                  <h3 className="text-sm font-bold text-[#0F2747] dark:text-slate-100 group-hover:text-[#D8B56A] dark:group-hover:text-[#D8B56A] transition-colors leading-snug">
                     {title}
                   </h3>
 

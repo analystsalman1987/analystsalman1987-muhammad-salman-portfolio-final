@@ -100,20 +100,6 @@ export const DEFAULT_APP_DATA: AppData = {
       ],
     },
     {
-      id: 'exp-lc',
-      title: 'LC Documentation & Coordination',
-      category: 'compliance',
-      iconName: 'FileText',
-      details: [
-        'LC draft preparation against supplier Proforma Invoices (PI) and Purchase Orders (PO)',
-        'Verification of LC payment terms and conditions',
-        'Supplier coordination for LC corrections and amendments',
-        'Customer LC draft review and confirmation',
-        'Commercial Invoice (CI) and Delivery Note (DN) preparation against customer LCs',
-        'Approval coordination and submission of LC-related documents',
-      ],
-    },
-    {
       id: 'exp-3',
       title: 'General Ledger & Reconciliation',
       category: 'reconciliation',
@@ -143,6 +129,20 @@ export const DEFAULT_APP_DATA: AppData = {
         'Account reconciliation before closing',
         'Supporting documentation review',
         'Accurate financial data preparation',
+      ],
+    },
+    {
+      id: 'exp-lc',
+      title: 'LC Documentation & Coordination',
+      category: 'compliance',
+      iconName: 'FileText',
+      details: [
+        'LC draft preparation against supplier Proforma Invoices (PI) and Purchase Orders (PO)',
+        'Verification of LC payment terms and conditions',
+        'Supplier coordination for LC corrections and amendments',
+        'Customer LC draft review and confirmation',
+        'Commercial Invoice (CI) and Delivery Note (DN) preparation against customer LCs',
+        'Approval coordination and submission of LC-related documents',
       ],
     },
     {
