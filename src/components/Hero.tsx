@@ -27,22 +27,22 @@ const LABELS = [
   'LC Documentation',
 ];
 
-// 14 balanced anchor positions distributed naturally across left, center, and right ONLY BELOW the central title
+// 14 balanced anchor positions distributed naturally across left, center, and right below the repositioned ACCOUNTANT subtitle
 const ANCHORS: { x: number; y: number }[] = [
-  { x: 0.14, y: 0.65 }, // 0: '14+ Years Exp' (Left Upper Tier below title)
-  { x: 0.29, y: 0.74 }, // 1: 'ERP Software' (Mid-Left Middle Tier)
-  { x: 0.50, y: 0.76 }, // 2: 'Financial Reporting' (Center Middle Tier)
-  { x: 0.86, y: 0.65 }, // 3: 'Receivables' (Right Upper Tier below title)
-  { x: 0.10, y: 0.78 }, // 4: 'VAT Reports & Submission' (Far-Left Middle Tier)
-  { x: 0.71, y: 0.66 }, // 5: 'Reconciliations' (Mid-Right Upper Tier)
-  { x: 0.22, y: 0.87 }, // 6: 'Costing' (Left Bottom Tier)
-  { x: 0.62, y: 0.86 }, // 7: 'Monthly Closing' (Center-Right Bottom Tier)
-  { x: 0.90, y: 0.78 }, // 8: 'Payables' (Far-Right Middle Tier)
-  { x: 0.38, y: 0.64 }, // 9: 'P&L Account' (Center-Left Upper Tier)
-  { x: 0.62, y: 0.64 }, // 10: 'Balance Sheet' (Center-Right Upper Tier)
-  { x: 0.42, y: 0.87 }, // 11: 'Aging Report' (Center-Left Bottom Tier)
-  { x: 0.80, y: 0.87 }, // 12: 'Accrual Accounting' (Right Bottom Tier)
-  { x: 0.74, y: 0.76 }, // 13: 'LC Documentation' (Mid-Right Middle Tier)
+  { x: 0.14, y: 0.55 }, // 0: '14+ Years Exp' (Left Upper Tier below ACCOUNTANT)
+  { x: 0.28, y: 0.66 }, // 1: 'ERP Software' (Mid-Left Middle Tier)
+  { x: 0.50, y: 0.67 }, // 2: 'Financial Reporting' (Center Middle Tier)
+  { x: 0.86, y: 0.55 }, // 3: 'Receivables' (Right Upper Tier below ACCOUNTANT)
+  { x: 0.10, y: 0.78 }, // 4: 'VAT Reports & Submission' (Far-Left Lower Tier)
+  { x: 0.72, y: 0.57 }, // 5: 'Reconciliations' (Mid-Right Upper Tier)
+  { x: 0.22, y: 0.88 }, // 6: 'Costing' (Left Bottom Tier)
+  { x: 0.62, y: 0.79 }, // 7: 'Monthly Closing' (Center-Right Lower Tier)
+  { x: 0.90, y: 0.78 }, // 8: 'Payables' (Far-Right Lower Tier)
+  { x: 0.38, y: 0.54 }, // 9: 'P&L Account' (Center-Left Upper Tier)
+  { x: 0.62, y: 0.54 }, // 10: 'Balance Sheet' (Center-Right Upper Tier)
+  { x: 0.42, y: 0.88 }, // 11: 'Aging Report' (Center-Left Bottom Tier)
+  { x: 0.80, y: 0.88 }, // 12: 'Accrual Accounting' (Right Bottom Tier)
+  { x: 0.74, y: 0.68 }, // 13: 'LC Documentation' (Mid-Right Middle Tier)
 ];
 
 // Connecting aesthetic lines between natural neighbor accounting pairs
@@ -368,13 +368,13 @@ export function Hero(_props: HeroProps) {
       };
     });
 
-    // Dynamic central title bottom clearance
+    // Dynamic central title bottom clearance (strictly below MUHAMMAD SALMAN and ACCOUNTANT)
     const getLowerMinY = () => {
       const center = stage.querySelector('.hero-roam-center') as HTMLElement | null;
-      if (!center) return stageH * 0.56;
+      if (!center) return stageH * 0.44;
       const cRect = center.getBoundingClientRect();
       const sRect = stage.getBoundingClientRect();
-      return Math.max((cRect.bottom - sRect.top) + 20, stageH * 0.56);
+      return Math.max((cRect.bottom - sRect.top) + 22, stageH * 0.44);
     };
 
     const chooseNewPosition = (index: number) => {
@@ -466,15 +466,6 @@ export function Hero(_props: HeroProps) {
           // Reposition while invisible (phase >= 14, opacity 0)
           if (previousPhases[i] < 14 && phase >= 14) {
             chooseNewPosition(i);
-          }
-          // When heading appears (phase >= 14.8, fading into clear visibility), trigger smooth text shine sweep inside letters
-          if (previousPhases[i] < 14.8 && phase >= 14.8) {
-            const heading = pointsRef.current[i]?.querySelector<HTMLElement>('.hero-roam-heading');
-            if (heading) {
-              heading.classList.remove('hero-roam-shimmer-once');
-              void heading.offsetWidth; // Restart one-time text shine for this appearance
-              heading.classList.add('hero-roam-shimmer-once');
-            }
           }
           previousPhases[i] = phase;
 
@@ -641,24 +632,6 @@ export function Hero(_props: HeroProps) {
       }
     };
 
-    // Initial entrance text shine for headings visible on page load
-    const initialTimers: number[] = [];
-    LABELS.forEach((_, i) => {
-      const initialPhase = ((FADE_OFFSETS[i] ?? i * 0.9) % 16 + 16) % 16;
-      if (initialPhase < 6.0) {
-        const tid = window.setTimeout(() => {
-          if (isUnmounted) return;
-          const heading = pointsRef.current[i]?.querySelector<HTMLElement>('.hero-roam-heading');
-          if (heading) {
-            heading.classList.remove('hero-roam-shimmer-once');
-            void heading.offsetWidth;
-            heading.classList.add('hero-roam-shimmer-once');
-          }
-        }, 320 + (i % 6) * 200);
-        initialTimers.push(tid);
-      }
-    });
-
     raf = requestAnimationFrame(frame);
 
     const handleVisibility = () => {
@@ -673,7 +646,6 @@ export function Hero(_props: HeroProps) {
     return () => {
       isUnmounted = true;
       cancelAnimationFrame(raf);
-      initialTimers.forEach(id => clearTimeout(id));
       window.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseleave', handleMouseLeave);
       document.removeEventListener('visibilitychange', handleVisibility);
@@ -703,25 +675,27 @@ export function Hero(_props: HeroProps) {
         .hero-roam-point{position:absolute;left:0;top:0;z-index:2;white-space:nowrap;pointer-events:none;will-change:transform,opacity}
 
         /* Clean floating headings: completely pill-free, border-free, background-free, and dot-free */
-        .hero-roam-heading{position:relative;display:inline-block;background:transparent;border:none;border-radius:0;padding:0;margin:0;box-shadow:none;outline:none;font-size:15px;font-weight:700;letter-spacing:.025em;line-height:1.2;white-space:nowrap;pointer-events:none;user-select:none;filter:drop-shadow(0 0 8px var(--point-glow)) drop-shadow(0 2px 4px rgba(4,16,32,.9));text-shadow:0 0 10px var(--point-glow)}
+        .hero-roam-heading{position:relative;display:inline-flex;flex-direction:column;align-items:center;background:transparent;border:none;border-radius:0;padding:0;margin:0;box-shadow:none;outline:none;font-size:15px;font-weight:700;letter-spacing:.025em;line-height:1.2;white-space:nowrap;pointer-events:none;user-select:none;filter:drop-shadow(0 0 8px var(--point-glow)) drop-shadow(0 2px 4px rgba(4,16,32,.9));text-shadow:0 0 10px var(--point-glow)}
         .hero-roam-heading:before{content:none;display:none}
-        .hero-roam-heading.primary,.hero-roam-heading.flagship{font-size:15px;font-weight:700;letter-spacing:.025em}
 
-        /* Clean text with alternating gold/blue and luminous light sweep strictly INSIDE letters */
-        .hero-roam-text{position:relative;display:inline-block;color:var(--point-color);background-image:linear-gradient(110deg,var(--point-color) 0%,var(--point-color) 35%,#ffffff 48%,#ffffff 52%,var(--point-color) 65%,var(--point-color) 100%);background-size:250% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;will-change:background-position}
-        .hero-roam-heading.hero-roam-shimmer-once .hero-roam-text{animation:heroTextShineInside 1.9s cubic-bezier(0.22,1,0.36,1) 1 forwards}
-        @keyframes heroTextShineInside{0%{background-position:100% 0}100%{background-position:-25% 0}}
+        /* Clean text with subtle dark golden/deep blue light sweep strictly INSIDE letters from LEFT to RIGHT */
+        .hero-roam-text{position:relative;display:inline-block;color:var(--point-color);background-image:linear-gradient(90deg,var(--point-color) 0%,var(--point-color) 38%,var(--sweep-color) 50%,var(--point-color) 62%,var(--point-color) 100%);background-size:250% 100%;background-position:140% 0;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:heroTextSweep 12s cubic-bezier(0.25,1,0.5,1) infinite;animation-delay:var(--heading-delay,0s);will-change:background-position}
+        @keyframes heroTextSweep{0%{background-position:140% 0}26%{background-position:-40% 0}100%{background-position:-40% 0}}
         @supports not (-webkit-background-clip:text){.hero-roam-text{background-image:none;-webkit-text-fill-color:var(--point-color);color:var(--point-color)}}
 
-        /* Center "Muhammad Salman" heading preserved (shifted 30px upward) */
-        .hero-roam-center{position:absolute;z-index:8;left:50%;top:calc(50% - 30px);transform:translate(-50%,-50%);width:max-content;max-width:calc(100% - 24px);min-height:0;padding:12px 20px;display:flex;flex-direction:column;gap:7px;align-items:center;justify-content:center;text-align:center;border:0;border-radius:0;background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:none;appearance:none;cursor:pointer;color:#f8e4b2;transition:transform .35s ease,filter .35s ease}
+        /* Thin, elegant horizontal light trail beneath moving expertise text */
+        .hero-roam-line{position:relative;display:block;width:100%;max-width:100%;height:1px;margin-top:4px;border-radius:999px;background-color:transparent;background-image:linear-gradient(90deg,transparent 0%,transparent 43%,var(--line-highlight) 50%,transparent 57%,transparent 100%),var(--line-track);background-size:260% 100%,100% 100%;background-position:140% 0,0 0;background-repeat:no-repeat;animation:heroLineSweep 12s cubic-bezier(0.25,1,0.5,1) infinite;animation-delay:var(--heading-delay,0s);filter:drop-shadow(0 0 3px var(--line-glow));pointer-events:none}
+        @keyframes heroLineSweep{0%{background-position:140% 0,0 0}26%{background-position:-40% 0,0 0}100%{background-position:-40% 0,0 0}}
+
+        /* Center "Muhammad Salman" heading: shifted upward by its rendered text height, so bottom edge sits where top was */
+        .hero-roam-center{position:absolute;z-index:8;left:50%;top:calc(50% - clamp(65px, 6.5vw + 25px, 115px));transform:translate(-50%,-50%);width:max-content;max-width:calc(100% - 24px);min-height:0;padding:12px 20px;display:flex;flex-direction:column;gap:7px;align-items:center;justify-content:center;text-align:center;border:0;border-radius:0;background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:none;appearance:none;cursor:pointer;color:#f8e4b2;transition:transform .35s ease,filter .35s ease}
         .hero-roam-center:hover,.hero-roam-center:focus-visible{transform:translate(-50%,-50%) translateY(-3px) scale(1.055);filter:drop-shadow(0 7px 2px rgba(0,0,0,.75)) drop-shadow(0 -2px 2px rgba(255,239,189,.5));outline:none}
-        .hero-roam-center strong{display:block;white-space:nowrap;font-size:clamp(21px,4.1vw,65px);font-weight:800;letter-spacing:.075em;color:#f8f1de;text-shadow:0 2px 3px rgba(4,16,32,.85),0 0 22px rgba(216,181,106,.28);line-height:1.2;transition:text-shadow .35s ease}
+        .hero-roam-center strong{display:block;white-space:nowrap;font-size:clamp(23.5px,4.6vw,73px);font-weight:800;letter-spacing:.075em;color:#f8f1de;text-shadow:0 2px 3px rgba(4,16,32,.85),0 0 22px rgba(216,181,106,.28);line-height:1.2;transition:text-shadow .35s ease}
         .hero-roam-center .hero-roam-subtitle{display:block;font-size:clamp(12px,1.35vw,19px);font-weight:700;letter-spacing:.36em;color:#d8b56a;text-shadow:0 2px 6px rgba(0,0,0,.7);transition:letter-spacing .35s ease,text-shadow .35s ease}
         .hero-roam-center:hover .hero-roam-subtitle,.hero-roam-center:focus-visible .hero-roam-subtitle{letter-spacing:.42em;text-shadow:0 2px 10px rgba(216,181,106,.55)}
         .hero-roam-center:hover strong,.hero-roam-center:focus-visible strong{text-shadow:1px 1px 0 #fffdf4,2px 2px 0 #e4c88c,3px 3px 0 #aa8648,5px 6px 5px rgba(0,0,0,.7),0 0 20px rgba(232,199,134,.4)}
-        @media(max-width:700px){.hero-free-roam{min-height:480px}.hero-roam-heading,.hero-roam-heading.primary,.hero-roam-heading.flagship{font-size:12px;font-weight:700}.hero-roam-center{width:auto;min-height:0;border-radius:0;padding:10px 12px}.hero-roam-center strong{font-size:clamp(18px,5.5vw,38px);letter-spacing:.025em}.hero-roam-center .hero-roam-subtitle{font-size:12px;letter-spacing:.25em}}
-        @media(prefers-reduced-motion:reduce){.hero-roam-heading.hero-roam-shimmer-once .hero-roam-text{animation:none;background-position:100% 0}}
+        @media(max-width:700px){.hero-free-roam{min-height:480px}.hero-roam-heading{font-size:12px;font-weight:700}.hero-roam-center{width:auto;min-height:0;border-radius:0;padding:10px 12px}.hero-roam-center strong{font-size:clamp(20px,6.16vw,42.5px);letter-spacing:.025em}.hero-roam-center .hero-roam-subtitle{font-size:12px;letter-spacing:.25em}}
+        @media(prefers-reduced-motion:reduce){.hero-roam-text,.hero-roam-line{animation:none;background-position:140% 0}}
       `}</style>
 
       {/* Slow square particles and connecting lines — decorative overlay only */}
@@ -795,7 +769,8 @@ export function Hero(_props: HeroProps) {
       <div className="hero-roam-stage" ref={stageRef}>
         <svg className="hero-roam-lines" ref={svgRef} aria-hidden="true" />
         {LABELS.map((label, i) => {
-          const color = i % 2 === 0 ? GOLD : BLUE;
+          const isGold = i % 2 === 0;
+          const color = isGold ? GOLD : BLUE;
           return (
             <div
               key={label}
@@ -807,10 +782,18 @@ export function Hero(_props: HeroProps) {
                 className="hero-roam-heading"
                 style={{
                   '--point-color': color,
-                  '--point-glow': i % 2 === 0 ? 'rgba(216,181,106,0.5)' : 'rgba(105,183,231,0.5)',
+                  '--sweep-color': isGold ? '#F3DB96' : '#A2E2FF',
+                  '--line-track': isGold 
+                    ? 'linear-gradient(90deg, transparent 0%, rgba(216, 181, 106, 0.28) 12%, rgba(216, 181, 106, 0.38) 50%, rgba(216, 181, 106, 0.28) 88%, transparent 100%)' 
+                    : 'linear-gradient(90deg, transparent 0%, rgba(105, 183, 231, 0.28) 12%, rgba(105, 183, 231, 0.38) 50%, rgba(105, 183, 231, 0.28) 88%, transparent 100%)',
+                  '--line-highlight': isGold ? '#FFF4D0' : '#E0F7FF',
+                  '--line-glow': isGold ? 'rgba(248, 227, 168, 0.65)' : 'rgba(162, 226, 255, 0.65)',
+                  '--point-glow': isGold ? 'rgba(216,181,106,0.45)' : 'rgba(105,183,231,0.45)',
+                  '--heading-delay': `${(i * 0.85).toFixed(2)}s`,
                 } as CSSProperties}
               >
                 <span className="hero-roam-text">{label}</span>
+                <span className="hero-roam-line" aria-hidden="true" />
               </span>
             </div>
           );
