@@ -25,11 +25,11 @@ const softwareItems: SoftwareItem[] = [
 ];
 
 const categoryStyles: Record<Category, string> = {
-  ERP: 'border-cyan-400 bg-cyan-100 text-cyan-950 dark:border-cyan-400 dark:bg-cyan-300 dark:text-cyan-950',
-  Accounting: 'border-emerald-400 bg-emerald-100 text-emerald-950 dark:border-emerald-400 dark:bg-emerald-300 dark:text-emerald-950',
-  Cloud: 'border-sky-400 bg-sky-100 text-sky-950 dark:border-sky-400 dark:bg-sky-300 dark:text-sky-950',
-  Financial: 'border-indigo-400 bg-indigo-100 text-indigo-950 dark:border-indigo-400 dark:bg-indigo-300 dark:text-indigo-950',
-  Productivity: 'border-violet-400 bg-violet-100 text-violet-950 dark:border-violet-400 dark:bg-violet-300 dark:text-violet-950',
+  ERP: 'border-[#D8B56A]/40 bg-[#D8B56A]/15 text-[#E2C47E] dark:border-[#D8B56A]/40 dark:bg-[#D8B56A]/15 dark:text-[#E2C47E]',
+  Accounting: 'border-[#D8B56A]/40 bg-[#D8B56A]/15 text-[#E2C47E] dark:border-[#D8B56A]/40 dark:bg-[#D8B56A]/15 dark:text-[#E2C47E]',
+  Cloud: 'border-[#D8B56A]/40 bg-[#D8B56A]/15 text-[#E2C47E] dark:border-[#D8B56A]/40 dark:bg-[#D8B56A]/15 dark:text-[#E2C47E]',
+  Financial: 'border-[#D8B56A]/40 bg-[#D8B56A]/15 text-[#E2C47E] dark:border-[#D8B56A]/40 dark:bg-[#D8B56A]/15 dark:text-[#E2C47E]',
+  Productivity: 'border-[#D8B56A]/40 bg-[#D8B56A]/15 text-[#E2C47E] dark:border-[#D8B56A]/40 dark:bg-[#D8B56A]/15 dark:text-[#E2C47E]',
 };
 
 function SoftwareLogo({ item }: { item: SoftwareItem }) {
@@ -72,7 +72,7 @@ export function Software(_props?: SoftwareProps) {
         {/* SECTION HEADER — unchanged */}
         <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div className="flex max-w-3xl flex-col items-start gap-1.5">
-            <span className="block text-xs font-bold uppercase tracking-widest text-[#0F766E] dark:text-teal-300">
+            <span className="block text-xs font-bold uppercase tracking-widest text-[#D8B56A] dark:text-[#E2C47E]">
               ERP &amp; SOFTWARE
             </span>
             <div>
@@ -92,7 +92,7 @@ export function Software(_props?: SoftwareProps) {
           {softwareItems.map((item) => (
             <div
               key={item.name}
-              className="group flex min-h-[88px] items-center rounded-xl border border-slate-200/90 bg-white px-4 py-3 shadow-[0_6px_18px_rgba(15,23,42,0.06)] transition-all duration-300 ease-out hover:-translate-y-1 hover:border-[#087d69]/50 hover:shadow-[0_12px_26px_rgba(8,125,105,0.12)] dark:border-slate-600/90 dark:bg-slate-800 dark:shadow-[0_8px_22px_rgba(0,0,0,0.22)] dark:hover:border-teal-400/60 dark:hover:bg-slate-800 dark:hover:shadow-[0_12px_28px_rgba(20,184,166,0.12),0_0_12px_rgba(216,181,106,0.07)]"
+              className="group flex min-h-[88px] items-center rounded-xl border border-slate-200/90 bg-white px-4 py-3 shadow-[0_6px_18px_rgba(15,23,42,0.06)] transition-all duration-300 ease-out hover:-translate-y-1 hover:border-[#B58C41]/50 hover:shadow-[0_12px_26px_rgba(216,181,106,0.12)] dark:border-slate-600/90 dark:bg-slate-800 dark:shadow-[0_8px_22px_rgba(0,0,0,0.22)] dark:hover:border-[#D8B56A]/60 dark:hover:bg-slate-800 dark:hover:shadow-[0_12px_28px_rgba(216,181,106,0.12),0_0_12px_rgba(216,181,106,0.07)]"
             >
               {/* SOFTWARE LOGO */}
               <div className="flex min-w-0 flex-1 items-center justify-center pr-3">
@@ -100,7 +100,7 @@ export function Software(_props?: SoftwareProps) {
               </div>
 
               {/* VERTICAL DIVIDER */}
-              <div className="h-10 w-px shrink-0 bg-slate-300 transition-colors duration-300 group-hover:bg-[#087d69]/60 dark:bg-slate-500 dark:group-hover:bg-teal-400/70" />
+              <div className="h-10 w-px shrink-0 bg-slate-300 transition-colors duration-300 group-hover:bg-[#B58C41]/60 dark:bg-slate-500 dark:group-hover:bg-[#D8B56A]/70" />
 
               {/* CATEGORY BADGE — unchanged */}
               <div className="flex min-w-[86px] shrink-0 items-center justify-center pl-3">
