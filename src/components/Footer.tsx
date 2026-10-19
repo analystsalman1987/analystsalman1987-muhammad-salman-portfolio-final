@@ -27,14 +27,14 @@ export function Footer({ profile, onOpenCV }: FooterProps) {
           {/* Brand & Title */}
           <div className="md:col-span-6 space-y-3">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-lg bg-[#0F2747] dark:bg-white border border-teal-500/50 text-teal-300 dark:text-[#0F766E] font-bold flex items-center justify-center text-base tracking-wider shadow-xs">
+              <div className="w-10 h-10 rounded-lg bg-[#0F2747] dark:bg-white border border-[#C9A45C]/50 text-[#E2C47E] dark:text-[#D8B56A] font-bold flex items-center justify-center text-base tracking-wider shadow-xs">
                 MS
               </div>
               <div>
                 <span className="text-base font-bold text-white dark:text-[#0F2747] block">
                   Muhammad Salman
                 </span>
-                <span className="text-xs text-teal-400 dark:text-[#0F766E] font-medium block">
+                <span className="text-xs text-[#D8B56A] dark:text-[#D8B56A] font-medium block">
                   {isRTL ? t.role : (profile.professionalTitle || 'Accountant | MBA Accounting & Finance')}
                 </span>
               </div>
@@ -43,7 +43,7 @@ export function Footer({ profile, onOpenCV }: FooterProps) {
               {isRTL ? t.desc : 'Accounting professional with 14+ years across Saudi Arabia and Pakistan specializing in financial reporting, bookkeeping, reconciliations, month-end closing, ERP systems, and ZATCA VAT compliance.'}
             </p>
             <div className="flex items-center gap-2 text-xs text-slate-300/80 dark:text-[#475569] pt-1">
-              <MapPin className="w-3.5 h-3.5 text-teal-400 dark:text-[#0F766E]" />
+              <MapPin className="w-3.5 h-3.5 text-[#D8B56A] dark:text-[#D8B56A]" />
               <span>{isRTL ? t.location : (profile.location || 'Dammam, Saudi Arabia')}</span>
             </div>
           </div>
@@ -54,14 +54,14 @@ export function Footer({ profile, onOpenCV }: FooterProps) {
               {isRTL ? t.contactTitle : 'Direct Contact'}
             </h4>
             <div className="flex items-center gap-2 text-slate-300 dark:text-[#334155]">
-              <Mail className="w-3.5 h-3.5 text-teal-400 dark:text-[#0F766E] shrink-0" />
-              <a href={`mailto:${profile.email}`} className="hover:text-white dark:hover:text-[#0F766E] transition-colors">
+              <Mail className="w-3.5 h-3.5 text-[#D8B56A] dark:text-[#D8B56A] shrink-0" />
+              <a href={`mailto:${profile.email}`} className="hover:text-white dark:hover:text-[#D8B56A] transition-colors">
                 {profile.email}
               </a>
             </div>
             <div className="flex items-center gap-2 text-slate-300 dark:text-[#334155]">
-              <Phone className="w-3.5 h-3.5 text-teal-400 dark:text-[#0F766E] shrink-0" />
-              <a href={`tel:${profile.primaryPhone.replace(/\s+/g, '')}`} className="hover:text-white dark:hover:text-[#0F766E] transition-colors" dir="ltr">
+              <Phone className="w-3.5 h-3.5 text-[#D8B56A] dark:text-[#D8B56A] shrink-0" />
+              <a href={`tel:${profile.primaryPhone.replace(/\s+/g, '')}`} className="hover:text-white dark:hover:text-[#D8B56A] transition-colors" dir="ltr">
                 {profile.primaryPhone}
               </a>
             </div>
@@ -81,18 +81,18 @@ export function Footer({ profile, onOpenCV }: FooterProps) {
                 <button
                   type="button"
                   onClick={onOpenCV}
-                  className="hover:text-teal-300 dark:hover:text-[#0F766E] transition-colors text-start cursor-pointer select-none touch-manipulation"
+                  className="hover:text-[#E2C47E] dark:hover:text-[#D8B56A] transition-colors text-start cursor-pointer select-none touch-manipulation"
                 >
                   {isRTL ? t.cvLink : 'View & Print CV / Resume'}
                 </button>
               </li>
               <li>
-                <a href="#experience" className="hover:text-teal-300 dark:hover:text-[#0F766E] transition-colors">
+                <a href="#experience" className="hover:text-[#E2C47E] dark:hover:text-[#D8B56A] transition-colors">
                   {isRTL ? t.experienceLink : 'Career History'}
                 </a>
               </li>
               <li>
-                <a href="#software" className="hover:text-teal-300 dark:hover:text-[#0F766E] transition-colors">
+                <a href="#software" className="hover:text-[#E2C47E] dark:hover:text-[#D8B56A] transition-colors">
                   {isRTL ? t.softwareLink : 'ERP & Accounting Software'}
                 </a>
               </li>
@@ -112,7 +112,7 @@ export function Footer({ profile, onOpenCV }: FooterProps) {
             <button
               type="button"
               onClick={scrollToTop}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800/80 dark:bg-white text-slate-300 dark:text-[#334155] hover:bg-[#0F766E] dark:hover:bg-[#0F766E] hover:text-white dark:hover:text-white border dark:border-[#CBD5E1] text-xs transition-colors cursor-pointer select-none touch-manipulation"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800/80 dark:bg-white text-slate-300 dark:text-[#334155] hover:bg-[#D8B56A] dark:hover:bg-[#D8B56A] hover:text-white dark:hover:text-white border dark:border-[#CBD5E1] text-xs transition-colors cursor-pointer select-none touch-manipulation"
             >
               <span>{isRTL ? t.backToTop : 'Back to top'}</span>
               <ArrowUp className="w-3.5 h-3.5" />
