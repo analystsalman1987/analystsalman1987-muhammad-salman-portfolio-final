@@ -326,10 +326,10 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
         <div 
           className={`absolute ${isRTL ? '-right-[31px] sm:-right-[39px]' : '-left-[31px] sm:-left-[39px]'} top-6 w-4 h-4 rounded-full border-2 transition-all ${
             isAlyami && job.isCurrent
-              ? 'bg-[#0F766E] border-[#E6F4F1] dark:border-teal-950 ring-4 ring-[#0F766E]/20'
+              ? 'bg-[#D8B56A] border-[#F4E7C5] dark:border-[#211D14] ring-4 ring-[#D8B56A]/20'
               : isExpanded
-                ? 'bg-[#0F766E] border-[#E6F4F1] dark:border-teal-800 ring-4 ring-[#0F766E]/20'
-                : 'bg-white dark:bg-slate-900 border-slate-400 dark:border-slate-600 group-hover:border-[#0F766E] group-hover:scale-110'
+                ? 'bg-[#D8B56A] border-[#F4E7C5] dark:border-[#665028] ring-4 ring-[#D8B56A]/20'
+                : 'bg-white dark:bg-slate-900 border-slate-400 dark:border-slate-600 group-hover:border-[#D8B56A] group-hover:scale-110'
           }`}
         />
 
@@ -337,7 +337,7 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
         <div 
           className={`rounded-2xl border transition-all duration-300 shadow-xs overflow-hidden ${
             isExpanded
-              ? 'border-[#0F766E]/50 dark:border-teal-500/50 ring-1 ring-[#0F766E]/25 bg-white dark:bg-slate-900/90 shadow-md'
+              ? 'border-[#D8B56A]/50 dark:border-[#C9A45C]/50 ring-1 ring-[#D8B56A]/25 bg-white dark:bg-slate-900/90 shadow-md'
               : 'bg-[#F4F6F8] dark:bg-slate-800/40 border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 hover:bg-slate-100/70 dark:hover:bg-slate-800/50'
           }`}
         >
@@ -346,30 +346,30 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
             type="button"
             onClick={() => toggleExpand(job.id)}
             aria-expanded={isExpanded}
-            className="w-full text-left rtl:text-right relative p-5 sm:p-6 cursor-pointer select-none focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#0F766E] touch-manipulation block"
+            className="w-full text-left rtl:text-right relative p-5 sm:p-6 cursor-pointer select-none focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#D8B56A] touch-manipulation block"
           >
             <div className="relative flex flex-col sm:flex-row sm:items-start justify-between gap-4">
               {/* LEFT SIDE: 1. Company Name, 2. Designation / Job Title, 3. Location */}
               <div className="space-y-1.5 min-w-0 sm:max-w-[48%]">
-                <h3 className="company-3d-text text-lg sm:text-xl font-extrabold text-[#0F2747] dark:text-white group-hover:text-[#0F766E] dark:group-hover:text-teal-400 transition-colors leading-snug">
+                <h3 className="company-3d-text text-lg sm:text-xl font-extrabold text-[#0F2747] dark:text-white group-hover:text-[#D8B56A] dark:group-hover:text-[#D8B56A] transition-colors leading-snug">
                   {companyName}
                 </h3>
 
                 <div className="flex items-center gap-2 flex-wrap">
-                  <span className="text-sm sm:text-base font-bold text-[#0F766E] dark:text-teal-400">
+                  <span className="text-sm sm:text-base font-bold text-[#D8B56A] dark:text-[#D8B56A]">
                     {role}
                   </span>
                   {/* Keep the Present Role badge ONLY for Ahmed Al Yami Group */}
                   {isAlyami && job.isCurrent && (
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-[#E6F4F1] text-[#0F766E] dark:bg-teal-950/80 dark:text-teal-300 border border-[#0F766E]/30 dark:border-teal-800">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#0F766E] animate-pulse" />
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-[#F4E7C5] text-[#D8B56A] dark:bg-[#211D14]/80 dark:text-[#E2C47E] border border-[#D8B56A]/30 dark:border-[#665028]">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#D8B56A] animate-pulse" />
                       {isRTL ? t.presentRole : 'Present Role'}
                     </span>
                   )}
                 </div>
 
                 <div className="text-xs sm:text-sm text-[#64748B] dark:text-slate-400 flex items-center gap-1.5">
-                  <MapPin className="w-3.5 h-3.5 shrink-0 text-[#0F766E] dark:text-teal-400" />
+                  <MapPin className="w-3.5 h-3.5 shrink-0 text-[#D8B56A] dark:text-[#D8B56A]" />
                   <span>{location}</span>
                 </div>
 
@@ -388,14 +388,14 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
                 <span 
                   className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold leading-none tracking-tight transition-all duration-300 ${
                     isExpanded
-                      ? 'bg-teal-600/[0.12] dark:bg-teal-400/[0.14] text-[#0F766E] dark:text-teal-200 border border-teal-500/40 shadow-xs'
-                      : 'bg-white/90 dark:bg-slate-900/80 text-[#0F766E] dark:text-teal-300 border border-teal-500/25 shadow-2xs backdrop-blur-xs'
+                      ? 'bg-[#B58C41]/[0.12] dark:bg-[#D8B56A]/[0.14] text-[#D8B56A] dark:text-[#EAD39C] border border-[#C9A45C]/40 shadow-xs'
+                      : 'bg-white/90 dark:bg-slate-900/80 text-[#D8B56A] dark:text-[#E2C47E] border border-[#C9A45C]/25 shadow-2xs backdrop-blur-xs'
                   }`}
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-[#D8B56A] shadow-xs shadow-[#D8B56A]/60" />
                   <span>{isRTL ? 'المسؤوليات' : 'Responsibilities'}</span>
                   <ChevronDown 
-                    className={`w-3.5 h-3.5 transition-transform duration-350 ease-out text-[#0F766E] dark:text-teal-300 ${
+                    className={`w-3.5 h-3.5 transition-transform duration-350 ease-out text-[#D8B56A] dark:text-[#E2C47E] ${
                       isExpanded ? 'rotate-180 text-[#D8B56A] dark:text-[#D8B56A]' : ''
                     }`} 
                   />
@@ -406,7 +406,7 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
               <div className="flex flex-row sm:flex-col items-center sm:items-end justify-between sm:justify-start gap-2.5 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-100 dark:border-slate-800/60">
                 {/* Subtle Navy/Glass Logo Container with High-Contrast Crisp Interior */}
                 <div 
-                  className="relative flex items-center justify-center h-[72px] sm:h-[80px] w-[145px] sm:w-[185px] px-3.5 py-2 rounded-xl bg-gradient-to-b from-[#FFFFFF] via-[#F8FAFC] to-[#EDF2F7] dark:from-[#FFFFFF] dark:via-[#F1F5F9] dark:to-[#E2E8F0] border border-slate-200/90 dark:border-teal-500/35 shadow-md shadow-slate-900/5 dark:shadow-teal-950/30 backdrop-blur-md group-hover:border-[#0F766E]/40 transition-all duration-300"
+                  className="relative flex items-center justify-center h-[72px] sm:h-[80px] w-[145px] sm:w-[185px] px-3.5 py-2 rounded-xl bg-gradient-to-b from-[#FFFFFF] via-[#F8FAFC] to-[#EDF2F7] dark:from-[#FFFFFF] dark:via-[#F1F5F9] dark:to-[#E2E8F0] border border-slate-200/90 dark:border-[#C9A45C]/35 shadow-md shadow-slate-900/5 dark:shadow-[#211D14]/30 backdrop-blur-md group-hover:border-[#D8B56A]/40 transition-all duration-300"
                   title={companyName}
                 >
                   {/* Subtle glass reflection highlight */}
@@ -423,14 +423,14 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
                     />
                   ) : (
                     <div className="flex items-center justify-center gap-2 px-2 text-[#0F2747]">
-                      <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-[#0F766E]/15 to-[#0F2747]/10 flex items-center justify-center border border-[#0F766E]/20 shrink-0">
-                        <Building2 className="w-4.5 h-4.5 text-[#0F766E]" />
+                      <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-[#D8B56A]/15 to-[#0F2747]/10 flex items-center justify-center border border-[#D8B56A]/20 shrink-0">
+                        <Building2 className="w-4.5 h-4.5 text-[#D8B56A]" />
                       </div>
                       <div className="flex flex-col text-left rtl:text-right min-w-0">
                         <span className="text-xs font-black tracking-wider uppercase text-[#0F2747]">
                           {getCompanyInitials(job.company)}
                         </span>
-                        <span className="text-[10px] font-semibold text-[#0F766E] truncate max-w-[85px] sm:max-w-[105px]">
+                        <span className="text-[10px] font-semibold text-[#D8B56A] truncate max-w-[85px] sm:max-w-[105px]">
                           {job.company.split(' ')[0]}
                         </span>
                       </div>
@@ -440,7 +440,7 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
 
                 {/* Employment Period / Date */}
                 <div className="inline-flex items-center gap-1.5 text-[11px] font-medium text-[#1F2937] dark:text-slate-300 bg-white dark:bg-slate-900 px-2.5 py-1 rounded-md border border-slate-200 dark:border-slate-800">
-                  <Calendar className="w-3 h-3 text-[#0F766E] dark:text-teal-400 shrink-0" />
+                  <Calendar className="w-3 h-3 text-[#D8B56A] dark:text-[#D8B56A] shrink-0" />
                   <span>{period}</span>
                 </div>
               </div>
@@ -458,10 +458,10 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
             <div className="overflow-hidden">
               <div className="p-4 sm:p-6 pt-1 sm:pt-2">
                 {/* Premium Dark Navy Glass Panel */}
-                <div className="relative rounded-2xl p-5 sm:p-6 bg-gradient-to-b from-[#081B2E]/95 via-[#061726]/98 to-[#030F1A]/98 text-slate-100 border border-teal-500/30 dark:border-teal-500/40 shadow-xl shadow-slate-950/40 backdrop-blur-xl">
+                <div className="relative rounded-2xl p-5 sm:p-6 bg-gradient-to-b from-[#081B2E]/95 via-[#061726]/98 to-[#030F1A]/98 text-slate-100 border border-[#C9A45C]/30 dark:border-[#C9A45C]/40 shadow-xl shadow-slate-950/40 backdrop-blur-xl">
                   {/* Ambient Soft Gold/Teal Backlight Accent */}
                   <div 
-                    className="absolute -top-12 -right-12 w-48 h-48 rounded-full bg-teal-500/10 blur-2xl pointer-events-none"
+                    className="absolute -top-12 -right-12 w-48 h-48 rounded-full bg-[#C9A45C]/10 blur-2xl pointer-events-none"
                     aria-hidden="true" 
                   />
                   <div 
@@ -493,9 +493,9 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
                       return (
                         <li 
                           key={idx} 
-                          className="flex items-start gap-3 text-xs sm:text-[13px] text-slate-200/90 bg-white/[0.04] hover:bg-white/[0.07] p-3 sm:p-3.5 rounded-xl border border-white/[0.08] hover:border-teal-400/30 transition-all duration-200"
+                          className="flex items-start gap-3 text-xs sm:text-[13px] text-slate-200/90 bg-white/[0.04] hover:bg-white/[0.07] p-3 sm:p-3.5 rounded-xl border border-white/[0.08] hover:border-[#D8B56A]/30 transition-all duration-200"
                         >
-                          <div className="mt-0.5 shrink-0 flex items-center justify-center w-4 h-4 rounded-full bg-teal-500/20 text-teal-300 border border-teal-500/30">
+                          <div className="mt-0.5 shrink-0 flex items-center justify-center w-4 h-4 rounded-full bg-[#C9A45C]/20 text-[#E2C47E] border border-[#C9A45C]/30">
                             <span className="w-1.5 h-1.5 rounded-full bg-[#D8B56A]" />
                           </div>
                           <span className="min-w-0 flex-1 leading-relaxed">
@@ -532,7 +532,7 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
                           {softwareList.map((sw, sIdx) => (
                             <div
                               key={sIdx}
-                              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-900/80 border border-teal-500/30 shadow-2xs hover:border-[#D8B56A]/50 transition-colors"
+                              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-900/80 border border-[#C9A45C]/30 shadow-2xs hover:border-[#D8B56A]/50 transition-colors"
                             >
                               <img
                                 src={sw.logo}
@@ -571,7 +571,7 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
         {/* Section Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
           <div className="flex flex-col items-start gap-1.5 max-w-3xl">
-            <span className="block text-xs font-bold tracking-widest text-[#0F766E] dark:text-teal-400 uppercase">
+            <span className="block text-xs font-bold tracking-widest text-[#D8B56A] dark:text-[#D8B56A] uppercase">
               {isRTL ? t.tag : 'Career Timeline'}
             </span>
             <div>
@@ -592,12 +592,12 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
                 onClick={onToggleSelect}
                 className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all border cursor-pointer ${
                   isSelected
-                    ? 'bg-[#E6F4F1] text-[#0F766E] border-[#0F766E]/40 dark:bg-teal-950/70 dark:text-teal-300 dark:border-teal-700/60 shadow-2xs'
+                    ? 'bg-[#F4E7C5] text-[#D8B56A] border-[#D8B56A]/40 dark:bg-[#211D14]/70 dark:text-[#E2C47E] dark:border-[#8D6B30]/60 shadow-2xs'
                     : 'bg-[#F4F6F8] text-slate-600 border-slate-200 dark:bg-slate-800 dark:text-slate-400 dark:border-slate-700 hover:text-slate-900 dark:hover:text-white'
                 }`}
                 title={isRTL ? t.bgTitle : 'Toggle subtle background image effect (Test)'}
               >
-                <span className={`w-1.5 h-1.5 rounded-full transition-colors ${isSelected ? 'bg-[#0F766E] dark:bg-teal-400 animate-pulse' : 'bg-slate-400'}`} />
+                <span className={`w-1.5 h-1.5 rounded-full transition-colors ${isSelected ? 'bg-[#D8B56A] dark:bg-[#D8B56A] animate-pulse' : 'bg-slate-400'}`} />
                 <span>{isSelected ? (isRTL ? t.bgActive : 'Background: Active') : (isRTL ? t.bgInactive : 'Background: Inactive')}</span>
               </button>
             )}
@@ -605,9 +605,9 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
             <button
               type="button"
               onClick={toggleAll}
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-semibold text-[#1F2937] dark:text-slate-300 bg-[#F4F6F8] hover:bg-[#E6F4F1] dark:bg-slate-800 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 transition-colors cursor-pointer"
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-semibold text-[#1F2937] dark:text-slate-300 bg-[#F4F6F8] hover:bg-[#F4E7C5] dark:bg-slate-800 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 transition-colors cursor-pointer"
             >
-              <Briefcase className="w-3.5 h-3.5 text-[#0F766E] dark:text-teal-400" />
+              <Briefcase className="w-3.5 h-3.5 text-[#D8B56A] dark:text-[#D8B56A]" />
               <span>{allExpanded ? (isRTL ? t.collapseAll : 'Collapse All') : (isRTL ? t.expandAll : 'Expand All')}</span>
             </button>
           </div>
@@ -624,7 +624,7 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
               className="w-full flex items-center justify-between gap-4 px-5 sm:px-6 py-4 text-left rtl:text-right hover:bg-[#F4F6F8]/80 dark:hover:bg-slate-800/50 transition-colors cursor-pointer select-none touch-manipulation"
             >
               <div className="flex items-center gap-3">
-                <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[#E6F4F1] dark:bg-teal-950/70 text-[#0F766E] dark:text-teal-300">
+                <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[#F4E7C5] dark:bg-[#211D14]/70 text-[#D8B56A] dark:text-[#E2C47E]">
                   <Briefcase className="w-4.5 h-4.5" />
                 </span>
                 <div>
@@ -637,7 +637,7 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
                 </div>
               </div>
               <ChevronDown
-                className={`w-5 h-5 shrink-0 text-[#0F766E] dark:text-teal-400 transition-transform duration-300 ${
+                className={`w-5 h-5 shrink-0 text-[#D8B56A] dark:text-[#D8B56A] transition-transform duration-300 ${
                   isFullTimeOpen ? 'rotate-180' : ''
                 }`}
               />
@@ -669,7 +669,7 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
               className="w-full flex items-center justify-between gap-4 px-5 sm:px-6 py-4 text-left rtl:text-right hover:bg-[#F4F6F8]/80 dark:hover:bg-slate-800/50 transition-colors cursor-pointer select-none touch-manipulation"
             >
               <div className="flex items-center gap-3">
-                <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[#E6F4F1] dark:bg-teal-950/70 text-[#0F766E] dark:text-teal-300">
+                <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[#F4E7C5] dark:bg-[#211D14]/70 text-[#D8B56A] dark:text-[#E2C47E]">
                   <Briefcase className="w-4.5 h-4.5" />
                 </span>
                 <div>
@@ -682,7 +682,7 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
                 </div>
               </div>
               <ChevronDown
-                className={`w-5 h-5 shrink-0 text-[#0F766E] dark:text-teal-400 transition-transform duration-300 ${
+                className={`w-5 h-5 shrink-0 text-[#D8B56A] dark:text-[#D8B56A] transition-transform duration-300 ${
                   isRemoteOpen ? 'rotate-180' : ''
                 }`}
               />
