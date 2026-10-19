@@ -24,9 +24,10 @@ const LABELS = [
   'Balance Sheet',
   'Aging Report',
   'Accrual Accounting',
+  'LC Documentation',
 ];
 
-// 13 balanced anchor positions distributed naturally across left, center, and right ONLY BELOW the central title
+// 14 balanced anchor positions distributed naturally across left, center, and right ONLY BELOW the central title
 const ANCHORS: { x: number; y: number }[] = [
   { x: 0.14, y: 0.65 }, // 0: '14+ Years Exp' (Left Upper Tier below title)
   { x: 0.29, y: 0.74 }, // 1: 'ERP Software' (Mid-Left Middle Tier)
@@ -41,6 +42,7 @@ const ANCHORS: { x: number; y: number }[] = [
   { x: 0.62, y: 0.64 }, // 10: 'Balance Sheet' (Center-Right Upper Tier)
   { x: 0.42, y: 0.87 }, // 11: 'Aging Report' (Center-Left Bottom Tier)
   { x: 0.80, y: 0.87 }, // 12: 'Accrual Accounting' (Right Bottom Tier)
+  { x: 0.74, y: 0.76 }, // 13: 'LC Documentation' (Mid-Right Middle Tier)
 ];
 
 // Connecting aesthetic lines between natural neighbor accounting pairs
@@ -65,6 +67,7 @@ const FADE_OFFSETS: number[] = [
   6.2,   // 10: 'Balance Sheet' (Center-Right)
   13.5,  // 11: 'Aging Report' (Bottom-Center-Left)
   14.8,  // 12: 'Accrual Accounting' (Right)
+  5.8,   // 13: 'LC Documentation' (Mid-Right)
 ];
 
 function getPointOpacity(tSec: number, offsetSec: number): number {
@@ -360,8 +363,8 @@ export function Hero(_props: HeroProps) {
       const el = pointsRef.current[i];
       const heading = el?.querySelector<HTMLElement>('.hero-roam-heading') || el?.firstElementChild as HTMLElement | null;
       return {
-        w: heading && heading.offsetWidth > 0 ? heading.offsetWidth : 120,
-        h: heading && heading.offsetHeight > 0 ? heading.offsetHeight : 22,
+        w: heading && heading.offsetWidth > 0 ? heading.offsetWidth : 140,
+        h: heading && heading.offsetHeight > 0 ? heading.offsetHeight : 26,
       };
     });
 
@@ -700,10 +703,9 @@ export function Hero(_props: HeroProps) {
         .hero-roam-point{position:absolute;left:0;top:0;z-index:2;white-space:nowrap;pointer-events:none;will-change:transform,opacity}
 
         /* Clean floating headings: completely pill-free, border-free, background-free, and dot-free */
-        .hero-roam-heading{position:relative;display:inline-block;background:transparent;border:none;border-radius:0;padding:0;margin:0;box-shadow:none;outline:none;font-size:13px;font-weight:750;letter-spacing:.025em;line-height:1.2;white-space:nowrap;pointer-events:none;user-select:none;filter:drop-shadow(0 0 8px var(--point-glow)) drop-shadow(0 2px 4px rgba(4,16,32,.9));text-shadow:0 0 10px var(--point-glow)}
+        .hero-roam-heading{position:relative;display:inline-block;background:transparent;border:none;border-radius:0;padding:0;margin:0;box-shadow:none;outline:none;font-size:15px;font-weight:700;letter-spacing:.025em;line-height:1.2;white-space:nowrap;pointer-events:none;user-select:none;filter:drop-shadow(0 0 8px var(--point-glow)) drop-shadow(0 2px 4px rgba(4,16,32,.9));text-shadow:0 0 10px var(--point-glow)}
         .hero-roam-heading:before{content:none;display:none}
-        .hero-roam-heading.primary{font-size:14px;font-weight:800;letter-spacing:.03em}
-        .hero-roam-heading.flagship{font-size:15px;font-weight:850;letter-spacing:.04em}
+        .hero-roam-heading.primary,.hero-roam-heading.flagship{font-size:15px;font-weight:700;letter-spacing:.025em}
 
         /* Clean text with alternating gold/blue and luminous light sweep strictly INSIDE letters */
         .hero-roam-text{position:relative;display:inline-block;color:var(--point-color);background-image:linear-gradient(110deg,var(--point-color) 0%,var(--point-color) 35%,#ffffff 48%,#ffffff 52%,var(--point-color) 65%,var(--point-color) 100%);background-size:250% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;will-change:background-position}
@@ -711,14 +713,14 @@ export function Hero(_props: HeroProps) {
         @keyframes heroTextShineInside{0%{background-position:100% 0}100%{background-position:-25% 0}}
         @supports not (-webkit-background-clip:text){.hero-roam-text{background-image:none;-webkit-text-fill-color:var(--point-color);color:var(--point-color)}}
 
-        /* Center "Muhammad Salman" heading preserved */
-        .hero-roam-center{position:absolute;z-index:8;left:50%;top:50%;transform:translate(-50%,-50%);width:max-content;max-width:calc(100% - 24px);min-height:0;padding:12px 20px;display:flex;flex-direction:column;gap:7px;align-items:center;justify-content:center;text-align:center;border:0;border-radius:0;background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:none;appearance:none;cursor:pointer;color:#f8e4b2;transition:transform .35s ease,filter .35s ease}
+        /* Center "Muhammad Salman" heading preserved (shifted 30px upward) */
+        .hero-roam-center{position:absolute;z-index:8;left:50%;top:calc(50% - 30px);transform:translate(-50%,-50%);width:max-content;max-width:calc(100% - 24px);min-height:0;padding:12px 20px;display:flex;flex-direction:column;gap:7px;align-items:center;justify-content:center;text-align:center;border:0;border-radius:0;background:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:none;appearance:none;cursor:pointer;color:#f8e4b2;transition:transform .35s ease,filter .35s ease}
         .hero-roam-center:hover,.hero-roam-center:focus-visible{transform:translate(-50%,-50%) translateY(-3px) scale(1.055);filter:drop-shadow(0 7px 2px rgba(0,0,0,.75)) drop-shadow(0 -2px 2px rgba(255,239,189,.5));outline:none}
         .hero-roam-center strong{display:block;white-space:nowrap;font-size:clamp(21px,4.1vw,65px);font-weight:800;letter-spacing:.075em;color:#f8f1de;text-shadow:0 2px 3px rgba(4,16,32,.85),0 0 22px rgba(216,181,106,.28);line-height:1.2;transition:text-shadow .35s ease}
         .hero-roam-center .hero-roam-subtitle{display:block;font-size:clamp(12px,1.35vw,19px);font-weight:700;letter-spacing:.36em;color:#d8b56a;text-shadow:0 2px 6px rgba(0,0,0,.7);transition:letter-spacing .35s ease,text-shadow .35s ease}
         .hero-roam-center:hover .hero-roam-subtitle,.hero-roam-center:focus-visible .hero-roam-subtitle{letter-spacing:.42em;text-shadow:0 2px 10px rgba(216,181,106,.55)}
         .hero-roam-center:hover strong,.hero-roam-center:focus-visible strong{text-shadow:1px 1px 0 #fffdf4,2px 2px 0 #e4c88c,3px 3px 0 #aa8648,5px 6px 5px rgba(0,0,0,.7),0 0 20px rgba(232,199,134,.4)}
-        @media(max-width:700px){.hero-free-roam{min-height:480px}.hero-roam-heading{font-size:10px}.hero-roam-heading.primary,.hero-roam-heading.flagship{font-size:11px}.hero-roam-center{width:auto;min-height:0;border-radius:0;padding:10px 12px}.hero-roam-center strong{font-size:clamp(18px,5.5vw,38px);letter-spacing:.025em}.hero-roam-center .hero-roam-subtitle{font-size:12px;letter-spacing:.25em}}
+        @media(max-width:700px){.hero-free-roam{min-height:480px}.hero-roam-heading,.hero-roam-heading.primary,.hero-roam-heading.flagship{font-size:12px;font-weight:700}.hero-roam-center{width:auto;min-height:0;border-radius:0;padding:10px 12px}.hero-roam-center strong{font-size:clamp(18px,5.5vw,38px);letter-spacing:.025em}.hero-roam-center .hero-roam-subtitle{font-size:12px;letter-spacing:.25em}}
         @media(prefers-reduced-motion:reduce){.hero-roam-heading.hero-roam-shimmer-once .hero-roam-text{animation:none;background-position:100% 0}}
       `}</style>
 
@@ -794,8 +796,6 @@ export function Hero(_props: HeroProps) {
         <svg className="hero-roam-lines" ref={svgRef} aria-hidden="true" />
         {LABELS.map((label, i) => {
           const color = i % 2 === 0 ? GOLD : BLUE;
-          const tier = label === 'Financial Reporting' ? 'flagship' :
-            ['Receivables','VAT Reports & Submission','Reconciliations','Monthly Closing','Payables','P&L Account','Balance Sheet'].includes(label) ? 'primary' : '';
           return (
             <div
               key={label}
@@ -804,7 +804,7 @@ export function Hero(_props: HeroProps) {
               style={{ opacity: 0, transform: 'translate3d(-300px,-300px,0)' }}
             >
               <span
-                className={`hero-roam-heading ${tier}`}
+                className="hero-roam-heading"
                 style={{
                   '--point-color': color,
                   '--point-glow': i % 2 === 0 ? 'rgba(216,181,106,0.5)' : 'rgba(105,183,231,0.5)',

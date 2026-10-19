@@ -44,6 +44,7 @@ const iconMap: Record<string, LucideIcon> = {
 const defaultIconById: Record<string, LucideIcon> = {
   'exp-1': ArrowLeftRight,
   'exp-2': Receipt,
+  'exp-lc': FileText,
   'exp-3': Calculator,
   'exp-4': BarChart3,
   'exp-5': ShieldCheck,
@@ -62,6 +63,7 @@ const defaultIconById: Record<string, LucideIcon> = {
 const expertiseImages: Record<string, string> = {
   'exp-1': '/images/Accounts Receivable & Collections.png.webp',
   'exp-2': '/images/Accounts Payable & Supplier Management.png.webp',
+  'exp-lc': '/images/professional-coordination.jpg',
   'exp-3': '/images/General Ledger & Reconciliation.png',
   'exp-4': '/images/Financial Reporting & Month-End Closing.png',
   'exp-5': '/images/ZATCA VAT & Tax Compliance.png',

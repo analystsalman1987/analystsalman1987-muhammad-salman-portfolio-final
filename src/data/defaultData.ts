@@ -1,7 +1,7 @@
 import { AppData } from '../types';
 
 export const DEFAULT_APP_DATA: AppData = {
-  version: 13,
+  version: 14,
   lastUpdated: new Date().toISOString(),
   profile: {
     fullName: 'Muhammad Salman',
@@ -97,6 +97,20 @@ export const DEFAULT_APP_DATA: AppData = {
         'Purchase documentation verification',
         'PO / GRN / Purchase Invoice matching',
         'Supplier account discrepancy follow-up',
+      ],
+    },
+    {
+      id: 'exp-lc',
+      title: 'LC Documentation & Coordination',
+      category: 'compliance',
+      iconName: 'FileText',
+      details: [
+        'LC draft preparation against supplier Proforma Invoices (PI) and Purchase Orders (PO)',
+        'Verification of LC payment terms and conditions',
+        'Supplier coordination for LC corrections and amendments',
+        'Customer LC draft review and confirmation',
+        'Commercial Invoice (CI) and Delivery Note (DN) preparation against customer LCs',
+        'Approval coordination and submission of LC-related documents',
       ],
     },
     {
@@ -237,24 +251,6 @@ export const DEFAULT_APP_DATA: AppData = {
         'Document completeness, accuracy, and proper audit-ready accounting records',
       ],
     },
-    {
-      id: 'exp-12',
-      title: 'Professional & Coordination Skills',
-      category: 'accounting',
-      iconName: 'Building2',
-      details: [
-        'Client coordination',
-        'Supplier coordination',
-        'Internal department coordination',
-        'Professional communication',
-        'Follow-up and task ownership',
-        'Organization',
-        'Time management',
-        'Deadline management',
-        'Attention to detail',
-        'Analytical and problem-solving approach',
-      ],
-    },
   ],
   experience: [
     {
@@ -275,6 +271,7 @@ export const DEFAULT_APP_DATA: AppData = {
         'Procurement & Supplier Coordination: Prepare supplier POs based on stock requirements, obtain management approvals, and coordinate approved POs with suppliers.',
         'Supplier Payments & Purchase Invoices: Submit payment requests to Finance according to PO payment terms and process purchase invoices based on actual quantities received.',
         'International Purchasing & Costing: Perform actual costing for international purchases by reconciling purchase costs, freight charges, customer-related charges, and supporting invoices.',
+        'LC Documentation & Coordination: Prepare LC drafts against supplier PIs/POs, verify payment terms, coordinate amendments, review customer LCs, and prepare CI/DN with required approvals.',
         'Petty Cash Management: Manage petty cash, collect supporting invoices/bills from the team monthly, disburse cash against valid invoices, maintain supporting documentation, and request replenishment from Finance after required management approval.',
         'Monthly Closing & VAT Support: Complete monthly sales invoice closing and provide sales invoice records and VAT-related reports to Finance.',
         'ERP Documentation & Finance Coordination: Maintain complete transaction documentation in ERP and provide daily support to Finance for supplier/customer reconciliations, balance confirmations, and other accounting requirements.',
