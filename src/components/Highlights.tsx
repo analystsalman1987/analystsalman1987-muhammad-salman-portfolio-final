@@ -40,7 +40,7 @@ export function Highlights({ highlights }: HighlightsProps) {
   const items = (highlights && highlights.length > 0) ? highlights : DEFAULT_APP_DATA.highlights;
 
   return (
-    <section className="relative py-16 bg-[#F4F6F8] dark:bg-slate-900/40 border-y border-slate-200 dark:border-slate-800/80 transition-colors overflow-hidden">
+    <section id="highlights" className="misty-portfolio relative py-16 bg-[#F4F6F8] dark:bg-slate-900/40 border-y border-slate-200 dark:border-slate-800/80 transition-colors overflow-hidden">
       {/* Subtle Professional Accounting & Spreadsheet Background Image */}
       <div 
         className="absolute inset-0 pointer-events-none z-0"
