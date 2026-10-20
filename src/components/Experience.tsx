@@ -409,10 +409,10 @@ export function Experience({ experience, isSelected, onToggleSelect }: Experienc
               {/* CENTER / RESPONSIBILITIES BUTTON */}
               <div className="flex justify-center sm:absolute sm:left-1/2 sm:-translate-x-1/2 sm:bottom-2.5 z-10 pointer-events-none">
                 <span 
-                  className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold leading-none tracking-tight transition-all duration-300 ${
+                  className={`experience-responsibilities-toggle inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold leading-none tracking-tight transition-all duration-300 ${
                     isExpanded
-                      ? 'bg-[#BE9852]/15 text-[#BE9852] border border-[#BE9852]/40 shadow-xs'
-                      : 'bg-[#F3F7FA] text-[#17324A] border border-[#C5D5E2] shadow-2xs'
+                      ? 'bg-[#1E3A56] text-[#E5C78E] border border-[#BE9852]/50 shadow-xs'
+                      : 'bg-[#1E3A56] text-[#F3F7FA] border border-[#7895AA] shadow-2xs'
                   }`}
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-[#BE9852] shadow-xs shadow-[#BE9852]/60" />
@@ -613,6 +613,25 @@ export function Experience({ experience, isSelected, onToggleSelect }: Experienc
         #experience .experience-job button span.text-\\[\\#17324A\\] {
           color: #f3f7fa !important;
         }
+        /* Fix the collapsed button label and the section description on dark navy. */
+        #experience .experience-section-description {
+          color: #f3f7fa !important;
+          -webkit-text-fill-color: #f3f7fa !important;
+          opacity: 1 !important;
+        }
+        #experience .experience-job .experience-responsibilities-toggle {
+          background-color: #1e3a56 !important;
+          border-color: #be9852 !important;
+          color: #f3f7fa !important;
+        }
+        #experience .experience-job .experience-responsibilities-toggle > span:nth-child(2) {
+          color: #f3f7fa !important;
+          -webkit-text-fill-color: #f3f7fa !important;
+          opacity: 1 !important;
+        }
+        #experience .experience-job .experience-responsibilities-toggle svg {
+          color: #be9852 !important;
+        }
       `}</style>
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
@@ -627,7 +646,7 @@ export function Experience({ experience, isSelected, onToggleSelect }: Experienc
                 {isRTL ? t.title : 'Work Experience'}
               </h2>
             </div>
-            <p className="mt-1 text-sm text-[#52677A]">
+            <p className="experience-section-description mt-1 text-sm text-[#F3F7FA]">
               {isRTL ? t.subtitle : 'A sustained record of financial management, regulatory adherence, and accounting across manufacturing, trade, hospitality, and corporate sectors in Saudi Arabia and Pakistan.'}
             </p>
           </div>
