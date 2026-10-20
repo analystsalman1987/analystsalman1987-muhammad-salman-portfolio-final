@@ -314,7 +314,7 @@ export function ParticleNetwork3D() {
 
   return (
     <div
-      className="fixed inset-0 pointer-events-none z-[1] overflow-hidden select-none"
+      className="absolute top-0 left-0 right-0 h-screen pointer-events-none z-[1] overflow-hidden select-none"
       aria-hidden="true"
     >
       <canvas

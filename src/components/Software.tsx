@@ -11,25 +11,25 @@ interface SoftwareItem {
 }
 
 const softwareItems: SoftwareItem[] = [
-  { name: 'OFIS (Powered by Oracle)', category: 'ERP', logo: '/images/software/oracle-logo.svg', fallback: 'OFIS (Powered by Oracle)', nameColor: 'text-[#17364d] dark:text-slate-100' },
-  { name: 'QuickBooks', category: 'Accounting', logo: '/images/software/quickbooks-logo.svg', fallback: 'QuickBooks', nameColor: 'text-green-700 dark:text-green-300' },
-  { name: 'Arqami', category: 'ERP', logo: '/images/software/Arqami Logo.png', fallback: 'ARQAMI', nameColor: 'text-blue-800 dark:text-blue-200' },
-  { name: 'Delta Financial', category: 'Financial', logo: '/images/software/delta-logo.svg', fallback: 'DELTA', nameColor: 'text-indigo-700 dark:text-indigo-200' },
-  { name: 'SMACC', category: 'ERP', logo: '/images/software/smacc-logo.png', fallback: 'SMACC', nameColor: 'text-blue-700 dark:text-blue-200' },
-  { name: 'Daftra', category: 'Cloud', logo: '/images/software/Daftra logo.png', fallback: 'DAFTRA', nameColor: 'text-blue-700 dark:text-blue-200' },
-  { name: 'Qoyod', category: 'Cloud', logo: '/images/software/Qoyod logo.png', fallback: 'QOYOD', nameColor: 'text-blue-900 dark:text-blue-200' },
-  { name: 'Peachtree', category: 'Accounting', logo: '/images/software/Peachtree logo.png', fallback: 'PEACHTREE', nameColor: 'text-orange-600 dark:text-orange-300' },
-  { name: 'Tally', category: 'Accounting', logo: '/images/software/Tally logo.png', fallback: 'TALLY', nameColor: 'text-red-700 dark:text-red-300' },
-  { name: 'Advanced Microsoft Excel', category: 'Productivity', logo: '/images/software/excel-logo.svg', fallback: 'EXCEL', nameColor: 'text-emerald-700 dark:text-emerald-300' },
-  { name: 'Microsoft Office', category: 'Productivity', logo: '/images/software/office-logo.svg', fallback: 'OFFICE', nameColor: 'text-orange-600 dark:text-orange-300' },
+  { name: 'OFIS (Powered by Oracle)', category: 'ERP', logo: '/images/software/oracle-logo.svg', fallback: 'OFIS (Powered by Oracle)', nameColor: 'text-[#17324A]' },
+  { name: 'QuickBooks', category: 'Accounting', logo: '/images/software/quickbooks-logo.svg', fallback: 'QuickBooks', nameColor: 'text-[#17324A]' },
+  { name: 'Arqami', category: 'ERP', logo: '/images/software/Arqami Logo.png', fallback: 'ARQAMI', nameColor: 'text-[#17324A]' },
+  { name: 'Delta Financial', category: 'Financial', logo: '/images/software/delta-logo.svg', fallback: 'DELTA', nameColor: 'text-[#17324A]' },
+  { name: 'SMACC', category: 'ERP', logo: '/images/software/smacc-logo.png', fallback: 'SMACC', nameColor: 'text-[#17324A]' },
+  { name: 'Daftra', category: 'Cloud', logo: '/images/software/Daftra logo.png', fallback: 'DAFTRA', nameColor: 'text-[#17324A]' },
+  { name: 'Qoyod', category: 'Cloud', logo: '/images/software/Qoyod logo.png', fallback: 'QOYOD', nameColor: 'text-[#17324A]' },
+  { name: 'Peachtree', category: 'Accounting', logo: '/images/software/Peachtree logo.png', fallback: 'PEACHTREE', nameColor: 'text-[#17324A]' },
+  { name: 'Tally', category: 'Accounting', logo: '/images/software/Tally logo.png', fallback: 'TALLY', nameColor: 'text-[#17324A]' },
+  { name: 'Advanced Microsoft Excel', category: 'Productivity', logo: '/images/software/excel-logo.svg', fallback: 'EXCEL', nameColor: 'text-[#17324A]' },
+  { name: 'Microsoft Office', category: 'Productivity', logo: '/images/software/office-logo.svg', fallback: 'OFFICE', nameColor: 'text-[#17324A]' },
 ];
 
 const categoryStyles: Record<Category, string> = {
-  ERP: 'border-[#D8B56A]/40 bg-[#D8B56A]/15 text-[#E2C47E] dark:border-[#D8B56A]/40 dark:bg-[#D8B56A]/15 dark:text-[#E2C47E]',
-  Accounting: 'border-[#D8B56A]/40 bg-[#D8B56A]/15 text-[#E2C47E] dark:border-[#D8B56A]/40 dark:bg-[#D8B56A]/15 dark:text-[#E2C47E]',
-  Cloud: 'border-[#D8B56A]/40 bg-[#D8B56A]/15 text-[#E2C47E] dark:border-[#D8B56A]/40 dark:bg-[#D8B56A]/15 dark:text-[#E2C47E]',
-  Financial: 'border-[#D8B56A]/40 bg-[#D8B56A]/15 text-[#E2C47E] dark:border-[#D8B56A]/40 dark:bg-[#D8B56A]/15 dark:text-[#E2C47E]',
-  Productivity: 'border-[#D8B56A]/40 bg-[#D8B56A]/15 text-[#E2C47E] dark:border-[#D8B56A]/40 dark:bg-[#D8B56A]/15 dark:text-[#E2C47E]',
+  ERP: 'border-[#BE9852]/40 bg-[#BE9852]/15 text-[#8B6B32]',
+  Accounting: 'border-[#BE9852]/40 bg-[#BE9852]/15 text-[#8B6B32]',
+  Cloud: 'border-[#BE9852]/40 bg-[#BE9852]/15 text-[#8B6B32]',
+  Financial: 'border-[#BE9852]/40 bg-[#BE9852]/15 text-[#8B6B32]',
+  Productivity: 'border-[#BE9852]/40 bg-[#BE9852]/15 text-[#8B6B32]',
 };
 
 function SoftwareLogo({ item }: { item: SoftwareItem }) {
@@ -38,7 +38,7 @@ function SoftwareLogo({ item }: { item: SoftwareItem }) {
   if (logoError) {
     return (
       <div className="flex h-[54px] w-full items-center justify-center">
-        <span className={`text-center text-[11px] font-extrabold tracking-wide !opacity-100 ${item.nameColor}`}>
+        <span className={`text-center text-[11px] font-extrabold tracking-wide ${item.nameColor}`}>
           {item.fallback}
         </span>
       </div>
@@ -46,13 +46,13 @@ function SoftwareLogo({ item }: { item: SoftwareItem }) {
   }
 
   return (
-    <div className="flex min-h-[64px] w-full max-w-[136px] items-center justify-center rounded-lg px-2 py-1 transition-colors duration-300 dark:bg-white/[0.96] dark:shadow-[0_1px_4px_rgba(0,0,0,0.18)]">
+    <div className="flex min-h-[64px] w-full max-w-[136px] items-center justify-center rounded-lg bg-white px-2 py-1 shadow-xs border border-[#C5D5E2]/40 transition-colors duration-300">
       <img
         src={item.logo}
         alt={`${item.name} logo`}
         loading="lazy"
         onError={() => setLogoError(true)}
-        className="h-[54px] w-full max-w-[122px] object-contain !opacity-100 transition-transform duration-300 group-hover:scale-[1.04]"
+        className="h-[54px] w-full max-w-[122px] object-contain transition-transform duration-300 group-hover:scale-[1.04]"
       />
     </div>
   );
@@ -66,33 +66,34 @@ export function Software(_props?: SoftwareProps) {
   return (
     <section
       id="software"
-      className="misty-portfolio deep-slate-champagne relative overflow-hidden border-b border-slate-200 bg-slate-50 py-16 transition-colors duration-300 dark:border-slate-700 dark:bg-slate-900 sm:py-20"
+      className="misty-portfolio relative overflow-hidden border-b border-[#C5D5E2] bg-[#A7C6E1] py-16 transition-colors duration-300 sm:py-20"
+      style={{ backgroundColor: '#A7C6E1' }}
     >
       <div className="relative z-10 mx-auto max-w-[1380px] px-5 sm:px-8 lg:px-12">
-        {/* SECTION HEADER — unchanged */}
+        {/* SECTION HEADER */}
         <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div className="flex max-w-3xl flex-col items-start gap-1.5">
-            <span className="block text-xs font-bold uppercase tracking-widest text-[#D8B56A] dark:text-[#E2C47E]">
+            <span className="block text-xs font-bold uppercase tracking-widest text-[#BE9852]">
               ERP &amp; SOFTWARE
             </span>
             <div>
-              <h2 className="main-heading-3d text-3xl font-extrabold tracking-tight dark:text-slate-100 sm:text-4xl">
+              <h2 className="main-heading-3d text-3xl font-extrabold tracking-tight text-[#17324A] sm:text-4xl">
                 ERP Systems &amp; Accounting Software
               </h2>
             </div>
-            <p className="mt-1 text-sm text-[#64748B] dark:text-slate-300">
+            <p className="mt-1 text-sm text-[#52677A]">
               Tools and systems I have worked with for accounting, reporting,
               inventory, AP/AR and financial management.
             </p>
           </div>
         </div>
 
-        {/* SOFTWARE CARDS — same grid, slightly larger logos and subtle hover */}
+        {/* SOFTWARE CARDS */}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {softwareItems.map((item) => (
             <div
               key={item.name}
-              className="group flex min-h-[88px] items-center rounded-xl border border-slate-200/90 bg-white px-4 py-3 shadow-[0_6px_18px_rgba(15,23,42,0.06)] transition-all duration-300 ease-out hover:-translate-y-1 hover:border-[#B58C41]/50 hover:shadow-[0_12px_26px_rgba(216,181,106,0.12)] dark:border-slate-600/90 dark:bg-slate-800 dark:shadow-[0_8px_22px_rgba(0,0,0,0.22)] dark:hover:border-[#D8B56A]/60 dark:hover:bg-slate-800 dark:hover:shadow-[0_12px_28px_rgba(216,181,106,0.12),0_0_12px_rgba(216,181,106,0.07)]"
+              className="group flex min-h-[88px] items-center rounded-xl border border-[#C5D5E2] bg-[#F3F7FA] px-4 py-3 shadow-xs transition-all duration-300 ease-out hover:-translate-y-1 hover:border-[#BE9852]/60 hover:bg-white hover:shadow-md"
             >
               {/* SOFTWARE LOGO */}
               <div className="flex min-w-0 flex-1 items-center justify-center pr-3">
@@ -100,11 +101,11 @@ export function Software(_props?: SoftwareProps) {
               </div>
 
               {/* VERTICAL DIVIDER */}
-              <div className="h-10 w-px shrink-0 bg-slate-300 transition-colors duration-300 group-hover:bg-[#B58C41]/60 dark:bg-slate-500 dark:group-hover:bg-[#D8B56A]/70" />
+              <div className="h-10 w-px shrink-0 bg-[#C5D5E2] transition-colors duration-300 group-hover:bg-[#BE9852]/60" />
 
-              {/* CATEGORY BADGE — unchanged */}
+              {/* CATEGORY BADGE */}
               <div className="flex min-w-[86px] shrink-0 items-center justify-center pl-3">
-                <span className={`shrink-0 rounded-full border px-2.5 py-1 text-[9px] font-black uppercase tracking-[0.02em] !opacity-100 shadow-sm ${categoryStyles[item.category]}`}>
+                <span className={`shrink-0 rounded-full border px-2.5 py-1 text-[9px] font-black uppercase tracking-[0.02em] shadow-2xs ${categoryStyles[item.category]}`}>
                   {item.category}
                 </span>
               </div>

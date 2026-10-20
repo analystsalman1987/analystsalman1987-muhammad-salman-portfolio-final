@@ -2,10 +2,8 @@ import { useState, useEffect } from 'react';
 import { 
   Calendar, 
   MapPin, 
-  CheckCircle2, 
   ChevronDown,
-  Briefcase,
-  Building2
+  Briefcase
 } from 'lucide-react';
 import { WorkExperienceItem } from '../types';
 import { useLanguage } from '../context/LanguageContext';
@@ -77,12 +75,16 @@ const getJobSoftware = (jobId: string, company: string): SoftwareChip[] => {
   return [];
 };
 
-const getCompanyLogoInfo = (job: WorkExperienceItem) => {
+interface CompanyLogoResult {
+  logo: string;
+  fallbackLogo?: string;
+  alt: string;
+}
+
+const getCompanyLogoInfo = (job: WorkExperienceItem): CompanyLogoResult | null => {
   const comp = (job.company || '').toLowerCase();
   const id = (job.id || '').toLowerCase();
 
-  // Prefer the company's original logo already saved in experience data.
-  // Keep the existing asset mappings below as fallbacks; never generate a substitute logo.
   const storedJob = job as WorkExperienceItem & {
     logo?: string;
     logoUrl?: string;
@@ -92,27 +94,48 @@ const getCompanyLogoInfo = (job: WorkExperienceItem) => {
     .find((value): value is string => typeof value === 'string' && value.trim().length > 0);
   if (savedLogo) return { logo: savedLogo, alt: job.company };
 
-  if (id === 'job-1' || comp.includes('alyami')) {
+  // 1. Ahmed Yahya Alyami Contracting Co. (Current employer)
+  if (id === 'job-1' || comp.includes('alyami') || comp.includes('اليامي')) {
     return { logo: alyamiLogo, alt: 'Ahmed Yahya Alyami Contracting Co.' };
   }
-  if (id === 'job-3' || comp.includes('palestine')) {
+  // 2. IQTAT Trading Co. - Clean transparent logo with original source fallback
+  if (id === 'job-2' || comp.includes('iqtat') || comp.includes('اقتات')) {
+    return { 
+      logo: '/images/iqtat-logo.png', 
+      fallbackLogo: '/images/Iqtat.png', 
+      alt: 'IQTAT Trading Co.' 
+    };
+  }
+  // 3. Palestine Hotel Makkah
+  if (id === 'job-3' || comp.includes('palestine') || comp.includes('فلسطين')) {
     return { logo: '/images/palestine-hotel-logo.png', alt: 'Palestine Hotel Makkah' };
   }
-  if (id === 'job-4' || comp.includes('raya')) {
+  // 4. Al Raya Specialties
+  if (id === 'job-4' || comp.includes('raya') || comp.includes('الراية')) {
     return { logo: '/images/alraya-logo.svg', alt: 'Al Raya Specialties' };
   }
-  if (id === 'job-6' || comp.includes('honda')) {
+  // 5. Waheed Sons Sanitary Ware - Check attached Waheed sons(1).jpeg / waheed-sons-logo.jpeg
+  if (id === 'job-5' || comp.includes('waheed') || comp.includes('وحيد')) {
+    return { 
+      logo: '/images/Waheed sons(1).jpeg', 
+      fallbackLogo: '/images/waheed-sons-logo.jpeg', 
+      alt: 'Waheed Sons Sanitary Ware' 
+    };
+  }
+  // 6. Honda Canal Bank
+  if (id === 'job-6' || comp.includes('honda') || comp.includes('هوندا')) {
     return { logo: '/images/honda-logo.svg', alt: 'Honda Canal Bank' };
   }
+  // 7. Aali Services Company - Check attached Aali(1).jpeg / aali-services-logo.jpeg
+  if (id === 'job-aali' || comp.includes('aali') || comp.includes('عالي')) {
+    return { 
+      logo: '/images/Aali(1).jpeg', 
+      fallbackLogo: '/images/aali-services-logo.jpeg', 
+      alt: 'Aali Services Company' 
+    };
+  }
+  // Peregrine Services and Erthal Company: pending genuine original logos
   return null;
-};
-
-const getCompanyInitials = (company: string): string => {
-  if (!company) return 'CO';
-  const clean = company.replace(/[^\w\s]/gi, '').trim();
-  const words = clean.split(/\s+/).filter(Boolean);
-  if (words.length === 1) return words[0].slice(0, 3).toUpperCase();
-  return words.slice(0, 3).map((w) => w[0].toUpperCase()).join('');
 };
 
 // Approved Remote Accounting Experience entries
@@ -152,70 +175,64 @@ const defaultPeregrineJob: WorkExperienceItem = {
 
 const defaultErthalJob: WorkExperienceItem = {
   id: 'job-erthal',
-  role: 'Remote Accountant / Accounting Support',
+  role: 'Remote Accountant / Bookkeeper',
   company: 'Erthal Company',
-  location: 'Jeddah, Saudi Arabia',
+  location: 'Riyadh, Saudi Arabia',
   period: 'Remote / Part-Time',
   isCurrent: false,
   responsibilities: [
-    'Review of weekly sales and expenses',
-    'Preparation and review of monthly sales reports',
-    'Preparation of quarterly VAT reports',
-    'VAT return submission through the ZATCA portal',
-    'Accounting records review and reconciliation',
-    'Supporting documentation and audit requirements',
+    'Daily and weekly driver cash deposit tracking and reconciliation',
+    'Fuel and operational expense verification against supporting bills',
+    'Accounting entries recording in Qoyod accounting software',
+    'Preparation of weekly and monthly vehicle and driver revenue summaries',
+    'Cash on hand and bank transaction reconciliation',
+    'Support in monthly operational expense review and reporting',
   ],
 };
 
-export function Experience({ experience, isSelected = false, onToggleSelect }: ExperienceProps) {
-  // All cards collapsed by default
-  const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set());
-  const [openCategories, setOpenCategories] = useState<Set<'full-time' | 'remote'>>(new Set());
+export function Experience({ experience, isSelected, onToggleSelect }: ExperienceProps) {
   const { isRTL } = useLanguage();
   const t = ARABIC_TRANSLATIONS.experience;
 
-  useEffect(() => {
-    const handleShowCategories = () => {
-      setOpenCategories(new Set());
-    };
-    const handleOpenFullTime = () => {
-      setOpenCategories(new Set(['full-time']));
-    };
-    const handleOpenRemote = () => {
-      setOpenCategories(new Set(['remote']));
-    };
-
-    window.addEventListener('experience-show-categories', handleShowCategories);
-    window.addEventListener('experience-open-full-time', handleOpenFullTime);
-    window.addEventListener('experience-open-remote', handleOpenRemote);
-
-    return () => {
-      window.removeEventListener('experience-show-categories', handleShowCategories);
-      window.removeEventListener('experience-open-full-time', handleOpenFullTime);
-      window.removeEventListener('experience-open-remote', handleOpenRemote);
-    };
-  }, []);
-
-  // 1. Separate formal career timeline jobs (strictly the 6 formal jobs)
-  const formalJobs = (experience || []).filter(
-    (j) =>
-      !j.company.toLowerCase().includes('aali') &&
-      !j.company.toLowerCase().includes('peregrine') &&
-      !j.company.toLowerCase().includes('erthal') &&
-      !j.id.toLowerCase().includes('aali') &&
-      !j.id.toLowerCase().includes('peregrine') &&
-      !j.id.toLowerCase().includes('erthal')
+  // Both categories start collapsed by default
+  const [openCategories, setOpenCategories] = useState<Set<'full-time' | 'remote'>>(
+    () => new Set([])
   );
 
-  // 2. Identify if Aali Services Company already exists in experience state (to avoid duplication)
+  // Expanded responsibility panels per card (empty by default)
+  const [expandedIds, setExpandedIds] = useState<Set<string>>(() => new Set());
+
+  // Deep linking to #experience-remote opens remote group
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.location.hash === '#experience-remote') {
+      setOpenCategories(new Set(['remote']));
+    }
+  }, []);
+
+  // 1. Separate full-time/formal jobs
+  const formalJobs = (experience || []).filter((j) => {
+    const c = j.company.toLowerCase();
+    const id = j.id.toLowerCase();
+    return (
+      !c.includes('aali') &&
+      !c.includes('عالي') &&
+      !c.includes('peregrine') &&
+      !c.includes('بيريجرين') &&
+      !c.includes('erthal') &&
+      !c.includes('إرثال') &&
+      !id.includes('aali') &&
+      !id.includes('peregrine') &&
+      !id.includes('erthal')
+    );
+  });
+
+  // 2. Remote jobs: check if present in user data, otherwise use approved default
   const existingAali = (experience || []).find(
     (j) => j.company.toLowerCase().includes('aali') || j.id.toLowerCase().includes('aali')
   );
-
   const existingPeregrine = (experience || []).find(
     (j) => j.company.toLowerCase().includes('peregrine') || j.id.toLowerCase().includes('peregrine')
   );
-
   const existingErthal = (experience || []).find(
     (j) => j.company.toLowerCase().includes('erthal') || j.id.toLowerCase().includes('erthal')
   );
@@ -231,8 +248,8 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
 
   if (!experience || experience.length === 0) {
     return (
-      <section id="experience" className="misty-portfolio deep-slate-champagne py-20 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
-        <div className="max-w-7xl mx-auto px-4 text-center text-slate-500">
+      <section id="experience" className="misty-portfolio py-20 bg-[#A7C6E1] border-b border-[#C5D5E2]">
+        <div className="max-w-7xl mx-auto px-4 text-center text-[#52677A]">
           {isRTL ? 'سيتم إضافة المعلومات قريباً.' : 'Information will be added soon.'}
         </div>
       </section>
@@ -326,10 +343,10 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
         <div 
           className={`absolute ${isRTL ? '-right-[31px] sm:-right-[39px]' : '-left-[31px] sm:-left-[39px]'} top-6 w-4 h-4 rounded-full border-2 transition-all ${
             isAlyami && job.isCurrent
-              ? 'bg-[#D8B56A] border-[#F4E7C5] dark:border-[#211D14] ring-4 ring-[#D8B56A]/20'
+              ? 'bg-[#BE9852] border-white ring-4 ring-[#BE9852]/25'
               : isExpanded
-                ? 'bg-[#D8B56A] border-[#F4E7C5] dark:border-[#665028] ring-4 ring-[#D8B56A]/20'
-                : 'bg-white dark:bg-slate-900 border-slate-400 dark:border-slate-600 group-hover:border-[#D8B56A] group-hover:scale-110'
+                ? 'bg-[#BE9852] border-white ring-4 ring-[#BE9852]/25'
+                : 'bg-white border-[#C5D5E2] group-hover:border-[#BE9852] group-hover:scale-110'
           }`}
         />
 
@@ -337,8 +354,8 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
         <div 
           className={`rounded-2xl border transition-all duration-300 shadow-xs overflow-hidden ${
             isExpanded
-              ? 'border-[#D8B56A]/50 dark:border-[#C9A45C]/50 ring-1 ring-[#D8B56A]/25 bg-white dark:bg-slate-900/90 shadow-md'
-              : 'bg-[#F4F6F8] dark:bg-slate-800/40 border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 hover:bg-slate-100/70 dark:hover:bg-slate-800/50'
+              ? 'border-[#BE9852]/60 ring-1 ring-[#BE9852]/25 bg-white shadow-md'
+              : 'bg-[#F3F7FA] border-[#C5D5E2] hover:border-[#BE9852]/60 hover:bg-white'
           }`}
         >
           {/* Clickable Header Button / Summary Area */}
@@ -346,41 +363,42 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
             type="button"
             onClick={() => toggleExpand(job.id)}
             aria-expanded={isExpanded}
-            className="w-full text-left rtl:text-right relative p-5 sm:p-6 cursor-pointer select-none focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#D8B56A] touch-manipulation block"
+            className="w-full text-left rtl:text-right relative p-5 sm:p-6 cursor-pointer select-none focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#BE9852] touch-manipulation block"
           >
             <div className="relative flex flex-col sm:flex-row sm:items-start justify-between gap-4">
-              {/* LEFT SIDE: 1. Company Name, 2. Designation / Job Title, 3. Location */}
-              <div className="space-y-1.5 min-w-0 sm:max-w-[66%]">
-                <h3 className="company-3d-text text-lg sm:text-xl font-bold text-[#0F2747] dark:text-white group-hover:text-[#D8B56A] dark:group-hover:text-[#D8B56A] transition-colors leading-snug">
+              {/* LEFT SIDE: 1. Company Name, 2. Designation / Job Title, 3. Location, 4. Date Directly Below Location */}
+              <div className={`space-y-1.5 min-w-0 ${logoInfo ? 'sm:max-w-[68%]' : 'sm:max-w-[85%]'}`}>
+                <h3 className="company-3d-text text-lg sm:text-xl font-bold text-[#17324A] group-hover:text-[#BE9852] transition-colors leading-snug">
                   {companyName}
                 </h3>
 
                 <div className="flex items-center gap-2 flex-wrap">
-                  <span className="text-sm sm:text-base font-bold text-[#D8B56A] dark:text-[#D8B56A]">
+                  <span className="text-sm sm:text-base font-bold text-[#BE9852]">
                     {role}
                   </span>
                   {/* Keep the Present Role badge ONLY for Ahmed Al Yami Group */}
                   {isAlyami && job.isCurrent && (
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-[#F4E7C5] text-[#D8B56A] dark:bg-[#211D14]/80 dark:text-[#E2C47E] border border-[#D8B56A]/30 dark:border-[#665028]">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#D8B56A] animate-pulse" />
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-[#BE9852]/15 text-[#BE9852] border border-[#BE9852]/35">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#BE9852] animate-pulse" />
                       {isRTL ? t.presentRole : 'Present Role'}
                     </span>
                   )}
                 </div>
 
-                <div className="text-xs sm:text-sm text-[#64748B] dark:text-slate-400 flex items-center gap-1.5">
-                  <MapPin className="w-3.5 h-3.5 shrink-0 text-[#D8B56A] dark:text-[#D8B56A]" />
+                <div className="text-xs sm:text-sm text-[#52677A] flex items-center gap-1.5">
+                  <MapPin className="w-3.5 h-3.5 shrink-0 text-[#BE9852]" />
                   <span>{location}</span>
                 </div>
 
-                <div className="experience-date inline-flex items-center gap-1.5 text-[11px] font-medium text-[#34495E] bg-[#F3F7FA] px-2.5 py-1 rounded-md border border-[#CAD7E2]">
+                {/* Employment Date DIRECTLY BELOW Location */}
+                <div className="experience-date inline-flex items-center gap-1.5 text-[11px] font-medium text-[#34495E] bg-[#F3F7FA] px-2.5 py-1 rounded-md border border-[#C5D5E2]">
                   <Calendar className="w-3 h-3 text-[#BE9852] shrink-0" />
                   <span>{period}</span>
                 </div>
 
                 {remoteOverview && (
-                  <p className="pt-1 text-xs sm:text-sm leading-relaxed text-[#64748B] dark:text-slate-400 max-w-xl">
-                    <span className="font-bold text-[#0F2747] dark:text-slate-200">
+                  <p className="pt-1 text-xs sm:text-sm leading-relaxed text-[#52677A] max-w-xl">
+                    <span className="font-bold text-[#17324A]">
                       {isRTL ? 'نبذة عن الشركة: ' : 'Company Overview: '}
                     </span>
                     {remoteOverview}
@@ -388,65 +406,52 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
                 )}
               </div>
 
-              {/* CENTER / RESPONSIBILITIES BUTTON (Kept in current position, with subtle gold/teal accents and rotating chevron) */}
+              {/* CENTER / RESPONSIBILITIES BUTTON */}
               <div className="flex justify-center sm:absolute sm:left-1/2 sm:-translate-x-1/2 sm:bottom-2.5 z-10 pointer-events-none">
                 <span 
                   className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold leading-none tracking-tight transition-all duration-300 ${
                     isExpanded
-                      ? 'bg-[#B58C41]/[0.12] dark:bg-[#D8B56A]/[0.14] text-[#D8B56A] dark:text-[#EAD39C] border border-[#C9A45C]/40 shadow-xs'
-                      : 'bg-white/90 dark:bg-slate-900/80 text-[#D8B56A] dark:text-[#E2C47E] border border-[#C9A45C]/25 shadow-2xs backdrop-blur-xs'
+                      ? 'bg-[#BE9852]/15 text-[#BE9852] border border-[#BE9852]/40 shadow-xs'
+                      : 'bg-[#F3F7FA] text-[#17324A] border border-[#C5D5E2] shadow-2xs'
                   }`}
                 >
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#D8B56A] shadow-xs shadow-[#D8B56A]/60" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#BE9852] shadow-xs shadow-[#BE9852]/60" />
                   <span>{isRTL ? 'المسؤوليات' : 'Responsibilities'}</span>
                   <ChevronDown 
-                    className={`w-3.5 h-3.5 transition-transform duration-350 ease-out text-[#D8B56A] dark:text-[#E2C47E] ${
-                      isExpanded ? 'rotate-180 text-[#D8B56A] dark:text-[#D8B56A]' : ''
+                    className={`w-3.5 h-3.5 transition-transform duration-350 ease-out text-[#BE9852] ${
+                      isExpanded ? 'rotate-180' : ''
                     }`} 
                   />
                 </span>
               </div>
 
-              {/* RIGHT SIDE: Dedicated Navy/Glass Logo Container (approx 70-80px) & Employment Date */}
-              <div className="flex flex-row sm:flex-col items-center sm:items-end justify-between sm:justify-start gap-2.5 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-100 dark:border-slate-800/60">
-                {/* Subtle Navy/Glass Logo Container with High-Contrast Crisp Interior */}
+              {/* RIGHT SIDE: Genuine Company Logo directly on card with NO visible box, border, background, or shadow */}
+              {logoInfo && (
                 <div 
-                  className="relative flex items-center justify-center h-[90px] sm:h-[112px] w-[150px] sm:w-[220px] px-3 py-2 rounded-xl bg-gradient-to-b from-[#FFFFFF] via-[#F8FAFC] to-[#EDF2F7] dark:from-[#FFFFFF] dark:via-[#F1F5F9] dark:to-[#E2E8F0] border border-slate-200/90 dark:border-[#C9A45C]/35 shadow-md shadow-slate-900/5 dark:shadow-[#211D14]/30 backdrop-blur-md group-hover:border-[#D8B56A]/40 transition-all duration-300"
+                  className="flex items-center justify-center sm:justify-end shrink-0 self-center sm:self-start pt-2 sm:pt-0 max-w-[160px] sm:max-w-[220px] w-full sm:w-auto"
                   title={companyName}
                 >
-                  {/* Subtle glass reflection highlight */}
-                  <div className="absolute inset-0 rounded-xl bg-gradient-to-tr from-transparent via-white/40 to-transparent pointer-events-none" />
-
-                  {logoInfo ? (
+                  <div className="relative flex items-center justify-center sm:justify-end h-[75px] sm:h-[95px] w-full sm:w-[190px]">
                     <img
                       src={logoInfo.logo}
                       alt={logoInfo.alt}
                       referrerPolicy="no-referrer"
-                      onError={(event) => { event.currentTarget.style.visibility = 'hidden'; }}
-                      className="relative z-10 w-full h-full object-contain drop-shadow-xs transition-transform duration-300 group-hover:scale-[1.02]"
-                      style={{ maxHeight: '100px' }}
+                      onError={(event) => { 
+                        if (logoInfo.fallbackLogo && event.currentTarget.src !== logoInfo.fallbackLogo) {
+                          event.currentTarget.src = logoInfo.fallbackLogo;
+                        } else {
+                          event.currentTarget.style.display = 'none';
+                        }
+                      }}
+                      className="w-auto h-full max-h-[75px] sm:max-h-[90px] max-w-full object-contain transition-transform duration-300 group-hover:scale-[1.03]"
                     />
-                  ) : (
-                    <div className="flex items-center justify-center gap-2 px-2 text-[#0F2747]">
-                      <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-[#D8B56A]/15 to-[#0F2747]/10 flex items-center justify-center border border-[#D8B56A]/20 shrink-0">
-                        <Building2 className="w-4.5 h-4.5 text-[#D8B56A]" />
-                      </div>
-                      <div className="flex flex-col text-left rtl:text-right min-w-0">
-                        <span className="text-xs font-black tracking-wider uppercase text-[#0F2747]">
-                          {getCompanyInitials(job.company)}
-                        </span>
-                        <span className="text-[10px] font-semibold text-[#D8B56A] truncate max-w-[85px] sm:max-w-[105px]">
-                          {job.company.split(' ')[0]}
-                        </span>
-                      </div>
-                    </div>
-                  )}
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           </button>
 
-          {/* EXPANDED RESPONSIBILITIES PANEL: Premium smooth expandable glass panel inside same card below info */}
+          {/* EXPANDED RESPONSIBILITIES PANEL: Light surface, deep navy headings, slate bullets */}
           <div 
             className={`grid transition-all duration-350 ease-[cubic-bezier(0.2,0.8,0.2,1)] ${
               isExpanded 
@@ -456,32 +461,22 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
           >
             <div className="overflow-hidden">
               <div className="p-4 sm:p-6 pt-1 sm:pt-2">
-                {/* Premium Dark Navy Glass Panel */}
-                <div className="relative rounded-2xl p-5 sm:p-6 bg-gradient-to-b from-[#081B2E]/95 via-[#061726]/98 to-[#030F1A]/98 text-slate-100 border border-[#C9A45C]/30 dark:border-[#C9A45C]/40 shadow-xl shadow-slate-950/40 backdrop-blur-xl">
-                  {/* Ambient Soft Gold/Teal Backlight Accent */}
-                  <div 
-                    className="absolute -top-12 -right-12 w-48 h-48 rounded-full bg-[#C9A45C]/10 blur-2xl pointer-events-none"
-                    aria-hidden="true" 
-                  />
-                  <div 
-                    className="absolute -bottom-12 -left-12 w-48 h-48 rounded-full bg-[#D8B56A]/10 blur-2xl pointer-events-none"
-                    aria-hidden="true" 
-                  />
-
-                  {/* Header: Key Responsibilities with Gold/Teal Accents */}
-                  <div className="relative z-10 flex flex-wrap items-center justify-between gap-3 mb-4 pb-3 border-b border-slate-700/60">
+                <div className="relative rounded-2xl p-5 sm:p-6 bg-[#F3F7FA] text-[#34495E] border border-[#C5D5E2] shadow-sm">
+                  
+                  {/* Header: Key Responsibilities */}
+                  <div className="relative z-10 flex flex-wrap items-center justify-between gap-3 mb-4 pb-3 border-b border-[#C5D5E2]">
                     <div className="flex items-center gap-2.5">
-                      <span className="w-2 h-2 rounded-full bg-[#D8B56A] shadow-xs shadow-[#D8B56A]" />
-                      <h4 className="text-sm sm:text-base font-extrabold tracking-wide uppercase text-white flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-[#BE9852] shadow-xs shadow-[#BE9852]" />
+                      <h4 className="text-sm sm:text-base font-extrabold tracking-wide uppercase text-[#17324A] flex items-center gap-2">
                         <span>{isRTL ? 'المسؤوليات الرئيسية' : 'Key Responsibilities'}</span>
                       </h4>
                     </div>
-                    <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#D8B56A]/15 text-[#F5E0A3] border border-[#D8B56A]/35 shadow-2xs">
+                    <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#BE9852]/15 text-[#BE9852] border border-[#BE9852]/35 shadow-2xs">
                       {respCount} {respCount === 1 ? (isRTL ? t.duty : 'duty') : (isRTL ? t.duties : 'duties')}
                     </span>
                   </div>
 
-                  {/* Responsibilities Grid with comfortable spacing */}
+                  {/* Responsibilities Grid with readable contrast */}
                   <ul className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-3.5">
                     {responsibilities.map((resp, idx) => {
                       const colonIndex = resp.indexOf(':');
@@ -492,23 +487,23 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
                       return (
                         <li 
                           key={idx} 
-                          className="flex items-start gap-3 text-xs sm:text-[13px] text-slate-200/90 bg-white/[0.04] hover:bg-white/[0.07] p-3 sm:p-3.5 rounded-xl border border-white/[0.08] hover:border-[#D8B56A]/30 transition-all duration-200"
+                          className="flex items-start gap-3 text-xs sm:text-[13px] text-[#34495E] bg-white hover:bg-white p-3 sm:p-3.5 rounded-xl border border-[#C5D5E2] hover:border-[#BE9852]/40 transition-all duration-200 shadow-2xs"
                         >
-                          <div className="mt-0.5 shrink-0 flex items-center justify-center w-4 h-4 rounded-full bg-[#C9A45C]/20 text-[#E2C47E] border border-[#C9A45C]/30">
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#D8B56A]" />
+                          <div className="mt-0.5 shrink-0 flex items-center justify-center w-4 h-4 rounded-full bg-[#BE9852]/20 text-[#BE9852] border border-[#BE9852]/30">
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#BE9852]" />
                           </div>
                           <span className="min-w-0 flex-1 leading-relaxed">
                             {hasHeading ? (
                               <span className="flex flex-col gap-1">
-                                <strong className="block font-extrabold text-[#F1D38A] text-[13px] sm:text-[14px] leading-snug tracking-[0.01em]">
+                                <strong className="block font-bold text-[#17324A] text-[13px] sm:text-[14px] leading-snug tracking-[0.01em]">
                                   {heading}:
                                 </strong>
-                                <span className="block text-slate-200/90 font-normal text-xs sm:text-[13px] leading-relaxed">
+                                <span className="block text-[#34495E] font-normal text-xs sm:text-[13px] leading-relaxed">
                                   {detail}
                                 </span>
                               </span>
                             ) : (
-                              <span className="block text-slate-200/90 font-normal text-xs sm:text-[13px] leading-relaxed">
+                              <span className="block text-[#34495E] font-normal text-xs sm:text-[13px] leading-relaxed">
                                 {resp}
                               </span>
                             )}
@@ -523,15 +518,15 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
                     const softwareList = getJobSoftware(job.id, job.company);
                     if (!softwareList || softwareList.length === 0) return null;
                     return (
-                      <div className="relative z-10 mt-5 pt-3.5 border-t border-slate-700/60 flex flex-wrap items-center gap-2.5">
-                        <span className="text-xs font-bold uppercase tracking-wider text-[#D8B56A] shrink-0">
+                      <div className="relative z-10 mt-5 pt-3.5 border-t border-[#C5D5E2] flex flex-wrap items-center gap-2.5">
+                        <span className="text-xs font-bold uppercase tracking-wider text-[#BE9852] shrink-0">
                           {isRTL ? 'البرامج المستخدمة:' : 'Software:'}
                         </span>
                         <div className="flex flex-wrap items-center gap-2">
                           {softwareList.map((sw, sIdx) => (
                             <div
                               key={sIdx}
-                              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-900/80 border border-[#C9A45C]/30 shadow-2xs hover:border-[#D8B56A]/50 transition-colors"
+                              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white border border-[#C5D5E2] shadow-2xs hover:border-[#BE9852]/50 transition-colors"
                             >
                               <img
                                 src={sw.logo}
@@ -539,7 +534,7 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
                                 className={sw.logoClass || 'h-4 w-auto object-contain shrink-0'}
                                 loading="lazy"
                               />
-                              <span className="text-xs font-semibold text-slate-100">
+                              <span className="text-xs font-semibold text-[#17324A]">
                                 {sw.name}
                               </span>
                             </div>
@@ -560,25 +555,23 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
   return (
     <section 
       id="experience" 
-      className="relative py-20 scroll-mt-20 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 transition-colors overflow-hidden"
+      className="misty-portfolio relative py-20 scroll-mt-20 bg-[#A7C6E1] border-b border-[#C5D5E2] transition-colors overflow-hidden"
+      style={{ backgroundColor: '#A7C6E1' }}
     >
-      {/* Subtle background gradient (no background image) */}
-      <div className="absolute inset-0 pointer-events-none z-0 bg-gradient-to-b from-white/90 via-white/75 to-white/92 dark:from-slate-900/90 dark:via-slate-900/75 dark:to-slate-900/92" aria-hidden="true" />
-
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
           <div className="flex flex-col items-start gap-1.5 max-w-3xl">
-            <span className="block text-xs font-bold tracking-widest text-[#D8B56A] dark:text-[#D8B56A] uppercase">
+            <span className="block text-xs font-bold tracking-widest text-[#BE9852] uppercase">
               {isRTL ? t.tag : 'Career Timeline'}
             </span>
             <div>
-              <h2 className="main-heading-3d text-3xl font-extrabold sm:text-4xl tracking-tight">
+              <h2 className="main-heading-3d text-3xl font-extrabold sm:text-4xl tracking-tight text-[#17324A]">
                 {isRTL ? t.title : 'Work Experience'}
               </h2>
             </div>
-            <p className="mt-1 text-sm text-[#64748B] dark:text-slate-400">
+            <p className="mt-1 text-sm text-[#52677A]">
               {isRTL ? t.subtitle : 'A sustained record of financial management, regulatory adherence, and accounting across manufacturing, trade, hospitality, and corporate sectors in Saudi Arabia and Pakistan.'}
             </p>
           </div>
@@ -591,12 +584,12 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
                 onClick={onToggleSelect}
                 className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all border cursor-pointer ${
                   isSelected
-                    ? 'bg-[#F4E7C5] text-[#D8B56A] border-[#D8B56A]/40 dark:bg-[#211D14]/70 dark:text-[#E2C47E] dark:border-[#8D6B30]/60 shadow-2xs'
-                    : 'bg-[#F4F6F8] text-slate-600 border-slate-200 dark:bg-slate-800 dark:text-slate-400 dark:border-slate-700 hover:text-slate-900 dark:hover:text-white'
+                    ? 'bg-[#BE9852]/15 text-[#BE9852] border-[#BE9852]/40 shadow-2xs'
+                    : 'bg-[#F3F7FA] text-[#52677A] border-[#C5D5E2] hover:text-[#17324A] hover:bg-white'
                 }`}
                 title={isRTL ? t.bgTitle : 'Toggle subtle background image effect (Test)'}
               >
-                <span className={`w-1.5 h-1.5 rounded-full transition-colors ${isSelected ? 'bg-[#D8B56A] dark:bg-[#D8B56A] animate-pulse' : 'bg-slate-400'}`} />
+                <span className={`w-1.5 h-1.5 rounded-full transition-colors ${isSelected ? 'bg-[#BE9852] animate-pulse' : 'bg-[#52677A]'}`} />
                 <span>{isSelected ? (isRTL ? t.bgActive : 'Background: Active') : (isRTL ? t.bgInactive : 'Background: Inactive')}</span>
               </button>
             )}
@@ -604,9 +597,9 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
             <button
               type="button"
               onClick={toggleAll}
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-semibold text-[#1F2937] dark:text-slate-300 bg-[#F4F6F8] hover:bg-[#F4E7C5] dark:bg-slate-800 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 transition-colors cursor-pointer"
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-semibold text-[#17324A] bg-[#F3F7FA] hover:bg-white border border-[#C5D5E2] transition-colors cursor-pointer shadow-xs"
             >
-              <Briefcase className="w-3.5 h-3.5 text-[#D8B56A] dark:text-[#D8B56A]" />
+              <Briefcase className="w-3.5 h-3.5 text-[#BE9852]" />
               <span>{allExpanded ? (isRTL ? t.collapseAll : 'Collapse All') : (isRTL ? t.expandAll : 'Expand All')}</span>
             </button>
           </div>
@@ -615,28 +608,28 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
         {/* Experience Groups — both collapsed by default */}
         <div className="space-y-5">
           {/* Full-Time Experience */}
-          <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-900/30 overflow-hidden shadow-xs">
+          <div className="rounded-2xl border border-[#C5D5E2] bg-[#F3F7FA] overflow-hidden shadow-xs">
             <button
               type="button"
               onClick={() => toggleCategory('full-time')}
               aria-expanded={isFullTimeOpen}
-              className="w-full flex items-center justify-between gap-4 px-5 sm:px-6 py-4 text-left rtl:text-right hover:bg-[#F4F6F8]/80 dark:hover:bg-slate-800/50 transition-colors cursor-pointer select-none touch-manipulation"
+              className="w-full flex items-center justify-between gap-4 px-5 sm:px-6 py-4 text-left rtl:text-right hover:bg-white/80 transition-colors cursor-pointer select-none touch-manipulation"
             >
               <div className="flex items-center gap-3">
-                <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[#F4E7C5] dark:bg-[#211D14]/70 text-[#D8B56A] dark:text-[#E2C47E]">
+                <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[#BE9852]/15 text-[#BE9852] border border-[#BE9852]/25">
                   <Briefcase className="w-4.5 h-4.5" />
                 </span>
                 <div>
-                  <h3 className="text-base sm:text-lg font-extrabold text-[#0F2747] dark:text-white">
+                  <h3 className="text-base sm:text-lg font-bold text-[#17324A]">
                     {isRTL ? 'الخبرة بدوام كامل' : 'Full-Time Experience'}
                   </h3>
-                  <p className="text-xs text-[#64748B] dark:text-slate-400">
+                  <p className="text-xs text-[#52677A]">
                     {isRTL ? `${formalJobs.length} وظائف مهنية` : `${formalJobs.length} professional roles`}
                   </p>
                 </div>
               </div>
               <ChevronDown
-                className={`w-5 h-5 shrink-0 text-[#D8B56A] dark:text-[#D8B56A] transition-transform duration-300 ${
+                className={`w-5 h-5 shrink-0 text-[#BE9852] transition-transform duration-300 ${
                   isFullTimeOpen ? 'rotate-180' : ''
                 }`}
               />
@@ -645,13 +638,13 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
             <div
               className={`grid transition-all duration-300 ease-in-out ${
                 isFullTimeOpen
-                  ? 'grid-rows-[1fr] opacity-100 border-t border-slate-200/80 dark:border-slate-800/80'
+                  ? 'grid-rows-[1fr] opacity-100 border-t border-[#C5D5E2]'
                   : 'grid-rows-[0fr] opacity-0'
               }`}
             >
               <div className="overflow-hidden">
                 <div className="p-5 sm:p-6">
-                  <div className={`relative ${isRTL ? 'border-r-2 mr-3 sm:mr-4 pr-6 sm:pr-8' : 'border-l-2 ml-3 sm:ml-4 pl-6 sm:pl-8'} border-slate-200 dark:border-slate-800 space-y-8 sm:space-y-10`}>
+                  <div className={`relative ${isRTL ? 'border-r-2 mr-3 sm:mr-4 pr-6 sm:pr-8' : 'border-l-2 ml-3 sm:ml-4 pl-6 sm:pl-8'} border-[#C5D5E2] space-y-8 sm:space-y-10`}>
                     {formalJobs.map(renderJobCard)}
                   </div>
                 </div>
@@ -660,28 +653,28 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
           </div>
 
           {/* Remote / Part-Time Experience */}
-          <div id="experience-remote" className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/70 dark:bg-slate-900/30 overflow-hidden shadow-xs scroll-mt-24">
+          <div id="experience-remote" className="rounded-2xl border border-[#C5D5E2] bg-[#F3F7FA] overflow-hidden shadow-xs scroll-mt-24">
             <button
               type="button"
               onClick={() => toggleCategory('remote')}
               aria-expanded={isRemoteOpen}
-              className="w-full flex items-center justify-between gap-4 px-5 sm:px-6 py-4 text-left rtl:text-right hover:bg-[#F4F6F8]/80 dark:hover:bg-slate-800/50 transition-colors cursor-pointer select-none touch-manipulation"
+              className="w-full flex items-center justify-between gap-4 px-5 sm:px-6 py-4 text-left rtl:text-right hover:bg-white/80 transition-colors cursor-pointer select-none touch-manipulation"
             >
               <div className="flex items-center gap-3">
-                <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[#F4E7C5] dark:bg-[#211D14]/70 text-[#D8B56A] dark:text-[#E2C47E]">
+                <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[#BE9852]/15 text-[#BE9852] border border-[#BE9852]/25">
                   <Briefcase className="w-4.5 h-4.5" />
                 </span>
                 <div>
-                  <h3 className="text-base sm:text-lg font-extrabold text-[#0F2747] dark:text-white">
+                  <h3 className="text-base sm:text-lg font-bold text-[#17324A]">
                     {isRTL ? 'الخبرة عن بُعد / بدوام جزئي' : 'Remote / Part-Time Experience'}
                   </h3>
-                  <p className="text-xs text-[#64748B] dark:text-slate-400">
+                  <p className="text-xs text-[#52677A]">
                     {isRTL ? `${remoteJobs.length} مهام محاسبية` : `${remoteJobs.length} accounting engagements`}
                   </p>
                 </div>
               </div>
               <ChevronDown
-                className={`w-5 h-5 shrink-0 text-[#D8B56A] dark:text-[#D8B56A] transition-transform duration-300 ${
+                className={`w-5 h-5 shrink-0 text-[#BE9852] transition-transform duration-300 ${
                   isRemoteOpen ? 'rotate-180' : ''
                 }`}
               />
@@ -690,13 +683,13 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
             <div
               className={`grid transition-all duration-300 ease-in-out ${
                 isRemoteOpen
-                  ? 'grid-rows-[1fr] opacity-100 border-t border-slate-200/80 dark:border-slate-800/80'
+                  ? 'grid-rows-[1fr] opacity-100 border-t border-[#C5D5E2]'
                   : 'grid-rows-[0fr] opacity-0'
               }`}
             >
               <div className="overflow-hidden">
                 <div className="p-5 sm:p-6">
-                  <div className={`relative ${isRTL ? 'border-r-2 mr-3 sm:mr-4 pr-6 sm:pr-8' : 'border-l-2 ml-3 sm:ml-4 pl-6 sm:pl-8'} border-slate-200 dark:border-slate-800 space-y-8 sm:space-y-10`}>
+                  <div className={`relative ${isRTL ? 'border-r-2 mr-3 sm:mr-4 pr-6 sm:pr-8' : 'border-l-2 ml-3 sm:ml-4 pl-6 sm:pl-8'} border-[#C5D5E2] space-y-8 sm:space-y-10`}>
                     {remoteJobs.map(renderJobCard)}
                   </div>
                 </div>

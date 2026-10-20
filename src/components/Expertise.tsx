@@ -126,22 +126,21 @@ export function Expertise({ expertise }: ExpertiseProps) {
   return (
     <section
       id="expertise"
-      className="misty-portfolio deep-slate-champagne 
+      className="misty-portfolio 
         relative
         py-20
         scroll-mt-20
-        bg-white
-        dark:bg-[#061522]
+        bg-[#A7C6E1]
         border-b
-        border-slate-200
-        dark:border-slate-800
+        border-[#C5D5E2]
         transition-colors
         overflow-hidden
       "
+      style={{ backgroundColor: '#A7C6E1' }}
     >
-      {/* LOCAL BACKDROP: Reduces visibility of decorative particles/lines strictly behind this section */}
+      {/* LOCAL BACKDROP */}
       <div
-        className="absolute inset-0 pointer-events-none z-0 bg-white/95 dark:bg-[#061522]/95 backdrop-blur-[2px]"
+        className="absolute inset-0 pointer-events-none z-0 bg-[#A7C6E1]/85 backdrop-blur-[2px]"
         aria-hidden="true"
       />
 
@@ -156,8 +155,7 @@ export function Expertise({ expertise }: ExpertiseProps) {
           className="
             w-full h-full
             object-cover object-center
-            opacity-[0.14]
-            dark:opacity-[0.07]
+            opacity-[0.12]
             contrast-105
             select-none
           "
@@ -168,12 +166,9 @@ export function Expertise({ expertise }: ExpertiseProps) {
           className="
             absolute inset-0
             bg-gradient-to-b
-            from-white/90
-            via-white/70
-            to-white/90
-            dark:from-[#061522]/90
-            dark:via-[#061522]/75
-            dark:to-[#061522]/90
+            from-[#A7C6E1]/90
+            via-[#A7C6E1]/70
+            to-[#A7C6E1]/90
           "
         />
       </div>
@@ -187,18 +182,18 @@ export function Expertise({ expertise }: ExpertiseProps) {
               text-xs
               font-bold
               tracking-widest
-              text-[#D8B56A]
+              text-[#BE9852]
               uppercase
             "
           >
             {isRTL ? t.tag : 'Technical Capabilities'}
           </span>
 
-          <h2 className="main-heading-3d text-3xl font-extrabold sm:text-4xl tracking-tight">
+          <h2 className="main-heading-3d text-3xl font-extrabold sm:text-4xl tracking-tight text-[#17324A]">
             {isRTL ? t.title : 'Core Professional Expertise'}
           </h2>
 
-          <p className="mt-1 text-sm text-[#64748B] dark:text-slate-400">
+          <p className="mt-1 text-sm text-[#52677A]">
             {isRTL
               ? t.subtitle
               : 'Comprehensive operational workflows, accounting controls, and technical proficiencies across 12 core domains. Click any category to view details.'}
@@ -229,11 +224,11 @@ export function Expertise({ expertise }: ExpertiseProps) {
               >
                 {/* SUBTLE MUTED-GOLD GROUP LABEL */}
                 <div className="flex items-center gap-2.5 mb-4 pt-1">
-                  <span className="w-2 h-2 rounded-full bg-[#D8B56A] shadow-xs shadow-[#D8B56A]/40 shrink-0" />
-                  <h3 className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#D8B56A] shrink-0">
+                  <span className="w-2 h-2 rounded-full bg-[#BE9852] shadow-xs shadow-[#BE9852]/40 shrink-0" />
+                  <h3 className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#17324A] shrink-0">
                     {isRTL ? group.arTitle : group.enTitle}
                   </h3>
-                  <div className="h-px flex-1 bg-gradient-to-r from-[#D8B56A]/35 via-[#D8B56A]/15 to-transparent rtl:bg-gradient-to-l" />
+                  <div className="h-px flex-1 bg-gradient-to-r from-[#BE9852]/40 via-[#BE9852]/15 to-transparent rtl:bg-gradient-to-l" />
                 </div>
 
                 {/* 2-COLUMN GRID ON DESKTOP, 1-COLUMN ON MOBILE (4 cards per group) */}
@@ -279,17 +274,11 @@ export function Expertise({ expertise }: ExpertiseProps) {
                             ${
                               isExpanded
                                 ? `
-                                  bg-[#F8FBFA]
-                                  dark:bg-[#071927]
-
-                                  border-[#D8B56A]/60
-                                  dark:border-[#D8B56A]/50
+                                  bg-white
+                                  border-[#BE9852]/60
                                   ring-1
-                                  ring-[#D8B56A]/20
-                                  dark:ring-[#D8B56A]/25
-
-                                  shadow-[0_10px_28px_rgba(216,181,106,0.12)]
-                                  dark:shadow-[0_12px_32px_rgba(0,0,0,0.45)]
+                                  ring-[#BE9852]/25
+                                  shadow-md
 
                                   ${
                                     isLeftColumn
@@ -307,22 +296,14 @@ export function Expertise({ expertise }: ExpertiseProps) {
                                 `
                                 : `
                                   rounded-xl
-                                  bg-[#F4F6F8]
-                                  dark:bg-[#071724]/95
+                                  bg-[#F3F7FA]
+                                  border-[#C5D5E2]
+                                  shadow-xs
 
-                                  border-slate-200/90
-                                  dark:border-slate-800/80
-
-                                  shadow-sm
-
-                                  hover:border-[#D8B56A]/40
-                                  dark:hover:border-[#D8B56A]/40
-
-                                  hover:bg-[#F8FBFA]
-                                  dark:hover:bg-[#0A2033]
-
+                                  hover:border-[#BE9852]/60
+                                  hover:bg-white
                                   hover:-translate-y-[1px]
-                                  hover:shadow-[0_8px_22px_rgba(216,181,106,0.07)]
+                                  hover:shadow-md
                                 `
                             }
                           `}
@@ -399,23 +380,20 @@ export function Expertise({ expertise }: ExpertiseProps) {
                                   ${
                                     isExpanded
                                       ? `
-                                        bg-[#D8B56A]/20
-                                        text-[#D8B56A]
-
-                                        dark:bg-[#D8B56A]/25
-                                        dark:text-[#F3DB96]
-
-                                        shadow-sm
+                                        bg-[#BE9852]/25
+                                        text-[#BE9852]
+                                        border
+                                        border-[#BE9852]/40
+                                        shadow-xs
                                       `
                                       : `
-                                        bg-[#D8B56A]/10
-                                        dark:bg-[#132E43]
-
-                                        text-[#D8B56A]
-                                        dark:text-[#D8B56A]
+                                        bg-[#BE9852]/15
+                                        text-[#BE9852]
+                                        border
+                                        border-[#BE9852]/25
 
                                         group-hover:scale-105
-                                        group-hover:bg-[#D8B56A]/15
+                                        group-hover:bg-[#BE9852]/20
                                       `
                                   }
                                 `}
@@ -435,17 +413,8 @@ export function Expertise({ expertise }: ExpertiseProps) {
 
                                   ${
                                     isExpanded
-                                      ? `
-                                        text-[#C2933A]
-                                        dark:text-[#E8CA83]
-                                      `
-                                      : `
-                                        text-[#0F2747]
-                                        dark:text-[#DCE4EB]
-
-                                        group-hover:text-[#D8B56A]
-                                        dark:group-hover:text-[#F3DB96]
-                                      `
+                                      ? 'text-[#BE9852] font-bold'
+                                      : 'text-[#17324A] group-hover:text-[#BE9852]'
                                   }
                                 `}
                               >
@@ -468,7 +437,7 @@ export function Expertise({ expertise }: ExpertiseProps) {
                                 text-[10px]
                                 sm:text-[11px]
 
-                                font-medium
+                                font-semibold
                                 shrink-0
 
                                 transition-all
@@ -476,25 +445,20 @@ export function Expertise({ expertise }: ExpertiseProps) {
                                 ${
                                   isExpanded
                                     ? `
-                                      bg-white/70
-                                      text-[#0F766E]
-
-                                      dark:bg-teal-950/40
-                                      dark:text-teal-200
-
+                                      bg-[#BE9852]/15
+                                      text-[#BE9852]
                                       border
-                                      border-[#A7D7CE]
-                                      dark:border-teal-500/40
+                                      border-[#BE9852]/40
                                     `
                                     : `
-                                      bg-teal-500/[0.05]
-                                      text-[#0F766E]
-                                      dark:text-teal-300
-
+                                      bg-[#F3F7FA]
+                                      text-[#17324A]
                                       border
-                                      border-teal-500/20
+                                      border-[#C5D5E2]
 
-                                      group-hover:bg-teal-500/[0.1]
+                                      group-hover:bg-white
+                                      group-hover:border-[#BE9852]/50
+                                      group-hover:text-[#BE9852]
                                     `
                                 }
                               `}
@@ -566,13 +530,11 @@ export function Expertise({ expertise }: ExpertiseProps) {
                                 rounded-xl
 
                                 border
-                                border-[#D8B56A]/40
-                                dark:border-[#D8B56A]/40
+                                border-[#C5D5E2]
 
-                                bg-[#F5FBF9]
-                                dark:bg-[#071927]
+                                bg-[#F3F7FA]
 
-                                shadow-[0_10px_28px_rgba(15,118,110,0.07)]
+                                shadow-md
                               "
                             >
                               {hasImage && (
@@ -592,8 +554,6 @@ export function Expertise({ expertise }: ExpertiseProps) {
                                     loading="lazy"
                                   />
 
-                                  <div className="absolute inset-0 bg-[#EAF6F3]/[0.03] dark:bg-teal-900/10" />
-
                                   <div
                                     className="
                                       absolute inset-0
@@ -601,12 +561,8 @@ export function Expertise({ expertise }: ExpertiseProps) {
                                       bg-gradient-to-b
 
                                       from-transparent
-                                      via-[#F5FBF9]/5
-                                      to-[#F5FBF9]
-
-                                      dark:from-transparent
-                                      dark:via-[#071927]/20
-                                      dark:to-[#071927]
+                                      via-[#F3F7FA]/30
+                                      to-[#F3F7FA]
                                     "
                                   />
                                 </div>
@@ -625,8 +581,7 @@ export function Expertise({ expertise }: ExpertiseProps) {
                                         text-xs
                                         sm:text-sm
 
-                                        text-[#294A46]
-                                        dark:text-slate-200
+                                        text-[#34495E]
 
                                         leading-relaxed
                                       "
@@ -634,7 +589,7 @@ export function Expertise({ expertise }: ExpertiseProps) {
                                       <CheckCircle2
                                         className="
                                           w-3.5 h-3.5
-                                          text-[#D8B56A]
+                                          text-[#BE9852]
                                           shrink-0
                                           mt-0.5
                                         "
@@ -701,14 +656,11 @@ export function Expertise({ expertise }: ExpertiseProps) {
 
                               overflow-hidden
 
-                              bg-[#F5FBF9]
-                              dark:bg-[#071927]
+                              bg-[#F3F7FA]
 
-                              shadow-[0_16px_38px_rgba(15,118,110,0.09)]
-                              dark:shadow-[0_18px_45px_rgba(0,0,0,0.35)]
+                              shadow-xl
 
-                              border-[#D8B56A]/50
-                              dark:border-[#D8B56A]/40
+                              border-[#C5D5E2]
 
                               ${
                                 isLeftColumn
@@ -760,13 +712,10 @@ export function Expertise({ expertise }: ExpertiseProps) {
                                           object-cover
                                           object-center
 
-                                          opacity-[0.96]
-                                          dark:opacity-[0.68]
+                                          opacity-[0.92]
                                         "
                                         loading="lazy"
                                       />
-
-                                      <div className="absolute inset-0 bg-[#EAF6F3]/[0.02] dark:bg-teal-900/[0.08]" />
 
                                       {/* FADE TOWARD TEXT */}
                                       <div
@@ -775,18 +724,14 @@ export function Expertise({ expertise }: ExpertiseProps) {
 
                                           bg-gradient-to-r
 
-                                          from-[#F5FBF9]
+                                          from-[#F3F7FA]
                                           from-[0%]
 
-                                          via-[#F5FBF9]/75
+                                          via-[#F3F7FA]/75
                                           via-[24%]
 
                                           to-transparent
                                           to-[65%]
-
-                                          dark:from-[#071927]
-                                          dark:via-[#071927]/80
-                                          dark:to-transparent
                                         "
                                       />
                                     </div>
@@ -800,18 +745,14 @@ export function Expertise({ expertise }: ExpertiseProps) {
 
                                         bg-gradient-to-r
 
-                                        from-[#F5FBF9]
+                                        from-[#F3F7FA]
                                         from-[0%]
 
-                                        via-[#F5FBF9]/96
+                                        via-[#F3F7FA]/96
                                         via-[34%]
 
                                         to-transparent
                                         to-[69%]
-
-                                        dark:from-[#071927]
-                                        dark:via-[#071927]/95
-                                        dark:to-transparent
                                       "
                                       aria-hidden="true"
                                     />
@@ -842,13 +783,10 @@ export function Expertise({ expertise }: ExpertiseProps) {
                                           object-cover
                                           object-center
 
-                                          opacity-[0.96]
-                                          dark:opacity-[0.68]
+                                          opacity-[0.92]
                                         "
                                         loading="lazy"
                                       />
-
-                                      <div className="absolute inset-0 bg-[#EAF6F3]/[0.02] dark:bg-teal-900/[0.08]" />
 
                                       {/* FADE TOWARD TEXT */}
                                       <div
@@ -857,18 +795,14 @@ export function Expertise({ expertise }: ExpertiseProps) {
 
                                           bg-gradient-to-r
 
-                                          from-[#F5FBF9]
+                                          from-[#F3F7FA]
                                           from-[0%]
 
-                                          via-[#F5FBF9]/75
+                                          via-[#F3F7FA]/75
                                           via-[24%]
 
                                           to-transparent
                                           to-[65%]
-
-                                          dark:from-[#071927]
-                                          dark:via-[#071927]/80
-                                          dark:to-transparent
                                         "
                                       />
                                     </div>
@@ -882,18 +816,14 @@ export function Expertise({ expertise }: ExpertiseProps) {
 
                                         bg-gradient-to-r
 
-                                        from-[#F5FBF9]
+                                        from-[#F3F7FA]
                                         from-[0%]
 
-                                        via-[#F5FBF9]/96
+                                        via-[#F3F7FA]/96
                                         via-[34%]
 
                                         to-transparent
                                         to-[69%]
-
-                                        dark:from-[#071927]
-                                        dark:via-[#071927]/95
-                                        dark:to-transparent
                                       "
                                       aria-hidden="true"
                                     />
@@ -910,11 +840,7 @@ export function Expertise({ expertise }: ExpertiseProps) {
 
                                     from-white/[0.02]
                                     via-transparent
-                                    to-[#F5FBF9]/10
-
-                                    dark:from-transparent
-                                    dark:via-transparent
-                                    dark:to-[#071927]/15
+                                    to-[#F3F7FA]/10
                                   "
                                   aria-hidden="true"
                                 />
@@ -943,8 +869,7 @@ export function Expertise({ expertise }: ExpertiseProps) {
                                       text-sm
                                       font-medium
 
-                                      text-[#294A46]
-                                      dark:text-slate-200
+                                      text-[#34495E]
 
                                       leading-relaxed
                                     "
@@ -953,7 +878,7 @@ export function Expertise({ expertise }: ExpertiseProps) {
                                       className="
                                         w-4 h-4
 
-                                        text-[#D8B56A]
+                                        text-[#BE9852]
 
                                         shrink-0
                                         mt-0.5
@@ -974,8 +899,7 @@ export function Expertise({ expertise }: ExpertiseProps) {
                                 ring-1
                                 ring-inset
 
-                                ring-[#0F766E]/[0.06]
-                                dark:ring-teal-300/10
+                                ring-[#C5D5E2]/40
                               "
                               aria-hidden="true"
                             />

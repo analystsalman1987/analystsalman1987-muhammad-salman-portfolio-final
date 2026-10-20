@@ -111,7 +111,7 @@ export function Contact({ profile }: ContactProps) {
   };
 
   return (
-    <section id="contact" className="misty-portfolio deep-slate-champagne relative py-20 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 transition-colors overflow-hidden">
+    <section id="contact" className="misty-portfolio relative py-20 bg-[#A7C6E1] border-b border-[#C5D5E2] transition-colors overflow-hidden" style={{ backgroundColor: '#A7C6E1' }}>
       {/* Subtle Modern Corporate Business Communication Workspace Background Image */}
       <div 
         className="absolute inset-0 pointer-events-none z-0"
@@ -120,25 +120,25 @@ export function Contact({ profile }: ContactProps) {
         <img 
           src="/images/contact_business_workspace.jpg" 
           alt="" 
-          className="w-full h-full object-cover object-center opacity-[0.22] dark:opacity-[0.16] filter contrast-105 select-none"
+          className="w-full h-full object-cover object-center opacity-[0.14] filter contrast-105 select-none"
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-white/85 via-white/50 to-white/90 dark:from-slate-900/85 dark:via-slate-900/55 dark:to-slate-900/90" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#A7C6E1]/85 via-[#A7C6E1]/70 to-[#A7C6E1]/90" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header: Vertical Stack (Label above Heading) */}
         <div className="flex flex-col items-start gap-1.5 max-w-3xl mb-12">
-          <span className="block text-xs font-bold tracking-widest text-[#D8B56A] dark:text-[#D8B56A] uppercase">
+          <span className="block text-xs font-bold tracking-widest text-[#BE9852] uppercase">
             {isRTL ? t.tag : 'Get In Touch'}
           </span>
           <div>
-            <h2 className="main-heading-3d text-3xl font-extrabold sm:text-4xl tracking-tight">
+            <h2 className="main-heading-3d text-3xl font-extrabold sm:text-4xl tracking-tight text-[#17324A]">
               {isRTL ? t.title : 'Contact Information'}
             </h2>
           </div>
-          <p className="mt-1 text-sm text-[#64748B] dark:text-slate-400">
+          <p className="mt-1 text-sm text-[#52677A]">
             {isRTL ? t.subtitle : 'Available for professional accounting, finance management, and corporate opportunities across Saudi Arabia.'}
           </p>
         </div>
@@ -151,19 +151,19 @@ export function Contact({ profile }: ContactProps) {
             {/* Email Card */}
             <a
               href={`mailto:${profile.email}`}
-              className="p-5 rounded-2xl bg-[#F4F6F8] dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 hover:border-[#D8B56A]/50 transition-all flex items-start gap-4 group block"
+              className="p-5 rounded-2xl bg-white border border-[#C5D5E2] hover:border-[#BE9852]/50 shadow-xs transition-all flex items-start gap-4 group block"
             >
-              <div className="w-11 h-11 rounded-xl bg-[#F4E7C5] dark:bg-[#211D14]/70 text-[#D8B56A] dark:text-[#D8B56A] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+              <div className="w-11 h-11 rounded-xl bg-[#F3F7FA] text-[#BE9852] border border-[#C5D5E2] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
                 <Mail className="w-5 h-5" />
               </div>
               <div className="min-w-0 flex-1">
-                <span className="text-[11px] font-bold text-[#64748B] dark:text-slate-500 uppercase tracking-wider block">
+                <span className="text-[11px] font-bold text-[#52677A] uppercase tracking-wider block">
                   {isRTL ? t.emailLabel : 'Email Address'}
                 </span>
-                <span className="text-sm font-semibold text-[#0F2747] dark:text-white group-hover:text-[#D8B56A] dark:group-hover:text-[#D8B56A] transition-colors break-all">
+                <span className="text-sm font-semibold text-[#17324A] group-hover:text-[#BE9852] transition-colors break-all">
                   {profile.email}
                 </span>
-                <span className="text-xs text-[#64748B] dark:text-slate-400 block mt-0.5">
+                <span className="text-xs text-[#52677A] block mt-0.5">
                   {isRTL ? t.emailSub : 'Direct primary correspondence'}
                 </span>
               </div>
@@ -172,19 +172,19 @@ export function Contact({ profile }: ContactProps) {
             {/* Primary Phone Card */}
             <a
               href={`tel:${profile.primaryPhone.replace(/\s+/g, '')}`}
-              className="p-5 rounded-2xl bg-[#F4F6F8] dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 hover:border-[#D8B56A]/50 transition-all flex items-start gap-4 group block"
+              className="p-5 rounded-2xl bg-white border border-[#C5D5E2] hover:border-[#BE9852]/50 shadow-xs transition-all flex items-start gap-4 group block"
             >
-              <div className="w-11 h-11 rounded-xl bg-[#F4E7C5] dark:bg-[#211D14]/70 text-[#D8B56A] dark:text-[#D8B56A] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+              <div className="w-11 h-11 rounded-xl bg-[#F3F7FA] text-[#BE9852] border border-[#C5D5E2] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
                 <Phone className="w-5 h-5" />
               </div>
               <div>
-                <span className="text-[11px] font-bold text-[#64748B] dark:text-slate-500 uppercase tracking-wider block">
+                <span className="text-[11px] font-bold text-[#52677A] uppercase tracking-wider block">
                   {isRTL ? t.phoneLabel : 'Primary Mobile / WhatsApp'}
                 </span>
-                <span className="text-sm font-semibold text-[#0F2747] dark:text-white group-hover:text-[#D8B56A] dark:group-hover:text-[#D8B56A] transition-colors" dir="ltr">
+                <span className="text-sm font-semibold text-[#17324A] group-hover:text-[#BE9852] transition-colors" dir="ltr">
                   {profile.primaryPhone}
                 </span>
-                <span className="text-xs text-[#64748B] dark:text-slate-400 block mt-0.5">
+                <span className="text-xs text-[#52677A] block mt-0.5">
                   {isRTL ? t.phoneSub : 'Direct phone & messaging'}
                 </span>
               </div>
@@ -193,37 +193,37 @@ export function Contact({ profile }: ContactProps) {
             {/* Alternative Phone Card */}
             <a
               href={`tel:${profile.altPhone.replace(/\s+/g, '')}`}
-              className="p-5 rounded-2xl bg-[#F4F6F8] dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 hover:border-[#D8B56A]/50 transition-all flex items-start gap-4 group block"
+              className="p-5 rounded-2xl bg-white border border-[#C5D5E2] hover:border-[#BE9852]/50 shadow-xs transition-all flex items-start gap-4 group block"
             >
-              <div className="w-11 h-11 rounded-xl bg-white dark:bg-slate-800 text-[#D8B56A] dark:text-[#E2C47E] border border-slate-200 dark:border-slate-700 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+              <div className="w-11 h-11 rounded-xl bg-[#F3F7FA] text-[#BE9852] border border-[#C5D5E2] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
                 <Phone className="w-5 h-5" />
               </div>
               <div>
-                <span className="text-[11px] font-bold text-[#64748B] dark:text-slate-500 uppercase tracking-wider block">
+                <span className="text-[11px] font-bold text-[#52677A] uppercase tracking-wider block">
                   {isRTL ? t.altPhoneLabel : 'Alternative Phone'}
                 </span>
-                <span className="text-sm font-semibold text-[#0F2747] dark:text-white group-hover:text-[#D8B56A] dark:group-hover:text-[#D8B56A] transition-colors" dir="ltr">
+                <span className="text-sm font-semibold text-[#17324A] group-hover:text-[#BE9852] transition-colors" dir="ltr">
                   {profile.altPhone}
                 </span>
-                <span className="text-xs text-[#64748B] dark:text-slate-400 block mt-0.5">
+                <span className="text-xs text-[#52677A] block mt-0.5">
                   {isRTL ? t.altPhoneSub : 'Secondary contact line'}
                 </span>
               </div>
             </a>
 
             {/* Location Card */}
-            <div className="p-5 rounded-2xl bg-[#F4F6F8] dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 flex items-start gap-4">
-              <div className="w-11 h-11 rounded-xl bg-[#F4E7C5] dark:bg-[#211D14]/70 text-[#D8B56A] dark:text-[#D8B56A] flex items-center justify-center shrink-0">
+            <div className="p-5 rounded-2xl bg-white border border-[#C5D5E2] shadow-xs flex items-start gap-4">
+              <div className="w-11 h-11 rounded-xl bg-[#F3F7FA] text-[#BE9852] border border-[#C5D5E2] flex items-center justify-center shrink-0">
                 <MapPin className="w-5 h-5" />
               </div>
               <div>
-                <span className="text-[11px] font-bold text-[#64748B] dark:text-slate-500 uppercase tracking-wider block">
+                <span className="text-[11px] font-bold text-[#52677A] uppercase tracking-wider block">
                   {isRTL ? t.locationLabel : 'Location'}
                 </span>
-                <span className="text-sm font-semibold text-[#0F2747] dark:text-white">
+                <span className="text-sm font-semibold text-[#17324A]">
                   {isRTL ? 'الدمام، المملكة العربية السعودية' : profile.location}
                 </span>
-                <span className="text-xs text-[#64748B] dark:text-slate-400 block mt-0.5">
+                <span className="text-xs text-[#52677A] block mt-0.5">
                   {isRTL ? t.locationSub : 'Eastern Province, Kingdom of Saudi Arabia'}
                 </span>
               </div>
@@ -231,18 +231,18 @@ export function Contact({ profile }: ContactProps) {
 
             {/* Driving License Card */}
             {profile.drivingLicense && (
-              <div className="p-5 rounded-2xl bg-[#F4F6F8] dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 flex items-start gap-4">
-                <div className="w-11 h-11 rounded-xl bg-[#F4E7C5] dark:bg-[#211D14]/70 text-[#D8B56A] dark:text-[#D8B56A] flex items-center justify-center shrink-0">
+              <div className="p-5 rounded-2xl bg-white border border-[#C5D5E2] shadow-xs flex items-start gap-4">
+                <div className="w-11 h-11 rounded-xl bg-[#F3F7FA] text-[#BE9852] border border-[#C5D5E2] flex items-center justify-center shrink-0">
                   <ShieldCheck className="w-5 h-5" />
                 </div>
                 <div>
-                  <span className="text-[11px] font-bold text-[#64748B] dark:text-slate-500 uppercase tracking-wider block">
+                  <span className="text-[11px] font-bold text-[#52677A] uppercase tracking-wider block">
                     {isRTL ? t.licenseLabel : 'Driving License'}
                   </span>
-                  <span className="text-sm font-semibold text-[#0F2747] dark:text-white">
+                  <span className="text-sm font-semibold text-[#17324A]">
                     {isRTL ? 'إقامة قابلة للتحويل | رخصة قيادة سعودية سارية' : profile.drivingLicense}
                   </span>
-                  <span className="text-xs text-[#64748B] dark:text-slate-400 block mt-0.5">
+                  <span className="text-xs text-[#52677A] block mt-0.5">
                     {isRTL ? t.licenseSub : 'Authorized in Kingdom of Saudi Arabia'}
                   </span>
                 </div>
@@ -253,27 +253,27 @@ export function Contact({ profile }: ContactProps) {
 
           {/* Contact Form (Right) */}
           <div className="lg:col-span-7 self-start">
-            <div className="p-5 sm:p-6 rounded-2xl bg-[#F4F6F8] dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 shadow-sm">
+            <div className="p-5 sm:p-6 rounded-2xl bg-white border border-[#C5D5E2] shadow-sm">
               
               <div className="mb-4">
-                <h3 className="text-lg font-bold text-[#0F2747] dark:text-white">
+                <h3 className="text-lg font-bold text-[#17324A]">
                   {isRTL ? t.formTitle : 'Send a Message'}
                 </h3>
-                <p className="text-xs text-[#64748B] dark:text-slate-400 mt-0.5">
+                <p className="text-xs text-[#52677A] mt-0.5">
                   {isRTL ? t.formSub : 'Feel free to send a message directly or open your email client.'}
                 </p>
               </div>
 
               {submitted ? (
-                <div className="p-5 text-center space-y-3.5 rounded-xl bg-[#F4E7C5] dark:bg-[#211D14]/40 border border-[#D8B56A]/30 dark:border-[#665028]">
-                  <div className="w-11 h-11 rounded-full bg-white dark:bg-[#332A18]/60 text-[#D8B56A] dark:text-[#D8B56A] flex items-center justify-center mx-auto shadow-xs">
+                <div className="p-5 text-center space-y-3.5 rounded-xl bg-[#F3F7FA] border border-[#BE9852]/40">
+                  <div className="w-11 h-11 rounded-full bg-white text-[#BE9852] border border-[#C5D5E2] flex items-center justify-center mx-auto shadow-xs">
                     <CheckCircle className="w-5 h-5" />
                   </div>
                   <div>
-                    <h4 className="text-base font-bold text-[#0F2747] dark:text-[#EAD39C]">
+                    <h4 className="text-base font-bold text-[#17324A]">
                       {isRTL ? t.successTitle : 'Thank you. Your message has been sent successfully.'}
                     </h4>
-                    <p className="text-xs text-[#D8B56A] dark:text-[#E2C47E] mt-1 max-w-md mx-auto">
+                    <p className="text-xs text-[#52677A] mt-1 max-w-md mx-auto">
                       {isRTL ? t.successSub : 'Your message has been delivered directly to Muhammad Salman. I will get back to you as soon as possible.'}
                     </p>
                   </div>
@@ -282,14 +282,14 @@ export function Contact({ profile }: ContactProps) {
                     <button
                       type="button"
                       onClick={resetForm}
-                      className="px-4 py-2 rounded-lg bg-white dark:bg-slate-800 text-[#1F2937] dark:text-slate-300 text-xs font-semibold border border-slate-200 dark:border-slate-700 hover:bg-[#F4F6F8] dark:hover:bg-slate-700 transition-colors cursor-pointer"
+                      className="px-4 py-2 rounded-lg bg-white text-[#17324A] text-xs font-semibold border border-[#C5D5E2] hover:bg-[#F3F7FA] hover:border-[#BE9852]/50 transition-colors cursor-pointer"
                     >
                       {isRTL ? t.writeAnotherBtn : 'Send Another Message'}
                     </button>
                     <button
                       type="button"
                       onClick={handleOpenEmailClient}
-                      className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-[#D8B56A] dark:text-[#E2C47E] hover:bg-[#F4E7C5]/60 dark:hover:bg-slate-800 text-xs font-semibold transition-colors cursor-pointer"
+                      className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-[#BE9852] hover:bg-[#BE9852]/10 text-xs font-semibold transition-colors cursor-pointer"
                     >
                       <ExternalLink className="w-3.5 h-3.5" />
                       <span>{isRTL ? t.directEmailBtn : 'Direct Email Client'}</span>
@@ -299,15 +299,15 @@ export function Contact({ profile }: ContactProps) {
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-3.5">
                   {error && (
-                    <div className="p-3 rounded-lg bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900 text-rose-700 dark:text-rose-300 text-xs flex items-center gap-2">
-                      <AlertCircle className="w-4 h-4 shrink-0 text-rose-600 dark:text-rose-400" />
+                    <div className="p-3 rounded-lg bg-rose-50 border border-rose-200 text-rose-700 text-xs flex items-center gap-2">
+                      <AlertCircle className="w-4 h-4 shrink-0 text-rose-600" />
                       <span>{error}</span>
                     </div>
                   )}
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                     <div>
-                      <label className="block text-xs font-bold text-[#1F2937] dark:text-slate-300 mb-1">
+                      <label className="block text-xs font-bold text-[#17324A] mb-1">
                         {isRTL ? t.nameLabel : 'Your Name *'}
                       </label>
                       <input
@@ -317,12 +317,12 @@ export function Contact({ profile }: ContactProps) {
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         placeholder={isRTL ? t.namePlaceholder : 'e.g. Abdullah Al-Harbi'}
-                        className="w-full px-3.5 py-2.5 text-xs rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-[#1F2937] dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#D8B56A] disabled:opacity-60"
+                        className="w-full px-3.5 py-2.5 text-xs rounded-lg bg-[#F3F7FA] border border-[#C5D5E2] text-[#17324A] placeholder-[#7E93A4] focus:outline-none focus:ring-2 focus:ring-[#BE9852] focus:bg-white disabled:opacity-60 transition-colors"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold text-[#1F2937] dark:text-slate-300 mb-1">
+                      <label className="block text-xs font-bold text-[#17324A] mb-1">
                         {isRTL ? t.emailInputLabel : 'Your Email *'}
                       </label>
                       <input
@@ -332,13 +332,13 @@ export function Contact({ profile }: ContactProps) {
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         placeholder={isRTL ? t.emailPlaceholder : 'name@company.com'}
-                        className="w-full px-3.5 py-2.5 text-xs rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-[#1F2937] dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#D8B56A] disabled:opacity-60"
+                        className="w-full px-3.5 py-2.5 text-xs rounded-lg bg-[#F3F7FA] border border-[#C5D5E2] text-[#17324A] placeholder-[#7E93A4] focus:outline-none focus:ring-2 focus:ring-[#BE9852] focus:bg-white disabled:opacity-60 transition-colors"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-[#1F2937] dark:text-slate-300 mb-1">
+                    <label className="block text-xs font-bold text-[#17324A] mb-1">
                       {isRTL ? t.subjectLabel : 'Subject'}
                     </label>
                     <input
@@ -347,12 +347,12 @@ export function Contact({ profile }: ContactProps) {
                       value={formData.subject}
                       onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                       placeholder={isRTL ? t.subjectPlaceholder : 'e.g. Professional Accounting Opportunity'}
-                      className="w-full px-3.5 py-2.5 text-xs rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-[#1F2937] dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#D8B56A] disabled:opacity-60"
+                      className="w-full px-3.5 py-2.5 text-xs rounded-lg bg-[#F3F7FA] border border-[#C5D5E2] text-[#17324A] placeholder-[#7E93A4] focus:outline-none focus:ring-2 focus:ring-[#BE9852] focus:bg-white disabled:opacity-60 transition-colors"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-[#1F2937] dark:text-slate-300 mb-1">
+                    <label className="block text-xs font-bold text-[#17324A] mb-1">
                       {isRTL ? t.messageLabel : 'Message *'}
                     </label>
                     <textarea
@@ -362,7 +362,7 @@ export function Contact({ profile }: ContactProps) {
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       placeholder={isRTL ? t.messagePlaceholder : 'Write your inquiry or proposal here...'}
-                      className="w-full px-3.5 py-2.5 text-xs rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-[#1F2937] dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#D8B56A] resize-none disabled:opacity-60"
+                      className="w-full px-3.5 py-2.5 text-xs rounded-lg bg-[#F3F7FA] border border-[#C5D5E2] text-[#17324A] placeholder-[#7E93A4] focus:outline-none focus:ring-2 focus:ring-[#BE9852] focus:bg-white resize-none disabled:opacity-60 transition-colors"
                     />
                   </div>
 
@@ -370,7 +370,7 @@ export function Contact({ profile }: ContactProps) {
                     <button
                       type="submit"
                       disabled={isSending}
-                      className={`w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-[#D8B56A] hover:bg-[#B58C41] text-white font-semibold text-xs transition-all shadow-xs cursor-pointer ${
+                      className={`w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-[#BE9852] hover:bg-[#A8823C] text-white font-semibold text-xs transition-all shadow-xs cursor-pointer ${
                         isSending ? 'opacity-70 cursor-not-allowed' : ''
                       }`}
                     >
@@ -390,7 +390,7 @@ export function Contact({ profile }: ContactProps) {
                     <button
                       type="button"
                       onClick={handleOpenEmailClient}
-                      className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-lg text-[#D8B56A] dark:text-[#E2C47E] hover:bg-[#F4E7C5]/60 dark:hover:bg-slate-800 text-xs font-semibold transition-colors cursor-pointer"
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-lg text-[#BE9852] hover:bg-[#BE9852]/10 text-xs font-semibold transition-colors cursor-pointer"
                     >
                       <ExternalLink className="w-3.5 h-3.5" />
                       <span>{isRTL ? t.directEmailBtn : 'Direct Email Client'}</span>

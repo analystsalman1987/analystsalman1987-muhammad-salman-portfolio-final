@@ -24,62 +24,36 @@ export function About({ profile: _profile, onOpenCV }: AboutProps) {
   return (
     <section
       id="about"
-      className="misty-portfolio 
-        relative
-        flex
-        min-h-[calc(100vh-5rem)]
-        flex-col
-        justify-center
-        overflow-hidden
-        border-b
-        border-[#0D2538]
-        bg-[#081A2B]
-        py-12
-        sm:py-16
-        lg:py-0
-      "
+      className="misty-portfolio relative flex min-h-[calc(100vh-5rem)] flex-col justify-center overflow-hidden border-b border-[#C5D5E2] bg-[#A7C6E1] py-16 sm:py-20 lg:py-24"
+      style={{ backgroundColor: '#A7C6E1' }}
     >
       {/* ============================================================
-          ABOUT BACKGROUND
+          ABOUT BACKGROUND & DECORATIVE ATMOSPHERE
           ============================================================ */}
       <div
         className="pointer-events-none absolute inset-0 z-0 overflow-hidden select-none"
         aria-hidden="true"
       >
+        {/* Subtle Accounting Background Image */}
+        <img
+          src="/images/about_accounting_background.jpg"
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover object-center opacity-[0.14] filter contrast-105"
+          loading="lazy"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#A7C6E1]/90 via-[#A7C6E1]/80 to-[#A7C6E1]/95" />
+
+        {/* Soft Golden Ambient Glow */}
         <div
-          className="
-            absolute
-            top-[8%]
-            right-[-10%]
-            h-[600px]
-            w-[600px]
-            rounded-full
-            bg-[#D8B56A]/8
-            blur-[170px]
-          "
+          className="absolute top-[8%] right-[-10%] h-[550px] w-[550px] rounded-full bg-[#BE9852]/10 blur-[150px]"
+        />
+        <div
+          className="absolute -bottom-36 -left-28 h-[500px] w-[500px] rounded-full bg-[#17324A]/8 blur-[130px]"
         />
 
+        {/* Subtle Decorative Grid Pattern */}
         <div
-          className="
-            absolute
-            -bottom-36
-            -left-28
-            h-[540px]
-            w-[540px]
-            rounded-full
-            bg-[#0D2538]/70
-            blur-[140px]
-          "
-        />
-
-        <div
-          className="
-            absolute
-            inset-0
-            bg-[linear-gradient(to_right,#132E4310_1px,transparent_1px),linear-gradient(to_bottom,#132E4310_1px,transparent_1px)]
-            bg-[size:4.5rem_4.5rem]
-            [mask-image:radial-gradient(ellipse_70%_60%_at_45%_50%,#000_45%,transparent_100%)]
-          "
+          className="absolute inset-0 bg-[linear-gradient(to_right,#17324A08_1px,transparent_1px),linear-gradient(to_bottom,#17324A08_1px,transparent_1px)] bg-[size:4.5rem_4.5rem] [mask-image:radial-gradient(ellipse_70%_60%_at_45%_50%,#000_45%,transparent_100%)]"
         />
       </div>
 
@@ -93,29 +67,23 @@ export function About({ profile: _profile, onOpenCV }: AboutProps) {
               LEFT CONTENT
               ======================================================== */}
           <div
-            className={`
-              flex
-              flex-col
-              justify-center
-              space-y-6
-              lg:col-span-7
-              xl:col-span-7
-              ${isRTL ? 'lg:text-right' : 'lg:text-left'}
-            `}
+            className={`flex flex-col justify-center space-y-6 lg:col-span-7 xl:col-span-7 ${
+              isRTL ? 'lg:text-right' : 'lg:text-left'
+            }`}
           >
             {/* HEADING */}
             <div className="flex flex-col items-start rtl:items-start text-left rtl:text-right">
-              <span className="block text-xs font-bold tracking-[0.25em] text-[#D8B56A] uppercase mb-2.5 sm:mb-3">
+              <span className="block text-xs font-bold tracking-[0.25em] text-[#BE9852] uppercase mb-2.5 sm:mb-3">
                 {isRTL ? t.tag : 'ABOUT ME'}
               </span>
 
-              <h2 className="main-heading-3d text-3xl font-extrabold tracking-tight text-[#F8FAFC] sm:text-4xl lg:text-5xl">
+              <h2 className="main-heading-3d text-3xl font-extrabold tracking-tight text-[#17324A] sm:text-4xl lg:text-5xl">
                 {isRTL ? t.title : 'Professional Summary'}
               </h2>
             </div>
 
-            {/* PROFESSIONAL SUMMARY */}
-            <div className="space-y-4 text-sm leading-relaxed text-[#CBD5E1] sm:text-base sm:leading-[1.8]">
+            {/* PROFESSIONAL SUMMARY - PARAGRAPHS OVER BACKGROUND */}
+            <div className="space-y-4 text-sm leading-relaxed text-[#34495E] sm:text-base sm:leading-[1.8] font-normal">
               <p>
                 {isRTL
                   ? t.summaryP1
@@ -134,37 +102,9 @@ export function About({ profile: _profile, onOpenCV }: AboutProps) {
               <button
                 type="button"
                 onClick={onOpenCV}
-                className="
-                  inline-flex
-                  items-center
-                  justify-center
-                  gap-2.5
-                  rounded-xl
-                  border
-                  border-[#F5E6BE]/60
-                  bg-gradient-to-r
-                  from-[#D8B56A]
-                  to-[#C99D46]
-                  px-6
-                  py-3
-                  text-sm
-                  sm:text-base
-                  font-bold
-                  text-[#071827]
-                  shadow-lg
-                  shadow-[#D8B56A]/20
-                  transition-all
-                  duration-200
-                  hover:-translate-y-0.5
-                  hover:from-[#E2C785]
-                  hover:to-[#D8B56A]
-                  hover:shadow-[#D8B56A]/35
-                  cursor-pointer
-                  select-none
-                  touch-manipulation
-                "
+                className="inline-flex items-center justify-center gap-2.5 rounded-xl border border-[#BE9852] bg-gradient-to-r from-[#BE9852] to-[#A8823C] px-6 py-3 text-sm sm:text-base font-bold text-white shadow-md shadow-[#BE9852]/25 transition-all duration-200 hover:-translate-y-0.5 hover:from-[#C9A45C] hover:to-[#BE9852] hover:shadow-lg hover:shadow-[#BE9852]/35 cursor-pointer select-none touch-manipulation"
               >
-                <Download className="h-4 w-4 text-[#071827]" />
+                <Download className="h-4 w-4 text-white" />
                 <span>{isRTL ? (t.downloadCv || 'تحميل السيرة الذاتية') : 'Download CV'}</span>
               </button>
 
@@ -172,176 +112,85 @@ export function About({ profile: _profile, onOpenCV }: AboutProps) {
                 href="https://www.linkedin.com/in/muhammad-salman-mba-finance-cpa-finalist-66908767/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="
-                  inline-flex
-                  items-center
-                  justify-center
-                  gap-2.5
-                  rounded-xl
-                  border
-                  border-[#38BDF8]/30
-                  bg-[#0D2538]/90
-                  px-6
-                  py-3
-                  text-sm
-                  sm:text-base
-                  font-bold
-                  text-[#F8FAFC]
-                  shadow-md
-                  shadow-[#04111D]/40
-                  backdrop-blur-sm
-                  transition-all
-                  duration-200
-                  hover:-translate-y-0.5
-                  hover:border-[#38BDF8]/60
-                  hover:bg-[#132E43]
-                  hover:text-[#38BDF8]
-                  hover:shadow-lg
-                  hover:shadow-[#38BDF8]/20
-                  cursor-pointer
-                  select-none
-                  touch-manipulation
-                "
+                className="inline-flex items-center justify-center gap-2.5 rounded-xl border border-[#C5D5E2] bg-[#F3F7FA] px-6 py-3 text-sm sm:text-base font-bold text-[#17324A] shadow-xs transition-all duration-200 hover:-translate-y-0.5 hover:border-[#0A66C2]/50 hover:bg-white hover:text-[#0A66C2] hover:shadow-md cursor-pointer select-none touch-manipulation"
               >
-                <Linkedin className="h-4 w-4 text-[#38BDF8]" />
+                <Linkedin className="h-4 w-4 text-[#0A66C2]" />
                 <span>{isRTL ? (t.linkedin || 'لينكد إن') : 'LinkedIn'}</span>
               </a>
             </div>
 
             {/* ======================================================
-                HIGHLIGHT CARDS
+                THREE HIGHLIGHT STATISTICS (DIRECT ON BACKGROUND, NO WHITE CARDS)
                 ====================================================== */}
             <div className="grid grid-cols-1 gap-3.5 pt-1 sm:grid-cols-3">
 
-              {/* EXPERIENCE */}
+              {/* 1. EXPERIENCE */}
               <div
-                className="
-                  flex
-                  flex-col
-                  items-center
-                  justify-center
-                  rounded-xl
-                  border
-                  border-[#D8B56A]/30
-                  bg-[#0D2538]/80
-                  p-4
-                  text-center
-                  shadow-md
-                  backdrop-blur-sm
-                  transition-all
-                  duration-300
-                  hover:-translate-y-1
-                  hover:border-[#D8B56A]/60
-                  hover:bg-[#102B40]
-                "
+                className="group flex flex-col items-center justify-center p-3 text-center transition-all duration-300 cursor-default select-none hover:-translate-y-1"
               >
-                <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-lg bg-[#132E43] text-[#D8B56A]">
-                  <CalendarDays className="h-5 w-5" />
+                <div className="mb-2 flex items-center justify-center text-[#17324A] group-hover:text-[#BE9852] transition-colors duration-300">
+                  <CalendarDays className="h-6 w-6 transition-transform duration-300 group-hover:scale-110 drop-shadow-xs" />
                 </div>
 
-                <div className="text-2xl font-black text-[#F8FAFC]">
+                <div 
+                  className="text-2xl sm:text-3xl font-black text-[#17324A] group-hover:text-[#BE9852] transition-colors duration-300 tracking-tight"
+                  style={{ textShadow: '0 1px 1px rgba(23, 50, 74, 0.16)' }}
+                >
                   14+
                 </div>
 
-                <div className="mt-1 text-xs font-bold text-[#CBD5E1]">
+                <div className="mt-1 text-xs font-bold text-[#17324A]/80 group-hover:text-[#BE9852] transition-colors duration-300">
                   {isRTL ? t.yearsExpLabel : 'Years Experience'}
                 </div>
               </div>
 
-              {/* EDUCATION */}
+              {/* 2. EDUCATION */}
               <div
-                className="
-                  flex
-                  flex-col
-                  items-center
-                  justify-center
-                  rounded-xl
-                  border
-                  border-[#D8B56A]/30
-                  bg-[#0D2538]/80
-                  p-4
-                  text-center
-                  shadow-md
-                  backdrop-blur-sm
-                  transition-all
-                  duration-300
-                  hover:-translate-y-1
-                  hover:border-[#D8B56A]/60
-                  hover:bg-[#102B40]
-                "
+                className="group flex flex-col items-center justify-center p-3 text-center transition-all duration-300 cursor-default select-none hover:-translate-y-1"
               >
-                <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-lg bg-[#132E43] text-[#D8B56A]">
-                  <GraduationCap className="h-5 w-5" />
+                <div className="mb-2 flex items-center justify-center text-[#17324A] group-hover:text-[#BE9852] transition-colors duration-300">
+                  <GraduationCap className="h-6 w-6 transition-transform duration-300 group-hover:scale-110 drop-shadow-xs" />
                 </div>
 
-                <div className="text-xl font-black text-[#F8FAFC]">
+                <div 
+                  className="text-xl sm:text-2xl font-black text-[#17324A] group-hover:text-[#BE9852] transition-colors duration-300 tracking-tight"
+                  style={{ textShadow: '0 1px 1px rgba(23, 50, 74, 0.16)' }}
+                >
                   MBA / BBA
                 </div>
 
-                <div className="mt-1 text-xs font-bold text-[#CBD5E1]">
+                <div className="mt-1 text-xs font-bold text-[#17324A]/80 group-hover:text-[#BE9852] transition-colors duration-300">
                   {isRTL ? 'المحاسبة والمالية' : 'Accounting & Finance'}
                 </div>
               </div>
 
-              {/* ZATCA */}
+              {/* 3. ZATCA */}
               <div
-                className="
-                  flex
-                  flex-col
-                  items-center
-                  justify-center
-                  rounded-xl
-                  border
-                  border-[#D8B56A]/30
-                  bg-[#0D2538]/80
-                  p-4
-                  text-center
-                  shadow-md
-                  backdrop-blur-sm
-                  transition-all
-                  duration-300
-                  hover:-translate-y-1
-                  hover:border-[#D8B56A]/60
-                  hover:bg-[#102B40]
-                "
+                className="group flex flex-col items-center justify-center p-3 text-center transition-all duration-300 cursor-default select-none hover:-translate-y-1"
               >
-                <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-lg bg-[#132E43] text-[#D8B56A]">
-                  <FileText className="h-5 w-5" />
+                <div className="mb-2 flex items-center justify-center text-[#17324A] group-hover:text-[#BE9852] transition-colors duration-300">
+                  <FileText className="h-6 w-6 transition-transform duration-300 group-hover:scale-110 drop-shadow-xs" />
                 </div>
 
-                <div className="text-xl font-black text-[#F8FAFC]">
+                <div 
+                  className="text-xl sm:text-2xl font-black text-[#17324A] group-hover:text-[#BE9852] transition-colors duration-300 tracking-tight"
+                  style={{ textShadow: '0 1px 1px rgba(23, 50, 74, 0.16)' }}
+                >
                   ZATCA
                 </div>
 
-                <div className="mt-1 text-xs font-bold text-[#CBD5E1]">
-                  {isRTL
-                    ? 'إقرارات ضريبة القيمة المضافة'
-                    : 'VAT Reporting'}
+                <div className="mt-1 text-xs font-bold text-[#17324A]/80 group-hover:text-[#BE9852] transition-colors duration-300">
+                  {isRTL ? 'إقرارات ضريبة القيمة المضافة' : 'VAT Reporting'}
                 </div>
               </div>
             </div>
 
             {/* ======================================================
-                STATUS / COMPLIANCE
+                STATUS / COMPLIANCE BAR
                 ====================================================== */}
-            <div
-              className="
-                flex
-                flex-wrap
-                items-center
-                justify-between
-                gap-3
-                border-t
-                border-[#132E43]
-                pt-4
-                text-xs
-                font-medium
-                text-[#CBD5E1]
-              "
-            >
+            <div className="flex flex-wrap items-center justify-between gap-3 border-t border-[#C5D5E2] pt-4 text-xs font-medium text-[#34495E]">
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="h-4 w-4 shrink-0 text-[#D8B56A]" />
-
+                <CheckCircle2 className="h-4 w-4 shrink-0 text-[#BE9852]" />
                 <span>
                   {isRTL
                     ? t.complianceNote
@@ -350,30 +199,11 @@ export function About({ profile: _profile, onOpenCV }: AboutProps) {
               </div>
 
               <div className="flex flex-wrap items-center gap-2.5">
-
                 {/* DRIVING LICENSE */}
-                <span
-                  className="
-                    inline-flex
-                    items-center
-                    gap-1.5
-                    rounded-md
-                    border
-                    border-[#D8B56A]/30
-                    bg-[#0D2538]
-                    px-2.5
-                    py-1
-                    text-[11px]
-                    font-semibold
-                    text-[#D8B56A]
-                  "
-                >
-                  <Car className="h-3.5 w-3.5" />
-
+                <span className="inline-flex items-center gap-1.5 rounded-md border border-[#C5D5E2] bg-[#F3F7FA] px-2.5 py-1 text-[11px] font-semibold text-[#17324A]">
+                  <Car className="h-3.5 w-3.5 text-[#BE9852]" />
                   <span>
-                    {isRTL
-                      ? t.drivingLicense
-                      : 'Valid Saudi Driving License'}
+                    {isRTL ? t.drivingLicense : 'Valid Saudi Driving License'}
                   </span>
                 </span>
 
@@ -382,27 +212,10 @@ export function About({ profile: _profile, onOpenCV }: AboutProps) {
                   href="https://www.ayalyami.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="
-                    inline-flex
-                    items-center
-                    gap-1.5
-                    rounded-md
-                    border
-                    border-[#132E43]
-                    bg-[#0D2538]
-                    px-2.5
-                    py-1
-                    text-[11px]
-                    font-semibold
-                    text-[#CBD5E1]
-                    transition-colors
-                    hover:border-[#D8B56A]/50
-                    hover:text-[#F8FAFC]
-                  "
+                  className="inline-flex items-center gap-1.5 rounded-md border border-[#C5D5E2] bg-[#F3F7FA] px-2.5 py-1 text-[11px] font-semibold text-[#17324A] transition-colors hover:border-[#BE9852]/60 hover:text-[#BE9852]"
                   title="Ahmed Yahya Alyami Contracting Co."
                 >
-                  <Briefcase className="h-3.5 w-3.5 text-[#D8B56A]" />
-
+                  <Briefcase className="h-3.5 w-3.5 text-[#BE9852]" />
                   <span>
                     {isRTL
                       ? 'شركة أحمد يحيى اليامي للمقاولات'
@@ -414,49 +227,18 @@ export function About({ profile: _profile, onOpenCV }: AboutProps) {
           </div>
 
           {/* ========================================================
-              RIGHT SIDE — REAL PHOTO
-              FACE / BODY / PHOTO CONTENT UNCHANGED
+              RIGHT SIDE — REAL PHOTO (NATURAL BLENDED EDGES)
               ======================================================== */}
           <div className="flex items-center justify-center lg:col-span-5 xl:col-span-5">
-            <div
-              className="
-                relative
-                mx-auto
-                w-full
-                max-w-[360px]
-                sm:max-w-[400px]
-                lg:max-w-[440px]
-                xl:max-w-[470px]
-              "
-            >
+            <div className="relative mx-auto w-full max-w-[360px] sm:max-w-[400px] lg:max-w-[440px] xl:max-w-[470px]">
               {/* SUBTLE GOLD ATMOSPHERE BEHIND PHOTO */}
               <div
-                className="
-                  pointer-events-none
-                  absolute
-                  -inset-[10%]
-                  bg-[radial-gradient(ellipse_at_center,rgba(216,181,106,0.10)_0%,rgba(216,181,106,0.04)_42%,transparent_72%)]
-                  blur-[50px]
-                "
+                className="pointer-events-none absolute -inset-[10%] bg-[radial-gradient(ellipse_at_center,rgba(190,152,82,0.12)_0%,rgba(190,152,82,0.04)_45%,transparent_72%)] blur-[50px]"
                 aria-hidden="true"
               />
 
-              {/* PHOTO CONTAINER — NO BORDER / NO CARD */}
-              <div
-                className="
-                  relative
-                  aspect-[3/4]
-                  w-full
-                  overflow-hidden
-                  bg-transparent
-                "
-              >
-                {/* ==================================================
-                    EXACT ORIGINAL REAL PHOTO
-                    NO AI EDIT
-                    NO FACE EDIT
-                    NO BODY EDIT
-                    ================================================== */}
+              {/* PHOTO CONTAINER WITH NATURAL FEATHERED EDGES MERGING INTO MISTY BLUE */}
+              <div className="relative aspect-[3/4] w-full overflow-hidden bg-transparent">
                 <img
                   src="/images/Muhammad_Salman_HD_1200.webp"
                   alt={
@@ -464,136 +246,27 @@ export function About({ profile: _profile, onOpenCV }: AboutProps) {
                       ? 'محمد سلمان - محاسب'
                       : 'Muhammad Salman - Accountant'
                   }
-                  className="
-                    absolute
-                    inset-0
-                    h-full
-                    w-full
-                    select-none
-                    object-cover
-                    object-[center_top]
-                  "
+                  className="absolute inset-0 h-full w-full select-none object-cover object-[center_top]"
+                  style={{
+                    maskImage: 'radial-gradient(ellipse 90% 92% at 50% 46%, black 66%, rgba(0,0,0,0.45) 86%, transparent 100%)',
+                    WebkitMaskImage: 'radial-gradient(ellipse 90% 92% at 50% 46%, black 66%, rgba(0,0,0,0.45) 86%, transparent 100%)',
+                  }}
                   loading="eager"
                 />
 
-                {/* ==================================================
-                    FAR LEFT CLOUD
-                    Kept away from face/body.
-                    ================================================== */}
+                {/* Soft Bottom Edge Feathering into #A7C6E1 */}
                 <div
-                  className="
-                    pointer-events-none
-                    absolute
-                    top-[-10%]
-                    bottom-[-8%]
-                    left-[-24%]
-                    z-10
-                    w-[42%]
-                    bg-[#081A2B]
-                    blur-[55px]
-                  "
+                  className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#A7C6E1] via-[#A7C6E1]/60 to-transparent z-10"
                   aria-hidden="true"
                 />
 
+                {/* Subtle Left & Right Edge Softening */}
                 <div
-                  className="
-                    pointer-events-none
-                    absolute
-                    top-[-8%]
-                    bottom-[-5%]
-                    left-[-12%]
-                    z-10
-                    w-[22%]
-                    bg-[#081A2B]/55
-                    blur-[42px]
-                  "
+                  className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-[#A7C6E1] to-transparent z-10"
                   aria-hidden="true"
                 />
-
-                {/* ==================================================
-                    FAR RIGHT CLOUD
-                    Kept away from face/body.
-                    ================================================== */}
                 <div
-                  className="
-                    pointer-events-none
-                    absolute
-                    top-[-10%]
-                    right-[-24%]
-                    bottom-[-8%]
-                    z-10
-                    w-[42%]
-                    bg-[#081A2B]
-                    blur-[55px]
-                  "
-                  aria-hidden="true"
-                />
-
-                <div
-                  className="
-                    pointer-events-none
-                    absolute
-                    top-[-8%]
-                    right-[-12%]
-                    bottom-[-5%]
-                    z-10
-                    w-[22%]
-                    bg-[#081A2B]/55
-                    blur-[42px]
-                  "
-                  aria-hidden="true"
-                />
-
-                {/* ==================================================
-                    TOP CLOUD
-                    Only outer top edge.
-                    ================================================== */}
-                <div
-                  className="
-                    pointer-events-none
-                    absolute
-                    top-[-18%]
-                    right-[-10%]
-                    left-[-10%]
-                    z-10
-                    h-[28%]
-                    bg-[#081A2B]/85
-                    blur-[55px]
-                  "
-                  aria-hidden="true"
-                />
-
-                {/* ==================================================
-                    VERY LIGHT CORNER VIGNETTE
-                    Wide clear center — does NOT approach face.
-                    ================================================== */}
-                <div
-                  className="
-                    pointer-events-none
-                    absolute
-                    inset-0
-                    z-10
-                    bg-[radial-gradient(ellipse_72%_82%_at_52%_46%,transparent_0%,transparent_68%,rgba(8,26,43,0.10)_79%,rgba(8,26,43,0.48)_94%,rgba(8,26,43,0.82)_100%)]
-                  "
-                  aria-hidden="true"
-                />
-
-                {/* ==================================================
-                    BOTTOM
-                    NO HEAVY CLOUD / NO BODY MERGE.
-                    Only tiny edge transition to avoid hard cut.
-                    ================================================== */}
-                <div
-                  className="
-                    pointer-events-none
-                    absolute
-                    right-0
-                    bottom-0
-                    left-0
-                    z-10
-                    h-[7%]
-                    bg-[linear-gradient(to_top,rgba(8,26,43,0.35)_0%,rgba(8,26,43,0.08)_55%,transparent_100%)]
-                  "
+                  className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-[#A7C6E1] to-transparent z-10"
                   aria-hidden="true"
                 />
               </div>

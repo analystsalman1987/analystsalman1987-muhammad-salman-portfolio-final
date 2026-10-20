@@ -610,190 +610,126 @@
 }
 
 
-/* ============================================================
-   DEEP SLATE NAVY + CHAMPAGNE GOLD (2026-10)
-   Color-only theme for non-Hero sections; Home/Hero untouched.
-   ============================================================ */
-:root { --slate-page:#34485D; --slate-card:#455B70; --slate-text:#E8DCC5; --slate-gold:#C5A15E; }
-:is(#about,#highlights,#expertise,#experience,#education,#software,#contact) {
-  background-color:var(--slate-page) !important;
-  color:var(--slate-text) !important;
-  border-color:#63758A !important;
-}
-:is(#highlights,#experience,#software) {background-color:#2C4055 !important;}
-:is(#about,#highlights,#expertise,#experience,#education,#software,#contact) > .absolute.inset-0.bg-gradient-to-b {
- background-image:linear-gradient(to bottom,rgba(52,72,93,.90),rgba(52,72,93,.82),rgba(52,72,93,.94)) !important;
-}
-:is(#about,#highlights,#expertise,#experience,#education,#software,#contact) .main-heading-3d {
- color:var(--slate-text) !important;
- text-shadow:0 2px 4px rgba(0,0,0,.25) !important;
-}
-:is(#about,#highlights,#expertise,#experience,#education,#software,#contact) .main-heading-3d:hover {color:var(--slate-gold) !important;}
-#experience .company-3d-text {color:#F5EAD4 !important;text-shadow:0 1px 2px rgba(0,0,0,.2) !important;}
-/* Top-level job and category cards only, not the expanded navy panel. */
-#experience .group > .rounded-2xl.border {background-color:var(--slate-card) !important;border-color:#748397 !important;}
-#experience .group > .rounded-2xl.border:hover {border-color:var(--slate-gold) !important;}
-#experience > div.relative.z-10 > div.space-y-5 > div.rounded-2xl {background-color:#354A5F !important;border-color:#708298 !important;}
-/* Ensure titles and muted supporting copy on light-to-dark cards remain readable. */
-:is(#about,#highlights,#expertise,#experience,#education,#software,#contact) :is(h2,h3,h4):not(.text-white):not(.text-\[\#F1D38A\]) {text-shadow:0 1px 2px rgba(0,0,0,.12);}
-#experience .group > .rounded-2xl.border > button .text-\[\#0F2747\],
-#experience .group > .rounded-2xl.border > button .text-\[\#1F2937\] {color:#F4E9D5 !important;}
-#experience .group > .rounded-2xl.border > button .text-\[\#64748B\] {color:#D2DCE6 !important;}
-/* Leave the navy expanded responsibility content, logos, software chips, all animations alone. */
-
-
 /* ===============================================================
-   MISTY BLUE / ACCOUNTANT PORTFOLIO — FINAL CONSISTENT PALETTE
-   Scope: About through Contact only. Hero, navigation, admin, and
-   all animations remain outside these selectors.
+   MISTY BLUE / ACCOUNTANT PORTFOLIO — UNIFIED THEME
+   Scope: ONLY non-Home sections (#about, #highlights, #expertise,
+   #experience, #software, #education, #contact).
+   Home / Hero (#home) is 100% untouched and locked.
    =============================================================== */
 :root {
-  --misty-bg: #DCE7F0;
+  --misty-bg: #A7C6E1;
   --misty-card: #F3F7FA;
   --misty-heading: #17324A;
   --misty-text: #34495E;
+  --misty-secondary: #52677A;
   --misty-gold: #BE9852;
-  --misty-border: #C2D2DF;
+  --misty-border: #C5D5E2;
+  --misty-input: #FFFFFF;
 }
+
+/* SECTION BACKGROUNDS FOR ALL NON-HOME SECTIONS */
+:is(#about, #highlights, #expertise, #experience, #education, #software, #contact),
+html.dark :is(#about, #highlights, #expertise, #experience, #education, #software, #contact),
 section.misty-portfolio,
 html.dark section.misty-portfolio {
-  background: var(--misty-bg) !important;
-  background-color: var(--misty-bg) !important;
+  background-color: #A7C6E1 !important;
   color: var(--misty-text) !important;
   border-color: var(--misty-border) !important;
 }
-/* Clear old dark masks, retaining the original image and particles. */
-section.misty-portfolio > .absolute.inset-0.bg-gradient-to-b,
-section.misty-portfolio > .absolute.inset-0.pointer-events-none.z-0.bg-gradient-to-b,
-section.misty-portfolio > div.absolute.inset-0.pointer-events-none.z-0.bg-gradient-to-b,
-section.misty-portfolio > div.absolute.inset-0.bg-gradient-to-b {
-  background: transparent !important;
+
+/* SOFT LIGHT MISTY OVERLAY FOR SECTION BACKGROUND IMAGES (SOFT BLEND WITH #A7C6E1) */
+:is(#about, #highlights, #expertise, #experience, #education, #software, #contact) > div.absolute.inset-0.pointer-events-none.z-0 img + div.absolute.inset-0,
+:is(#about, #highlights, #expertise, #experience, #education, #software, #contact) > div.absolute.inset-0 img + div.absolute.inset-0 {
+  background: linear-gradient(180deg, rgba(167, 198, 225, 0.85) 0%, rgba(167, 198, 225, 0.70) 50%, rgba(167, 198, 225, 0.88) 100%) !important;
 }
-section.misty-portfolio > div.absolute.inset-0.pointer-events-none.z-0 img + div.absolute.inset-0,
-section.misty-portfolio > div.absolute.inset-0 img + div.absolute.inset-0 {
-  background: linear-gradient(180deg, rgba(220,231,240,.82), rgba(220,231,240,.69), rgba(220,231,240,.85)) !important;
-}
-/* Shared heading format, without altering wording or layout. */
-section.misty-portfolio h2,
-section.misty-portfolio h2.main-heading-3d,
-html.dark section.misty-portfolio h2.main-heading-3d {
-  color: var(--misty-heading) !important;
-  -webkit-text-fill-color: var(--misty-heading) !important;
-  text-shadow: none !important;
+
+/* ALL MAIN HEADINGS IN NON-HOME SECTIONS */
+:is(#about, #highlights, #expertise, #experience, #education, #software, #contact) h2,
+:is(#about, #highlights, #expertise, #experience, #education, #software, #contact) .main-heading-3d,
+html.dark :is(#about, #highlights, #expertise, #experience, #education, #software, #contact) .main-heading-3d {
+  color: #17324A !important;
+  -webkit-text-fill-color: #17324A !important;
+  text-shadow: 0 1px 2px rgba(23, 50, 74, 0.12) !important;
   font-weight: 800 !important;
-  letter-spacing: -.025em !important;
+  letter-spacing: -0.02em !important;
+  cursor: pointer;
+  transition: color 0.3s ease, -webkit-text-fill-color 0.3s ease, text-shadow 0.3s ease, transform 0.3s ease !important;
 }
-section.misty-portfolio h3,
-section.misty-portfolio h4,
-section.misty-portfolio .company-3d-text,
-html.dark section.misty-portfolio .company-3d-text {
+
+@media (hover: hover) {
+  :is(#about, #highlights, #expertise, #experience, #education, #software, #contact) h2:hover,
+  :is(#about, #highlights, #expertise, #experience, #education, #software, #contact) .main-heading-3d:hover,
+  html.dark :is(#about, #highlights, #expertise, #experience, #education, #software, #contact) .main-heading-3d:hover {
+    color: #BE9852 !important;
+    -webkit-text-fill-color: #BE9852 !important;
+    text-shadow: 
+      0 1px 0 rgba(255, 255, 255, 0.35),
+      0 2px 6px rgba(190, 152, 82, 0.45),
+      0 4px 12px rgba(23, 50, 74, 0.20) !important;
+  }
+}
+
+:is(#about, #highlights, #expertise, #experience, #education, #software, #contact) h3,
+:is(#about, #highlights, #expertise, #experience, #education, #software, #contact) h4,
+:is(#about, #highlights, #expertise, #experience, #education, #software, #contact) .company-3d-text,
+html.dark :is(#about, #highlights, #expertise, #experience, #education, #software, #contact) .company-3d-text {
   color: var(--misty-heading) !important;
   text-shadow: none !important;
 }
-section.misty-portfolio p,
-section.misty-portfolio li,
-section.misty-portfolio label,
-section.misty-portfolio input,
-section.misty-portfolio textarea {
+
+/* BODY & SECONDARY TEXT */
+:is(#about, #highlights, #expertise, #experience, #education, #software, #contact) p,
+:is(#about, #highlights, #expertise, #experience, #education, #software, #contact) li {
   color: var(--misty-text) !important;
 }
-section.misty-portfolio [class*="text-slate-400"],
-section.misty-portfolio [class*="text-slate-300"],
-section.misty-portfolio [class*="text-slate-200"],
-section.misty-portfolio [class*="text-[#64748B]"],
-section.misty-portfolio [class*="text-[#94A3B8]"] {
-  color: var(--misty-text) !important;
+
+:is(#about, #highlights, #expertise, #experience, #education, #software, #contact) [class*="text-[#64748B]"],
+:is(#about, #highlights, #expertise, #experience, #education, #software, #contact) [class*="text-slate-400"],
+:is(#about, #highlights, #expertise, #experience, #education, #software, #contact) [class*="text-slate-500"] {
+  color: var(--misty-secondary) !important;
 }
-/* Category tiles and content panels — same treatment in every section. */
-section.misty-portfolio :is(article,li,[class*="rounded-xl"],[class*="rounded-2xl"]):is([class*="bg-slate"],[class*="bg-[#0"],[class*="bg-[#1"],[class*="bg-[#2"],[class*="bg-[#3"],[class*="bg-[#4"],[class*="bg-white"],[class*="bg-[#F4F6F8]"]) {
-  background: var(--misty-card) !important;
-  background-color: var(--misty-card) !important;
-  border-color: var(--misty-border) !important;
-  box-shadow: 0 3px 14px rgba(23,50,74,.055) !important;
-}
-/* Tailwind dark backgrounds often win due to later cascade; explicitly unify. */
-html.dark section.misty-portfolio :is(article,li,[class*="rounded-xl"],[class*="rounded-2xl"]):is([class*="dark:bg"],[class*="bg-slate"],[class*="bg-white"],[class*="bg-[#0"],[class*="bg-[#1"],[class*="bg-[#2"],[class*="bg-[#3"],[class*="bg-[#4"]) {
-  background: var(--misty-card) !important;
-  border-color: var(--misty-border) !important;
-}
-section.misty-portfolio [class*="border-slate"],
-section.misty-portfolio [class*="border-[#C9A45C]"] {
-  border-color: var(--misty-border) !important;
-}
-section.misty-portfolio [class*="text-[#D8B56A]"],
-section.misty-portfolio [class*="text-[#C9A45C]"],
-section.misty-portfolio [class*="text-[#E2C47E]"] {
+
+/* GOLD SECTION TAGS & MUTED GOLD ACCENTS */
+:is(#about, #highlights, #expertise, #experience, #education, #software, #contact) span[class*="tracking-widest"],
+:is(#about, #highlights, #expertise, #experience, #education, #software, #contact) span[class*="tracking-[0.25em]"] {
   color: var(--misty-gold) !important;
 }
-/* Gold small labels remain legible on light surfaces. */
-section.misty-portfolio > div :is(span,small)[class*="tracking-widest"] {
-  color: #9B7433 !important;
+
+:is(#about, #highlights, #expertise, #experience, #education, #software, #contact) [class*="text-[#D8B56A]"],
+:is(#about, #highlights, #expertise, #experience, #education, #software, #contact) [class*="text-[#BE9852]"] {
+  color: var(--misty-gold) !important;
 }
-/* About: restore clean light cards while preserving portrait and effects. */
-#about.misty-portfolio [class*="bg-[#081A2B]"],
-#about.misty-portfolio [class*="bg-[#0D2538]"],
-#about.misty-portfolio [class*="bg-[#132E43]"] {
+
+/* CARDS: UNIFIED ICE WHITE SURFACE & BORDER */
+:is(#about, #highlights, #expertise, #experience, #education, #software, #contact) :is(article, [class*="rounded-xl"], [class*="rounded-2xl"]):is([class*="bg-white"], [class*="bg-slate"], [class*="bg-[#F4F6F8]"], [class*="bg-[#081"], [class*="bg-[#0D2"], [class*="bg-[#071"], [class*="bg-[#061"]) {
   background-color: var(--misty-card) !important;
+  border-color: var(--misty-border) !important;
+  box-shadow: 0 2px 10px rgba(23, 50, 74, 0.05) !important;
 }
-#about.misty-portfolio > div.absolute.inset-0 { opacity: .38; }
-/* Highlights image preserved with a gentle light overlay. */
-#highlights.misty-portfolio > div.absolute.inset-0 img { opacity: .16 !important; }
-#highlights.misty-portfolio ul li,
-#highlights.misty-portfolio [class*="rounded-xl"][class*="bg-"] {
-  background: var(--misty-card) !important;
+
+html.dark :is(#about, #highlights, #expertise, #experience, #education, #software, #contact) :is(article, [class*="rounded-xl"], [class*="rounded-2xl"]):is([class*="dark:bg-slate"], [class*="dark:bg-[#"]) {
+  background-color: var(--misty-card) !important;
   border-color: var(--misty-border) !important;
 }
-/* Expertise: remove original almost-black backdrop. */
-#expertise.misty-portfolio > div.absolute.inset-0 { background: transparent !important; }
-#expertise.misty-portfolio button[class*="rounded"],
-#expertise.misty-portfolio [class*="rounded-xl"][class*="bg-"] {
-  background: var(--misty-card) !important;
-  border-color: var(--misty-border) !important;
-}
-/* Work experience: light cards, no heavy dark glass. */
-#experience.misty-portfolio > div.absolute.inset-0 { background: transparent !important; }
-#experience.misty-portfolio [class*="rounded-2xl"][class*="bg-"] ,
-#experience.misty-portfolio [class*="rounded-xl"][class*="bg-"] {
-  background: var(--misty-card) !important;
-  border-color: var(--misty-border) !important;
-  box-shadow: 0 3px 14px rgba(23,50,74,.05) !important;
-}
-#experience.misty-portfolio .company-3d-text { font-weight: 700 !important; }
-#experience.misty-portfolio .experience-date { margin-top: 6px; width: max-content; }
-#experience.misty-portfolio .experience-date span { color: var(--misty-text) !important; }
-#experience.misty-portfolio [class*="bg-gradient-to-b"][class*="from-[#081B2E]"] {
-  background: #EAF1F6 !important;
-  border-color: var(--misty-border) !important;
-  box-shadow: none !important;
-}
-#experience.misty-portfolio [class*="bg-white/[0.04]"] {
-  background: #F8FAFC !important;
-  border-color: #CEDBE5 !important;
-}
-#experience.misty-portfolio [class*="bg-gradient-to-b"][class*="from-[#081B2E]"] :is(h4,strong) {
+
+/* INPUTS & FORM CONTROLS */
+:is(#contact) input,
+:is(#contact) textarea {
+  background-color: var(--misty-input) !important;
   color: var(--misty-heading) !important;
+  border-color: var(--misty-border) !important;
 }
-#experience.misty-portfolio [class*="bg-gradient-to-b"][class*="from-[#081B2E]"] :is(span,p,li) {
+:is(#contact) input::placeholder,
+:is(#contact) textarea::placeholder {
+  color: #7E93A4 !important;
+}
+
+/* WORK EXPERIENCE RESPONSIBILITIES PANEL */
+#experience .experience-date {
+  background-color: var(--misty-card) !important;
+  border-color: var(--misty-border) !important;
+}
+#experience .experience-date span {
   color: var(--misty-text) !important;
 }
-#experience.misty-portfolio [class*="bg-gradient-to-b"][class*="from-[#081B2E]"] [class*="text-[#F1D38A]"] {
-  color: #8B6B32 !important;
-}
-#experience.misty-portfolio [class*="bg-gradient-to-b"][class*="from-[#FFFFFF]"] {
-  background: #FFFFFF !important;
-}
-/* Software logos stay on white plates for accurate brand colors. */
-#software.misty-portfolio img { opacity: 1 !important; }
-#software.misty-portfolio [class*="dark:bg-white"] { background: #FFFFFF !important; }
-/* Education and contact inputs / tiles. */
-#education.misty-portfolio > div.absolute.inset-0,
-#contact.misty-portfolio > div.absolute.inset-0 { background: transparent !important; }
-#contact.misty-portfolio input,
-#contact.misty-portfolio textarea {
-  background: #FFFFFF !important;
-  color: var(--misty-heading) !important;
-  border: 1px solid var(--misty-border) !important;
-}
-#contact.misty-portfolio input::placeholder,
-#contact.misty-portfolio textarea::placeholder { color: #687D8D !important; }
-/* Preserve company logos, animated network, icons and interactions. */
+

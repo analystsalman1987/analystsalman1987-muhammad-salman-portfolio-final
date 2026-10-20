@@ -40,7 +40,7 @@ export function Highlights({ highlights }: HighlightsProps) {
   const items = (highlights && highlights.length > 0) ? highlights : DEFAULT_APP_DATA.highlights;
 
   return (
-    <section id="highlights" className="misty-portfolio relative py-16 bg-[#F4F6F8] dark:bg-slate-900/40 border-y border-slate-200 dark:border-slate-800/80 transition-colors overflow-hidden">
+    <section id="highlights" className="misty-portfolio relative py-16 sm:py-20 bg-[#A7C6E1] border-y border-[#C5D5E2] transition-colors overflow-hidden" style={{ backgroundColor: '#A7C6E1' }}>
       {/* Subtle Professional Accounting & Spreadsheet Background Image */}
       <div 
         className="absolute inset-0 pointer-events-none z-0"
@@ -49,30 +49,30 @@ export function Highlights({ highlights }: HighlightsProps) {
         <img 
           src="/images/accounting_workplace_optimized.webp"
           alt="" 
-          className="w-full h-full object-cover object-center opacity-[0.25] dark:opacity-[0.18] filter contrast-105 select-none"
+          className="w-full h-full object-cover object-center opacity-[0.16] filter contrast-105 select-none"
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#F4F6F8]/75 via-[#F4F6F8]/40 to-[#F4F6F8]/80 dark:from-slate-900/80 dark:via-slate-900/45 dark:to-slate-900/80" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#A7C6E1]/85 via-[#A7C6E1]/70 to-[#A7C6E1]/90" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header: Vertical Stack (Label above Heading) */}
         <div className="flex flex-col items-center text-center max-w-2xl mx-auto mb-10 gap-1.5">
-          <span className="block text-xs font-bold tracking-widest text-[#D8B56A] uppercase">
+          <span className="block text-xs font-bold tracking-widest text-[#BE9852] uppercase">
             {isRTL ? t.tag : 'Executive Overview'}
           </span>
           <div>
-            <h2 className="main-heading-3d text-3xl font-extrabold sm:text-4xl tracking-tight">
+            <h2 className="main-heading-3d text-3xl font-extrabold sm:text-4xl tracking-tight text-[#17324A]">
               {isRTL ? t.title : 'Professional Highlights'}
             </h2>
           </div>
-          <p className="mt-1 text-xs sm:text-sm text-[#64748B] dark:text-slate-400">
+          <p className="mt-1 text-xs sm:text-sm text-[#52677A]">
             {isRTL ? t.subtitle : 'A quick, high-level overview of core accounting qualifications, regional experience, and operational strengths.'}
           </p>
         </div>
 
-        {/* 8 Concise Highlight Cards Grid (Easy for recruiters to scan) */}
+        {/* 8 Concise Highlight Cards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
           {items.map((item, idx) => {
             const Icon = (item.iconName && iconMap[item.iconName]) || Award;
@@ -83,18 +83,18 @@ export function Highlights({ highlights }: HighlightsProps) {
             return (
               <div
                 key={item.id || idx}
-                className="group rounded-xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 p-5 shadow-xs hover:border-[#D8B56A]/50 dark:hover:border-[#D8B56A]/50 hover:shadow-sm transition-all duration-200 flex flex-col justify-between"
+                className="group rounded-xl bg-[#F3F7FA] border border-[#C5D5E2] p-5 shadow-xs hover:border-[#BE9852]/60 hover:bg-white hover:shadow-md transition-all duration-200 flex flex-col justify-between"
               >
                 <div>
-                  <div className="w-10 h-10 rounded-lg bg-[#D8B56A]/10 text-[#D8B56A] border border-[#D8B56A]/20 flex items-center justify-center shrink-0 mb-3.5 group-hover:scale-105 group-hover:bg-[#D8B56A]/15 transition-all">
+                  <div className="w-10 h-10 rounded-lg bg-[#BE9852]/15 text-[#BE9852] border border-[#BE9852]/25 flex items-center justify-center shrink-0 mb-3.5 group-hover:scale-105 group-hover:bg-[#BE9852]/20 transition-all">
                     <Icon className="w-5 h-5" />
                   </div>
 
-                  <h3 className="text-sm font-bold text-[#0F2747] dark:text-slate-100 group-hover:text-[#D8B56A] dark:group-hover:text-[#D8B56A] transition-colors leading-snug">
+                  <h3 className="text-sm font-bold text-[#17324A] group-hover:text-[#BE9852] transition-colors leading-snug">
                     {title}
                   </h3>
 
-                  <p className="text-xs text-[#64748B] dark:text-slate-400 mt-2 leading-relaxed">
+                  <p className="text-xs text-[#52677A] mt-2 leading-relaxed">
                     {subtitle}
                   </p>
                 </div>
