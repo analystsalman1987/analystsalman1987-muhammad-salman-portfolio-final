@@ -114,7 +114,7 @@ export function EducationLanguages({
                           <div className="flex-1 min-w-0">
                             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                               <div>
-                                <h3 className="text-base sm:text-lg font-bold text-[#F3F7FA] group-hover:text-[#BE9852] transition-colors flex items-center gap-2 flex-wrap">
+                                <h3 className="text-base sm:text-lg font-bold text-[#E5C78E] group-hover:text-[#BE9852] transition-colors flex items-center gap-2 flex-wrap">
                                   <span>{degree} — {specialization}</span>
                                 </h3>
                                 {institution && (
@@ -156,7 +156,7 @@ export function EducationLanguages({
                       <div
                         className={`grid transition-all duration-300 ease-in-out ${
                           isExpanded
-                            ? 'grid-rows-[1fr] opacity-100 border-t border-[#C5D5E2] bg-[#F3F7FA]'
+                            ? 'grid-rows-[1fr] opacity-100 border-t border-[#C5D5E2] bg-[#254866]'
                             : 'grid-rows-[0fr] opacity-0'
                         }`}
                       >
@@ -238,7 +238,7 @@ export function EducationLanguages({
                             <Globe className="w-4 h-4" />
                           </div>
                           <div>
-                            <h4 className="text-sm font-bold text-[#F3F7FA]">
+                            <h4 className="text-sm font-bold text-[#E5C78E]">
                               {name}
                             </h4>
                             {notes && (
@@ -249,7 +249,7 @@ export function EducationLanguages({
                           </div>
                         </div>
 
-                        <span className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-[#BE9852]/15 text-[#8B6B32] border border-[#BE9852]/30">
+                        <span className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-[#BE9852]/15 text-[#E5C78E] border border-[#BE9852]/30">
                           {isRTL ? t.fluentBadge : 'Fluent / Working'}
                         </span>
                       </div>
