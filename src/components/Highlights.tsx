@@ -40,7 +40,7 @@ export function Highlights({ highlights }: HighlightsProps) {
   const items = (highlights && highlights.length > 0) ? highlights : DEFAULT_APP_DATA.highlights;
 
   return (
-    <section className="relative py-16 bg-[#FAF8F3] dark:bg-slate-900/40 border-y border-[#E8DDC9] dark:border-slate-800/80 transition-colors overflow-hidden">
+    <section className="relative py-16 bg-[#F4F6F8] dark:bg-slate-900/40 border-y border-slate-200 dark:border-slate-800/80 transition-colors overflow-hidden">
       {/* Subtle Professional Accounting & Spreadsheet Background Image */}
       <div 
         className="absolute inset-0 pointer-events-none z-0"
@@ -52,14 +52,14 @@ export function Highlights({ highlights }: HighlightsProps) {
           className="w-full h-full object-cover object-center opacity-[0.25] dark:opacity-[0.18] filter contrast-105 select-none"
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#FAF8F3]/80 via-[#FAF8F3]/45 to-[#FAF8F3]/85 dark:from-slate-900/80 dark:via-slate-900/45 dark:to-slate-900/80" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#F4F6F8]/75 via-[#F4F6F8]/40 to-[#F4F6F8]/80 dark:from-slate-900/80 dark:via-slate-900/45 dark:to-slate-900/80" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header: Vertical Stack (Label above Heading) */}
         <div className="flex flex-col items-center text-center max-w-2xl mx-auto mb-10 gap-1.5">
-          <span className="block text-xs font-bold tracking-widest text-[#C5A15E] uppercase">
+          <span className="block text-xs font-bold tracking-widest text-[#D8B56A] uppercase">
             {isRTL ? t.tag : 'Executive Overview'}
           </span>
           <div>
@@ -83,14 +83,14 @@ export function Highlights({ highlights }: HighlightsProps) {
             return (
               <div
                 key={item.id || idx}
-                className="group rounded-xl bg-white dark:bg-slate-900 border border-[#E8DDC9]/90 dark:border-slate-800 p-5 shadow-xs hover:border-[#C5A15E]/50 dark:hover:border-[#C5A15E]/50 hover:shadow-sm transition-all duration-200 flex flex-col justify-between"
+                className="group rounded-xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 p-5 shadow-xs hover:border-[#D8B56A]/50 dark:hover:border-[#D8B56A]/50 hover:shadow-sm transition-all duration-200 flex flex-col justify-between"
               >
                 <div>
-                  <div className="w-10 h-10 rounded-lg bg-[#C5A15E]/10 text-[#C5A15E] border border-[#C5A15E]/20 flex items-center justify-center shrink-0 mb-3.5 group-hover:scale-105 group-hover:bg-[#C5A15E]/15 transition-all">
+                  <div className="w-10 h-10 rounded-lg bg-[#D8B56A]/10 text-[#D8B56A] border border-[#D8B56A]/20 flex items-center justify-center shrink-0 mb-3.5 group-hover:scale-105 group-hover:bg-[#D8B56A]/15 transition-all">
                     <Icon className="w-5 h-5" />
                   </div>
 
-                  <h3 className="text-sm font-bold text-[#0F2747] dark:text-slate-100 group-hover:text-[#C5A15E] dark:group-hover:text-[#C5A15E] transition-colors leading-snug">
+                  <h3 className="text-sm font-bold text-[#0F2747] dark:text-slate-100 group-hover:text-[#D8B56A] dark:group-hover:text-[#D8B56A] transition-colors leading-snug">
                     {title}
                   </h3>
 
