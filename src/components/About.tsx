@@ -24,8 +24,8 @@ export function About({ profile: _profile, onOpenCV }: AboutProps) {
   return (
     <section
       id="about"
-      className="misty-portfolio relative flex min-h-[calc(100vh-5rem)] flex-col justify-center overflow-hidden border-b border-[#C5D5E2] bg-[#A7C6E1] py-16 sm:py-20 lg:py-24"
-      style={{ backgroundColor: '#A7C6E1' }}
+      className="misty-portfolio relative flex min-h-[calc(100vh-5rem)] flex-col justify-center overflow-hidden border-b border-[#C5D5E2] bg-[#305879] py-16 sm:py-20 lg:py-24"
+      style={{ backgroundColor: '#305879' }}
     >
       {/* ============================================================
           ABOUT BACKGROUND & DECORATIVE ATMOSPHERE
