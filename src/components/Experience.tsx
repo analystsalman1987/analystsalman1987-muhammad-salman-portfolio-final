@@ -248,7 +248,7 @@ export function Experience({ experience, isSelected, onToggleSelect }: Experienc
 
   if (!experience || experience.length === 0) {
     return (
-      <section id="experience" className="misty-portfolio py-20 bg-[#A7C6E1] border-b border-[#C5D5E2]">
+      <section id="experience" className="misty-portfolio py-20 bg-[#305879] border-b border-[#C5D5E2]">
         <div className="max-w-7xl mx-auto px-4 text-center text-[#52677A]">
           {isRTL ? 'سيتم إضافة المعلومات قريباً.' : 'Information will be added soon.'}
         </div>
@@ -555,8 +555,8 @@ export function Experience({ experience, isSelected, onToggleSelect }: Experienc
   return (
     <section 
       id="experience" 
-      className="misty-portfolio relative py-20 scroll-mt-20 bg-[#A7C6E1] border-b border-[#C5D5E2] transition-colors overflow-hidden"
-      style={{ backgroundColor: '#A7C6E1' }}
+      className="misty-portfolio relative py-20 scroll-mt-20 bg-[#305879] border-b border-[#C5D5E2] transition-colors overflow-hidden"
+      style={{ backgroundColor: '#305879' }}
     >
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
