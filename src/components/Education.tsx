@@ -37,7 +37,7 @@ export function EducationLanguages({ education, languages }: EducationLanguagesP
   };
 
   return (
-    <section id="education" className="relative py-20 bg-[#F4F6F8] dark:bg-slate-950/60 border-b border-slate-200 dark:border-slate-800 transition-colors overflow-hidden">
+    <section style={{ backgroundColor: "#34485D", color: "#E8DCC5", borderColor: "#63758A" }} id="education" className="deep-slate-champagne relative py-20 bg-[#F4F6F8] dark:bg-slate-950/60 border-b border-slate-200 dark:border-slate-800 transition-colors overflow-hidden">
       {/* Subtle Professional Accounting & Academic Workplace Background Image */}
       <div 
         className="absolute inset-0 pointer-events-none z-0"
