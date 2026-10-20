@@ -40,6 +40,7 @@ export function EducationLanguages({
 
   return (
     <section id="education" className="misty-portfolio relative py-20 bg-[#305879] border-b border-[#C5D5E2] transition-colors overflow-hidden" style={{ backgroundColor: '#305879' }}>
+      <style>{`#education .language-row .language-golden-name { color: #E5C78E !important; -webkit-text-fill-color: #E5C78E !important; opacity: 1 !important; }`}</style>
       {/* Subtle Professional Accounting & Academic Workplace Background Image */}
       <div 
         className="absolute inset-0 pointer-events-none z-0"
@@ -238,7 +239,7 @@ export function EducationLanguages({
                             <Globe className="w-4 h-4" />
                           </div>
                           <div>
-                            <h4 className="text-sm font-bold text-[#E5C78E]">
+                            <h4 className="language-golden-name text-sm font-bold text-[#E5C78E]" style={{ color: '#E5C78E', WebkitTextFillColor: '#E5C78E' }}>
                               {name}
                             </h4>
                             {notes && (
