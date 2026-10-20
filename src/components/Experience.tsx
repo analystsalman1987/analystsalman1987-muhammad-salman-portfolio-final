@@ -338,7 +338,7 @@ export function Experience({ experience, isSelected, onToggleSelect }: Experienc
     const logoInfo = getCompanyLogoInfo(job);
 
     return (
-      <div key={job.id} className="relative group">
+      <div key={job.id} className="relative group experience-job">
         {/* Timeline marker node */}
         <div 
           className={`absolute ${isRTL ? '-right-[31px] sm:-right-[39px]' : '-left-[31px] sm:-left-[39px]'} top-6 w-4 h-4 rounded-full border-2 transition-all ${
@@ -461,7 +461,7 @@ export function Experience({ experience, isSelected, onToggleSelect }: Experienc
           >
             <div className="overflow-hidden">
               <div className="p-4 sm:p-6 pt-1 sm:pt-2">
-                <div className="relative rounded-2xl p-5 sm:p-6 bg-[#F3F7FA] text-[#34495E] border border-[#C5D5E2] shadow-sm">
+                <div className="experience-responsibilities relative rounded-2xl p-5 sm:p-6 bg-[#F3F7FA] text-[#34495E] border border-[#C5D5E2] shadow-sm">
                   
                   {/* Header: Key Responsibilities */}
                   <div className="relative z-10 flex flex-wrap items-center justify-between gap-3 mb-4 pb-3 border-b border-[#C5D5E2]">
@@ -487,7 +487,7 @@ export function Experience({ experience, isSelected, onToggleSelect }: Experienc
                       return (
                         <li 
                           key={idx} 
-                          className="flex items-start gap-3 text-xs sm:text-[13px] text-[#34495E] bg-white hover:bg-white p-3 sm:p-3.5 rounded-xl border border-[#C5D5E2] hover:border-[#BE9852]/40 transition-all duration-200 shadow-2xs"
+                          className="experience-duty flex items-start gap-3 text-xs sm:text-[13px] text-[#34495E] bg-white hover:bg-white p-3 sm:p-3.5 rounded-xl border border-[#C5D5E2] hover:border-[#BE9852]/40 transition-all duration-200 shadow-2xs"
                         >
                           <div className="mt-0.5 shrink-0 flex items-center justify-center w-4 h-4 rounded-full bg-[#BE9852]/20 text-[#BE9852] border border-[#BE9852]/30">
                             <span className="w-1.5 h-1.5 rounded-full bg-[#BE9852]" />
@@ -558,6 +558,55 @@ export function Experience({ experience, isSelected, onToggleSelect }: Experienc
       className="misty-portfolio relative py-20 scroll-mt-20 bg-[#305879] border-b border-[#C5D5E2] transition-colors overflow-hidden"
       style={{ backgroundColor: '#305879' }}
     >
+
+      <style>{`
+        /* Experience-only readability repair: no changes to Home or other sections. */
+        #experience .experience-job > div:nth-child(2) {
+          background: #254866 !important;
+          border-color: #52718a !important;
+        }
+        #experience .experience-job .company-3d-text {
+          color: #f3f7fa !important;
+        }
+        #experience .experience-job .company-3d-text:hover {
+          color: #be9852 !important;
+        }
+        #experience .experience-job .experience-date {
+          background: #1e3a56 !important;
+          color: #f3f7fa !important;
+          border-color: #7895aa !important;
+        }
+        #experience .experience-job .experience-date span,
+        #experience .experience-job .text-\\[\\#52677A\\] {
+          color: #f3f7fa !important;
+        }
+        #experience .experience-responsibilities {
+          background: #254866 !important;
+          color: #f3f7fa !important;
+          border-color: #52718a !important;
+        }
+        #experience .experience-responsibilities h4 {
+          color: #f3f7fa !important;
+        }
+        #experience .experience-responsibilities .experience-duty {
+          background: #dce7f0 !important;
+          color: #17324a !important;
+          border-color: #c5d5e2 !important;
+        }
+        #experience .experience-responsibilities .experience-duty strong,
+        #experience .experience-responsibilities .experience-duty span:not(.w-1\\.5) {
+          color: #17324a !important;
+          opacity: 1 !important;
+          -webkit-text-fill-color: #17324a !important;
+        }
+        #experience .experience-responsibilities .experience-duty:hover {
+          background: #e7eff6 !important;
+          border-color: #be9852 !important;
+        }
+        #experience .experience-job button span.text-\\[\\#17324A\\] {
+          color: #f3f7fa !important;
+        }
+      `}</style>
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
