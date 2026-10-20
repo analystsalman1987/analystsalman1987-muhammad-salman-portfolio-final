@@ -610,239 +610,37 @@
 }
 
 
-/* ===============================================================
-   MISTY BLUE / ACCOUNTANT PORTFOLIO — UNIFIED THEME
-   Scope: ONLY non-Home sections (#about, #highlights, #expertise,
-   #experience, #software, #education, #contact).
-   Home / Hero (#home) is 100% untouched and locked.
-   =============================================================== */
-:root {
-  --misty-bg: #A7C6E1;
-  --misty-card: #F3F7FA;
-  --misty-heading: #17324A;
-  --misty-text: #34495E;
-  --misty-secondary: #52677A;
-  --misty-gold: #BE9852;
-  --misty-border: #C5D5E2;
-  --misty-input: #FFFFFF;
-}
 
-/* SECTION BACKGROUNDS FOR ALL NON-HOME SECTIONS */
-:is(#about, #highlights, #expertise, #experience, #education, #software, #contact),
-html.dark :is(#about, #highlights, #expertise, #experience, #education, #software, #contact),
-section.misty-portfolio,
-html.dark section.misty-portfolio {
-  background-color: #A7C6E1 !important;
-  color: var(--misty-text) !important;
-  border-color: var(--misty-border) !important;
+/* Final approved navy theme — scoped to non-Home sections only. */
+:is(#about,#highlights,#expertise,#experience,#software,#education,#contact),
+html.dark :is(#about,#highlights,#expertise,#experience,#software,#education,#contact) {
+ background-color:#305879 !important;
 }
-
-/* SOFT LIGHT MISTY OVERLAY FOR SECTION BACKGROUND IMAGES (SOFT BLEND WITH #A7C6E1) */
-:is(#about, #highlights, #expertise, #experience, #education, #software, #contact) > div.absolute.inset-0.pointer-events-none.z-0 img + div.absolute.inset-0,
-:is(#about, #highlights, #expertise, #experience, #education, #software, #contact) > div.absolute.inset-0 img + div.absolute.inset-0 {
-  background: linear-gradient(180deg, rgba(167, 198, 225, 0.85) 0%, rgba(167, 198, 225, 0.70) 50%, rgba(167, 198, 225, 0.88) 100%) !important;
+:is(#about,#highlights,#expertise,#experience,#software,#education,#contact) > div.absolute.inset-0.pointer-events-none.z-0 img + div.absolute.inset-0 {
+ background:linear-gradient(180deg,rgba(48,88,121,.92),rgba(48,88,121,.84),rgba(48,88,121,.94)) !important;
 }
-
-/* ALL MAIN HEADINGS IN NON-HOME SECTIONS */
-:is(#about, #highlights, #expertise, #experience, #education, #software, #contact) h2,
-:is(#about, #highlights, #expertise, #experience, #education, #software, #contact) .main-heading-3d,
-html.dark :is(#about, #highlights, #expertise, #experience, #education, #software, #contact) .main-heading-3d {
-  color: #17324A !important;
-  -webkit-text-fill-color: #17324A !important;
-  text-shadow: 0 1px 2px rgba(23, 50, 74, 0.12) !important;
-  font-weight: 800 !important;
-  letter-spacing: -0.02em !important;
-  cursor: pointer;
-  transition: color 0.3s ease, -webkit-text-fill-color 0.3s ease, text-shadow 0.3s ease, transform 0.3s ease !important;
+:is(#about,#highlights,#expertise,#experience,#software,#education,#contact) .main-heading-3d {
+ color:#f3f7fa !important;
+ -webkit-text-fill-color:#f3f7fa !important;
 }
-
-@media (hover: hover) {
-  :is(#about, #highlights, #expertise, #experience, #education, #software, #contact) h2:hover,
-  :is(#about, #highlights, #expertise, #experience, #education, #software, #contact) .main-heading-3d:hover,
-  html.dark :is(#about, #highlights, #expertise, #experience, #education, #software, #contact) .main-heading-3d:hover {
-    color: #BE9852 !important;
-    -webkit-text-fill-color: #BE9852 !important;
-    text-shadow: 
-      0 1px 0 rgba(255, 255, 255, 0.35),
-      0 2px 6px rgba(190, 152, 82, 0.45),
-      0 4px 12px rgba(23, 50, 74, 0.20) !important;
-  }
+@media(hover:hover) {
+ :is(#about,#highlights,#expertise,#experience,#software,#education,#contact) .main-heading-3d:hover {
+  color:#be9852 !important;
+  -webkit-text-fill-color:#be9852 !important;
+ }
 }
-
-:is(#about, #highlights, #expertise, #experience, #education, #software, #contact) h3,
-:is(#about, #highlights, #expertise, #experience, #education, #software, #contact) h4,
-:is(#about, #highlights, #expertise, #experience, #education, #software, #contact) .company-3d-text,
-html.dark :is(#about, #highlights, #expertise, #experience, #education, #software, #contact) .company-3d-text {
-  color: var(--misty-heading) !important;
-  text-shadow: none !important;
-}
-
-/* BODY & SECONDARY TEXT */
-:is(#about, #highlights, #expertise, #experience, #education, #software, #contact) p,
-:is(#about, #highlights, #expertise, #experience, #education, #software, #contact) li {
-  color: var(--misty-text) !important;
-}
-
-:is(#about, #highlights, #expertise, #experience, #education, #software, #contact) [class*="text-[#64748B]"],
-:is(#about, #highlights, #expertise, #experience, #education, #software, #contact) [class*="text-slate-400"],
-:is(#about, #highlights, #expertise, #experience, #education, #software, #contact) [class*="text-slate-500"] {
-  color: var(--misty-secondary) !important;
-}
-
-/* GOLD SECTION TAGS & MUTED GOLD ACCENTS */
-:is(#about, #highlights, #expertise, #experience, #education, #software, #contact) span[class*="tracking-widest"],
-:is(#about, #highlights, #expertise, #experience, #education, #software, #contact) span[class*="tracking-[0.25em]"] {
-  color: var(--misty-gold) !important;
-}
-
-:is(#about, #highlights, #expertise, #experience, #education, #software, #contact) [class*="text-[#D8B56A]"],
-:is(#about, #highlights, #expertise, #experience, #education, #software, #contact) [class*="text-[#BE9852]"] {
-  color: var(--misty-gold) !important;
-}
-
-/* CARDS: UNIFIED ICE WHITE SURFACE & BORDER */
-:is(#about, #highlights, #expertise, #experience, #education, #software, #contact) :is(article, [class*="rounded-xl"], [class*="rounded-2xl"]):is([class*="bg-white"], [class*="bg-slate"], [class*="bg-[#F4F6F8]"], [class*="bg-[#081"], [class*="bg-[#0D2"], [class*="bg-[#071"], [class*="bg-[#061"]) {
-  background-color: var(--misty-card) !important;
-  border-color: var(--misty-border) !important;
-  box-shadow: 0 2px 10px rgba(23, 50, 74, 0.05) !important;
-}
-
-html.dark :is(#about, #highlights, #expertise, #experience, #education, #software, #contact) :is(article, [class*="rounded-xl"], [class*="rounded-2xl"]):is([class*="dark:bg-slate"], [class*="dark:bg-[#"]) {
-  background-color: var(--misty-card) !important;
-  border-color: var(--misty-border) !important;
-}
-
-/* INPUTS & FORM CONTROLS */
-:is(#contact) input,
-:is(#contact) textarea {
-  background-color: var(--misty-input) !important;
-  color: var(--misty-heading) !important;
-  border-color: var(--misty-border) !important;
-}
-:is(#contact) input::placeholder,
-:is(#contact) textarea::placeholder {
-  color: #7E93A4 !important;
-}
-
-/* WORK EXPERIENCE RESPONSIBILITIES PANEL */
-#experience .experience-date {
-  background-color: var(--misty-card) !important;
-  border-color: var(--misty-border) !important;
-}
-#experience .experience-date span {
-  color: var(--misty-text) !important;
-}
-
-
-
-/* Approved navy theme, section-scoped. Home/Hero styles intentionally untouched. */
-#about, #highlights, #expertise, #experience, #software, #education, #contact {
-  background-color: #305879 !important;
-}
-#about .main-heading-3d, #expertise .main-heading-3d,
-#experience .main-heading-3d, #education .main-heading-3d,
-#contact .main-heading-3d, #software .main-heading-3d,
-#highlights .main-heading-3d {
-  color: #f3f7fa;
-}
-/* Existing main-heading-3d hover mechanics are preserved. */
-#about .main-heading-3d:hover, #expertise .main-heading-3d:hover,
-#experience .main-heading-3d:hover, #education .main-heading-3d:hover,
-#contact .main-heading-3d:hover, #software .main-heading-3d:hover,
-#highlights .main-heading-3d:hover {
-  color: #be9852;
-}
-#about p, #expertise > div p, #experience > div p,
-#education > div p, #contact > div p, #software > div p {
-  color: #f3f7fa;
-}
-/* Expertise: keep existing grid, cards, hover-driven right-hand detail panel and imagery. */
-#expertise .bg-\[\#F3F7FA\], #expertise .bg-white,
-#expertise .bg-\[\#A7C6E1\] { background-color: #254866 !important; }
-#expertise .text-\[\#17324A\], #expertise .text-\[\#34495E\],
-#expertise .text-\[\#52677A\], #expertise .text-\[\#8B6B32\] {
-  color: #f3f7fa !important;
-}
-#expertise .text-\[\#BE9852\] { color: #e5c78e !important; }
-#expertise [id^="expertise-panel-"] { background-color: #254866; color: #f3f7fa; }
-/* Experience: navy employer cards; expanded individual responsibility items stay pale. */
-#experience .bg-white, #experience .bg-\[\#F3F7FA\] {
-  background-color: #254866 !important;
-}
-#experience .text-\[\#17324A\], #experience .text-\[\#34495E\],
-#experience .text-\[\#52677A\] { color: #f3f7fa !important; }
-#experience .bg-\[\#BE9852\] { background-color: #be9852; }
-#experience .relative.rounded-2xl.p-5.bg-\[\#F3F7FA\],
-#experience .relative.rounded-2xl.p-5 { background-color: #254866 !important; }
-/* Individual responsibility cards: preserve existing structure, use pale blue and dark text. */
-#experience .relative.rounded-2xl.p-5 .grid > div,
-#experience .relative.rounded-2xl.p-5 .grid > li {
-  background-color: #dce7f0;
-  color: #17324a;
-}
-#experience .relative.rounded-2xl.p-5 .grid > div *,
-#experience .relative.rounded-2xl.p-5 .grid > li * {
-  color: #17324a;
-}
-/* Education/Languages: preserve expansion logic and existing layout. */
-#education .bg-\[\#F3F7FA\], #education .bg-white {
-  background-color: #254866 !important;
-}
-#education .text-\[\#17324A\], #education .text-\[\#34495E\],
-#education .text-\[\#52677A\], #education .text-\[\#8B6B32\] {
-  color: #f3f7fa !important;
-}
-/* Contact: dark information cards/form, light inputs and legible labels. */
-#contact .rounded-2xl.bg-white, #contact .rounded-xl.bg-white,
-#contact .bg-\[\#F3F7FA\] {
-  background-color: #254866 !important;
-}
-#contact .text-\[\#17324A\], #contact .text-\[\#34495E\],
-#contact .text-\[\#52677A\] { color: #f3f7fa !important; }
-#contact input, #contact textarea {
-  background-color: #1e3a56 !important;
-  color: #f3f7fa !important;
-  border-color: #7895aa !important;
-}
-#contact input::placeholder, #contact textarea::placeholder {
-  color: #c5d5e2 !important;
-}
-#contact input:focus, #contact textarea:focus { border-color: #be9852 !important; }
-/* Footer: consistent darker end cap; no structural changes. */
-footer.no-print { background-color: #1e3a56 !important; color: #f3f7fa; }
-
-
-/* FINAL EXPERTISE FIX — scoped; Home and other sections are untouched. */
-#expertise, html.dark #expertise {
-  --misty-bg: #305879;
-  --misty-card: #254866;
-  --misty-heading: #E5C78E;
-  --misty-text: #F3F7FA;
-  --misty-secondary: #E0EAF2;
-  --misty-border: #406781;
-  background-color: #305879 !important;
-  color: #F3F7FA !important;
-}
-#expertise > div.absolute.inset-0 img + div.absolute.inset-0,
-#expertise > div.absolute.inset-0.pointer-events-none.z-0 img + div.absolute.inset-0 {
-  background: linear-gradient(180deg,rgba(48,88,121,.94),rgba(48,88,121,.88),rgba(48,88,121,.94)) !important;
-}
-#expertise h3, #expertise h4, html.dark #expertise h3, html.dark #expertise h4 {
-  color: #E5C78E !important;
-}
-#expertise p, #expertise li, #expertise li span,
-html.dark #expertise p, html.dark #expertise li, html.dark #expertise li span {
-  color: #F3F7FA !important;
-}
-#expertise .main-heading-3d, html.dark #expertise .main-heading-3d {color:#F3F7FA !important;}
-#expertise .main-heading-3d:hover, html.dark #expertise .main-heading-3d:hover {color:#BE9852 !important;}
-#expertise .bg-white, #expertise .bg-\[\#F3F7FA\],
-html.dark #expertise .bg-white, html.dark #expertise .bg-\[\#F3F7FA\] {
-  background-color: #254866 !important;
-}
-#expertise .text-\[\#17324A\], #expertise .text-\[\#34495E\],
-html.dark #expertise .text-\[\#17324A\], html.dark #expertise .text-\[\#34495E\] {
-  color: #F3F7FA !important;
-}
-#expertise button[aria-expanded] h3 { color: #E5C78E !important; }
-#expertise [id^="expertise-panel-"] { background-color:#254866 !important; color:#F3F7FA !important; }
+#experience .experience-job .company-3d-text { color:#f3f7fa !important;-webkit-text-fill-color:#f3f7fa !important; }
+#experience .experience-job .company-3d-text:hover {color:#be9852 !important;-webkit-text-fill-color:#be9852 !important;}
+#experience .experience-job .experience-date {background:#1e3a56 !important;color:#f3f7fa !important;}
+#experience .experience-job .experience-date * {color:#f3f7fa !important;}
+#experience .experience-responsibilities {background:#254866 !important;}
+#experience .experience-responsibilities .experience-duty {background:#dce7f0 !important;}
+#experience .experience-responsibilities .experience-duty :is(strong,p,span) {color:#17324a !important;-webkit-text-fill-color:#17324a !important;}
+#education .edu-navy-card, #education .language-navy-card {background:#254866 !important;border-color:#52718a !important;}
+#education .edu-navy-card :is(h3,p), #education .language-navy-card :is(h3,p) {color:#f3f7fa !important;}
+#education .edu-navy-card h3, #education .language-navy-card h3 {color:#e5c78e !important;}
+#education .edu-navy-card .edu-meta {background:#1e3a56 !important;color:#f3f7fa !important;}
+#education .edu-navy-card .edu-meta * {color:#f3f7fa !important;}
+#education .language-navy-card .language-row {background:#254866 !important;border-color:#52718a !important;}
+#education .language-navy-card .language-row * {color:#f3f7fa !important;}
+#software {background-color:#305879 !important;background-image:none !important;}
