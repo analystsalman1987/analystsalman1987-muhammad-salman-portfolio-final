@@ -609,52 +609,34 @@
 :where(main section:not(#home), footer) [class~="ring-[#0F766E]/25"] { --tw-ring-color:rgba(216,181,106,.35) !important; }
 }
 
-/* ==============================================================
-   Pearl White & Champagne — scoped presentation-only theme.
-   Original Home/Hero, animations, component markup and data intact.
-   ============================================================= */
-:root {
-  --pearl-surface: #FAF8F3;
-  --pearl-alternate: #F0E9DC;
-  --pearl-card: #FFFFFF;
-  --pearl-ink: #071B2E;
-  --pearl-gold: #C5A15E;
-}
 
-/* Only non-Hero portfolio sections; both current light/dark modes. */
-:is(#about, #highlights, #expertise, #experience, #education, #software, #contact) {
-  background-color: var(--pearl-surface) !important;
-  color: var(--pearl-ink);
-  border-color: #E6DCCB !important;
+/* ============================================================
+   DEEP SLATE NAVY + CHAMPAGNE GOLD (2026-10)
+   Color-only theme for non-Hero sections; Home/Hero untouched.
+   ============================================================ */
+:root { --slate-page:#34485D; --slate-card:#455B70; --slate-text:#E8DCC5; --slate-gold:#C5A15E; }
+:is(#about,#highlights,#expertise,#experience,#education,#software,#contact) {
+  background-color:var(--slate-page) !important;
+  color:var(--slate-text) !important;
+  border-color:#63758A !important;
 }
-:is(#highlights, #experience, #software) {
-  background-color: var(--pearl-alternate) !important;
+:is(#highlights,#experience,#software) {background-color:#2C4055 !important;}
+:is(#about,#highlights,#expertise,#experience,#education,#software,#contact) > .absolute.inset-0.bg-gradient-to-b {
+ background-image:linear-gradient(to bottom,rgba(52,72,93,.90),rgba(52,72,93,.82),rgba(52,72,93,.94)) !important;
 }
-/* Background overlays on sections with existing imagery remain in place. */
-:is(#about, #highlights, #expertise, #experience, #education, #software, #contact) > .absolute.inset-0.bg-gradient-to-b {
-  background-image: linear-gradient(to bottom, rgba(250,248,243,.92), rgba(250,248,243,.80), rgba(250,248,243,.94)) !important;
+:is(#about,#highlights,#expertise,#experience,#education,#software,#contact) .main-heading-3d {
+ color:var(--slate-text) !important;
+ text-shadow:0 2px 4px rgba(0,0,0,.25) !important;
 }
-/* Keep expanded Work Experience navy responsibility panels completely unchanged. */
-#experience .company-3d-text {
-  color: var(--pearl-ink) !important;
-  text-shadow: 0 1px 1px rgba(7,27,46,.12) !important;
-}
-:is(#about, #highlights, #expertise, #experience, #education, #software, #contact) .main-heading-3d {
-  color: var(--pearl-ink) !important;
-  text-shadow: 0 1px 0 #fff, 0 3px 6px rgba(7,27,46,.12) !important;
-}
-:is(#about, #highlights, #expertise, #experience, #education, #software, #contact) .main-heading-3d:hover {
-  color: var(--pearl-gold) !important;
-}
-/* Experience outer cards only; nested dark expanded panel remains navy. */
-#experience .group > .rounded-2xl.border {
-  background-color: var(--pearl-card) !important;
-  border-color: #E5D9C6 !important;
-}
-#experience .group > .rounded-2xl.border:hover {
-  border-color: var(--pearl-gold) !important;
-}
-#experience .group > .rounded-2xl.border > button {
-  color: var(--pearl-ink);
-}
-/* Preserve component-local gold highlights and dark navy expanded panels. */
+:is(#about,#highlights,#expertise,#experience,#education,#software,#contact) .main-heading-3d:hover {color:var(--slate-gold) !important;}
+#experience .company-3d-text {color:#F5EAD4 !important;text-shadow:0 1px 2px rgba(0,0,0,.2) !important;}
+/* Top-level job and category cards only, not the expanded navy panel. */
+#experience .group > .rounded-2xl.border {background-color:var(--slate-card) !important;border-color:#748397 !important;}
+#experience .group > .rounded-2xl.border:hover {border-color:var(--slate-gold) !important;}
+#experience > div.relative.z-10 > div.space-y-5 > div.rounded-2xl {background-color:#354A5F !important;border-color:#708298 !important;}
+/* Ensure titles and muted supporting copy on light-to-dark cards remain readable. */
+:is(#about,#highlights,#expertise,#experience,#education,#software,#contact) :is(h2,h3,h4):not(.text-white):not(.text-\[\#F1D38A\]) {text-shadow:0 1px 2px rgba(0,0,0,.12);}
+#experience .group > .rounded-2xl.border > button .text-\[\#0F2747\],
+#experience .group > .rounded-2xl.border > button .text-\[\#1F2937\] {color:#F4E9D5 !important;}
+#experience .group > .rounded-2xl.border > button .text-\[\#64748B\] {color:#D2DCE6 !important;}
+/* Leave the navy expanded responsibility content, logos, software chips, all animations alone. */
