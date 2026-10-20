@@ -51,7 +51,7 @@ export function EducationLanguages({
           className="w-full h-full object-cover object-center opacity-[0.16] filter contrast-105 select-none"
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#A7C6E1]/85 via-[#A7C6E1]/70 to-[#A7C6E1]/90" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#305879]/95 via-[#305879]/90 to-[#305879]/95" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -65,17 +65,17 @@ export function EducationLanguages({
                 {isRTL ? t.tag : 'Academic Background'}
               </span>
               <div>
-                <h2 className="main-heading-3d text-3xl font-extrabold sm:text-4xl tracking-tight text-[#17324A]">
+                <h2 className="main-heading-3d text-3xl font-extrabold sm:text-4xl tracking-tight text-[#F3F7FA]">
                   {isRTL ? t.title : 'Education'}
                 </h2>
               </div>
-              <p className="mt-1 text-sm text-[#52677A]">
+              <p className="mt-1 text-sm text-[#F3F7FA]">
                 {isRTL ? t.subtitle : 'Formal business administration and banking & finance higher education foundation.'}
               </p>
             </div>
 
             {education.length === 0 ? (
-              <div className="p-8 text-center rounded-xl bg-[#F3F7FA] border border-[#C5D5E2] text-[#52677A]">
+              <div className="p-8 text-center rounded-xl bg-[#254866] border border-[#52718A] text-[#F3F7FA]">
                 {isRTL ? 'سيتم إضافة المعلومات قريباً.' : 'Information will be added soon.'}
               </div>
             ) : (
@@ -92,10 +92,10 @@ export function EducationLanguages({
                   return (
                     <div
                       key={item.id}
-                      className={`rounded-2xl border transition-all duration-200 shadow-xs overflow-hidden ${
+                      className={`edu-navy-card rounded-2xl border transition-all duration-200 shadow-xs overflow-hidden ${
                         isExpanded
-                          ? 'bg-white border-[#BE9852]/60 ring-1 ring-[#BE9852]/25 shadow-md'
-                          : 'bg-[#F3F7FA] border-[#C5D5E2] hover:border-[#BE9852]/60 hover:bg-white'
+                          ? 'bg-[#254866] border-[#BE9852]/60 ring-1 ring-[#BE9852]/25 shadow-md'
+                          : 'bg-[#254866] border-[#52718A] hover:border-[#BE9852]/60 hover:bg-[#254866]'
                       }`}
                     >
                       {/* Clickable Card Header */}
@@ -114,18 +114,18 @@ export function EducationLanguages({
                           <div className="flex-1 min-w-0">
                             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                               <div>
-                                <h3 className="text-base sm:text-lg font-bold text-[#17324A] group-hover:text-[#BE9852] transition-colors flex items-center gap-2 flex-wrap">
+                                <h3 className="text-base sm:text-lg font-bold text-[#F3F7FA] group-hover:text-[#BE9852] transition-colors flex items-center gap-2 flex-wrap">
                                   <span>{degree} — {specialization}</span>
                                 </h3>
                                 {institution && (
-                                  <p className="text-xs font-medium text-[#52677A] mt-0.5">
+                                  <p className="text-xs font-medium text-[#F3F7FA] mt-0.5">
                                     {institution}
                                   </p>
                                 )}
                               </div>
 
                               <div className="flex items-center gap-2 sm:gap-2.5 shrink-0 flex-wrap">
-                                <span className="inline-flex items-center gap-1 text-xs font-semibold text-[#34495E] bg-[#F3F7FA] border border-[#C5D5E2] px-2.5 py-1 rounded-md">
+                                <span className="edu-meta inline-flex items-center gap-1 text-xs font-semibold text-[#F3F7FA] bg-[#254866] border border-[#52718A] px-2.5 py-1 rounded-md">
                                   <Calendar className="w-3 h-3 text-[#BE9852]" />
                                   {period}
                                 </span>
@@ -135,7 +135,7 @@ export function EducationLanguages({
                                   className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-semibold transition-all ${
                                     isExpanded
                                       ? 'bg-[#BE9852] text-white shadow-2xs'
-                                      : 'bg-[#F3F7FA] text-[#17324A] border border-[#C5D5E2] hover:bg-white hover:border-[#BE9852]/50 hover:text-[#BE9852]'
+                                      : 'bg-[#1E3A56] text-[#F3F7FA] border border-[#C5D5E2] hover:bg-white hover:border-[#BE9852]/50 hover:text-[#BE9852]'
                                   }`}
                                   title={isRTL ? t.overviewTitle : 'Toggle academic overview'}
                                 >
@@ -161,17 +161,17 @@ export function EducationLanguages({
                         }`}
                       >
                         <div className="overflow-hidden">
-                          <div className="p-5 sm:p-6 pt-4 space-y-3 text-xs text-[#34495E]">
+                          <div className="p-5 sm:p-6 pt-4 space-y-3 text-xs text-[#F3F7FA]">
                             <div className="flex items-center gap-2 font-medium">
                               <BookOpen className="w-4 h-4 text-[#BE9852] shrink-0" />
-                              <span>{isRTL ? t.specializationLabel : 'Specialization:'} <strong className="text-[#17324A] font-bold">{specialization}</strong></span>
+                              <span>{isRTL ? t.specializationLabel : 'Specialization:'} <strong className="text-[#F3F7FA] font-bold">{specialization}</strong></span>
                             </div>
-                            <p className="leading-relaxed text-[#34495E]">
+                            <p className="leading-relaxed text-[#F3F7FA]">
                               {desc}
                             </p>
                             {institution && (
-                              <p className="text-[#52677A]">
-                                {isRTL ? t.institutionLabel : 'Institution:'} <span className="font-semibold text-[#17324A]">{institution}</span>
+                              <p className="text-[#F3F7FA]">
+                                {isRTL ? t.institutionLabel : 'Institution:'} <span className="font-semibold text-[#F3F7FA]">{institution}</span>
                               </p>
                             )}
                           </div>
@@ -185,7 +185,7 @@ export function EducationLanguages({
             )}
 
             {/* Academic Foundation Callout Box */}
-            <div className="p-5 rounded-2xl bg-[#F3F7FA] border border-[#C5D5E2] shadow-xs flex items-start gap-4">
+            <div className="edu-navy-card p-5 rounded-2xl bg-[#254866] border border-[#52718A] shadow-xs flex items-start gap-4">
               <div className="w-10 h-10 rounded-xl bg-[#BE9852]/15 text-[#BE9852] border border-[#BE9852]/25 flex items-center justify-center shrink-0 mt-0.5">
                 <GraduationCap className="w-5 h-5" />
               </div>
@@ -193,7 +193,7 @@ export function EducationLanguages({
                 <h4 className="text-xs font-bold uppercase tracking-wider text-[#BE9852]">
                   {isRTL ? t.foundationTitle : 'Higher Education Foundation'}
                 </h4>
-                <p className="text-xs text-[#52677A] leading-relaxed">
+                <p className="text-xs text-[#F3F7FA] leading-relaxed">
                   {isRTL ? t.foundationDesc : 'Post-graduate degree in Business Administration with Banking & Finance specialization, combined with undergraduate business education covering financial accounting, audit, management, and quantitative finance methods.'}
                 </p>
               </div>
@@ -207,21 +207,21 @@ export function EducationLanguages({
                 {isRTL ? t.languagesTag : 'Communication'}
               </span>
               <div>
-                <h2 className="main-heading-3d text-3xl font-extrabold sm:text-4xl tracking-tight text-[#17324A]">
+                <h2 className="main-heading-3d text-3xl font-extrabold sm:text-4xl tracking-tight text-[#F3F7FA]">
                   {isRTL ? t.languagesTitle : 'Languages'}
                 </h2>
               </div>
-              <p className="mt-1 text-sm text-[#52677A]">
+              <p className="mt-1 text-sm text-[#F3F7FA]">
                 {isRTL ? t.languagesSubtitle : 'Linguistic versatility supporting multinational teams, Saudi vendor dealings, and corporate correspondence.'}
               </p>
             </div>
 
             {languages.length === 0 ? (
-              <div className="p-8 text-center rounded-xl bg-[#F3F7FA] border border-[#C5D5E2] text-[#52677A]">
+              <div className="p-8 text-center rounded-xl bg-[#254866] border border-[#52718A] text-[#F3F7FA]">
                 {isRTL ? 'سيتم إضافة المعلومات قريباً.' : 'Information will be added soon.'}
               </div>
             ) : (
-              <div className="p-6 rounded-2xl bg-[#F3F7FA] border border-[#C5D5E2] shadow-xs flex-1 flex flex-col justify-between space-y-4">
+              <div className="language-navy-card p-6 rounded-2xl bg-[#254866] border border-[#52718A] shadow-xs flex-1 flex flex-col justify-between space-y-4">
                 <div className="space-y-3.5 sm:space-y-4">
                   {languages.map((lang, idx) => {
                     const arLang = t.langItems.find((x) => x.id === lang.id) || t.langItems[idx];
@@ -231,18 +231,18 @@ export function EducationLanguages({
                     return (
                       <div
                         key={lang.id}
-                        className="p-4 rounded-xl bg-white border border-[#C5D5E2] flex items-center justify-between shadow-2xs"
+                        className="language-row p-4 rounded-xl bg-[#254866] border border-[#52718A] flex items-center justify-between shadow-2xs"
                       >
                         <div className="flex items-center gap-3">
                           <div className="w-9 h-9 rounded-lg bg-[#BE9852]/15 text-[#BE9852] border border-[#BE9852]/25 flex items-center justify-center font-bold text-sm">
                             <Globe className="w-4 h-4" />
                           </div>
                           <div>
-                            <h4 className="text-sm font-bold text-[#17324A]">
+                            <h4 className="text-sm font-bold text-[#F3F7FA]">
                               {name}
                             </h4>
                             {notes && (
-                              <span className="text-xs text-[#52677A]">
+                              <span className="text-xs text-[#F3F7FA]">
                                 {notes}
                               </span>
                             )}
@@ -257,7 +257,7 @@ export function EducationLanguages({
                   })}
                 </div>
 
-                <div className="mt-auto pt-4 border-t border-[#C5D5E2] text-[11px] text-[#52677A] leading-relaxed">
+                <div className="mt-auto pt-4 border-t border-[#C5D5E2] text-[11px] text-[#F3F7FA] leading-relaxed">
                   {isRTL ? t.languagesNote : 'Daily professional communication with Saudi governmental portals (ZATCA), corporate bank officers, suppliers, and internal stakeholders.'}
                 </div>
               </div>
