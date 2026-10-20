@@ -124,9 +124,9 @@ export function Expertise({ expertise }: ExpertiseProps) {
   };
 
   return (
-    <section
+    <section style={{ backgroundColor: "#34485D", color: "#E8DCC5", borderColor: "#63758A" }}
       id="expertise"
-      className="
+      className="deep-slate-champagne 
         relative
         py-20
         scroll-mt-20
