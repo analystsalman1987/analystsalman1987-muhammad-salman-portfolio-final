@@ -67,8 +67,9 @@ export function Software(_props?: SoftwareProps) {
     <section
       id="software"
       className="misty-portfolio relative overflow-hidden border-b border-[#C5D5E2] bg-[#305879] py-16 transition-colors duration-300 sm:py-20"
-      style={{ backgroundColor: '#305879' }}
+      style={{ backgroundColor: '#305879', backgroundImage: 'none' }}
     >
+      <style>{`#software { background: #305879 !important; background-image: none !important; } #software .main-heading-3d { color: #F3F7FA; } #software .main-heading-3d:hover { color: #BE9852; }`}</style>
       <div className="relative z-10 mx-auto max-w-[1380px] px-5 sm:px-8 lg:px-12">
         {/* SECTION HEADER */}
         <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
@@ -101,11 +102,11 @@ export function Software(_props?: SoftwareProps) {
               </div>
 
               {/* VERTICAL DIVIDER */}
-              <div className="h-10 w-px shrink-0 bg-[#C5D5E2] transition-colors duration-300 group-hover:bg-[#BE9852]/60" />
+              <div className="h-10 w-px shrink-0 bg-[#9FB4C4] transition-colors duration-300 group-hover:bg-[#BE9852]/60" />
 
               {/* CATEGORY BADGE */}
               <div className="flex min-w-[86px] shrink-0 items-center justify-center pl-3">
-                <span className={`shrink-0 text-[11px] font-bold uppercase tracking-wide text-[#E5C78E]`}>
+                <span className="shrink-0 text-[12px] font-extrabold uppercase tracking-wide text-[#F0CF89]" style={{ color: '#F0CF89', textShadow: '0 1px 2px rgba(0,0,0,.35)' }}>
                   {item.category}
                 </span>
               </div>
