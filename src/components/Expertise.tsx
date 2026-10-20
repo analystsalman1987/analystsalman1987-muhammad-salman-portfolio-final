@@ -130,13 +130,33 @@ function ExpertiseSideNetwork() {
 
     const resize = () => {
       const rect = canvas.getBoundingClientRect();
-      width = rect.width;
-      height = rect.height;
+      const nextWidth = rect.width;
+      const nextHeight = rect.height;
+      if (Math.abs(nextWidth - width) < 1 && Math.abs(nextHeight - height) < 1 && dots.length) return;
+
+      const oldWidth = width;
+      const oldHeight = height;
+      width = nextWidth;
+      height = nextHeight;
       dpr = Math.min(window.devicePixelRatio || 1, 2);
       canvas.width = Math.max(1, Math.round(width * dpr));
       canvas.height = Math.max(1, Math.round(height * dpr));
       context.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const count = Math.min(58, Math.max(20, Math.round(height / 42)));
+
+      // IMPORTANT: keep existing particle positions when a card expands.
+      // Recreating dots on every section resize made the entire network jump.
+      if (dots.length) {
+        for (const dot of dots) {
+          dot.y = oldHeight > 0 ? dot.y * height / oldHeight : dot.y;
+          const oldSideStart = dot.side === 0 ? 0 : oldWidth * 0.81;
+          const oldSideSize = oldWidth * 0.19;
+          const fraction = oldSideSize > 0 ? (dot.x - oldSideStart) / oldSideSize : 0.5;
+          dot.x = (dot.side === 0 ? 0 : width * 0.81) + fraction * width * 0.19;
+        }
+        return;
+      }
+
+      const count = 48;
       dots = Array.from({ length: count }, (_, i) => {
         const side = i % 2 === 0;
         return {
@@ -155,7 +175,7 @@ function ExpertiseSideNetwork() {
       const delta = Math.min(2, Math.max(0, (time - (lastTime || time)) / 16.67));
       lastTime = time;
       context.clearRect(0, 0, width, height);
-      if (width < 700) return; // keep mobile content completely clear
+      if (width < 700) {\n        frame = window.requestAnimationFrame(draw);\n        return; // keep mobile content completely clear\n      }
 
       for (const dot of dots) {
         if (!reduceMotion.matches) {
@@ -195,12 +215,7 @@ function ExpertiseSideNetwork() {
       if (!reduceMotion.matches) frame = window.requestAnimationFrame(draw);
     };
 
-    const observer = new ResizeObserver(() => {
-      resize();
-      window.cancelAnimationFrame(frame);
-      lastTime = 0;
-      frame = window.requestAnimationFrame(draw);
-    });
+    const observer = new ResizeObserver(resize);
     observer.observe(canvas);
     resize();
     frame = window.requestAnimationFrame(draw);
