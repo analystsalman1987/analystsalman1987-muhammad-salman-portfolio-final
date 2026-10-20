@@ -231,7 +231,7 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
 
   if (!experience || experience.length === 0) {
     return (
-      <section style={{ backgroundColor: "#34485D", color: "#E8DCC5", borderColor: "#63758A" }} id="experience" className="deep-slate-champagne py-20 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
+      <section id="experience" className="misty-portfolio deep-slate-champagne py-20 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
         <div className="max-w-7xl mx-auto px-4 text-center text-slate-500">
           {isRTL ? 'سيتم إضافة المعلومات قريباً.' : 'Information will be added soon.'}
         </div>
@@ -350,8 +350,8 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
           >
             <div className="relative flex flex-col sm:flex-row sm:items-start justify-between gap-4">
               {/* LEFT SIDE: 1. Company Name, 2. Designation / Job Title, 3. Location */}
-              <div className="space-y-1.5 min-w-0 sm:max-w-[48%]">
-                <h3 className="company-3d-text text-lg sm:text-xl font-extrabold text-[#0F2747] dark:text-white group-hover:text-[#D8B56A] dark:group-hover:text-[#D8B56A] transition-colors leading-snug">
+              <div className="space-y-1.5 min-w-0 sm:max-w-[66%]">
+                <h3 className="company-3d-text text-lg sm:text-xl font-bold text-[#0F2747] dark:text-white group-hover:text-[#D8B56A] dark:group-hover:text-[#D8B56A] transition-colors leading-snug">
                   {companyName}
                 </h3>
 
@@ -371,6 +371,11 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
                 <div className="text-xs sm:text-sm text-[#64748B] dark:text-slate-400 flex items-center gap-1.5">
                   <MapPin className="w-3.5 h-3.5 shrink-0 text-[#D8B56A] dark:text-[#D8B56A]" />
                   <span>{location}</span>
+                </div>
+
+                <div className="experience-date inline-flex items-center gap-1.5 text-[11px] font-medium text-[#34495E] bg-[#F3F7FA] px-2.5 py-1 rounded-md border border-[#CAD7E2]">
+                  <Calendar className="w-3 h-3 text-[#BE9852] shrink-0" />
+                  <span>{period}</span>
                 </div>
 
                 {remoteOverview && (
@@ -406,7 +411,7 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
               <div className="flex flex-row sm:flex-col items-center sm:items-end justify-between sm:justify-start gap-2.5 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-100 dark:border-slate-800/60">
                 {/* Subtle Navy/Glass Logo Container with High-Contrast Crisp Interior */}
                 <div 
-                  className="relative flex items-center justify-center h-[72px] sm:h-[80px] w-[145px] sm:w-[185px] px-3.5 py-2 rounded-xl bg-gradient-to-b from-[#FFFFFF] via-[#F8FAFC] to-[#EDF2F7] dark:from-[#FFFFFF] dark:via-[#F1F5F9] dark:to-[#E2E8F0] border border-slate-200/90 dark:border-[#C9A45C]/35 shadow-md shadow-slate-900/5 dark:shadow-[#211D14]/30 backdrop-blur-md group-hover:border-[#D8B56A]/40 transition-all duration-300"
+                  className="relative flex items-center justify-center h-[90px] sm:h-[112px] w-[150px] sm:w-[220px] px-3 py-2 rounded-xl bg-gradient-to-b from-[#FFFFFF] via-[#F8FAFC] to-[#EDF2F7] dark:from-[#FFFFFF] dark:via-[#F1F5F9] dark:to-[#E2E8F0] border border-slate-200/90 dark:border-[#C9A45C]/35 shadow-md shadow-slate-900/5 dark:shadow-[#211D14]/30 backdrop-blur-md group-hover:border-[#D8B56A]/40 transition-all duration-300"
                   title={companyName}
                 >
                   {/* Subtle glass reflection highlight */}
@@ -419,7 +424,7 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
                       referrerPolicy="no-referrer"
                       onError={(event) => { event.currentTarget.style.visibility = 'hidden'; }}
                       className="relative z-10 w-full h-full object-contain drop-shadow-xs transition-transform duration-300 group-hover:scale-[1.02]"
-                      style={{ maxHeight: '66px' }}
+                      style={{ maxHeight: '100px' }}
                     />
                   ) : (
                     <div className="flex items-center justify-center gap-2 px-2 text-[#0F2747]">
@@ -436,12 +441,6 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
                       </div>
                     </div>
                   )}
-                </div>
-
-                {/* Employment Period / Date */}
-                <div className="inline-flex items-center gap-1.5 text-[11px] font-medium text-[#1F2937] dark:text-slate-300 bg-white dark:bg-slate-900 px-2.5 py-1 rounded-md border border-slate-200 dark:border-slate-800">
-                  <Calendar className="w-3 h-3 text-[#D8B56A] dark:text-[#D8B56A] shrink-0" />
-                  <span>{period}</span>
                 </div>
               </div>
             </div>
@@ -501,7 +500,7 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
                           <span className="min-w-0 flex-1 leading-relaxed">
                             {hasHeading ? (
                               <span className="flex flex-col gap-1">
-                                <strong className="block font-extrabold text-[#F1D38A] text-[13.5px] sm:text-[14.5px] leading-snug tracking-[0.01em]">
+                                <strong className="block font-extrabold text-[#F1D38A] text-[13px] sm:text-[14px] leading-snug tracking-[0.01em]">
                                   {heading}:
                                 </strong>
                                 <span className="block text-slate-200/90 font-normal text-xs sm:text-[13px] leading-relaxed">
