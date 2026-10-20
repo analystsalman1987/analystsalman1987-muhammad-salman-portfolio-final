@@ -189,7 +189,7 @@ export function Expertise({ expertise }: ExpertiseProps) {
             {isRTL ? t.tag : 'Technical Capabilities'}
           </span>
 
-          <h2 className="main-heading-3d text-3xl font-extrabold sm:text-4xl tracking-tight text-[#17324A]">
+          <h2 className="main-heading-3d text-3xl font-extrabold sm:text-4xl tracking-tight text-[#F3F7FA]">
             {isRTL ? t.title : 'Core Professional Expertise'}
           </h2>
 
@@ -724,10 +724,10 @@ export function Expertise({ expertise }: ExpertiseProps) {
 
                                           bg-gradient-to-r
 
-                                          from-[#F3F7FA]
+                                          from-[#254866]
                                           from-[0%]
 
-                                          via-[#F3F7FA]/75
+                                          via-[#254866]/85
                                           via-[24%]
 
                                           to-transparent
@@ -745,10 +745,10 @@ export function Expertise({ expertise }: ExpertiseProps) {
 
                                         bg-gradient-to-r
 
-                                        from-[#F3F7FA]
+                                        from-[#254866]
                                         from-[0%]
 
-                                        via-[#F3F7FA]/96
+                                        via-[#254866]/98
                                         via-[34%]
 
                                         to-transparent
@@ -795,10 +795,10 @@ export function Expertise({ expertise }: ExpertiseProps) {
 
                                           bg-gradient-to-r
 
-                                          from-[#F3F7FA]
+                                          from-[#254866]
                                           from-[0%]
 
-                                          via-[#F3F7FA]/75
+                                          via-[#254866]/85
                                           via-[24%]
 
                                           to-transparent
@@ -816,10 +816,10 @@ export function Expertise({ expertise }: ExpertiseProps) {
 
                                         bg-gradient-to-r
 
-                                        from-[#F3F7FA]
+                                        from-[#254866]
                                         from-[0%]
 
-                                        via-[#F3F7FA]/96
+                                        via-[#254866]/98
                                         via-[34%]
 
                                         to-transparent
