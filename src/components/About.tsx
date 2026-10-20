@@ -1,607 +1,660 @@
-import {
-  CalendarDays,
-  GraduationCap,
-  FileText,
-  CheckCircle2,
-  Car,
-  Briefcase,
-  Download,
-  Linkedin,
-} from 'lucide-react';
-import { ProfileInfo } from '../types';
-import { useLanguage } from '../context/LanguageContext';
-import { ARABIC_TRANSLATIONS } from '../data/arabicData';
+@import "tailwindcss";
 
-interface AboutProps {
-  profile?: ProfileInfo;
-  onOpenCV?: () => void;
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-navy: #071827;
+  --color-navy-dark: #05121e;
+  --color-navy-light: #0D2538;
+  --color-midnight: #0D2538;
+  --color-midnight-light: #132E43;
+
+  --color-gold: #D8B56A;
+  --color-gold-deep: #C9A45C;
+  --color-gold-light: #F4E7C5;
+
+  --color-teal-primary: #0F766E;
+  --color-teal-hover: #0c625c;
+  --color-teal-light: #E6F4F1;
+
+  --color-light-gray: #0D2538;
+  --color-dark-text: #F8FAFC;
+  --color-muted-text: #CBD5E1;
+
+  /* Executive Deep Navy + Midnight Theme Palettes */
+  --color-slate-950: #071827; /* Main page background */
+  --color-slate-900: #081A2B; /* Alternate section background */
+  --color-slate-850: #0B2033; /* Secondary cards / panels */
+  --color-slate-800: #0D2538; /* Main cards */
+  --color-slate-700: #1B3850; /* Borders & dividers */
+  --color-slate-600: #335370;
+  --color-slate-500: #64748B;
+  --color-slate-400: #94A3B8;
+  --color-slate-300: #CBD5E1;
+  --color-slate-200: #E2E8F0;
+  --color-slate-100: #F8FAFC;
 }
 
-export function About({ profile: _profile, onOpenCV }: AboutProps) {
-  const { isRTL } = useLanguage();
-  const t = ARABIC_TRANSLATIONS.about;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    color: #F8FAFC;
+    background-color: #071827;
+  }
 
-  return (
-    <section
-      id="about"
-      className="
-        relative
-        flex
-        min-h-[calc(100vh-5rem)]
-        flex-col
-        justify-center
-        overflow-hidden
-        border-b
-        border-[#0D2538]
-        bg-[#081A2B]
-        py-12
-        sm:py-16
-        lg:py-0
-      "
-    >
-      {/* ============================================================
-          ABOUT BACKGROUND
-          ============================================================ */}
-      <div
-        className="pointer-events-none absolute inset-0 z-0 overflow-hidden select-none"
-        aria-hidden="true"
-      >
-        <div
-          className="
-            absolute
-            top-[8%]
-            right-[-10%]
-            h-[600px]
-            w-[600px]
-            rounded-full
-            bg-[#D8B56A]/8
-            blur-[170px]
-          "
-        />
+  html.dark,
+  [data-theme="dark"] {
+    color: #F8FAFC;
+    background-color: #071827;
+  }
 
-        <div
-          className="
-            absolute
-            -bottom-36
-            -left-28
-            h-[540px]
-            w-[540px]
-            rounded-full
-            bg-[#0D2538]/70
-            blur-[140px]
-          "
-        />
-
-        <div
-          className="
-            absolute
-            inset-0
-            bg-[linear-gradient(to_right,#132E4310_1px,transparent_1px),linear-gradient(to_bottom,#132E4310_1px,transparent_1px)]
-            bg-[size:4.5rem_4.5rem]
-            [mask-image:radial-gradient(ellipse_70%_60%_at_45%_50%,#000_45%,transparent_100%)]
-          "
-        />
-      </div>
-
-      {/* ============================================================
-          MAIN CONTENT
-          ============================================================ */}
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-10 xl:gap-12">
-
-          {/* ========================================================
-              LEFT CONTENT
-              ======================================================== */}
-          <div
-            className={`
-              flex
-              flex-col
-              justify-center
-              space-y-6
-              lg:col-span-7
-              xl:col-span-7
-              ${isRTL ? 'lg:text-right' : 'lg:text-left'}
-            `}
-          >
-            {/* HEADING */}
-            <div className="flex flex-col items-start rtl:items-start text-left rtl:text-right">
-              <span className="block text-xs font-bold tracking-[0.25em] text-[#D8B56A] uppercase mb-2.5 sm:mb-3">
-                {isRTL ? t.tag : 'ABOUT ME'}
-              </span>
-
-              <h2 className="main-heading-3d text-3xl font-extrabold tracking-tight text-[#F8FAFC] sm:text-4xl lg:text-5xl">
-                {isRTL ? t.title : 'Professional Summary'}
-              </h2>
-            </div>
-
-            {/* PROFESSIONAL SUMMARY */}
-            <div className="space-y-4 text-sm leading-relaxed text-[#CBD5E1] sm:text-base sm:leading-[1.8]">
-              <p>
-                {isRTL
-                  ? t.summaryP1
-                  : 'With more than 14 years of accounting and finance experience, I have worked across diverse business environments in Saudi Arabia and Pakistan, supporting day-to-day accounting operations, financial reporting, reconciliations, accounts payable and receivable, and month-end activities.'}
-              </p>
-
-              <p>
-                {isRTL
-                  ? t.summaryP2
-                  : 'My professional experience includes ZATCA VAT compliance, inventory and costing, cash and petty cash management, customer and supplier account reconciliation, collections, and ERP-based accounting processes. I focus on maintaining accurate financial records, effective internal controls, and timely financial information to support business operations.'}
-              </p>
-            </div>
-
-            {/* ACTION BUTTONS: Download CV & LinkedIn */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-1">
-              <button
-                type="button"
-                onClick={onOpenCV}
-                className="
-                  inline-flex
-                  items-center
-                  justify-center
-                  gap-2.5
-                  rounded-xl
-                  border
-                  border-[#F5E6BE]/60
-                  bg-gradient-to-r
-                  from-[#D8B56A]
-                  to-[#C99D46]
-                  px-6
-                  py-3
-                  text-sm
-                  sm:text-base
-                  font-bold
-                  text-[#071827]
-                  shadow-lg
-                  shadow-[#D8B56A]/20
-                  transition-all
-                  duration-200
-                  hover:-translate-y-0.5
-                  hover:from-[#E2C785]
-                  hover:to-[#D8B56A]
-                  hover:shadow-[#D8B56A]/35
-                  cursor-pointer
-                  select-none
-                  touch-manipulation
-                "
-              >
-                <Download className="h-4 w-4 text-[#071827]" />
-                <span>{isRTL ? (t.downloadCv || 'تحميل السيرة الذاتية') : 'Download CV'}</span>
-              </button>
-
-              <a
-                href="https://www.linkedin.com/in/muhammad-salman-mba-finance-cpa-finalist-66908767/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="
-                  inline-flex
-                  items-center
-                  justify-center
-                  gap-2.5
-                  rounded-xl
-                  border
-                  border-[#38BDF8]/30
-                  bg-[#0D2538]/90
-                  px-6
-                  py-3
-                  text-sm
-                  sm:text-base
-                  font-bold
-                  text-[#F8FAFC]
-                  shadow-md
-                  shadow-[#04111D]/40
-                  backdrop-blur-sm
-                  transition-all
-                  duration-200
-                  hover:-translate-y-0.5
-                  hover:border-[#38BDF8]/60
-                  hover:bg-[#132E43]
-                  hover:text-[#38BDF8]
-                  hover:shadow-lg
-                  hover:shadow-[#38BDF8]/20
-                  cursor-pointer
-                  select-none
-                  touch-manipulation
-                "
-              >
-                <Linkedin className="h-4 w-4 text-[#38BDF8]" />
-                <span>{isRTL ? (t.linkedin || 'لينكد إن') : 'LinkedIn'}</span>
-              </a>
-            </div>
-
-            {/* ======================================================
-                HIGHLIGHT CARDS
-                ====================================================== */}
-            <div className="grid grid-cols-1 gap-3.5 pt-1 sm:grid-cols-3">
-
-              {/* EXPERIENCE */}
-              <div
-                className="
-                  flex
-                  flex-col
-                  items-center
-                  justify-center
-                  rounded-xl
-                  border
-                  border-[#D8B56A]/30
-                  bg-[#0D2538]/80
-                  p-4
-                  text-center
-                  shadow-md
-                  backdrop-blur-sm
-                  transition-all
-                  duration-300
-                  hover:-translate-y-1
-                  hover:border-[#D8B56A]/60
-                  hover:bg-[#102B40]
-                "
-              >
-                <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-lg bg-[#132E43] text-[#D8B56A]">
-                  <CalendarDays className="h-5 w-5" />
-                </div>
-
-                <div className="text-2xl font-black text-[#F8FAFC]">
-                  14+
-                </div>
-
-                <div className="mt-1 text-xs font-bold text-[#CBD5E1]">
-                  {isRTL ? t.yearsExpLabel : 'Years Experience'}
-                </div>
-              </div>
-
-              {/* EDUCATION */}
-              <div
-                className="
-                  flex
-                  flex-col
-                  items-center
-                  justify-center
-                  rounded-xl
-                  border
-                  border-[#D8B56A]/30
-                  bg-[#0D2538]/80
-                  p-4
-                  text-center
-                  shadow-md
-                  backdrop-blur-sm
-                  transition-all
-                  duration-300
-                  hover:-translate-y-1
-                  hover:border-[#D8B56A]/60
-                  hover:bg-[#102B40]
-                "
-              >
-                <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-lg bg-[#132E43] text-[#D8B56A]">
-                  <GraduationCap className="h-5 w-5" />
-                </div>
-
-                <div className="text-xl font-black text-[#F8FAFC]">
-                  MBA / BBA
-                </div>
-
-                <div className="mt-1 text-xs font-bold text-[#CBD5E1]">
-                  {isRTL ? 'المحاسبة والمالية' : 'Accounting & Finance'}
-                </div>
-              </div>
-
-              {/* ZATCA */}
-              <div
-                className="
-                  flex
-                  flex-col
-                  items-center
-                  justify-center
-                  rounded-xl
-                  border
-                  border-[#D8B56A]/30
-                  bg-[#0D2538]/80
-                  p-4
-                  text-center
-                  shadow-md
-                  backdrop-blur-sm
-                  transition-all
-                  duration-300
-                  hover:-translate-y-1
-                  hover:border-[#D8B56A]/60
-                  hover:bg-[#102B40]
-                "
-              >
-                <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-lg bg-[#132E43] text-[#D8B56A]">
-                  <FileText className="h-5 w-5" />
-                </div>
-
-                <div className="text-xl font-black text-[#F8FAFC]">
-                  ZATCA
-                </div>
-
-                <div className="mt-1 text-xs font-bold text-[#CBD5E1]">
-                  {isRTL
-                    ? 'إقرارات ضريبة القيمة المضافة'
-                    : 'VAT Reporting'}
-                </div>
-              </div>
-            </div>
-
-            {/* ======================================================
-                STATUS / COMPLIANCE
-                ====================================================== */}
-            <div
-              className="
-                flex
-                flex-wrap
-                items-center
-                justify-between
-                gap-3
-                border-t
-                border-[#132E43]
-                pt-4
-                text-xs
-                font-medium
-                text-[#CBD5E1]
-              "
-            >
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="h-4 w-4 shrink-0 text-[#D8B56A]" />
-
-                <span>
-                  {isRTL
-                    ? t.complianceNote
-                    : 'Operating with full compliance in Dammam, Kingdom of Saudi Arabia'}
-                </span>
-              </div>
-
-              <div className="flex flex-wrap items-center gap-2.5">
-
-                {/* DRIVING LICENSE */}
-                <span
-                  className="
-                    inline-flex
-                    items-center
-                    gap-1.5
-                    rounded-md
-                    border
-                    border-[#D8B56A]/30
-                    bg-[#0D2538]
-                    px-2.5
-                    py-1
-                    text-[11px]
-                    font-semibold
-                    text-[#D8B56A]
-                  "
-                >
-                  <Car className="h-3.5 w-3.5" />
-
-                  <span>
-                    {isRTL
-                      ? t.drivingLicense
-                      : 'Valid Saudi Driving License'}
-                  </span>
-                </span>
-
-                {/* CURRENT EMPLOYER */}
-                <a
-                  href="https://www.ayalyami.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="
-                    inline-flex
-                    items-center
-                    gap-1.5
-                    rounded-md
-                    border
-                    border-[#132E43]
-                    bg-[#0D2538]
-                    px-2.5
-                    py-1
-                    text-[11px]
-                    font-semibold
-                    text-[#CBD5E1]
-                    transition-colors
-                    hover:border-[#D8B56A]/50
-                    hover:text-[#F8FAFC]
-                  "
-                  title="Ahmed Yahya Alyami Contracting Co."
-                >
-                  <Briefcase className="h-3.5 w-3.5 text-[#D8B56A]" />
-
-                  <span>
-                    {isRTL
-                      ? 'شركة أحمد يحيى اليامي للمقاولات'
-                      : 'Ahmed Yahya Alyami Contracting Co.'}
-                  </span>
-                </a>
-              </div>
-            </div>
-          </div>
-
-          {/* ========================================================
-              RIGHT SIDE — REAL PHOTO
-              FACE / BODY / PHOTO CONTENT UNCHANGED
-              ======================================================== */}
-          <div className="flex items-center justify-center lg:col-span-5 xl:col-span-5">
-            <div
-              className="
-                relative
-                mx-auto
-                w-full
-                max-w-[360px]
-                sm:max-w-[400px]
-                lg:max-w-[440px]
-                xl:max-w-[470px]
-              "
-            >
-              {/* SUBTLE GOLD ATMOSPHERE BEHIND PHOTO */}
-              <div
-                className="
-                  pointer-events-none
-                  absolute
-                  -inset-[10%]
-                  bg-[radial-gradient(ellipse_at_center,rgba(216,181,106,0.10)_0%,rgba(216,181,106,0.04)_42%,transparent_72%)]
-                  blur-[50px]
-                "
-                aria-hidden="true"
-              />
-
-              {/* PHOTO CONTAINER — NO BORDER / NO CARD */}
-              <div
-                className="
-                  relative
-                  aspect-[3/4]
-                  w-full
-                  overflow-hidden
-                  bg-transparent
-                "
-              >
-                {/* ==================================================
-                    EXACT ORIGINAL REAL PHOTO
-                    NO AI EDIT
-                    NO FACE EDIT
-                    NO BODY EDIT
-                    ================================================== */}
-                <img
-                  src="/images/Muhammad_Salman_HD_1200.webp"
-                  alt={
-                    isRTL
-                      ? 'محمد سلمان - محاسب'
-                      : 'Muhammad Salman - Accountant'
-                  }
-                  className="
-                    absolute
-                    inset-0
-                    h-full
-                    w-full
-                    select-none
-                    object-cover
-                    object-[center_top]
-                  "
-                  loading="eager"
-                />
-
-                {/* ==================================================
-                    FAR LEFT CLOUD
-                    Kept away from face/body.
-                    ================================================== */}
-                <div
-                  className="
-                    pointer-events-none
-                    absolute
-                    top-[-10%]
-                    bottom-[-8%]
-                    left-[-24%]
-                    z-10
-                    w-[42%]
-                    bg-[#081A2B]
-                    blur-[55px]
-                  "
-                  aria-hidden="true"
-                />
-
-                <div
-                  className="
-                    pointer-events-none
-                    absolute
-                    top-[-8%]
-                    bottom-[-5%]
-                    left-[-12%]
-                    z-10
-                    w-[22%]
-                    bg-[#081A2B]/55
-                    blur-[42px]
-                  "
-                  aria-hidden="true"
-                />
-
-                {/* ==================================================
-                    FAR RIGHT CLOUD
-                    Kept away from face/body.
-                    ================================================== */}
-                <div
-                  className="
-                    pointer-events-none
-                    absolute
-                    top-[-10%]
-                    right-[-24%]
-                    bottom-[-8%]
-                    z-10
-                    w-[42%]
-                    bg-[#081A2B]
-                    blur-[55px]
-                  "
-                  aria-hidden="true"
-                />
-
-                <div
-                  className="
-                    pointer-events-none
-                    absolute
-                    top-[-8%]
-                    right-[-12%]
-                    bottom-[-5%]
-                    z-10
-                    w-[22%]
-                    bg-[#081A2B]/55
-                    blur-[42px]
-                  "
-                  aria-hidden="true"
-                />
-
-                {/* ==================================================
-                    TOP CLOUD
-                    Only outer top edge.
-                    ================================================== */}
-                <div
-                  className="
-                    pointer-events-none
-                    absolute
-                    top-[-18%]
-                    right-[-10%]
-                    left-[-10%]
-                    z-10
-                    h-[28%]
-                    bg-[#081A2B]/85
-                    blur-[55px]
-                  "
-                  aria-hidden="true"
-                />
-
-                {/* ==================================================
-                    VERY LIGHT CORNER VIGNETTE
-                    Wide clear center — does NOT approach face.
-                    ================================================== */}
-                <div
-                  className="
-                    pointer-events-none
-                    absolute
-                    inset-0
-                    z-10
-                    bg-[radial-gradient(ellipse_72%_82%_at_52%_46%,transparent_0%,transparent_68%,rgba(8,26,43,0.10)_79%,rgba(8,26,43,0.48)_94%,rgba(8,26,43,0.82)_100%)]
-                  "
-                  aria-hidden="true"
-                />
-
-                {/* ==================================================
-                    BOTTOM
-                    NO HEAVY CLOUD / NO BODY MERGE.
-                    Only tiny edge transition to avoid hard cut.
-                    ================================================== */}
-                <div
-                  className="
-                    pointer-events-none
-                    absolute
-                    right-0
-                    bottom-0
-                    left-0
-                    z-10
-                    h-[7%]
-                    bg-[linear-gradient(to_top,rgba(8,26,43,0.35)_0%,rgba(8,26,43,0.08)_55%,transparent_100%)]
-                  "
-                  aria-hidden="true"
-                />
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-  );
+  html[dir="rtl"] {
+    font-family: 'Cairo', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
 }
+
+/* Subtle professional 3D raised / embossed effect for Work Experience Company Name */
+.company-3d-text {
+  color: #F8FAFC;
+  text-shadow: 
+    0 1px 2px rgba(0, 0, 0, 0.4),
+    0 2px 4px rgba(7, 24, 39, 0.6);
+  letter-spacing: -0.01em;
+}
+
+/* Subtle professional 3D raised / embossed effect for Gold/Teal metric labels */
+.mini-card-3d-text {
+  color: #D8B56A !important;
+  text-shadow: 
+    0 1px 2px rgba(0, 0, 0, 0.5),
+    0 2px 6px rgba(216, 181, 106, 0.25);
+  letter-spacing: -0.01em;
+}
+
+/* Refined depth for Company Card Name */
+.hero-company-3d {
+  color: #F8FAFC;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.40);
+  letter-spacing: -0.01em;
+}
+
+/* Main Headings 3D Embossed Effect */
+.main-heading-3d {
+  display: inline-block;
+  color: #F8FAFC;
+  text-shadow: 
+    0 1px 0 rgba(255, 255, 255, 0.2),
+    0 2px 4px rgba(0, 0, 0, 0.5),
+    0 4px 10px rgba(7, 24, 39, 0.6);
+  letter-spacing: -0.015em;
+  transition: color 0.25s ease, text-shadow 0.25s ease;
+}
+
+@media (hover: hover) {
+  .main-heading-3d:hover {
+    color: #D8B56A !important;
+    text-shadow: 
+      0 1px 0 rgba(255, 255, 255, 0.25),
+      0 2px 6px rgba(216, 181, 106, 0.35),
+      0 6px 14px rgba(7, 24, 39, 0.7);
+  }
+}
+
+@media print {
+  body {
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+  .page-break {
+    page-break-after: always;
+  }
+}
+
+@media screen {
+  .print-only {
+    display: none !important;
+  }
+}
+
+/* ==========================================================================
+   Home Live Moving Architectural Glass Background Keyframes
+   Strictly NO stars, NO particles, NO network dots, NO gaming/neon.
+   Visible, elegant movement within 5-8 seconds.
+   ========================================================================== */
+
+/* LAYER 1: Deep Navy / Midnight Base Shift */
+@keyframes navyBaseShift {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-24px, 18px, 0) scale(1.04);
+  }
+}
+
+/* LAYER 2: Moving Glass Reflection (14-18s) - Visible traveling reflection */
+@keyframes movingGlassReflection {
+  0% {
+    transform: translate3d(-35%, -18%, 0) rotate(24deg);
+    opacity: 0.18;
+  }
+  50% {
+    transform: translate3d(25%, 12%, 0) rotate(24deg);
+    opacity: 0.45;
+  }
+  100% {
+    transform: translate3d(-35%, -18%, 0) rotate(24deg);
+    opacity: 0.18;
+  }
+}
+
+/* LAYER 3: Champagne Gold Light Drift (18-24s) - Soft warm travelling illumination */
+@keyframes champagneGoldDrift {
+  0% {
+    transform: translate3d(-18%, -14%, 0) scale(1);
+    opacity: 0.24;
+  }
+  40% {
+    transform: translate3d(24%, 16%, 0) scale(1.15);
+    opacity: 0.35;
+  }
+  75% {
+    transform: translate3d(-10%, 24%, 0) scale(0.94);
+    opacity: 0.22;
+  }
+  100% {
+    transform: translate3d(-18%, -14%, 0) scale(1);
+    opacity: 0.24;
+  }
+}
+
+/* LAYER 4: Glass Light Sweep (10-16s) - Narrow reflection gleam travelling across facade */
+@keyframes glassLightSweep {
+  0% {
+    transform: translate3d(-120%, -60%, 0) rotate(28deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.65;
+  }
+  50% {
+    opacity: 0.85;
+  }
+  85% {
+    opacity: 0.40;
+  }
+  100% {
+    transform: translate3d(140%, 70%, 0) rotate(28deg);
+    opacity: 0;
+  }
+}
+
+/* Horizontal corporate light sweep across city (LEFT -> RIGHT -> RESET, 10-14s) */
+@keyframes corporateLightSweep {
+  0% {
+    transform: translate3d(-100vw, 0, 0);
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.60;
+  }
+  50% {
+    opacity: 0.85;
+  }
+  92% {
+    opacity: 0.60;
+  }
+  100% {
+    transform: translate3d(200vw, 0, 0);
+    opacity: 0;
+  }
+}
+
+/* Moving Financial Graph Gentle Float (8-12s) */
+@keyframes financialGraphFloat {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -9px, 0);
+  }
+}
+
+/* Streaming Dashed Trajectory */
+@keyframes graphDashFlow {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -120;
+  }
+}
+
+/* Subtle Glowing Trendline Pulse */
+@keyframes graphGlowPulse {
+  0%, 100% {
+    stroke-opacity: 0.75;
+    stroke-width: 2.2;
+  }
+  50% {
+    stroke-opacity: 1.0;
+    stroke-width: 2.7;
+  }
+}
+
+/* Financial Data Points Node Pulse */
+@keyframes graphNodePulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.80;
+  }
+  50% {
+    transform: scale(1.35);
+    opacity: 1;
+  }
+}
+
+/* Animated Financial Bar Heights - Rising & Falling (5-9s) */
+@keyframes finBarPulse1 {
+  0%, 100% {
+    transform: scaleY(0.40);
+    opacity: 0.45;
+  }
+  50% {
+    transform: scaleY(1.20);
+    opacity: 0.90;
+  }
+}
+
+@keyframes finBarPulse2 {
+  0%, 100% {
+    transform: scaleY(1.10);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scaleY(0.35);
+    opacity: 0.40;
+  }
+}
+
+@keyframes finBarPulse3 {
+  0%, 100% {
+    transform: scaleY(0.50);
+    opacity: 0.50;
+  }
+  50% {
+    transform: scaleY(1.25);
+    opacity: 0.95;
+  }
+}
+
+@keyframes finBarPulse4 {
+  0%, 100% {
+    transform: scaleY(0.90);
+    opacity: 0.75;
+  }
+  50% {
+    transform: scaleY(0.30);
+    opacity: 0.35;
+  }
+}
+
+@keyframes finBarPulse5 {
+  0%, 100% {
+    transform: scaleY(0.35);
+    opacity: 0.40;
+  }
+  50% {
+    transform: scaleY(1.15);
+    opacity: 0.85;
+  }
+}
+
+/* Building Window Lights Pulse - Slowly brighten/dim (Navy/Cool-Blue <-> Champagne-Gold, 6-12s) */
+@keyframes windowGlowA {
+  0%, 100% {
+    opacity: 0.20;
+    fill: #1E3A5F;
+  }
+  35% {
+    opacity: 0.60;
+    fill: #7DD3FC;
+  }
+  65% {
+    opacity: 0.95;
+    fill: #D8B56A;
+  }
+  85% {
+    opacity: 0.70;
+    fill: #F4E7C5;
+  }
+}
+
+@keyframes windowGlowB {
+  0%, 100% {
+    opacity: 0.95;
+    fill: #D8B56A;
+  }
+  30% {
+    opacity: 0.65;
+    fill: #CBD5E1;
+  }
+  60% {
+    opacity: 0.20;
+    fill: #0D2538;
+  }
+  85% {
+    opacity: 0.55;
+    fill: #38BDF8;
+  }
+}
+
+@keyframes windowGlowC {
+  0%, 100% {
+    opacity: 0.35;
+    fill: #38BDF8;
+  }
+  40% {
+    opacity: 0.95;
+    fill: #D8B56A;
+  }
+  75% {
+    opacity: 0.70;
+    fill: #CBD5E1;
+  }
+  90% {
+    opacity: 0.25;
+    fill: #132E43;
+  }
+}
+
+/* LAYER 5: Architectural Depth Parallax (20-30s) */
+@keyframes archDepthLayerA {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes archDepthLayerB {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Animation Classes */
+.animate-navy-base {
+  animation: navyBaseShift 22s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-glass-reflection {
+  animation: movingGlassReflection 16s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.animate-gold-drift {
+  animation: champagneGoldDrift 20s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.animate-gold-drift-2 {
+  animation: champagneGoldDrift 24s ease-in-out 6s infinite reverse;
+  will-change: transform, opacity;
+}
+
+.animate-light-sweep {
+  animation: glassLightSweep 13s cubic-bezier(0.35, 0.05, 0.25, 1) infinite;
+  will-change: transform, opacity;
+}
+
+.animate-corp-light-sweep {
+  animation: corporateLightSweep 12s cubic-bezier(0.35, 0.05, 0.25, 1) infinite;
+  will-change: transform, opacity;
+}
+
+.animate-financial-graph {
+  animation: financialGraphFloat 10s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-graph-dash {
+  animation: graphDashFlow 9s linear infinite;
+  will-change: stroke-dashoffset;
+}
+
+.animate-graph-line {
+  animation: graphGlowPulse 8s ease-in-out infinite;
+  will-change: stroke-opacity, stroke-width;
+}
+
+.animate-graph-node-1 {
+  animation: graphNodePulse 4.5s ease-in-out 0s infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.animate-graph-node-2 {
+  animation: graphNodePulse 5.0s ease-in-out 1.2s infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.animate-graph-node-3 {
+  animation: graphNodePulse 4.8s ease-in-out 2.4s infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.animate-graph-node-4 {
+  animation: graphNodePulse 5.2s ease-in-out 0.8s infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.animate-graph-node-5 {
+  animation: graphNodePulse 4.6s ease-in-out 1.8s infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.animate-fin-bar-1 { animation: finBarPulse1 5.8s ease-in-out 0s infinite; transform-origin: bottom; will-change: transform, opacity; }
+.animate-fin-bar-2 { animation: finBarPulse2 8.2s ease-in-out 1.2s infinite; transform-origin: bottom; will-change: transform, opacity; }
+.animate-fin-bar-3 { animation: finBarPulse3 6.5s ease-in-out 0.5s infinite; transform-origin: bottom; will-change: transform, opacity; }
+.animate-fin-bar-4 { animation: finBarPulse4 7.8s ease-in-out 2.1s infinite; transform-origin: bottom; will-change: transform, opacity; }
+.animate-fin-bar-5 { animation: finBarPulse5 5.2s ease-in-out 1.5s infinite; transform-origin: bottom; will-change: transform, opacity; }
+.animate-fin-bar-6 { animation: finBarPulse1 8.8s ease-in-out 2.8s infinite; transform-origin: bottom; will-change: transform, opacity; }
+.animate-fin-bar-7 { animation: finBarPulse3 7.0s ease-in-out 0.9s infinite; transform-origin: bottom; will-change: transform, opacity; }
+.animate-fin-bar-8 { animation: finBarPulse4 6.0s ease-in-out 1.7s infinite; transform-origin: bottom; will-change: transform, opacity; }
+.animate-fin-bar-9 { animation: finBarPulse2 7.4s ease-in-out 0.3s infinite; transform-origin: bottom; will-change: transform, opacity; }
+.animate-fin-bar-10 { animation: finBarPulse5 8.5s ease-in-out 2.4s infinite; transform-origin: bottom; will-change: transform, opacity; }
+
+.animate-window-glow-a {
+  animation: windowGlowA 7.5s ease-in-out infinite;
+  will-change: opacity, fill;
+}
+
+.animate-window-glow-b {
+  animation: windowGlowB 9.5s ease-in-out 1.8s infinite;
+  will-change: opacity, fill;
+}
+
+.animate-window-glow-c {
+  animation: windowGlowC 11.5s ease-in-out 3.5s infinite;
+  will-change: opacity, fill;
+}
+
+.animate-arch-depth-a {
+  animation: archDepthLayerA 22s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-arch-depth-b {
+  animation: archDepthLayerB 27s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Backward-compatible legacy classes for any other references */
+.animate-gold-light-1 {
+  animation: champagneGoldDrift 20s ease-in-out infinite;
+}
+.animate-gold-light-2 {
+  animation: champagneGoldDrift 24s ease-in-out 6s infinite reverse;
+}
+.animate-navy-shift {
+  animation: navyBaseShift 22s ease-in-out infinite;
+}
+.animate-arch-depth {
+  animation: archDepthLayerA 24s ease-in-out infinite;
+}
+.animate-glass-layer {
+  animation: archDepthLayerB 28s ease-in-out infinite;
+}
+.animate-glass-sweep {
+  animation: glassLightSweep 13s cubic-bezier(0.35, 0.05, 0.25, 1) infinite;
+}
+
+/* Mask utility for soft edge fades */
+.hero-portrait-mask {
+  mask-image: linear-gradient(to bottom, black 78%, rgba(0, 0, 0, 0.7) 90%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 78%, rgba(0, 0, 0, 0.7) 90%, transparent 100%);
+}
+
+/* Accessibility: Stop/reduce motion when user prefers reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-navy-base,
+  .animate-glass-reflection,
+  .animate-gold-drift,
+  .animate-gold-drift-2,
+  .animate-light-sweep,
+  .animate-corp-light-sweep,
+  .animate-financial-graph,
+  .animate-fin-bar-1,
+  .animate-fin-bar-2,
+  .animate-fin-bar-3,
+  .animate-fin-bar-4,
+  .animate-window-glow-a,
+  .animate-window-glow-b,
+  .animate-window-glow-c,
+  .animate-arch-depth-a,
+  .animate-arch-depth-b,
+  .animate-gold-light-1,
+  .animate-gold-light-2,
+  .animate-navy-shift,
+  .animate-arch-depth,
+  .animate-glass-layer,
+  .animate-glass-sweep {
+    animation: none !important;
+  }
+}
+
+/* Consistent muted-gold public interface accents. Home and original brand assets are excluded. */
+@media screen {
+:where(main section:not(#home), footer) [class~="text-[#0F766E]"],
+:where(main section:not(#home), footer) [class~="text-[#0f766e]"],
+:where(main section:not(#home), footer) [class~="text-teal-primary"],
+:where(main section:not(#home), footer) [class~="text-teal-300"],
+:where(main section:not(#home), footer) [class~="text-teal-400"],
+:where(main section:not(#home), footer) [class~="dark:text-teal-200"],
+:where(main section:not(#home), footer) [class~="dark:text-teal-300"],
+:where(main section:not(#home), footer) [class~="dark:text-teal-400"],
+:where(main section:not(#home), footer) [class~="dark:text-teal-500"],
+:where(main section:not(#home), footer) [class~="text-cyan-400"],
+:where(main section:not(#home), footer) [class~="dark:text-cyan-400"] { color:#D8B56A !important; }
+:where(main section:not(#home), footer) [class~="bg-[#E6F4F1]"],
+:where(main section:not(#home), footer) [class~="bg-teal-light"],
+:where(main section:not(#home), footer) [class~="dark:bg-teal-950/70"],
+:where(main section:not(#home), footer) [class~="dark:bg-teal-950/60"],
+:where(main section:not(#home), footer) [class~="dark:bg-teal-950/40"],
+:where(main section:not(#home), footer) [class~="dark:bg-teal-900/60"],
+:where(main section:not(#home), footer) [class~="bg-teal-950/50"] { background-color:rgba(216,181,106,.09) !important; }
+:where(main section:not(#home), footer) :is(h2,h3,h4) { color:#D8B56A; }
+:where(main section:not(#home), footer) .lucide { color:#D8B56A; }
+:where(main section:not(#home), footer) [class~="border-[#0F766E]/20"] { border-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="border-[#0F766E]/30"] { border-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="border-[#0F766E]/40"] { border-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="border-[#0F766E]/50"] { border-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="border-teal-500/20"] { border-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="border-teal-500/25"] { border-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="border-teal-500/30"] { border-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="border-teal-500/40"] { border-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="border-teal-500/50"] { border-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="dark:border-teal-500/35"] { border-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="dark:border-teal-500/40"] { border-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="dark:border-teal-500/50"] { border-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="dark:border-teal-700/60"] { border-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="dark:border-teal-800"] { border-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="dark:border-teal-950"] { border-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="dark:hover:border-teal-400/60"]:hover { border-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="dark:hover:border-teal-600/40"]:hover { border-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="dark:ring-teal-300/10"] { --tw-ring-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="focus-visible:ring-[#0F766E]"] { --tw-ring-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="focus:ring-[#0F766E]"] { --tw-ring-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="group-hover:border-[#0F766E]"]:hover { border-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="group-hover:border-[#0F766E]/40"]:hover { border-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="hover:border-[#087d69]/50"]:hover { border-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="hover:border-[#0F766E]/40"]:hover { border-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="hover:border-[#0F766E]/50"]:hover { border-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="hover:border-teal-400/30"]:hover { border-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="ring-[#0F766E]"] { --tw-ring-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="ring-[#0F766E]/20"] { --tw-ring-color:rgba(216,181,106,.35) !important; }
+:where(main section:not(#home), footer) [class~="ring-[#0F766E]/25"] { --tw-ring-color:rgba(216,181,106,.35) !important; }
+}
+
+/* ==============================================================
+   Pearl White & Champagne — scoped presentation-only theme.
+   Original Home/Hero, animations, component markup and data intact.
+   ============================================================= */
+:root {
+  --pearl-surface: #FAF8F3;
+  --pearl-alternate: #F0E9DC;
+  --pearl-card: #FFFFFF;
+  --pearl-ink: #071B2E;
+  --pearl-gold: #C5A15E;
+}
+
+/* Only non-Hero portfolio sections; both current light/dark modes. */
+:is(#about, #highlights, #expertise, #experience, #education, #software, #contact) {
+  background-color: var(--pearl-surface) !important;
+  color: var(--pearl-ink);
+  border-color: #E6DCCB !important;
+}
+:is(#highlights, #experience, #software) {
+  background-color: var(--pearl-alternate) !important;
+}
+/* Background overlays on sections with existing imagery remain in place. */
+:is(#about, #highlights, #expertise, #experience, #education, #software, #contact) > .absolute.inset-0.bg-gradient-to-b {
+  background-image: linear-gradient(to bottom, rgba(250,248,243,.92), rgba(250,248,243,.80), rgba(250,248,243,.94)) !important;
+}
+/* Keep expanded Work Experience navy responsibility panels completely unchanged. */
+#experience .company-3d-text {
+  color: var(--pearl-ink) !important;
+  text-shadow: 0 1px 1px rgba(7,27,46,.12) !important;
+}
+:is(#about, #highlights, #expertise, #experience, #education, #software, #contact) .main-heading-3d {
+  color: var(--pearl-ink) !important;
+  text-shadow: 0 1px 0 #fff, 0 3px 6px rgba(7,27,46,.12) !important;
+}
+:is(#about, #highlights, #expertise, #experience, #education, #software, #contact) .main-heading-3d:hover {
+  color: var(--pearl-gold) !important;
+}
+/* Experience outer cards only; nested dark expanded panel remains navy. */
+#experience .group > .rounded-2xl.border {
+  background-color: var(--pearl-card) !important;
+  border-color: #E5D9C6 !important;
+}
+#experience .group > .rounded-2xl.border:hover {
+  border-color: var(--pearl-gold) !important;
+}
+#experience .group > .rounded-2xl.border > button {
+  color: var(--pearl-ink);
+}
+/* Preserve component-local gold highlights and dark navy expanded panels. */
