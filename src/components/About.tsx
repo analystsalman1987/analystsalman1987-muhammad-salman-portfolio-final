@@ -32,8 +32,8 @@ export function About({ profile: _profile, onOpenCV }: AboutProps) {
         justify-center
         overflow-hidden
         border-b
-        border-[#E6DCCB]
-        bg-[#FAF8F3]
+        border-[#0D2538]
+        bg-[#081A2B]
         py-12
         sm:py-16
         lg:py-0
@@ -109,13 +109,13 @@ export function About({ profile: _profile, onOpenCV }: AboutProps) {
                 {isRTL ? t.tag : 'ABOUT ME'}
               </span>
 
-              <h2 className="main-heading-3d text-3xl font-extrabold tracking-tight text-[#071B2E] sm:text-4xl lg:text-5xl">
+              <h2 className="main-heading-3d text-3xl font-extrabold tracking-tight text-[#F8FAFC] sm:text-4xl lg:text-5xl">
                 {isRTL ? t.title : 'Professional Summary'}
               </h2>
             </div>
 
             {/* PROFESSIONAL SUMMARY */}
-            <div className="space-y-4 text-sm leading-relaxed text-[#34465A] sm:text-base sm:leading-[1.8]">
+            <div className="space-y-4 text-sm leading-relaxed text-[#CBD5E1] sm:text-base sm:leading-[1.8]">
               <p>
                 {isRTL
                   ? t.summaryP1
@@ -223,7 +223,7 @@ export function About({ profile: _profile, onOpenCV }: AboutProps) {
                   rounded-xl
                   border
                   border-[#D8B56A]/30
-                  bg-white/90
+                  bg-[#0D2538]/80
                   p-4
                   text-center
                   shadow-md
@@ -232,18 +232,18 @@ export function About({ profile: _profile, onOpenCV }: AboutProps) {
                   duration-300
                   hover:-translate-y-1
                   hover:border-[#D8B56A]/60
-                  hover:bg-[#FFF9EC]
+                  hover:bg-[#102B40]
                 "
               >
-                <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-lg bg-[#F0E9DC] text-[#C5A15E]">
+                <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-lg bg-[#132E43] text-[#D8B56A]">
                   <CalendarDays className="h-5 w-5" />
                 </div>
 
-                <div className="text-2xl font-black text-[#071B2E]">
+                <div className="text-2xl font-black text-[#F8FAFC]">
                   14+
                 </div>
 
-                <div className="mt-1 text-xs font-bold text-[#526175]">
+                <div className="mt-1 text-xs font-bold text-[#CBD5E1]">
                   {isRTL ? t.yearsExpLabel : 'Years Experience'}
                 </div>
               </div>
@@ -258,7 +258,7 @@ export function About({ profile: _profile, onOpenCV }: AboutProps) {
                   rounded-xl
                   border
                   border-[#D8B56A]/30
-                  bg-white/90
+                  bg-[#0D2538]/80
                   p-4
                   text-center
                   shadow-md
@@ -267,18 +267,18 @@ export function About({ profile: _profile, onOpenCV }: AboutProps) {
                   duration-300
                   hover:-translate-y-1
                   hover:border-[#D8B56A]/60
-                  hover:bg-[#FFF9EC]
+                  hover:bg-[#102B40]
                 "
               >
-                <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-lg bg-[#F0E9DC] text-[#C5A15E]">
+                <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-lg bg-[#132E43] text-[#D8B56A]">
                   <GraduationCap className="h-5 w-5" />
                 </div>
 
-                <div className="text-xl font-black text-[#071B2E]">
+                <div className="text-xl font-black text-[#F8FAFC]">
                   MBA / BBA
                 </div>
 
-                <div className="mt-1 text-xs font-bold text-[#526175]">
+                <div className="mt-1 text-xs font-bold text-[#CBD5E1]">
                   {isRTL ? 'المحاسبة والمالية' : 'Accounting & Finance'}
                 </div>
               </div>
@@ -293,7 +293,7 @@ export function About({ profile: _profile, onOpenCV }: AboutProps) {
                   rounded-xl
                   border
                   border-[#D8B56A]/30
-                  bg-white/90
+                  bg-[#0D2538]/80
                   p-4
                   text-center
                   shadow-md
@@ -302,18 +302,18 @@ export function About({ profile: _profile, onOpenCV }: AboutProps) {
                   duration-300
                   hover:-translate-y-1
                   hover:border-[#D8B56A]/60
-                  hover:bg-[#FFF9EC]
+                  hover:bg-[#102B40]
                 "
               >
-                <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-lg bg-[#F0E9DC] text-[#C5A15E]">
+                <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-lg bg-[#132E43] text-[#D8B56A]">
                   <FileText className="h-5 w-5" />
                 </div>
 
-                <div className="text-xl font-black text-[#071B2E]">
+                <div className="text-xl font-black text-[#F8FAFC]">
                   ZATCA
                 </div>
 
-                <div className="mt-1 text-xs font-bold text-[#526175]">
+                <div className="mt-1 text-xs font-bold text-[#CBD5E1]">
                   {isRTL
                     ? 'إقرارات ضريبة القيمة المضافة'
                     : 'VAT Reporting'}
@@ -332,11 +332,11 @@ export function About({ profile: _profile, onOpenCV }: AboutProps) {
                 justify-between
                 gap-3
                 border-t
-                border-[#E6DCCB]
+                border-[#132E43]
                 pt-4
                 text-xs
                 font-medium
-                text-[#526175]
+                text-[#CBD5E1]
               "
             >
               <div className="flex items-center gap-2">
@@ -360,7 +360,7 @@ export function About({ profile: _profile, onOpenCV }: AboutProps) {
                     rounded-md
                     border
                     border-[#D8B56A]/30
-                    bg-white
+                    bg-[#0D2538]
                     px-2.5
                     py-1
                     text-[11px]
@@ -388,16 +388,16 @@ export function About({ profile: _profile, onOpenCV }: AboutProps) {
                     gap-1.5
                     rounded-md
                     border
-                    border-[#E6DCCB]
-                    bg-white
+                    border-[#132E43]
+                    bg-[#0D2538]
                     px-2.5
                     py-1
                     text-[11px]
                     font-semibold
-                    text-[#34465A]
+                    text-[#CBD5E1]
                     transition-colors
                     hover:border-[#D8B56A]/50
-                    hover:text-[#071B2E]
+                    hover:text-[#F8FAFC]
                   "
                   title="Ahmed Yahya Alyami Contracting Co."
                 >
