@@ -11,17 +11,17 @@ interface SoftwareItem {
 }
 
 const softwareItems: SoftwareItem[] = [
-  { name: 'OFIS (Powered by Oracle)', category: 'ERP', logo: '/images/software/oracle-logo.svg', fallback: 'OFIS (Powered by Oracle)', nameColor: 'text-[#17324A]' },
-  { name: 'QuickBooks', category: 'Accounting', logo: '/images/software/quickbooks-logo.svg', fallback: 'QuickBooks', nameColor: 'text-[#17324A]' },
-  { name: 'Arqami', category: 'ERP', logo: '/images/software/Arqami Logo.png', fallback: 'ARQAMI', nameColor: 'text-[#17324A]' },
-  { name: 'Delta Financial', category: 'Financial', logo: '/images/software/delta-logo.svg', fallback: 'DELTA', nameColor: 'text-[#17324A]' },
-  { name: 'SMACC', category: 'ERP', logo: '/images/software/smacc-logo.png', fallback: 'SMACC', nameColor: 'text-[#17324A]' },
-  { name: 'Daftra', category: 'Cloud', logo: '/images/software/Daftra logo.png', fallback: 'DAFTRA', nameColor: 'text-[#17324A]' },
-  { name: 'Qoyod', category: 'Cloud', logo: '/images/software/Qoyod logo.png', fallback: 'QOYOD', nameColor: 'text-[#17324A]' },
-  { name: 'Peachtree', category: 'Accounting', logo: '/images/software/Peachtree logo.png', fallback: 'PEACHTREE', nameColor: 'text-[#17324A]' },
-  { name: 'Tally', category: 'Accounting', logo: '/images/software/Tally logo.png', fallback: 'TALLY', nameColor: 'text-[#17324A]' },
-  { name: 'Advanced Microsoft Excel', category: 'Productivity', logo: '/images/software/excel-logo.svg', fallback: 'EXCEL', nameColor: 'text-[#17324A]' },
-  { name: 'Microsoft Office', category: 'Productivity', logo: '/images/software/office-logo.svg', fallback: 'OFFICE', nameColor: 'text-[#17324A]' },
+  { name: 'OFIS (Powered by Oracle)', category: 'ERP', logo: '/images/software/oracle-logo.svg', fallback: 'OFIS (Powered by Oracle)', nameColor: 'text-[#F3F7FA]' },
+  { name: 'QuickBooks', category: 'Accounting', logo: '/images/software/quickbooks-logo.svg', fallback: 'QuickBooks', nameColor: 'text-[#F3F7FA]' },
+  { name: 'Arqami', category: 'ERP', logo: '/images/software/Arqami Logo.png', fallback: 'ARQAMI', nameColor: 'text-[#F3F7FA]' },
+  { name: 'Delta Financial', category: 'Financial', logo: '/images/software/delta-logo.svg', fallback: 'DELTA', nameColor: 'text-[#F3F7FA]' },
+  { name: 'SMACC', category: 'ERP', logo: '/images/software/smacc-logo.png', fallback: 'SMACC', nameColor: 'text-[#F3F7FA]' },
+  { name: 'Daftra', category: 'Cloud', logo: '/images/software/Daftra logo.png', fallback: 'DAFTRA', nameColor: 'text-[#F3F7FA]' },
+  { name: 'Qoyod', category: 'Cloud', logo: '/images/software/Qoyod logo.png', fallback: 'QOYOD', nameColor: 'text-[#F3F7FA]' },
+  { name: 'Peachtree', category: 'Accounting', logo: '/images/software/Peachtree logo.png', fallback: 'PEACHTREE', nameColor: 'text-[#F3F7FA]' },
+  { name: 'Tally', category: 'Accounting', logo: '/images/software/Tally logo.png', fallback: 'TALLY', nameColor: 'text-[#F3F7FA]' },
+  { name: 'Advanced Microsoft Excel', category: 'Productivity', logo: '/images/software/excel-logo.svg', fallback: 'EXCEL', nameColor: 'text-[#F3F7FA]' },
+  { name: 'Microsoft Office', category: 'Productivity', logo: '/images/software/office-logo.svg', fallback: 'OFFICE', nameColor: 'text-[#F3F7FA]' },
 ];
 
 const categoryStyles: Record<Category, string> = {
@@ -46,7 +46,7 @@ function SoftwareLogo({ item }: { item: SoftwareItem }) {
   }
 
   return (
-    <div className="flex min-h-[64px] w-full max-w-[136px] items-center justify-center rounded-lg bg-white px-2 py-1 shadow-xs border border-[#C5D5E2]/40 transition-colors duration-300">
+    <div className="flex min-h-[64px] w-full max-w-[136px] items-center justify-center px-2 py-1 transition-colors duration-300">
       <img
         src={item.logo}
         alt={`${item.name} logo`}
@@ -66,8 +66,8 @@ export function Software(_props?: SoftwareProps) {
   return (
     <section
       id="software"
-      className="misty-portfolio relative overflow-hidden border-b border-[#C5D5E2] bg-[#A7C6E1] py-16 transition-colors duration-300 sm:py-20"
-      style={{ backgroundColor: '#A7C6E1' }}
+      className="misty-portfolio relative overflow-hidden border-b border-[#C5D5E2] bg-[#305879] py-16 transition-colors duration-300 sm:py-20"
+      style={{ backgroundColor: '#305879' }}
     >
       <div className="relative z-10 mx-auto max-w-[1380px] px-5 sm:px-8 lg:px-12">
         {/* SECTION HEADER */}
@@ -81,7 +81,7 @@ export function Software(_props?: SoftwareProps) {
                 ERP Systems &amp; Accounting Software
               </h2>
             </div>
-            <p className="mt-1 text-sm text-[#52677A]">
+            <p className="mt-1 text-sm text-[#F3F7FA]">
               Tools and systems I have worked with for accounting, reporting,
               inventory, AP/AR and financial management.
             </p>
@@ -93,7 +93,7 @@ export function Software(_props?: SoftwareProps) {
           {softwareItems.map((item) => (
             <div
               key={item.name}
-              className="group flex min-h-[88px] items-center rounded-xl border border-[#C5D5E2] bg-[#F3F7FA] px-4 py-3 shadow-xs transition-all duration-300 ease-out hover:-translate-y-1 hover:border-[#BE9852]/60 hover:bg-white hover:shadow-md"
+              className="group flex min-h-[88px] items-center px-4 py-3 transition-colors duration-300"
             >
               {/* SOFTWARE LOGO */}
               <div className="flex min-w-0 flex-1 items-center justify-center pr-3">
@@ -105,7 +105,7 @@ export function Software(_props?: SoftwareProps) {
 
               {/* CATEGORY BADGE */}
               <div className="flex min-w-[86px] shrink-0 items-center justify-center pl-3">
-                <span className={`shrink-0 rounded-full border px-2.5 py-1 text-[9px] font-black uppercase tracking-[0.02em] shadow-2xs ${categoryStyles[item.category]}`}>
+                <span className={`shrink-0 text-[11px] font-bold uppercase tracking-wide text-[#E5C78E]`}>
                   {item.category}
                 </span>
               </div>
