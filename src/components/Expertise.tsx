@@ -119,7 +119,7 @@ function ExpertiseSideNetwork() {
     const context = canvas.getContext('2d');
     if (!context) return;
 
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    // Decorative motion runs continuously while this section is mounted.
     let frame = 0;
     let width = 0;
     let height = 0;
@@ -147,7 +147,7 @@ function ExpertiseSideNetwork() {
       // Recreating dots on every section resize made the entire network jump.
       if (dots.length) {
         for (const dot of dots) {
-          dot.y = oldHeight > 0 ? dot.y * height / oldHeight : dot.y;
+          dot.y = Math.max(0, Math.min(height, dot.y));
           const oldSideStart = dot.side === 0 ? 0 : oldWidth * 0.81;
           const oldSideSize = oldWidth * 0.19;
           const fraction = oldSideSize > 0 ? (dot.x - oldSideStart) / oldSideSize : 0.5;
@@ -156,15 +156,15 @@ function ExpertiseSideNetwork() {
         return;
       }
 
-      const count = 48;
+      const count = 80;
       dots = Array.from({ length: count }, (_, i) => {
         const side = i % 2 === 0;
         return {
           x: side ? Math.random() * width * 0.19 : width * (0.81 + Math.random() * 0.19),
           y: Math.random() * height,
-          vx: (Math.random() < 0.5 ? -1 : 1) * (0.28 + Math.random() * 0.34),
-          vy: (Math.random() < 0.5 ? -1 : 1) * (0.28 + Math.random() * 0.34),
-          r: 0.8 + Math.random() * 1.2,
+          vx: (Math.random() < 0.5 ? -1 : 1) * (0.45 + Math.random() * 0.45),
+          vy: (Math.random() < 0.5 ? -1 : 1) * (0.45 + Math.random() * 0.45),
+          r: 1.3 + Math.random() * 1.4,
           depth: 0.65 + Math.random() * 0.6,
           side: side ? 0 : 1,
         };
@@ -181,7 +181,7 @@ function ExpertiseSideNetwork() {
       }
 
       for (const dot of dots) {
-        if (!reduceMotion.matches) {
+        {
           dot.x += dot.vx * delta;
           dot.y += dot.vy * delta;
           if (dot.y < 0 || dot.y > height) dot.vy *= -1;
@@ -200,7 +200,7 @@ function ExpertiseSideNetwork() {
           const distance = Math.hypot(a.x - b.x, a.y - b.y);
           if (distance > 125) continue;
           context.beginPath();
-          context.strokeStyle = `rgba(220,231,240,${(1 - distance / 125) * 0.20})`;
+          context.strokeStyle = `rgba(220,231,240,${(1 - distance / 125) * 0.46})`;
           context.lineWidth = 0.7;
           context.moveTo(a.x, a.y);
           context.lineTo(b.x, b.y);
@@ -212,10 +212,10 @@ function ExpertiseSideNetwork() {
         context.fill();
         context.beginPath();
         context.arc(a.x, a.y, a.r * a.depth, 0, Math.PI * 2);
-        context.fillStyle = 'rgba(229,199,142,0.72)';
+        context.fillStyle = 'rgba(229,199,142,0.98)';
         context.fill();
       });
-      if (!reduceMotion.matches) frame = window.requestAnimationFrame(draw);
+      frame = window.requestAnimationFrame(draw);
     };
 
     const observer = new ResizeObserver(resize);
@@ -232,10 +232,10 @@ function ExpertiseSideNetwork() {
     <canvas
       ref={canvasRef}
       aria-hidden="true"
-      className="absolute inset-0 z-[1] h-full w-full pointer-events-none"
+      className="absolute inset-0 z-20 h-full w-full pointer-events-none"
       style={{
-        maskImage: 'linear-gradient(to right, black 0%, black 11%, transparent 24%, transparent 76%, black 89%, black 100%)',
-        WebkitMaskImage: 'linear-gradient(to right, black 0%, black 11%, transparent 24%, transparent 76%, black 89%, black 100%)',
+        maskImage: 'linear-gradient(to right, black 0%, black 14%, transparent 27%, transparent 73%, black 86%, black 100%)',
+        WebkitMaskImage: 'linear-gradient(to right, black 0%, black 14%, transparent 27%, transparent 73%, black 86%, black 100%)',
       }}
     />
   );
