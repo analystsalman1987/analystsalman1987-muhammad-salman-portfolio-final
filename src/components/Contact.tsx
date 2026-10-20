@@ -111,7 +111,7 @@ export function Contact({ profile }: ContactProps) {
   };
 
   return (
-    <section id="contact" className="misty-portfolio relative py-20 bg-[#A7C6E1] border-b border-[#C5D5E2] transition-colors overflow-hidden" style={{ backgroundColor: '#A7C6E1' }}>
+    <section id="contact" className="misty-portfolio relative py-20 bg-[#305879] border-b border-[#C5D5E2] transition-colors overflow-hidden" style={{ backgroundColor: '#305879' }}>
       {/* Subtle Modern Corporate Business Communication Workspace Background Image */}
       <div 
         className="absolute inset-0 pointer-events-none z-0"
