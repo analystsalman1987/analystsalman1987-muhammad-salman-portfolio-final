@@ -64,9 +64,9 @@ interface SoftwareProps {
 
 export function Software(_props?: SoftwareProps) {
   return (
-    <section
+    <section style={{ backgroundColor: "#34485D", color: "#E8DCC5", borderColor: "#63758A" }}
       id="software"
-      className="relative overflow-hidden border-b border-slate-200 bg-slate-50 py-16 transition-colors duration-300 dark:border-slate-700 dark:bg-slate-900 sm:py-20"
+      className="deep-slate-champagne relative overflow-hidden border-b border-slate-200 bg-slate-50 py-16 transition-colors duration-300 dark:border-slate-700 dark:bg-slate-900 sm:py-20"
     >
       <div className="relative z-10 mx-auto max-w-[1380px] px-5 sm:px-8 lg:px-12">
         {/* SECTION HEADER — unchanged */}
