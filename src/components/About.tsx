@@ -24,7 +24,7 @@ export function About({ profile: _profile, onOpenCV }: AboutProps) {
   return (
     <section
       id="about"
-      className="
+      className="misty-portfolio 
         relative
         flex
         min-h-[calc(100vh-5rem)]
