@@ -352,10 +352,10 @@ export function Experience({ experience, isSelected, onToggleSelect }: Experienc
 
         {/* Card Container */}
         <div 
-          className={`rounded-2xl border transition-all duration-300 shadow-xs overflow-hidden ${
+          className={`experience-company-card ${isExpanded ? "experience-company-expanded" : "experience-company-closed"} rounded-2xl border transition-all duration-300 shadow-xs overflow-hidden ${
             isExpanded
-              ? 'border-[#BE9852]/60 ring-1 ring-[#BE9852]/25 bg-white shadow-md'
-              : 'bg-[#F3F7FA] border-[#C5D5E2] hover:border-[#BE9852]/60 hover:bg-white'
+              ? 'border-[#BE9852]/60 ring-1 ring-[#BE9852]/25 bg-[#F3F7FA] shadow-md'
+              : 'bg-[#254866] border-[#52718A] hover:border-[#BE9852]/60 hover:bg-[#254866]'
           }`}
         >
           {/* Clickable Header Button / Summary Area */}
@@ -368,7 +368,7 @@ export function Experience({ experience, isSelected, onToggleSelect }: Experienc
             <div className="relative flex flex-col sm:flex-row sm:items-start justify-between gap-4">
               {/* LEFT SIDE: 1. Company Name, 2. Designation / Job Title, 3. Location, 4. Date Directly Below Location */}
               <div className={`space-y-1.5 min-w-0 ${logoInfo ? 'sm:max-w-[68%]' : 'sm:max-w-[85%]'}`}>
-                <h3 className="company-3d-text text-lg sm:text-xl font-bold !text-[#F3F7FA] group-hover:!text-[#BE9852] transition-colors leading-snug">
+                <h3 className="company-3d-text text-lg sm:text-xl font-bold transition-colors leading-snug">
                   {companyName}
                 </h3>
 
@@ -461,7 +461,7 @@ export function Experience({ experience, isSelected, onToggleSelect }: Experienc
           >
             <div className="overflow-hidden">
               <div className="p-4 sm:p-6 pt-1 sm:pt-2">
-                <div className="experience-responsibilities relative rounded-2xl p-5 sm:p-6 bg-[#F3F7FA] text-[#34495E] border border-[#C5D5E2] shadow-sm">
+                <div className="experience-responsibilities relative rounded-2xl p-5 sm:p-6 bg-[#254866] text-[#F3F7FA] border border-[#52718A] shadow-sm">
                   
                   {/* Header: Key Responsibilities */}
                   <div className="relative z-10 flex flex-wrap items-center justify-between gap-3 mb-4 pb-3 border-b border-[#C5D5E2]">
@@ -632,6 +632,26 @@ export function Experience({ experience, isSelected, onToggleSelect }: Experienc
         #experience .experience-job .experience-responsibilities-toggle svg {
           color: #be9852 !important;
         }
+
+        /* Approved Experience scheme: dark groups, white expanded company card, navy responsibility panel. */
+        #experience .experience-group { background:#254866 !important; border-color:#52718A !important; }
+        #experience .experience-group-trigger { background:#254866 !important; }
+        #experience .experience-group-trigger:hover { background:#2C5273 !important; }
+        #experience .experience-group-title { color:#E5C78E !important; -webkit-text-fill-color:#E5C78E !important; }
+        #experience .experience-group-subtitle { color:#F3F7FA !important; -webkit-text-fill-color:#F3F7FA !important; }
+        #experience .experience-company-closed { background:#254866 !important; }
+        #experience .experience-company-expanded { background:#F3F7FA !important; }
+        #experience .experience-company-expanded .company-3d-text {color:#17324A !important;-webkit-text-fill-color:#17324A !important;}
+        #experience .experience-company-expanded .text-\\[\\#52677A\\],
+        #experience .experience-company-expanded .text-\\[\\#52677A\\] span {color:#17324A !important;-webkit-text-fill-color:#17324A !important;}
+        #experience .experience-company-expanded .experience-date {background:#E1EBF3 !important;color:#17324A !important;}
+        #experience .experience-company-expanded .experience-date span {color:#17324A !important;-webkit-text-fill-color:#17324A !important;}
+        #experience .experience-company-expanded .experience-responsibilities {background:#254866 !important;color:#F3F7FA !important;}
+        #experience .experience-company-expanded .experience-responsibilities h4 {color:#E5C78E !important;-webkit-text-fill-color:#E5C78E !important;}
+        #experience .experience-company-expanded .experience-duty {background:#DCE7F0 !important;}
+        #experience .experience-company-expanded .experience-duty strong,
+        #experience .experience-company-expanded .experience-duty span {color:#17324A !important;-webkit-text-fill-color:#17324A !important;}
+        #experience .experience-company-expanded .experience-responsibilities-toggle {background:#1E3A56 !important;}
       `}</style>
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
@@ -683,22 +703,22 @@ export function Experience({ experience, isSelected, onToggleSelect }: Experienc
         {/* Experience Groups — both collapsed by default */}
         <div className="space-y-5">
           {/* Full-Time Experience */}
-          <div className="rounded-2xl border border-[#C5D5E2] bg-[#F3F7FA] overflow-hidden shadow-xs">
+          <div className="experience-group rounded-2xl border border-[#C5D5E2] bg-[#F3F7FA] overflow-hidden shadow-xs">
             <button
               type="button"
               onClick={() => toggleCategory('full-time')}
               aria-expanded={isFullTimeOpen}
-              className="w-full flex items-center justify-between gap-4 px-5 sm:px-6 py-4 text-left rtl:text-right hover:bg-white/80 transition-colors cursor-pointer select-none touch-manipulation"
+              className="experience-group-trigger w-full flex items-center justify-between gap-4 px-5 sm:px-6 py-4 text-left rtl:text-right transition-colors cursor-pointer select-none touch-manipulation"
             >
               <div className="flex items-center gap-3">
                 <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[#BE9852]/15 text-[#BE9852] border border-[#BE9852]/25">
                   <Briefcase className="w-4.5 h-4.5" />
                 </span>
                 <div>
-                  <h3 className="text-base sm:text-lg font-bold text-[#17324A]">
+                  <h3 className="experience-group-title text-base sm:text-lg font-bold text-[#BE9852]">
                     {isRTL ? 'الخبرة بدوام كامل' : 'Full-Time Experience'}
                   </h3>
-                  <p className="text-xs text-[#52677A]">
+                  <p className="experience-group-subtitle text-xs text-[#F3F7FA]">
                     {isRTL ? `${formalJobs.length} وظائف مهنية` : `${formalJobs.length} professional roles`}
                   </p>
                 </div>
@@ -728,22 +748,22 @@ export function Experience({ experience, isSelected, onToggleSelect }: Experienc
           </div>
 
           {/* Remote / Part-Time Experience */}
-          <div id="experience-remote" className="rounded-2xl border border-[#C5D5E2] bg-[#F3F7FA] overflow-hidden shadow-xs scroll-mt-24">
+          <div id="experience-remote" className="experience-group rounded-2xl border border-[#C5D5E2] bg-[#F3F7FA] overflow-hidden shadow-xs scroll-mt-24">
             <button
               type="button"
               onClick={() => toggleCategory('remote')}
               aria-expanded={isRemoteOpen}
-              className="w-full flex items-center justify-between gap-4 px-5 sm:px-6 py-4 text-left rtl:text-right hover:bg-white/80 transition-colors cursor-pointer select-none touch-manipulation"
+              className="experience-group-trigger w-full flex items-center justify-between gap-4 px-5 sm:px-6 py-4 text-left rtl:text-right transition-colors cursor-pointer select-none touch-manipulation"
             >
               <div className="flex items-center gap-3">
                 <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[#BE9852]/15 text-[#BE9852] border border-[#BE9852]/25">
                   <Briefcase className="w-4.5 h-4.5" />
                 </span>
                 <div>
-                  <h3 className="text-base sm:text-lg font-bold text-[#17324A]">
+                  <h3 className="experience-group-title text-base sm:text-lg font-bold text-[#BE9852]">
                     {isRTL ? 'الخبرة عن بُعد / بدوام جزئي' : 'Remote / Part-Time Experience'}
                   </h3>
-                  <p className="text-xs text-[#52677A]">
+                  <p className="experience-group-subtitle text-xs text-[#F3F7FA]">
                     {isRTL ? `${remoteJobs.length} مهام محاسبية` : `${remoteJobs.length} accounting engagements`}
                   </p>
                 </div>
