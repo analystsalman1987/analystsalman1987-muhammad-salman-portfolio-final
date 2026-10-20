@@ -640,3 +640,160 @@
 #experience .group > .rounded-2xl.border > button .text-\[\#1F2937\] {color:#F4E9D5 !important;}
 #experience .group > .rounded-2xl.border > button .text-\[\#64748B\] {color:#D2DCE6 !important;}
 /* Leave the navy expanded responsibility content, logos, software chips, all animations alone. */
+
+
+/* ===============================================================
+   MISTY BLUE / ACCOUNTANT PORTFOLIO — FINAL CONSISTENT PALETTE
+   Scope: About through Contact only. Hero, navigation, admin, and
+   all animations remain outside these selectors.
+   =============================================================== */
+:root {
+  --misty-bg: #DCE7F0;
+  --misty-card: #F3F7FA;
+  --misty-heading: #17324A;
+  --misty-text: #34495E;
+  --misty-gold: #BE9852;
+  --misty-border: #C2D2DF;
+}
+section.misty-portfolio,
+html.dark section.misty-portfolio {
+  background: var(--misty-bg) !important;
+  background-color: var(--misty-bg) !important;
+  color: var(--misty-text) !important;
+  border-color: var(--misty-border) !important;
+}
+/* Clear old dark masks, retaining the original image and particles. */
+section.misty-portfolio > .absolute.inset-0.bg-gradient-to-b,
+section.misty-portfolio > .absolute.inset-0.pointer-events-none.z-0.bg-gradient-to-b,
+section.misty-portfolio > div.absolute.inset-0.pointer-events-none.z-0.bg-gradient-to-b,
+section.misty-portfolio > div.absolute.inset-0.bg-gradient-to-b {
+  background: transparent !important;
+}
+section.misty-portfolio > div.absolute.inset-0.pointer-events-none.z-0 img + div.absolute.inset-0,
+section.misty-portfolio > div.absolute.inset-0 img + div.absolute.inset-0 {
+  background: linear-gradient(180deg, rgba(220,231,240,.82), rgba(220,231,240,.69), rgba(220,231,240,.85)) !important;
+}
+/* Shared heading format, without altering wording or layout. */
+section.misty-portfolio h2,
+section.misty-portfolio h2.main-heading-3d,
+html.dark section.misty-portfolio h2.main-heading-3d {
+  color: var(--misty-heading) !important;
+  -webkit-text-fill-color: var(--misty-heading) !important;
+  text-shadow: none !important;
+  font-weight: 800 !important;
+  letter-spacing: -.025em !important;
+}
+section.misty-portfolio h3,
+section.misty-portfolio h4,
+section.misty-portfolio .company-3d-text,
+html.dark section.misty-portfolio .company-3d-text {
+  color: var(--misty-heading) !important;
+  text-shadow: none !important;
+}
+section.misty-portfolio p,
+section.misty-portfolio li,
+section.misty-portfolio label,
+section.misty-portfolio input,
+section.misty-portfolio textarea {
+  color: var(--misty-text) !important;
+}
+section.misty-portfolio [class*="text-slate-400"],
+section.misty-portfolio [class*="text-slate-300"],
+section.misty-portfolio [class*="text-slate-200"],
+section.misty-portfolio [class*="text-[#64748B]"],
+section.misty-portfolio [class*="text-[#94A3B8]"] {
+  color: var(--misty-text) !important;
+}
+/* Category tiles and content panels — same treatment in every section. */
+section.misty-portfolio :is(article,li,[class*="rounded-xl"],[class*="rounded-2xl"]):is([class*="bg-slate"],[class*="bg-[#0"],[class*="bg-[#1"],[class*="bg-[#2"],[class*="bg-[#3"],[class*="bg-[#4"],[class*="bg-white"],[class*="bg-[#F4F6F8]"]) {
+  background: var(--misty-card) !important;
+  background-color: var(--misty-card) !important;
+  border-color: var(--misty-border) !important;
+  box-shadow: 0 3px 14px rgba(23,50,74,.055) !important;
+}
+/* Tailwind dark backgrounds often win due to later cascade; explicitly unify. */
+html.dark section.misty-portfolio :is(article,li,[class*="rounded-xl"],[class*="rounded-2xl"]):is([class*="dark:bg"],[class*="bg-slate"],[class*="bg-white"],[class*="bg-[#0"],[class*="bg-[#1"],[class*="bg-[#2"],[class*="bg-[#3"],[class*="bg-[#4"]) {
+  background: var(--misty-card) !important;
+  border-color: var(--misty-border) !important;
+}
+section.misty-portfolio [class*="border-slate"],
+section.misty-portfolio [class*="border-[#C9A45C]"] {
+  border-color: var(--misty-border) !important;
+}
+section.misty-portfolio [class*="text-[#D8B56A]"],
+section.misty-portfolio [class*="text-[#C9A45C]"],
+section.misty-portfolio [class*="text-[#E2C47E]"] {
+  color: var(--misty-gold) !important;
+}
+/* Gold small labels remain legible on light surfaces. */
+section.misty-portfolio > div :is(span,small)[class*="tracking-widest"] {
+  color: #9B7433 !important;
+}
+/* About: restore clean light cards while preserving portrait and effects. */
+#about.misty-portfolio [class*="bg-[#081A2B]"],
+#about.misty-portfolio [class*="bg-[#0D2538]"],
+#about.misty-portfolio [class*="bg-[#132E43]"] {
+  background-color: var(--misty-card) !important;
+}
+#about.misty-portfolio > div.absolute.inset-0 { opacity: .38; }
+/* Highlights image preserved with a gentle light overlay. */
+#highlights.misty-portfolio > div.absolute.inset-0 img { opacity: .16 !important; }
+#highlights.misty-portfolio ul li,
+#highlights.misty-portfolio [class*="rounded-xl"][class*="bg-"] {
+  background: var(--misty-card) !important;
+  border-color: var(--misty-border) !important;
+}
+/* Expertise: remove original almost-black backdrop. */
+#expertise.misty-portfolio > div.absolute.inset-0 { background: transparent !important; }
+#expertise.misty-portfolio button[class*="rounded"],
+#expertise.misty-portfolio [class*="rounded-xl"][class*="bg-"] {
+  background: var(--misty-card) !important;
+  border-color: var(--misty-border) !important;
+}
+/* Work experience: light cards, no heavy dark glass. */
+#experience.misty-portfolio > div.absolute.inset-0 { background: transparent !important; }
+#experience.misty-portfolio [class*="rounded-2xl"][class*="bg-"] ,
+#experience.misty-portfolio [class*="rounded-xl"][class*="bg-"] {
+  background: var(--misty-card) !important;
+  border-color: var(--misty-border) !important;
+  box-shadow: 0 3px 14px rgba(23,50,74,.05) !important;
+}
+#experience.misty-portfolio .company-3d-text { font-weight: 700 !important; }
+#experience.misty-portfolio .experience-date { margin-top: 6px; width: max-content; }
+#experience.misty-portfolio .experience-date span { color: var(--misty-text) !important; }
+#experience.misty-portfolio [class*="bg-gradient-to-b"][class*="from-[#081B2E]"] {
+  background: #EAF1F6 !important;
+  border-color: var(--misty-border) !important;
+  box-shadow: none !important;
+}
+#experience.misty-portfolio [class*="bg-white/[0.04]"] {
+  background: #F8FAFC !important;
+  border-color: #CEDBE5 !important;
+}
+#experience.misty-portfolio [class*="bg-gradient-to-b"][class*="from-[#081B2E]"] :is(h4,strong) {
+  color: var(--misty-heading) !important;
+}
+#experience.misty-portfolio [class*="bg-gradient-to-b"][class*="from-[#081B2E]"] :is(span,p,li) {
+  color: var(--misty-text) !important;
+}
+#experience.misty-portfolio [class*="bg-gradient-to-b"][class*="from-[#081B2E]"] [class*="text-[#F1D38A]"] {
+  color: #8B6B32 !important;
+}
+#experience.misty-portfolio [class*="bg-gradient-to-b"][class*="from-[#FFFFFF]"] {
+  background: #FFFFFF !important;
+}
+/* Software logos stay on white plates for accurate brand colors. */
+#software.misty-portfolio img { opacity: 1 !important; }
+#software.misty-portfolio [class*="dark:bg-white"] { background: #FFFFFF !important; }
+/* Education and contact inputs / tiles. */
+#education.misty-portfolio > div.absolute.inset-0,
+#contact.misty-portfolio > div.absolute.inset-0 { background: transparent !important; }
+#contact.misty-portfolio input,
+#contact.misty-portfolio textarea {
+  background: #FFFFFF !important;
+  color: var(--misty-heading) !important;
+  border: 1px solid var(--misty-border) !important;
+}
+#contact.misty-portfolio input::placeholder,
+#contact.misty-portfolio textarea::placeholder { color: #687D8D !important; }
+/* Preserve company logos, animated network, icons and interactions. */
