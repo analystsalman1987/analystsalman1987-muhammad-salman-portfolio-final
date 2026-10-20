@@ -19,7 +19,7 @@ export function Footer({ profile, onOpenCV }: FooterProps) {
   };
 
   return (
-    <footer className="bg-[#0F2747] dark:bg-[#DEE5EC] text-slate-300 dark:text-[#334155] border-t border-slate-800 dark:border-[#CBD5E1] transition-colors no-print">
+    <footer className="bg-[#1E3A56] dark:bg-[#1E3A56] text-slate-300 dark:text-[#334155] border-t border-slate-800 dark:border-[#CBD5E1] transition-colors no-print">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
         
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 pb-12 border-b border-slate-800/80 dark:border-[#CBD5E1]">
