@@ -111,7 +111,7 @@ export function Contact({ profile }: ContactProps) {
   };
 
   return (
-    <section style={{ backgroundColor: "#34485D", color: "#E8DCC5", borderColor: "#63758A" }} id="contact" className="deep-slate-champagne relative py-20 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 transition-colors overflow-hidden">
+    <section id="contact" className="misty-portfolio deep-slate-champagne relative py-20 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 transition-colors overflow-hidden">
       {/* Subtle Modern Corporate Business Communication Workspace Background Image */}
       <div 
         className="absolute inset-0 pointer-events-none z-0"
