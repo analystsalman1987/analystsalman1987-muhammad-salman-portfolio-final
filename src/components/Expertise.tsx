@@ -175,7 +175,10 @@ function ExpertiseSideNetwork() {
       const delta = Math.min(2, Math.max(0, (time - (lastTime || time)) / 16.67));
       lastTime = time;
       context.clearRect(0, 0, width, height);
-      if (width < 700) {\n        frame = window.requestAnimationFrame(draw);\n        return; // keep mobile content completely clear\n      }
+      if (width < 700) {
+        frame = window.requestAnimationFrame(draw);
+        return; // keep mobile content completely clear
+      }
 
       for (const dot of dots) {
         if (!reduceMotion.matches) {
