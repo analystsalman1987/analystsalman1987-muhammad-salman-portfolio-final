@@ -733,3 +733,80 @@ html.dark :is(#about, #highlights, #expertise, #experience, #education, #softwar
   color: var(--misty-text) !important;
 }
 
+
+
+/* Approved navy theme, section-scoped. Home/Hero styles intentionally untouched. */
+#about, #highlights, #expertise, #experience, #software, #education, #contact {
+  background-color: #305879 !important;
+}
+#about .main-heading-3d, #expertise .main-heading-3d,
+#experience .main-heading-3d, #education .main-heading-3d,
+#contact .main-heading-3d, #software .main-heading-3d,
+#highlights .main-heading-3d {
+  color: #f3f7fa;
+}
+/* Existing main-heading-3d hover mechanics are preserved. */
+#about .main-heading-3d:hover, #expertise .main-heading-3d:hover,
+#experience .main-heading-3d:hover, #education .main-heading-3d:hover,
+#contact .main-heading-3d:hover, #software .main-heading-3d:hover,
+#highlights .main-heading-3d:hover {
+  color: #be9852;
+}
+#about p, #expertise > div p, #experience > div p,
+#education > div p, #contact > div p, #software > div p {
+  color: #f3f7fa;
+}
+/* Expertise: keep existing grid, cards, hover-driven right-hand detail panel and imagery. */
+#expertise .bg-\[\#F3F7FA\], #expertise .bg-white,
+#expertise .bg-\[\#A7C6E1\] { background-color: #254866 !important; }
+#expertise .text-\[\#17324A\], #expertise .text-\[\#34495E\],
+#expertise .text-\[\#52677A\], #expertise .text-\[\#8B6B32\] {
+  color: #f3f7fa !important;
+}
+#expertise .text-\[\#BE9852\] { color: #e5c78e !important; }
+#expertise [id^="expertise-panel-"] { background-color: #254866; color: #f3f7fa; }
+/* Experience: navy employer cards; expanded individual responsibility items stay pale. */
+#experience .bg-white, #experience .bg-\[\#F3F7FA\] {
+  background-color: #254866 !important;
+}
+#experience .text-\[\#17324A\], #experience .text-\[\#34495E\],
+#experience .text-\[\#52677A\] { color: #f3f7fa !important; }
+#experience .bg-\[\#BE9852\] { background-color: #be9852; }
+#experience .relative.rounded-2xl.p-5.bg-\[\#F3F7FA\],
+#experience .relative.rounded-2xl.p-5 { background-color: #254866 !important; }
+/* Individual responsibility cards: preserve existing structure, use pale blue and dark text. */
+#experience .relative.rounded-2xl.p-5 .grid > div,
+#experience .relative.rounded-2xl.p-5 .grid > li {
+  background-color: #dce7f0;
+  color: #17324a;
+}
+#experience .relative.rounded-2xl.p-5 .grid > div *,
+#experience .relative.rounded-2xl.p-5 .grid > li * {
+  color: #17324a;
+}
+/* Education/Languages: preserve expansion logic and existing layout. */
+#education .bg-\[\#F3F7FA\], #education .bg-white {
+  background-color: #254866 !important;
+}
+#education .text-\[\#17324A\], #education .text-\[\#34495E\],
+#education .text-\[\#52677A\], #education .text-\[\#8B6B32\] {
+  color: #f3f7fa !important;
+}
+/* Contact: dark information cards/form, light inputs and legible labels. */
+#contact .rounded-2xl.bg-white, #contact .rounded-xl.bg-white,
+#contact .bg-\[\#F3F7FA\] {
+  background-color: #254866 !important;
+}
+#contact .text-\[\#17324A\], #contact .text-\[\#34495E\],
+#contact .text-\[\#52677A\] { color: #f3f7fa !important; }
+#contact input, #contact textarea {
+  background-color: #1e3a56 !important;
+  color: #f3f7fa !important;
+  border-color: #7895aa !important;
+}
+#contact input::placeholder, #contact textarea::placeholder {
+  color: #c5d5e2 !important;
+}
+#contact input:focus, #contact textarea:focus { border-color: #be9852 !important; }
+/* Footer: consistent darker end cap; no structural changes. */
+footer.no-print { background-color: #1e3a56 !important; color: #f3f7fa; }
