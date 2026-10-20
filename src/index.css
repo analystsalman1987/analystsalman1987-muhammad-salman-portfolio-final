@@ -810,3 +810,39 @@ html.dark :is(#about, #highlights, #expertise, #experience, #education, #softwar
 #contact input:focus, #contact textarea:focus { border-color: #be9852 !important; }
 /* Footer: consistent darker end cap; no structural changes. */
 footer.no-print { background-color: #1e3a56 !important; color: #f3f7fa; }
+
+
+/* FINAL EXPERTISE FIX — scoped; Home and other sections are untouched. */
+#expertise, html.dark #expertise {
+  --misty-bg: #305879;
+  --misty-card: #254866;
+  --misty-heading: #E5C78E;
+  --misty-text: #F3F7FA;
+  --misty-secondary: #E0EAF2;
+  --misty-border: #406781;
+  background-color: #305879 !important;
+  color: #F3F7FA !important;
+}
+#expertise > div.absolute.inset-0 img + div.absolute.inset-0,
+#expertise > div.absolute.inset-0.pointer-events-none.z-0 img + div.absolute.inset-0 {
+  background: linear-gradient(180deg,rgba(48,88,121,.94),rgba(48,88,121,.88),rgba(48,88,121,.94)) !important;
+}
+#expertise h3, #expertise h4, html.dark #expertise h3, html.dark #expertise h4 {
+  color: #E5C78E !important;
+}
+#expertise p, #expertise li, #expertise li span,
+html.dark #expertise p, html.dark #expertise li, html.dark #expertise li span {
+  color: #F3F7FA !important;
+}
+#expertise .main-heading-3d, html.dark #expertise .main-heading-3d {color:#F3F7FA !important;}
+#expertise .main-heading-3d:hover, html.dark #expertise .main-heading-3d:hover {color:#BE9852 !important;}
+#expertise .bg-white, #expertise .bg-\[\#F3F7FA\],
+html.dark #expertise .bg-white, html.dark #expertise .bg-\[\#F3F7FA\] {
+  background-color: #254866 !important;
+}
+#expertise .text-\[\#17324A\], #expertise .text-\[\#34495E\],
+html.dark #expertise .text-\[\#17324A\], html.dark #expertise .text-\[\#34495E\] {
+  color: #F3F7FA !important;
+}
+#expertise button[aria-expanded] h3 { color: #E5C78E !important; }
+#expertise [id^="expertise-panel-"] { background-color:#254866 !important; color:#F3F7FA !important; }
