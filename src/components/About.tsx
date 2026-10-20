@@ -27,6 +27,26 @@ export function About({ profile: _profile, onOpenCV }: AboutProps) {
       className="misty-portfolio relative flex min-h-[calc(100vh-5rem)] flex-col justify-center overflow-hidden border-b border-[#C5D5E2] bg-[#305879] py-16 sm:py-20 lg:py-24"
       style={{ backgroundColor: '#305879' }}
     >
+      <style>{`
+        #about .about-readable-copy, #about .about-readable-copy p {
+          color: #F3F7FA !important;
+          -webkit-text-fill-color: #F3F7FA !important;
+          opacity: 1 !important;
+        }
+        #about .about-stats .group > div, #about .about-stats .group > div * {
+          color: #F3F7FA !important;
+          -webkit-text-fill-color: #F3F7FA !important;
+        }
+        #about .about-stats .group:hover > div,
+        #about .about-stats .group:hover > div * {
+          color: #BE9852 !important;
+          -webkit-text-fill-color: #BE9852 !important;
+        }
+        #about .about-compliance, #about .about-compliance > div > span {
+          color: #F3F7FA !important;
+          -webkit-text-fill-color: #F3F7FA !important;
+        }
+      `}</style>
       {/* ============================================================
           ABOUT BACKGROUND & DECORATIVE ATMOSPHERE
           ============================================================ */}
@@ -41,7 +61,7 @@ export function About({ profile: _profile, onOpenCV }: AboutProps) {
           className="absolute inset-0 h-full w-full object-cover object-center opacity-[0.14] filter contrast-105"
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#A7C6E1]/90 via-[#A7C6E1]/80 to-[#A7C6E1]/95" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#305879]/95 via-[#305879]/88 to-[#305879]/95" />
 
         {/* Soft Golden Ambient Glow */}
         <div
@@ -83,7 +103,7 @@ export function About({ profile: _profile, onOpenCV }: AboutProps) {
             </div>
 
             {/* PROFESSIONAL SUMMARY - PARAGRAPHS OVER BACKGROUND */}
-            <div className="space-y-4 text-sm leading-relaxed text-[#34495E] sm:text-base sm:leading-[1.8] font-normal">
+            <div className="about-readable-copy space-y-4 text-sm leading-relaxed text-[#F3F7FA] sm:text-base sm:leading-[1.8] font-normal">
               <p>
                 {isRTL
                   ? t.summaryP1
@@ -122,7 +142,7 @@ export function About({ profile: _profile, onOpenCV }: AboutProps) {
             {/* ======================================================
                 THREE HIGHLIGHT STATISTICS (DIRECT ON BACKGROUND, NO WHITE CARDS)
                 ====================================================== */}
-            <div className="grid grid-cols-1 gap-3.5 pt-1 sm:grid-cols-3">
+            <div className="about-stats grid grid-cols-1 gap-3.5 pt-1 sm:grid-cols-3">
 
               {/* 1. EXPERIENCE */}
               <div
@@ -188,7 +208,7 @@ export function About({ profile: _profile, onOpenCV }: AboutProps) {
             {/* ======================================================
                 STATUS / COMPLIANCE BAR
                 ====================================================== */}
-            <div className="flex flex-wrap items-center justify-between gap-3 border-t border-[#C5D5E2] pt-4 text-xs font-medium text-[#34495E]">
+            <div className="about-compliance flex flex-wrap items-center justify-between gap-3 border-t border-[#C5D5E2]/40 pt-4 text-xs font-medium text-[#F3F7FA]">
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="h-4 w-4 shrink-0 text-[#BE9852]" />
                 <span>
@@ -248,27 +268,12 @@ export function About({ profile: _profile, onOpenCV }: AboutProps) {
                   }
                   className="absolute inset-0 h-full w-full select-none object-cover object-[center_top]"
                   style={{
-                    maskImage: 'radial-gradient(ellipse 90% 92% at 50% 46%, black 66%, rgba(0,0,0,0.45) 86%, transparent 100%)',
-                    WebkitMaskImage: 'radial-gradient(ellipse 90% 92% at 50% 46%, black 66%, rgba(0,0,0,0.45) 86%, transparent 100%)',
+                    maskImage: 'radial-gradient(ellipse 73% 72% at 50% 48%, #000 48%, rgba(0,0,0,.96) 65%, rgba(0,0,0,.6) 82%, transparent 100%)',
+                    WebkitMaskImage: 'radial-gradient(ellipse 73% 72% at 50% 48%, #000 48%, rgba(0,0,0,.96) 65%, rgba(0,0,0,.6) 82%, transparent 100%)',
                   }}
                   loading="eager"
                 />
 
-                {/* Soft Bottom Edge Feathering into #A7C6E1 */}
-                <div
-                  className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#A7C6E1] via-[#A7C6E1]/60 to-transparent z-10"
-                  aria-hidden="true"
-                />
-
-                {/* Subtle Left & Right Edge Softening */}
-                <div
-                  className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-[#A7C6E1] to-transparent z-10"
-                  aria-hidden="true"
-                />
-                <div
-                  className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-[#A7C6E1] to-transparent z-10"
-                  aria-hidden="true"
-                />
               </div>
             </div>
           </div>
