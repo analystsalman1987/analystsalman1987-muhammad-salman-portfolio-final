@@ -368,7 +368,7 @@ export function Experience({ experience, isSelected, onToggleSelect }: Experienc
             <div className="relative flex flex-col sm:flex-row sm:items-start justify-between gap-4">
               {/* LEFT SIDE: 1. Company Name, 2. Designation / Job Title, 3. Location, 4. Date Directly Below Location */}
               <div className={`space-y-1.5 min-w-0 ${logoInfo ? 'sm:max-w-[68%]' : 'sm:max-w-[85%]'}`}>
-                <h3 className="company-3d-text text-lg sm:text-xl font-bold text-[#17324A] group-hover:text-[#BE9852] transition-colors leading-snug">
+                <h3 className="company-3d-text text-lg sm:text-xl font-bold !text-[#F3F7FA] group-hover:!text-[#BE9852] transition-colors leading-snug">
                   {companyName}
                 </h3>
 
@@ -443,7 +443,7 @@ export function Experience({ experience, isSelected, onToggleSelect }: Experienc
                           event.currentTarget.style.display = 'none';
                         }
                       }}
-                      className="w-auto h-full max-h-[75px] sm:max-h-[90px] max-w-full object-contain transition-transform duration-300 group-hover:scale-[1.03]"
+                      className="experience-logo w-auto h-full max-h-[75px] sm:max-h-[90px] max-w-full object-contain transition-transform duration-300 group-hover:scale-[1.03]"
                     />
                   </div>
                 </div>
@@ -568,8 +568,15 @@ export function Experience({ experience, isSelected, onToggleSelect }: Experienc
         #experience .experience-job .company-3d-text {
           color: #f3f7fa !important;
         }
-        #experience .experience-job .company-3d-text:hover {
+        #experience .experience-job:hover .company-3d-text {
           color: #be9852 !important;
+        }
+        /* Soft illumination around genuine logos: no replacement, opaque box or recoloring. */
+        #experience .experience-job .experience-logo {
+          filter: drop-shadow(0 0 7px rgba(255,255,255,.72)) drop-shadow(0 0 18px rgba(255,255,255,.34));
+        }
+        #experience .experience-job:hover .experience-logo {
+          filter: drop-shadow(0 0 10px rgba(255,255,255,.9)) drop-shadow(0 0 23px rgba(255,255,255,.48));
         }
         #experience .experience-job .experience-date {
           background: #1e3a56 !important;
