@@ -231,7 +231,7 @@ export function Experience({ experience, isSelected = false, onToggleSelect }: E
 
   if (!experience || experience.length === 0) {
     return (
-      <section id="experience" className="py-20 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
+      <section style={{ backgroundColor: "#34485D", color: "#E8DCC5", borderColor: "#63758A" }} id="experience" className="deep-slate-champagne py-20 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
         <div className="max-w-7xl mx-auto px-4 text-center text-slate-500">
           {isRTL ? 'سيتم إضافة المعلومات قريباً.' : 'Information will be added soon.'}
         </div>
