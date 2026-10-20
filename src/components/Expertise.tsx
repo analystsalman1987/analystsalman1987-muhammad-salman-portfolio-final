@@ -125,7 +125,7 @@ function ExpertiseSideNetwork() {
     let height = 0;
     let dpr = 1;
     let lastTime = 0;
-    type Dot = { x: number; y: number; vx: number; vy: number; r: number; depth: number };
+    type Dot = { x: number; y: number; vx: number; vy: number; r: number; depth: number; side: number };
     let dots: Dot[] = [];
 
     const resize = () => {
@@ -142,10 +142,11 @@ function ExpertiseSideNetwork() {
         return {
           x: side ? Math.random() * width * 0.19 : width * (0.81 + Math.random() * 0.19),
           y: Math.random() * height,
-          vx: (Math.random() - 0.5) * 0.16,
-          vy: (Math.random() - 0.5) * 0.16,
+          vx: (Math.random() < 0.5 ? -1 : 1) * (0.28 + Math.random() * 0.34),
+          vy: (Math.random() < 0.5 ? -1 : 1) * (0.28 + Math.random() * 0.34),
           r: 0.8 + Math.random() * 1.2,
           depth: 0.65 + Math.random() * 0.6,
+          side: side ? 0 : 1,
         };
       });
     };
@@ -161,7 +162,12 @@ function ExpertiseSideNetwork() {
           dot.x += dot.vx * delta;
           dot.y += dot.vy * delta;
           if (dot.y < 0 || dot.y > height) dot.vy *= -1;
-          if (dot.x < 0 || dot.x > width) dot.vx *= -1;
+          const minX = dot.side === 0 ? 0 : width * 0.81;
+          const maxX = dot.side === 0 ? width * 0.19 : width;
+          if (dot.x < minX || dot.x > maxX) {
+            dot.vx *= -1;
+            dot.x = Math.max(minX, Math.min(maxX, dot.x));
+          }
         }
       }
 
