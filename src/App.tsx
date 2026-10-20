@@ -4,7 +4,6 @@ import { useTheme } from './hooks/useTheme';
 import { adminAuthClient } from './services/adminAuthClient';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
-import { Highlights } from './components/Highlights';
 import { About } from './components/About';
 import { Expertise } from './components/Expertise';
 import { Experience } from './components/Experience';
@@ -196,12 +195,10 @@ export default function App() {
   }
 
   // Otherwise render public profile website
-  const { settings, profile, highlights, expertise, experience, skills, software, education, languages } = data;
+  const { settings, profile, expertise, experience, skills, software, education, languages } = data;
   const rawVisibility = settings?.sectionVisibility;
   const isExpertiseVisible = rawVisibility ? rawVisibility.expertise !== false : true;
-  const isHighlightsVisible = rawVisibility ? rawVisibility.highlights !== false : true;
   const effectiveExpertise = (expertise && expertise.length > 0) ? expertise : DEFAULT_APP_DATA.expertise;
-  const effectiveHighlights = (highlights && highlights.length > 0) ? highlights : DEFAULT_APP_DATA.highlights;
 
   const visibility = {
     hero: true,
@@ -252,10 +249,7 @@ export default function App() {
           />
         )}
 
-        {/* Professional Highlights Section */}
-        {isHighlightsVisible && (
-          <Highlights highlights={effectiveHighlights} />
-        )}
+        {/* Professional Highlights intentionally hidden; content remains in saved data. */}
 
         {/* Core Professional Expertise Section */}
         {isExpertiseVisible && (
