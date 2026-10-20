@@ -130,17 +130,17 @@ export function Expertise({ expertise }: ExpertiseProps) {
         relative
         py-20
         scroll-mt-20
-        bg-[#A7C6E1]
+        bg-[#305879]
         border-b
         border-[#C5D5E2]
         transition-colors
         overflow-hidden
       "
-      style={{ backgroundColor: '#A7C6E1' }}
+      style={{ backgroundColor: '#305879' }}
     >
       {/* LOCAL BACKDROP */}
       <div
-        className="absolute inset-0 pointer-events-none z-0 bg-[#A7C6E1]/85 backdrop-blur-[2px]"
+        className="absolute inset-0 pointer-events-none z-0 bg-[#305879]/85 backdrop-blur-[2px]"
         aria-hidden="true"
       />
 
