@@ -112,6 +112,38 @@ export function Contact({ profile }: ContactProps) {
 
   return (
     <section id="contact" className="misty-portfolio relative py-20 bg-[#305879] border-b border-[#C5D5E2] transition-colors overflow-hidden" style={{ backgroundColor: '#305879' }}>
+
+      <style>{`
+        #contact { background-color: #305879 !important; }
+        #contact .contact-intro { color:#F3F7FA !important; -webkit-text-fill-color:#F3F7FA !important; opacity:1 !important; }
+        #contact .contact-info-card, #contact .contact-form-card {
+          background-color:#254866 !important;
+          border-color:#52718A !important;
+          color:#F3F7FA !important;
+        }
+        #contact .contact-info-card:hover { border-color:#BE9852 !important; background-color:#2A5070 !important; }
+        #contact .contact-info-card span, #contact .contact-form-card h3,
+        #contact .contact-form-card p, #contact .contact-form-card label {
+          color:#F3F7FA !important; -webkit-text-fill-color:#F3F7FA !important;
+        }
+        #contact .contact-info-card .contact-info-label,
+        #contact .contact-form-card h3 {
+          color:#E5C78E !important; -webkit-text-fill-color:#E5C78E !important;
+        }
+        #contact .contact-info-card a:hover, #contact .contact-info-card a:hover span { color:#E5C78E !important; }
+        #contact .contact-field {
+          background-color:#1E3A56 !important; color:#F3F7FA !important;
+          -webkit-text-fill-color:#F3F7FA !important; border-color:#7895AA !important;
+        }
+        #contact .contact-field::placeholder {
+          color:#C5D5E2 !important; -webkit-text-fill-color:#C5D5E2 !important; opacity:1;
+        }
+        #contact .contact-field:focus { border-color:#BE9852 !important; }
+        #contact .contact-form-card button[type="button"] { color:#E5C78E !important; }
+        #contact .contact-form-card button[type="submit"] { color:white !important; }
+        #contact .contact-form-card .bg-rose-50 { background-color:#7F1D1D !important; }
+        #contact .contact-form-card .bg-rose-50 span { color:#FFF1F2 !important; -webkit-text-fill-color:#FFF1F2 !important; }
+      `}</style>
       {/* Subtle Modern Corporate Business Communication Workspace Background Image */}
       <div 
         className="absolute inset-0 pointer-events-none z-0"
@@ -123,7 +155,7 @@ export function Contact({ profile }: ContactProps) {
           className="w-full h-full object-cover object-center opacity-[0.14] filter contrast-105 select-none"
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#A7C6E1]/85 via-[#A7C6E1]/70 to-[#A7C6E1]/90" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#305879]/95 via-[#305879]/90 to-[#305879]/95" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -138,7 +170,7 @@ export function Contact({ profile }: ContactProps) {
               {isRTL ? t.title : 'Contact Information'}
             </h2>
           </div>
-          <p className="mt-1 text-sm text-[#52677A]">
+          <p className="contact-intro mt-1 text-sm text-[#F3F7FA]">
             {isRTL ? t.subtitle : 'Available for professional accounting, finance management, and corporate opportunities across Saudi Arabia.'}
           </p>
         </div>
@@ -151,13 +183,13 @@ export function Contact({ profile }: ContactProps) {
             {/* Email Card */}
             <a
               href={`mailto:${profile.email}`}
-              className="p-5 rounded-2xl bg-white border border-[#C5D5E2] hover:border-[#BE9852]/50 shadow-xs transition-all flex items-start gap-4 group block"
+              className="contact-info-card p-5 rounded-2xl bg-[#254866] border border-[#52718A] hover:border-[#BE9852]/50 shadow-xs transition-all flex items-start gap-4 group block"
             >
               <div className="w-11 h-11 rounded-xl bg-[#F3F7FA] text-[#BE9852] border border-[#C5D5E2] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
                 <Mail className="w-5 h-5" />
               </div>
               <div className="min-w-0 flex-1">
-                <span className="text-[11px] font-bold text-[#52677A] uppercase tracking-wider block">
+                <span className="contact-info-label text-[11px] font-bold text-[#E5C78E] uppercase tracking-wider block">
                   {isRTL ? t.emailLabel : 'Email Address'}
                 </span>
                 <span className="text-sm font-semibold text-[#17324A] group-hover:text-[#BE9852] transition-colors break-all">
@@ -172,13 +204,13 @@ export function Contact({ profile }: ContactProps) {
             {/* Primary Phone Card */}
             <a
               href={`tel:${profile.primaryPhone.replace(/\s+/g, '')}`}
-              className="p-5 rounded-2xl bg-white border border-[#C5D5E2] hover:border-[#BE9852]/50 shadow-xs transition-all flex items-start gap-4 group block"
+              className="contact-info-card p-5 rounded-2xl bg-[#254866] border border-[#52718A] hover:border-[#BE9852]/50 shadow-xs transition-all flex items-start gap-4 group block"
             >
               <div className="w-11 h-11 rounded-xl bg-[#F3F7FA] text-[#BE9852] border border-[#C5D5E2] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
                 <Phone className="w-5 h-5" />
               </div>
               <div>
-                <span className="text-[11px] font-bold text-[#52677A] uppercase tracking-wider block">
+                <span className="contact-info-label text-[11px] font-bold text-[#E5C78E] uppercase tracking-wider block">
                   {isRTL ? t.phoneLabel : 'Primary Mobile / WhatsApp'}
                 </span>
                 <span className="text-sm font-semibold text-[#17324A] group-hover:text-[#BE9852] transition-colors" dir="ltr">
@@ -193,13 +225,13 @@ export function Contact({ profile }: ContactProps) {
             {/* Alternative Phone Card */}
             <a
               href={`tel:${profile.altPhone.replace(/\s+/g, '')}`}
-              className="p-5 rounded-2xl bg-white border border-[#C5D5E2] hover:border-[#BE9852]/50 shadow-xs transition-all flex items-start gap-4 group block"
+              className="contact-info-card p-5 rounded-2xl bg-[#254866] border border-[#52718A] hover:border-[#BE9852]/50 shadow-xs transition-all flex items-start gap-4 group block"
             >
               <div className="w-11 h-11 rounded-xl bg-[#F3F7FA] text-[#BE9852] border border-[#C5D5E2] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
                 <Phone className="w-5 h-5" />
               </div>
               <div>
-                <span className="text-[11px] font-bold text-[#52677A] uppercase tracking-wider block">
+                <span className="contact-info-label text-[11px] font-bold text-[#E5C78E] uppercase tracking-wider block">
                   {isRTL ? t.altPhoneLabel : 'Alternative Phone'}
                 </span>
                 <span className="text-sm font-semibold text-[#17324A] group-hover:text-[#BE9852] transition-colors" dir="ltr">
@@ -212,12 +244,12 @@ export function Contact({ profile }: ContactProps) {
             </a>
 
             {/* Location Card */}
-            <div className="p-5 rounded-2xl bg-white border border-[#C5D5E2] shadow-xs flex items-start gap-4">
+            <div className="contact-info-card p-5 rounded-2xl bg-[#254866] border border-[#52718A] shadow-xs flex items-start gap-4">
               <div className="w-11 h-11 rounded-xl bg-[#F3F7FA] text-[#BE9852] border border-[#C5D5E2] flex items-center justify-center shrink-0">
                 <MapPin className="w-5 h-5" />
               </div>
               <div>
-                <span className="text-[11px] font-bold text-[#52677A] uppercase tracking-wider block">
+                <span className="contact-info-label text-[11px] font-bold text-[#E5C78E] uppercase tracking-wider block">
                   {isRTL ? t.locationLabel : 'Location'}
                 </span>
                 <span className="text-sm font-semibold text-[#17324A]">
@@ -231,12 +263,12 @@ export function Contact({ profile }: ContactProps) {
 
             {/* Driving License Card */}
             {profile.drivingLicense && (
-              <div className="p-5 rounded-2xl bg-white border border-[#C5D5E2] shadow-xs flex items-start gap-4">
+              <div className="contact-info-card p-5 rounded-2xl bg-[#254866] border border-[#52718A] shadow-xs flex items-start gap-4">
                 <div className="w-11 h-11 rounded-xl bg-[#F3F7FA] text-[#BE9852] border border-[#C5D5E2] flex items-center justify-center shrink-0">
                   <ShieldCheck className="w-5 h-5" />
                 </div>
                 <div>
-                  <span className="text-[11px] font-bold text-[#52677A] uppercase tracking-wider block">
+                  <span className="contact-info-label text-[11px] font-bold text-[#E5C78E] uppercase tracking-wider block">
                     {isRTL ? t.licenseLabel : 'Driving License'}
                   </span>
                   <span className="text-sm font-semibold text-[#17324A]">
@@ -253,7 +285,7 @@ export function Contact({ profile }: ContactProps) {
 
           {/* Contact Form (Right) */}
           <div className="lg:col-span-7 self-start">
-            <div className="p-5 sm:p-6 rounded-2xl bg-white border border-[#C5D5E2] shadow-sm">
+            <div className="contact-form-card p-5 sm:p-6 rounded-2xl bg-[#254866] border border-[#52718A] shadow-sm">
               
               <div className="mb-4">
                 <h3 className="text-lg font-bold text-[#17324A]">
@@ -317,7 +349,7 @@ export function Contact({ profile }: ContactProps) {
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         placeholder={isRTL ? t.namePlaceholder : 'e.g. Abdullah Al-Harbi'}
-                        className="w-full px-3.5 py-2.5 text-xs rounded-lg bg-[#F3F7FA] border border-[#C5D5E2] text-[#17324A] placeholder-[#7E93A4] focus:outline-none focus:ring-2 focus:ring-[#BE9852] focus:bg-white disabled:opacity-60 transition-colors"
+                        className="contact-field w-full px-3.5 py-2.5 text-xs rounded-lg bg-[#1E3A56] border border-[#7895AA] text-[#F3F7FA] placeholder-[#B7C9D9] focus:outline-none focus:ring-2 focus:ring-[#BE9852] disabled:opacity-60 transition-colors"
                       />
                     </div>
 
@@ -332,7 +364,7 @@ export function Contact({ profile }: ContactProps) {
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         placeholder={isRTL ? t.emailPlaceholder : 'name@company.com'}
-                        className="w-full px-3.5 py-2.5 text-xs rounded-lg bg-[#F3F7FA] border border-[#C5D5E2] text-[#17324A] placeholder-[#7E93A4] focus:outline-none focus:ring-2 focus:ring-[#BE9852] focus:bg-white disabled:opacity-60 transition-colors"
+                        className="contact-field w-full px-3.5 py-2.5 text-xs rounded-lg bg-[#1E3A56] border border-[#7895AA] text-[#F3F7FA] placeholder-[#B7C9D9] focus:outline-none focus:ring-2 focus:ring-[#BE9852] disabled:opacity-60 transition-colors"
                       />
                     </div>
                   </div>
@@ -347,7 +379,7 @@ export function Contact({ profile }: ContactProps) {
                       value={formData.subject}
                       onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                       placeholder={isRTL ? t.subjectPlaceholder : 'e.g. Professional Accounting Opportunity'}
-                      className="w-full px-3.5 py-2.5 text-xs rounded-lg bg-[#F3F7FA] border border-[#C5D5E2] text-[#17324A] placeholder-[#7E93A4] focus:outline-none focus:ring-2 focus:ring-[#BE9852] focus:bg-white disabled:opacity-60 transition-colors"
+                      className="contact-field w-full px-3.5 py-2.5 text-xs rounded-lg bg-[#1E3A56] border border-[#7895AA] text-[#F3F7FA] placeholder-[#B7C9D9] focus:outline-none focus:ring-2 focus:ring-[#BE9852] disabled:opacity-60 transition-colors"
                     />
                   </div>
 
@@ -362,7 +394,7 @@ export function Contact({ profile }: ContactProps) {
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       placeholder={isRTL ? t.messagePlaceholder : 'Write your inquiry or proposal here...'}
-                      className="w-full px-3.5 py-2.5 text-xs rounded-lg bg-[#F3F7FA] border border-[#C5D5E2] text-[#17324A] placeholder-[#7E93A4] focus:outline-none focus:ring-2 focus:ring-[#BE9852] focus:bg-white resize-none disabled:opacity-60 transition-colors"
+                      className="contact-field w-full px-3.5 py-2.5 text-xs rounded-lg bg-[#1E3A56] border border-[#7895AA] text-[#F3F7FA] placeholder-[#B7C9D9] focus:outline-none focus:ring-2 focus:ring-[#BE9852] resize-none disabled:opacity-60 transition-colors"
                     />
                   </div>
 
