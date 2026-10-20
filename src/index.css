@@ -608,3 +608,53 @@
 :where(main section:not(#home), footer) [class~="ring-[#0F766E]/20"] { --tw-ring-color:rgba(216,181,106,.35) !important; }
 :where(main section:not(#home), footer) [class~="ring-[#0F766E]/25"] { --tw-ring-color:rgba(216,181,106,.35) !important; }
 }
+
+/* ==============================================================
+   Pearl White & Champagne — scoped presentation-only theme.
+   Original Home/Hero, animations, component markup and data intact.
+   ============================================================= */
+:root {
+  --pearl-surface: #FAF8F3;
+  --pearl-alternate: #F0E9DC;
+  --pearl-card: #FFFFFF;
+  --pearl-ink: #071B2E;
+  --pearl-gold: #C5A15E;
+}
+
+/* Only non-Hero portfolio sections; both current light/dark modes. */
+:is(#about, #highlights, #expertise, #experience, #education, #software, #contact) {
+  background-color: var(--pearl-surface) !important;
+  color: var(--pearl-ink);
+  border-color: #E6DCCB !important;
+}
+:is(#highlights, #experience, #software) {
+  background-color: var(--pearl-alternate) !important;
+}
+/* Background overlays on sections with existing imagery remain in place. */
+:is(#about, #highlights, #expertise, #experience, #education, #software, #contact) > .absolute.inset-0.bg-gradient-to-b {
+  background-image: linear-gradient(to bottom, rgba(250,248,243,.92), rgba(250,248,243,.80), rgba(250,248,243,.94)) !important;
+}
+/* Keep expanded Work Experience navy responsibility panels completely unchanged. */
+#experience .company-3d-text {
+  color: var(--pearl-ink) !important;
+  text-shadow: 0 1px 1px rgba(7,27,46,.12) !important;
+}
+:is(#about, #highlights, #expertise, #experience, #education, #software, #contact) .main-heading-3d {
+  color: var(--pearl-ink) !important;
+  text-shadow: 0 1px 0 #fff, 0 3px 6px rgba(7,27,46,.12) !important;
+}
+:is(#about, #highlights, #expertise, #experience, #education, #software, #contact) .main-heading-3d:hover {
+  color: var(--pearl-gold) !important;
+}
+/* Experience outer cards only; nested dark expanded panel remains navy. */
+#experience .group > .rounded-2xl.border {
+  background-color: var(--pearl-card) !important;
+  border-color: #E5D9C6 !important;
+}
+#experience .group > .rounded-2xl.border:hover {
+  border-color: var(--pearl-gold) !important;
+}
+#experience .group > .rounded-2xl.border > button {
+  color: var(--pearl-ink);
+}
+/* Preserve component-local gold highlights and dark navy expanded panels. */
