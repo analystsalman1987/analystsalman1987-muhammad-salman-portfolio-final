@@ -46,6 +46,21 @@ export function About({ profile: _profile, onOpenCV }: AboutProps) {
           color: #F3F7FA !important;
           -webkit-text-fill-color: #F3F7FA !important;
         }
+        #about .about-compliance .about-bottom-badge {
+          background-color: #F3F7FA !important;
+          border-color: #C5D5E2 !important;
+          color: #17324A !important;
+          -webkit-text-fill-color: #17324A !important;
+        }
+        #about .about-compliance .about-bottom-badge span {
+          color: #17324A !important;
+          -webkit-text-fill-color: #17324A !important;
+          opacity: 1 !important;
+        }
+        #about .about-compliance .about-bottom-badge:hover span {
+          color: #8B6B32 !important;
+          -webkit-text-fill-color: #8B6B32 !important;
+        }
       `}</style>
       {/* ============================================================
           ABOUT BACKGROUND & DECORATIVE ATMOSPHERE
@@ -220,7 +235,7 @@ export function About({ profile: _profile, onOpenCV }: AboutProps) {
 
               <div className="flex flex-wrap items-center gap-2.5">
                 {/* DRIVING LICENSE */}
-                <span className="inline-flex items-center gap-1.5 rounded-md border border-[#C5D5E2] bg-[#F3F7FA] px-2.5 py-1 text-[11px] font-semibold text-[#17324A]">
+                <span className="about-bottom-badge inline-flex items-center gap-1.5 rounded-md border border-[#C5D5E2] bg-[#F3F7FA] px-2.5 py-1 text-[11px] font-semibold text-[#17324A]">
                   <Car className="h-3.5 w-3.5 text-[#BE9852]" />
                   <span>
                     {isRTL ? t.drivingLicense : 'Valid Saudi Driving License'}
@@ -232,7 +247,7 @@ export function About({ profile: _profile, onOpenCV }: AboutProps) {
                   href="https://www.ayalyami.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 rounded-md border border-[#C5D5E2] bg-[#F3F7FA] px-2.5 py-1 text-[11px] font-semibold text-[#17324A] transition-colors hover:border-[#BE9852]/60 hover:text-[#BE9852]"
+                  className="about-bottom-badge inline-flex items-center gap-1.5 rounded-md border border-[#C5D5E2] bg-[#F3F7FA] px-2.5 py-1 text-[11px] font-semibold text-[#17324A] transition-colors hover:border-[#BE9852]/60 hover:text-[#BE9852]"
                   title="Ahmed Yahya Alyami Contracting Co."
                 >
                   <Briefcase className="h-3.5 w-3.5 text-[#BE9852]" />
