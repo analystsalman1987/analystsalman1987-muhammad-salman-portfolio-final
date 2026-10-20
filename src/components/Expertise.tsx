@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   ArrowLeftRight,
   Receipt,
@@ -104,6 +104,119 @@ const expertiseImages: Record<string, string> = {
   'exp-12': '/images/professional-coordination.jpg',
 };
 
+
+/**
+ * Decorative, pointer-transparent side network. Only used inside Expertise.
+ * Draws slowly drifting dots and fine connecting lines in the side gutters.
+ * Honors reduced-motion and does not change card/hover functionality.
+ */
+function ExpertiseSideNetwork() {
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const context = canvas.getContext('2d');
+    if (!context) return;
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let frame = 0;
+    let width = 0;
+    let height = 0;
+    let dpr = 1;
+    let lastTime = 0;
+    type Dot = { x: number; y: number; vx: number; vy: number; r: number; depth: number };
+    let dots: Dot[] = [];
+
+    const resize = () => {
+      const rect = canvas.getBoundingClientRect();
+      width = rect.width;
+      height = rect.height;
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.max(1, Math.round(width * dpr));
+      canvas.height = Math.max(1, Math.round(height * dpr));
+      context.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const count = Math.min(58, Math.max(20, Math.round(height / 42)));
+      dots = Array.from({ length: count }, (_, i) => {
+        const side = i % 2 === 0;
+        return {
+          x: side ? Math.random() * width * 0.19 : width * (0.81 + Math.random() * 0.19),
+          y: Math.random() * height,
+          vx: (Math.random() - 0.5) * 0.16,
+          vy: (Math.random() - 0.5) * 0.16,
+          r: 0.8 + Math.random() * 1.2,
+          depth: 0.65 + Math.random() * 0.6,
+        };
+      });
+    };
+
+    const draw = (time: number) => {
+      const delta = Math.min(2, Math.max(0, (time - (lastTime || time)) / 16.67));
+      lastTime = time;
+      context.clearRect(0, 0, width, height);
+      if (width < 700) return; // keep mobile content completely clear
+
+      for (const dot of dots) {
+        if (!reduceMotion.matches) {
+          dot.x += dot.vx * delta;
+          dot.y += dot.vy * delta;
+          if (dot.y < 0 || dot.y > height) dot.vy *= -1;
+          if (dot.x < 0 || dot.x > width) dot.vx *= -1;
+        }
+      }
+
+      dots.forEach((a, i) => {
+        for (let j = i + 1; j < dots.length; j++) {
+          const b = dots[j];
+          const distance = Math.hypot(a.x - b.x, a.y - b.y);
+          if (distance > 125) continue;
+          context.beginPath();
+          context.strokeStyle = `rgba(220,231,240,${(1 - distance / 125) * 0.20})`;
+          context.lineWidth = 0.7;
+          context.moveTo(a.x, a.y);
+          context.lineTo(b.x, b.y);
+          context.stroke();
+        }
+        context.beginPath();
+        context.arc(a.x, a.y, a.r * a.depth * 2.4, 0, Math.PI * 2);
+        context.fillStyle = 'rgba(190,152,82,0.065)';
+        context.fill();
+        context.beginPath();
+        context.arc(a.x, a.y, a.r * a.depth, 0, Math.PI * 2);
+        context.fillStyle = 'rgba(229,199,142,0.72)';
+        context.fill();
+      });
+      if (!reduceMotion.matches) frame = window.requestAnimationFrame(draw);
+    };
+
+    const observer = new ResizeObserver(() => {
+      resize();
+      window.cancelAnimationFrame(frame);
+      lastTime = 0;
+      frame = window.requestAnimationFrame(draw);
+    });
+    observer.observe(canvas);
+    resize();
+    frame = window.requestAnimationFrame(draw);
+    return () => {
+      observer.disconnect();
+      window.cancelAnimationFrame(frame);
+    };
+  }, []);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      aria-hidden="true"
+      className="absolute inset-0 z-[1] h-full w-full pointer-events-none"
+      style={{
+        maskImage: 'linear-gradient(to right, black 0%, black 11%, transparent 24%, transparent 76%, black 89%, black 100%)',
+        WebkitMaskImage: 'linear-gradient(to right, black 0%, black 11%, transparent 24%, transparent 76%, black 89%, black 100%)',
+      }}
+    />
+  );
+}
+
 export function Expertise({ expertise }: ExpertiseProps) {
   // Desktop hover opens one directional panel; touch/keyboard retain button access.
   const [expandedId, setExpandedId] = useState<string | null>(null);
@@ -172,6 +285,9 @@ export function Expertise({ expertise }: ExpertiseProps) {
           "
         />
       </div>
+
+      {/* Side-only decorative network; never intercepts mouse hover or clicks. */}
+      <ExpertiseSideNetwork />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* HEADER (Main section title preserved) */}
