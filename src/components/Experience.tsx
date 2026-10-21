@@ -658,7 +658,7 @@ export function Experience({ experience, isSelected, onToggleSelect }: Experienc
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 z-0"
         style={{
-          background: 'radial-gradient(ellipse 65% 60% at 80% 35%, rgba(190,152,82,0.06) 0%, rgba(48,88,121,0) 75%)',
+          background: 'radial-gradient(ellipse 65% 60% at 80% 35%, rgba(190,152,82,0.20) 0%, rgba(48,88,121,0) 78%)',
         }}
       />
 
