@@ -88,35 +88,6 @@ export function About({ profile: _profile, onOpenCV }: AboutProps) {
         <div
           className="absolute inset-0 bg-[linear-gradient(to_right,#17324A08_1px,transparent_1px),linear-gradient(to_bottom,#17324A08_1px,transparent_1px)] bg-[size:4.5rem_4.5rem] [mask-image:radial-gradient(ellipse_70%_60%_at_45%_50%,#000_45%,transparent_100%)]"
         />
-
-        {/* LOCKED: Edge-only corporate network. Existing colors; no content changes. */}
-        <svg
-          className="absolute inset-0 h-full w-full"
-          viewBox="0 0 1440 850"
-          preserveAspectRatio="none"
-          fill="none"
-          aria-hidden="true"
-        >
-          <g stroke="#BE9852" strokeWidth="1" strokeOpacity="0.27">
-            <path d="M0 95 L85 145 L160 90 L225 175 L135 245 L38 280 L0 340" />
-            <path d="M0 525 L80 465 L175 520 L225 615 L115 705 L0 675" />
-            <path d="M1440 90 L1370 155 L1275 105 L1210 200 L1310 275 L1440 245" />
-            <path d="M1440 515 L1360 460 L1270 535 L1220 630 L1340 715 L1440 665" />
-          </g>
-          <g stroke="#C5D5E2" strokeWidth="0.8" strokeOpacity="0.17">
-            <path d="M85 145 L38 280 L135 245 L175 520 L80 465 L115 705" />
-            <path d="M1370 155 L1310 275 L1270 535 L1360 460 L1340 715" />
-          </g>
-          <g fill="#BE9852" fillOpacity="0.58">
-            <circle cx="85" cy="145" r="3" /><circle cx="160" cy="90" r="2.5" />
-            <circle cx="135" cy="245" r="3" /><circle cx="38" cy="280" r="2" />
-            <circle cx="80" cy="465" r="3" /><circle cx="175" cy="520" r="2" />
-            <circle cx="115" cy="705" r="3" /><circle cx="1370" cy="155" r="3" />
-            <circle cx="1275" cy="105" r="2.5" /><circle cx="1310" cy="275" r="3" />
-            <circle cx="1360" cy="460" r="3" /><circle cx="1270" cy="535" r="2.5" />
-            <circle cx="1340" cy="715" r="3" />
-          </g>
-        </svg>
       </div>
 
       {/* ============================================================
