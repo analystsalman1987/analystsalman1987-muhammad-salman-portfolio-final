@@ -653,6 +653,15 @@ export function Experience({ experience, isSelected, onToggleSelect }: Experienc
         #experience .experience-company-expanded .experience-duty span {color:#17324A !important;-webkit-text-fill-color:#17324A !important;}
         #experience .experience-company-expanded .experience-responsibilities-toggle {background:#1E3A56 !important;}
       `}</style>
+      {/* Locked subtle ambient background glow — existing palette only */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-0"
+        style={{
+          background: 'radial-gradient(ellipse 65% 60% at 80% 35%, rgba(190,152,82,0.06) 0%, rgba(48,88,121,0) 75%)',
+        }}
+      />
+
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
