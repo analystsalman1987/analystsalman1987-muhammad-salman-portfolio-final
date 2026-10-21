@@ -61,34 +61,18 @@ export function About({ profile: _profile, onOpenCV }: AboutProps) {
         }
       `}</style>
       {/* ============================================================
-          ABOUT BACKGROUND & DECORATIVE ATMOSPHERE
+          ABOUT BACKGROUND (EXACT APPROVED FINANCE BACKGROUND IMAGE)
           ============================================================ */}
       <div
-        className="pointer-events-none absolute inset-0 z-0 overflow-hidden select-none"
+        className="pointer-events-none absolute inset-0 z-0 bg-cover bg-center bg-no-repeat select-none"
+        style={{
+          backgroundImage: "url('/images/about-finance-background.png')",
+          backgroundPosition: 'center center',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+        }}
         aria-hidden="true"
-      >
-        {/* Subtle Accounting Background Image */}
-        <img
-          src="/images/about_accounting_background.jpg"
-          alt=""
-          className="absolute inset-0 h-full w-full object-cover object-center opacity-[0.14] filter contrast-105"
-          loading="lazy"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#305879]/95 via-[#305879]/88 to-[#305879]/95" />
-
-        {/* Soft Golden Ambient Glow */}
-        <div
-          className="absolute top-[8%] right-[-10%] h-[550px] w-[550px] rounded-full bg-[#BE9852]/10 blur-[150px]"
-        />
-        <div
-          className="absolute -bottom-36 -left-28 h-[500px] w-[500px] rounded-full bg-[#17324A]/8 blur-[130px]"
-        />
-
-        {/* Subtle Decorative Grid Pattern */}
-        <div
-          className="absolute inset-0 bg-[linear-gradient(to_right,#17324A08_1px,transparent_1px),linear-gradient(to_bottom,#17324A08_1px,transparent_1px)] bg-[size:4.5rem_4.5rem] [mask-image:radial-gradient(ellipse_70%_60%_at_45%_50%,#000_45%,transparent_100%)]"
-        />
-      </div>
+      />
 
       {/* ============================================================
           MAIN CONTENT
