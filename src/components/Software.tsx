@@ -6,21 +6,23 @@ interface SoftwareItem {
   fallback: string;
   glow: string;
   whiteBackground?: boolean;
+  brandMark?: 'odoo' | 'zoho' | 'wafeq';
+  size?: number;
 }
 
 const softwareItems: SoftwareItem[] = [
   { name: 'OFIS (Powered by Oracle)', logo: '/images/software/oracle-logo.svg', fallback: 'ORACLE', glow: '255,65,65' },
   { name: 'QuickBooks', logo: '/images/software/quickbooks-logo.svg', fallback: 'QuickBooks', glow: '35,235,65' },
-  { name: 'Arqami', logo: '/images/software/Arqami Logo.png', fallback: 'ARQAMI', glow: '65,135,255', whiteBackground: true },
+  { name: 'Arqami', logo: '/images/software/Arqami Logo.png', fallback: 'ARQAMI', glow: '65,135,255', whiteBackground: true, size: 1.02 },
   { name: 'Delta Financial', logo: '/images/software/delta-logo.svg', fallback: 'DELTA', glow: '255,195,30' },
   { name: 'SMACC', logo: '/images/software/smacc-logo.png', fallback: 'SMACC', glow: '35,145,255' },
-  { name: 'Daftra', logo: '/images/software/Daftra logo.png', fallback: 'DAFTRA', glow: '55,155,255', whiteBackground: true },
+  { name: 'Daftra', logo: '/images/software/Daftra logo.png', fallback: 'DAFTRA', glow: '55,155,255', whiteBackground: true, size: 1.10 },
   { name: 'Qoyod', logo: '/images/software/Qoyod logo.png', fallback: 'QOYOD', glow: '55,130,255' },
-  { name: 'Peachtree', logo: '/images/software/Peachtree logo.png', fallback: 'PEACHTREE', glow: '255,190,45', whiteBackground: true },
-  { name: 'Tally', logo: '/images/software/Tally logo.png', fallback: 'TALLY', glow: '255,75,100', whiteBackground: true },
-  { name: 'Odoo', logo: '/images/software/odoo-logo.png', fallback: 'odoo', glow: '175,95,175' },
-  { name: 'Zoho Books', logo: '/images/software/zoho-books-logo.png', fallback: 'Zoho Books', glow: '45,155,255' },
-  { name: 'Wafeq', logo: '/images/software/wafeq-logo.png', fallback: 'wafeq', glow: '110,95,255' },
+  { name: 'Peachtree', logo: '/images/software/Peachtree logo.png', fallback: 'PEACHTREE', glow: '255,190,45', whiteBackground: true, size: 1.18 },
+  { name: 'Tally', logo: '/images/software/Tally logo.png', fallback: 'TALLY', glow: '255,75,100', whiteBackground: true, size: 1.10 },
+  { name: 'Odoo', logo: '', fallback: 'odoo', glow: '175,95,175', brandMark: 'odoo' },
+  { name: 'Zoho Books', logo: '', fallback: 'Zoho Books', glow: '45,155,255', brandMark: 'zoho' },
+  { name: 'Wafeq', logo: '', fallback: 'wafeq', glow: '110,95,255', brandMark: 'wafeq' },
   { name: 'Advanced Microsoft Excel', logo: '/images/software/excel-logo.svg', fallback: 'EXCEL', glow: '25,230,110' },
   { name: 'Microsoft Office', logo: '/images/software/office-logo.svg', fallback: 'OFFICE', glow: '255,95,35' },
 ];
@@ -161,8 +163,8 @@ function SoftwareSideNetwork() {
   );
 }
 
-// Remove near-white pixels from opaque logo assets at runtime.
-// Original files remain untouched. For pixel-perfect results, use transparent PNGs.
+// Remove only the light background connected to image edges.
+// Unlike a global white-color filter, this preserves isolated white logo letters.
 function removeWhiteBackground(image: HTMLImageElement): string {
   const canvas = document.createElement('canvas');
   canvas.width = image.naturalWidth;
@@ -170,19 +172,72 @@ function removeWhiteBackground(image: HTMLImageElement): string {
   const ctx = canvas.getContext('2d', { willReadFrequently: true });
   if (!ctx) return image.src;
   ctx.drawImage(image, 0, 0);
-  const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height);
-  const data = pixels.data;
-  for (let i = 0; i < data.length; i += 4) {
-    const r = data[i], g = data[i + 1], b = data[i + 2];
-    const min = Math.min(r, g, b);
-    const max = Math.max(r, g, b);
-    // Only neutral, very light colors: keep colored and dark logo artwork.
-    if (min > 235 && max - min < 20) {
-      data[i + 3] = Math.round(data[i + 3] * Math.max(0, (255 - min) / 20));
+  const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+  const data = imageData.data;
+  const w = canvas.width, h = canvas.height;
+  const visited = new Uint8Array(w * h);
+  const queue = new Int32Array(w * h);
+  let head = 0, tail = 0;
+  const isLight = (index: number) => {
+    const k = index * 4;
+    return data[k] > 225 && data[k + 1] > 225 && data[k + 2] > 225 &&
+      Math.max(data[k], data[k + 1], data[k + 2]) - Math.min(data[k], data[k + 1], data[k + 2]) < 28;
+  };
+  const push = (index: number) => {
+    if (!visited[index] && isLight(index)) {
+      visited[index] = 1;
+      queue[tail++] = index;
     }
+  };
+  for (let x = 0; x < w; x++) { push(x); push((h - 1) * w + x); }
+  for (let y = 0; y < h; y++) { push(y * w); push(y * w + w - 1); }
+  while (head < tail) {
+    const i = queue[head++];
+    const x = i % w, y = Math.floor(i / w);
+    data[i * 4 + 3] = 0;
+    if (x > 0) push(i - 1);
+    if (x + 1 < w) push(i + 1);
+    if (y > 0) push(i - w);
+    if (y + 1 < h) push(i + w);
   }
-  ctx.putImageData(pixels, 0, 0);
+  // Soft antialiasing at the cutout edge, without recoloring the logo itself.
+  for (let i = 0; i < w * h; i++) {
+    if (visited[i]) continue;
+    const k = i * 4;
+    const min = Math.min(data[k], data[k + 1], data[k + 2]);
+    if (min > 235 && (i % w === 0 || i % w === w - 1)) data[k + 3] = 0;
+  }
+  ctx.putImageData(imageData, 0, 0);
   return canvas.toDataURL('image/png');
+}
+
+// Embedded transparent vector marks: no missing-image text fallbacks.
+// These are brand-inspired presentations; official assets can replace them later.
+function BuiltInBrandLogo({ brand }: { brand: 'odoo' | 'zoho' | 'wafeq' }) {
+  if (brand === 'odoo') return (
+    <svg className="software-logo-image" viewBox="0 0 240 75" role="img" aria-label="Odoo">
+      <text x="120" y="54" textAnchor="middle" fontFamily="Arial, sans-serif" fontWeight="800" fontSize="66" letterSpacing="-5">
+        <tspan fill="#D66BCB">o</tspan><tspan fill="#B8B7C5">doo</tspan>
+      </text>
+    </svg>
+  );
+  if (brand === 'zoho') return (
+    <svg className="software-logo-image" viewBox="0 0 260 82" role="img" aria-label="Zoho Books">
+      <g transform="translate(5,12)" fill="none" stroke="#25B8F5" strokeWidth="5" strokeLinejoin="round">
+        <rect x="0" y="0" width="54" height="54" rx="9" />
+        <path d="M13 12h23c11 0 11 15 0 15H13m0 0h25c11 0 11 15 0 15H13z" />
+      </g>
+      <text x="73" y="34" fill="#F6FAFF" fontSize="25" fontFamily="Arial,sans-serif" fontWeight="700">Zoho</text>
+      <text x="73" y="62" fill="#F6FAFF" fontSize="29" fontFamily="Arial,sans-serif" fontWeight="800">Books</text>
+    </svg>
+  );
+  return (
+    <svg className="software-logo-image" viewBox="0 0 250 80" role="img" aria-label="Wafeq">
+      <defs><linearGradient id="wafeqMarkGradient" x1="0" y1="0" x2="1" y2="1"><stop stopColor="#A76BFF"/><stop offset="1" stopColor="#507DF9"/></linearGradient></defs>
+      <path d="M7 20 L25 58 L41 29 L57 58 L76 20" fill="none" stroke="url(#wafeqMarkGradient)" strokeWidth="12" strokeLinecap="round" strokeLinejoin="round" />
+      <text x="92" y="56" fill="#F0F2FF" fontSize="46" fontWeight="750" fontFamily="Arial,sans-serif">wafeq</text>
+    </svg>
+  );
 }
 
 function SoftwareLogo({ item }: { item: SoftwareItem }) {
@@ -190,7 +245,7 @@ function SoftwareLogo({ item }: { item: SoftwareItem }) {
   const [processedLogo, setProcessedLogo] = useState<string | null>(null);
   return (
     <div
-      className="software-logo-item group relative flex h-[88px] w-full items-center justify-center sm:h-[95px]"
+      className="software-logo-item group relative flex h-[82px] w-full items-center justify-center sm:h-[87px]"
       style={{
         '--logo-glow': `rgba(${item.glow},0.46)`,
         '--logo-soft-glow': `rgba(${item.glow},0.20)`,
@@ -198,7 +253,9 @@ function SoftwareLogo({ item }: { item: SoftwareItem }) {
     >
       <div className="software-light" aria-hidden="true" />
       <div className="software-logo-inner">
-        {logoError ? (
+        {item.brandMark ? (
+          <BuiltInBrandLogo brand={item.brandMark} />
+        ) : logoError ? (
           <span className="software-fallback">{item.fallback}</span>
         ) : (
           <img
@@ -214,7 +271,8 @@ function SoftwareLogo({ item }: { item: SoftwareItem }) {
               }
             }}
             onError={() => setLogoError(true)}
-            className="software-logo-image"
+            className={`software-logo-image software-logo-${item.name.toLowerCase().replace(/[^a-z]/g, '')}`}
+            style={{ transform: `scale(${item.size || 1})` }}
           />
         )}
       </div>
@@ -235,6 +293,9 @@ export function Software(_props?: SoftwareProps) {
         #software { background: #305879 !important; background-image: none !important; }
         #software .main-heading-3d { color: #F3F7FA; }
         #software .main-heading-3d:hover { color: #BE9852; }
+        @media (min-width: 1024px) {
+          #software .software-logo-item:nth-last-child(2) { grid-column: 2; }
+        }
         #software .software-logo-item {
           isolation: isolate;
           perspective: 900px;
@@ -245,11 +306,11 @@ export function Software(_props?: SoftwareProps) {
         }
         #software .software-light {
           position: absolute;
-          width: 62%; height: 48%; left: 19%; top: 26%;
+          width: 54%; height: 42%; left: 23%; top: 29%;
           border-radius: 50%;
           background: var(--logo-glow);
           filter: blur(25px);
-          opacity: 0.50;
+          opacity: 0.36;
           transform: scale(1);
           transition: opacity 350ms ease, transform 350ms ease;
           pointer-events: none;
@@ -265,7 +326,7 @@ export function Software(_props?: SoftwareProps) {
         }
         #software .software-logo-image {
           display: block;
-          width: 75%; max-width: 131px; height: 49px;
+          width: 79%; max-width: 156px; height: 58px;
           object-fit: contain;
           filter: drop-shadow(0 0 5px var(--logo-glow))
                   drop-shadow(0 0 10px var(--logo-soft-glow))
@@ -273,6 +334,9 @@ export function Software(_props?: SoftwareProps) {
                   drop-shadow(0 9px 7px rgba(0,0,0,.20));
           transition: filter 380ms ease;
         }
+        #software .software-logo-arqami { filter: brightness(1.65) drop-shadow(0 0 6px var(--logo-glow)); }
+        #software .software-logo-qoyod { filter: brightness(1.65) drop-shadow(0 0 6px var(--logo-glow)); }
+        #software .software-logo-daftra { filter: brightness(1.30) drop-shadow(0 0 6px var(--logo-glow)); }
         #software .software-fallback {
           font-size: 15px; font-weight: 800; letter-spacing: 1px;
           color: #F3F7FA; text-align: center;
@@ -291,7 +355,7 @@ export function Software(_props?: SoftwareProps) {
           opacity: 0.78; transform: scale(1.15);
         }
         @media (max-width: 640px) {
-          #software .software-logo-image { width: 75%; max-width: 109px; height: 42px; }
+          #software .software-logo-image { width: 85%; max-width: 126px; height: 49px; }
           #software .software-light { width: 72%; left: 14%; }
         }
         @media (prefers-reduced-motion: reduce) {
@@ -306,7 +370,7 @@ export function Software(_props?: SoftwareProps) {
       <SoftwareSideNetwork />
 
       <div className="relative z-10 mx-auto max-w-[1380px] px-5 sm:px-8 lg:px-12">
-        <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div className="flex max-w-3xl flex-col items-start gap-1.5">
             <span className="block text-xs font-bold uppercase tracking-widest text-[#BE9852]">
               ERP &amp; SOFTWARE
@@ -322,7 +386,7 @@ export function Software(_props?: SoftwareProps) {
             </p>
           </div>
         </div>
-        <div className="grid grid-cols-2 gap-x-5 gap-y-4 sm:grid-cols-3 lg:grid-cols-4 lg:gap-y-5">
+        <div className="mx-auto grid max-w-[1100px] grid-cols-2 gap-x-4 gap-y-1 sm:grid-cols-3 lg:grid-cols-4 lg:gap-x-7 lg:gap-y-2">
           {softwareItems.map((item) => (
             <SoftwareLogo key={item.name} item={item} />
           ))}
