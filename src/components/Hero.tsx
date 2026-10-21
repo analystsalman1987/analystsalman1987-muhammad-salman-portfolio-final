@@ -3,6 +3,7 @@ import type { CSSProperties } from 'react';
 import type { ProfileInfo } from '../types';
 import { useLanguage } from '../context/LanguageContext';
 import SlowParticleNetwork from './SlowParticleNetwork';
+import { Download, Mail, Linkedin } from 'lucide-react';
 
 interface HeroProps {
   profile?: ProfileInfo;
@@ -715,6 +716,17 @@ export function Hero(_props: HeroProps) {
         .hero-roam-center .hero-roam-subtitle{display:block;font-size:clamp(12px,1.35vw,19px);font-weight:700;letter-spacing:.36em;color:#d8b56a;text-shadow:0 2px 6px rgba(0,0,0,.7);transition:letter-spacing .35s ease,text-shadow .35s ease}
         .hero-roam-center:hover .hero-roam-subtitle,.hero-roam-center:focus-visible .hero-roam-subtitle{letter-spacing:.42em;text-shadow:0 2px 10px rgba(216,181,106,.55)}
         .hero-roam-center:hover strong,.hero-roam-center:focus-visible strong{text-shadow:none;filter:drop-shadow(0 3px 2px rgba(0,0,0,.6)) drop-shadow(0 0 10px rgba(216,181,106,.35))}
+        /* Only the new hero actions; all existing hero rules remain untouched. */
+        .hero-actions{position:absolute;z-index:10;left:50%;top:calc(50% + clamp(12px,2.8vw,42px));transform:translateX(-50%);display:flex;align-items:center;justify-content:center;gap:12px;white-space:nowrap;max-width:calc(100% - 24px)}
+        .hero-action{display:inline-flex;align-items:center;justify-content:center;gap:9px;border-radius:11px;padding:11px 18px;font-size:13px;font-weight:700;line-height:1.25;text-decoration:none;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;touch-action:manipulation}
+        .hero-action:hover{transform:translateY(-3px)}
+        .hero-action-primary{color:#fff;background:linear-gradient(110deg,#BE9852,#A8823C);border:1px solid #BE9852;box-shadow:0 4px 18px rgba(190,152,82,.18)}
+        .hero-action-primary:hover{box-shadow:0 7px 24px rgba(190,152,82,.32)}
+        .hero-action-outline{color:#F3F7FA;background:rgba(8,30,48,.34);border:1px solid rgba(197,213,226,.65)}
+        .hero-action-outline:hover{border-color:#D8B56A}
+        .hero-action-linkedin{color:#69B7E7;background:transparent;border:0;padding:10px}
+        .hero-action-linkedin:hover{color:#A2E2FF}
+        @media(max-width:700px){.hero-actions{gap:6px;top:calc(50% + 32px)}.hero-action{font-size:11px;padding:9px 10px;gap:5px}.hero-action-linkedin{padding:8px}}
         @media(max-width:700px){.hero-free-roam{min-height:480px}.hero-roam-heading{font-size:12px;font-weight:700}.hero-roam-center{width:auto;min-height:0;border-radius:0;padding:10px 12px}.hero-roam-center strong{font-size:clamp(20px,6.16vw,42.5px);letter-spacing:.025em}.hero-roam-center .hero-roam-subtitle{font-size:12px;letter-spacing:.25em}}
         @media(prefers-reduced-motion:reduce){.hero-roam-text{animation:none;background-position:140% 0}.hero-roam-line{will-change:auto}}
       `}</style>
@@ -831,6 +843,27 @@ export function Hero(_props: HeroProps) {
         <strong>{isRTL ? 'محمد سلمان' : 'MUHAMMAD SALMAN'}</strong>
         <span className="hero-roam-subtitle">{isRTL ? 'محاسب' : 'ACCOUNTANT'}</span>
       </button>
+
+      {/* New controls only — original center heading, labels, globe and waves unchanged. */}
+      <div className="hero-actions" dir={isRTL ? 'rtl' : 'ltr'}>
+        <button type="button" className="hero-action hero-action-primary" onClick={_props.onOpenCV}>
+          <Download size={17} aria-hidden="true" />
+          <span>{isRTL ? 'تحميل السيرة الذاتية' : 'Download CV'}</span>
+        </button>
+        <a className="hero-action hero-action-outline" href="#contact" onClick={(event) => {
+          const target = document.getElementById('contact');
+          if (!target) return;
+          event.preventDefault();
+          window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
+          window.history.replaceState(null, '', '#contact');
+        }}>
+          <Mail size={17} aria-hidden="true" />
+          <span>{isRTL ? 'تواصل معي' : 'Contact Me'}</span>
+        </a>
+        <a className="hero-action hero-action-linkedin" href="https://www.linkedin.com/in/muhammad-salman-mba-finance-cpa-finalist-66908767/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile" title="LinkedIn">
+          <Linkedin size={27} aria-hidden="true" />
+        </a>
+      </div>
     </section>
   );
 }
