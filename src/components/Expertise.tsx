@@ -139,40 +139,17 @@ export function Expertise({ expertise }: ExpertiseProps) {
       "
       style={{ backgroundColor: '#305879' }}
     >
-      {/* LOCAL BACKDROP */}
+      {/* Full-section background: cover, center, no-repeat */}
       <div
-        className="absolute inset-0 pointer-events-none z-0 bg-[#305879]/85 backdrop-blur-[2px]"
+        className="pointer-events-none absolute inset-0 z-0 bg-cover bg-center bg-no-repeat select-none"
+        style={{
+          backgroundImage: "url('/assets/aistudio/Solid_About_Me_Blue_Background_e6873484.png')",
+          backgroundPosition: 'center center',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+        }}
         aria-hidden="true"
       />
-
-      {/* BACKGROUND IMAGE ACCENT */}
-      <div
-        className="absolute inset-0 pointer-events-none z-0"
-        aria-hidden="true"
-      >
-        <img
-          src="/images/accounting_workplace.jpg"
-          alt=""
-          className="
-            w-full h-full
-            object-cover object-center
-            opacity-[0.12]
-            contrast-105
-            select-none
-          "
-          loading="lazy"
-        />
-
-        <div
-          className="
-            absolute inset-0
-            bg-gradient-to-b
-            from-[#305879]/95
-            via-[#305879]/90
-            to-[#305879]/95
-          "
-        />
-      </div>
 
       {/* Geometric network: decorative only; existing gold/blue palette */}
       <svg aria-hidden="true" className="pointer-events-none absolute inset-0 z-0 h-full w-full" viewBox="0 0 1600 1000" preserveAspectRatio="none">

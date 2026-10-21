@@ -41,19 +41,17 @@ export function EducationLanguages({
   return (
     <section id="education" className="misty-portfolio relative py-20 bg-[#305879] border-b border-[#C5D5E2] transition-colors overflow-hidden" style={{ backgroundColor: '#305879' }}>
       <style>{`#education .language-row .language-golden-name { color: #E5C78E !important; -webkit-text-fill-color: #E5C78E !important; opacity: 1 !important; }`}</style>
-      {/* Subtle Professional Accounting & Academic Workplace Background Image */}
-      <div 
-        className="absolute inset-0 pointer-events-none z-0"
+      {/* Full-section background: cover, center, no-repeat */}
+      <div
+        className="pointer-events-none absolute inset-0 z-0 bg-cover bg-center bg-no-repeat select-none"
+        style={{
+          backgroundImage: "url('/assets/aistudio/Solid_About_Me_Blue_Background_e6873484.png')",
+          backgroundPosition: 'center center',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+        }}
         aria-hidden="true"
-      >
-        <img 
-          src="/images/accounting_workplace.jpg" 
-          alt="" 
-          className="w-full h-full object-cover object-center opacity-[0.16] filter contrast-105 select-none"
-          loading="lazy"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#305879]/95 via-[#305879]/90 to-[#305879]/95" />
-      </div>
+      />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         

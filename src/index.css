@@ -617,7 +617,7 @@ html.dark :is(#about,#highlights,#expertise,#experience,#software,#education,#co
  background-color:#305879 !important;
 }
 :is(#about,#highlights,#expertise,#experience,#software,#education,#contact) > div.absolute.inset-0.pointer-events-none.z-0 img + div.absolute.inset-0 {
- background:linear-gradient(180deg,rgba(48,88,121,.92),rgba(48,88,121,.84),rgba(48,88,121,.94)) !important;
+ background:linear-gradient(180deg,rgba(48,88,121,.96),rgba(48,88,121,.92),rgba(48,88,121,.96)) !important;
 }
 :is(#about,#highlights,#expertise,#experience,#software,#education,#contact) .main-heading-3d {
  color:#f3f7fa !important;
@@ -642,5 +642,4 @@ html.dark :is(#about,#highlights,#expertise,#experience,#software,#education,#co
 #education .edu-navy-card .edu-meta {background:#1e3a56 !important;color:#f3f7fa !important;}
 #education .edu-navy-card .edu-meta * {color:#f3f7fa !important;}
 #education .language-navy-card .language-row {background:#254866 !important;border-color:#52718a !important;}
-#education .language-navy-card .language-row * {color:#f3f7fa !important;}
-#software {background-color:#305879 !important;background-image:none !important;}
+#software {background-color:#305879 !important;}

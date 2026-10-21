@@ -56,11 +56,17 @@ export function Highlights({ highlights }: HighlightsProps) {
         }
       `}</style>
 
-      {/* Static background: do not add moving effects outside Home. */}
-      <div className="pointer-events-none absolute inset-0 z-0" aria-hidden="true">
-        <img src="/images/accounting_workplace_optimized.webp" alt="" loading="lazy" className="h-full w-full object-cover opacity-[0.07]" />
-        <div className="absolute inset-0" style={{ background:'linear-gradient(135deg,rgba(48,88,121,.94),rgba(30,58,86,.92))' }} />
-      </div>
+      {/* Full-section background: cover, center, no-repeat */}
+      <div
+        className="pointer-events-none absolute inset-0 z-0 bg-cover bg-center bg-no-repeat select-none"
+        style={{
+          backgroundImage: "url('/assets/aistudio/Solid_About_Me_Blue_Background_e6873484.png')",
+          backgroundPosition: 'center center',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+        }}
+        aria-hidden="true"
+      />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto mb-12 flex max-w-2xl flex-col items-center gap-1.5 text-center">

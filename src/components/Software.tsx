@@ -287,10 +287,10 @@ export function Software(_props?: SoftwareProps) {
     <section
       id="software"
       className="misty-portfolio relative overflow-hidden border-b border-[#C5D5E2] bg-[#305879] py-16 transition-colors duration-300 sm:py-20"
-      style={{ backgroundColor: '#305879', backgroundImage: 'none' }}
+      style={{ backgroundColor: '#305879' }}
     >
       <style>{`
-        #software { background: #305879 !important; background-image: none !important; }
+        #software { background-color: #305879 !important; }
         #software .main-heading-3d { color: #F3F7FA; }
         #software .main-heading-3d:hover { color: #BE9852; }
         @media (min-width: 1024px) {
@@ -365,6 +365,18 @@ export function Software(_props?: SoftwareProps) {
           #software .software-logo-item:hover .software-logo-inner { transform: none; }
         }
       `}</style>
+
+      {/* Full-section background: cover, center, no-repeat */}
+      <div
+        className="pointer-events-none absolute inset-0 z-0 bg-cover bg-center bg-no-repeat select-none"
+        style={{
+          backgroundImage: "url('/assets/aistudio/Solid_About_Me_Blue_Background_e6873484.png')",
+          backgroundPosition: 'center center',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+        }}
+        aria-hidden="true"
+      />
 
       {/* Original Expertise network, unchanged speed, count, colors, side positioning */}
       <SoftwareSideNetwork />

@@ -653,6 +653,18 @@ export function Experience({ experience, isSelected, onToggleSelect }: Experienc
         #experience .experience-company-expanded .experience-duty span {color:#17324A !important;-webkit-text-fill-color:#17324A !important;}
         #experience .experience-company-expanded .experience-responsibilities-toggle {background:#1E3A56 !important;}
       `}</style>
+      {/* Full-section background: cover, center, no-repeat */}
+      <div
+        className="pointer-events-none absolute inset-0 z-0 bg-cover bg-center bg-no-repeat select-none"
+        style={{
+          backgroundImage: "url('/assets/aistudio/Solid_About_Me_Blue_Background_e6873484.png')",
+          backgroundPosition: 'center center',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+        }}
+        aria-hidden="true"
+      />
+
       {/* Subtle orbit / network backdrop, same existing palette; content untouched */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0" style={{ background: 'radial-gradient(ellipse 58% 75% at 78% 52%, rgba(190,152,82,0.14), rgba(48,88,121,0) 76%)' }} />
       <svg aria-hidden="true" className="pointer-events-none absolute top-0 left-0 z-0 h-[620px] w-full" viewBox="0 0 1600 620" preserveAspectRatio="none">

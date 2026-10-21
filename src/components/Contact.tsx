@@ -144,19 +144,17 @@ export function Contact({ profile }: ContactProps) {
         #contact .contact-form-card .bg-rose-50 { background-color:#7F1D1D !important; }
         #contact .contact-form-card .bg-rose-50 span { color:#FFF1F2 !important; -webkit-text-fill-color:#FFF1F2 !important; }
       `}</style>
-      {/* Subtle Modern Corporate Business Communication Workspace Background Image */}
-      <div 
-        className="absolute inset-0 pointer-events-none z-0"
+      {/* Full-section background: cover, center, no-repeat */}
+      <div
+        className="pointer-events-none absolute inset-0 z-0 bg-cover bg-center bg-no-repeat select-none"
+        style={{
+          backgroundImage: "url('/assets/aistudio/Solid_About_Me_Blue_Background_e6873484.png')",
+          backgroundPosition: 'center center',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+        }}
         aria-hidden="true"
-      >
-        <img 
-          src="/images/contact_business_workspace.jpg" 
-          alt="" 
-          className="w-full h-full object-cover object-center opacity-[0.14] filter contrast-105 select-none"
-          loading="lazy"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#305879]/95 via-[#305879]/90 to-[#305879]/95" />
-      </div>
+      />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
