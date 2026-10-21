@@ -158,8 +158,33 @@ function SoftwareSideNetwork() {
   );
 }
 
+// Remove near-white pixels from opaque logo assets at runtime.
+// Original files remain untouched. For pixel-perfect results, use transparent PNGs.
+function removeWhiteBackground(image: HTMLImageElement): string {
+  const canvas = document.createElement('canvas');
+  canvas.width = image.naturalWidth;
+  canvas.height = image.naturalHeight;
+  const ctx = canvas.getContext('2d', { willReadFrequently: true });
+  if (!ctx) return image.src;
+  ctx.drawImage(image, 0, 0);
+  const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height);
+  const data = pixels.data;
+  for (let i = 0; i < data.length; i += 4) {
+    const r = data[i], g = data[i + 1], b = data[i + 2];
+    const min = Math.min(r, g, b);
+    const max = Math.max(r, g, b);
+    // Only neutral, very light colors: keep colored and dark logo artwork.
+    if (min > 235 && max - min < 20) {
+      data[i + 3] = Math.round(data[i + 3] * Math.max(0, (255 - min) / 20));
+    }
+  }
+  ctx.putImageData(pixels, 0, 0);
+  return canvas.toDataURL('image/png');
+}
+
 function SoftwareLogo({ item }: { item: SoftwareItem }) {
   const [logoError, setLogoError] = useState(false);
+  const [processedLogo, setProcessedLogo] = useState<string | null>(null);
   return (
     <div
       className="software-logo-item group relative flex h-[105px] w-full items-center justify-center sm:h-[115px]"
@@ -174,11 +199,19 @@ function SoftwareLogo({ item }: { item: SoftwareItem }) {
           <span className="software-fallback">{item.fallback}</span>
         ) : (
           <img
-            src={item.logo}
+            src={processedLogo || item.logo}
             alt={`${item.name} logo`}
             loading="lazy"
+            onLoad={(event) => {
+              if (!item.whiteBackground || processedLogo) return;
+              try {
+                setProcessedLogo(removeWhiteBackground(event.currentTarget));
+              } catch {
+                // Keep original image if canvas processing is unavailable.
+              }
+            }}
             onError={() => setLogoError(true)}
-            className={`software-logo-image ${item.whiteBackground ? 'software-white-background' : ''}`}
+            className="software-logo-image"
           />
         )}
       </div>
@@ -237,8 +270,6 @@ export function Software(_props?: SoftwareProps) {
                   drop-shadow(0 9px 7px rgba(0,0,0,.20));
           transition: filter 380ms ease;
         }
-        /* Approximate blend for opaque white-background PNG assets. */
-        #software .software-white-background { mix-blend-mode: multiply; }
         #software .software-fallback {
           font-size: 15px; font-weight: 800; letter-spacing: 1px;
           color: #F3F7FA; text-align: center;
