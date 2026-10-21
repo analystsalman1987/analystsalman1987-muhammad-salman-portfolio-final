@@ -18,6 +18,9 @@ const softwareItems: SoftwareItem[] = [
   { name: 'Qoyod', logo: '/images/software/Qoyod logo.png', fallback: 'QOYOD', glow: '55,130,255' },
   { name: 'Peachtree', logo: '/images/software/Peachtree logo.png', fallback: 'PEACHTREE', glow: '255,190,45', whiteBackground: true },
   { name: 'Tally', logo: '/images/software/Tally logo.png', fallback: 'TALLY', glow: '255,75,100', whiteBackground: true },
+  { name: 'Odoo', logo: '/images/software/odoo-logo.png', fallback: 'odoo', glow: '175,95,175' },
+  { name: 'Zoho Books', logo: '/images/software/zoho-books-logo.png', fallback: 'Zoho Books', glow: '45,155,255' },
+  { name: 'Wafeq', logo: '/images/software/wafeq-logo.png', fallback: 'wafeq', glow: '110,95,255' },
   { name: 'Advanced Microsoft Excel', logo: '/images/software/excel-logo.svg', fallback: 'EXCEL', glow: '25,230,110' },
   { name: 'Microsoft Office', logo: '/images/software/office-logo.svg', fallback: 'OFFICE', glow: '255,95,35' },
 ];
@@ -187,7 +190,7 @@ function SoftwareLogo({ item }: { item: SoftwareItem }) {
   const [processedLogo, setProcessedLogo] = useState<string | null>(null);
   return (
     <div
-      className="software-logo-item group relative flex h-[105px] w-full items-center justify-center sm:h-[115px]"
+      className="software-logo-item group relative flex h-[88px] w-full items-center justify-center sm:h-[95px]"
       style={{
         '--logo-glow': `rgba(${item.glow},0.46)`,
         '--logo-soft-glow': `rgba(${item.glow},0.20)`,
@@ -262,7 +265,7 @@ export function Software(_props?: SoftwareProps) {
         }
         #software .software-logo-image {
           display: block;
-          width: 78%; max-width: 175px; height: 65px;
+          width: 75%; max-width: 131px; height: 49px;
           object-fit: contain;
           filter: drop-shadow(0 0 5px var(--logo-glow))
                   drop-shadow(0 0 10px var(--logo-soft-glow))
@@ -288,7 +291,7 @@ export function Software(_props?: SoftwareProps) {
           opacity: 0.78; transform: scale(1.15);
         }
         @media (max-width: 640px) {
-          #software .software-logo-image { width: 82%; max-width: 145px; height: 55px; }
+          #software .software-logo-image { width: 75%; max-width: 109px; height: 42px; }
           #software .software-light { width: 72%; left: 14%; }
         }
         @media (prefers-reduced-motion: reduce) {
@@ -319,7 +322,7 @@ export function Software(_props?: SoftwareProps) {
             </p>
           </div>
         </div>
-        <div className="grid grid-cols-2 gap-x-5 gap-y-5 sm:grid-cols-3 lg:grid-cols-4 lg:gap-y-7">
+        <div className="grid grid-cols-2 gap-x-5 gap-y-4 sm:grid-cols-3 lg:grid-cols-4 lg:gap-y-5">
           {softwareItems.map((item) => (
             <SoftwareLogo key={item.name} item={item} />
           ))}
