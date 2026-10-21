@@ -174,6 +174,18 @@ export function Expertise({ expertise }: ExpertiseProps) {
         />
       </div>
 
+      {/* Locked subtle geometric background — existing palette only */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-0"
+        style={{
+          backgroundImage: 'linear-gradient(to right, rgba(190,152,82,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(190,152,82,0.05) 1px, transparent 1px)',
+          backgroundSize: '64px 64px',
+          maskImage: 'radial-gradient(ellipse 85% 75% at 50% 48%, black 25%, transparent 100%)',
+          WebkitMaskImage: 'radial-gradient(ellipse 85% 75% at 50% 48%, black 25%, transparent 100%)',
+        }}
+      />
+
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* HEADER (Main section title preserved) */}
         <div className="flex flex-col items-start gap-1.5 max-w-3xl mb-12">
