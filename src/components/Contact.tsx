@@ -8,7 +8,6 @@ import {
   Send, 
   CheckCircle, 
   ExternalLink, 
-  ShieldCheck,
   AlertCircle
 } from 'lucide-react';
 import { ProfileInfo } from '../types';
@@ -202,64 +201,31 @@ export function Contact({ profile }: ContactProps) {
               </div>
             </a>
 
-            {/* LinkedIn profile — added without changing existing contact cards. */}
-            <a
-              href="https://www.linkedin.com/in/muhammad-salman-mba-finance-cpa-finalist-66908767/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="contact-info-card p-5 rounded-2xl bg-[#254866] border border-[#52718A] hover:border-[#BE9852]/50 shadow-xs transition-all flex items-start gap-4 group block"
-            >
-              <div className="w-11 h-11 rounded-xl bg-[#F3F7FA] text-[#0A66C2] border border-[#C5D5E2] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
-                <Linkedin className="w-5 h-5" />
+            {/* Both contact numbers in one card; each number remains independently clickable. */}
+            <div className="contact-info-card p-5 rounded-2xl bg-[#254866] border border-[#52718A] shadow-xs flex items-start gap-4">
+              <div className="w-11 h-11 rounded-xl bg-[#F3F7FA] text-[#BE9852] border border-[#C5D5E2] flex items-center justify-center shrink-0">
+                <Phone className="w-5 h-5" />
               </div>
               <div className="min-w-0 flex-1">
-                <span className="contact-info-label text-[11px] font-bold text-[#E5C78E] uppercase tracking-wider block">LinkedIn</span>
-                <span className="text-sm font-semibold text-[#F3F7FA] break-words">{isRTL ? 'الملف الشخصي المهني' : 'View Professional Profile'}</span>
-                <span className="text-xs text-[#C5D5E2] block mt-0.5">{isRTL ? 'فتح في علامة تبويب جديدة' : 'Opens in a new tab'}</span>
-              </div>
-            </a>
-
-            {/* Primary Phone Card */}
-            <a
-              href={`tel:${profile.primaryPhone.replace(/\s+/g, '')}`}
-              className="contact-info-card p-5 rounded-2xl bg-[#254866] border border-[#52718A] hover:border-[#BE9852]/50 shadow-xs transition-all flex items-start gap-4 group block"
-            >
-              <div className="w-11 h-11 rounded-xl bg-[#F3F7FA] text-[#BE9852] border border-[#C5D5E2] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
-                <Phone className="w-5 h-5" />
-              </div>
-              <div>
                 <span className="contact-info-label text-[11px] font-bold text-[#E5C78E] uppercase tracking-wider block">
-                  {isRTL ? t.phoneLabel : 'Primary Mobile / WhatsApp'}
+                  {isRTL ? 'أرقام التواصل' : 'Contact Numbers'}
                 </span>
-                <span className="text-sm font-semibold text-[#17324A] group-hover:text-[#BE9852] transition-colors" dir="ltr">
-                  {profile.primaryPhone}
-                </span>
-                <span className="text-xs text-[#52677A] block mt-0.5">
-                  {isRTL ? t.phoneSub : 'Direct phone & messaging'}
-                </span>
+                <div className="mt-2 flex flex-col gap-2">
+                  <div>
+                    <span className="block text-xs text-[#C5D5E2]">{isRTL ? t.phoneLabel : 'Primary Mobile / WhatsApp'}</span>
+                    <a href={`tel:${profile.primaryPhone.replace(/\s+/g, '')}`} className="block w-fit text-sm font-semibold text-[#F3F7FA] hover:text-[#E5C78E] transition-colors" dir="ltr">
+                      {profile.primaryPhone}
+                    </a>
+                  </div>
+                  <div>
+                    <span className="block text-xs text-[#C5D5E2]">{isRTL ? t.altPhoneLabel : 'Alternative Phone'}</span>
+                    <a href={`tel:${profile.altPhone.replace(/\s+/g, '')}`} className="block w-fit text-sm font-semibold text-[#F3F7FA] hover:text-[#E5C78E] transition-colors" dir="ltr">
+                      {profile.altPhone}
+                    </a>
+                  </div>
+                </div>
               </div>
-            </a>
-
-            {/* Alternative Phone Card */}
-            <a
-              href={`tel:${profile.altPhone.replace(/\s+/g, '')}`}
-              className="contact-info-card p-5 rounded-2xl bg-[#254866] border border-[#52718A] hover:border-[#BE9852]/50 shadow-xs transition-all flex items-start gap-4 group block"
-            >
-              <div className="w-11 h-11 rounded-xl bg-[#F3F7FA] text-[#BE9852] border border-[#C5D5E2] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
-                <Phone className="w-5 h-5" />
-              </div>
-              <div>
-                <span className="contact-info-label text-[11px] font-bold text-[#E5C78E] uppercase tracking-wider block">
-                  {isRTL ? t.altPhoneLabel : 'Alternative Phone'}
-                </span>
-                <span className="text-sm font-semibold text-[#17324A] group-hover:text-[#BE9852] transition-colors" dir="ltr">
-                  {profile.altPhone}
-                </span>
-                <span className="text-xs text-[#52677A] block mt-0.5">
-                  {isRTL ? t.altPhoneSub : 'Secondary contact line'}
-                </span>
-              </div>
-            </a>
+            </div>
 
             {/* Location Card */}
             <div className="contact-info-card p-5 rounded-2xl bg-[#254866] border border-[#52718A] shadow-xs flex items-start gap-4">
@@ -278,26 +244,6 @@ export function Contact({ profile }: ContactProps) {
                 </span>
               </div>
             </div>
-
-            {/* Driving License Card */}
-            {profile.drivingLicense && (
-              <div className="contact-info-card p-5 rounded-2xl bg-[#254866] border border-[#52718A] shadow-xs flex items-start gap-4">
-                <div className="w-11 h-11 rounded-xl bg-[#F3F7FA] text-[#BE9852] border border-[#C5D5E2] flex items-center justify-center shrink-0">
-                  <ShieldCheck className="w-5 h-5" />
-                </div>
-                <div>
-                  <span className="contact-info-label text-[11px] font-bold text-[#E5C78E] uppercase tracking-wider block">
-                    {isRTL ? t.licenseLabel : 'Driving License'}
-                  </span>
-                  <span className="text-sm font-semibold text-[#17324A]">
-                    {isRTL ? 'إقامة قابلة للتحويل | رخصة قيادة سعودية سارية' : profile.drivingLicense}
-                  </span>
-                  <span className="text-xs text-[#52677A] block mt-0.5">
-                    {isRTL ? t.licenseSub : 'Authorized in Kingdom of Saudi Arabia'}
-                  </span>
-                </div>
-              </div>
-            )}
 
           </div>
 
