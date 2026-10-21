@@ -179,10 +179,10 @@ export function Expertise({ expertise }: ExpertiseProps) {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 z-0"
         style={{
-          backgroundImage: 'linear-gradient(to right, rgba(190,152,82,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(190,152,82,0.05) 1px, transparent 1px)',
+          backgroundImage: 'linear-gradient(to right, rgba(190,152,82,0.16) 1px, transparent 1px), linear-gradient(to bottom, rgba(190,152,82,0.16) 1px, transparent 1px)',
           backgroundSize: '64px 64px',
-          maskImage: 'radial-gradient(ellipse 85% 75% at 50% 48%, black 25%, transparent 100%)',
-          WebkitMaskImage: 'radial-gradient(ellipse 85% 75% at 50% 48%, black 25%, transparent 100%)',
+          maskImage: 'linear-gradient(to bottom, transparent 0%, black 14%, black 88%, transparent 100%)',
+          WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 14%, black 88%, transparent 100%)',
         }}
       />
 
