@@ -174,17 +174,39 @@ export function Expertise({ expertise }: ExpertiseProps) {
         />
       </div>
 
-      {/* Locked subtle geometric background — existing palette only */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 z-0"
-        style={{
-          backgroundImage: 'linear-gradient(to right, rgba(190,152,82,0.16) 1px, transparent 1px), linear-gradient(to bottom, rgba(190,152,82,0.16) 1px, transparent 1px)',
-          backgroundSize: '64px 64px',
-          maskImage: 'linear-gradient(to bottom, transparent 0%, black 14%, black 88%, transparent 100%)',
-          WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 14%, black 88%, transparent 100%)',
-        }}
-      />
+      {/* Geometric network: decorative only; existing gold/blue palette */}
+      <svg aria-hidden="true" className="pointer-events-none absolute inset-0 z-0 h-full w-full" viewBox="0 0 1600 1000" preserveAspectRatio="none">
+        <defs>
+          <pattern id="expertise-grid" width="64" height="64" patternUnits="userSpaceOnUse">
+            <path d="M64 0H0V64" fill="none" stroke="#BE9852" strokeOpacity="0.13" strokeWidth="1" />
+          </pattern>
+          <radialGradient id="expertise-node-glow"><stop stopColor="#BE9852" stopOpacity="0.48"/><stop offset="1" stopColor="#BE9852" stopOpacity="0"/></radialGradient>
+        </defs>
+        <rect width="1600" height="1000" fill="url(#expertise-grid)" />
+        <g fill="none" stroke="#BE9852" strokeWidth="1.25" strokeOpacity="0.36">
+          <path d="M0 270L85 190 158 270 225 140 318 205 395 110M0 550L94 475 180 580 272 460 360 525M1230 85L1315 155 1400 90 1510 165 1600 105M1250 410L1335 335 1420 395 1500 270 1600 325M0 825L90 740 190 840 305 725 385 800M1250 795L1330 700 1445 770 1530 675 1600 720"/>
+        </g>
+        <g fill="#BE9852" fillOpacity="0.9">
+          <circle cx="85" cy="190" r="3.5"/><circle cx="158" cy="270" r="4"/><circle cx="225" cy="140" r="4"/><circle cx="318" cy="205" r="2.5"/>
+          <circle cx="94" cy="475" r="3"/><circle cx="272" cy="460" r="3"/><circle cx="1315" cy="155" r="3"/><circle cx="1400" cy="90" r="4"/>
+          <circle cx="1420" cy="395" r="3.5"/><circle cx="1500" cy="270" r="4"/><circle cx="90" cy="740" r="3.5"/><circle cx="305" cy="725" r="4"/>
+          <circle cx="1330" cy="700" r="4"/><circle cx="1530" cy="675" r="3.5"/>
+        </g>
+        {/* Edge highlights remain visible across wide and tall screens */}
+        <g fill="none" stroke="#BE9852" strokeOpacity="0.38" strokeWidth="1.4">
+          <path d="M0 85L48 135 115 75 175 150 240 100M1600 85L1540 145 1480 85 1410 160 1340 110" />
+          <path d="M0 405L60 360 130 420 210 350M1600 425L1540 365 1470 435 1395 370" />
+        </g>
+        <g fill="#BE9852" fillOpacity="0.94">
+          <circle cx="48" cy="135" r="5"/><circle cx="115" cy="75" r="4"/><circle cx="175" cy="150" r="4"/>
+          <circle cx="1540" cy="145" r="5"/><circle cx="1480" cy="85" r="4"/><circle cx="1410" cy="160" r="4"/>
+          <circle cx="60" cy="360" r="5"/><circle cx="130" cy="420" r="4"/>
+          <circle cx="1540" cy="365" r="5"/><circle cx="1470" cy="435" r="4"/>
+        </g>
+        <g fill="url(#expertise-node-glow)">
+          <circle cx="225" cy="140" r="24"/><circle cx="1500" cy="270" r="27"/><circle cx="305" cy="725" r="23"/><circle cx="1330" cy="700" r="25"/>
+        </g>
+      </svg>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* HEADER (Main section title preserved) */}
