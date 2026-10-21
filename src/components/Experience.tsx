@@ -653,14 +653,22 @@ export function Experience({ experience, isSelected, onToggleSelect }: Experienc
         #experience .experience-company-expanded .experience-duty span {color:#17324A !important;-webkit-text-fill-color:#17324A !important;}
         #experience .experience-company-expanded .experience-responsibilities-toggle {background:#1E3A56 !important;}
       `}</style>
-      {/* Locked subtle ambient background glow — existing palette only */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 z-0"
-        style={{
-          background: 'radial-gradient(ellipse 65% 60% at 80% 35%, rgba(190,152,82,0.20) 0%, rgba(48,88,121,0) 78%)',
-        }}
-      />
+      {/* Subtle orbit / network backdrop, same existing palette; content untouched */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0" style={{ background: 'radial-gradient(ellipse 58% 75% at 78% 52%, rgba(190,152,82,0.14), rgba(48,88,121,0) 76%)' }} />
+      <svg aria-hidden="true" className="pointer-events-none absolute inset-0 z-0 h-full w-full" viewBox="0 0 1600 620" preserveAspectRatio="xMidYMid slice">
+        <defs><radialGradient id="experience-node-glow"><stop stopColor="#BE9852" stopOpacity="0.48"/><stop offset="1" stopColor="#BE9852" stopOpacity="0"/></radialGradient></defs>
+        <g fill="none" stroke="#BE9852" strokeOpacity="0.22" strokeWidth="1.25">
+          <ellipse cx="1290" cy="310" rx="420" ry="215"/><ellipse cx="1290" cy="310" rx="355" ry="174"/><ellipse cx="1290" cy="310" rx="285" ry="133"/>
+        </g>
+        <g fill="none" stroke="#BE9852" strokeOpacity="0.25" strokeWidth="1.2">
+          <path d="M0 165L85 125 155 195 245 140 330 215M0 485L80 410 165 475 260 395 355 465" />
+        </g>
+        <g fill="#BE9852" fillOpacity="0.75">
+          <circle cx="85" cy="125" r="4"/><circle cx="245" cy="140" r="3"/><circle cx="80" cy="410" r="3.5"/><circle cx="260" cy="395" r="3"/>
+          <circle cx="955" cy="225" r="3.5"/><circle cx="1460" cy="130" r="3.5"/><circle cx="1545" cy="395" r="4"/><circle cx="1390" cy="470" r="3.5"/>
+        </g>
+        <g fill="url(#experience-node-glow)"><circle cx="85" cy="125" r="27"/><circle cx="260" cy="395" r="22"/><circle cx="1545" cy="395" r="27"/></g>
+      </svg>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
