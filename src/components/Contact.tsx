@@ -2,6 +2,7 @@ import { useState } from 'react';
 import emailjs from '@emailjs/browser';
 import { 
   Mail, 
+  Linkedin, 
   Phone, 
   MapPin, 
   Send, 
@@ -198,6 +199,23 @@ export function Contact({ profile }: ContactProps) {
                 <span className="text-xs text-[#52677A] block mt-0.5">
                   {isRTL ? t.emailSub : 'Direct primary correspondence'}
                 </span>
+              </div>
+            </a>
+
+            {/* LinkedIn profile — added without changing existing contact cards. */}
+            <a
+              href="https://www.linkedin.com/in/muhammad-salman-mba-finance-cpa-finalist-66908767/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="contact-info-card p-5 rounded-2xl bg-[#254866] border border-[#52718A] hover:border-[#BE9852]/50 shadow-xs transition-all flex items-start gap-4 group block"
+            >
+              <div className="w-11 h-11 rounded-xl bg-[#F3F7FA] text-[#0A66C2] border border-[#C5D5E2] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                <Linkedin className="w-5 h-5" />
+              </div>
+              <div className="min-w-0 flex-1">
+                <span className="contact-info-label text-[11px] font-bold text-[#E5C78E] uppercase tracking-wider block">LinkedIn</span>
+                <span className="text-sm font-semibold text-[#F3F7FA] break-words">{isRTL ? 'الملف الشخصي المهني' : 'View Professional Profile'}</span>
+                <span className="text-xs text-[#C5D5E2] block mt-0.5">{isRTL ? 'فتح في علامة تبويب جديدة' : 'Opens in a new tab'}</span>
               </div>
             </a>
 
