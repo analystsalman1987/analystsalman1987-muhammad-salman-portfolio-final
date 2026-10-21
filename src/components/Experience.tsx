@@ -655,7 +655,7 @@ export function Experience({ experience, isSelected, onToggleSelect }: Experienc
       `}</style>
       {/* Subtle orbit / network backdrop, same existing palette; content untouched */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0" style={{ background: 'radial-gradient(ellipse 58% 75% at 78% 52%, rgba(190,152,82,0.14), rgba(48,88,121,0) 76%)' }} />
-      <svg aria-hidden="true" className="pointer-events-none absolute inset-0 z-0 h-full w-full" viewBox="0 0 1600 620" preserveAspectRatio="xMidYMid slice">
+      <svg aria-hidden="true" className="pointer-events-none absolute top-0 left-0 z-0 h-[620px] w-full" viewBox="0 0 1600 620" preserveAspectRatio="none">
         <defs><radialGradient id="experience-node-glow"><stop stopColor="#BE9852" stopOpacity="0.48"/><stop offset="1" stopColor="#BE9852" stopOpacity="0"/></radialGradient></defs>
         <g fill="none" stroke="#BE9852" strokeOpacity="0.22" strokeWidth="1.25">
           <ellipse cx="1290" cy="310" rx="420" ry="215"/><ellipse cx="1290" cy="310" rx="355" ry="174"/><ellipse cx="1290" cy="310" rx="285" ry="133"/>
@@ -670,6 +670,17 @@ export function Experience({ experience, isSelected, onToggleSelect }: Experienc
         <g fill="url(#experience-node-glow)"><circle cx="85" cy="125" r="27"/><circle cx="260" cy="395" r="22"/><circle cx="1545" cy="395" r="27"/></g>
       </svg>
 
+      {/* Repeated edge-only orbits stay visible when the accordion expands. */}
+      <svg aria-hidden="true" className="pointer-events-none absolute top-[620px] left-0 z-0 h-[900px] w-full" viewBox="0 0 1600 900" preserveAspectRatio="none">
+        <g fill="none" stroke="#BE9852" strokeOpacity="0.20" strokeWidth="1.2">
+          <ellipse cx="1490" cy="455" rx="460" ry="300"/><ellipse cx="1490" cy="455" rx="395" ry="240"/>
+          <path d="M0 160L75 105 155 180 240 95 315 155M0 575L85 500 165 590 250 515"/>
+        </g>
+        <g fill="#BE9852" fillOpacity="0.75">
+          <circle cx="75" cy="105" r="4"/><circle cx="240" cy="95" r="4"/><circle cx="85" cy="500" r="4"/>
+          <circle cx="1570" cy="270" r="4"/><circle cx="1500" cy="710" r="4"/>
+        </g>
+      </svg>
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
