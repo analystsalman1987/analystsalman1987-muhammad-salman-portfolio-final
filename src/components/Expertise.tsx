@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import {
   ArrowLeftRight,
   Receipt,
@@ -105,142 +105,6 @@ const expertiseImages: Record<string, string> = {
 };
 
 
-/**
- * Decorative, pointer-transparent side network. Only used inside Expertise.
- * Draws slowly drifting dots and fine connecting lines in the side gutters.
- * Honors reduced-motion and does not change card/hover functionality.
- */
-function ExpertiseSideNetwork() {
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const context = canvas.getContext('2d');
-    if (!context) return;
-
-    // Decorative motion runs continuously while this section is mounted.
-    let frame = 0;
-    let width = 0;
-    let height = 0;
-    let dpr = 1;
-    let lastTime = 0;
-    type Dot = { x: number; y: number; vx: number; vy: number; r: number; depth: number; side: number };
-    let dots: Dot[] = [];
-
-    const resize = () => {
-      const rect = canvas.getBoundingClientRect();
-      const nextWidth = rect.width;
-      const nextHeight = rect.height;
-      if (Math.abs(nextWidth - width) < 1 && Math.abs(nextHeight - height) < 1 && dots.length) return;
-
-      const oldWidth = width;
-      const oldHeight = height;
-      width = nextWidth;
-      height = nextHeight;
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
-      canvas.width = Math.max(1, Math.round(width * dpr));
-      canvas.height = Math.max(1, Math.round(height * dpr));
-      context.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-      // IMPORTANT: keep existing particle positions when a card expands.
-      // Recreating dots on every section resize made the entire network jump.
-      if (dots.length) {
-        for (const dot of dots) {
-          dot.y = Math.max(0, Math.min(height, dot.y));
-          const oldSideStart = dot.side === 0 ? 0 : oldWidth * 0.81;
-          const oldSideSize = oldWidth * 0.19;
-          const fraction = oldSideSize > 0 ? (dot.x - oldSideStart) / oldSideSize : 0.5;
-          dot.x = (dot.side === 0 ? 0 : width * 0.81) + fraction * width * 0.19;
-        }
-        return;
-      }
-
-      const count = 80;
-      dots = Array.from({ length: count }, (_, i) => {
-        const side = i % 2 === 0;
-        return {
-          x: side ? Math.random() * width * 0.19 : width * (0.81 + Math.random() * 0.19),
-          y: Math.random() * height,
-          vx: (Math.random() < 0.5 ? -1 : 1) * (0.45 + Math.random() * 0.45),
-          vy: (Math.random() < 0.5 ? -1 : 1) * (0.45 + Math.random() * 0.45),
-          r: 1.3 + Math.random() * 1.4,
-          depth: 0.65 + Math.random() * 0.6,
-          side: side ? 0 : 1,
-        };
-      });
-    };
-
-    const draw = (time: number) => {
-      const delta = Math.min(2, Math.max(0, (time - (lastTime || time)) / 16.67));
-      lastTime = time;
-      context.clearRect(0, 0, width, height);
-      if (width < 700) {
-        frame = window.requestAnimationFrame(draw);
-        return; // keep mobile content completely clear
-      }
-
-      for (const dot of dots) {
-        {
-          dot.x += dot.vx * delta;
-          dot.y += dot.vy * delta;
-          if (dot.y < 0 || dot.y > height) dot.vy *= -1;
-          const minX = dot.side === 0 ? 0 : width * 0.81;
-          const maxX = dot.side === 0 ? width * 0.19 : width;
-          if (dot.x < minX || dot.x > maxX) {
-            dot.vx *= -1;
-            dot.x = Math.max(minX, Math.min(maxX, dot.x));
-          }
-        }
-      }
-
-      dots.forEach((a, i) => {
-        for (let j = i + 1; j < dots.length; j++) {
-          const b = dots[j];
-          const distance = Math.hypot(a.x - b.x, a.y - b.y);
-          if (distance > 125) continue;
-          context.beginPath();
-          context.strokeStyle = `rgba(220,231,240,${(1 - distance / 125) * 0.46})`;
-          context.lineWidth = 0.7;
-          context.moveTo(a.x, a.y);
-          context.lineTo(b.x, b.y);
-          context.stroke();
-        }
-        context.beginPath();
-        context.arc(a.x, a.y, a.r * a.depth * 2.4, 0, Math.PI * 2);
-        context.fillStyle = 'rgba(190,152,82,0.065)';
-        context.fill();
-        context.beginPath();
-        context.arc(a.x, a.y, a.r * a.depth, 0, Math.PI * 2);
-        context.fillStyle = 'rgba(229,199,142,0.98)';
-        context.fill();
-      });
-      frame = window.requestAnimationFrame(draw);
-    };
-
-    const observer = new ResizeObserver(resize);
-    observer.observe(canvas);
-    resize();
-    frame = window.requestAnimationFrame(draw);
-    return () => {
-      observer.disconnect();
-      window.cancelAnimationFrame(frame);
-    };
-  }, []);
-
-  return (
-    <canvas
-      ref={canvasRef}
-      aria-hidden="true"
-      className="absolute inset-0 z-20 h-full w-full pointer-events-none"
-      style={{
-        maskImage: 'linear-gradient(to right, black 0%, black 14%, transparent 27%, transparent 73%, black 86%, black 100%)',
-        WebkitMaskImage: 'linear-gradient(to right, black 0%, black 14%, transparent 27%, transparent 73%, black 86%, black 100%)',
-      }}
-    />
-  );
-}
-
 export function Expertise({ expertise }: ExpertiseProps) {
   // Desktop hover opens one directional panel; touch/keyboard retain button access.
   const [expandedId, setExpandedId] = useState<string | null>(null);
@@ -309,9 +173,6 @@ export function Expertise({ expertise }: ExpertiseProps) {
           "
         />
       </div>
-
-      {/* Side-only decorative network; never intercepts mouse hover or clicks. */}
-      <ExpertiseSideNetwork />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* HEADER (Main section title preserved) */}
