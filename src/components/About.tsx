@@ -5,8 +5,6 @@ import {
   CheckCircle2,
   Car,
   Briefcase,
-  Download,
-  Linkedin,
 } from 'lucide-react';
 import { ProfileInfo } from '../types';
 import { useLanguage } from '../context/LanguageContext';
@@ -132,28 +130,7 @@ export function About({ profile: _profile, onOpenCV }: AboutProps) {
               </p>
             </div>
 
-            {/* ACTION BUTTONS: Download CV & LinkedIn */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-1">
-              <button
-                type="button"
-                onClick={onOpenCV}
-                className="inline-flex items-center justify-center gap-2.5 rounded-xl border border-[#BE9852] bg-gradient-to-r from-[#BE9852] to-[#A8823C] px-6 py-3 text-sm sm:text-base font-bold text-white shadow-md shadow-[#BE9852]/25 transition-all duration-200 hover:-translate-y-0.5 hover:from-[#C9A45C] hover:to-[#BE9852] hover:shadow-lg hover:shadow-[#BE9852]/35 cursor-pointer select-none touch-manipulation"
-              >
-                <Download className="h-4 w-4 text-white" />
-                <span>{isRTL ? (t.downloadCv || 'تحميل السيرة الذاتية') : 'Download CV'}</span>
-              </button>
-
-              <a
-                href="https://www.linkedin.com/in/muhammad-salman-mba-finance-cpa-finalist-66908767/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2.5 rounded-xl border border-[#C5D5E2] bg-[#F3F7FA] px-6 py-3 text-sm sm:text-base font-bold text-[#17324A] shadow-xs transition-all duration-200 hover:-translate-y-0.5 hover:border-[#0A66C2]/50 hover:bg-white hover:text-[#0A66C2] hover:shadow-md cursor-pointer select-none touch-manipulation"
-              >
-                <Linkedin className="h-4 w-4 text-[#0A66C2]" />
-                <span>{isRTL ? (t.linkedin || 'لينكد إن') : 'LinkedIn'}</span>
-              </a>
-            </div>
-
+            
             {/* ======================================================
                 THREE HIGHLIGHT STATISTICS (DIRECT ON BACKGROUND, NO WHITE CARDS)
                 ====================================================== */}
